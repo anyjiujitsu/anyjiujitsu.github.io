@@ -1,22 +1,1037 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>My Website</title>
+  <meta charset="UTF-8" />
+  <title>Grappling Hub</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <!-- Optional Google Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
   <style>
-    body {
-      background: #111;
-      color: #eee;
-      font-family: Arial, sans-serif;
-      padding: 40px;
+    :root {
+      --bg: #05060b;
+      --bg-elevated: #0c0f17;
+      --accent: #4f8cff;
+      --accent-soft: rgba(79, 140, 255, 0.15);
+      --accent-border: rgba(79, 140, 255, 0.35);
+      --text: #f5f5f7;
+      --text-soft: #9ca3af;
+      --border-subtle: #1f2933;
+      --danger: #f97373;
+      --success: #4ade80;
+      --radius-xl: 20px;
+      --radius-lg: 14px;
+      --radius-md: 10px;
+      --shadow-soft: 0 20px 45px rgba(0, 0, 0, 0.55);
+      --shadow-subtle: 0 10px 25px rgba(0, 0, 0, 0.35);
+      --transition-fast: 0.18s ease-out;
     }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      min-height: 100vh;
+      margin: 0;
+      font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      background: radial-gradient(circle at top, #111827 0, var(--bg) 48%, #020617 100%);
+      color: var(--text);
+      display: flex;
+      justify-content: center;
+      padding: 32px 16px;
+    }
+
+    .shell {
+      width: 100%;
+      max-width: 1080px;
+      background: linear-gradient(135deg, rgba(79, 140, 255, 0.24), transparent 38%) border-box,
+                  radial-gradient(circle at top left, rgba(244, 244, 245, 0.05), transparent 60%) border-box,
+                  var(--bg-elevated);
+      border-radius: 28px;
+      border: 1px solid rgba(148, 163, 184, 0.18);
+      box-shadow: var(--shadow-soft);
+      padding: 20px 20px 24px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Subtle glow element */
+    .shell::before {
+      content: "";
+      position: absolute;
+      inset: -40%;
+      background:
+        radial-gradient(circle at 0% 0%, rgba(79, 140, 255, 0.08), transparent 55%),
+        radial-gradient(circle at 100% 0%, rgba(244, 244, 245, 0.04), transparent 50%);
+      opacity: 0.8;
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      align-items: flex-start;
+      margin-bottom: 18px;
+    }
+
+    .brand {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .brand-label {
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      font-size: 11px;
+      color: var(--accent);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .brand-label-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 999px;
+      background: var(--accent);
+      box-shadow: 0 0 12px rgba(79, 140, 255, 0.9);
+    }
+
     h1 {
-      color: #58a6ff;
+      font-size: clamp(22px, 2.2vw, 26px);
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      display: flex;
+      align-items: baseline;
+      gap: 8px;
+    }
+
+    h1 span.accent {
+      color: var(--accent);
+    }
+
+    .subtitle {
+      font-size: 13px;
+      color: var(--text-soft);
+    }
+
+    .header-meta {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      align-items: flex-end;
+      font-size: 12px;
+      color: var(--text-soft);
+    }
+
+    .pill-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      justify-content: flex-end;
+    }
+
+    .pill {
+      padding: 5px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.3);
+      background: rgba(15, 23, 42, 0.75);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      white-space: nowrap;
+    }
+
+    .pill-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: var(--success);
+      box-shadow: 0 0 8px rgba(74, 222, 128, 0.95);
+    }
+
+    .pill-badge {
+      background: var(--accent-soft);
+      border-color: var(--accent-border);
+      color: var(--accent);
+    }
+
+    /* Tabs */
+
+    .tabs-shell {
+      margin-top: 6px;
+      background: radial-gradient(circle at top, rgba(15, 23, 42, 0.9), rgba(15, 23, 42, 0.96))
+                  border-box;
+      border-radius: var(--radius-xl);
+      border: 1px solid rgba(31, 41, 55, 0.9);
+      padding: 10px;
+      box-shadow: var(--shadow-subtle);
+    }
+
+    .tabs-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 8px;
+    }
+
+    .tabs-list {
+      display: inline-flex;
+      gap: 6px;
+      padding: 4px;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(31, 41, 55, 0.9);
+    }
+
+    .tab-button {
+      position: relative;
+      border: none;
+      background: transparent;
+      color: var(--text-soft);
+      font-size: 13px;
+      padding: 6px 14px;
+      border-radius: 999px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: background var(--transition-fast),
+                  color var(--transition-fast),
+                  transform var(--transition-fast);
+      white-space: nowrap;
+    }
+
+    .tab-button span.count-pill {
+      font-size: 11px;
+      padding: 2px 8px;
+      border-radius: 999px;
+      border: 1px solid rgba(55, 65, 81, 0.9);
+      background: rgba(15, 23, 42, 0.95);
+      color: #9ca3af;
+    }
+
+    .tab-button:hover {
+      background: rgba(31, 41, 55, 0.9);
+      color: #e5e7eb;
+      transform: translateY(-1px);
+    }
+
+    .tab-button.active {
+      background: radial-gradient(circle at top, rgba(79, 140, 255, 0.16), transparent 65%);
+      color: var(--text);
+      box-shadow:
+        0 0 0 1px rgba(79, 140, 255, 0.6),
+        0 8px 20px rgba(15, 23, 42, 0.9);
+    }
+
+    .tab-button.active span.count-pill {
+      border-color: rgba(79, 140, 255, 0.8);
+      background: rgba(15, 23, 42, 0.98);
+      color: var(--accent);
+    }
+
+    .tabs-tools {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex: 1;
+      justify-content: flex-end;
+    }
+
+    .search-input {
+      position: relative;
+      flex: 0 1 230px;
+    }
+
+    .search-input input {
+      width: 100%;
+      padding: 7px 10px 7px 26px;
+      border-radius: 999px;
+      border: 1px solid rgba(55, 65, 81, 0.9);
+      background: rgba(15, 23, 42, 0.95);
+      color: var(--text);
+      font-size: 12px;
+      outline: none;
+      transition: border var(--transition-fast),
+                  box-shadow var(--transition-fast),
+                  background var(--transition-fast);
+    }
+
+    .search-input input::placeholder {
+      color: #6b7280;
+    }
+
+    .search-input input:focus {
+      border-color: rgba(79, 140, 255, 0.9);
+      box-shadow: 0 0 0 1px rgba(79, 140, 255, 0.8);
+      background: rgba(15, 23, 42, 0.99);
+    }
+
+    .search-input-icon {
+      position: absolute;
+      left: 8px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 11px;
+      color: #6b7280;
+      pointer-events: none;
+    }
+
+    .tag-chip {
+      padding: 4px 10px;
+      border-radius: 999px;
+      border: 1px dashed rgba(55, 65, 81, 0.9);
+      font-size: 11px;
+      color: #9ca3af;
+      background: rgba(15, 23, 42, 0.95);
+      white-space: nowrap;
+    }
+
+    /* Tab panels */
+
+    .tab-panel {
+      display: none;
+      margin-top: 6px;
+      border-radius: var(--radius-lg);
+      padding: 10px;
+      background: radial-gradient(circle at top left, rgba(15, 23, 42, 0.98), rgba(15, 23, 42, 0.96));
+      border: 1px solid rgba(31, 41, 55, 0.95);
+    }
+
+    .tab-panel.active {
+      display: block;
+    }
+
+    .panel-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 8px;
+      margin-bottom: 8px;
+      font-size: 12px;
+    }
+
+    .panel-title {
+      font-weight: 500;
+      font-size: 13px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .panel-pill {
+      padding: 2px 8px;
+      border-radius: 999px;
+      border: 1px solid rgba(55, 65, 81, 0.85);
+      font-size: 11px;
+      color: #9ca3af;
+      background: rgba(15, 23, 42, 0.98);
+    }
+
+    .panel-meta {
+      font-size: 11px;
+      color: var(--text-soft);
+    }
+
+    /* Table styling */
+
+    .table-wrapper {
+      border-radius: var(--radius-md);
+      border: 1px solid rgba(31, 41, 55, 0.9);
+      overflow: hidden;
+      background: radial-gradient(circle at top, rgba(15, 23, 42, 1), rgba(15, 23, 42, 0.98));
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 12px;
+      color: var(--text);
+    }
+
+    thead {
+      background: linear-gradient(to right, rgba(15, 23, 42, 1), rgba(15, 23, 42, 0.96));
+    }
+
+    thead th {
+      text-align: left;
+      font-weight: 500;
+      padding: 9px 10px;
+      border-bottom: 1px solid rgba(31, 41, 55, 0.95);
+      color: #9ca3af;
+      white-space: nowrap;
+    }
+
+    tbody tr {
+      border-bottom: 1px solid rgba(31, 41, 55, 0.85);
+      transition: background var(--transition-fast), transform var(--transition-fast);
+    }
+
+    tbody tr:nth-child(even) {
+      background: rgba(15, 23, 42, 0.96);
+    }
+
+    tbody tr:nth-child(odd) {
+      background: rgba(15, 23, 42, 0.99);
+    }
+
+    tbody tr:hover {
+      background: rgba(30, 64, 175, 0.35);
+      transform: translateY(-1px);
+    }
+
+    td {
+      padding: 8px 10px;
+      vertical-align: top;
+      line-height: 1.4;
+    }
+
+    td .tag {
+      display: inline-flex;
+      padding: 2px 8px;
+      border-radius: 999px;
+      font-size: 11px;
+      border: 1px solid rgba(55, 65, 81, 0.9);
+      background: rgba(15, 23, 42, 0.98);
+      color: #e5e7eb;
+      gap: 6px;
+      align-items: center;
+      white-space: nowrap;
+    }
+
+    .tag-accent {
+      border-color: rgba(79, 140, 255, 0.9);
+      background: rgba(15, 23, 42, 1);
+      color: var(--accent);
+    }
+
+    .tag-soft {
+      color: #9ca3af;
+      font-weight: 400;
+    }
+
+    .tag-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: var(--accent);
+    }
+
+    .text-soft {
+      color: #9ca3af;
+    }
+
+    .text-strong {
+      font-weight: 500;
+    }
+
+    a.link {
+      color: #c4d6ff;
+      text-decoration: none;
+      border-bottom: 1px dotted rgba(148, 163, 184, 0.6);
+    }
+
+    a.link:hover {
+      color: #e0e7ff;
+      border-bottom-style: solid;
+    }
+
+    .badge-danger {
+      color: var(--danger);
+      font-weight: 500;
+    }
+
+    .badge-success {
+      color: var(--success);
+      font-weight: 500;
+    }
+
+    .chip-outline {
+      border-radius: 999px;
+      border: 1px solid rgba(75, 85, 99, 0.9);
+      padding: 1px 6px;
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      color: #9ca3af;
+    }
+
+    footer {
+      margin-top: 10px;
+      font-size: 11px;
+      display: flex;
+      justify-content: space-between;
+      color: #6b7280;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    /* Responsive */
+
+    @media (max-width: 768px) {
+      body {
+        padding: 16px 10px;
+      }
+
+      .shell {
+        padding: 14px 12px 18px;
+        border-radius: 20px;
+      }
+
+      header {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .header-meta {
+        align-items: flex-start;
+      }
+
+      .tabs-header {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .tabs-tools {
+        justify-content: space-between;
+      }
+
+      .search-input {
+        flex: 1 1 auto;
+      }
+
+      table,
+      thead,
+      tbody,
+      th,
+      td,
+      tr {
+        display: block;
+      }
+
+      thead {
+        display: none;
+      }
+
+      .table-wrapper {
+        border-radius: 14px;
+      }
+
+      tbody tr {
+        margin: 0 0 8px 0;
+        border-radius: 12px;
+        overflow: hidden;
+        border: 1px solid rgba(31, 41, 55, 0.9);
+      }
+
+      td {
+        display: flex;
+        justify-content: space-between;
+        gap: 12px;
+        padding: 8px 10px;
+      }
+
+      td::before {
+        content: attr(data-label);
+        font-weight: 500;
+        color: #9ca3af;
+        flex: 0 0 40%;
+        max-width: 160px;
+      }
+
+      td > * {
+        text-align: right;
+      }
     }
   </style>
 </head>
 <body>
-  <h1>Hello!</h1>
-  <p>This is my free GitHub Pages website.</p>
+  <div class="shell">
+    <header>
+      <div class="brand">
+        <div class="brand-label">
+          <span class="brand-label-dot"></span>
+          LIVE GRAPPLING INDEX
+        </div>
+        <h1>
+          Grappling <span class="accent">Hub</span>
+        </h1>
+        <div class="subtitle">
+          Centralized view of upcoming <span class="text-soft">events</span>, <span class="text-soft">open mats</span>, and your <span class="text-soft">academy directory</span>.
+        </div>
+      </div>
+      <div class="header-meta">
+        <div class="pill-row">
+          <div class="pill pill-badge">
+            <span class="pill-dot"></span>
+            Auto-sorted by date
+          </div>
+          <div class="pill">
+            Next 60 days
+          </div>
+        </div>
+        <div style="font-size: 11px; opacity: 0.9;">
+          Last updated: <span class="text-soft">manually</span>
+        </div>
+      </div>
+    </header>
+
+    <section class="tabs-shell">
+      <div class="tabs-header">
+        <div class="tabs-list">
+          <button class="tab-button active" data-tab="events">
+            Events
+            <span class="count-pill" id="badge-events">3</span>
+          </button>
+          <button class="tab-button" data-tab="openmats">
+            Open Mats
+            <span class="count-pill" id="badge-openmats">3</span>
+          </button>
+          <button class="tab-button" data-tab="directory">
+            Directory
+            <span class="count-pill" id="badge-directory">5</span>
+          </button>
+        </div>
+
+        <div class="tabs-tools">
+          <div class="search-input">
+            <span class="search-input-icon">🔍</span>
+            <input id="globalSearch" type="text" placeholder="Filter current tab…" />
+          </div>
+          <div class="tag-chip">
+            Tip: Type a gym, city, or coach name to filter.
+          </div>
+        </div>
+      </div>
+
+      <!-- EVENTS PANEL -->
+      <div class="tab-panel active" data-panel="events">
+        <div class="panel-header">
+          <div class="panel-title">
+            Events
+            <span class="panel-pill">Seminars · Camps · Tournaments</span>
+          </div>
+          <div class="panel-meta">
+            Highlighting structured events with a specific date, time &amp; price.
+          </div>
+        </div>
+
+        <div class="table-wrapper">
+          <table>
+            <tbody>
+              <tr>
+                <td data-label="Date">
+                  <span class="text-strong">Nov 29, 2025</span><br>
+                  <span class="text-soft">Sat · 10:00–13:00</span>
+                </td>
+                <td data-label="Location">
+                  <span class="text-strong">Example Jiu Jitsu</span><br>
+                  <span class="text-soft">Boston, MA</span>
+                </td>
+                <td data-label="Seminar / Focus">
+                  <span class="tag tag-accent">
+                    <span class="tag-dot"></span>
+                    Leg Lock Systems
+                  </span><br>
+                  <span class="text-soft">Coach: Jane Doe</span>
+                </td>
+                <td data-label="Type">
+                  <span class="chip-outline">Seminar</span>
+                </td>
+                <td data-label="Price">
+                  <span class="badge-success">$80 early · $100 door</span><br>
+                  <span class="text-soft">Open to all affiliations</span>
+                </td>
+                <td data-label="Notes">
+                  <span class="text-soft">
+                    Gi &amp; No-Gi sections · Limited to 40 spots.
+                  </span>
+                </td>
+              </tr>
+
+              <tr>
+                <td data-label="Date">
+                  <span class="text-strong">Dec 07, 2025</span><br>
+                  <span class="text-soft">Sun · 11:00–14:00</span>
+                </td>
+                <td data-label="Location">
+                  <span class="text-strong">North Shore Grappling</span><br>
+                  <span class="text-soft">Salem, MA</span>
+                </td>
+                <td data-label="Seminar / Focus">
+                  <span class="tag tag-accent">
+                    Passing vs Modern Guards
+                  </span><br>
+                  <span class="text-soft">Coach: John Smith</span>
+                </td>
+                <td data-label="Type">
+                  <span class="chip-outline">Seminar</span>
+                </td>
+                <td data-label="Price">
+                  <span class="badge-success">$60</span><br>
+                  <span class="text-soft">Pre-reg only</span>
+                </td>
+                <td data-label="Notes">
+                  <span class="text-soft">
+                    No-Gi only · Intermediate+ recommended.
+                  </span>
+                </td>
+              </tr>
+
+              <tr>
+                <td data-label="Date">
+                  <span class="text-strong">Jan 18, 2026</span><br>
+                  <span class="text-soft">Sun · All day</span>
+                </td>
+                <td data-label="Location">
+                  <span class="text-strong">New England Grappling Open</span><br>
+                  <span class="text-soft">Providence, RI</span>
+                </td>
+                <td data-label="Seminar / Focus">
+                  <span class="tag">
+                    Tournament
+                  </span><br>
+                  <span class="text-soft">Gi &amp; No-Gi divisions</span>
+                </td>
+                <td data-label="Type">
+                  <span class="chip-outline">Tournament</span>
+                </td>
+                <td data-label="Price">
+                  <span class="badge-success">From $99</span><br>
+                  <span class="text-soft">Registration closes Jan 05</span>
+                </td>
+                <td data-label="Notes">
+                  <span class="text-soft">
+                    Smoothcomp · Kids, Adults, Masters · Team points.
+                  </span>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- OPEN MATS PANEL -->
+      <div class="tab-panel" data-panel="openmats">
+        <div class="panel-header">
+          <div class="panel-title">
+            Open Mats
+            <span class="panel-pill">Recurring &amp; Drop-In Training</span>
+          </div>
+          <div class="panel-meta">
+            Filter by day, level, or special focus (women’s only, competition, etc.).
+          </div>
+        </div>
+
+        <div class="table-wrapper">
+          <table>
+            <tbody>
+              <tr>
+                <td data-label="Day / Time">
+                  <span class="text-strong">Sundays</span><br>
+                  <span class="text-soft">11:00–13:00</span>
+                </td>
+                <td data-label="Location">
+                  <span class="text-strong">Market Street BJJ</span><br>
+                  <span class="text-soft">Somersworth, NH</span>
+                </td>
+                <td data-label="Format">
+                  <span class="tag tag-accent">
+                    Women’s Only
+                  </span><br>
+                  <span class="text-soft">Gi &amp; No-Gi friendly</span>
+                </td>
+                <td data-label="Level">
+                  <span class="chip-outline">All Levels</span><br>
+                  <span class="text-soft">Beginner-friendly</span>
+                </td>
+                <td data-label="Cost">
+                  <span class="badge-success">Free</span><br>
+                  <span class="text-soft">All gyms welcome</span>
+                </td>
+                <td data-label="Notes">
+                  <span class="text-soft">
+                    Community-focused roll · No coaching fee · Bring a friend.
+                  </span>
+                </td>
+              </tr>
+
+              <tr>
+                <td data-label="Day / Time">
+                  <span class="text-strong">Fridays</span><br>
+                  <span class="text-soft">19:00–21:00</span>
+                </td>
+                <td data-label="Location">
+                  <span class="text-strong">Downtown Grappling Club</span><br>
+                  <span class="text-soft">Boston, MA</span>
+                </td>
+                <td data-label="Format">
+                  <span class="tag">
+                    Competition Rounds
+                  </span><br>
+                  <span class="text-soft">Scenario &amp; shark-tank rounds</span>
+                </td>
+                <td data-label="Level">
+                  <span class="chip-outline">Intermediate+</span><br>
+                  <span class="text-soft">Blue belt &amp; up suggested</span>
+                </td>
+                <td data-label="Cost">
+                  <span class="badge-success">$10 drop-in</span><br>
+                  <span class="text-soft">Cash or Venmo</span>
+                </td>
+                <td data-label="Notes">
+                  <span class="text-soft">
+                    Great for tournament prep · No instruction, just rounds.
+                  </span>
+                </td>
+              </tr>
+
+              <tr>
+                <td data-label="Day / Time">
+                  <span class="text-strong">Wednesdays</span><br>
+                  <span class="text-soft">12:00–13:30</span>
+                </td>
+                <td data-label="Location">
+                  <span class="text-strong">Harbor City Jiu Jitsu</span><br>
+                  <span class="text-soft">Portland, ME</span>
+                </td>
+                <td data-label="Format">
+                  <span class="tag">
+                    Noon Open Mat
+                  </span><br>
+                  <span class="text-soft">Gi only</span>
+                </td>
+                <td data-label="Level">
+                  <span class="chip-outline">Mixed</span><br>
+                  <span class="text-soft">Visitors welcome</span>
+                </td>
+                <td data-label="Cost">
+                  <span class="badge-success">$5 suggested</span><br>
+                  <span class="text-soft">Members free</span>
+                </td>
+                <td data-label="Notes">
+                  <span class="text-soft">
+                    Light-to-moderate pace · Good for drilling &amp; flow rounds.
+                  </span>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- DIRECTORY PANEL -->
+      <div class="tab-panel" data-panel="directory">
+        <div class="panel-header">
+          <div class="panel-title">
+            Directory
+            <span class="panel-pill">Academies &amp; training locations</span>
+          </div>
+          <div class="panel-meta">
+            Use this as your master list – edit, expand, or plug in your real data.
+          </div>
+        </div>
+
+        <div class="table-wrapper">
+          <table>
+            <tbody>
+              <tr>
+                <td data-label="Academy">
+                  <span class="text-strong">Example Jiu Jitsu</span><br>
+                  <span class="text-soft">Head Coach: Jane Doe</span>
+                </td>
+                <td data-label="Location">
+                  <span class="text-soft">Boston, MA · USA</span><br>
+                  <span class="text-soft">Neighborhood: South End</span>
+                </td>
+                <td data-label="Style / Programs">
+                  <span class="tag tag-accent">
+                    BJJ · No-Gi · Wrestling
+                  </span><br>
+                  <span class="text-soft">Kids · Adults · Competition Team</span>
+                </td>
+                <td data-label="Links">
+                  <a class="link" href="#" target="_blank">@examplebjj</a><br>
+                  <a class="link" href="#" target="_blank">Website</a>
+                </td>
+              </tr>
+
+              <tr>
+                <td data-label="Academy">
+                  <span class="text-strong">Market Street BJJ</span><br>
+                  <span class="text-soft">Owner: Alex Rivera</span>
+                </td>
+                <td data-label="Location">
+                  <span class="text-soft">Somersworth, NH · USA</span><br>
+                  <span class="text-soft">Women’s only open mat host</span>
+                </td>
+                <td data-label="Style / Programs">
+                  <span class="tag">
+                    BJJ · No-Gi
+                  </span><br>
+                  <span class="text-soft">Fundamentals · Advanced · Women’s program</span>
+                </td>
+                <td data-label="Links">
+                  <a class="link" href="#" target="_blank">@marketstreetbjj</a><br>
+                  <a class="link" href="#" target="_blank">Website</a>
+                </td>
+              </tr>
+
+              <tr>
+                <td data-label="Academy">
+                  <span class="text-strong">North Shore Grappling</span><br>
+                  <span class="text-soft">Competition-heavy room</span>
+                </td>
+                <td data-label="Location">
+                  <span class="text-soft">Salem, MA · USA</span><br>
+                  <span class="text-soft">North Shore</span>
+                </td>
+                <td data-label="Style / Programs">
+                  <span class="tag">
+                    BJJ · No-Gi · MMA
+                  </span><br>
+                  <span class="text-soft">Comp team · Open mat Fridays</span>
+                </td>
+                <td data-label="Links">
+                  <a class="link" href="#" target="_blank">@northshoregrappling</a><br>
+                  <a class="link" href="#" target="_blank">Website</a>
+                </td>
+              </tr>
+
+              <tr>
+                <td data-label="Academy">
+                  <span class="text-strong">Downtown Grappling Club</span><br>
+                  <span class="text-soft">No-Gi only</span>
+                </td>
+                <td data-label="Location">
+                  <span class="text-soft">Boston, MA · USA</span><br>
+                  <span class="text-soft">Downtown</span>
+                </td>
+                <td data-label="Style / Programs">
+                  <span class="tag">
+                    No-Gi · Wrestling
+                  </span><br>
+                  <span class="text-soft">Competition rounds · Drop-in friendly</span>
+                </td>
+                <td data-label="Links">
+                  <a class="link" href="#" target="_blank">@downtowngrappling</a><br>
+                  <a class="link" href="#" target="_blank">Website</a>
+                </td>
+              </tr>
+
+              <tr>
+                <td data-label="Academy">
+                  <span class="text-strong">Harbor City Jiu Jitsu</span><br>
+                  <span class="text-soft">Scenic coastal academy</span>
+                </td>
+                <td data-label="Location">
+                  <span class="text-soft">Portland, ME · USA</span><br>
+                  <span class="text-soft">Harbor district</span>
+                </td>
+                <td data-label="Style / Programs">
+                  <span class="tag">
+                    BJJ · No-Gi
+                  </span><br>
+                  <span class="text-soft">Morning &amp; noon training blocks</span>
+                </td>
+                <td data-label="Links">
+                  <a class="link" href="#" target="_blank">@harborcitybjj</a><br>
+                  <a class="link" href="#" target="_blank">Website</a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <div>
+        You can edit all rows directly in <span class="text-soft">index.html</span> or convert this into a data-driven setup later.
+      </div>
+      <div>
+        Built for GitHub Pages · Single file template.
+      </div>
+    </footer>
+  </div>
+
+  <script>
+    // Tab switching
+    const tabButtons = document.querySelectorAll(".tab-button");
+    const tabPanels = document.querySelectorAll(".tab-panel");
+    const searchInput = document.getElementById("globalSearch");
+
+    function setActiveTab(target) {
+      tabButtons.forEach(btn => {
+        btn.classList.toggle("active", btn.dataset.tab === target);
+      });
+
+      tabPanels.forEach(panel => {
+        panel.classList.toggle("active", panel.dataset.panel === target);
+      });
+
+      // Clear search when switching tabs (optional)
+      searchInput.value = "";
+      applyFilter("");
+    }
+
+    tabButtons.forEach(btn => {
+      btn.addEventListener("click", () => {
+        setActiveTab(btn.dataset.tab);
+      });
+    });
+
+    // Simple table filter per active tab
+    function applyFilter(query) {
+      const activePanel = document.querySelector(".tab-panel.active");
+      if (!activePanel) return;
+
+      const rows = activePanel.querySelectorAll("tbody tr");
+      const q = query.toLowerCase().trim();
+
+      rows.forEach(row => {
+        const text = row.innerText.toLowerCase();
+        const matches = text.includes(q);
+        row.style.display = matches ? "" : "none";
+      });
+    }
+
+    searchInput.addEventListener("input", (e) => {
+      applyFilter(e.target.value);
+    });
+
+    // Optional: auto-count rows and update badges
+    function updateBadgeCounts() {
+      const map = {
+        events: "badge-events",
+        openmats: "badge-openmats",
+        directory: "badge-directory"
+      };
+
+      Object.keys(map).forEach(key => {
+        const panel = document.querySelector(`.tab-panel[data-panel="${key}"]`);
+        if (!panel) return;
+        const visibleRows = Array.from(panel.querySelectorAll("tbody tr"))
+          .filter(tr => tr.style.display !== "none");
+        const badge = document.getElementById(map[key]);
+        if (badge) badge.textContent = visibleRows.length;
+      });
+    }
+
+    // Keep badge counts in sync with filter
+    searchInput.addEventListener("input", updateBadgeCounts);
+    window.addEventListener("load", updateBadgeCounts);
+  </script>
 </body>
 </html>
