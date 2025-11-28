@@ -2,10 +2,9 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>ANY - N.E. Grappling</title>
+  <title>Grappling Hub</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-  <!-- Optional Google Font -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -61,7 +60,6 @@
       overflow: hidden;
     }
 
-    /* Subtle glow element */
     .shell::before {
       content: "";
       position: absolute;
@@ -164,8 +162,6 @@
       border-color: var(--accent-border);
       color: var(--accent);
     }
-
-    /* Tabs */
 
     .tabs-shell {
       margin-top: 6px;
@@ -298,8 +294,6 @@
       white-space: nowrap;
     }
 
-    /* Tab panels */
-
     .tab-panel {
       display: none;
       margin-top: 6px;
@@ -343,8 +337,6 @@
       font-size: 11px;
       color: var(--text-soft);
     }
-
-    /* Table styling */
 
     .table-wrapper {
       border-radius: var(--radius-md);
@@ -416,47 +408,6 @@
       color: var(--accent);
     }
 
-    .tag-soft {
-      color: #9ca3af;
-      font-weight: 400;
-    }
-
-    .tag-dot {
-      width: 7px;
-      height: 7px;
-      border-radius: 999px;
-      background: var(--accent);
-    }
-
-    .text-soft {
-      color: #9ca3af;
-    }
-
-    .text-strong {
-      font-weight: 500;
-    }
-
-    a.link {
-      color: #c4d6ff;
-      text-decoration: none;
-      border-bottom: 1px dotted rgba(148, 163, 184, 0.6);
-    }
-
-    a.link:hover {
-      color: #e0e7ff;
-      border-bottom-style: solid;
-    }
-
-    .badge-danger {
-      color: var(--danger);
-      font-weight: 500;
-    }
-
-    .badge-success {
-      color: var(--success);
-      font-weight: 500;
-    }
-
     .chip-outline {
       border-radius: 999px;
       border: 1px solid rgba(75, 85, 99, 0.9);
@@ -476,8 +427,6 @@
       gap: 10px;
       flex-wrap: wrap;
     }
-
-    /* Responsive */
 
     @media (max-width: 768px) {
       body {
@@ -565,7 +514,7 @@
           LIVE GRAPPLING INDEX
         </div>
         <h1>
-          ANY <span class="accent">N.E. Grappling</span>
+          Grappling <span class="accent">Hub</span>
         </h1>
         <div class="subtitle">
           Centralized view of upcoming <span class="text-soft">events</span>, <span class="text-soft">open mats</span>, and your <span class="text-soft">academy directory</span>.
@@ -582,7 +531,7 @@
           </div>
         </div>
         <div style="font-size: 11px; opacity: 0.9;">
-          Last updated: <span class="text-soft">11282025</span>
+          Last updated: <span class="text-soft">manually</span>
         </div>
       </div>
     </header>
@@ -592,7 +541,7 @@
         <div class="tabs-list">
           <button class="tab-button active" data-tab="events">
             Events
-            <span class="count-pill" id="badge-events">3</span>
+            <span class="count-pill" id="badge-events">187</span>
           </button>
           <button class="tab-button" data-tab="openmats">
             Open Mats
@@ -615,92 +564,3580 @@
         </div>
       </div>
 
-<!-- EVENTS PANEL (UPDATED) -->
-<div class="tab-panel active" data-panel="events">
-  <div class="panel-header">
-    <div class="panel-title">
-      Events
-      <span class="panel-pill">Seminars · Camps · Tournaments</span>
-    </div>
-    <div class="panel-meta">
-      Highlighting structured events with a specific date &amp; instructor/focus.
-    </div>
-  </div>
+      <!-- EVENTS PANEL -->
+      <div class="tab-panel active" data-panel="events">
+        <div class="panel-header">
+          <div class="panel-title">
+            Events
+            <span class="panel-pill">Seminars · Camps · Tournaments · Specials</span>
+          </div>
+          <div class="panel-meta">
+            Populated directly from your ANYJJ event sheet. State names expanded, times removed.
+          </div>
+        </div>
 
-  <div class="table-wrapper">
-    <table>
-      <tbody>
+        <div class="table-wrapper">
+          <table>
+            <tbody>
+              <tr>
+                <td data-label="Date">
+                  <span class="text-strong">September 26, 2025</span><br>
+                  <span class="text-soft">Friday</span>
+                </td>
+                <td data-label="Location">
+                  <span class="text-strong">Black Hole Jiu Jitsu</span><br>
+                  <span class="text-soft">Seymour, Connecticut</span>
+                </td>
+                <td data-label="Seminar / Focus">
+                  <span class="tag tag-accent">
+                    Mike Wacker
+                  </span><br>
+                  <span class="text-soft">Type: Seminar</span>
+                </td>
+                <td data-label="Type">
+                  <span class="chip-outline">Seminar</span>
+                </td>
+              </tr>
+              <tr>
+                <td data-label="Date">
+                  <span class="text-strong">September 28, 2025</span><br>
+                  <span class="text-soft">Sunday</span>
+                </td>
+                <td data-label="Location">
+                  <span class="text-strong">Lauzon MMA</span><br>
+                  <span class="text-soft">Canton, Massachusetts</span>
+                </td>
+                <td data-label="Seminar / Focus">
+                  <span class="tag tag-accent">
+                    Christos Papadelos
+                  </span><br>
+                  <span class="text-soft">Type: Seminar</span>
+                </td>
+                <td data-label="Type">
+                  <span class="chip-outline">Seminar</span>
+                </td>
+              </tr>
+              <tr>
+                <td data-label="Date">
+                  <span class="text-strong">October 1, 2025</span><br>
+                  <span class="text-soft">Wednesday</span>
+                </td>
+                <td data-label="Location">
+                  <span class="text-strong">TMC Danbury BJJ</span><br>
+                  <span class="text-soft">Danbury, Connecticut</span>
+                </td>
+                <td data-label="Seminar / Focus">
+                  <span class="tag tag-accent">
+                    Rigor Monteiro de Oliveira
+                  </span><br>
+                  <span class="text-soft">Type: Seminar</span>
+                </td>
+                <td data-label="Type">
+                  <span class="chip-outline">Seminar</span>
+                </td>
+              </tr>
+              <tr>
+                <td data-label="Date">
+                  <span class="text-strong">October 2, 2025</span><br>
+                  <span class="text-soft">Thursday</span>
+                </td>
+                <td data-label="Location">
+                  <span class="text-strong">TMC Danbury BJJ</span><br>
+                  <span class="text-soft">Danbury, Connecticut</span>
+                </td>
+                <td data-label="Seminar / Focus">
+                  <span class="tag tag-accent">
+                    Rigor Monteiro de Oliveira
+                  </span><br>
+                  <span class="text-soft">Type: Seminar</span>
+                </td>
+                <td data-label="Type">
+                  <span class="chip-outline">Seminar</span>
+                </td>
+              </tr>
+              <tr>
+                <td data-label="Date">
+                  <span class="text-strong">October 2, 2025</span><br>
+                  <span class="text-soft">Thursday</span>
+                </td>
+                <td data-label="Location">
+                  <span class="text-strong">Underdog MMA</span><br>
+                  <span class="text-soft">W. Hartford, Connecticut</span>
+                </td>
+                <td data-label="Seminar / Focus">
+                  <span class="tag tag-accent">
+                    Leandro “Tatu” Escobar
+                  </span><br>
+                  <span class="text-soft">Type: Seminar</span>
+                </td>
+                <td data-label="Type">
+                  <span class="chip-outline">Seminar</span>
+                </td>
+              </tr>
+              <tr>
+                <td data-label="Date">
+                  <span class="text-strong">October 3, 2025</span><br>
+                  <span class="text-soft">Friday</span>
+                </td>
+                <td data-label="Location">
+                  <span class="text-strong">Gracie Barra</span><br>
+                  <span class="text-soft">S. Portland, Maine</span>
+                </td>
+                <td data-label="Seminar / Focus">
+                  <span class="tag tag-accent">
+                    Mayara Custodio
+                  </span><br>
+                  <span class="text-soft">Type: Seminar</span>
+                </td>
+                <td data-label="Type">
+                  <span class="chip-outline">Seminar</span>
+                </td>
+              </tr>
+              <tr>
+                <td data-label="Date">
+                  <span class="text-strong">October 4, 2025</span><br>
+                  <span class="text-soft">Saturday</span>
+                </td>
+                <td data-label="Location">
+                  <span class="text-strong">Gracie Barra</span><br>
+                  <span class="text-soft">Braintree, Massachusetts</span>
+                </td>
+                <td data-label="Seminar / Focus">
+                  <span class="tag tag-accent">
+                    Mayara Custodio
+                  </span><br>
+                  <span class="text-soft">Type: Seminar</span>
+                </td>
+                <td data-label="Type">
+                  <span class="chip-outline">Seminar</span>
+                </td>
+              </tr>
+              <tr>
+                <td data-label="Date">
+                  <span class="text-strong">October 4, 2025</span><br>
+                  <span class="text-soft">Saturday</span>
+                </td>
+                <td data-label="Location">
+                  <span class="text-strong">SBG East Coast</span><br>
+                  <span class="text-soft">Dartmouth, Massachusetts</span>
+                </td>
+                <td data-label="Seminar / Focus">
+                  <span class="tag tag-accent">
+                    1 Year Anniversary
+                  </span><br>
+                  <span class="text-soft">Type: Open House</span>
+                </td>
+                <td data-label="Type">
+                  <span class="chip-outline">Open House</span>
+                </td>
+              </tr>
+              <tr>
+                <td data-label="Date">
+                  <span class="text-strong">October 4, 2025</span><br>
+                  <span class="text-soft">Saturday</span>
+                </td>
+                <td data-label="Location">
+                  <span class="text-strong">FCF MMA</span><br>
+                  <span class="text-soft">Brunswick, Maine</span>
+                </td>
+                <td data-label="Seminar / Focus">
+                  <span class="tag tag-accent">
+                    Sean Rubchinuk
+                  </span><br>
+                  <span class="text-soft">Type: Seminar</span>
+                </td>
+                <td data-label="Type">
+                  <span class="chip-outline">Seminar</span>
+                </td>
+              </tr>
+              <tr>
+                <td data-label="Date">
+                  <span class="text-strong">October 4, 2025</span><br>
+                  <span class="text-soft">Saturday</span>
+                </td>
+                <td data-label="Location">
+                  <span class="text-strong">Clandestine Submissions</span><br>
+                  <span class="text-soft">Sanford, Maine</span>
+                </td>
+                <td data-label="Seminar / Focus">
+                  <span class="tag tag-accent">
+                    Keith Charest
+                  </span><br>
+                  <span class="text-soft">Type: Seminar</span>
+                </td>
+                <td data-label="Type">
+                  <span class="chip-outline">Seminar</span>
+                </td>
+              </tr>
+              <tr>
+                <td data-label="Date">
+                  <span class="text-strong">October 5, 2025</span><br>
+                  <span class="text-soft">Sunday</span>
+                </td>
+                <td data-label="Location">
+                  <span class="text-strong">Radius Martial Arts</span><br>
+                  <span class="text-soft">Fairfield, Connecticut</span>
+                </td>
+                <td data-label="Seminar / Focus">
+                  <span class="tag tag-accent">
+                    Women’s Only Open Mat
+                  </span><br>
+                  <span class="text-soft">Type: Women's Only</span>
+                </td>
+                <td data-label="Type">
+                  <span class="chip-outline">Women's Only</span>
+                </td>
+              </tr>
+              <tr>
+                <td data-label="Date">
+                  <span class="text-strong">October 6, 2025</span><br>
+                  <span class="text-soft">Monday</span>
+                </td>
+                <td data-label="Location">
+                  <span class="text-strong">Atlas JiuJitsu</span><br>
+                  <span class="text-soft">Waltham, Massachusetts</span>
+                </td>
+                <td data-label="Seminar / Focus">
+                  <span class="tag tag-accent">
+                    Anthony “Scissorhands” Edwards
+                  </span><br>
+                  <span class="text-soft">Type: Seminar</span>
+                </td>
+                <td data-label="Type">
+                  <span class="chip-outline">Seminar</span>
+                </td>
+              </tr>
+              <tr>
+                <td data-label="Date">
+                  <span class="text-strong">October 10, 2025</span><br>
+                  <span class="text-soft">Friday</span>
+                </td>
+                <td data-label="Location">
+                  <span class="text-strong">New England Top Team</span><br>
+                  <span class="text-soft">Salem, New Hampshire</span>
+                </td>
+                <td data-label="Seminar / Focus">
+                  <span class="tag tag-accent">
+                    Roll - A - Thon for Tanner Lamagna
+                  </span><br>
+                  <span class="text-soft">Type: Charity Event</span>
+                </td>
+                <td data-label="Type">
+                  <span class="chip-outline">Charity Event</span>
+                </td>
+              </tr>
+              <tr>
+                <td data-label="Date">
+                  <span class="text-strong">October 11, 2025</span><br>
+                  <span class="text-soft">Saturday</span>
+                </td>
+                <td data-label="Location">
+                  <span class="text-strong">nan</span><br>
+                  <span class="text-soft">Hanover, Massachusetts</span>
+                </td>
+                <td data-label="Seminar / Focus">
+                  <span class="tag tag-accent">
+                    Grappling Industries
+                  </span><br>
+                  <span class="text-soft">Type: Tournament</span>
+                </td>
+                <td data-label="Type">
+                  <span class="chip-outline">Tournament</span>
+                </td>
+              </tr>
+              <tr>
+                <td data-label="Date">
+                  <span class="text-strong">October 11, 2025</span><br>
+                  <span class="text-soft">Saturday</span>
+                </td>
+                <td data-label="Location">
+                  <span class="text-strong">Danny Savery</span><br>
+                  <span class="text-soft">Bristol, Rhode Island</span>
+                </td>
+                <td data-label="Seminar / Focus">
+                  <span class="tag tag-accent">
+                    The Art of the Choke
+                  </span><br>
+                  <span class="text-soft">Type: Workshop</span>
+                </td>
+                <td data-label="Type">
+                  <span class="chip-outline">Workshop</span>
+                </td>
+              </tr>
+              <tr>
+                <td data-label="Date">
+                  <span class="text-strong">October 11, 2025</span><br>
+                  <span class="text-soft">Saturday</span>
+                </td>
+                <td data-label="Location">
+                  <span class="text-strong">Fenix BJJ</span><br>
+                  <span class="text-soft">Woburn, Massachusetts</span>
+                </td>
+                <td data-label="Seminar / Focus">
+                  <span class="tag tag-accent">
+                    Women’s Only Open Mat
+                  </span><br>
+                  <span class="text-soft">Type: Women's Only</span>
+                </td>
+                <td data-label="Type">
+                  <span class="chip-outline">Women's Only</span>
+                </td>
+              </tr>
+              <tr>
+                <td data-label="Date">
+                  <span class="text-strong">October 11, 2025</span><br>
+                  <span class="text-soft">Saturday</span>
+                </td>
+                <td data-label="Location">
+                  <span class="text-strong">Defensive Edge MMA</span><br>
+                  <span class="text-soft">Wakefield, Massachusetts</span>
+                </td>
+                <td data-label="Seminar / Focus">
+                  <span class="tag tag-accent">
+                    Self Defense - Fernanda Araujo
+                  </span><br>
+                  <span class="text-soft">Type: Women's Only</span>
+                </td>
+                <td data-label="Type">
+                  <span class="chip-outline">Women's Only</span>
+                </td>
+              </tr>
+              <tr>
+                <td data-label="Date">
+                  <span class="text-strong">October 11, 2025</span><br>
+                  <span class="text-soft">Saturday</span>
+                </td>
+                <td data-label="Location">
+                  <span class="text-strong">Dedeco</span><br>
+                  <span class="text-soft">Weymouth, Massachusetts</span>
+                </td>
+                <td data-label="Seminar / Focus">
+                  <span class="tag tag-accent">
+                    Rafael Formiga
+                  </span><br>
+                  <span class="text-soft">Type: Seminar</span>
+                </td>
+                <td data-label="Type">
+                  <span class="chip-outline">Seminar</span>
+                </td>
+              </tr>
+              <tr>
+                <td data-label="Date">
+                  <span class="text-strong">October 11, 2025</span><br>
+                  <span class="text-soft">Saturday</span>
+                </td>
+                <td data-label="Location">
+                  <span class="text-strong">Alexey BJJ</span><br>
+                  <span class="text-soft">Westbrook, Maine</span>
+                </td>
+                <td data-label="Seminar / Focus">
+                  <span class="tag tag-accent">
+                    Jansen Gomes
+                  </span><br>
+                  <span class="text-soft">Type: Seminar</span>
+                </td>
+                <td data-label="Type">
+                  <span class="chip-outline">Seminar</span>
+                </td>
+              </tr>
+              <tr>
+                <td data-label="Date">
+                  <span class="text-strong">October 12, 2025</span><br>
+                  <span class="text-soft">Sunday</span>
+                </td>
+                <td data-label="Location">
+                  <span class="text-strong">Mom’s Basement MMA</span><br>
+                  <span class="text-soft">Mattapoisett, Massachusetts</span>
+                </td>
+                <td data-label="Seminar / Focus">
+                  <span class="tag tag-accent">
+                    Christos Papadelos
+                  </span><br>
+                  <span class="text-soft">Type: Seminar</span>
+                </td>
+                <td data-label="Type">
+                  <span class="chip-outline">Seminar</span>
+                </td>
+              </tr>
+              <tr>
+                <td data-label="Date">
+                  <span class="text-strong">October 12, 2025</span><br>
+                  <span class="text-soft">Sunday</span>
+                </td>
+                <td data-label="Location">
+                  <span class="text-strong">Iron Lion Team</span><br>
+                  <span class="text-soft">Bridgeport, Connecticut</span>
+                </td>
+                <td data-label="Seminar / Focus">
+                  <span class="tag tag-accent">
+                    Fight Club Vol XV
+                  </span><br>
+                  <span class="text-soft">Type: Open Mat</span>
+                </td>
+                <td data-label="Type">
+                  <span class="chip-outline">Open Mat</span>
+                </td>
+              </tr>
+              <tr>
+                <td data-label="Date">
+                  <span class="text-strong">October 12, 2025</span><br>
+                  <span class="text-soft">Sunday</span>
+                </td>
+                <td data-label="Location">
+                  <span class="text-strong">South Coast Muay Thai</span><br>
+                  <span class="text-soft">New Bedford, Massachusetts</span>
+                </td>
+                <td data-label="Seminar / Focus">
+                  <span class="tag tag-accent">
+                    Aaron Hughes
+                  </span><br>
+                  <span class="text-soft">Type: Seminar</span>
+                </td>
+                <td data-label="Type">
+                  <span class="chip-outline">Seminar</span>
+                </td>
+              </tr>
+              <tr>
+                <td data-label="Date">
+                  <span class="text-strong">October 14, 2025</span><br>
+                  <span class="text-soft">Tuesday</span>
+                </td>
+                <td data-label="Location">
+                  <span class="text-strong">Z Team Jiu Jitsu</span><br>
+                  <span class="text-soft">Fitchburg, Massachusetts</span>
+                </td>
+                <td data-label="Seminar / Focus">
+                  <span class="tag tag-accent">
+                    Alana Norton - No Gi Class
+                  </span><br>
+                  <span class="text-soft">Type: Women's Only</span>
+                </td>
+                <td data-label="Type">
+                  <span class="chip-outline">Women's Only</span>
+                </td>
+              </tr>
+              <tr>
+                <td data-label="Date">
+                  <span class="text-strong">October 18, 2025</span><br>
+                  <span class="text-soft">Saturday</span>
+                </td>
+                <td data-label="Location">
+                  <span class="text-strong">Defensive Edge MMA</span><br>
+                  <span class="text-soft">Wakefield, Massachusetts</span>
+                </td>
+                <td data-label="Seminar / Focus">
+                  <span class="tag tag-accent">
+                    Self Defense - Fernanda Araujo
+                  </span><br>
+                  <span class="text-soft">Type: Women's Only</span>
+                </td>
+                <td data-label="Type">
+                  <span class="chip-outline">Women's Only</span>
+                </td>
+              </tr>
+              <tr>
+                <td data-label="Date">
+                  <span class="text-strong">October 18, 2025</span><br>
+                  <span class="text-soft">Saturday</span>
+                </td>
+                <td data-label="Location">
+                  <span class="text-strong">Nostros MMA</span><br>
+                  <span class="text-soft">Somersworth, New Hampshire</span>
+                </td>
+                <td data-label="Seminar / Focus">
+                  <span class="tag tag-accent">
+                    Women’s Only Open Mat
+                  </span><br>
+                  <span class="text-soft">Type: Women's Only</span>
+                </td>
+                <td data-label="Type">
+                  <span class="chip-outline">Women's Only</span>
+                </td>
+              </tr>
+              <tr>
+                <td data-label="Date">
+                  <span class="text-strong">October 18, 2025</span><br>
+                  <span class="text-soft">Saturday</span>
+                </td>
+                <td data-label="Location">
+                  <span class="text-strong">Broadway Jiu Jitsu</span><br>
+                  <span class="text-soft">Boston, Massachusetts</span>
+                </td>
+                <td data-label="Seminar / Focus">
+                  <span class="tag tag-accent">
+                    Keith Krikorian
+                  </span><br>
+                  <span class="text-soft">Type: Seminar</span>
+                </td>
+                <td data-label="Type">
+                  <span class="chip-outline">Seminar</span>
+                </td>
+              </tr>
+              <tr>
+                <td data-label="Date">
+                  <span class="text-strong">October 18, 2025</span><br>
+                  <span class="text-soft">Saturday</span>
+                </td>
+                <td data-label="Location">
+                  <span class="text-strong">Blue Collar Jiu Jitsu</span><br>
+                  <span class="text-soft">Mendon, Massachusetts</span>
+                </td>
+                <td data-label="Seminar / Focus">
+                  <span class="tag tag-accent">
+                    Marne Chiccarelli
+                  </span><br>
+                  <span class="text-soft">Type: Seminar</span>
+                </td>
+                <td data-label="Type">
+                  <span class="chip-outline">Seminar</span>
+                </td>
+              </tr>
+              <tr>
+                <td data-label="Date">
+                  <span class="text-strong">October 18, 2025</span><br>
+                  <span class="text-soft">Saturday</span>
+                </td>
+                <td data-label="Location">
+                  <span class="text-strong">Valle JiuJitsu</span><br>
+                  <span class="text-soft">Londonderry, New Hampshire</span>
+                </td>
+                <td data-label="Seminar / Focus">
+                  <span class="tag tag-accent">
+                    Valle BJJ - 3 Year Anniversary
+                  </span><br>
+                  <span class="text-soft">Type: Open House</span>
+                </td>
+                <td data-label="Type">
+                  <span class="chip-outline">Open House</span>
+                </td>
+              </tr>
+              <tr>
+                <td data-label="Date">
+                  <span class="text-strong">October 18, 2025</span><br>
+                  <span class="text-soft">Saturday</span>
+                </td>
+                <td data-label="Location">
+                  <span class="text-strong">nan</span><br>
+                  <span class="text-soft">Mansfield, Massachusetts</span>
+                </td>
+                <td data-label="Seminar / Focus">
+                  <span class="tag tag-accent">
+                    CS/R Tournament
+                  </span><br>
+                  <span class="text-soft">Type: Tournament (Invite)</span>
+                </td>
+                <td data-label="Type">
+                  <span class="chip-outline">Tournament (Invite)</span>
+                </td>
+              </tr>
+              <tr>
+                <td data-label="Date">
+                  <span class="text-strong">October 19, 2025</span><br>
+                  <span class="text-soft">Sunday</span>
+                </td>
+                <td data-label="Location">
+                  <span class="text-strong">Ironhold Jiu Jitsu</span><br>
+                  <span class="text-soft">Agawam, Massachusetts</span>
+                </td>
+                <td data-label="Seminar / Focus">
+                  <span class="tag tag-accent">
+                    Keith Krikorian
+                  </span><br>
+                  <span class="text-soft">Type: Seminar</span>
+                </td>
+                <td data-label="Type">
+                  <span class="chip-outline">Seminar</span>
+                </td>
+              </tr>
+              <tr>
+                <td data-label="Date">
+                  <span class="text-strong">October 20, 2025</span><br>
+                  <span class="text-soft">Monday</span>
+                </td>
+                <td data-label="Location">
+                  <span class="text-strong">Binda Jiu Jitsu</span><br>
+                  <span class="text-soft">Haverhill, Massachusetts</span>
+                </td>
+                <td data-label="Seminar / Focus">
+                  <span class="tag tag-accent">
+                    Fellipe Andrew
+                  </span><br>
+                  <span class="text-soft">Type: Seminar</span>
+                </td>
+                <td data-label="Type">
+                  <span class="chip-outline">Seminar</span>
+                </td>
+              </tr>
+              <tr>
+                <td data-label="Date">
+                  <span class="text-strong">October 21, 2025</span><br>
+                  <span class="text-soft">Tuesday</span>
+                </td>
+                <td data-label="Location">
+                  <span class="text-strong">Binda Jiu Jitsu</span><br>
+                  <span class="text-soft">Haverhill, Massachusetts</span>
+                </td>
+                <td data-label="Seminar / Focus">
+                  <span class="tag tag-accent">
+                    Leticia Cardozo
+                  </span><br>
+                  <span class="text-soft">Type: Seminar</span>
+                </td>
+                <td data-label="Type">
+                  <span class="chip-outline">Seminar</span>
+                </td>
+              </tr>
+              <tr>
+                <td data-label="Date">
+                  <span class="text-strong">October 22, 2025</span><br>
+                  <span class="text-soft">Wednesday</span>
+                </td>
+                <td data-label="Location">
+                  <span class="text-strong">Team Lawton Martial Arts</span><br>
+                  <span class="text-soft">Farmingdale, Maine</span>
+                </td>
+                <td data-label="Seminar / Focus">
+                  <span class="tag tag-accent">
+                    Charles Harriott
+                  </span><br>
+                  <span class="text-soft">Type: Seminar</span>
+                </td>
+                <td data-label="Type">
+                  <span class="chip-outline">Seminar</span>
+                </td>
+              </tr>
+              <tr>
+                <td data-label="Date">
+                  <span class="text-strong">October 24, 2025</span><br>
+                  <span class="text-soft">Friday</span>
+                </td>
+                <td data-label="Location">
+                  <span class="text-strong">Newport Martial Arts</span><br>
+                  <span class="text-soft">Newport, Rhode Island</span>
+                </td>
+                <td data-label="Seminar / Focus">
+                  <span class="tag tag-accent">
+                    Haunted House
+                  </span><br>
+                  <span class="text-soft">Type: Kids Event</span>
+                </td>
+                <td data-label="Type">
+                  <span class="chip-outline">Kids Event</span>
+                </td>
+              </tr>
+              <tr>
+                <td data-label="Date">
+                  <span class="text-strong">October 24, 2025</span><br>
+                  <span class="text-soft">Friday</span>
+                </td>
+                <td data-label="Location">
+                  <span class="text-strong">Renzo Gracie Academy</span><br>
+                  <span class="text-soft">Milford, Connecticut</span>
+                </td>
+                <td data-label="Seminar / Focus">
+                  <span class="tag tag-accent">
+                    Ghostly Grapplers Halloween Party
+                  </span><br>
+                  <span class="text-soft">Type: Kids Event</span>
+                </td>
+                <td data-label="Type">
+                  <span class="chip-outline">Kids Event</span>
+                </td>
+              </tr>
+              <tr>
+                <td data-label="Date">
+                  <span class="text-strong">October 25, 2025</span><br>
+                  <span class="text-soft">Saturday</span>
+                </td>
+                <td data-label="Location">
+                  <span class="text-strong">Acadia Brazilian Jiu Jitsu</span><br>
+                  <span class="text-soft">Ellsworth, Maine</span>
+                </td>
+                <td data-label="Seminar / Focus">
+                  <span class="tag tag-accent">
+                    Mike Pellegrino
+                  </span><br>
+                  <span class="text-soft">Type: Seminar</span>
+                </td>
+                <td data-label="Type">
+                  <span class="chip-outline">Seminar</span>
+                </td>
+              </tr>
+              <tr>
+                <td data-label="Date">
+                  <span class="text-strong">October 25, 2025</span><br>
+                  <span class="text-soft">Saturday</span>
+                </td>
+                <td data-label="Location">
+                  <span class="text-strong">Mission First BJJ</span><br>
+                  <span class="text-soft">Middletown, Rhode Island</span>
+                </td>
+                <td data-label="Seminar / Focus">
+                  <span class="tag tag-accent">
+                    Aaron Tiegs
+                  </span><br>
+                  <span class="text-soft">Type: Seminar</span>
+                </td>
+                <td data-label="Type">
+                  <span class="chip-outline">Seminar</span>
+                </td>
+              </tr>
+              <tr>
+                <td data-label="Date">
+                  <span class="text-strong">October 25, 2025</span><br>
+                  <span class="text-soft">Saturday</span>
+                </td>
+                <td data-label="Location">
+                  <span class="text-strong">Gentle Art Dojo</span><br>
+                  <span class="text-soft">Chelmsford, Massachusetts</span>
+                </td>
+                <td data-label="Seminar / Focus">
+                  <span class="tag tag-accent">
+                    Paulinho - Kids Seminar
+                  </span><br>
+                  <span class="text-soft">Type: Seminar</span>
+                </td>
+                <td data-label="Type">
+                  <span class="chip-outline">Seminar</span>
+                </td>
+              </tr>
+              <tr>
+                <td data-label="Date">
+                  <span class="text-strong">October 25, 2025</span><br>
+                  <span class="text-soft">Saturday</span>
+                </td>
+                <td data-label="Location">
+                  <span class="text-strong">nan</span><br>
+                  <span class="text-soft">Middletown, Connecticut</span>
+                </td>
+                <td data-label="Seminar / Focus">
+                  <span class="tag tag-accent">
+                    Fuji BJJ State Championship
+                  </span><br>
+                  <span class="text-soft">Type: Tournament</span>
+                </td>
+                <td data-label="Type">
+                  <span class="chip-outline">Tournament</span>
+                </td>
+              </tr>
+              <tr>
+                <td data-label="Date">
+                  <span class="text-strong">October 25, 2025</span><br>
+                  <span class="text-soft">Saturday</span>
+                </td>
+                <td data-label="Location">
+                  <span class="text-strong">Connors Martial Arts Academy</span><br>
+                  <span class="text-soft">Norwood, Massachusetts</span>
+                </td>
+                <td data-label="Seminar / Focus">
+                  <span class="tag tag-accent">
+                    Rory Connors
+                  </span><br>
+                  <span class="text-soft">Type: Seminar</span>
+                </td>
+                <td data-label="Type">
+                  <span class="chip-outline">Seminar</span>
+                </td>
+              </tr>
+              <tr>
+                <td data-label="Date">
+                  <span class="text-strong">October 25, 2025</span><br>
+                  <span class="text-soft">Saturday</span>
+                </td>
+                <td data-label="Location">
+                  <span class="text-strong">Virtue Martial Arts</span><br>
+                  <span class="text-soft">Waltham, Massachusetts</span>
+                </td>
+                <td data-label="Seminar / Focus">
+                  <span class="tag tag-accent">
+                    Darkside Jiu Jitsu
+                  </span><br>
+                  <span class="text-soft">Type: Seminar</span>
+                </td>
+                <td data-label="Type">
+                  <span class="chip-outline">Seminar</span>
+                </td>
+              </tr>
+              <tr>
+                <td data-label="Date">
+                  <span class="text-strong">October 25, 2025</span><br>
+                  <span class="text-soft">Saturday</span>
+                </td>
+                <td data-label="Location">
+                  <span class="text-strong">Gracie Barra</span><br>
+                  <span class="text-soft">Braintree, Massachusetts</span>
+                </td>
+                <td data-label="Seminar / Focus">
+                  <span class="tag tag-accent">
+                    Mayara Custodio - Seminar
+                  </span><br>
+                  <span class="text-soft">Type: Women's Only</span>
+                </td>
+                <td data-label="Type">
+                  <span class="chip-outline">Women's Only</span>
+                </td>
+              </tr>
+              <tr>
+                <td data-label="Date">
+                  <span class="text-strong">October 25, 2025</span><br>
+                  <span class="text-soft">Saturday</span>
+                </td>
+                <td data-label="Location">
+                  <span class="text-strong">Snake Pit USA MMA</span><br>
+                  <span class="text-soft">Billerica, Massachusetts</span>
+                </td>
+                <td data-label="Seminar / Focus">
+                  <span class="tag tag-accent">
+                    Catch Wrestling - Joel Bane
+                  </span><br>
+                  <span class="text-soft">Type: Seminar</span>
+                </td>
+                <td data-label="Type">
+                  <span class="chip-outline">Seminar</span>
+                </td>
+              </tr>
+              <tr>
+                <td data-label="Date">
+                  <span class="text-strong">October 26, 2025</span><br>
+                  <span class="text-soft">Sunday</span>
+                </td>
+                <td data-label="Location">
+                  <span class="text-strong">nan</span><br>
+                  <span class="text-soft">Waterbury, Connecticut</span>
+                </td>
+                <td data-label="Seminar / Focus">
+                  <span class="tag tag-accent">
+                    Charity - Arm Bars Against MS
+                  </span><br>
+                  <span class="text-soft">Type: Tournament</span>
+                </td>
+                <td data-label="Type">
+                  <span class="chip-outline">Tournament</span>
+                </td>
+              </tr>
+              <tr>
+                <td data-label="Date">
+                  <span class="text-strong">October 26, 2025</span><br>
+                  <span class="text-soft">Sunday</span>
+                </td>
+                <td data-label="Location">
+                  <span class="text-strong">nan</span><br>
+                  <span class="text-soft">Rockland, Maine</span>
+                </td>
+                <td data-label="Seminar / Focus">
+                  <span class="tag tag-accent">
+                    Flow Sub Only 7
+                  </span><br>
+                  <span class="text-soft">Type: Tournament</span>
+                </td>
+                <td data-label="Type">
+                  <span class="chip-outline">Tournament</span>
+                </td>
+              </tr>
+              <tr>
+                <td data-label="Date">
+                  <span class="text-strong">October 26, 2025</span><br>
+                  <span class="text-soft">Sunday</span>
+                </td>
+                <td data-label="Location">
+                  <span class="text-strong">Team Forsa</span><br>
+                  <span class="text-soft">Woburn, Massachusetts</span>
+                </td>
+                <td data-label="Seminar / Focus">
+                  <span class="tag tag-accent">
+                    Bulletproof Your Body for BJJ
+                  </span><br>
+                  <span class="text-soft">Type: Workshop</span>
+                </td>
+                <td data-label="Type">
+                  <span class="chip-outline">Workshop</span>
+                </td>
+              </tr>
+              <tr>
+                <td data-label="Date">
+                  <span class="text-strong">October 26, 2025</span><br>
+                  <span class="text-soft">Sunday</span>
+                </td>
+                <td data-label="Location">
+                  <span class="text-strong">Daniel Gracie Academy</span><br>
+                  <span class="text-soft">Plymouth, Massachusetts</span>
+                </td>
+                <td data-label="Seminar / Focus">
+                  <span class="tag tag-accent">
+                    Christos Papadelos
+                  </span><br>
+                  <span class="text-soft">Type: Seminar</span>
+                </td>
+                <td data-label="Type">
+                  <span class="chip-outline">Seminar</span>
+                </td>
+              </tr>
+              <tr>
+                <td data-label="Date">
+                  <span class="text-strong">October 29, 2025</span><br>
+                  <span class="text-soft">Wednesday</span>
+                </td>
+                <td data-label="Location">
+                  <span class="text-strong">Gracie Gym</span><br>
+                  <span class="text-soft">Windham, Maine</span>
+                </td>
+                <td data-label="Seminar / Focus">
+                  <span class="tag tag-accent">
+                    Rodrigo Castro
+                  </span><br>
+                  <span class="text-soft">Type: Seminar</span>
+                </td>
+                <td data-label="Type">
+                  <span class="chip-outline">Seminar</span>
+                </td>
+              </tr>
+              <tr>
+                <td data-label="Date">
+                  <span class="text-strong">October 29, 2025</span><br>
+                  <span class="text-soft">Wednesday</span>
+                </td>
+                <td data-label="Location">
+                  <span class="text-strong">Lauzon MMA</span><br>
+                  <span class="text-soft">Canton, Massachusetts</span>
+                </td>
+                <td data-label="Seminar / Focus">
+                  <span class="tag tag-accent">
+                    Charles Harriott
+                  </span><br>
+                  <span class="text-soft">Type: Seminar</span>
+                </td>
+                <td data-label="Type">
+                  <span class="chip-outline">Seminar</span>
+                </td>
+              </tr>
+              <tr>
+                <td data-label="Date">
+                  <span class="text-strong">October 29, 2025</span><br>
+                  <span class="text-soft">Wednesday</span>
+                </td>
+                <td data-label="Location">
+                  <span class="text-strong">Technique BJJ</span><br>
+                  <span class="text-soft">Prospect, Connecticut</span>
+                </td>
+                <td data-label="Seminar / Focus">
+                  <span class="tag tag-accent">
+                    Halloween Open Mat
+                  </span><br>
+                  <span class="text-soft">Type: Open Mat</span>
+                </td>
+                <td data-label="Type">
+                  <span class="chip-outline">Open Mat</span>
+                </td>
+              </tr>
+              <tr>
+                <td data-label="Date">
+                  <span class="text-strong">October 31, 2025</span><br>
+                  <span class="text-soft">Friday</span>
+                </td>
+                <td data-label="Location">
+                  <span class="text-strong">Broadway Jiu Jitsu</span><br>
+                  <span class="text-soft">Boston, Massachusetts</span>
+                </td>
+                <td data-label="Seminar / Focus">
+                  <span class="tag tag-accent">
+                    Carlson Gracie Jr
+                  </span><br>
+                  <span class="text-soft">Type: Seminar</span>
+                </td>
+                <td data-label="Type">
+                  <span class="chip-outline">Seminar</span>
+                </td>
+              </tr>
+              <tr>
+                <td data-label="Date">
+                  <span class="text-strong">November 1, 2025</span><br>
+                  <span class="text-soft">Saturday</span>
+                </td>
+                <td data-label="Location">
+                  <span class="text-strong">nan</span><br>
+                  <span class="text-soft">Trumbull, Connecticut</span>
+                </td>
+                <td data-label="Seminar / Focus">
+                  <span class="tag tag-accent">
+                    Gaman Submission Challenge
+                  </span><br>
+                  <span class="text-soft">Type: Tournament</span>
+                </td>
+                <td data-label="Type">
+                  <span class="chip-outline">Tournament</span>
+                </td>
+              </tr>
+              <tr>
+                <td data-label="Date">
+                  <span class="text-strong">November 1, 2025</span><br>
+                  <span class="text-soft">Saturday</span>
+                </td>
+                <td data-label="Location">
+                  <span class="text-strong">Fenix BJJ</span><br>
+                  <span class="text-soft">Tewksbury, Massachusetts</span>
+                </td>
+                <td data-label="Seminar / Focus">
+                  <span class="tag tag-accent">
+                    Veterans Day Ruck &amp; Roll
+                  </span><br>
+                  <span class="text-soft">Type: Charity Event</span>
+                </td>
+                <td data-label="Type">
+                  <span class="chip-outline">Charity Event</span>
+                </td>
+              </tr>
+              <tr>
+                <td data-label="Date">
+                  <span class="text-strong">November 1, 2025</span><br>
+                  <span class="text-soft">Saturday</span>
+                </td>
+                <td data-label="Location">
+                  <span class="text-strong">nan</span><br>
+                  <span class="text-soft">Manchester, New Hampshire</span>
+                </td>
+                <td data-label="Seminar / Focus">
+                  <span class="tag tag-accent">
+                    Combat Zone Ninety
+                  </span><br>
+                  <span class="text-soft">Type: Tournament (Invite)</span>
+                </td>
+                <td data-label="Type">
+                  <span class="chip-outline">Tournament (Invite)</span>
+                </td>
+              </tr>
+              <tr>
+                <td data-label="Date">
+                  <span class="text-strong">November 1, 2025</span><br>
+                  <span class="text-soft">Saturday</span>
+                </td>
+                <td data-label="Location">
+                  <span class="text-strong">Ironhold Jiu Jitsu</span><br>
+                  <span class="text-soft">Agawam, Massachusetts</span>
+                </td>
+                <td data-label="Seminar / Focus">
+                  <span class="tag tag-accent">
+                    Grand Opening
+                  </span><br>
+                  <span class="text-soft">Type: Grand Opening</span>
+                </td>
+                <td data-label="Type">
+                  <span class="chip-outline">Grand Opening</span>
+                </td>
+              </tr>
+              <tr>
+                <td data-label="Date">
+                  <span class="text-strong">November 1, 2025</span><br>
+                  <span class="text-soft">Saturday</span>
+                </td>
+                <td data-label="Location">
+                  <span class="text-strong">Pajama Strangle Time</span><br>
+                  <span class="text-soft">Providence, Rhode Island</span>
+                </td>
+                <td data-label="Seminar / Focus">
+                  <span class="tag tag-accent">
+                    Spooky Sparring - Open Mat
+                  </span><br>
+                  <span class="text-soft">Type: Open Mat</span>
+                </td>
+                <td data-label="Type">
+                  <span class="chip-outline">Open Mat</span>
+                </td>
+              </tr>
+              <tr>
+                <td data-label="Date">
+                  <span class="text-strong">November 1, 2025</span><br>
+                  <span class="text-soft">Saturday</span>
+                </td>
+                <td data-label="Location">
+                  <span class="text-strong">EP Martial Arts</span><br>
+                  <span class="text-soft">E. Providence, Rhode Island</span>
+                </td>
+                <td data-label="Seminar / Focus">
+                  <span class="tag tag-accent">
+                    Mayara Custodio
+                  </span><br>
+                  <span class="text-soft">Type: Seminar</span>
+                </td>
+                <td data-label="Type">
+                  <span class="chip-outline">Seminar</span>
+                </td>
+              </tr>
+              <tr>
+                <td data-label="Date">
+                  <span class="text-strong">November 1, 2025</span><br>
+                  <span class="text-soft">Saturday</span>
+                </td>
+                <td data-label="Location">
+                  <span class="text-strong">Carlson Gracie RI</span><br>
+                  <span class="text-soft">Westerly, Rhode Island</span>
+                </td>
+                <td data-label="Seminar / Focus">
+                  <span class="tag tag-accent">
+                    Carlson Gracie Jr
+                  </span><br>
+                  <span class="text-soft">Type: Seminar</span>
+                </td>
+                <td data-label="Type">
+                  <span class="chip-outline">Seminar</span>
+                </td>
+              </tr>
+              <tr>
+                <td data-label="Date">
+                  <span class="text-strong">November 1, 2025</span><br>
+                  <span class="text-soft">Saturday</span>
+                </td>
+                <td data-label="Location">
+                  <span class="text-strong">NESF</span><br>
+                  <span class="text-soft">Arlington, Massachusetts</span>
+                </td>
+                <td data-label="Seminar / Focus">
+                  <span class="tag tag-accent">
+                    2 Year Anniversary - Party/Promo
+                  </span><br>
+                  <span class="text-soft">Type: Open House</span>
+                </td>
+                <td data-label="Type">
+                  <span class="chip-outline">Open House</span>
+                </td>
+              </tr>
+              <tr>
+                <td data-label="Date">
+                  <span class="text-strong">November 2, 2025</span><br>
+                  <span class="text-soft">Sunday</span>
+                </td>
+                <td data-label="Location">
+                  <span class="text-strong">Team Santos</span><br>
+                  <span class="text-soft">Pawtucket, Rhode Island</span>
+                </td>
+                <td data-label="Seminar / Focus">
+                  <span class="tag tag-accent">
+                    Mega Mat Open Mat
+                  </span><br>
+                  <span class="text-soft">Type: Open Mat</span>
+                </td>
+                <td data-label="Type">
+                  <span class="chip-outline">Open Mat</span>
+                </td>
+              </tr>
+              <tr>
+                <td data-label="Date">
+                  <span class="text-strong">November 2, 2025</span><br>
+                  <span class="text-soft">Sunday</span>
+                </td>
+                <td data-label="Location">
+                  <span class="text-strong">Team Forsa</span><br>
+                  <span class="text-soft">Woburn, Massachusetts</span>
+                </td>
+                <td data-label="Seminar / Focus">
+                  <span class="tag tag-accent">
+                    Bulletproof Your Body for BJJ
+                  </span><br>
+                  <span class="text-soft">Type: Workshop</span>
+                </td>
+                <td data-label="Type">
+                  <span class="chip-outline">Workshop</span>
+                </td>
+              </tr>
+              <tr>
+                <td data-label="Date">
+                  <span class="text-strong">November 2, 2025</span><br>
+                  <span class="text-soft">Sunday</span>
+                </td>
+                <td data-label="Location">
+                  <span class="text-strong">Solid Base BJJ</span><br>
+                  <span class="text-soft">Southington, Connecticut</span>
+                </td>
+                <td data-label="Seminar / Focus">
+                  <span class="tag tag-accent">
+                    Women’s Only Open Mat
+                  </span><br>
+                  <span class="text-soft">Type: Women's Only</span>
+                </td>
+                <td data-label="Type">
+                  <span class="chip-outline">Women's Only</span>
+                </td>
+              </tr>
+              <tr>
+                <td data-label="Date">
+                  <span class="text-strong">November 2, 2025</span><br>
+                  <span class="text-soft">Sunday</span>
+                </td>
+                <td data-label="Location">
+                  <span class="text-strong">Radius Martial Arts</span><br>
+                  <span class="text-soft">Fairfield, Connecticut</span>
+                </td>
+                <td data-label="Seminar / Focus">
+                  <span class="tag tag-accent">
+                    Women’s Only Open Mat
+                  </span><br>
+                  <span class="text-soft">Type: Women's Only</span>
+                </td>
+                <td data-label="Type">
+                  <span class="chip-outline">Women's Only</span>
+                </td>
+              </tr>
+              <tr>
+                <td data-label="Date">
+                  <span class="text-strong">November 2, 2025</span><br>
+                  <span class="text-soft">Sunday</span>
+                </td>
+                <td data-label="Location">
+                  <span class="text-strong">Carlson Gracie CT</span><br>
+                  <span class="text-soft">New Haven, Connecticut</span>
+                </td>
+                <td data-label="Seminar / Focus">
+                  <span class="tag tag-accent">
+                    Carlson Gracie Jr
+                  </span><br>
+                  <span class="text-soft">Type: Seminar</span>
+                </td>
+                <td data-label="Type">
+                  <span class="chip-outline">Seminar</span>
+                </td>
+              </tr>
+              <tr>
+                <td data-label="Date">
+                  <span class="text-strong">November 2, 2025</span><br>
+                  <span class="text-soft">Sunday</span>
+                </td>
+                <td data-label="Location">
+                  <span class="text-strong">Renzo Gracie Academy</span><br>
+                  <span class="text-soft">Smithfield, Rhode Island</span>
+                </td>
+                <td data-label="Seminar / Focus">
+                  <span class="tag tag-accent">
+                    Mayara Custodio
+                  </span><br>
+                  <span class="text-soft">Type: Seminar</span>
+                </td>
+                <td data-label="Type">
+                  <span class="chip-outline">Seminar</span>
+                </td>
+              </tr>
+              <tr>
+                <td data-label="Date">
+                  <span class="text-strong">November 5, 2025</span><br>
+                  <span class="text-soft">Wednesday</span>
+                </td>
+                <td data-label="Location">
+                  <span class="text-strong">Submit Your Friend Academy</span><br>
+                  <span class="text-soft">Boston, Massachusetts</span>
+                </td>
+                <td data-label="Seminar / Focus">
+                  <span class="tag tag-accent">
+                    Paulo PiuPiu Silva
+                  </span><br>
+                  <span class="text-soft">Type: Seminar</span>
+                </td>
+                <td data-label="Type">
+                  <span class="chip-outline">Seminar</span>
+                </td>
+              </tr>
+              <tr>
+                <td data-label="Date">
+                  <span class="text-strong">November 7, 2025</span><br>
+                  <span class="text-soft">Friday</span>
+                </td>
+                <td data-label="Location">
+                  <span class="text-strong">Elements MMA</span><br>
+                  <span class="text-soft">Keene, New Hampshire</span>
+                </td>
+                <td data-label="Seminar / Focus">
+                  <span class="tag tag-accent">
+                    Nathan Eisenberg
+                  </span><br>
+                  <span class="text-soft">Type: Seminar</span>
+                </td>
+                <td data-label="Type">
+                  <span class="chip-outline">Seminar</span>
+                </td>
+              </tr>
+              <tr>
+                <td data-label="Date">
+                  <span class="text-strong">November 7, 2025</span><br>
+                  <span class="text-soft">Friday</span>
+                </td>
+                <td data-label="Location">
+                  <span class="text-strong">Manchester BJJ</span><br>
+                  <span class="text-soft">Manchester, Connecticut</span>
+                </td>
+                <td data-label="Seminar / Focus">
+                  <span class="tag tag-accent">
+                    Tommy Wales
+                  </span><br>
+                  <span class="text-soft">Type: Seminar</span>
+                </td>
+                <td data-label="Type">
+                  <span class="chip-outline">Seminar</span>
+                </td>
+              </tr>
+              <tr>
+                <td data-label="Date">
+                  <span class="text-strong">November 8, 2025</span><br>
+                  <span class="text-soft">Saturday</span>
+                </td>
+                <td data-label="Location">
+                  <span class="text-strong">nan</span><br>
+                  <span class="text-soft">Danvers, Massachusetts</span>
+                </td>
+                <td data-label="Seminar / Focus">
+                  <span class="tag tag-accent">
+                    Tap Cancer Out
+                  </span><br>
+                  <span class="text-soft">Type: Tournament</span>
+                </td>
+                <td data-label="Type">
+                  <span class="chip-outline">Tournament</span>
+                </td>
+              </tr>
+              <tr>
+                <td data-label="Date">
+                  <span class="text-strong">November 8, 2025</span><br>
+                  <span class="text-soft">Saturday</span>
+                </td>
+                <td data-label="Location">
+                  <span class="text-strong">Plainville Martial Arts</span><br>
+                  <span class="text-soft">Plainville, Connecticut</span>
+                </td>
+                <td data-label="Seminar / Focus">
+                  <span class="tag tag-accent">
+                    Technique / Belt Test / Shark Tank
+                  </span><br>
+                  <span class="text-soft">Type: Seminar</span>
+                </td>
+                <td data-label="Type">
+                  <span class="chip-outline">Seminar</span>
+                </td>
+              </tr>
+              <tr>
+                <td data-label="Date">
+                  <span class="text-strong">November 8, 2025</span><br>
+                  <span class="text-soft">Saturday</span>
+                </td>
+                <td data-label="Location">
+                  <span class="text-strong">SBG East Coast</span><br>
+                  <span class="text-soft">Dartmouth, Massachusetts</span>
+                </td>
+                <td data-label="Seminar / Focus">
+                  <span class="tag tag-accent">
+                    Matt Thornton
+                  </span><br>
+                  <span class="text-soft">Type: Seminar</span>
+                </td>
+                <td data-label="Type">
+                  <span class="chip-outline">Seminar</span>
+                </td>
+              </tr>
+              <tr>
+                <td data-label="Date">
+                  <span class="text-strong">November 8, 2025</span><br>
+                  <span class="text-soft">Saturday</span>
+                </td>
+                <td data-label="Location">
+                  <span class="text-strong">Integrated Martial Arts</span><br>
+                  <span class="text-soft">Worcester, Massachusetts</span>
+                </td>
+                <td data-label="Seminar / Focus">
+                  <span class="tag tag-accent">
+                    Helena Cravar
+                  </span><br>
+                  <span class="text-soft">Type: Seminar</span>
+                </td>
+                <td data-label="Type">
+                  <span class="chip-outline">Seminar</span>
+                </td>
+              </tr>
+              <tr>
+                <td data-label="Date">
+                  <span class="text-strong">November 9, 2025</span><br>
+                  <span class="text-soft">Sunday</span>
+                </td>
+                <td data-label="Location">
+                  <span class="text-strong">SBG East Coast</span><br>
+                  <span class="text-soft">Dartmouth, Massachusetts</span>
+                </td>
+                <td data-label="Seminar / Focus">
+                  <span class="tag tag-accent">
+                    Matt Thornton
+                  </span><br>
+                  <span class="text-soft">Type: Seminar</span>
+                </td>
+                <td data-label="Type">
+                  <span class="chip-outline">Seminar</span>
+                </td>
+              </tr>
+              <tr>
+                <td data-label="Date">
+                  <span class="text-strong">November 9, 2025</span><br>
+                  <span class="text-soft">Sunday</span>
+                </td>
+                <td data-label="Location">
+                  <span class="text-strong">Daniel Gracie Academy</span><br>
+                  <span class="text-soft">Hyannis, Massachusetts</span>
+                </td>
+                <td data-label="Seminar / Focus">
+                  <span class="tag tag-accent">
+                    Vitor Vianna
+                  </span><br>
+                  <span class="text-soft">Type: Seminar</span>
+                </td>
+                <td data-label="Type">
+                  <span class="chip-outline">Seminar</span>
+                </td>
+              </tr>
+              <tr>
+                <td data-label="Date">
+                  <span class="text-strong">November 9, 2025</span><br>
+                  <span class="text-soft">Sunday</span>
+                </td>
+                <td data-label="Location">
+                  <span class="text-strong">nan</span><br>
+                  <span class="text-soft">Danvers, Massachusetts</span>
+                </td>
+                <td data-label="Seminar / Focus">
+                  <span class="tag tag-accent">
+                    Tap Cancer Out
+                  </span><br>
+                  <span class="text-soft">Type: Tournament</span>
+                </td>
+                <td data-label="Type">
+                  <span class="chip-outline">Tournament</span>
+                </td>
+              </tr>
+              <tr>
+                <td data-label="Date">
+                  <span class="text-strong">November 9, 2025</span><br>
+                  <span class="text-soft">Sunday</span>
+                </td>
+                <td data-label="Location">
+                  <span class="text-strong">Nostros MMA</span><br>
+                  <span class="text-soft">Somersworth, New Hampshire</span>
+                </td>
+                <td data-label="Seminar / Focus">
+                  <span class="tag tag-accent">
+                    Veterans Day Ruck &amp; Roll
+                  </span><br>
+                  <span class="text-soft">Type: Charity Event</span>
+                </td>
+                <td data-label="Type">
+                  <span class="chip-outline">Charity Event</span>
+                </td>
+              </tr>
+              <tr>
+                <td data-label="Date">
+                  <span class="text-strong">November 9, 2025</span><br>
+                  <span class="text-soft">Sunday</span>
+                </td>
+                <td data-label="Location">
+                  <span class="text-strong">F.I.T.E. FIT</span><br>
+                  <span class="text-soft">Glastonbury, Connecticut</span>
+                </td>
+                <td data-label="Seminar / Focus">
+                  <span class="tag tag-accent">
+                    We Defy Veterans Day Open Mat
+                  </span><br>
+                  <span class="text-soft">Type: Charity Event</span>
+                </td>
+                <td data-label="Type">
+                  <span class="chip-outline">Charity Event</span>
+                </td>
+              </tr>
+              <tr>
+                <td data-label="Date">
+                  <span class="text-strong">November 11, 2025</span><br>
+                  <span class="text-soft">Tuesday</span>
+                </td>
+                <td data-label="Location">
+                  <span class="text-strong">BattleGround JiuJitsu</span><br>
+                  <span class="text-soft">W. Springfield, Massachusetts</span>
+                </td>
+                <td data-label="Seminar / Focus">
+                  <span class="tag tag-accent">
+                    Veterans Day Open Mat
+                  </span><br>
+                  <span class="text-soft">Type: Open Mat</span>
+                </td>
+                <td data-label="Type">
+                  <span class="chip-outline">Open Mat</span>
+                </td>
+              </tr>
+              <tr>
+                <td data-label="Date">
+                  <span class="text-strong">November 12, 2025</span><br>
+                  <span class="text-soft">Wednesday</span>
+                </td>
+                <td data-label="Location">
+                  <span class="text-strong">Bernardo Faria Academy</span><br>
+                  <span class="text-soft">Bedford, Massachusetts</span>
+                </td>
+                <td data-label="Seminar / Focus">
+                  <span class="tag tag-accent">
+                    Master Alvaro Romano - Mobility
+                  </span><br>
+                  <span class="text-soft">Type: Workshop</span>
+                </td>
+                <td data-label="Type">
+                  <span class="chip-outline">Workshop</span>
+                </td>
+              </tr>
+              <tr>
+                <td data-label="Date">
+                  <span class="text-strong">November 15, 2025</span><br>
+                  <span class="text-soft">Saturday</span>
+                </td>
+                <td data-label="Location">
+                  <span class="text-strong">Tri-Force Training Center</span><br>
+                  <span class="text-soft">Pawtucket, Rhode Island</span>
+                </td>
+                <td data-label="Seminar / Focus">
+                  <span class="tag tag-accent">
+                    Josh Barnett
+                  </span><br>
+                  <span class="text-soft">Type: Seminar</span>
+                </td>
+                <td data-label="Type">
+                  <span class="chip-outline">Seminar</span>
+                </td>
+              </tr>
+              <tr>
+                <td data-label="Date">
+                  <span class="text-strong">November 15, 2025</span><br>
+                  <span class="text-soft">Saturday</span>
+                </td>
+                <td data-label="Location">
+                  <span class="text-strong">nan</span><br>
+                  <span class="text-soft">Hanover, Massachusetts</span>
+                </td>
+                <td data-label="Seminar / Focus">
+                  <span class="tag tag-accent">
+                    NAGA Grappling
+                  </span><br>
+                  <span class="text-soft">Type: Tournament</span>
+                </td>
+                <td data-label="Type">
+                  <span class="chip-outline">Tournament</span>
+                </td>
+              </tr>
+              <tr>
+                <td data-label="Date">
+                  <span class="text-strong">November 15, 2025</span><br>
+                  <span class="text-soft">Saturday</span>
+                </td>
+                <td data-label="Location">
+                  <span class="text-strong">Umass Lowell BJJ</span><br>
+                  <span class="text-soft">Lowell, Massachusetts</span>
+                </td>
+                <td data-label="Seminar / Focus">
+                  <span class="tag tag-accent">
+                    Chris Piscione &amp; Michelle Ribeck
+                  </span><br>
+                  <span class="text-soft">Type: Seminar</span>
+                </td>
+                <td data-label="Type">
+                  <span class="chip-outline">Seminar</span>
+                </td>
+              </tr>
+              <tr>
+                <td data-label="Date">
+                  <span class="text-strong">November 15, 2025</span><br>
+                  <span class="text-soft">Saturday</span>
+                </td>
+                <td data-label="Location">
+                  <span class="text-strong">Fenix BJJ</span><br>
+                  <span class="text-soft">Tewksbury, Massachusetts</span>
+                </td>
+                <td data-label="Seminar / Focus">
+                  <span class="tag tag-accent">
+                    Women’s Only Open Mat
+                  </span><br>
+                  <span class="text-soft">Type: Women's Only</span>
+                </td>
+                <td data-label="Type">
+                  <span class="chip-outline">Women's Only</span>
+                </td>
+              </tr>
+              <tr>
+                <td data-label="Date">
+                  <span class="text-strong">November 15, 2025</span><br>
+                  <span class="text-soft">Saturday</span>
+                </td>
+                <td data-label="Location">
+                  <span class="text-strong">Aqueous BJJ</span><br>
+                  <span class="text-soft">Bedford, New Hampshire</span>
+                </td>
+                <td data-label="Seminar / Focus">
+                  <span class="tag tag-accent">
+                    Junny Ocasio
+                  </span><br>
+                  <span class="text-soft">Type: Seminar</span>
+                </td>
+                <td data-label="Type">
+                  <span class="chip-outline">Seminar</span>
+                </td>
+              </tr>
+              <tr>
+                <td data-label="Date">
+                  <span class="text-strong">November 15, 2025</span><br>
+                  <span class="text-soft">Saturday</span>
+                </td>
+                <td data-label="Location">
+                  <span class="text-strong">Unita BJJ</span><br>
+                  <span class="text-soft">Lebanon, New Hampshire</span>
+                </td>
+                <td data-label="Seminar / Focus">
+                  <span class="tag tag-accent">
+                    Andre Dedeco
+                  </span><br>
+                  <span class="text-soft">Type: Seminar</span>
+                </td>
+                <td data-label="Type">
+                  <span class="chip-outline">Seminar</span>
+                </td>
+              </tr>
+              <tr>
+                <td data-label="Date">
+                  <span class="text-strong">November 16, 2025</span><br>
+                  <span class="text-soft">Sunday</span>
+                </td>
+                <td data-label="Location">
+                  <span class="text-strong">Lauzon MMA</span><br>
+                  <span class="text-soft">Canton, Massachusetts</span>
+                </td>
+                <td data-label="Seminar / Focus">
+                  <span class="tag tag-accent">
+                    Breathe and Plunge for Athletes
+                  </span><br>
+                  <span class="text-soft">Type: Workshop</span>
+                </td>
+                <td data-label="Type">
+                  <span class="chip-outline">Workshop</span>
+                </td>
+              </tr>
+              <tr>
+                <td data-label="Date">
+                  <span class="text-strong">November 16, 2025</span><br>
+                  <span class="text-soft">Sunday</span>
+                </td>
+                <td data-label="Location">
+                  <span class="text-strong">Pajama Strangle Time</span><br>
+                  <span class="text-soft">Providence, Rhode Island</span>
+                </td>
+                <td data-label="Seminar / Focus">
+                  <span class="tag tag-accent">
+                    Chokes For Chicks Womens Open
+                  </span><br>
+                  <span class="text-soft">Type: Women's Only</span>
+                </td>
+                <td data-label="Type">
+                  <span class="chip-outline">Women's Only</span>
+                </td>
+              </tr>
+              <tr>
+                <td data-label="Date">
+                  <span class="text-strong">November 16, 2025</span><br>
+                  <span class="text-soft">Sunday</span>
+                </td>
+                <td data-label="Location">
+                  <span class="text-strong">Z Team Jiu Jitsu</span><br>
+                  <span class="text-soft">Fitchburg, Massachusetts</span>
+                </td>
+                <td data-label="Seminar / Focus">
+                  <span class="tag tag-accent">
+                    Z Team Invitational IV
+                  </span><br>
+                  <span class="text-soft">Type: Tournament (Invite)</span>
+                </td>
+                <td data-label="Type">
+                  <span class="chip-outline">Tournament (Invite)</span>
+                </td>
+              </tr>
+              <tr>
+                <td data-label="Date">
+                  <span class="text-strong">November 18, 2025</span><br>
+                  <span class="text-soft">Tuesday</span>
+                </td>
+                <td data-label="Location">
+                  <span class="text-strong">Team Flo</span><br>
+                  <span class="text-soft">Tyngsboro, Massachusetts</span>
+                </td>
+                <td data-label="Seminar / Focus">
+                  <span class="tag tag-accent">
+                    All Women’s Open Mat
+                  </span><br>
+                  <span class="text-soft">Type: Women's Only</span>
+                </td>
+                <td data-label="Type">
+                  <span class="chip-outline">Women's Only</span>
+                </td>
+              </tr>
+              <tr>
+                <td data-label="Date">
+                  <span class="text-strong">November 21, 2025</span><br>
+                  <span class="text-soft">Friday</span>
+                </td>
+                <td data-label="Location">
+                  <span class="text-strong">Broadway Jiu Jitsu</span><br>
+                  <span class="text-soft">Boston, Massachusetts</span>
+                </td>
+                <td data-label="Seminar / Focus">
+                  <span class="tag tag-accent">
+                    Nicholas Meregali
+                  </span><br>
+                  <span class="text-soft">Type: Seminar</span>
+                </td>
+                <td data-label="Type">
+                  <span class="chip-outline">Seminar</span>
+                </td>
+              </tr>
+              <tr>
+                <td data-label="Date">
+                  <span class="text-strong">November 22, 2025</span><br>
+                  <span class="text-soft">Saturday</span>
+                </td>
+                <td data-label="Location">
+                  <span class="text-strong">nan</span><br>
+                  <span class="text-soft">Windsor, Connecticut</span>
+                </td>
+                <td data-label="Seminar / Focus">
+                  <span class="tag tag-accent">
+                    TLP 21 - Battle Underground
+                  </span><br>
+                  <span class="text-soft">Type: Tournament (Invite)</span>
+                </td>
+                <td data-label="Type">
+                  <span class="chip-outline">Tournament (Invite)</span>
+                </td>
+              </tr>
+              <tr>
+                <td data-label="Date">
+                  <span class="text-strong">November 22, 2025</span><br>
+                  <span class="text-soft">Saturday</span>
+                </td>
+                <td data-label="Location">
+                  <span class="text-strong">Combate Real School of Jiu Jitsu</span><br>
+                  <span class="text-soft">Southbridge, Massachusetts</span>
+                </td>
+                <td data-label="Seminar / Focus">
+                  <span class="tag tag-accent">
+                    Joe Moreira
+                  </span><br>
+                  <span class="text-soft">Type: Seminar</span>
+                </td>
+                <td data-label="Type">
+                  <span class="chip-outline">Seminar</span>
+                </td>
+              </tr>
+              <tr>
+                <td data-label="Date">
+                  <span class="text-strong">November 22, 2025</span><br>
+                  <span class="text-soft">Saturday</span>
+                </td>
+                <td data-label="Location">
+                  <span class="text-strong">Greenwich Jiu Jiutsu Academy</span><br>
+                  <span class="text-soft">Greenwich, Connecticut</span>
+                </td>
+                <td data-label="Seminar / Focus">
+                  <span class="tag tag-accent">
+                    Josh Souders
+                  </span><br>
+                  <span class="text-soft">Type: Seminar</span>
+                </td>
+                <td data-label="Type">
+                  <span class="chip-outline">Seminar</span>
+                </td>
+              </tr>
+              <tr>
+                <td data-label="Date">
+                  <span class="text-strong">November 22, 2025</span><br>
+                  <span class="text-soft">Saturday</span>
+                </td>
+                <td data-label="Location">
+                  <span class="text-strong">Umass Amherst</span><br>
+                  <span class="text-soft">Amherst, Massachusetts</span>
+                </td>
+                <td data-label="Seminar / Focus">
+                  <span class="tag tag-accent">
+                    Jake Smith
+                  </span><br>
+                  <span class="text-soft">Type: Seminar</span>
+                </td>
+                <td data-label="Type">
+                  <span class="chip-outline">Seminar</span>
+                </td>
+              </tr>
+              <tr>
+                <td data-label="Date">
+                  <span class="text-strong">November 22, 2025</span><br>
+                  <span class="text-soft">Saturday</span>
+                </td>
+                <td data-label="Location">
+                  <span class="text-strong">Daniel Gracie Academy</span><br>
+                  <span class="text-soft">Northborough, Massachusetts</span>
+                </td>
+                <td data-label="Seminar / Focus">
+                  <span class="tag tag-accent">
+                    Nicholas Meregali
+                  </span><br>
+                  <span class="text-soft">Type: Seminar</span>
+                </td>
+                <td data-label="Type">
+                  <span class="chip-outline">Seminar</span>
+                </td>
+              </tr>
+              <tr>
+                <td data-label="Date">
+                  <span class="text-strong">November 23, 2025</span><br>
+                  <span class="text-soft">Sunday</span>
+                </td>
+                <td data-label="Location">
+                  <span class="text-strong">Combate Real School of Jiu Jitsu</span><br>
+                  <span class="text-soft">Southbridge, Massachusetts</span>
+                </td>
+                <td data-label="Seminar / Focus">
+                  <span class="tag tag-accent">
+                    Joe Moreira
+                  </span><br>
+                  <span class="text-soft">Type: Seminar</span>
+                </td>
+                <td data-label="Type">
+                  <span class="chip-outline">Seminar</span>
+                </td>
+              </tr>
+              <tr>
+                <td data-label="Date">
+                  <span class="text-strong">November 23, 2025</span><br>
+                  <span class="text-soft">Sunday</span>
+                </td>
+                <td data-label="Location">
+                  <span class="text-strong">nan</span><br>
+                  <span class="text-soft">Bristol, Connecticut</span>
+                </td>
+                <td data-label="Seminar / Focus">
+                  <span class="tag tag-accent">
+                    IGC Invitational
+                  </span><br>
+                  <span class="text-soft">Type: Tournament (Invite)</span>
+                </td>
+                <td data-label="Type">
+                  <span class="chip-outline">Tournament (Invite)</span>
+                </td>
+              </tr>
+              <tr>
+                <td data-label="Date">
+                  <span class="text-strong">November 23, 2025</span><br>
+                  <span class="text-soft">Sunday</span>
+                </td>
+                <td data-label="Location">
+                  <span class="text-strong">Connors Martial Arts Academy</span><br>
+                  <span class="text-soft">Norwood, Massachusetts</span>
+                </td>
+                <td data-label="Seminar / Focus">
+                  <span class="tag tag-accent">
+                    Henry Oberlander Memorial OM
+                  </span><br>
+                  <span class="text-soft">Type: Open Mat</span>
+                </td>
+                <td data-label="Type">
+                  <span class="chip-outline">Open Mat</span>
+                </td>
+              </tr>
+              <tr>
+                <td data-label="Date">
+                  <span class="text-strong">November 25, 2025</span><br>
+                  <span class="text-soft">Tuesday</span>
+                </td>
+                <td data-label="Location">
+                  <span class="text-strong">Underdog MMA</span><br>
+                  <span class="text-soft">West Hartford, Connecticut</span>
+                </td>
+                <td data-label="Seminar / Focus">
+                  <span class="tag tag-accent">
+                    Coach Kia Upperbody Wrestling
+                  </span><br>
+                  <span class="text-soft">Type: Seminar</span>
+                </td>
+                <td data-label="Type">
+                  <span class="chip-outline">Seminar</span>
+                </td>
+              </tr>
+              <tr>
+                <td data-label="Date">
+                  <span class="text-strong">November 26, 2025</span><br>
+                  <span class="text-soft">Wednesday</span>
+                </td>
+                <td data-label="Location">
+                  <span class="text-strong">Recon MMA</span><br>
+                  <span class="text-soft">Portland, Maine</span>
+                </td>
+                <td data-label="Seminar / Focus">
+                  <span class="tag tag-accent">
+                    Introduction to CLA
+                  </span><br>
+                  <span class="text-soft">Type: Workshop</span>
+                </td>
+                <td data-label="Type">
+                  <span class="chip-outline">Workshop</span>
+                </td>
+              </tr>
+              <tr>
+                <td data-label="Date">
+                  <span class="text-strong">November 26, 2025</span><br>
+                  <span class="text-soft">Wednesday</span>
+                </td>
+                <td data-label="Location">
+                  <span class="text-strong">Unit 232</span><br>
+                  <span class="text-soft">Littleton, Massachusetts</span>
+                </td>
+                <td data-label="Seminar / Focus">
+                  <span class="tag tag-accent">
+                    Holiday Open Mat
+                  </span><br>
+                  <span class="text-soft">Type: Open Mat</span>
+                </td>
+                <td data-label="Type">
+                  <span class="chip-outline">Open Mat</span>
+                </td>
+              </tr>
+              <tr>
+                <td data-label="Date">
+                  <span class="text-strong">November 27, 2025</span><br>
+                  <span class="text-soft">Thursday</span>
+                </td>
+                <td data-label="Location">
+                  <span class="text-strong">Flow State Fighting</span><br>
+                  <span class="text-soft">Tolland, Connecticut</span>
+                </td>
+                <td data-label="Seminar / Focus">
+                  <span class="tag tag-accent">
+                    Thanksgiving Day Open Mat
+                  </span><br>
+                  <span class="text-soft">Type: Open Mat</span>
+                </td>
+                <td data-label="Type">
+                  <span class="chip-outline">Open Mat</span>
+                </td>
+              </tr>
+              <tr>
+                <td data-label="Date">
+                  <span class="text-strong">November 27, 2025</span><br>
+                  <span class="text-soft">Thursday</span>
+                </td>
+                <td data-label="Location">
+                  <span class="text-strong">South Shore Sportfighting</span><br>
+                  <span class="text-soft">Rockland, Massachusetts</span>
+                </td>
+                <td data-label="Seminar / Focus">
+                  <span class="tag tag-accent">
+                    Thanksgiving Day Open Mat
+                  </span><br>
+                  <span class="text-soft">Type: Open Mat</span>
+                </td>
+                <td data-label="Type">
+                  <span class="chip-outline">Open Mat</span>
+                </td>
+              </tr>
+              <tr>
+                <td data-label="Date">
+                  <span class="text-strong">November 27, 2025</span><br>
+                  <span class="text-soft">Thursday</span>
+                </td>
+                <td data-label="Location">
+                  <span class="text-strong">Precision Jiujitsu</span><br>
+                  <span class="text-soft">Hudson, New Hampshire</span>
+                </td>
+                <td data-label="Seminar / Focus">
+                  <span class="tag tag-accent">
+                    Holiday Open Mat
+                  </span><br>
+                  <span class="text-soft">Type: Open Mat</span>
+                </td>
+                <td data-label="Type">
+                  <span class="chip-outline">Open Mat</span>
+                </td>
+              </tr>
+              <tr>
+                <td data-label="Date">
+                  <span class="text-strong">November 27, 2025</span><br>
+                  <span class="text-soft">Thursday</span>
+                </td>
+                <td data-label="Location">
+                  <span class="text-strong">Giannetti Martial Arts</span><br>
+                  <span class="text-soft">Whitman, Massachusetts</span>
+                </td>
+                <td data-label="Seminar / Focus">
+                  <span class="tag tag-accent">
+                    Thanksgiving Day Open Mat
+                  </span><br>
+                  <span class="text-soft">Type: Open Mat</span>
+                </td>
+                <td data-label="Type">
+                  <span class="chip-outline">Open Mat</span>
+                </td>
+              </tr>
+              <tr>
+                <td data-label="Date">
+                  <span class="text-strong">November 27, 2025</span><br>
+                  <span class="text-soft">Thursday</span>
+                </td>
+                <td data-label="Location">
+                  <span class="text-strong">Gentle Art Dojo</span><br>
+                  <span class="text-soft">Chelmsford, Massachusetts</span>
+                </td>
+                <td data-label="Seminar / Focus">
+                  <span class="tag tag-accent">
+                    Turkey Roll - Food Drive
+                  </span><br>
+                  <span class="text-soft">Type: Charity Event</span>
+                </td>
+                <td data-label="Type">
+                  <span class="chip-outline">Charity Event</span>
+                </td>
+              </tr>
+              <tr>
+                <td data-label="Date">
+                  <span class="text-strong">November 27, 2025</span><br>
+                  <span class="text-soft">Thursday</span>
+                </td>
+                <td data-label="Location">
+                  <span class="text-strong">Integrated Martial Arts</span><br>
+                  <span class="text-soft">Worcester, Massachusetts</span>
+                </td>
+                <td data-label="Seminar / Focus">
+                  <span class="tag tag-accent">
+                    Roll for Jamaica
+                  </span><br>
+                  <span class="text-soft">Type: Charity Event</span>
+                </td>
+                <td data-label="Type">
+                  <span class="chip-outline">Charity Event</span>
+                </td>
+              </tr>
+              <tr>
+                <td data-label="Date">
+                  <span class="text-strong">November 27, 2025</span><br>
+                  <span class="text-soft">Thursday</span>
+                </td>
+                <td data-label="Location">
+                  <span class="text-strong">Pajama Strangle Time</span><br>
+                  <span class="text-soft">Providence, Rhode Island</span>
+                </td>
+                <td data-label="Seminar / Focus">
+                  <span class="tag tag-accent">
+                    Thanksgiving Day Open Mat
+                  </span><br>
+                  <span class="text-soft">Type: Open Mat</span>
+                </td>
+                <td data-label="Type">
+                  <span class="chip-outline">Open Mat</span>
+                </td>
+              </tr>
+              <tr>
+                <td data-label="Date">
+                  <span class="text-strong">November 27, 2025</span><br>
+                  <span class="text-soft">Thursday</span>
+                </td>
+                <td data-label="Location">
+                  <span class="text-strong">Seaside Jiu Jitsu</span><br>
+                  <span class="text-soft">Lynn, Massachusetts</span>
+                </td>
+                <td data-label="Seminar / Focus">
+                  <span class="tag tag-accent">
+                    Thanksgiving Day Open Mat
+                  </span><br>
+                  <span class="text-soft">Type: Open Mat</span>
+                </td>
+                <td data-label="Type">
+                  <span class="chip-outline">Open Mat</span>
+                </td>
+              </tr>
+              <tr>
+                <td data-label="Date">
+                  <span class="text-strong">November 27, 2025</span><br>
+                  <span class="text-soft">Thursday</span>
+                </td>
+                <td data-label="Location">
+                  <span class="text-strong">Primal Jiujitsu</span><br>
+                  <span class="text-soft">Derry, New Hampshire</span>
+                </td>
+                <td data-label="Seminar / Focus">
+                  <span class="tag tag-accent">
+                    Thanksgiving Day Open Mat
+                  </span><br>
+                  <span class="text-soft">Type: Open Mat</span>
+                </td>
+                <td data-label="Type">
+                  <span class="chip-outline">Open Mat</span>
+                </td>
+              </tr>
+              <tr>
+                <td data-label="Date">
+                  <span class="text-strong">November 27, 2025</span><br>
+                  <span class="text-soft">Thursday</span>
+                </td>
+                <td data-label="Location">
+                  <span class="text-strong">Clandestine Submissions</span><br>
+                  <span class="text-soft">Sanford, Maine</span>
+                </td>
+                <td data-label="Seminar / Focus">
+                  <span class="tag tag-accent">
+                    Thanksgiving Gi Turkey Rolls
+                  </span><br>
+                  <span class="text-soft">Type: Open Mat</span>
+                </td>
+                <td data-label="Type">
+                  <span class="chip-outline">Open Mat</span>
+                </td>
+              </tr>
+              <tr>
+                <td data-label="Date">
+                  <span class="text-strong">November 27, 2025</span><br>
+                  <span class="text-soft">Thursday</span>
+                </td>
+                <td data-label="Location">
+                  <span class="text-strong">South Boston BJJ</span><br>
+                  <span class="text-soft">Boston, Massachusetts</span>
+                </td>
+                <td data-label="Seminar / Focus">
+                  <span class="tag tag-accent">
+                    Thanksgiving Day Open Mat
+                  </span><br>
+                  <span class="text-soft">Type: Open Mat</span>
+                </td>
+                <td data-label="Type">
+                  <span class="chip-outline">Open Mat</span>
+                </td>
+              </tr>
+              <tr>
+                <td data-label="Date">
+                  <span class="text-strong">November 27, 2025</span><br>
+                  <span class="text-soft">Thursday</span>
+                </td>
+                <td data-label="Location">
+                  <span class="text-strong">Connors Martial Arts Academy</span><br>
+                  <span class="text-soft">Norwood, Massachusetts</span>
+                </td>
+                <td data-label="Seminar / Focus">
+                  <span class="tag tag-accent">
+                    Holiday Open Mat
+                  </span><br>
+                  <span class="text-soft">Type: Open Mat</span>
+                </td>
+                <td data-label="Type">
+                  <span class="chip-outline">Open Mat</span>
+                </td>
+              </tr>
+              <tr>
+                <td data-label="Date">
+                  <span class="text-strong">November 27, 2025</span><br>
+                  <span class="text-soft">Thursday</span>
+                </td>
+                <td data-label="Location">
+                  <span class="text-strong">Ironhold Jiu Jitsu</span><br>
+                  <span class="text-soft">Agawam, Massachusetts</span>
+                </td>
+                <td data-label="Seminar / Focus">
+                  <span class="tag tag-accent">
+                    Holiday Open Mat
+                  </span><br>
+                  <span class="text-soft">Type: Open Mat</span>
+                </td>
+                <td data-label="Type">
+                  <span class="chip-outline">Open Mat</span>
+                </td>
+              </tr>
+              <tr>
+                <td data-label="Date">
+                  <span class="text-strong">November 27, 2025</span><br>
+                  <span class="text-soft">Thursday</span>
+                </td>
+                <td data-label="Location">
+                  <span class="text-strong">CT Combat Training Center</span><br>
+                  <span class="text-soft">Oakville, Connecticut</span>
+                </td>
+                <td data-label="Seminar / Focus">
+                  <span class="tag tag-accent">
+                    Thanksgiving Day Open Mat
+                  </span><br>
+                  <span class="text-soft">Type: Open Mat</span>
+                </td>
+                <td data-label="Type">
+                  <span class="chip-outline">Open Mat</span>
+                </td>
+              </tr>
+              <tr>
+                <td data-label="Date">
+                  <span class="text-strong">November 27, 2025</span><br>
+                  <span class="text-soft">Thursday</span>
+                </td>
+                <td data-label="Location">
+                  <span class="text-strong">Imperium Martial Arts</span><br>
+                  <span class="text-soft">North Reading, Massachusetts</span>
+                </td>
+                <td data-label="Seminar / Focus">
+                  <span class="tag tag-accent">
+                    Thanksgiving Day Open Mat
+                  </span><br>
+                  <span class="text-soft">Type: Open Mat</span>
+                </td>
+                <td data-label="Type">
+                  <span class="chip-outline">Open Mat</span>
+                </td>
+              </tr>
+              <tr>
+                <td data-label="Date">
+                  <span class="text-strong">November 27, 2025</span><br>
+                  <span class="text-soft">Thursday</span>
+                </td>
+                <td data-label="Location">
+                  <span class="text-strong">Underdog MMA</span><br>
+                  <span class="text-soft">West Hartford, Connecticut</span>
+                </td>
+                <td data-label="Seminar / Focus">
+                  <span class="tag tag-accent">
+                    Thanksgiving Day Open Mat
+                  </span><br>
+                  <span class="text-soft">Type: Open Mat</span>
+                </td>
+                <td data-label="Type">
+                  <span class="chip-outline">Open Mat</span>
+                </td>
+              </tr>
+              <tr>
+                <td data-label="Date">
+                  <span class="text-strong">November 27, 2025</span><br>
+                  <span class="text-soft">Thursday</span>
+                </td>
+                <td data-label="Location">
+                  <span class="text-strong">Alliance BJJ</span><br>
+                  <span class="text-soft">Westborough, Massachusetts</span>
+                </td>
+                <td data-label="Seminar / Focus">
+                  <span class="tag tag-accent">
+                    Thanksgiving Day Open Mat
+                  </span><br>
+                  <span class="text-soft">Type: Open Mat</span>
+                </td>
+                <td data-label="Type">
+                  <span class="chip-outline">Open Mat</span>
+                </td>
+              </tr>
+              <tr>
+                <td data-label="Date">
+                  <span class="text-strong">November 27, 2025</span><br>
+                  <span class="text-soft">Thursday</span>
+                </td>
+                <td data-label="Location">
+                  <span class="text-strong">Hammer Jiu Jitsu</span><br>
+                  <span class="text-soft">Fairfield, Connecticut</span>
+                </td>
+                <td data-label="Seminar / Focus">
+                  <span class="tag tag-accent">
+                    Thanksgiving Day Open Mat
+                  </span><br>
+                  <span class="text-soft">Type: Open Mat</span>
+                </td>
+                <td data-label="Type">
+                  <span class="chip-outline">Open Mat</span>
+                </td>
+              </tr>
+              <tr>
+                <td data-label="Date">
+                  <span class="text-strong">November 27, 2025</span><br>
+                  <span class="text-soft">Thursday</span>
+                </td>
+                <td data-label="Location">
+                  <span class="text-strong">Versus Jiujitsu</span><br>
+                  <span class="text-soft">Natick, Massachusetts</span>
+                </td>
+                <td data-label="Seminar / Focus">
+                  <span class="tag tag-accent">
+                    Thanksgiving Day Open Mat
+                  </span><br>
+                  <span class="text-soft">Type: Open Mat</span>
+                </td>
+                <td data-label="Type">
+                  <span class="chip-outline">Open Mat</span>
+                </td>
+              </tr>
+              <tr>
+                <td data-label="Date">
+                  <span class="text-strong">November 28, 2025</span><br>
+                  <span class="text-soft">Friday</span>
+                </td>
+                <td data-label="Location">
+                  <span class="text-strong">Clandestine Submissions</span><br>
+                  <span class="text-soft">Sanford, Maine</span>
+                </td>
+                <td data-label="Seminar / Focus">
+                  <span class="tag tag-accent">
+                    Black Friday No Gi Open Mat
+                  </span><br>
+                  <span class="text-soft">Type: Open Mat</span>
+                </td>
+                <td data-label="Type">
+                  <span class="chip-outline">Open Mat</span>
+                </td>
+              </tr>
+              <tr>
+                <td data-label="Date">
+                  <span class="text-strong">November 28, 2025</span><br>
+                  <span class="text-soft">Friday</span>
+                </td>
+                <td data-label="Location">
+                  <span class="text-strong">Unit 232</span><br>
+                  <span class="text-soft">Littleton, Massachusetts</span>
+                </td>
+                <td data-label="Seminar / Focus">
+                  <span class="tag tag-accent">
+                    Holiday Open Mat
+                  </span><br>
+                  <span class="text-soft">Type: Open Mat</span>
+                </td>
+                <td data-label="Type">
+                  <span class="chip-outline">Open Mat</span>
+                </td>
+              </tr>
+              <tr>
+                <td data-label="Date">
+                  <span class="text-strong">November 28, 2025</span><br>
+                  <span class="text-soft">Friday</span>
+                </td>
+                <td data-label="Location">
+                  <span class="text-strong">Precision Jiujitsu</span><br>
+                  <span class="text-soft">Hudson, New Hampshire</span>
+                </td>
+                <td data-label="Seminar / Focus">
+                  <span class="tag tag-accent">
+                    Holiday Open Mat
+                  </span><br>
+                  <span class="text-soft">Type: Open Mat</span>
+                </td>
+                <td data-label="Type">
+                  <span class="chip-outline">Open Mat</span>
+                </td>
+              </tr>
+              <tr>
+                <td data-label="Date">
+                  <span class="text-strong">November 28, 2025</span><br>
+                  <span class="text-soft">Friday</span>
+                </td>
+                <td data-label="Location">
+                  <span class="text-strong">Radius Martial Arts</span><br>
+                  <span class="text-soft">Fairfield, Connecticut</span>
+                </td>
+                <td data-label="Seminar / Focus">
+                  <span class="tag tag-accent">
+                    Holiday Open Mat
+                  </span><br>
+                  <span class="text-soft">Type: Open Mat</span>
+                </td>
+                <td data-label="Type">
+                  <span class="chip-outline">Open Mat</span>
+                </td>
+              </tr>
+              <tr>
+                <td data-label="Date">
+                  <span class="text-strong">November 28, 2025</span><br>
+                  <span class="text-soft">Friday</span>
+                </td>
+                <td data-label="Location">
+                  <span class="text-strong">Ironhold Jiu Jitsu</span><br>
+                  <span class="text-soft">Agawam, Massachusetts</span>
+                </td>
+                <td data-label="Seminar / Focus">
+                  <span class="tag tag-accent">
+                    Holiday Open Mat
+                  </span><br>
+                  <span class="text-soft">Type: Open Mat</span>
+                </td>
+                <td data-label="Type">
+                  <span class="chip-outline">Open Mat</span>
+                </td>
+              </tr>
+              <tr>
+                <td data-label="Date">
+                  <span class="text-strong">November 28, 2025</span><br>
+                  <span class="text-soft">Friday</span>
+                </td>
+                <td data-label="Location">
+                  <span class="text-strong">Atom JiuJitsu</span><br>
+                  <span class="text-soft">Newton, Massachusetts</span>
+                </td>
+                <td data-label="Seminar / Focus">
+                  <span class="tag tag-accent">
+                    Holiday Open Mat
+                  </span><br>
+                  <span class="text-soft">Type: Open Mat</span>
+                </td>
+                <td data-label="Type">
+                  <span class="chip-outline">Open Mat</span>
+                </td>
+              </tr>
+              <tr>
+                <td data-label="Date">
+                  <span class="text-strong">November 28, 2025</span><br>
+                  <span class="text-soft">Friday</span>
+                </td>
+                <td data-label="Location">
+                  <span class="text-strong">Connecticut Submission Grappling</span><br>
+                  <span class="text-soft">Bridgeport, Connecticut</span>
+                </td>
+                <td data-label="Seminar / Focus">
+                  <span class="tag tag-accent">
+                    Holiday Open Mat
+                  </span><br>
+                  <span class="text-soft">Type: Open House</span>
+                </td>
+                <td data-label="Type">
+                  <span class="chip-outline">Open House</span>
+                </td>
+              </tr>
+              <tr>
+                <td data-label="Date">
+                  <span class="text-strong">November 28, 2025</span><br>
+                  <span class="text-soft">Friday</span>
+                </td>
+                <td data-label="Location">
+                  <span class="text-strong">Connors Martial Arts Academy</span><br>
+                  <span class="text-soft">Norwood, Massachusetts</span>
+                </td>
+                <td data-label="Seminar / Focus">
+                  <span class="tag tag-accent">
+                    Holiday Open Mat
+                  </span><br>
+                  <span class="text-soft">Type: Open Mat</span>
+                </td>
+                <td data-label="Type">
+                  <span class="chip-outline">Open Mat</span>
+                </td>
+              </tr>
+              <tr>
+                <td data-label="Date">
+                  <span class="text-strong">November 29, 2025</span><br>
+                  <span class="text-soft">Saturday</span>
+                </td>
+                <td data-label="Location">
+                  <span class="text-strong">Bazzani Martial Arts</span><br>
+                  <span class="text-soft">Nashua, New Hampshire</span>
+                </td>
+                <td data-label="Seminar / Focus">
+                  <span class="tag tag-accent">
+                    Women’s Only Open Mat
+                  </span><br>
+                  <span class="text-soft">Type: Women's Only</span>
+                </td>
+                <td data-label="Type">
+                  <span class="chip-outline">Women's Only</span>
+                </td>
+              </tr>
+              <tr>
+                <td data-label="Date">
+                  <span class="text-strong">November 29, 2025</span><br>
+                  <span class="text-soft">Saturday</span>
+                </td>
+                <td data-label="Location">
+                  <span class="text-strong">BTT Boston</span><br>
+                  <span class="text-soft">Everett, Massachusetts</span>
+                </td>
+                <td data-label="Seminar / Focus">
+                  <span class="tag tag-accent">
+                    Seminar + Charity Benefit
+                  </span><br>
+                  <span class="text-soft">Type: Seminar</span>
+                </td>
+                <td data-label="Type">
+                  <span class="chip-outline">Seminar</span>
+                </td>
+              </tr>
+              <tr>
+                <td data-label="Date">
+                  <span class="text-strong">November 29, 2025</span><br>
+                  <span class="text-soft">Saturday</span>
+                </td>
+                <td data-label="Location">
+                  <span class="text-strong">Boston BJJ</span><br>
+                  <span class="text-soft">Woburn, Massachusetts</span>
+                </td>
+                <td data-label="Seminar / Focus">
+                  <span class="tag tag-accent">
+                    Roberto Maia
+                  </span><br>
+                  <span class="text-soft">Type: Seminar</span>
+                </td>
+                <td data-label="Type">
+                  <span class="chip-outline">Seminar</span>
+                </td>
+              </tr>
+              <tr>
+                <td data-label="Date">
+                  <span class="text-strong">November 29, 2025</span><br>
+                  <span class="text-soft">Saturday</span>
+                </td>
+                <td data-label="Location">
+                  <span class="text-strong">DF Fitness</span><br>
+                  <span class="text-soft">Gloucester, Massachusetts</span>
+                </td>
+                <td data-label="Seminar / Focus">
+                  <span class="tag tag-accent">
+                    Holiday Open Mat
+                  </span><br>
+                  <span class="text-soft">Type: Open Mat</span>
+                </td>
+                <td data-label="Type">
+                  <span class="chip-outline">Open Mat</span>
+                </td>
+              </tr>
+              <tr>
+                <td data-label="Date">
+                  <span class="text-strong">November 29, 2025</span><br>
+                  <span class="text-soft">Saturday</span>
+                </td>
+                <td data-label="Location">
+                  <span class="text-strong">nan</span><br>
+                  <span class="text-soft">Newtown, Connecticut</span>
+                </td>
+                <td data-label="Seminar / Focus">
+                  <span class="tag tag-accent">
+                    Grappling Industries
+                  </span><br>
+                  <span class="text-soft">Type: Tournament</span>
+                </td>
+                <td data-label="Type">
+                  <span class="chip-outline">Tournament</span>
+                </td>
+              </tr>
+              <tr>
+                <td data-label="Date">
+                  <span class="text-strong">November 30, 2025</span><br>
+                  <span class="text-soft">Sunday</span>
+                </td>
+                <td data-label="Location">
+                  <span class="text-strong">Fit Club BJJ</span><br>
+                  <span class="text-soft">Fairfield, Connecticut</span>
+                </td>
+                <td data-label="Seminar / Focus">
+                  <span class="tag tag-accent">
+                    Murilo Santana
+                  </span><br>
+                  <span class="text-soft">Type: Seminar</span>
+                </td>
+                <td data-label="Type">
+                  <span class="chip-outline">Seminar</span>
+                </td>
+              </tr>
+              <tr>
+                <td data-label="Date">
+                  <span class="text-strong">December 1, 2025</span><br>
+                  <span class="text-soft">Monday</span>
+                </td>
+                <td data-label="Location">
+                  <span class="text-strong">Integrated Martial Arts</span><br>
+                  <span class="text-soft">Worcester, Massachusetts</span>
+                </td>
+                <td data-label="Seminar / Focus">
+                  <span class="tag tag-accent">
+                    Sarah Rose
+                  </span><br>
+                  <span class="text-soft">Type: Seminar</span>
+                </td>
+                <td data-label="Type">
+                  <span class="chip-outline">Seminar</span>
+                </td>
+              </tr>
+              <tr>
+                <td data-label="Date">
+                  <span class="text-strong">December 2, 2025</span><br>
+                  <span class="text-soft">Tuesday</span>
+                </td>
+                <td data-label="Location">
+                  <span class="text-strong">Whaling City Athletic Club</span><br>
+                  <span class="text-soft">New London, Connecticut</span>
+                </td>
+                <td data-label="Seminar / Focus">
+                  <span class="tag tag-accent">
+                    Ace Gonzalez
+                  </span><br>
+                  <span class="text-soft">Type: Seminar</span>
+                </td>
+                <td data-label="Type">
+                  <span class="chip-outline">Seminar</span>
+                </td>
+              </tr>
+              <tr>
+                <td data-label="Date">
+                  <span class="text-strong">December 5, 2025</span><br>
+                  <span class="text-soft">Friday</span>
+                </td>
+                <td data-label="Location">
+                  <span class="text-strong">Team Lawton Martial Arts</span><br>
+                  <span class="text-soft">Farmingdale, Maine</span>
+                </td>
+                <td data-label="Seminar / Focus">
+                  <span class="tag tag-accent">
+                    Mat Sisters - Women’s Open Mat
+                  </span><br>
+                  <span class="text-soft">Type: Women's Only</span>
+                </td>
+                <td data-label="Type">
+                  <span class="chip-outline">Women's Only</span>
+                </td>
+              </tr>
+              <tr>
+                <td data-label="Date">
+                  <span class="text-strong">December 5, 2025</span><br>
+                  <span class="text-soft">Friday</span>
+                </td>
+                <td data-label="Location">
+                  <span class="text-strong">Clandestine Submissions</span><br>
+                  <span class="text-soft">Sanford, Maine</span>
+                </td>
+                <td data-label="Seminar / Focus">
+                  <span class="tag tag-accent">
+                    Pete The Greek Letsos
+                  </span><br>
+                  <span class="text-soft">Type: Seminar</span>
+                </td>
+                <td data-label="Type">
+                  <span class="chip-outline">Seminar</span>
+                </td>
+              </tr>
+              <tr>
+                <td data-label="Date">
+                  <span class="text-strong">December 6, 2025</span><br>
+                  <span class="text-soft">Saturday</span>
+                </td>
+                <td data-label="Location">
+                  <span class="text-strong">USMMA</span><br>
+                  <span class="text-soft">Bellingham, Massachusetts</span>
+                </td>
+                <td data-label="Seminar / Focus">
+                  <span class="tag tag-accent">
+                    Mat Santos
+                  </span><br>
+                  <span class="text-soft">Type: Seminar</span>
+                </td>
+                <td data-label="Type">
+                  <span class="chip-outline">Seminar</span>
+                </td>
+              </tr>
+              <tr>
+                <td data-label="Date">
+                  <span class="text-strong">December 6, 2025</span><br>
+                  <span class="text-soft">Saturday</span>
+                </td>
+                <td data-label="Location">
+                  <span class="text-strong">Boston University</span><br>
+                  <span class="text-soft">Boston, Massachusetts</span>
+                </td>
+                <td data-label="Seminar / Focus">
+                  <span class="tag tag-accent">
+                    Boston University Invitational
+                  </span><br>
+                  <span class="text-soft">Type: Tournament (Invite)</span>
+                </td>
+                <td data-label="Type">
+                  <span class="chip-outline">Tournament (Invite)</span>
+                </td>
+              </tr>
+              <tr>
+                <td data-label="Date">
+                  <span class="text-strong">December 6, 2025</span><br>
+                  <span class="text-soft">Saturday</span>
+                </td>
+                <td data-label="Location">
+                  <span class="text-strong">nan</span><br>
+                  <span class="text-soft">Sturbridge, Massachusetts</span>
+                </td>
+                <td data-label="Seminar / Focus">
+                  <span class="tag tag-accent">
+                    World Championship Grappling
+                  </span><br>
+                  <span class="text-soft">Type: Tournament (Invite)</span>
+                </td>
+                <td data-label="Type">
+                  <span class="chip-outline">Tournament (Invite)</span>
+                </td>
+              </tr>
+              <tr>
+                <td data-label="Date">
+                  <span class="text-strong">December 6, 2025</span><br>
+                  <span class="text-soft">Saturday</span>
+                </td>
+                <td data-label="Location">
+                  <span class="text-strong">South Boston BJJ</span><br>
+                  <span class="text-soft">Boston, Massachusetts</span>
+                </td>
+                <td data-label="Seminar / Focus">
+                  <span class="tag tag-accent">
+                    Pete The Greek Letsos
+                  </span><br>
+                  <span class="text-soft">Type: Seminar</span>
+                </td>
+                <td data-label="Type">
+                  <span class="chip-outline">Seminar</span>
+                </td>
+              </tr>
+              <tr>
+                <td data-label="Date">
+                  <span class="text-strong">December 6, 2025</span><br>
+                  <span class="text-soft">Saturday</span>
+                </td>
+                <td data-label="Location">
+                  <span class="text-strong">Fight Sports Boston</span><br>
+                  <span class="text-soft">New Bedford, Massachusetts</span>
+                </td>
+                <td data-label="Seminar / Focus">
+                  <span class="tag tag-accent">
+                    Hiago George
+                  </span><br>
+                  <span class="text-soft">Type: Seminar</span>
+                </td>
+                <td data-label="Type">
+                  <span class="chip-outline">Seminar</span>
+                </td>
+              </tr>
+              <tr>
+                <td data-label="Date">
+                  <span class="text-strong">December 6, 2025</span><br>
+                  <span class="text-soft">Saturday</span>
+                </td>
+                <td data-label="Location">
+                  <span class="text-strong">Vermont BJJ Academy</span><br>
+                  <span class="text-soft">Williston, Vermont</span>
+                </td>
+                <td data-label="Seminar / Focus">
+                  <span class="tag tag-accent">
+                    Kids “Kumite” Tournamet
+                  </span><br>
+                  <span class="text-soft">Type: Kids Event</span>
+                </td>
+                <td data-label="Type">
+                  <span class="chip-outline">Kids Event</span>
+                </td>
+              </tr>
+              <tr>
+                <td data-label="Date">
+                  <span class="text-strong">December 7, 2025</span><br>
+                  <span class="text-soft">Sunday</span>
+                </td>
+                <td data-label="Location">
+                  <span class="text-strong">Off Your Back Academy</span><br>
+                  <span class="text-soft">Londonderry, New Hampshire</span>
+                </td>
+                <td data-label="Seminar / Focus">
+                  <span class="tag tag-accent">
+                    Marcelo Siqueira
+                  </span><br>
+                  <span class="text-soft">Type: Seminar</span>
+                </td>
+                <td data-label="Type">
+                  <span class="chip-outline">Seminar</span>
+                </td>
+              </tr>
+              <tr>
+                <td data-label="Date">
+                  <span class="text-strong">December 7, 2025</span><br>
+                  <span class="text-soft">Sunday</span>
+                </td>
+                <td data-label="Location">
+                  <span class="text-strong">nan</span><br>
+                  <span class="text-soft">Danbury, Connecticut</span>
+                </td>
+                <td data-label="Seminar / Focus">
+                  <span class="tag tag-accent">
+                    United Grappling
+                  </span><br>
+                  <span class="text-soft">Type: Tournament</span>
+                </td>
+                <td data-label="Type">
+                  <span class="chip-outline">Tournament</span>
+                </td>
+              </tr>
+              <tr>
+                <td data-label="Date">
+                  <span class="text-strong">December 10, 2025</span><br>
+                  <span class="text-soft">Wednesday</span>
+                </td>
+                <td data-label="Location">
+                  <span class="text-strong">Royce Gracie Academy</span><br>
+                  <span class="text-soft">Glastonbury, Connecticut</span>
+                </td>
+                <td data-label="Seminar / Focus">
+                  <span class="tag tag-accent">
+                    Rodrigo Gracie
+                  </span><br>
+                  <span class="text-soft">Type: Seminar</span>
+                </td>
+                <td data-label="Type">
+                  <span class="chip-outline">Seminar</span>
+                </td>
+              </tr>
+              <tr>
+                <td data-label="Date">
+                  <span class="text-strong">December 13, 2025</span><br>
+                  <span class="text-soft">Saturday</span>
+                </td>
+                <td data-label="Location">
+                  <span class="text-strong">Integrated Martial Arts</span><br>
+                  <span class="text-soft">Worcester, Massachusetts</span>
+                </td>
+                <td data-label="Seminar / Focus">
+                  <span class="tag tag-accent">
+                    Jean “Dalua” Cartagena
+                  </span><br>
+                  <span class="text-soft">Type: Seminar</span>
+                </td>
+                <td data-label="Type">
+                  <span class="chip-outline">Seminar</span>
+                </td>
+              </tr>
+              <tr>
+                <td data-label="Date">
+                  <span class="text-strong">December 13, 2025</span><br>
+                  <span class="text-soft">Saturday</span>
+                </td>
+                <td data-label="Location">
+                  <span class="text-strong">Renzo Gracie Academy</span><br>
+                  <span class="text-soft">Smithfield, Rhode Island</span>
+                </td>
+                <td data-label="Seminar / Focus">
+                  <span class="tag tag-accent">
+                    Robert Correa &amp; Celsinho Vinicus
+                  </span><br>
+                  <span class="text-soft">Type: Seminar</span>
+                </td>
+                <td data-label="Type">
+                  <span class="chip-outline">Seminar</span>
+                </td>
+              </tr>
+              <tr>
+                <td data-label="Date">
+                  <span class="text-strong">December 13, 2025</span><br>
+                  <span class="text-soft">Saturday</span>
+                </td>
+                <td data-label="Location">
+                  <span class="text-strong">nan</span><br>
+                  <span class="text-soft">Derry, New Hampshire</span>
+                </td>
+                <td data-label="Seminar / Focus">
+                  <span class="tag tag-accent">
+                    Grappling Industries
+                  </span><br>
+                  <span class="text-soft">Type: Tournament</span>
+                </td>
+                <td data-label="Type">
+                  <span class="chip-outline">Tournament</span>
+                </td>
+              </tr>
+              <tr>
+                <td data-label="Date">
+                  <span class="text-strong">December 13, 2025</span><br>
+                  <span class="text-soft">Saturday</span>
+                </td>
+                <td data-label="Location">
+                  <span class="text-strong">nan</span><br>
+                  <span class="text-soft">Hyannis, Massachusetts</span>
+                </td>
+                <td data-label="Seminar / Focus">
+                  <span class="tag tag-accent">
+                    Super Fight for a Cause
+                  </span><br>
+                  <span class="text-soft">Type: Tournament (Invite)</span>
+                </td>
+                <td data-label="Type">
+                  <span class="chip-outline">Tournament (Invite)</span>
+                </td>
+              </tr>
+              <tr>
+                <td data-label="Date">
+                  <span class="text-strong">December 14, 2025</span><br>
+                  <span class="text-soft">Sunday</span>
+                </td>
+                <td data-label="Location">
+                  <span class="text-strong">Blue Collar Jiu Jitsu</span><br>
+                  <span class="text-soft">Mendon, Massachusetts</span>
+                </td>
+                <td data-label="Seminar / Focus">
+                  <span class="tag tag-accent">
+                    Mayara Custodio
+                  </span><br>
+                  <span class="text-soft">Type: Seminar</span>
+                </td>
+                <td data-label="Type">
+                  <span class="chip-outline">Seminar</span>
+                </td>
+              </tr>
+              <tr>
+                <td data-label="Date">
+                  <span class="text-strong">December 14, 2025</span><br>
+                  <span class="text-soft">Sunday</span>
+                </td>
+                <td data-label="Location">
+                  <span class="text-strong">Balance Point BJJ</span><br>
+                  <span class="text-soft">Milford, New Hampshire</span>
+                </td>
+                <td data-label="Seminar / Focus">
+                  <span class="tag tag-accent">
+                    Women’s Only Open Mat
+                  </span><br>
+                  <span class="text-soft">Type: Women's Only</span>
+                </td>
+                <td data-label="Type">
+                  <span class="chip-outline">Women's Only</span>
+                </td>
+              </tr>
+              <tr>
+                <td data-label="Date">
+                  <span class="text-strong">December 20, 2025</span><br>
+                  <span class="text-soft">Saturday</span>
+                </td>
+                <td data-label="Location">
+                  <span class="text-strong">Nostros MMA</span><br>
+                  <span class="text-soft">Somersworth, New Hampshire</span>
+                </td>
+                <td data-label="Seminar / Focus">
+                  <span class="tag tag-accent">
+                    Women’s Only Open Mat
+                  </span><br>
+                  <span class="text-soft">Type: Women's Only</span>
+                </td>
+                <td data-label="Type">
+                  <span class="chip-outline">Women's Only</span>
+                </td>
+              </tr>
+              <tr>
+                <td data-label="Date">
+                  <span class="text-strong">December 20, 2025</span><br>
+                  <span class="text-soft">Saturday</span>
+                </td>
+                <td data-label="Location">
+                  <span class="text-strong">Defensive Edge MMA</span><br>
+                  <span class="text-soft">Wakefield, Massachusetts</span>
+                </td>
+                <td data-label="Seminar / Focus">
+                  <span class="tag tag-accent">
+                    Fernanda and Michelle
+                  </span><br>
+                  <span class="text-soft">Type: Seminar</span>
+                </td>
+                <td data-label="Type">
+                  <span class="chip-outline">Seminar</span>
+                </td>
+              </tr>
+              <tr>
+                <td data-label="Date">
+                  <span class="text-strong">December 28, 2025</span><br>
+                  <span class="text-soft">Sunday</span>
+                </td>
+                <td data-label="Location">
+                  <span class="text-strong">nan</span><br>
+                  <span class="text-soft">Milford, New Hampshire</span>
+                </td>
+                <td data-label="Seminar / Focus">
+                  <span class="tag tag-accent">
+                    Grappling Industries
+                  </span><br>
+                  <span class="text-soft">Type: Tournament</span>
+                </td>
+                <td data-label="Type">
+                  <span class="chip-outline">Tournament</span>
+                </td>
+              </tr>
+              <tr>
+                <td data-label="Date">
+                  <span class="text-strong">January 3, 2026</span><br>
+                  <span class="text-soft">Saturday</span>
+                </td>
+                <td data-label="Location">
+                  <span class="text-strong">nan</span><br>
+                  <span class="text-soft">Boston, Massachusetts</span>
+                </td>
+                <td data-label="Seminar / Focus">
+                  <span class="tag tag-accent">
+                    Grappling Industries
+                  </span><br>
+                  <span class="text-soft">Type: Tournament</span>
+                </td>
+                <td data-label="Type">
+                  <span class="chip-outline">Tournament</span>
+                </td>
+              </tr>
+              <tr>
+                <td data-label="Date">
+                  <span class="text-strong">January 3, 2026</span><br>
+                  <span class="text-soft">Saturday</span>
+                </td>
+                <td data-label="Location">
+                  <span class="text-strong">Mohegan Sun Arena</span><br>
+                  <span class="text-soft">Uncasville, Connecticut</span>
+                </td>
+                <td data-label="Seminar / Focus">
+                  <span class="tag tag-accent">
+                    Reality Righting
+                  </span><br>
+                  <span class="text-soft">Type: Tournament (Invite)</span>
+                </td>
+                <td data-label="Type">
+                  <span class="chip-outline">Tournament (Invite)</span>
+                </td>
+              </tr>
+              <tr>
+                <td data-label="Date">
+                  <span class="text-strong">January 10, 2026</span><br>
+                  <span class="text-soft">Saturday</span>
+                </td>
+                <td data-label="Location">
+                  <span class="text-strong">Morselli Jiu Jitsu</span><br>
+                  <span class="text-soft">Taunton, Massachusetts</span>
+                </td>
+                <td data-label="Seminar / Focus">
+                  <span class="tag tag-accent">
+                    Diego Pato
+                  </span><br>
+                  <span class="text-soft">Type: Seminar</span>
+                </td>
+                <td data-label="Type">
+                  <span class="chip-outline">Seminar</span>
+                </td>
+              </tr>
+              <tr>
+                <td data-label="Date">
+                  <span class="text-strong">January 11, 2026</span><br>
+                  <span class="text-soft">Sunday</span>
+                </td>
+                <td data-label="Location">
+                  <span class="text-strong">RedZone Jiu Jitsu</span><br>
+                  <span class="text-soft">Monroe, Connecticut</span>
+                </td>
+                <td data-label="Seminar / Focus">
+                  <span class="tag tag-accent">
+                    True Strength All Levels Event
+                  </span><br>
+                  <span class="text-soft">Type: Women's Only</span>
+                </td>
+                <td data-label="Type">
+                  <span class="chip-outline">Women's Only</span>
+                </td>
+              </tr>
+              <tr>
+                <td data-label="Date">
+                  <span class="text-strong">January 17, 2026</span><br>
+                  <span class="text-soft">Saturday</span>
+                </td>
+                <td data-label="Location">
+                  <span class="text-strong">Integrated Martial Arts</span><br>
+                  <span class="text-soft">West Boylston, Massachusetts</span>
+                </td>
+                <td data-label="Seminar / Focus">
+                  <span class="tag tag-accent">
+                    Fight Back - Women’s Only Invtnl.
+                  </span><br>
+                  <span class="text-soft">Type: Tournament (Invite)</span>
+                </td>
+                <td data-label="Type">
+                  <span class="chip-outline">Tournament (Invite)</span>
+                </td>
+              </tr>
+              <tr>
+                <td data-label="Date">
+                  <span class="text-strong">January 17, 2026</span><br>
+                  <span class="text-soft">Saturday</span>
+                </td>
+                <td data-label="Location">
+                  <span class="text-strong">nan</span><br>
+                  <span class="text-soft">Newtown, Connecticut</span>
+                </td>
+                <td data-label="Seminar / Focus">
+                  <span class="tag tag-accent">
+                    Gaman Submission Challenge
+                  </span><br>
+                  <span class="text-soft">Type: Tournament</span>
+                </td>
+                <td data-label="Type">
+                  <span class="chip-outline">Tournament</span>
+                </td>
+              </tr>
+              <tr>
+                <td data-label="Date">
+                  <span class="text-strong">January 17, 2026</span><br>
+                  <span class="text-soft">Saturday</span>
+                </td>
+                <td data-label="Location">
+                  <span class="text-strong">nan</span><br>
+                  <span class="text-soft">Rockland, Maine</span>
+                </td>
+                <td data-label="Seminar / Focus">
+                  <span class="tag tag-accent">
+                    Flow Sub Only Underground 6
+                  </span><br>
+                  <span class="text-soft">Type: Tournament (Invite)</span>
+                </td>
+                <td data-label="Type">
+                  <span class="chip-outline">Tournament (Invite)</span>
+                </td>
+              </tr>
+              <tr>
+                <td data-label="Date">
+                  <span class="text-strong">January 24, 2026</span><br>
+                  <span class="text-soft">Saturday</span>
+                </td>
+                <td data-label="Location">
+                  <span class="text-strong">Alpha Nerds Facility</span><br>
+                  <span class="text-soft">Natick, Massachusetts</span>
+                </td>
+                <td data-label="Seminar / Focus">
+                  <span class="tag tag-accent">
+                    Shawn Melanson
+                  </span><br>
+                  <span class="text-soft">Type: Seminar</span>
+                </td>
+                <td data-label="Type">
+                  <span class="chip-outline">Seminar</span>
+                </td>
+              </tr>
+              <tr>
+                <td data-label="Date">
+                  <span class="text-strong">January 30, 2026</span><br>
+                  <span class="text-soft">Friday</span>
+                </td>
+                <td data-label="Location">
+                  <span class="text-strong">Summit Jiu Jitsu</span><br>
+                  <span class="text-soft">Stamford, Connecticut</span>
+                </td>
+                <td data-label="Seminar / Focus">
+                  <span class="tag tag-accent">
+                    Justin “JFLO” Flores
+                  </span><br>
+                  <span class="text-soft">Type: Seminar</span>
+                </td>
+                <td data-label="Type">
+                  <span class="chip-outline">Seminar</span>
+                </td>
+              </tr>
+              <tr>
+                <td data-label="Date">
+                  <span class="text-strong">January 31, 2026</span><br>
+                  <span class="text-soft">Saturday</span>
+                </td>
+                <td data-label="Location">
+                  <span class="text-strong">nan</span><br>
+                  <span class="text-soft">Tiverton, Rhode Island</span>
+                </td>
+                <td data-label="Seminar / Focus">
+                  <span class="tag tag-accent">
+                    NAGA Grappling
+                  </span><br>
+                  <span class="text-soft">Type: Tournament</span>
+                </td>
+                <td data-label="Type">
+                  <span class="chip-outline">Tournament</span>
+                </td>
+              </tr>
+              <tr>
+                <td data-label="Date">
+                  <span class="text-strong">February 8, 2026</span><br>
+                  <span class="text-soft">Sunday</span>
+                </td>
+                <td data-label="Location">
+                  <span class="text-strong">nan</span><br>
+                  <span class="text-soft">Tyngsboro, Massachusetts</span>
+                </td>
+                <td data-label="Seminar / Focus">
+                  <span class="tag tag-accent">
+                    Gaman Mass Open
+                  </span><br>
+                  <span class="text-soft">Type: Tournament</span>
+                </td>
+                <td data-label="Type">
+                  <span class="chip-outline">Tournament</span>
+                </td>
+              </tr>
+              <tr>
+                <td data-label="Date">
+                  <span class="text-strong">February 14, 2026</span><br>
+                  <span class="text-soft">Saturday</span>
+                </td>
+                <td data-label="Location">
+                  <span class="text-strong">nan</span><br>
+                  <span class="text-soft">Newtown, Connecticut</span>
+                </td>
+                <td data-label="Seminar / Focus">
+                  <span class="tag tag-accent">
+                    Gaman Connecticut Open
+                  </span><br>
+                  <span class="text-soft">Type: Tournament</span>
+                </td>
+                <td data-label="Type">
+                  <span class="chip-outline">Tournament</span>
+                </td>
+              </tr>
+              <tr>
+                <td data-label="Date">
+                  <span class="text-strong">February 21, 2026</span><br>
+                  <span class="text-soft">Saturday</span>
+                </td>
+                <td data-label="Location">
+                  <span class="text-strong">BTT Boston</span><br>
+                  <span class="text-soft">Everett, Massachusetts</span>
+                </td>
+                <td data-label="Seminar / Focus">
+                  <span class="tag tag-accent">
+                    Meyram Maquine
+                  </span><br>
+                  <span class="text-soft">Type: Seminar</span>
+                </td>
+                <td data-label="Type">
+                  <span class="chip-outline">Seminar</span>
+                </td>
+              </tr>
+              <tr>
+                <td data-label="Date">
+                  <span class="text-strong">February 21, 2026</span><br>
+                  <span class="text-soft">Saturday</span>
+                </td>
+                <td data-label="Location">
+                  <span class="text-strong">Technique BJJ</span><br>
+                  <span class="text-soft">Prospect, Connecticut</span>
+                </td>
+                <td data-label="Seminar / Focus">
+                  <span class="tag tag-accent">
+                    Joel Bane
+                  </span><br>
+                  <span class="text-soft">Type: Seminar</span>
+                </td>
+                <td data-label="Type">
+                  <span class="chip-outline">Seminar</span>
+                </td>
+              </tr>
+              <tr>
+                <td data-label="Date">
+                  <span class="text-strong">February 21, 2026</span><br>
+                  <span class="text-soft">Saturday</span>
+                </td>
+                <td data-label="Location">
+                  <span class="text-strong">nan</span><br>
+                  <span class="text-soft">Milford, New Hampshire</span>
+                </td>
+                <td data-label="Seminar / Focus">
+                  <span class="tag tag-accent">
+                    Grappling Industries
+                  </span><br>
+                  <span class="text-soft">Type: Tournament</span>
+                </td>
+                <td data-label="Type">
+                  <span class="chip-outline">Tournament</span>
+                </td>
+              </tr>
+              <tr>
+                <td data-label="Date">
+                  <span class="text-strong">February 21, 2026</span><br>
+                  <span class="text-soft">Saturday</span>
+                </td>
+                <td data-label="Location">
+                  <span class="text-strong">nan</span><br>
+                  <span class="text-soft">Manchester, New Hampshire</span>
+                </td>
+                <td data-label="Seminar / Focus">
+                  <span class="tag tag-accent">
+                    Combat Zone 91
+                  </span><br>
+                  <span class="text-soft">Type: Tournament (Invite)</span>
+                </td>
+                <td data-label="Type">
+                  <span class="chip-outline">Tournament (Invite)</span>
+                </td>
+              </tr>
+              <tr>
+                <td data-label="Date">
+                  <span class="text-strong">February 22, 2026</span><br>
+                  <span class="text-soft">Sunday</span>
+                </td>
+                <td data-label="Location">
+                  <span class="text-strong">Technique BJJ</span><br>
+                  <span class="text-soft">Prospect, Connecticut</span>
+                </td>
+                <td data-label="Seminar / Focus">
+                  <span class="tag tag-accent">
+                    Joel Bane
+                  </span><br>
+                  <span class="text-soft">Type: Seminar</span>
+                </td>
+                <td data-label="Type">
+                  <span class="chip-outline">Seminar</span>
+                </td>
+              </tr>
+              <tr>
+                <td data-label="Date">
+                  <span class="text-strong">March 8, 2026</span><br>
+                  <span class="text-soft">Sunday</span>
+                </td>
+                <td data-label="Location">
+                  <span class="text-strong">nan</span><br>
+                  <span class="text-soft">Danvers, Massachusetts</span>
+                </td>
+                <td data-label="Seminar / Focus">
+                  <span class="tag tag-accent">
+                    Fuji BJJ
+                  </span><br>
+                  <span class="text-soft">Type: Tournament</span>
+                </td>
+                <td data-label="Type">
+                  <span class="chip-outline">Tournament</span>
+                </td>
+              </tr>
+              <tr>
+                <td data-label="Date">
+                  <span class="text-strong">April 4, 2026</span><br>
+                  <span class="text-soft">Saturday</span>
+                </td>
+                <td data-label="Location">
+                  <span class="text-strong">nan</span><br>
+                  <span class="text-soft">Boston, Massachusetts</span>
+                </td>
+                <td data-label="Seminar / Focus">
+                  <span class="tag tag-accent">
+                    Grappling Industries
+                  </span><br>
+                  <span class="text-soft">Type: Tournament</span>
+                </td>
+                <td data-label="Type">
+                  <span class="chip-outline">Tournament</span>
+                </td>
+              </tr>
+              <tr>
+                <td data-label="Date">
+                  <span class="text-strong">April 11, 2026</span><br>
+                  <span class="text-soft">Saturday</span>
+                </td>
+                <td data-label="Location">
+                  <span class="text-strong">nan</span><br>
+                  <span class="text-soft">Warwick, Rhode Island</span>
+                </td>
+                <td data-label="Seminar / Focus">
+                  <span class="tag tag-accent">
+                    Grappling Industries
+                  </span><br>
+                  <span class="text-soft">Type: Tournament</span>
+                </td>
+                <td data-label="Type">
+                  <span class="chip-outline">Tournament</span>
+                </td>
+              </tr>
+              <tr>
+                <td data-label="Date">
+                  <span class="text-strong">May 2, 2026</span><br>
+                  <span class="text-soft">Saturday</span>
+                </td>
+                <td data-label="Location">
+                  <span class="text-strong">nan</span><br>
+                  <span class="text-soft">Fairfield, Connecticut</span>
+                </td>
+                <td data-label="Seminar / Focus">
+                  <span class="tag tag-accent">
+                    Tap Cancer Out
+                  </span><br>
+                  <span class="text-soft">Type: Tournament</span>
+                </td>
+                <td data-label="Type">
+                  <span class="chip-outline">Tournament</span>
+                </td>
+              </tr>
+              <tr>
+                <td data-label="Date">
+                  <span class="text-strong">May 23, 2026</span><br>
+                  <span class="text-soft">Saturday</span>
+                </td>
+                <td data-label="Location">
+                  <span class="text-strong">nan</span><br>
+                  <span class="text-soft">Milford, New Hampshire</span>
+                </td>
+                <td data-label="Seminar / Focus">
+                  <span class="tag tag-accent">
+                    Grappling Industries
+                  </span><br>
+                  <span class="text-soft">Type: Tournament</span>
+                </td>
+                <td data-label="Type">
+                  <span class="chip-outline">Tournament</span>
+                </td>
+              </tr>
+              <tr>
+                <td data-label="Date">
+                  <span class="text-strong">June 21, 2026</span><br>
+                  <span class="text-soft">Sunday</span>
+                </td>
+                <td data-label="Location">
+                  <span class="text-strong">nan</span><br>
+                  <span class="text-soft">Rangeley, Maine</span>
+                </td>
+                <td data-label="Seminar / Focus">
+                  <span class="tag tag-accent">
+                    Black Fly Kids Northeast Comp
+                  </span><br>
+                  <span class="text-soft">Type: Kids Event</span>
+                </td>
+                <td data-label="Type">
+                  <span class="chip-outline">Kids Event</span>
+                </td>
+              </tr>
+              <tr>
+                <td data-label="Date">
+                  <span class="text-strong">July 11, 2026</span><br>
+                  <span class="text-soft">Saturday</span>
+                </td>
+                <td data-label="Location">
+                  <span class="text-strong">nan</span><br>
+                  <span class="text-soft">Boston, Massachusetts</span>
+                </td>
+                <td data-label="Seminar / Focus">
+                  <span class="tag tag-accent">
+                    Grappling Industries
+                  </span><br>
+                  <span class="text-soft">Type: Tournament</span>
+                </td>
+                <td data-label="Type">
+                  <span class="chip-outline">Tournament</span>
+                </td>
+              </tr>
+              <tr>
+                <td data-label="Date">
+                  <span class="text-strong">August 7, 2026</span><br>
+                  <span class="text-soft">Friday</span>
+                </td>
+                <td data-label="Location">
+                  <span class="text-strong">nan</span><br>
+                  <span class="text-soft">Sturbridge, Massachusetts</span>
+                </td>
+                <td data-label="Seminar / Focus">
+                  <span class="tag tag-accent">
+                    Defensive Edge Camp
+                  </span><br>
+                  <span class="text-soft">Type: Seminar</span>
+                </td>
+                <td data-label="Type">
+                  <span class="chip-outline">Seminar</span>
+                </td>
+              </tr>
+              <tr>
+                <td data-label="Date">
+                  <span class="text-strong">August 8, 2026</span><br>
+                  <span class="text-soft">Saturday</span>
+                </td>
+                <td data-label="Location">
+                  <span class="text-strong">nan</span><br>
+                  <span class="text-soft">Sturbridge, Massachusetts</span>
+                </td>
+                <td data-label="Seminar / Focus">
+                  <span class="tag tag-accent">
+                    Defensive Edge Camp
+                  </span><br>
+                  <span class="text-soft">Type: Seminar</span>
+                </td>
+                <td data-label="Type">
+                  <span class="chip-outline">Seminar</span>
+                </td>
+              </tr>
+              <tr>
+                <td data-label="Date">
+                  <span class="text-strong">August 9, 2026</span><br>
+                  <span class="text-soft">Sunday</span>
+                </td>
+                <td data-label="Location">
+                  <span class="text-strong">nan</span><br>
+                  <span class="text-soft">Sturbridge, Massachusetts</span>
+                </td>
+                <td data-label="Seminar / Focus">
+                  <span class="tag tag-accent">
+                    Defensive Edge Camp
+                  </span><br>
+                  <span class="text-soft">Type: Seminar</span>
+                </td>
+                <td data-label="Type">
+                  <span class="chip-outline">Seminar</span>
+                </td>
+              </tr>
+              <tr>
+                <td data-label="Date">
+                  <span class="text-strong">August 15, 2026</span><br>
+                  <span class="text-soft">Saturday</span>
+                </td>
+                <td data-label="Location">
+                  <span class="text-strong">nan</span><br>
+                  <span class="text-soft">Milford, New Hampshire</span>
+                </td>
+                <td data-label="Seminar / Focus">
+                  <span class="tag tag-accent">
+                    Grappling Industries
+                  </span><br>
+                  <span class="text-soft">Type: Tournament</span>
+                </td>
+                <td data-label="Type">
+                  <span class="chip-outline">Tournament</span>
+                </td>
+              </tr>
+              <tr>
+                <td data-label="Date">
+                  <span class="text-strong">September 5, 2026</span><br>
+                  <span class="text-soft">Saturday</span>
+                </td>
+                <td data-label="Location">
+                  <span class="text-strong">nan</span><br>
+                  <span class="text-soft">Warwick, Rhode Island</span>
+                </td>
+                <td data-label="Seminar / Focus">
+                  <span class="tag tag-accent">
+                    Grappling Industries
+                  </span><br>
+                  <span class="text-soft">Type: Tournament</span>
+                </td>
+                <td data-label="Type">
+                  <span class="chip-outline">Tournament</span>
+                </td>
+              </tr>
+              <tr>
+                <td data-label="Date">
+                  <span class="text-strong">October 10, 2026</span><br>
+                  <span class="text-soft">Saturday</span>
+                </td>
+                <td data-label="Location">
+                  <span class="text-strong">nan</span><br>
+                  <span class="text-soft">Boston, Massachusetts</span>
+                </td>
+                <td data-label="Seminar / Focus">
+                  <span class="tag tag-accent">
+                    Grappling Industries
+                  </span><br>
+                  <span class="text-soft">Type: Tournament</span>
+                </td>
+                <td data-label="Type">
+                  <span class="chip-outline">Tournament</span>
+                </td>
+              </tr>
+              <tr>
+                <td data-label="Date">
+                  <span class="text-strong">November 7, 2026</span><br>
+                  <span class="text-soft">Saturday</span>
+                </td>
+                <td data-label="Location">
+                  <span class="text-strong">nan</span><br>
+                  <span class="text-soft">Milford, New Hampshire</span>
+                </td>
+                <td data-label="Seminar / Focus">
+                  <span class="tag tag-accent">
+                    Grappling Industries
+                  </span><br>
+                  <span class="text-soft">Type: Tournament</span>
+                </td>
+                <td data-label="Type">
+                  <span class="chip-outline">Tournament</span>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
 
-        <!-- EVENT 1 -->
-        <tr>
-          <td data-label="Date">
-            <span class="text-strong">November 29, 2025</span><br>
-            <span class="text-soft">Saturday</span>
-          </td>
-          <td data-label="Location">
-            <span class="text-strong">Example Jiu Jitsu</span><br>
-            <span class="text-soft">Boston, Massachusetts</span>
-          </td>
-          <td data-label="Seminar / Focus">
-            <span class="tag tag-accent">
-              <span class="tag-dot"></span>
-              Leg Lock Systems
-            </span><br>
-            <span class="text-soft">Coach: Jane Doe</span>
-          </td>
-          <td data-label="Type">
-            <span class="chip-outline">Seminar</span>
-          </td>
-        </tr>
-
-        <!-- EVENT 2 -->
-        <tr>
-          <td data-label="Date">
-            <span class="text-strong">December 7, 2025</span><br>
-            <span class="text-soft">Sunday</span>
-          </td>
-          <td data-label="Location">
-            <span class="text-strong">North Shore Grappling</span><br>
-            <span class="text-soft">Salem, Massachusetts</span>
-          </td>
-          <td data-label="Seminar / Focus">
-            <span class="tag tag-accent">
-              Passing vs Modern Guards
-            </span><br>
-            <span class="text-soft">Coach: John Smith</span>
-          </td>
-          <td data-label="Type">
-            <span class="chip-outline">Seminar</span>
-          </td>
-        </tr>
-
-        <!-- EVENT 3 -->
-        <tr>
-          <td data-label="Date">
-            <span class="text-strong">January 18, 2026</span><br>
-            <span class="text-soft">Sunday</span>
-          </td>
-          <td data-label="Location">
-            <span class="text-strong">New England Grappling Open</span><br>
-            <span class="text-soft">Providence, Rhode Island</span>
-          </td>
-          <td data-label="Seminar / Focus">
-            <span class="tag">
-              Tournament
-            </span><br>
-            <span class="text-soft">Gi &amp; No-Gi divisions</span>
-          </td>
-          <td data-label="Type">
-            <span class="chip-outline">Tournament</span>
-          </td>
-        </tr>
-
-      </tbody>
-    </table>
-  </div>
-</div>
-
-      <!-- OPEN MATS PANEL -->
+      <!-- OPEN MATS PANEL (sample content; edit manually) -->
       <div class="tab-panel" data-panel="openmats">
         <div class="panel-header">
           <div class="panel-title">
@@ -722,7 +4159,7 @@
                 </td>
                 <td data-label="Location">
                   <span class="text-strong">Market Street BJJ</span><br>
-                  <span class="text-soft">Somersworth, NH</span>
+                  <span class="text-soft">Somersworth, New Hampshire</span>
                 </td>
                 <td data-label="Format">
                   <span class="tag tag-accent">
@@ -735,7 +4172,7 @@
                   <span class="text-soft">Beginner-friendly</span>
                 </td>
                 <td data-label="Cost">
-                  <span class="badge-success">Free</span><br>
+                  <span class="success">Free</span><br>
                   <span class="text-soft">All gyms welcome</span>
                 </td>
                 <td data-label="Notes">
@@ -752,7 +4189,7 @@
                 </td>
                 <td data-label="Location">
                   <span class="text-strong">Downtown Grappling Club</span><br>
-                  <span class="text-soft">Boston, MA</span>
+                  <span class="text-soft">Boston, Massachusetts</span>
                 </td>
                 <td data-label="Format">
                   <span class="tag">
@@ -765,7 +4202,7 @@
                   <span class="text-soft">Blue belt &amp; up suggested</span>
                 </td>
                 <td data-label="Cost">
-                  <span class="badge-success">$10 drop-in</span><br>
+                  <span class="success">$10 drop-in</span><br>
                   <span class="text-soft">Cash or Venmo</span>
                 </td>
                 <td data-label="Notes">
@@ -782,7 +4219,7 @@
                 </td>
                 <td data-label="Location">
                   <span class="text-strong">Harbor City Jiu Jitsu</span><br>
-                  <span class="text-soft">Portland, ME</span>
+                  <span class="text-soft">Portland, Maine</span>
                 </td>
                 <td data-label="Format">
                   <span class="tag">
@@ -795,7 +4232,7 @@
                   <span class="text-soft">Visitors welcome</span>
                 </td>
                 <td data-label="Cost">
-                  <span class="badge-success">$5 suggested</span><br>
+                  <span class="success">$5 suggested</span><br>
                   <span class="text-soft">Members free</span>
                 </td>
                 <td data-label="Notes">
@@ -809,7 +4246,7 @@
         </div>
       </div>
 
-      <!-- DIRECTORY PANEL -->
+      <!-- DIRECTORY PANEL (sample content; edit manually) -->
       <div class="tab-panel" data-panel="directory">
         <div class="panel-header">
           <div class="panel-title">
@@ -830,7 +4267,7 @@
                   <span class="text-soft">Head Coach: Jane Doe</span>
                 </td>
                 <td data-label="Location">
-                  <span class="text-soft">Boston, MA · USA</span><br>
+                  <span class="text-soft">Boston, Massachusetts · USA</span><br>
                   <span class="text-soft">Neighborhood: South End</span>
                 </td>
                 <td data-label="Style / Programs">
@@ -851,7 +4288,7 @@
                   <span class="text-soft">Owner: Alex Rivera</span>
                 </td>
                 <td data-label="Location">
-                  <span class="text-soft">Somersworth, NH · USA</span><br>
+                  <span class="text-soft">Somersworth, New Hampshire · USA</span><br>
                   <span class="text-soft">Women’s only open mat host</span>
                 </td>
                 <td data-label="Style / Programs">
@@ -872,7 +4309,7 @@
                   <span class="text-soft">Competition-heavy room</span>
                 </td>
                 <td data-label="Location">
-                  <span class="text-soft">Salem, MA · USA</span><br>
+                  <span class="text-soft">Salem, Massachusetts · USA</span><br>
                   <span class="text-soft">North Shore</span>
                 </td>
                 <td data-label="Style / Programs">
@@ -893,7 +4330,7 @@
                   <span class="text-soft">No-Gi only</span>
                 </td>
                 <td data-label="Location">
-                  <span class="text-soft">Boston, MA · USA</span><br>
+                  <span class="text-soft">Boston, Massachusetts · USA</span><br>
                   <span class="text-soft">Downtown</span>
                 </td>
                 <td data-label="Style / Programs">
@@ -914,7 +4351,7 @@
                   <span class="text-soft">Scenic coastal academy</span>
                 </td>
                 <td data-label="Location">
-                  <span class="text-soft">Portland, ME · USA</span><br>
+                  <span class="text-soft">Portland, Maine · USA</span><br>
                   <span class="text-soft">Harbor district</span>
                 </td>
                 <td data-label="Style / Programs">
@@ -936,7 +4373,7 @@
 
     <footer>
       <div>
-        You can edit all rows directly in <span class="text-soft">index.html</span> or convert this into a data-driven setup later.
+        Events are sourced from your ANYJJ CSV export. Edit this file directly to update the live view.
       </div>
       <div>
         Built for GitHub Pages · Single file template.
@@ -945,7 +4382,6 @@
   </div>
 
   <script>
-    // Tab switching
     const tabButtons = document.querySelectorAll(".tab-button");
     const tabPanels = document.querySelectorAll(".tab-panel");
     const searchInput = document.getElementById("globalSearch");
@@ -959,9 +4395,9 @@
         panel.classList.toggle("active", panel.dataset.panel === target);
       });
 
-      // Clear search when switching tabs (optional)
       searchInput.value = "";
       applyFilter("");
+      updateBadgeCounts();
     }
 
     tabButtons.forEach(btn => {
@@ -970,7 +4406,6 @@
       });
     });
 
-    // Simple table filter per active tab
     function applyFilter(query) {
       const activePanel = document.querySelector(".tab-panel.active");
       if (!activePanel) return;
@@ -987,9 +4422,9 @@
 
     searchInput.addEventListener("input", (e) => {
       applyFilter(e.target.value);
+      updateBadgeCounts();
     });
 
-    // Optional: auto-count rows and update badges
     function updateBadgeCounts() {
       const map = {
         events: "badge-events",
@@ -1007,8 +4442,6 @@
       });
     }
 
-    // Keep badge counts in sync with filter
-    searchInput.addEventListener("input", updateBadgeCounts);
     window.addEventListener("load", updateBadgeCounts);
   </script>
 </body>
