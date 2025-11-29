@@ -15,17 +15,14 @@
 
   <style>
     :root {
-      --bg: #0b2e1d; /* deep forest */
-      --bg-elevated: #123827;
+      --bg: #03301c; /* deep forest */
       --panel: #f6efe2; /* cream */
-      --panel-soft: #f9f3e6;
-      --accent: #21634a; /* forest green */
-      --accent-soft: rgba(33, 99, 74, 0.12);
-      --text: #1f2933;
+      --panel-soft: #fbf4e6;
+      --accent: #14532d; /* forest green */
+      --accent-soft: rgba(20, 83, 45, 0.08);
+      --text: #102a43;
       --text-soft: #6b7280;
-      --border-subtle: rgba(15, 118, 80, 0.35);
-      --radius-xl: 26px;
-      --radius-lg: 18px;
+      --border-subtle: rgba(20, 83, 45, 0.35);
       --shadow-soft: 0 18px 45px rgba(0, 0, 0, 0.55);
     }
 
@@ -40,7 +37,7 @@
       min-height: 100vh;
       font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text",
         sans-serif;
-      background: radial-gradient(circle at top, #14532d 0, #062016 45%, #020a06 100%);
+      background: var(--bg);
       color: var(--text);
       display: flex;
       justify-content: center;
@@ -57,28 +54,13 @@
     .app-shell {
       width: 100%;
       max-width: 960px;
-      background:
-        radial-gradient(circle at 0 0, rgba(248, 250, 252, 0.9), transparent 60%),
-        radial-gradient(circle at 100% 0, rgba(187, 247, 208, 0.5), transparent 60%),
-        var(--panel);
-      border-radius: 32px;
-      border: 1px solid rgba(15, 118, 80, 0.4);
+      background: var(--panel);
+      border-radius: 28px;
+      border: 1px solid var(--border-subtle);
       box-shadow: var(--shadow-soft);
       padding: 18px 18px 22px;
       position: relative;
       overflow: hidden;
-    }
-
-    .app-shell::before {
-      content: "";
-      position: absolute;
-      inset: -40%;
-      background:
-        radial-gradient(circle at 20% -10%, rgba(34, 197, 94, 0.3), transparent 60%),
-        radial-gradient(circle at 120% 0, rgba(255, 255, 255, 0.8), transparent 55%);
-      opacity: 0.7;
-      pointer-events: none;
-      mix-blend-mode: multiply;
     }
 
     .app-inner {
@@ -97,7 +79,7 @@
       font-size: 11px;
       letter-spacing: 0.18em;
       text-transform: uppercase;
-      color: #6b7280;
+      color: var(--text-soft);
     }
 
     h1 {
@@ -106,7 +88,7 @@
       display: flex;
       gap: 6px;
       align-items: baseline;
-      color: #062814;
+      color: #052e16;
     }
 
     h1 span.highlight {
@@ -186,7 +168,7 @@
       padding: 9px 14px;
       font-size: 12px;
       font-weight: 500;
-      background: linear-gradient(135deg, #166534, #16a34a);
+      background: #14532d;
       color: #fefce8;
       display: inline-flex;
       align-items: center;
@@ -258,7 +240,7 @@
       font-weight: 600;
       letter-spacing: 0.06em;
       text-transform: uppercase;
-      color: #166534;
+      color: var(--accent);
     }
 
     .results-count {
@@ -279,8 +261,7 @@
       border-radius: 14px;
       padding: 8px 10px;
       border: 1px solid rgba(148, 163, 184, 0.9);
-      background: radial-gradient(circle at 0 0, rgba(52, 211, 153, 0.25), transparent 55%),
-                  #fffdf6;
+      background: #fffdf6;
       display: flex;
       flex-direction: column;
       gap: 2px;
@@ -341,7 +322,7 @@
 
       .app-shell {
         padding: 14px 14px 18px;
-        border-radius: 26px;
+        border-radius: 24px;
       }
 
       #map {
@@ -3050,13 +3031,7 @@
     const RADIUS_MILES = 20;
     const RADIUS_KM = RADIUS_MILES * 1.60934;
 
-    // Enrich with geocoding metadata
-    gyms.forEach(g => {
-      g.lat = null;
-      g.lng = null;
-      g.geocoded = false;
-    });
-
+    // Map setup
     const map = L.map("map", {
       zoomControl: false,
     }).setView([42.3601, -71.0589], 7);
@@ -3070,6 +3045,7 @@
 
     let userMarker = null;
     const gymMarkers = [];
+    const townCache = {}; // key: "Town,ST" -> {lat,lng}
 
     function haversineDistance(lat1, lon1, lat2, lon2) {
       const toRad = (v) => (v * Math.PI) / 180;
@@ -3086,10 +3062,13 @@
       return R * c;
     }
 
-    async function geocodeGym(gym) {
-      if (gym.geocoded) return gym;
-      const query = `${gym.name}, ${gym.town}, ${gym.state}`;
-      const url = `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(query)}`;
+    async function geocodeTown(town, state) {
+      const key = `${town}, ${state}`;
+      if (townCache[key]) return townCache[key];
+
+      const url = `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(
+        key
+      )}`;
 
       try {
         const res = await fetch(url, { headers: { "Accept-Language": "en" } });
@@ -3097,14 +3076,17 @@
         const data = await res.json();
         if (!data.length) throw new Error("no results");
         const best = data[0];
-        gym.lat = parseFloat(best.lat);
-        gym.lng = parseFloat(best.lon);
-        gym.geocoded = true;
+        const coords = {
+          lat: parseFloat(best.lat),
+          lng: parseFloat(best.lon),
+        };
+        townCache[key] = coords;
+        return coords;
       } catch (e) {
-        console.warn("Could not geocode gym", gym.name, e);
-        gym.geocoded = true; // avoid retry loop
+        console.warn("Could not geocode town", key, e);
+        townCache[key] = null;
+        return null;
       }
-      return gym;
     }
 
     function clearGymMarkers() {
@@ -3115,16 +3097,21 @@
     async function renderResults(centerLat, centerLng) {
       clearGymMarkers();
 
-      // Ensure all gyms have attempted geocoding
-      await Promise.all(gyms.map(geocodeGym));
+      const enriched = [];
 
-      const nearby = gyms
-        .filter((g) => g.lat != null && g.lng != null)
-        .map((g) => {
-          const distanceKm = haversineDistance(centerLat, centerLng, g.lat, g.lng);
-          const distanceMiles = distanceKm / 1.60934;
-          return { ...g, distanceKm, distanceMiles };
-        })
+      // derive coords per gym from town-level geocode
+      for (const g of gyms) {
+        const town = (g.town || "").trim();
+        const state = (g.state || "").trim();
+        if (!town || !state) continue;
+        const coords = await geocodeTown(town, state);
+        if (!coords) continue;
+        const distanceKm = haversineDistance(centerLat, centerLng, coords.lat, coords.lng);
+        const distanceMiles = distanceKm / 1.60934;
+        enriched.push({ ...g, lat: coords.lat, lng: coords.lng, distanceKm, distanceMiles });
+      }
+
+      const nearby = enriched
         .filter((g) => g.distanceKm <= RADIUS_KM)
         .sort((a, b) => a.distanceKm - b.distanceKm);
 
@@ -3200,7 +3187,7 @@
         li.appendChild(meta);
 
         li.addEventListener("click", () => {
-          map.setView([g.lat, g.lng], 12);
+          map.setView([g.lat, g.lng], 11);
           marker.openPopup();
         });
 
@@ -3244,9 +3231,9 @@
       } else {
         userMarker = L.circleMarker([lat, lng], {
           radius: 7,
-          color: "#166534",
+          color: "#14532d",
           weight: 2,
-          fillColor: "#22c55e",
+          fillColor: "#16a34a",
           fillOpacity: 0.5,
         }).addTo(map);
       }
