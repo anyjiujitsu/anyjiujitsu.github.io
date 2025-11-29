@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Gym Locator Map</title>
+  <title>ANY • Academy Map</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <!-- Leaflet CSS -->
@@ -15,17 +15,18 @@
 
   <style>
     :root {
-      --bg: #020617;
-      --bg-elevated: #020617;
-      --panel: #020617;
-      --accent: #4f8cff;
-      --accent-soft: rgba(79, 140, 255, 0.1);
-      --text: #e5e7eb;
-      --text-soft: #9ca3af;
-      --border-subtle: rgba(148, 163, 184, 0.25);
-      --radius-xl: 22px;
+      --bg: #0b2e1d; /* deep forest */
+      --bg-elevated: #123827;
+      --panel: #f6efe2; /* cream */
+      --panel-soft: #f9f3e6;
+      --accent: #21634a; /* forest green */
+      --accent-soft: rgba(33, 99, 74, 0.12);
+      --text: #1f2933;
+      --text-soft: #6b7280;
+      --border-subtle: rgba(15, 118, 80, 0.35);
+      --radius-xl: 26px;
       --radius-lg: 18px;
-      --shadow-soft: 0 18px 45px rgba(0, 0, 0, 0.7);
+      --shadow-soft: 0 18px 45px rgba(0, 0, 0, 0.55);
     }
 
     *,
@@ -39,7 +40,7 @@
       min-height: 100vh;
       font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text",
         sans-serif;
-      background: radial-gradient(circle at top, #111827 0, var(--bg) 46%, #020617 100%);
+      background: radial-gradient(circle at top, #14532d 0, #062016 45%, #020a06 100%);
       color: var(--text);
       display: flex;
       justify-content: center;
@@ -56,12 +57,12 @@
     .app-shell {
       width: 100%;
       max-width: 960px;
-      background: radial-gradient(circle at 0 0, rgba(56, 189, 248, 0.08), transparent 55%),
-                  radial-gradient(circle at 100% 0, rgba(129, 140, 248, 0.09), transparent 50%),
-                  radial-gradient(circle at 50% 120%, rgba(16, 185, 129, 0.18), transparent 60%),
-                  rgba(15, 23, 42, 0.96);
-      border-radius: 30px;
-      border: 1px solid rgba(148, 163, 184, 0.35);
+      background:
+        radial-gradient(circle at 0 0, rgba(248, 250, 252, 0.9), transparent 60%),
+        radial-gradient(circle at 100% 0, rgba(187, 247, 208, 0.5), transparent 60%),
+        var(--panel);
+      border-radius: 32px;
+      border: 1px solid rgba(15, 118, 80, 0.4);
       box-shadow: var(--shadow-soft);
       padding: 18px 18px 22px;
       position: relative;
@@ -73,10 +74,11 @@
       position: absolute;
       inset: -40%;
       background:
-        radial-gradient(circle at 15% -10%, rgba(59, 130, 246, 0.25), transparent 55%),
-        radial-gradient(circle at 110% 10%, rgba(236, 72, 153, 0.18), transparent 50%);
-      opacity: 0.25;
+        radial-gradient(circle at 20% -10%, rgba(34, 197, 94, 0.3), transparent 60%),
+        radial-gradient(circle at 120% 0, rgba(255, 255, 255, 0.8), transparent 55%);
+      opacity: 0.7;
       pointer-events: none;
+      mix-blend-mode: multiply;
     }
 
     .app-inner {
@@ -93,9 +95,9 @@
 
     .eyebrow {
       font-size: 11px;
-      letter-spacing: 0.17em;
+      letter-spacing: 0.18em;
       text-transform: uppercase;
-      color: #9ca3af;
+      color: #6b7280;
     }
 
     h1 {
@@ -104,10 +106,11 @@
       display: flex;
       gap: 6px;
       align-items: baseline;
+      color: #062814;
     }
 
     h1 span.highlight {
-      color: #93c5fd;
+      color: var(--accent);
       font-weight: 650;
     }
 
@@ -119,10 +122,9 @@
 
     .search-panel {
       margin-top: 12px;
-      background: radial-gradient(circle at 0% 0%, rgba(15, 23, 42, 0.5), transparent 60%),
-                  rgba(15, 23, 42, 0.96);
+      background: var(--panel-soft);
       border-radius: 18px;
-      border: 1px solid var(--border-subtle);
+      border: 1px solid rgba(148, 163, 184, 0.6);
       padding: 10px 12px;
       display: flex;
       flex-wrap: wrap;
@@ -138,8 +140,8 @@
     .search-input-wrap input {
       width: 100%;
       border-radius: 999px;
-      border: 1px solid rgba(148, 163, 184, 0.5);
-      background: rgba(15, 23, 42, 0.96);
+      border: 1px solid rgba(148, 163, 184, 0.7);
+      background: #fffdf6;
       padding: 9px 34px 9px 30px;
       color: var(--text);
       font-size: 13px;
@@ -147,7 +149,7 @@
     }
 
     .search-input-wrap input::placeholder {
-      color: #64748b;
+      color: #9ca3af;
     }
 
     .search-icon {
@@ -169,7 +171,7 @@
       padding: 2px 6px;
       font-size: 10px;
       background: rgba(148, 163, 184, 0.2);
-      color: #e5e7eb;
+      color: #111827;
       cursor: pointer;
       display: none;
     }
@@ -180,12 +182,12 @@
 
     .search-panel button.locate-btn {
       border-radius: 999px;
-      border: none;
+      border: 1px solid rgba(22, 163, 74, 0.9);
       padding: 9px 14px;
       font-size: 12px;
       font-weight: 500;
-      background: linear-gradient(135deg, #4f46e5, #22c55e);
-      color: white;
+      background: linear-gradient(135deg, #166534, #16a34a);
+      color: #fefce8;
       display: inline-flex;
       align-items: center;
       gap: 6px;
@@ -197,8 +199,8 @@
       width: 6px;
       height: 6px;
       border-radius: 999px;
-      background: #22c55e;
-      box-shadow: 0 0 0 5px rgba(34, 197, 94, 0.25);
+      background: #bbf7d0;
+      box-shadow: 0 0 0 5px rgba(187, 247, 208, 0.7);
     }
 
     .search-meta {
@@ -213,28 +215,30 @@
     .radius-pill {
       border-radius: 999px;
       padding: 4px 9px;
-      background: rgba(15, 23, 42, 0.95);
-      border: 1px solid rgba(148, 163, 184, 0.6);
+      background: #fff7e0;
+      border: 1px solid rgba(148, 163, 184, 0.8);
       font-size: 11px;
+      color: #374151;
     }
 
     #map {
       height: 320px;
       border-radius: 22px;
-      border: 1px solid rgba(148, 163, 184, 0.35);
+      border: 1px solid rgba(148, 163, 184, 0.9);
       margin-top: 14px;
       overflow: hidden;
+      box-shadow: 0 10px 30px rgba(15, 23, 42, 0.25);
     }
 
     .leaflet-container {
-      background: #020617;
+      background: #ecfdf3;
     }
 
     .results-panel {
       margin-top: 14px;
-      background: rgba(15, 23, 42, 0.96);
+      background: #fffaf0;
       border-radius: 20px;
-      border: 1px solid var(--border-subtle);
+      border: 1px solid rgba(148, 163, 184, 0.6);
       padding: 12px 12px 10px;
       max-height: 360px;
       overflow-y: auto;
@@ -252,14 +256,14 @@
     .results-title {
       font-size: 13px;
       font-weight: 600;
-      letter-spacing: 0.04em;
+      letter-spacing: 0.06em;
       text-transform: uppercase;
-      color: #cbd5f5;
+      color: #166534;
     }
 
     .results-count {
       font-size: 11px;
-      color: #9ca3af;
+      color: var(--text-soft);
     }
 
     .list {
@@ -274,9 +278,9 @@
     .card {
       border-radius: 14px;
       padding: 8px 10px;
-      border: 1px solid rgba(31, 41, 55, 0.9);
-      background: radial-gradient(circle at 0 0, rgba(59, 130, 246, 0.2), transparent 55%),
-                  rgba(15, 23, 42, 0.96);
+      border: 1px solid rgba(148, 163, 184, 0.9);
+      background: radial-gradient(circle at 0 0, rgba(52, 211, 153, 0.25), transparent 55%),
+                  #fffdf6;
       display: flex;
       flex-direction: column;
       gap: 2px;
@@ -293,17 +297,18 @@
     .card-title {
       font-size: 13px;
       font-weight: 600;
+      color: #052e16;
     }
 
     .card-distance {
       font-size: 11px;
-      color: #a5b4fc;
+      color: #15803d;
       white-space: nowrap;
     }
 
     .card-location {
       font-size: 12px;
-      color: #e5e7eb;
+      color: #1f2937;
       display: flex;
       align-items: center;
       gap: 5px;
@@ -315,12 +320,17 @@
 
     .card-meta {
       font-size: 11px;
-      color: #9ca3af;
+      color: #4b5563;
+    }
+
+    .card-ig {
+      font-size: 11px;
+      color: #047857;
     }
 
     .empty-state {
       font-size: 12px;
-      color: #9ca3af;
+      color: #6b7280;
       padding: 4px 0 2px;
     }
 
@@ -331,7 +341,7 @@
 
       .app-shell {
         padding: 14px 14px 18px;
-        border-radius: 24px;
+        border-radius: 26px;
       }
 
       #map {
@@ -408,57 +418,2648 @@
   ></script>
 
   <script>
-    // --- Sample gym data: replace / extend this array with real academies ---
+    // Gyms sourced from directory.csv
     const gyms = [
-      {
-        id: 1,
-        name: "Black Hole Jiu-Jitsu",
-        city: "Seymour",
-        state: "Connecticut",
-        lat: 41.396,
-        lng: -73.089,
-      },
-      {
-        id: 2,
-        name: "Lauzon MMA",
-        city: "Canton",
-        state: "Massachusetts",
-        lat: 42.156,
-        lng: -71.144,
-      },
-      {
-        id: 3,
-        name: "Broadway Jiu-Jitsu",
-        city: "South Boston",
-        state: "Massachusetts",
-        lat: 42.3334,
-        lng: -71.0507,
-      },
-      {
-        id: 4,
-        name: "Fenway BJJ",
-        city: "Boston",
-        state: "Massachusetts",
-        lat: 42.3459,
-        lng: -71.0983,
-      },
-      {
-        id: 5,
-        name: "Nostos MMA",
-        city: "Somersworth",
-        state: "New Hampshire",
-        lat: 43.2597,
-        lng: -70.8653,
-      }
-    ];
+  {
+    "id": 1,
+    "name": "Marcelo Garcia JJ",
+    "town": "Bridgeport",
+    "state": "CT",
+    "ig": "bridgeport_marcelogarciajj"
+  },
+  {
+    "id": 2,
+    "name": "American Top Team",
+    "town": "Danbury",
+    "state": "CT",
+    "ig": "attconnecticut"
+  },
+  {
+    "id": 3,
+    "name": "Soulcraft / Macarra BJJ",
+    "town": "Hamden",
+    "state": "CT",
+    "ig": "macarra_bjj_hamden"
+  },
+  {
+    "id": 4,
+    "name": "Gracie Sports BJJ",
+    "town": "Norwalk",
+    "state": "CT",
+    "ig": "graciesportsbjj"
+  },
+  {
+    "id": 5,
+    "name": "Black Hole Jiu Jitsu",
+    "town": "Seymour",
+    "state": "CT",
+    "ig": "blackholejj.ct"
+  },
+  {
+    "id": 6,
+    "name": "Summit JiuJitsu",
+    "town": "Stamford",
+    "state": "CT",
+    "ig": "summit.jiujitsu"
+  },
+  {
+    "id": 7,
+    "name": "Secret Pages Brazilian Jiu Jitsu",
+    "town": "Tolland",
+    "state": "CT",
+    "ig": "secret_pages_bjj"
+  },
+  {
+    "id": 8,
+    "name": "Dandelion Jiujitsu & Wrestling",
+    "town": "West Haven",
+    "state": "CT",
+    "ig": "dandelionbjj"
+  },
+  {
+    "id": 9,
+    "name": "Agoge Jiu Jitsu and Muay Thai",
+    "town": "Willington",
+    "state": "CT",
+    "ig": "agogejjmt"
+  },
+  {
+    "id": 10,
+    "name": "Mass BJJ",
+    "town": "Acton",
+    "state": "MA",
+    "ig": "mass_bjj"
+  },
+  {
+    "id": 11,
+    "name": "Ironhold Jiu Jitsu",
+    "town": "Agawam",
+    "state": "MA",
+    "ig": "ironhold_jiujitsu_"
+  },
+  {
+    "id": 12,
+    "name": "Gracie Barra Andover",
+    "town": "Andover",
+    "state": "MA",
+    "ig": "graciebarraandover"
+  },
+  {
+    "id": 13,
+    "name": "New England Submission Fighting (Boston)",
+    "town": "Arlington",
+    "state": "MA",
+    "ig": "nesfboston"
+  },
+  {
+    "id": 14,
+    "name": "Ronin Jiu-Jitsu",
+    "town": "Attleboro",
+    "state": "MA",
+    "ig": "roninjiujitsu"
+  },
+  {
+    "id": 15,
+    "name": "Bernardo Faria BJJ Academy",
+    "town": "Bedford",
+    "state": "MA",
+    "ig": "bernardofariabjjacademy"
+  },
+  {
+    "id": 16,
+    "name": "Invictus Training Center",
+    "town": "Beverly",
+    "state": "MA",
+    "ig": "invictustrainingcenter"
+  },
+  {
+    "id": 17,
+    "name": "Gracie Barra Boston",
+    "town": "Boston",
+    "state": "MA",
+    "ig": "gbbostonbjj"
+  },
+  {
+    "id": 18,
+    "name": "Combat Sports Boston",
+    "town": "Boston",
+    "state": "MA",
+    "ig": "combatsportsboston"
+  },
+  {
+    "id": 19,
+    "name": "Back 2 Basics Jiu Jitsu",
+    "town": "Boston",
+    "state": "MA",
+    "ig": "b2basics_jiujitsu"
+  },
+  {
+    "id": 20,
+    "name": "Brazilian Top Team Boston",
+    "town": "Boston (Back Bay)",
+    "state": "MA",
+    "ig": "bttboston"
+  },
+  {
+    "id": 21,
+    "name": "Brazilian Top Team Back Bay",
+    "town": "Boston (Back Bay)",
+    "state": "MA",
+    "ig": "bttbackbay"
+  },
+  {
+    "id": 22,
+    "name": "Gracie Barra Braintree",
+    "town": "Braintree",
+    "state": "MA",
+    "ig": "gbbraintree"
+  },
+  {
+    "id": 23,
+    "name": "Submit Your Friend Academy",
+    "town": "Brighton (Boston)",
+    "state": "MA",
+    "ig": "syfabjj"
+  },
+  {
+    "id": 24,
+    "name": "Orion BJJ",
+    "town": "Brockton",
+    "state": "MA",
+    "ig": "orionbjj"
+  },
+  {
+    "id": 25,
+    "name": "Florian Martial Arts Center",
+    "town": "Brookline",
+    "state": "MA",
+    "ig": "florianmartialarts"
+  },
+  {
+    "id": 26,
+    "name": "Ginsberg Academy BJJ",
+    "town": "Cambridge",
+    "state": "MA",
+    "ig": "ginsbergbjj"
+  },
+  {
+    "id": 27,
+    "name": "Alchemy Brazilian Jiu-Jitsu",
+    "town": "Clinton",
+    "state": "MA",
+    "ig": "alchemy_brazilian_jiujitsu"
+  },
+  {
+    "id": 28,
+    "name": "20000 Leagues Jiu Jitsu",
+    "town": "Danvers",
+    "state": "MA",
+    "ig": "20000_leagues_jiu_jitsu_"
+  },
+  {
+    "id": 29,
+    "name": "Empower BJJ",
+    "town": "Dorchester",
+    "state": "MA",
+    "ig": "empowerbjjusa"
+  },
+  {
+    "id": 30,
+    "name": "IN Jiujitsu",
+    "town": "East Bridgewater",
+    "state": "MA",
+    "ig": "injiujitsu"
+  },
+  {
+    "id": 31,
+    "name": "Regiment Training Center",
+    "town": "Fall River",
+    "state": "MA",
+    "ig": "regiment_training_center"
+  },
+  {
+    "id": 32,
+    "name": "ZTeam Jiu-Jitsu",
+    "town": "Fitchburg",
+    "state": "MA",
+    "ig": "zteamjiujitsu"
+  },
+  {
+    "id": 33,
+    "name": "Thurston Academy of Martial Arts",
+    "town": "Hanover",
+    "state": "MA",
+    "ig": "thurston_academy"
+  },
+  {
+    "id": 34,
+    "name": "PQ Jiu Jitsu",
+    "town": "Hanover",
+    "state": "MA",
+    "ig": "pqjiujitsu"
+  },
+  {
+    "id": 35,
+    "name": "Upper Level JiuJitsu",
+    "town": "Hudson",
+    "state": "MA",
+    "ig": "upperlevelhudson"
+  },
+  {
+    "id": 36,
+    "name": "Cristyan BJJ",
+    "town": "Hyannis",
+    "state": "MA",
+    "ig": "cristyanbjj"
+  },
+  {
+    "id": 37,
+    "name": "Unit 232 HQ",
+    "town": "Littleton",
+    "state": "MA",
+    "ig": "unit232.hq"
+  },
+  {
+    "id": 38,
+    "name": "The Paradigm Academy",
+    "town": "Lowell",
+    "state": "MA",
+    "ig": "theparadigmacademy"
+  },
+  {
+    "id": 39,
+    "name": "The Paradigm Academy",
+    "town": "Lowell",
+    "state": "MA",
+    "ig": "theparadigmacademy"
+  },
+  {
+    "id": 40,
+    "name": "First Colony Brazilian Jiu-Jitsu",
+    "town": "Marblehead",
+    "state": "MA",
+    "ig": "firstcolonybjj"
+  },
+  {
+    "id": 41,
+    "name": "Phoenix BJJ",
+    "town": "Marlborough",
+    "state": "MA",
+    "ig": "phoenix_jj_official"
+  },
+  {
+    "id": 42,
+    "name": "Gorilla Martial Arts",
+    "town": "Marlborough",
+    "state": "MA",
+    "ig": "gorilla_martial_arts_"
+  },
+  {
+    "id": 43,
+    "name": "Exodus Brazilian Jiu Jitsu",
+    "town": "Marlborough",
+    "state": "MA",
+    "ig": "exodus.jiujitsu"
+  },
+  {
+    "id": 44,
+    "name": "REAL BJJ",
+    "town": "Middleboro",
+    "state": "MA",
+    "ig": "realbjjma"
+  },
+  {
+    "id": 45,
+    "name": "Mohawk Martial Arts",
+    "town": "Millis",
+    "state": "MA",
+    "ig": "mohawmartialarts"
+  },
+  {
+    "id": 46,
+    "name": "Werdum Training Center",
+    "town": "Nantucket",
+    "state": "MA",
+    "ig": "werdum.nantucket"
+  },
+  {
+    "id": 47,
+    "name": "Versus Jiu-Jitsu Academy",
+    "town": "Natick",
+    "state": "MA",
+    "ig": "versusjiujitsuma"
+  },
+  {
+    "id": 48,
+    "name": "ATOM Jiu-Jitsu",
+    "town": "Newton",
+    "state": "MA",
+    "ig": "atom_bjj"
+  },
+  {
+    "id": 49,
+    "name": "Gracie Barra",
+    "town": "Newton",
+    "state": "MA",
+    "ig": "gracie_barra_jiujitsu"
+  },
+  {
+    "id": 50,
+    "name": "Steeple City JiuJitsu",
+    "town": "North Adams",
+    "state": "MA",
+    "ig": "steeplecityjiujitsu"
+  },
+  {
+    "id": 51,
+    "name": "Daniel Gracie Academy",
+    "town": "Northborough",
+    "state": "MA",
+    "ig": "danielgracieacademy"
+  },
+  {
+    "id": 52,
+    "name": "Elements MMA",
+    "town": "Norwood",
+    "state": "MA",
+    "ig": "elements_mma"
+  },
+  {
+    "id": 53,
+    "name": "Gentle Art Dojo (North Shore)",
+    "town": "Peabody",
+    "state": "MA",
+    "ig": "gadnorthshore"
+  },
+  {
+    "id": 54,
+    "name": "Gracie Barra",
+    "town": "Peabody",
+    "state": "MA",
+    "ig": "gbpeabody"
+  },
+  {
+    "id": 55,
+    "name": "Brazilian Top Team Rowley",
+    "town": "Rowley",
+    "state": "MA",
+    "ig": "bttrowley"
+  },
+  {
+    "id": 56,
+    "name": "617 Brazilian Jiu Jitsu",
+    "town": "Somerville",
+    "state": "MA",
+    "ig": "617bjj"
+  },
+  {
+    "id": 57,
+    "name": "South Boston BJJ",
+    "town": "South Boston",
+    "state": "MA",
+    "ig": "southbostonbjj"
+  },
+  {
+    "id": 58,
+    "name": "Vaca BJJ & MMA",
+    "town": "Springfield",
+    "state": "MA",
+    "ig": "vacabjjmma_gym"
+  },
+  {
+    "id": 59,
+    "name": "Fighting Arts Academy",
+    "town": "Springfield",
+    "state": "MA",
+    "ig": "fightingartsacademy"
+  },
+  {
+    "id": 60,
+    "name": "Morselli Jiu Jitsu Academy",
+    "town": "Taunton",
+    "state": "MA",
+    "ig": "morsellijj"
+  },
+  {
+    "id": 61,
+    "name": "Fenix Brazilian Jiu Jitsu Tewksbury",
+    "town": "Tewksbury",
+    "state": "MA",
+    "ig": "fenixbjjtewksbury"
+  },
+  {
+    "id": 62,
+    "name": "Team Fight Academy",
+    "town": "Wakefield",
+    "state": "MA",
+    "ig": "teamfightacademy"
+  },
+  {
+    "id": 63,
+    "name": "Virtue Martial Arts",
+    "town": "Waltham",
+    "state": "MA",
+    "ig": "virtue_martialarts"
+  },
+  {
+    "id": 64,
+    "name": "Alliance Jiu Jitsu Westborough",
+    "town": "Westborough",
+    "state": "MA",
+    "ig": "alliancewestborough"
+  },
+  {
+    "id": 65,
+    "name": "The Lab Jiu-Jitsu",
+    "town": "Westwood",
+    "state": "MA",
+    "ig": "the_lab_jiu_jitsu_westwood"
+  },
+  {
+    "id": 66,
+    "name": "Giannetti Martial Arts",
+    "town": "Whitman",
+    "state": "MA",
+    "ig": "giannettimartialarts"
+  },
+  {
+    "id": 67,
+    "name": "Boston Brazilian Jiu Jitsu Woburn",
+    "town": "Woburn",
+    "state": "MA",
+    "ig": "bostonbjjwoburn"
+  },
+  {
+    "id": 68,
+    "name": "Fenix Brazilian Jiu Jitsu Woburn",
+    "town": "Woburn",
+    "state": "MA",
+    "ig": "fenixbjjwoburn"
+  },
+  {
+    "id": 69,
+    "name": "Worcester MMA (Abusado Team)",
+    "town": "Worcester",
+    "state": "MA",
+    "ig": "worcester_mma"
+  },
+  {
+    "id": 70,
+    "name": "Black Bear BJJ & Fitness",
+    "town": "Augusta",
+    "state": "ME",
+    "ig": "blackbear_bjj"
+  },
+  {
+    "id": 71,
+    "name": "Three Points BJJ",
+    "town": "Blue Hills",
+    "state": "ME",
+    "ig": "threepointsbjj"
+  },
+  {
+    "id": 72,
+    "name": "Rolls Jiu Jitsu",
+    "town": "Ellsworth",
+    "state": "ME",
+    "ig": "rollsjiujitsu"
+  },
+  {
+    "id": 73,
+    "name": "Aroostook Grappling Club",
+    "town": "Houlton",
+    "state": "ME",
+    "ig": "aroostookbjj"
+  },
+  {
+    "id": 74,
+    "name": "Bear Clan JiuJitsu",
+    "town": "Oakland",
+    "state": "ME",
+    "ig": "bearclan_jiujitsu"
+  },
+  {
+    "id": 75,
+    "name": "Recon MMA",
+    "town": "Portland",
+    "state": "ME",
+    "ig": "recon.portland"
+  },
+  {
+    "id": 76,
+    "name": "The Academy Portland",
+    "town": "Portland",
+    "state": "ME",
+    "ig": "theacademymaine"
+  },
+  {
+    "id": 77,
+    "name": "Stonecoast BJJ",
+    "town": "Portland",
+    "state": "ME",
+    "ig": "stonecoastbjj"
+  },
+  {
+    "id": 78,
+    "name": "Flow Brazilian Jiu Jitsu",
+    "town": "Rockland",
+    "state": "ME",
+    "ig": "flowbjj_maine"
+  },
+  {
+    "id": 79,
+    "name": "Gracie Barra South Portland",
+    "town": "South Portland",
+    "state": "ME",
+    "ig": "gbsouthportland"
+  },
+  {
+    "id": 80,
+    "name": "Gracie Gym Maine",
+    "town": "Windham",
+    "state": "ME",
+    "ig": "graciegymmaine"
+  },
+  {
+    "id": 81,
+    "name": "Aqueous Brazilian Jiu-Jitsu",
+    "town": "Bedford",
+    "state": "NH",
+    "ig": "aqueousbjj"
+  },
+  {
+    "id": 82,
+    "name": "Dark Arts Jiu Jitsu Brentwood (inside Conquer Self Defense)",
+    "town": "Brentwood",
+    "state": "NH",
+    "ig": "darkartsjiujitsu_brentwood"
+  },
+  {
+    "id": 83,
+    "name": "Leverage Jiu-Jitsu Academy",
+    "town": "Concord",
+    "state": "NH",
+    "ig": "leverage_jiujitsu_nh"
+  },
+  {
+    "id": 84,
+    "name": "New England BJJ Academy",
+    "town": "Concord",
+    "state": "NH",
+    "ig": "nebjjacademy"
+  },
+  {
+    "id": 85,
+    "name": "Primal Jiu Jitsu and Martial Arts",
+    "town": "Derry",
+    "state": "NH",
+    "ig": "primaljiujitsuacademy"
+  },
+  {
+    "id": 86,
+    "name": "Limitless Pride",
+    "town": "East Hampstead",
+    "state": "NH",
+    "ig": "limitlesspride"
+  },
+  {
+    "id": 87,
+    "name": "Hero Jiu Jitsu Academy",
+    "town": "Exeter",
+    "state": "NH",
+    "ig": "herojiujitsu"
+  },
+  {
+    "id": 88,
+    "name": "Kevin Watson Brazilian Jiu-Jitsu",
+    "town": "Exeter",
+    "state": "NH",
+    "ig": "kevinwatsonbjj"
+  },
+  {
+    "id": 89,
+    "name": "Precision JiuJitsu",
+    "town": "Hudson",
+    "state": "NH",
+    "ig": "precision_jiujitsu"
+  },
+  {
+    "id": 90,
+    "name": "Lakes Region Vale Tudo",
+    "town": "Laconia",
+    "state": "NH",
+    "ig": "lakesregionvaletudo"
+  },
+  {
+    "id": 91,
+    "name": "Fenix Highlanders Club",
+    "town": "Littleton",
+    "state": "NH",
+    "ig": "fenixhighlanders"
+  },
+  {
+    "id": 92,
+    "name": "Valle Brazilian Jiu Jitsu",
+    "town": "Londonderry",
+    "state": "NH",
+    "ig": "valle_jiujitsu"
+  },
+  {
+    "id": 93,
+    "name": "Brazilian Top Team",
+    "town": "Londonderry",
+    "state": "NH",
+    "ig": "btt_londonderry"
+  },
+  {
+    "id": 94,
+    "name": "Burgess MMA",
+    "town": "Manchester",
+    "state": "NH",
+    "ig": "youtalkwetrain"
+  },
+  {
+    "id": 95,
+    "name": "Gate City MMA",
+    "town": "Nashua",
+    "state": "NH",
+    "ig": "gatecitymma"
+  },
+  {
+    "id": 96,
+    "name": "Granite State BJJ",
+    "town": "North Hampton",
+    "state": "NH",
+    "ig": "granitestatebjj"
+  },
+  {
+    "id": 97,
+    "name": "Sanders Jiu Jitsu",
+    "town": "Rochester",
+    "state": "NH",
+    "ig": "sandersbjjacademy"
+  },
+  {
+    "id": 98,
+    "name": "Monadnock BJJ",
+    "town": "Swanzey",
+    "state": "NH",
+    "ig": "monadnockbrazilianjiujitsu"
+  },
+  {
+    "id": 99,
+    "name": "Renzo Gracie",
+    "town": "Windham",
+    "state": "NH",
+    "ig": "renzogracienh"
+  },
+  {
+    "id": 100,
+    "name": "Coventry BJJ",
+    "town": "Coventry",
+    "state": "RI",
+    "ig": "coventryribjj"
+  },
+  {
+    "id": 101,
+    "name": "Playground Jiu Jitsu",
+    "town": "East Providence",
+    "state": "RI",
+    "ig": "playgroundjiujitsu"
+  },
+  {
+    "id": 102,
+    "name": "Pajama Strangle Time! Death Kitty Dojo",
+    "town": "Providence",
+    "state": "RI",
+    "ig": "deathkittydojo"
+  },
+  {
+    "id": 103,
+    "name": "Tim Burrill Brazilian Jiu-Jitsu",
+    "town": "Providence",
+    "state": "RI",
+    "ig": "timburrillbjj"
+  },
+  {
+    "id": 104,
+    "name": "Providence BJJ",
+    "town": "Providence",
+    "state": "RI",
+    "ig": "providencebjj"
+  },
+  {
+    "id": 105,
+    "name": "Renzo Gracie RI",
+    "town": "Smithfield",
+    "state": "RI",
+    "ig": "renzogracieri"
+  },
+  {
+    "id": 106,
+    "name": "GT Fighting Academy",
+    "town": "Wakefield",
+    "state": "RI",
+    "ig": "gtfightingacademy"
+  },
+  {
+    "id": 107,
+    "name": "Granite City MMA",
+    "town": "Barre",
+    "state": "VT",
+    "ig": "granitecitymma"
+  },
+  {
+    "id": 108,
+    "name": "Gracie Jiu Jitsu Vermont",
+    "town": "Essex Junction",
+    "state": "VT",
+    "ig": "gracie_jiu_jitsu_vermont"
+  },
+  {
+    "id": 109,
+    "name": "Kingdom Jiu-Jitsu",
+    "town": "Hardwick",
+    "state": "VT",
+    "ig": "kingdom.jiu.jitsu"
+  },
+  {
+    "id": 110,
+    "name": "Rutland American Jiujitsu Academy",
+    "town": "Rutland",
+    "state": "VT",
+    "ig": "rutland_ajj"
+  },
+  {
+    "id": 111,
+    "name": "High Hat Brazilian Jiu-Jitsu",
+    "town": "South Burlington",
+    "state": "VT",
+    "ig": "highhatbrazilianjiujitsu"
+  },
+  {
+    "id": 112,
+    "name": "The Club",
+    "town": "St. Albans",
+    "state": "VT",
+    "ig": "theclubvt"
+  },
+  {
+    "id": 113,
+    "name": "Vermont Brazilian Jiu-Jitsu (VT BJJ)",
+    "town": "Williston",
+    "state": "VT",
+    "ig": "vermontbjj"
+  },
+  {
+    "id": 114,
+    "name": "Gracie Jiujitsu",
+    "town": "Berlin",
+    "state": "CT",
+    "ig": "gracie_jiujitsu_ct"
+  },
+  {
+    "id": 115,
+    "name": "Teixeira MMA & Fitness",
+    "town": "Bethel",
+    "state": "CT",
+    "ig": "teixeirammaandfitness"
+  },
+  {
+    "id": 116,
+    "name": "Iron Lion",
+    "town": "Bridgeport",
+    "state": "CT",
+    "ig": "iron_lion_team_"
+  },
+  {
+    "id": 117,
+    "name": "Connecticut Submission Grappling",
+    "town": "Bridgeport",
+    "state": "CT",
+    "ig": "connecticutsubmissiongrappling"
+  },
+  {
+    "id": 118,
+    "name": "Ascension Athletics",
+    "town": "Bristol",
+    "state": "CT",
+    "ig": "ascensionathleticsct"
+  },
+  {
+    "id": 119,
+    "name": "Team Squared BJJ",
+    "town": "Brooklyn",
+    "state": "CT",
+    "ig": "squared_bjj_brooklyn"
+  },
+  {
+    "id": 120,
+    "name": "360 Defense",
+    "town": "Colchester",
+    "state": "CT",
+    "ig": "360defensecolchester"
+  },
+  {
+    "id": 121,
+    "name": "TRITAC Training Center",
+    "town": "Cromwell",
+    "state": "CT",
+    "ig": "tritactrainingcenter"
+  },
+  {
+    "id": 122,
+    "name": "Kore Integrated Combatives",
+    "town": "Danbury",
+    "state": "CT",
+    "ig": "korecombatives"
+  },
+  {
+    "id": 123,
+    "name": "TMC BJJ School",
+    "town": "Danbury",
+    "state": "CT",
+    "ig": "tmcdanburybjj"
+  },
+  {
+    "id": 124,
+    "name": "FIT CLUB BJJ & Self-Defense",
+    "town": "Fairfield",
+    "state": "CT",
+    "ig": "fitclubbjj"
+  },
+  {
+    "id": 125,
+    "name": "Hammer Jiu Jitsu",
+    "town": "Fairfield",
+    "state": "CT",
+    "ig": "hammerjiujitsu"
+  },
+  {
+    "id": 126,
+    "name": "Radius Martial Arts 10th Planet",
+    "town": "Fairfield",
+    "state": "CT",
+    "ig": "radiusmartialarts"
+  },
+  {
+    "id": 127,
+    "name": "Gracie Farmington Valley",
+    "town": "Farmington",
+    "state": "CT",
+    "ig": "gfvjiujitsu"
+  },
+  {
+    "id": 128,
+    "name": "Royce Gracie Academy",
+    "town": "Glastonbury",
+    "state": "CT",
+    "ig": "rgjjnct"
+  },
+  {
+    "id": 129,
+    "name": "F.I.T.E. Fit",
+    "town": "Glastonbury",
+    "state": "CT",
+    "ig": "fitefit1"
+  },
+  {
+    "id": 130,
+    "name": "Silverback Training Facility",
+    "town": "Glastonbury",
+    "state": "CT",
+    "ig": "silverbacktrainingfacility"
+  },
+  {
+    "id": 131,
+    "name": "Greenwich Jiu Jitsu Academy",
+    "town": "Greenwich",
+    "state": "CT",
+    "ig": "greenwichjiujitsuacademy"
+  },
+  {
+    "id": 132,
+    "name": "The Roughhouse",
+    "town": "Groton",
+    "state": "CT",
+    "ig": "roughhousejj"
+  },
+  {
+    "id": 133,
+    "name": "Hebron BJJ (Bushido BJJ)",
+    "town": "Hebron",
+    "state": "CT",
+    "ig": "hebronbjj"
+  },
+  {
+    "id": 134,
+    "name": "Kairos Jiu Jitsu",
+    "town": "Higganum",
+    "state": "CT",
+    "ig": "kairosjiujitsu"
+  },
+  {
+    "id": 135,
+    "name": "Gracie Litchfield Hills",
+    "town": "Litchfield",
+    "state": "CT",
+    "ig": "glhjiujitsu"
+  },
+  {
+    "id": 136,
+    "name": "Black Wolf Shoreline",
+    "town": "Madison",
+    "state": "CT",
+    "ig": "blackwolfmartialarts_shoreline"
+  },
+  {
+    "id": 137,
+    "name": "Manchester Brazilian Jiu-Jitsu (Bushido BJJ)",
+    "town": "Manchester",
+    "state": "CT",
+    "ig": "manchesterbjj"
+  },
+  {
+    "id": 138,
+    "name": "Team Legacy 860 MMA",
+    "town": "Manchester",
+    "state": "CT",
+    "ig": "teamlegacy860mma"
+  },
+  {
+    "id": 139,
+    "name": "FlowState Fighting & Fitness",
+    "town": "Manchester",
+    "state": "CT",
+    "ig": "flowstatefightingandfitness"
+  },
+  {
+    "id": 140,
+    "name": "Uconn Brazilian Jiu-Jitsu",
+    "town": "Mansfield",
+    "state": "CT",
+    "ig": "uconnbjj"
+  },
+  {
+    "id": 141,
+    "name": "Campanella Martial Arts",
+    "town": "Middlebury",
+    "state": "CT",
+    "ig": "campanellamartialarts"
+  },
+  {
+    "id": 142,
+    "name": "Fighting Arts Academy CT",
+    "town": "Milford",
+    "state": "CT",
+    "ig": "faa_ct"
+  },
+  {
+    "id": 143,
+    "name": "Renzo Gracie",
+    "town": "Milford",
+    "state": "CT",
+    "ig": "renzograciemilford"
+  },
+  {
+    "id": 144,
+    "name": "Cruvinel Brothers Training Center",
+    "town": "Monroe",
+    "state": "CT",
+    "ig": "cruvinelbrothers"
+  },
+  {
+    "id": 145,
+    "name": "Redzone Jiut Jitsu",
+    "town": "Monroe",
+    "state": "CT",
+    "ig": "redzonejiujitsu"
+  },
+  {
+    "id": 146,
+    "name": "Modern Self Defense Center",
+    "town": "New Britain",
+    "state": "CT",
+    "ig": "modernselfdefense"
+  },
+  {
+    "id": 147,
+    "name": "Heavy Hitters Club",
+    "town": "New Britain",
+    "state": "CT",
+    "ig": "heavyhitters.club"
+  },
+  {
+    "id": 148,
+    "name": "Carlson Gracie Jiu-Jitsu",
+    "town": "New Haven",
+    "state": "CT",
+    "ig": "carlsongraciect"
+  },
+  {
+    "id": 149,
+    "name": "Ronin New Haven",
+    "town": "New Haven",
+    "state": "CT",
+    "ig": "roninnewhaven"
+  },
+  {
+    "id": 150,
+    "name": "Whaling City Athletic Club",
+    "town": "New London",
+    "state": "CT",
+    "ig": "whalingcity.athleticclub"
+  },
+  {
+    "id": 151,
+    "name": "Rapadura BJJ / Double Five BJJ",
+    "town": "Newtown",
+    "state": "CT",
+    "ig": "rapadura_bjj"
+  },
+  {
+    "id": 152,
+    "name": "Rogers Academy",
+    "town": "North Franklin",
+    "state": "CT",
+    "ig": "rogersmartialarts"
+  },
+  {
+    "id": 153,
+    "name": "Ultimate Mixed Martial Arts",
+    "town": "North Haven",
+    "state": "CT",
+    "ig": "ultimatemmabjj"
+  },
+  {
+    "id": 154,
+    "name": "Viana Bros Fight Club",
+    "town": "Oakville",
+    "state": "CT",
+    "ig": "vianabrosfightclub"
+  },
+  {
+    "id": 155,
+    "name": "CT Combat Training Center",
+    "town": "Oakville",
+    "state": "CT",
+    "ig": "ct_combat"
+  },
+  {
+    "id": 156,
+    "name": "Black Wolf Martial Arts",
+    "town": "Orange",
+    "state": "CT",
+    "ig": "blackwolfmartialarts"
+  },
+  {
+    "id": 157,
+    "name": "Plainville Martial Arts",
+    "town": "Plainville",
+    "state": "CT",
+    "ig": "pmabjj"
+  },
+  {
+    "id": 158,
+    "name": "Technique Brazilian Jiu-Jitsu",
+    "town": "Prospect",
+    "state": "CT",
+    "ig": "technique_bjj"
+  },
+  {
+    "id": 159,
+    "name": "Endure BJJ Academy",
+    "town": "Shelton",
+    "state": "CT",
+    "ig": "endurebjjacademy"
+  },
+  {
+    "id": 160,
+    "name": "CT Jiujitsu Kobukai",
+    "town": "South Windsor",
+    "state": "CT",
+    "ig": "kobukai_jj_sw"
+  },
+  {
+    "id": 161,
+    "name": "Solid Base BJJ",
+    "town": "Southington",
+    "state": "CT",
+    "ig": "solidbasebjj"
+  },
+  {
+    "id": 162,
+    "name": "Ground Work Jiu-Jitsu",
+    "town": "Stamford",
+    "state": "CT",
+    "ig": "groundworkjiujitsu"
+  },
+  {
+    "id": 163,
+    "name": "Carlson Gracie Team CT / Cesar Pereira BJJ",
+    "town": "Stamford",
+    "state": "CT",
+    "ig": "bjjstamfordct"
+  },
+  {
+    "id": 164,
+    "name": "Cruvinel Brothers Training Center",
+    "town": "Stratford",
+    "state": "CT",
+    "ig": "cruvinelbros"
+  },
+  {
+    "id": 165,
+    "name": "Full Circle Martial Arts",
+    "town": "Suffield",
+    "state": "CT",
+    "ig": "fullcirclect"
+  },
+  {
+    "id": 166,
+    "name": "IDP Jiujitsu and Fitness",
+    "town": "Tolland",
+    "state": "CT",
+    "ig": "submission_piracy"
+  },
+  {
+    "id": 167,
+    "name": "Essencia Jiu Jitsu",
+    "town": "Trumbull",
+    "state": "CT",
+    "ig": "essenciajj"
+  },
+  {
+    "id": 168,
+    "name": "Gonzalez Grappling",
+    "town": "Vernon",
+    "state": "CT",
+    "ig": "gonzalezgrapplingllc"
+  },
+  {
+    "id": 169,
+    "name": "Jitsu Academy CT (Nova Uni\u00e3o CT)",
+    "town": "Wallingford",
+    "state": "CT",
+    "ig": "jitsuacademyct"
+  },
+  {
+    "id": 170,
+    "name": "Performance Combat MMA",
+    "town": "Wallingford",
+    "state": "CT",
+    "ig": "performance_combat_mike"
+  },
+  {
+    "id": 171,
+    "name": "IMB of CT Boxing/MMA",
+    "town": "Waterbury",
+    "state": "CT",
+    "ig": "imbct"
+  },
+  {
+    "id": 172,
+    "name": "PSDTC Warriors",
+    "town": "Waterbury",
+    "state": "CT",
+    "ig": "psdtc"
+  },
+  {
+    "id": 173,
+    "name": "Crossroads Brazilian Jiu Jitsu",
+    "town": "Waterford",
+    "state": "CT",
+    "ig": "crossroadsbjj"
+  },
+  {
+    "id": 174,
+    "name": "The Dojo",
+    "town": "Wesport",
+    "state": "CT",
+    "ig": "thedojoct"
+  },
+  {
+    "id": 175,
+    "name": "Underdog Mixed Martial Arts",
+    "town": "West Hartford",
+    "state": "CT",
+    "ig": "underdogmmact"
+  },
+  {
+    "id": 176,
+    "name": "Plus One Defense Systems",
+    "town": "West Hartford",
+    "state": "CT",
+    "ig": "plusonedefensesystems"
+  },
+  {
+    "id": 177,
+    "name": "Frog Bridge MMA",
+    "town": "Windham",
+    "state": "CT",
+    "ig": "frogbridgemma"
+  },
+  {
+    "id": 178,
+    "name": "MMA Barn",
+    "town": "Windsor",
+    "state": "CT",
+    "ig": "mmabarn"
+  },
+  {
+    "id": 179,
+    "name": "Soulcraft JiuJitsu",
+    "town": "Woodbury",
+    "state": "CT",
+    "ig": "scissorhandsbjj"
+  },
+  {
+    "id": 180,
+    "name": "NESF MMA",
+    "town": "Amherst",
+    "state": "MA",
+    "ig": "nesfmma"
+  },
+  {
+    "id": 181,
+    "name": "Mass BJJ Arlington",
+    "town": "Arlington",
+    "state": "MA",
+    "ig": "massbjj"
+  },
+  {
+    "id": 182,
+    "name": "SoulFight Jiu Jitsu",
+    "town": "Ashland",
+    "state": "MA",
+    "ig": "soulfightjiujitsu"
+  },
+  {
+    "id": 183,
+    "name": "Selva Brazilian Jiu Jitsu",
+    "town": "Ashland",
+    "state": "MA",
+    "ig": "selva_bjj"
+  },
+  {
+    "id": 184,
+    "name": "USMMA",
+    "town": "Bellingham",
+    "state": "MA",
+    "ig": "usmma"
+  },
+  {
+    "id": 185,
+    "name": "Snake Pit Boston",
+    "town": "Billerica",
+    "state": "MA",
+    "ig": "snakepitboston"
+  },
+  {
+    "id": 186,
+    "name": "BU Brazilian Jiu-Jitsu Club",
+    "town": "Boston",
+    "state": "MA",
+    "ig": "bostonubjj"
+  },
+  {
+    "id": 187,
+    "name": "Travis Stevens Jiu-Jitsu Academy",
+    "town": "Boston",
+    "state": "MA",
+    "ig": "travisstevensjiujitsu"
+  },
+  {
+    "id": 188,
+    "name": "All 1 MMA",
+    "town": "Boston",
+    "state": "MA",
+    "ig": "all1mma"
+  },
+  {
+    "id": 189,
+    "name": "UFC GYM Boston",
+    "town": "Boston",
+    "state": "MA",
+    "ig": "ufcgymboston"
+  },
+  {
+    "id": 190,
+    "name": "Citadel Martial Arts & Fitness",
+    "town": "Boston",
+    "state": "MA",
+    "ig": "citadelmartialarts"
+  },
+  {
+    "id": 191,
+    "name": "Level Ground Mixed Martial Arts",
+    "town": "Boston (Dorchester)",
+    "state": "MA",
+    "ig": "levelgroundmma"
+  },
+  {
+    "id": 192,
+    "name": "JP Martial Arts Academy",
+    "town": "Boston (Jamaica Plain)",
+    "state": "MA",
+    "ig": "jpmartialartsacademy"
+  },
+  {
+    "id": 193,
+    "name": "Brazilian Jiu-Jitsu at BSU",
+    "town": "Bridgewater",
+    "state": "MA",
+    "ig": "bjj_bsu"
+  },
+  {
+    "id": 194,
+    "name": "Lauzon MMA",
+    "town": "Canton",
+    "state": "MA",
+    "ig": "lauzonmmacanton"
+  },
+  {
+    "id": 195,
+    "name": "Gracie Brazilian Jiu Jitsu and Fitness",
+    "town": "Charlton",
+    "state": "MA",
+    "ig": "hondojjusa"
+  },
+  {
+    "id": 196,
+    "name": "Gentle Art Dojo (Chelmsford)",
+    "town": "Chelmsford",
+    "state": "MA",
+    "ig": "gadchelmsford"
+  },
+  {
+    "id": 197,
+    "name": "Brazilian Top Team North Shore",
+    "town": "Danvers",
+    "state": "MA",
+    "ig": "btt_north_shore"
+  },
+  {
+    "id": 198,
+    "name": "Gracie Jiu Jitsu Dedham",
+    "town": "Dedham",
+    "state": "MA",
+    "ig": "graciejiujitsudedham"
+  },
+  {
+    "id": 199,
+    "name": "Mass BJJ The Valley",
+    "town": "Devens",
+    "state": "MA",
+    "ig": "massbjjthevalley"
+  },
+  {
+    "id": 200,
+    "name": "New City Jiujitsu",
+    "town": "Easthampton",
+    "state": "MA",
+    "ig": "newcityjiujitsu"
+  },
+  {
+    "id": 201,
+    "name": "Danny Savery BJJ",
+    "town": "Fairhaven",
+    "state": "MA",
+    "ig": "dannysaverybjjfairhaven"
+  },
+  {
+    "id": 202,
+    "name": "Daniel Gracie Academy Falmouth",
+    "town": "Falmouth",
+    "state": "MA",
+    "ig": "danielgraciefalmouth"
+  },
+  {
+    "id": 203,
+    "name": "Newaza BJJ Club",
+    "town": "Fitchburg",
+    "state": "MA",
+    "ig": "newazajiujitsu"
+  },
+  {
+    "id": 204,
+    "name": "Alliance Jiu Jitsu Framingham",
+    "town": "Framingham",
+    "state": "MA",
+    "ig": "alliancejiujitsuframingham"
+  },
+  {
+    "id": 205,
+    "name": "Dragon Lair MMA",
+    "town": "Framingham",
+    "state": "MA",
+    "ig": "dragon_lair_mma"
+  },
+  {
+    "id": 206,
+    "name": "Sakura Jiu Jitsu",
+    "town": "Gloucester",
+    "state": "MA",
+    "ig": "sakura_bjj_ma"
+  },
+  {
+    "id": 207,
+    "name": "DF Fitness MA Center",
+    "town": "Gloucester",
+    "state": "MA",
+    "ig": "dffitnessmacenter"
+  },
+  {
+    "id": 208,
+    "name": "Torrent Brazilian Jiu-Jitsu",
+    "town": "Hanover",
+    "state": "MA",
+    "ig": "torrent_bjj"
+  },
+  {
+    "id": 209,
+    "name": "Daniel Gracie Academy Hanover",
+    "town": "Hanover",
+    "state": "MA",
+    "ig": "danielgraciehanover"
+  },
+  {
+    "id": 210,
+    "name": "Binda Jiu Jitsu",
+    "town": "Haverhill",
+    "state": "MA",
+    "ig": "bindajiujitsu"
+  },
+  {
+    "id": 211,
+    "name": "Squared BJJ",
+    "town": "Holden",
+    "state": "MA",
+    "ig": "squaredbjjholden"
+  },
+  {
+    "id": 212,
+    "name": "Hudson Combat Academy",
+    "town": "Hudson",
+    "state": "MA",
+    "ig": "hudsoncombatacademy"
+  },
+  {
+    "id": 213,
+    "name": "Brazilian Top Team Cape Cod",
+    "town": "Hyannis",
+    "state": "MA",
+    "ig": "bttcapecod"
+  },
+  {
+    "id": 214,
+    "name": "Daniel Gracie Academy Hyannis",
+    "town": "Hyannis",
+    "state": "MA",
+    "ig": "danielgraciehyannis"
+  },
+  {
+    "id": 215,
+    "name": "Sardinha BJJ",
+    "town": "Hyannis",
+    "state": "MA",
+    "ig": "sardinhabjjcapecod"
+  },
+  {
+    "id": 216,
+    "name": "Hyannis Mixed Martial Arts",
+    "town": "Hyannis",
+    "state": "MA",
+    "ig": "hyannis_mixed_martial_arts"
+  },
+  {
+    "id": 217,
+    "name": "Lakeville MMA Club",
+    "town": "Lakeville",
+    "state": "MA",
+    "ig": "lakevillemma"
+  },
+  {
+    "id": 218,
+    "name": "Squared BJJ",
+    "town": "Leominster",
+    "state": "MA",
+    "ig": "squaredbjjleominster"
+  },
+  {
+    "id": 219,
+    "name": "Cesario Team",
+    "town": "Leominster",
+    "state": "MA",
+    "ig": "bjjleominster"
+  },
+  {
+    "id": 220,
+    "name": "Gentle Art Dojo (Littleton)",
+    "town": "Littleton",
+    "state": "MA",
+    "ig": "gadlittleton"
+  },
+  {
+    "id": 221,
+    "name": "River Hawk Brazilian Jiu Jitsu (UMass Lowell)",
+    "town": "Lowell",
+    "state": "MA",
+    "ig": "umlbjj"
+  },
+  {
+    "id": 222,
+    "name": "Team Link Ludlow",
+    "town": "Ludlow",
+    "state": "MA",
+    "ig": "teamlinkludlow"
+  },
+  {
+    "id": 223,
+    "name": "Seaside Jiu-Jitsu (BTT Lynn)",
+    "town": "Lynn",
+    "state": "MA",
+    "ig": "seasidejiujitsu"
+  },
+  {
+    "id": 224,
+    "name": "Brazilian Top Team Lynn",
+    "town": "Lynn",
+    "state": "MA",
+    "ig": "btt.lynn"
+  },
+  {
+    "id": 225,
+    "name": "Checkmate Martial Arts",
+    "town": "Manchester",
+    "state": "MA",
+    "ig": "checkmate_martial_arts"
+  },
+  {
+    "id": 226,
+    "name": "Soneca BJJ Marlborough",
+    "town": "Marlborough",
+    "state": "MA",
+    "ig": "sonecabjj_marlboro"
+  },
+  {
+    "id": 227,
+    "name": "Fight For Life BJJ",
+    "town": "Marlborough",
+    "state": "MA",
+    "ig": "fight4lifebjj"
+  },
+  {
+    "id": 228,
+    "name": "Sigma Martial Arts and Fitness",
+    "town": "Medford",
+    "state": "MA",
+    "ig": "sigmamartialartsfitness"
+  },
+  {
+    "id": 229,
+    "name": "Mau Mau BJJ",
+    "town": "Medford",
+    "state": "MA",
+    "ig": "maumaubjjacademy"
+  },
+  {
+    "id": 230,
+    "name": "Nirvana Brazilian Jiu Jitsu",
+    "town": "Melrose",
+    "state": "MA",
+    "ig": "nirvanabrazilianjiujitsu"
+  },
+  {
+    "id": 231,
+    "name": "Blue Collar Jiu Jitsu",
+    "town": "Mendon",
+    "state": "MA",
+    "ig": "bluecollar_bjj"
+  },
+  {
+    "id": 232,
+    "name": "BJJ Boston 24/7/365",
+    "town": "Methuen",
+    "state": "MA",
+    "ig": "bjj__boston"
+  },
+  {
+    "id": 233,
+    "name": "Terrinha BJJ",
+    "town": "Milford",
+    "state": "MA",
+    "ig": "tdtbjj"
+  },
+  {
+    "id": 234,
+    "name": "5 Stones Jiu Jitsu",
+    "town": "Millbury",
+    "state": "MA",
+    "ig": "5stonesjiujitsu"
+  },
+  {
+    "id": 235,
+    "name": "Bay State Brazilian Jiu-Jitsu",
+    "town": "Natick",
+    "state": "MA",
+    "ig": "baystatebjj"
+  },
+  {
+    "id": 236,
+    "name": "Alpha Nerds Training Facility",
+    "town": "Natick",
+    "state": "MA",
+    "ig": "alphanerdsfacility"
+  },
+  {
+    "id": 237,
+    "name": "South Coast Self Defense",
+    "town": "New Bedford",
+    "state": "MA",
+    "ig": "southcoastselfdefensema"
+  },
+  {
+    "id": 238,
+    "name": "Fight Sports Boston",
+    "town": "New Bedford",
+    "state": "MA",
+    "ig": "fightsportsbostonbjj"
+  },
+  {
+    "id": 239,
+    "name": "Day 1 BJJ",
+    "town": "Newton",
+    "state": "MA",
+    "ig": "day1_jiujitsu_newton"
+  },
+  {
+    "id": 240,
+    "name": "Carlson Gracie Jiu-Jitsu Team (North Andover BJJ)",
+    "town": "North Andover",
+    "state": "MA",
+    "ig": "northandoverbjj"
+  },
+  {
+    "id": 241,
+    "name": "Brabos Brazilian Jiu Jitsu",
+    "town": "North Andover",
+    "state": "MA",
+    "ig": "brabosbrazillianjj"
+  },
+  {
+    "id": 242,
+    "name": "Monkey King Martial Arts",
+    "town": "North Attleboro",
+    "state": "MA",
+    "ig": "monkeykingmmx"
+  },
+  {
+    "id": 243,
+    "name": "ICON Jiu Jitsu USA",
+    "town": "North Billerica",
+    "state": "MA",
+    "ig": "iconbjjusa"
+  },
+  {
+    "id": 244,
+    "name": "SBG East Coast",
+    "town": "North Dartmouth",
+    "state": "MA",
+    "ig": "sbgeastcoast"
+  },
+  {
+    "id": 245,
+    "name": "Imperium Martial Arts",
+    "town": "North Reading",
+    "state": "MA",
+    "ig": "imperium_martial_arts"
+  },
+  {
+    "id": 246,
+    "name": "Team Link",
+    "town": "Northampton",
+    "state": "MA",
+    "ig": "teamlinknoho"
+  },
+  {
+    "id": 247,
+    "name": "Kaizen Norwell",
+    "town": "Norwell",
+    "state": "MA",
+    "ig": "kaizennorwell"
+  },
+  {
+    "id": 248,
+    "name": "Luiz Paulo Brazilian Jiu Jitsu",
+    "town": "Norwood",
+    "state": "MA",
+    "ig": "luizpaulojiujitsu"
+  },
+  {
+    "id": 249,
+    "name": "Connor\u2019s Martial Arts Academy",
+    "town": "Norwood",
+    "state": "MA",
+    "ig": "connorsmartialartsacademy"
+  },
+  {
+    "id": 250,
+    "name": "Daniel Gracie Academy Orleans",
+    "town": "Orleans",
+    "state": "MA",
+    "ig": "danielgracieorleans"
+  },
+  {
+    "id": 251,
+    "name": "BTT New England",
+    "town": "Peabody",
+    "state": "MA",
+    "ig": "bttnewengland"
+  },
+  {
+    "id": 252,
+    "name": "BST Jiu Jitsu",
+    "town": "Peabody",
+    "state": "MA",
+    "ig": "bst_jiu_jitsu"
+  },
+  {
+    "id": 253,
+    "name": "Dosier Jiu Jitsu",
+    "town": "Pittsfield",
+    "state": "MA",
+    "ig": "dosierjiujitsu"
+  },
+  {
+    "id": 254,
+    "name": "Darkside Jiu-Jitsu",
+    "town": "Plainville",
+    "state": "MA",
+    "ig": "darksidejiujitsu"
+  },
+  {
+    "id": 255,
+    "name": "Daniel Gracie Academy Plymouth",
+    "town": "Plymouth",
+    "state": "MA",
+    "ig": "danielgracieplymouth"
+  },
+  {
+    "id": 256,
+    "name": "Trifecta MMA",
+    "town": "Quincy",
+    "state": "MA",
+    "ig": "trifectamma"
+  },
+  {
+    "id": 257,
+    "name": "Gracie Jiu Jitsu Quincy",
+    "town": "Quincy",
+    "state": "MA",
+    "ig": "graciejiujitsuquincy"
+  },
+  {
+    "id": 258,
+    "name": "Energy Fitness",
+    "town": "Randolph",
+    "state": "MA",
+    "ig": "energyfitnessma"
+  },
+  {
+    "id": 259,
+    "name": "Lauzon MMA",
+    "town": "Raynham",
+    "state": "MA",
+    "ig": "lauzonmma"
+  },
+  {
+    "id": 260,
+    "name": "Brazilian Top Team Revere",
+    "town": "Revere",
+    "state": "MA",
+    "ig": "bttrevere"
+  },
+  {
+    "id": 261,
+    "name": "South Shore Sportfighting",
+    "town": "Rockland",
+    "state": "MA",
+    "ig": "sssportfighting"
+  },
+  {
+    "id": 262,
+    "name": "North Shore BJJ Academy",
+    "town": "Salem",
+    "state": "MA",
+    "ig": "northshorebjj"
+  },
+  {
+    "id": 263,
+    "name": "Forged Krav Maga / Clinch Dirty Boxing",
+    "town": "Salem",
+    "state": "MA",
+    "ig": "forged_bjj_kravmaga"
+  },
+  {
+    "id": 264,
+    "name": "Forge Jiu-Jitsu",
+    "town": "Sandwich",
+    "state": "MA",
+    "ig": "_forge_jiujitsu_"
+  },
+  {
+    "id": 265,
+    "name": "Gracie Barra South Shore",
+    "town": "Scituate",
+    "state": "MA",
+    "ig": "gbsouthshore"
+  },
+  {
+    "id": 266,
+    "name": "Danny Savery BJJ",
+    "town": "Somerset",
+    "state": "MA",
+    "ig": "dannysaverybjjsomerset"
+  },
+  {
+    "id": 267,
+    "name": "Brazilian Martial Arts Center (BMAC)",
+    "town": "Somerville",
+    "state": "MA",
+    "ig": "bmacboston"
+  },
+  {
+    "id": 268,
+    "name": "Broadway Jiu-Jitsu",
+    "town": "South Boston",
+    "state": "MA",
+    "ig": "broadwayjiujitsu"
+  },
+  {
+    "id": 269,
+    "name": "Mom's Basement MMA",
+    "town": "Southbridge",
+    "state": "MA",
+    "ig": "moms_basement_mma"
+  },
+  {
+    "id": 270,
+    "name": "Combate Real School of Jiu Jitsu",
+    "town": "Southbridge",
+    "state": "MA",
+    "ig": "crjjschool"
+  },
+  {
+    "id": 271,
+    "name": "Springfield Submission Society",
+    "town": "Springfield",
+    "state": "MA",
+    "ig": "springfieldmabjjsociety"
+  },
+  {
+    "id": 272,
+    "name": "Boston Brazilian Jiu-Jitsu Stoughton",
+    "town": "Stoughton",
+    "state": "MA",
+    "ig": "bostonbjjstoughton"
+  },
+  {
+    "id": 273,
+    "name": "Maxx Training Center",
+    "town": "Stoughton",
+    "state": "MA",
+    "ig": "maxx_center"
+  },
+  {
+    "id": 274,
+    "name": "New England Warrior Arts",
+    "town": "Swampscott, MA",
+    "state": "MA",
+    "ig": "newenglandwarriorarts"
+  },
+  {
+    "id": 275,
+    "name": "Daniel Gracie Academy",
+    "town": "Tewksbury",
+    "state": "MA",
+    "ig": "danielgracienorthshore"
+  },
+  {
+    "id": 276,
+    "name": "2002 Jiu Jitsu",
+    "town": "Tewksbury",
+    "state": "MA",
+    "ig": "2002jiujitsu"
+  },
+  {
+    "id": 277,
+    "name": "Team Flo Brazilian Jiu Jitsu",
+    "town": "Tyngsboro",
+    "state": "MA",
+    "ig": "team_flo_bjj"
+  },
+  {
+    "id": 278,
+    "name": "Blitz Fitness",
+    "town": "Vineyard Haven",
+    "state": "MA",
+    "ig": "blitzfitnessofmv"
+  },
+  {
+    "id": 279,
+    "name": "Battleground JiuJitsu",
+    "town": "W. Springfield",
+    "state": "MA",
+    "ig": "battlegroundjiujitsu"
+  },
+  {
+    "id": 280,
+    "name": "Gabriel Gladiator Training Center",
+    "town": "W. Springfield",
+    "state": "MA",
+    "ig": "gabrielgladiator.tc"
+  },
+  {
+    "id": 281,
+    "name": "Defensive Edge Martial Arts",
+    "town": "Wakefield",
+    "state": "MA",
+    "ig": "defensiveedge"
+  },
+  {
+    "id": 282,
+    "name": "Atlas Jiu Jitsu Waltham",
+    "town": "Waltham",
+    "state": "MA",
+    "ig": "atlasjiujitsuwaltham"
+  },
+  {
+    "id": 283,
+    "name": "WatchCity MMA",
+    "town": "Waltham",
+    "state": "MA",
+    "ig": "watchcitymma"
+  },
+  {
+    "id": 284,
+    "name": "Snake Pit New England",
+    "town": "Waltham",
+    "state": "MA",
+    "ig": "snakepitnewengland"
+  },
+  {
+    "id": 285,
+    "name": "Watch City MMA",
+    "town": "Waltham",
+    "state": "MA",
+    "ig": "watch_city_mma"
+  },
+  {
+    "id": 286,
+    "name": "Theodorou Academy of Jiu Jitsu",
+    "town": "Watertown",
+    "state": "MA",
+    "ig": "theodorouacademyjiujitsu"
+  },
+  {
+    "id": 287,
+    "name": "Kimura BJJ USA Official",
+    "town": "Watertown",
+    "state": "MA",
+    "ig": "kimurabjjusaofficial"
+  },
+  {
+    "id": 288,
+    "name": "Team Link BJJ and MMA",
+    "town": "Webster",
+    "state": "MA",
+    "ig": "team_link_webster_bjj_and_mma"
+  },
+  {
+    "id": 289,
+    "name": "Integrated Martial Arts Worcester",
+    "town": "West Boylston",
+    "state": "MA",
+    "ig": "ima.worcester"
+  },
+  {
+    "id": 290,
+    "name": "Luiz Paulo Brazilian Jiu Jitsu (West Bridgewater)",
+    "town": "West Bridgewater",
+    "state": "MA",
+    "ig": "luizpaulojiujitsuwb"
+  },
+  {
+    "id": 291,
+    "name": "Viver MMA",
+    "town": "West Roxbury (Boston)",
+    "state": "MA",
+    "ig": "viver.mma"
+  },
+  {
+    "id": 292,
+    "name": "Integrated Martial Arts",
+    "town": "Westborough",
+    "state": "MA",
+    "ig": "integrated_martialarts"
+  },
+  {
+    "id": 293,
+    "name": "Jamaica\u2019s Ground BJJ",
+    "town": "Westborough",
+    "state": "MA",
+    "ig": "jamaicas_groundbjj"
+  },
+  {
+    "id": 294,
+    "name": "Team Link Westfield",
+    "town": "Westfield",
+    "state": "MA",
+    "ig": "teamlinkwestfield"
+  },
+  {
+    "id": 295,
+    "name": "Brazilian Top Team Westford",
+    "town": "Westford",
+    "state": "MA",
+    "ig": "bttwestford"
+  },
+  {
+    "id": 296,
+    "name": "Mantis Boxing (Randy Brown)",
+    "town": "Westminster",
+    "state": "MA",
+    "ig": "randybrownmantisboxer"
+  },
+  {
+    "id": 297,
+    "name": "Dedeco Brazilian Jiu-Jitsu",
+    "town": "Weymouth",
+    "state": "MA",
+    "ig": "dedecobjj"
+  },
+  {
+    "id": 298,
+    "name": "617 BJJ Woburn",
+    "town": "Woburn",
+    "state": "MA",
+    "ig": "gc.jiujitsuacademy"
+  },
+  {
+    "id": 299,
+    "name": "Team Forsa / BJJ Boston",
+    "town": "Woburn",
+    "state": "MA",
+    "ig": "teamforsabjj"
+  },
+  {
+    "id": 300,
+    "name": "FUJI Martial Arts Woburn",
+    "town": "Woburn",
+    "state": "MA",
+    "ig": "fujima_woburn"
+  },
+  {
+    "id": 301,
+    "name": "Worcester Martial Arts Academy",
+    "town": "Worcester",
+    "state": "MA",
+    "ig": "worcester_martial_arts_academy"
+  },
+  {
+    "id": 302,
+    "name": "Soneca BJJ Worcester",
+    "town": "Worcester",
+    "state": "MA",
+    "ig": "sonecabjj_worcester"
+  },
+  {
+    "id": 303,
+    "name": "Young's MMA",
+    "town": "Bangor",
+    "state": "ME",
+    "ig": "youngsmma"
+  },
+  {
+    "id": 304,
+    "name": "Bar Harbor BJJ",
+    "town": "Bar Harbor",
+    "state": "ME",
+    "ig": "bar_harbor_bjj"
+  },
+  {
+    "id": 305,
+    "name": "Team Moreira",
+    "town": "Biddeford",
+    "state": "ME",
+    "ig": "team_moreira_biddeford"
+  },
+  {
+    "id": 306,
+    "name": "Titan Athletics",
+    "town": "Brewer",
+    "state": "ME",
+    "ig": "titan.athletics"
+  },
+  {
+    "id": 307,
+    "name": "Brunswick Academy of Martial Arts",
+    "town": "Brunswick",
+    "state": "ME",
+    "ig": "brunswickacademy"
+  },
+  {
+    "id": 308,
+    "name": "First Class Fitness & MMA",
+    "town": "Brunswick",
+    "state": "ME",
+    "ig": "fcfmma"
+  },
+  {
+    "id": 309,
+    "name": "Acadia Brazilian Jiu-Jitsu",
+    "town": "Ellsworth",
+    "state": "ME",
+    "ig": "acadia_brazilian_jiu_jitsu"
+  },
+  {
+    "id": 310,
+    "name": "Team Lawton Martial Arts",
+    "town": "Farmingdale",
+    "state": "ME",
+    "ig": "teamlawtonmartialarts"
+  },
+  {
+    "id": 311,
+    "name": "Foundry BJJ",
+    "town": "Farmington",
+    "state": "ME",
+    "ig": "foundryfarmington"
+  },
+  {
+    "id": 312,
+    "name": "Empire Brazilian Jiu Jitsu Maine",
+    "town": "Freeport",
+    "state": "ME",
+    "ig": "empirebjjmaine"
+  },
+  {
+    "id": 313,
+    "name": "Carll Clan BJJ",
+    "town": "Gray",
+    "state": "ME",
+    "ig": "carllclanbjj"
+  },
+  {
+    "id": 314,
+    "name": "Central Maine BJJ (CMBJJ)",
+    "town": "Lewiston",
+    "state": "ME",
+    "ig": "centralmainebjj"
+  },
+  {
+    "id": 315,
+    "name": "Blue Wave Brazilian Jiu-Jitsu",
+    "town": "Portland",
+    "state": "ME",
+    "ig": "bluewavebjj"
+  },
+  {
+    "id": 316,
+    "name": "Kingsguard Brazilian Jiu Jitsu",
+    "town": "Rangeley",
+    "state": "ME",
+    "ig": "kingsguard_bjj"
+  },
+  {
+    "id": 317,
+    "name": "Evolution Athletix",
+    "town": "Saco",
+    "state": "ME",
+    "ig": "evoathletix"
+  },
+  {
+    "id": 318,
+    "name": "Clandestine Submissions",
+    "town": "Sanford",
+    "state": "ME",
+    "ig": "clandestinesubmissions"
+  },
+  {
+    "id": 319,
+    "name": "Southern Maine BJJ",
+    "town": "South Portland",
+    "state": "ME",
+    "ig": "southernmaine_bjj"
+  },
+  {
+    "id": 320,
+    "name": "Choi Institute of Martial Arts & Science",
+    "town": "South Portland",
+    "state": "ME",
+    "ig": "choi_institute_mma"
+  },
+  {
+    "id": 321,
+    "name": "De La Riva Alexey BJJ",
+    "town": "Westbrook",
+    "state": "ME",
+    "ig": "delariva_alexeybjj"
+  },
+  {
+    "id": 322,
+    "name": "Alexey Pickerell BJJ (De La Riva)",
+    "town": "Westbrook",
+    "state": "ME",
+    "ig": "alexeypickerellbjj"
+  },
+  {
+    "id": 323,
+    "name": "Conquer Self Defense",
+    "town": "Brentwood",
+    "state": "NH",
+    "ig": "conquerselfdefense"
+  },
+  {
+    "id": 324,
+    "name": "Averill's Martial Arts Academy",
+    "town": "Concord",
+    "state": "NH",
+    "ig": "averills_martial_arts_academy"
+  },
+  {
+    "id": 325,
+    "name": "Nomad Grappling Club",
+    "town": "Conway",
+    "state": "NH",
+    "ig": "nomad_grappling_club"
+  },
+  {
+    "id": 326,
+    "name": "Professional Martial Arts Academy (PMA Derry)",
+    "town": "Derry",
+    "state": "NH",
+    "ig": "pmaderry"
+  },
+  {
+    "id": 327,
+    "name": "Start Brazilian Jiu Jitsu NH",
+    "town": "Derry",
+    "state": "NH",
+    "ig": "start_bjj_nh"
+  },
+  {
+    "id": 328,
+    "name": "Team Link NH",
+    "town": "Hooksett",
+    "state": "NH",
+    "ig": "tjsosd"
+  },
+  {
+    "id": 329,
+    "name": "UNITA Jiu Jitsu",
+    "town": "Lebanon",
+    "state": "NH",
+    "ig": "unitabjj"
+  },
+  {
+    "id": 330,
+    "name": "Resiliency Martial Arts Academy",
+    "town": "Littleton",
+    "state": "NH",
+    "ig": "adam_laclair"
+  },
+  {
+    "id": 331,
+    "name": "Off Your Back Jiu Jitsu Academy",
+    "town": "Londonderry",
+    "state": "NH",
+    "ig": "offyourbackbjj.academy"
+  },
+  {
+    "id": 332,
+    "name": "Gracie Jiu-Jitsu",
+    "town": "Manchester",
+    "state": "NH",
+    "ig": "graciejiujitsumanchester"
+  },
+  {
+    "id": 333,
+    "name": "Balance Point BJJ & Kickboxing Academy",
+    "town": "Milford",
+    "state": "NH",
+    "ig": "balancepoint.bjj"
+  },
+  {
+    "id": 334,
+    "name": "Hook Fight Co",
+    "town": "Moultonborough",
+    "state": "NH",
+    "ig": "hookfightco"
+  },
+  {
+    "id": 335,
+    "name": "Bazzani Brazilian Jiu-Jitsu",
+    "town": "Nashua",
+    "state": "NH",
+    "ig": "bazzanimartialarts"
+  },
+  {
+    "id": 336,
+    "name": "Karasu Tengu Academy",
+    "town": "Nashua",
+    "state": "NH",
+    "ig": "ktacademy_nashua"
+  },
+  {
+    "id": 337,
+    "name": "Triumph BJJ",
+    "town": "Nashua",
+    "state": "NH",
+    "ig": "teamtriumphbjj"
+  },
+  {
+    "id": 338,
+    "name": "Port City BJJ",
+    "town": "Newington",
+    "state": "NH",
+    "ig": "port_city_bjj"
+  },
+  {
+    "id": 339,
+    "name": "Heavy Mettle Jiu Jitsu",
+    "town": "North Hampton",
+    "state": "NH",
+    "ig": "heavymettlejj"
+  },
+  {
+    "id": 340,
+    "name": "Spero's Brazilian Jiu-Jitsu (BTT Plaistow)",
+    "town": "Plaistow",
+    "state": "NH",
+    "ig": "btt_plaistow"
+  },
+  {
+    "id": 341,
+    "name": "Forged Self Defense",
+    "town": "Rochester",
+    "state": "NH",
+    "ig": "forgedselfdefense"
+  },
+  {
+    "id": 342,
+    "name": "New England Top Team",
+    "town": "Salem",
+    "state": "NH",
+    "ig": "newenglandtopteam"
+  },
+  {
+    "id": 343,
+    "name": "Flow With The Go Jiu-Jitsu",
+    "town": "Seabrook",
+    "state": "NH",
+    "ig": "flowwiththegojiujitsu"
+  },
+  {
+    "id": 344,
+    "name": "Nostos MMA",
+    "town": "Somersworth",
+    "state": "NH",
+    "ig": "nostosmma"
+  },
+  {
+    "id": 345,
+    "name": "Danny Savery BJJ",
+    "town": "Bristol",
+    "state": "RI",
+    "ig": "dannysaverybjjbristol"
+  },
+  {
+    "id": 346,
+    "name": "Balleto Advanced Training Center",
+    "town": "Cranston",
+    "state": "RI",
+    "ig": "balletoadvancedtraining"
+  },
+  {
+    "id": 347,
+    "name": "EP Martial Arts",
+    "town": "East Providence",
+    "state": "RI",
+    "ig": "epmartialarts"
+  },
+  {
+    "id": 348,
+    "name": "Elevate Dojo",
+    "town": "Exeter",
+    "state": "RI",
+    "ig": "elevatedojo"
+  },
+  {
+    "id": 349,
+    "name": "Ocean State Brazilian Jiu Jitsu",
+    "town": "Jamestown",
+    "state": "RI",
+    "ig": "oceanstatebjj"
+  },
+  {
+    "id": 350,
+    "name": "Rising Sun Jiu-Jitsu",
+    "town": "Johnston",
+    "state": "RI",
+    "ig": "risingsunjiujitsu"
+  },
+  {
+    "id": 351,
+    "name": "Fierce Academy RI MMA BJJ",
+    "town": "Lincoln",
+    "state": "RI",
+    "ig": "fierceacademyri"
+  },
+  {
+    "id": 352,
+    "name": "Newport Martial Arts",
+    "town": "Newport",
+    "state": "RI",
+    "ig": "newportmartialartsri"
+  },
+  {
+    "id": 353,
+    "name": "Mission First BJJ",
+    "town": "Newport",
+    "state": "RI",
+    "ig": "missionfirstbjj"
+  },
+  {
+    "id": 354,
+    "name": "Folgo Jiu Jitsu",
+    "town": "North Providence",
+    "state": "RI",
+    "ig": "folgojj"
+  },
+  {
+    "id": 355,
+    "name": "Tri-Force MMA/BJJ",
+    "town": "Pawtucket",
+    "state": "RI",
+    "ig": "triforcemmabjj"
+  },
+  {
+    "id": 356,
+    "name": "Team Santos Fighting Academy",
+    "town": "Pawtucket",
+    "state": "RI",
+    "ig": "teamsantos_bjj_mma"
+  },
+  {
+    "id": 357,
+    "name": "Tri Force Training Center",
+    "town": "Pawtucket",
+    "state": "RI",
+    "ig": "triforcetrainingcenter"
+  },
+  {
+    "id": 358,
+    "name": "Burke's Martial Arts",
+    "town": "Providence",
+    "state": "RI",
+    "ig": "burkesmartialarts"
+  },
+  {
+    "id": 359,
+    "name": "Tim Burrill Brazilian Jiu-Jitsu",
+    "town": "Providence",
+    "state": "RI",
+    "ig": "timburrillbrazilianjiujitsu"
+  },
+  {
+    "id": 360,
+    "name": "Brown University Grappling & MMA (GAMMA)",
+    "town": "Providence",
+    "state": "RI",
+    "ig": "brownugamma"
+  },
+  {
+    "id": 361,
+    "name": "Pride Martial Arts",
+    "town": "South Kingstown",
+    "state": "RI",
+    "ig": "pridemartialartsri"
+  },
+  {
+    "id": 362,
+    "name": "Cortes BJJ & Fitness",
+    "town": "Warwick",
+    "state": "RI",
+    "ig": "cortesbjj_ri"
+  },
+  {
+    "id": 363,
+    "name": "Rilion Gracie Rhode Island",
+    "town": "West Warwick",
+    "state": "RI",
+    "ig": "riliongracie.ri"
+  },
+  {
+    "id": 364,
+    "name": "Fight Factory RI",
+    "town": "West Warwick",
+    "state": "RI",
+    "ig": "fightfactoryri"
+  },
+  {
+    "id": 365,
+    "name": "Brausa Carlson Gracie BJJ",
+    "town": "Westerly",
+    "state": "RI",
+    "ig": "projeto_brausa"
+  },
+  {
+    "id": 366,
+    "name": "Toad BJJ",
+    "town": "Bennington",
+    "state": "VT",
+    "ig": "toadbjj"
+  },
+  {
+    "id": 367,
+    "name": "Gracie Jiu-Jitsu Brattleboro",
+    "town": "Brattleboro",
+    "state": "VT",
+    "ig": "brattleborojiujitsu"
+  },
+  {
+    "id": 368,
+    "name": "Grind BJJ",
+    "town": "Burlington",
+    "state": "VT",
+    "ig": "grind.bjj"
+  },
+  {
+    "id": 369,
+    "name": "Green Mountain Martial Arts Collaborative",
+    "town": "Burlington",
+    "state": "VT",
+    "ig": "greenmountainmartialarts"
+  },
+  {
+    "id": 370,
+    "name": "Warriors Path MMA",
+    "town": "Killington",
+    "state": "VT",
+    "ig": "warriorspathmma"
+  },
+  {
+    "id": 371,
+    "name": "Team Juc\u00e3o Vermont BJJ",
+    "town": "Londonderry",
+    "state": "VT",
+    "ig": "teamjucaovermontbjj"
+  },
+  {
+    "id": 372,
+    "name": "Middlebury American Jiu Jitsu Academy",
+    "town": "Middlebury",
+    "state": "VT",
+    "ig": "middlebury_jiujitsu"
+  },
+  {
+    "id": 373,
+    "name": "Upper Valley BJJ",
+    "town": "White River Junction",
+    "state": "VT",
+    "ig": "uppervalleybjj"
+  },
+  {
+    "id": 374,
+    "name": "Rodrigo Medeiros BJJ",
+    "town": "Williston",
+    "state": "VT",
+    "ig": "bjjrevolutionteamofficial"
+  },
+  {
+    "id": 375,
+    "name": "Combat Fitness MMA",
+    "town": "Winooski",
+    "state": "VT",
+    "ig": "combatfitnessmmavt"
+  }
+];
 
     const RADIUS_MILES = 20;
     const RADIUS_KM = RADIUS_MILES * 1.60934;
 
-    // --- Map setup ---
+    // Enrich with geocoding metadata
+    gyms.forEach(g => {
+      g.lat = null;
+      g.lng = null;
+      g.geocoded = false;
+    });
+
     const map = L.map("map", {
       zoomControl: false,
-    }).setView([42.3601, -71.0589], 8); // default: Boston
+    }).setView([42.3601, -71.0589], 7);
 
     L.control.zoom({ position: "bottomright" }).addTo(map);
 
@@ -472,7 +3073,7 @@
 
     function haversineDistance(lat1, lon1, lat2, lon2) {
       const toRad = (v) => (v * Math.PI) / 180;
-      const R = 6371; // km
+      const R = 6371;
       const dLat = toRad(lat2 - lat1);
       const dLon = toRad(lon2 - lon1);
       const a =
@@ -482,7 +3083,28 @@
           Math.sin(dLon / 2) *
           Math.sin(dLon / 2);
       const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-      return R * c; // km
+      return R * c;
+    }
+
+    async function geocodeGym(gym) {
+      if (gym.geocoded) return gym;
+      const query = `${gym.name}, ${gym.town}, ${gym.state}`;
+      const url = `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(query)}`;
+
+      try {
+        const res = await fetch(url, { headers: { "Accept-Language": "en" } });
+        if (!res.ok) throw new Error("geocode error");
+        const data = await res.json();
+        if (!data.length) throw new Error("no results");
+        const best = data[0];
+        gym.lat = parseFloat(best.lat);
+        gym.lng = parseFloat(best.lon);
+        gym.geocoded = true;
+      } catch (e) {
+        console.warn("Could not geocode gym", gym.name, e);
+        gym.geocoded = true; // avoid retry loop
+      }
+      return gym;
     }
 
     function clearGymMarkers() {
@@ -490,10 +3112,14 @@
       gymMarkers.length = 0;
     }
 
-    function renderResults(centerLat, centerLng) {
+    async function renderResults(centerLat, centerLng) {
       clearGymMarkers();
 
+      // Ensure all gyms have attempted geocoding
+      await Promise.all(gyms.map(geocodeGym));
+
       const nearby = gyms
+        .filter((g) => g.lat != null && g.lng != null)
         .map((g) => {
           const distanceKm = haversineDistance(centerLat, centerLng, g.lat, g.lng);
           const distanceMiles = distanceKm / 1.60934;
@@ -521,17 +3147,15 @@
       const bounds = [];
 
       nearby.forEach((g) => {
-        // Add marker
         const marker = L.marker([g.lat, g.lng]).addTo(map);
         marker.bindPopup(
-          `<strong>${g.name}</strong><br />${g.city}, ${g.state}<br /><small>${g.distanceMiles.toFixed(
-            1
-          )} mi away</small>`
+          `<strong>${g.name}</strong><br />${g.town}, ${g.state}` +
+          (g.ig ? `<br /><small>@${g.ig}</small>` : "") +
+          `<br /><small>${g.distanceMiles.toFixed(1)} mi away</small>`
         );
         gymMarkers.push(marker);
         bounds.push([g.lat, g.lng]);
 
-        // Card
         const li = document.createElement("li");
         li.className = "card";
         li.dataset.gymId = g.id;
@@ -556,16 +3180,23 @@
         pin.className = "geo-pin";
         pin.textContent = "📍";
         const locText = document.createElement("span");
-        locText.textContent = `${g.city}, ${g.state}`;
+        locText.textContent = `${g.town}, ${g.state}`;
         locationRow.appendChild(pin);
         locationRow.appendChild(locText);
 
-        const meta = document.createElement("div");
-        meta.className = "card-meta";
-        meta.textContent = "Click to focus on map";
-
         li.appendChild(headerLine);
         li.appendChild(locationRow);
+
+        if (g.ig) {
+          const ig = document.createElement("div");
+          ig.className = "card-ig";
+          ig.textContent = `@${g.ig}`;
+          li.appendChild(ig);
+        }
+
+        const meta = document.createElement("div");
+        meta.className = "card-meta";
+        meta.textContent = "Tap to center map";
         li.appendChild(meta);
 
         li.addEventListener("click", () => {
@@ -587,7 +3218,7 @@
       }
     }
 
-    async function geocode(query) {
+    async function geocodeLocation(query) {
       const url = `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(
         query
       )}`;
@@ -596,13 +3227,9 @@
           "Accept-Language": "en",
         },
       });
-      if (!res.ok) {
-        throw new Error("Geocoding failed");
-      }
+      if (!res.ok) throw new Error("Geocoding failed");
       const data = await res.json();
-      if (!data.length) {
-        throw new Error("No results");
-      }
+      if (!data.length) throw new Error("No results");
       const best = data[0];
       return {
         lat: parseFloat(best.lat),
@@ -617,7 +3244,7 @@
       } else {
         userMarker = L.circleMarker([lat, lng], {
           radius: 7,
-          color: "#22c55e",
+          color: "#166534",
           weight: 2,
           fillColor: "#22c55e",
           fillOpacity: 0.5,
@@ -633,9 +3260,9 @@
         resultsContainer.textContent = "Searching…";
         countEl.textContent = "0";
 
-        const loc = await geocode(query);
+        const loc = await geocodeLocation(query);
         setUserMarker(loc.lat, loc.lng);
-        renderResults(loc.lat, loc.lng);
+        await renderResults(loc.lat, loc.lng);
       } catch (err) {
         console.error(err);
         clearGymMarkers();
@@ -650,7 +3277,6 @@
       }
     }
 
-    // --- Event wiring ---
     const searchInput = document.getElementById("searchInput");
     const clearSearchBtn = document.getElementById("clearSearch");
 
@@ -679,21 +3305,21 @@
       document.getElementById("resultsContainer").textContent =
         "Enter a location above to see nearby gyms.";
       document.getElementById("resultsCount").textContent = "0";
-      map.setView([42.3601, -71.0589], 8);
+      map.setView([42.3601, -71.0589], 7);
     });
 
     document
       .getElementById("useMyLocationBtn")
-      .addEventListener("click", () => {
+      .addEventListener("click", async () => {
         if (!navigator.geolocation) {
           alert("Geolocation is not supported by your browser.");
           return;
         }
         navigator.geolocation.getCurrentPosition(
-          (pos) => {
+          async (pos) => {
             const { latitude, longitude } = pos.coords;
             setUserMarker(latitude, longitude);
-            renderResults(latitude, longitude);
+            await renderResults(latitude, longitude);
           },
           (err) => {
             console.error(err);
