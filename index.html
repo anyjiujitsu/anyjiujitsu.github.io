@@ -348,32 +348,6 @@
       overflow: hidden;
       background: radial-gradient(circle at top, rgba(15, 23, 42, 1), rgba(15, 23, 42, 0.98));
     }
-    .date-row td {
-      padding: 10px 10px 4px;
-      border-top: 1px solid rgba(148, 163, 184, 0.3);
-    }
-
-    .date-header {
-      font-size: 12px;
-      font-weight: 600;
-      color: #e5e7eb;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      opacity: 0.9;
-    }
-
-    .date-header .dot {
-      opacity: 0.6;
-      font-size: 10px;
-    }
-
-    .hidden-date {
-      display: none;
-    }
-
 
     table {
       width: 100%;
@@ -381,6 +355,38 @@
       font-size: 12px;
       color: var(--text);
     }
+    .date-row td {
+      padding: 10px 10px 4px;
+      border-bottom: none;
+      background: transparent;
+    }
+
+    .date-header {
+      font-size: 12px;
+      font-weight: 600;
+      color: #e5e7eb;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      opacity: 0.9;
+    }
+
+    .date-header-day {
+      color: #9ca3af;
+    }
+
+    .date-header-sep {
+      margin: 0 4px;
+      opacity: 0.7;
+    }
+
+    .hidden-date {
+      display: none;
+    }
+
+    .event-row {
+      background: rgba(15, 23, 42, 0.98);
+    }
+
 
     thead {
       background: linear-gradient(to right, rgba(15, 23, 42, 1), rgba(15, 23, 42, 0.96));
@@ -453,7 +459,7 @@
       display: inline-flex;
       align-items: center;
       border-radius: 999px;
-      padding: 2px 8px;
+      padding: 2px 10px;
       font-size: 10px;
       font-weight: 600;
       letter-spacing: 0.08em;
@@ -497,6 +503,7 @@
       flex-wrap: wrap;
     }
 
+    
     @media (max-width: 768px) {
       body {
         padding: 16px 10px;
@@ -514,65 +521,109 @@
 
       .header-meta {
         align-items: flex-start;
+        margin-top: 8px;
       }
 
       .tabs-header {
         flex-direction: column;
         align-items: stretch;
+        gap: 12px;
       }
 
-      .tabs-tools {
+      .tabs-list {
+        width: 100%;
         justify-content: space-between;
       }
 
-      .search-input {
-        flex: 1 1 auto;
+      .tabs-tools {
+        width: 100%;
       }
 
-      table,
-      thead,
-      tbody,
-      th,
-      td,
-      tr {
-        display: block;
+      .tabs-tools .search-input {
+        width: 100%;
+      }
+
+      .table-wrapper {
+        border-radius: 14px;
+        padding: 6px 6px 10px;
+      }
+
+      .table-wrapper table {
+        width: 100%;
+        border-collapse: separate;
+        border-spacing: 0 10px;
       }
 
       thead {
         display: none;
       }
 
-      .table-wrapper {
-        border-radius: 14px;
+      tbody {
+        display: block;
       }
 
       tbody tr {
-        margin: 0 0 8px 0;
-        border-radius: 12px;
-        overflow: hidden;
-        border: 1px solid rgba(31, 41, 55, 0.9);
+        border-bottom: none;
+        background: transparent;
       }
 
-      td {
+      .date-row td {
+        padding: 8px 4px 4px;
+      }
+
+      .event-row {
         display: flex;
-        justify-content: space-between;
-        gap: 12px;
+        flex-wrap: wrap;
+        gap: 4px 12px;
         padding: 8px 10px;
+        border-radius: 16px;
+        border: 1px solid rgba(31, 41, 55, 0.9);
+        background: rgba(15, 23, 42, 0.98);
       }
 
-      td::before {
-        content: attr(data-label);
-        font-weight: 500;
-        color: #9ca3af;
-        flex: 0 0 40%;
-        max-width: 160px;
+      .event-row td {
+        padding: 0;
+        border: none;
+        background: transparent;
+        font-size: 12px;
       }
 
-      td > * {
+      .event-row td.hidden-date,
+      .event-row td[data-label="Date"] {
+        display: none;
+      }
+
+      .event-row td[data-label="Type"] {
+        order: 0;
+      }
+
+      .event-row td[data-label="Location"] {
+        order: 1;
+        margin-left: auto;
         text-align: right;
       }
+
+      .event-row td[data-label="Seminar / Focus"] {
+        order: 2;
+        flex: 1 0 100%;
+      }
+
+      td[data-label="Location"] .text-strong::before {
+        content: "📍 ";
+        opacity: 0.9;
+        font-size: 12px;
+        margin-right: 3px;
+      }
+
+      .type-pill {
+        font-size: 11px;
+      }
+
+      .tag.tag-accent {
+        margin-top: 2px;
+      }
     }
-  </style>
+</style>
 </head>
 <body>
   <div class="shell">
@@ -652,12 +703,12 @@
               <tr class="date-row">
                 <td colspan="4">
                   <div class="date-header">
-                    <span class="text-strong">September 26, 2025</span>
-                    <span class="dot">•</span>
-                    <span class="text-soft">Friday</span>
+                    <span class="date-header-day">Friday</span>
+                    <span class="date-header-sep">-</span>
+                    <span class="date-header-date">September 26, 2025</span>
                   </div>
                 </td>
-              </tr><tr>
+              </tr><tr class="event-row">
                 <td data-label="Date" class="hidden-date"></td>
                 <td data-label="Location">
                   <span class="text-strong">Black Hole Jiu Jitsu</span><br>
@@ -676,12 +727,12 @@
               <tr class="date-row">
                 <td colspan="4">
                   <div class="date-header">
-                    <span class="text-strong">September 28, 2025</span>
-                    <span class="dot">•</span>
-                    <span class="text-soft">Sunday</span>
+                    <span class="date-header-day">Sunday</span>
+                    <span class="date-header-sep">-</span>
+                    <span class="date-header-date">September 28, 2025</span>
                   </div>
                 </td>
-              </tr><tr>
+              </tr><tr class="event-row">
                 <td data-label="Date" class="hidden-date"></td>
                 <td data-label="Location">
                   <span class="text-strong">Lauzon MMA</span><br>
@@ -700,12 +751,12 @@
               <tr class="date-row">
                 <td colspan="4">
                   <div class="date-header">
-                    <span class="text-strong">October 1, 2025</span>
-                    <span class="dot">•</span>
-                    <span class="text-soft">Wednesday</span>
+                    <span class="date-header-day">Wednesday</span>
+                    <span class="date-header-sep">-</span>
+                    <span class="date-header-date">October 1, 2025</span>
                   </div>
                 </td>
-              </tr><tr>
+              </tr><tr class="event-row">
                 <td data-label="Date" class="hidden-date"></td>
                 <td data-label="Location">
                   <span class="text-strong">TMC Danbury BJJ</span><br>
@@ -724,12 +775,12 @@
               <tr class="date-row">
                 <td colspan="4">
                   <div class="date-header">
-                    <span class="text-strong">October 2, 2025</span>
-                    <span class="dot">•</span>
-                    <span class="text-soft">Thursday</span>
+                    <span class="date-header-day">Thursday</span>
+                    <span class="date-header-sep">-</span>
+                    <span class="date-header-date">October 2, 2025</span>
                   </div>
                 </td>
-              </tr><tr>
+              </tr><tr class="event-row">
                 <td data-label="Date" class="hidden-date"></td>
                 <td data-label="Location">
                   <span class="text-strong">TMC Danbury BJJ</span><br>
@@ -744,7 +795,7 @@
                   <span class="type-pill type-seminar">Seminar</span>
                 </td>
               </tr>
-              <tr>
+              <tr class="event-row">
                 <td data-label="Date" class="hidden-date"></td>
                 <td data-label="Location">
                   <span class="text-strong">Underdog MMA</span><br>
@@ -763,12 +814,12 @@
               <tr class="date-row">
                 <td colspan="4">
                   <div class="date-header">
-                    <span class="text-strong">October 3, 2025</span>
-                    <span class="dot">•</span>
-                    <span class="text-soft">Friday</span>
+                    <span class="date-header-day">Friday</span>
+                    <span class="date-header-sep">-</span>
+                    <span class="date-header-date">October 3, 2025</span>
                   </div>
                 </td>
-              </tr><tr>
+              </tr><tr class="event-row">
                 <td data-label="Date" class="hidden-date"></td>
                 <td data-label="Location">
                   <span class="text-strong">Gracie Barra</span><br>
@@ -787,12 +838,12 @@
               <tr class="date-row">
                 <td colspan="4">
                   <div class="date-header">
-                    <span class="text-strong">October 4, 2025</span>
-                    <span class="dot">•</span>
-                    <span class="text-soft">Saturday</span>
+                    <span class="date-header-day">Saturday</span>
+                    <span class="date-header-sep">-</span>
+                    <span class="date-header-date">October 4, 2025</span>
                   </div>
                 </td>
-              </tr><tr>
+              </tr><tr class="event-row">
                 <td data-label="Date" class="hidden-date"></td>
                 <td data-label="Location">
                   <span class="text-strong">Gracie Barra</span><br>
@@ -807,7 +858,7 @@
                   <span class="type-pill type-seminar">Seminar</span>
                 </td>
               </tr>
-              <tr>
+              <tr class="event-row">
                 <td data-label="Date" class="hidden-date"></td>
                 <td data-label="Location">
                   <span class="text-strong">SBG East Coast</span><br>
@@ -822,7 +873,7 @@
                   <span class="type-pill type-openhouse">Open House</span>
                 </td>
               </tr>
-              <tr>
+              <tr class="event-row">
                 <td data-label="Date" class="hidden-date"></td>
                 <td data-label="Location">
                   <span class="text-strong">FCF MMA</span><br>
@@ -837,7 +888,7 @@
                   <span class="type-pill type-seminar">Seminar</span>
                 </td>
               </tr>
-              <tr>
+              <tr class="event-row">
                 <td data-label="Date" class="hidden-date"></td>
                 <td data-label="Location">
                   <span class="text-strong">Clandestine Submissions</span><br>
@@ -856,12 +907,12 @@
               <tr class="date-row">
                 <td colspan="4">
                   <div class="date-header">
-                    <span class="text-strong">October 5, 2025</span>
-                    <span class="dot">•</span>
-                    <span class="text-soft">Sunday</span>
+                    <span class="date-header-day">Sunday</span>
+                    <span class="date-header-sep">-</span>
+                    <span class="date-header-date">October 5, 2025</span>
                   </div>
                 </td>
-              </tr><tr>
+              </tr><tr class="event-row">
                 <td data-label="Date" class="hidden-date"></td>
                 <td data-label="Location">
                   <span class="text-strong">Radius Martial Arts</span><br>
@@ -880,12 +931,12 @@
               <tr class="date-row">
                 <td colspan="4">
                   <div class="date-header">
-                    <span class="text-strong">October 6, 2025</span>
-                    <span class="dot">•</span>
-                    <span class="text-soft">Monday</span>
+                    <span class="date-header-day">Monday</span>
+                    <span class="date-header-sep">-</span>
+                    <span class="date-header-date">October 6, 2025</span>
                   </div>
                 </td>
-              </tr><tr>
+              </tr><tr class="event-row">
                 <td data-label="Date" class="hidden-date"></td>
                 <td data-label="Location">
                   <span class="text-strong">Atlas JiuJitsu</span><br>
@@ -904,12 +955,12 @@
               <tr class="date-row">
                 <td colspan="4">
                   <div class="date-header">
-                    <span class="text-strong">October 10, 2025</span>
-                    <span class="dot">•</span>
-                    <span class="text-soft">Friday</span>
+                    <span class="date-header-day">Friday</span>
+                    <span class="date-header-sep">-</span>
+                    <span class="date-header-date">October 10, 2025</span>
                   </div>
                 </td>
-              </tr><tr>
+              </tr><tr class="event-row">
                 <td data-label="Date" class="hidden-date"></td>
                 <td data-label="Location">
                   <span class="text-strong">New England Top Team</span><br>
@@ -928,12 +979,12 @@
               <tr class="date-row">
                 <td colspan="4">
                   <div class="date-header">
-                    <span class="text-strong">October 11, 2025</span>
-                    <span class="dot">•</span>
-                    <span class="text-soft">Saturday</span>
+                    <span class="date-header-day">Saturday</span>
+                    <span class="date-header-sep">-</span>
+                    <span class="date-header-date">October 11, 2025</span>
                   </div>
                 </td>
-              </tr><tr>
+              </tr><tr class="event-row">
                 <td data-label="Date" class="hidden-date"></td>
                 <td data-label="Location">
                   <span class="text-strong">nan</span><br>
@@ -948,7 +999,7 @@
                   <span class="type-pill type-tournament">Tournament</span>
                 </td>
               </tr>
-              <tr>
+              <tr class="event-row">
                 <td data-label="Date" class="hidden-date"></td>
                 <td data-label="Location">
                   <span class="text-strong">Danny Savery</span><br>
@@ -963,7 +1014,7 @@
                   <span class="type-pill type-pill">Workshop</span>
                 </td>
               </tr>
-              <tr>
+              <tr class="event-row">
                 <td data-label="Date" class="hidden-date"></td>
                 <td data-label="Location">
                   <span class="text-strong">Fenix BJJ</span><br>
@@ -978,7 +1029,7 @@
                   <span class="type-pill type-women">Women's Only</span>
                 </td>
               </tr>
-              <tr>
+              <tr class="event-row">
                 <td data-label="Date" class="hidden-date"></td>
                 <td data-label="Location">
                   <span class="text-strong">Defensive Edge MMA</span><br>
@@ -993,7 +1044,7 @@
                   <span class="type-pill type-women">Women's Only</span>
                 </td>
               </tr>
-              <tr>
+              <tr class="event-row">
                 <td data-label="Date" class="hidden-date"></td>
                 <td data-label="Location">
                   <span class="text-strong">Dedeco</span><br>
@@ -1008,7 +1059,7 @@
                   <span class="type-pill type-seminar">Seminar</span>
                 </td>
               </tr>
-              <tr>
+              <tr class="event-row">
                 <td data-label="Date" class="hidden-date"></td>
                 <td data-label="Location">
                   <span class="text-strong">Alexey BJJ</span><br>
@@ -1027,12 +1078,12 @@
               <tr class="date-row">
                 <td colspan="4">
                   <div class="date-header">
-                    <span class="text-strong">October 12, 2025</span>
-                    <span class="dot">•</span>
-                    <span class="text-soft">Sunday</span>
+                    <span class="date-header-day">Sunday</span>
+                    <span class="date-header-sep">-</span>
+                    <span class="date-header-date">October 12, 2025</span>
                   </div>
                 </td>
-              </tr><tr>
+              </tr><tr class="event-row">
                 <td data-label="Date" class="hidden-date"></td>
                 <td data-label="Location">
                   <span class="text-strong">Mom’s Basement MMA</span><br>
@@ -1047,7 +1098,7 @@
                   <span class="type-pill type-seminar">Seminar</span>
                 </td>
               </tr>
-              <tr>
+              <tr class="event-row">
                 <td data-label="Date" class="hidden-date"></td>
                 <td data-label="Location">
                   <span class="text-strong">Iron Lion Team</span><br>
@@ -1062,7 +1113,7 @@
                   <span class="type-pill type-openmat">Open Mat</span>
                 </td>
               </tr>
-              <tr>
+              <tr class="event-row">
                 <td data-label="Date" class="hidden-date"></td>
                 <td data-label="Location">
                   <span class="text-strong">South Coast Muay Thai</span><br>
@@ -1081,12 +1132,12 @@
               <tr class="date-row">
                 <td colspan="4">
                   <div class="date-header">
-                    <span class="text-strong">October 14, 2025</span>
-                    <span class="dot">•</span>
-                    <span class="text-soft">Tuesday</span>
+                    <span class="date-header-day">Tuesday</span>
+                    <span class="date-header-sep">-</span>
+                    <span class="date-header-date">October 14, 2025</span>
                   </div>
                 </td>
-              </tr><tr>
+              </tr><tr class="event-row">
                 <td data-label="Date" class="hidden-date"></td>
                 <td data-label="Location">
                   <span class="text-strong">Z Team Jiu Jitsu</span><br>
@@ -1105,12 +1156,12 @@
               <tr class="date-row">
                 <td colspan="4">
                   <div class="date-header">
-                    <span class="text-strong">October 18, 2025</span>
-                    <span class="dot">•</span>
-                    <span class="text-soft">Saturday</span>
+                    <span class="date-header-day">Saturday</span>
+                    <span class="date-header-sep">-</span>
+                    <span class="date-header-date">October 18, 2025</span>
                   </div>
                 </td>
-              </tr><tr>
+              </tr><tr class="event-row">
                 <td data-label="Date" class="hidden-date"></td>
                 <td data-label="Location">
                   <span class="text-strong">Defensive Edge MMA</span><br>
@@ -1125,7 +1176,7 @@
                   <span class="type-pill type-women">Women's Only</span>
                 </td>
               </tr>
-              <tr>
+              <tr class="event-row">
                 <td data-label="Date" class="hidden-date"></td>
                 <td data-label="Location">
                   <span class="text-strong">Nostros MMA</span><br>
@@ -1140,7 +1191,7 @@
                   <span class="type-pill type-women">Women's Only</span>
                 </td>
               </tr>
-              <tr>
+              <tr class="event-row">
                 <td data-label="Date" class="hidden-date"></td>
                 <td data-label="Location">
                   <span class="text-strong">Broadway Jiu Jitsu</span><br>
@@ -1155,7 +1206,7 @@
                   <span class="type-pill type-seminar">Seminar</span>
                 </td>
               </tr>
-              <tr>
+              <tr class="event-row">
                 <td data-label="Date" class="hidden-date"></td>
                 <td data-label="Location">
                   <span class="text-strong">Blue Collar Jiu Jitsu</span><br>
@@ -1170,7 +1221,7 @@
                   <span class="type-pill type-seminar">Seminar</span>
                 </td>
               </tr>
-              <tr>
+              <tr class="event-row">
                 <td data-label="Date" class="hidden-date"></td>
                 <td data-label="Location">
                   <span class="text-strong">Valle JiuJitsu</span><br>
@@ -1185,7 +1236,7 @@
                   <span class="type-pill type-openhouse">Open House</span>
                 </td>
               </tr>
-              <tr>
+              <tr class="event-row">
                 <td data-label="Date" class="hidden-date"></td>
                 <td data-label="Location">
                   <span class="text-strong">nan</span><br>
@@ -1197,19 +1248,19 @@
                   </span>
                 </td>
                 <td data-label="Type">
-                  <span class="type-pill type-pill">Tournament (Invite)</span>
+                  <span class="type-pill type-tournament">Tournament (Invite)</span>
                 </td>
               </tr>
               
               <tr class="date-row">
                 <td colspan="4">
                   <div class="date-header">
-                    <span class="text-strong">October 19, 2025</span>
-                    <span class="dot">•</span>
-                    <span class="text-soft">Sunday</span>
+                    <span class="date-header-day">Sunday</span>
+                    <span class="date-header-sep">-</span>
+                    <span class="date-header-date">October 19, 2025</span>
                   </div>
                 </td>
-              </tr><tr>
+              </tr><tr class="event-row">
                 <td data-label="Date" class="hidden-date"></td>
                 <td data-label="Location">
                   <span class="text-strong">Ironhold Jiu Jitsu</span><br>
@@ -1228,12 +1279,12 @@
               <tr class="date-row">
                 <td colspan="4">
                   <div class="date-header">
-                    <span class="text-strong">October 20, 2025</span>
-                    <span class="dot">•</span>
-                    <span class="text-soft">Monday</span>
+                    <span class="date-header-day">Monday</span>
+                    <span class="date-header-sep">-</span>
+                    <span class="date-header-date">October 20, 2025</span>
                   </div>
                 </td>
-              </tr><tr>
+              </tr><tr class="event-row">
                 <td data-label="Date" class="hidden-date"></td>
                 <td data-label="Location">
                   <span class="text-strong">Binda Jiu Jitsu</span><br>
@@ -1252,12 +1303,12 @@
               <tr class="date-row">
                 <td colspan="4">
                   <div class="date-header">
-                    <span class="text-strong">October 21, 2025</span>
-                    <span class="dot">•</span>
-                    <span class="text-soft">Tuesday</span>
+                    <span class="date-header-day">Tuesday</span>
+                    <span class="date-header-sep">-</span>
+                    <span class="date-header-date">October 21, 2025</span>
                   </div>
                 </td>
-              </tr><tr>
+              </tr><tr class="event-row">
                 <td data-label="Date" class="hidden-date"></td>
                 <td data-label="Location">
                   <span class="text-strong">Binda Jiu Jitsu</span><br>
@@ -1276,12 +1327,12 @@
               <tr class="date-row">
                 <td colspan="4">
                   <div class="date-header">
-                    <span class="text-strong">October 22, 2025</span>
-                    <span class="dot">•</span>
-                    <span class="text-soft">Wednesday</span>
+                    <span class="date-header-day">Wednesday</span>
+                    <span class="date-header-sep">-</span>
+                    <span class="date-header-date">October 22, 2025</span>
                   </div>
                 </td>
-              </tr><tr>
+              </tr><tr class="event-row">
                 <td data-label="Date" class="hidden-date"></td>
                 <td data-label="Location">
                   <span class="text-strong">Team Lawton Martial Arts</span><br>
@@ -1300,12 +1351,12 @@
               <tr class="date-row">
                 <td colspan="4">
                   <div class="date-header">
-                    <span class="text-strong">October 24, 2025</span>
-                    <span class="dot">•</span>
-                    <span class="text-soft">Friday</span>
+                    <span class="date-header-day">Friday</span>
+                    <span class="date-header-sep">-</span>
+                    <span class="date-header-date">October 24, 2025</span>
                   </div>
                 </td>
-              </tr><tr>
+              </tr><tr class="event-row">
                 <td data-label="Date" class="hidden-date"></td>
                 <td data-label="Location">
                   <span class="text-strong">Newport Martial Arts</span><br>
@@ -1320,7 +1371,7 @@
                   <span class="type-pill type-pill">Kids Event</span>
                 </td>
               </tr>
-              <tr>
+              <tr class="event-row">
                 <td data-label="Date" class="hidden-date"></td>
                 <td data-label="Location">
                   <span class="text-strong">Renzo Gracie Academy</span><br>
@@ -1339,12 +1390,12 @@
               <tr class="date-row">
                 <td colspan="4">
                   <div class="date-header">
-                    <span class="text-strong">October 25, 2025</span>
-                    <span class="dot">•</span>
-                    <span class="text-soft">Saturday</span>
+                    <span class="date-header-day">Saturday</span>
+                    <span class="date-header-sep">-</span>
+                    <span class="date-header-date">October 25, 2025</span>
                   </div>
                 </td>
-              </tr><tr>
+              </tr><tr class="event-row">
                 <td data-label="Date" class="hidden-date"></td>
                 <td data-label="Location">
                   <span class="text-strong">Acadia Brazilian Jiu Jitsu</span><br>
@@ -1359,7 +1410,7 @@
                   <span class="type-pill type-seminar">Seminar</span>
                 </td>
               </tr>
-              <tr>
+              <tr class="event-row">
                 <td data-label="Date" class="hidden-date"></td>
                 <td data-label="Location">
                   <span class="text-strong">Mission First BJJ</span><br>
@@ -1374,7 +1425,7 @@
                   <span class="type-pill type-seminar">Seminar</span>
                 </td>
               </tr>
-              <tr>
+              <tr class="event-row">
                 <td data-label="Date" class="hidden-date"></td>
                 <td data-label="Location">
                   <span class="text-strong">Gentle Art Dojo</span><br>
@@ -1389,7 +1440,7 @@
                   <span class="type-pill type-seminar">Seminar</span>
                 </td>
               </tr>
-              <tr>
+              <tr class="event-row">
                 <td data-label="Date" class="hidden-date"></td>
                 <td data-label="Location">
                   <span class="text-strong">nan</span><br>
@@ -1404,7 +1455,7 @@
                   <span class="type-pill type-tournament">Tournament</span>
                 </td>
               </tr>
-              <tr>
+              <tr class="event-row">
                 <td data-label="Date" class="hidden-date"></td>
                 <td data-label="Location">
                   <span class="text-strong">Connors Martial Arts Academy</span><br>
@@ -1419,7 +1470,7 @@
                   <span class="type-pill type-seminar">Seminar</span>
                 </td>
               </tr>
-              <tr>
+              <tr class="event-row">
                 <td data-label="Date" class="hidden-date"></td>
                 <td data-label="Location">
                   <span class="text-strong">Virtue Martial Arts</span><br>
@@ -1434,7 +1485,7 @@
                   <span class="type-pill type-seminar">Seminar</span>
                 </td>
               </tr>
-              <tr>
+              <tr class="event-row">
                 <td data-label="Date" class="hidden-date"></td>
                 <td data-label="Location">
                   <span class="text-strong">Gracie Barra</span><br>
@@ -1449,7 +1500,7 @@
                   <span class="type-pill type-women">Women's Only</span>
                 </td>
               </tr>
-              <tr>
+              <tr class="event-row">
                 <td data-label="Date" class="hidden-date"></td>
                 <td data-label="Location">
                   <span class="text-strong">Snake Pit USA MMA</span><br>
@@ -1468,12 +1519,12 @@
               <tr class="date-row">
                 <td colspan="4">
                   <div class="date-header">
-                    <span class="text-strong">October 26, 2025</span>
-                    <span class="dot">•</span>
-                    <span class="text-soft">Sunday</span>
+                    <span class="date-header-day">Sunday</span>
+                    <span class="date-header-sep">-</span>
+                    <span class="date-header-date">October 26, 2025</span>
                   </div>
                 </td>
-              </tr><tr>
+              </tr><tr class="event-row">
                 <td data-label="Date" class="hidden-date"></td>
                 <td data-label="Location">
                   <span class="text-strong">nan</span><br>
@@ -1488,7 +1539,7 @@
                   <span class="type-pill type-tournament">Tournament</span>
                 </td>
               </tr>
-              <tr>
+              <tr class="event-row">
                 <td data-label="Date" class="hidden-date"></td>
                 <td data-label="Location">
                   <span class="text-strong">nan</span><br>
@@ -1503,7 +1554,7 @@
                   <span class="type-pill type-tournament">Tournament</span>
                 </td>
               </tr>
-              <tr>
+              <tr class="event-row">
                 <td data-label="Date" class="hidden-date"></td>
                 <td data-label="Location">
                   <span class="text-strong">Team Forsa</span><br>
@@ -1518,7 +1569,7 @@
                   <span class="type-pill type-pill">Workshop</span>
                 </td>
               </tr>
-              <tr>
+              <tr class="event-row">
                 <td data-label="Date" class="hidden-date"></td>
                 <td data-label="Location">
                   <span class="text-strong">Daniel Gracie Academy</span><br>
@@ -1537,12 +1588,12 @@
               <tr class="date-row">
                 <td colspan="4">
                   <div class="date-header">
-                    <span class="text-strong">October 29, 2025</span>
-                    <span class="dot">•</span>
-                    <span class="text-soft">Wednesday</span>
+                    <span class="date-header-day">Wednesday</span>
+                    <span class="date-header-sep">-</span>
+                    <span class="date-header-date">October 29, 2025</span>
                   </div>
                 </td>
-              </tr><tr>
+              </tr><tr class="event-row">
                 <td data-label="Date" class="hidden-date"></td>
                 <td data-label="Location">
                   <span class="text-strong">Gracie Gym</span><br>
@@ -1557,7 +1608,7 @@
                   <span class="type-pill type-seminar">Seminar</span>
                 </td>
               </tr>
-              <tr>
+              <tr class="event-row">
                 <td data-label="Date" class="hidden-date"></td>
                 <td data-label="Location">
                   <span class="text-strong">Lauzon MMA</span><br>
@@ -1572,7 +1623,7 @@
                   <span class="type-pill type-seminar">Seminar</span>
                 </td>
               </tr>
-              <tr>
+              <tr class="event-row">
                 <td data-label="Date" class="hidden-date"></td>
                 <td data-label="Location">
                   <span class="text-strong">Technique BJJ</span><br>
@@ -1591,12 +1642,12 @@
               <tr class="date-row">
                 <td colspan="4">
                   <div class="date-header">
-                    <span class="text-strong">October 31, 2025</span>
-                    <span class="dot">•</span>
-                    <span class="text-soft">Friday</span>
+                    <span class="date-header-day">Friday</span>
+                    <span class="date-header-sep">-</span>
+                    <span class="date-header-date">October 31, 2025</span>
                   </div>
                 </td>
-              </tr><tr>
+              </tr><tr class="event-row">
                 <td data-label="Date" class="hidden-date"></td>
                 <td data-label="Location">
                   <span class="text-strong">Broadway Jiu Jitsu</span><br>
@@ -1615,12 +1666,12 @@
               <tr class="date-row">
                 <td colspan="4">
                   <div class="date-header">
-                    <span class="text-strong">November 1, 2025</span>
-                    <span class="dot">•</span>
-                    <span class="text-soft">Saturday</span>
+                    <span class="date-header-day">Saturday</span>
+                    <span class="date-header-sep">-</span>
+                    <span class="date-header-date">November 1, 2025</span>
                   </div>
                 </td>
-              </tr><tr>
+              </tr><tr class="event-row">
                 <td data-label="Date" class="hidden-date"></td>
                 <td data-label="Location">
                   <span class="text-strong">nan</span><br>
@@ -1635,7 +1686,7 @@
                   <span class="type-pill type-tournament">Tournament</span>
                 </td>
               </tr>
-              <tr>
+              <tr class="event-row">
                 <td data-label="Date" class="hidden-date"></td>
                 <td data-label="Location">
                   <span class="text-strong">Fenix BJJ</span><br>
@@ -1650,7 +1701,7 @@
                   <span class="type-pill type-pill">Charity Event</span>
                 </td>
               </tr>
-              <tr>
+              <tr class="event-row">
                 <td data-label="Date" class="hidden-date"></td>
                 <td data-label="Location">
                   <span class="text-strong">nan</span><br>
@@ -1662,10 +1713,10 @@
                   </span>
                 </td>
                 <td data-label="Type">
-                  <span class="type-pill type-pill">Tournament (Invite)</span>
+                  <span class="type-pill type-tournament">Tournament (Invite)</span>
                 </td>
               </tr>
-              <tr>
+              <tr class="event-row">
                 <td data-label="Date" class="hidden-date"></td>
                 <td data-label="Location">
                   <span class="text-strong">Ironhold Jiu Jitsu</span><br>
@@ -1680,7 +1731,7 @@
                   <span class="type-pill type-pill">Grand Opening</span>
                 </td>
               </tr>
-              <tr>
+              <tr class="event-row">
                 <td data-label="Date" class="hidden-date"></td>
                 <td data-label="Location">
                   <span class="text-strong">Pajama Strangle Time</span><br>
@@ -1695,7 +1746,7 @@
                   <span class="type-pill type-openmat">Open Mat</span>
                 </td>
               </tr>
-              <tr>
+              <tr class="event-row">
                 <td data-label="Date" class="hidden-date"></td>
                 <td data-label="Location">
                   <span class="text-strong">EP Martial Arts</span><br>
@@ -1710,7 +1761,7 @@
                   <span class="type-pill type-seminar">Seminar</span>
                 </td>
               </tr>
-              <tr>
+              <tr class="event-row">
                 <td data-label="Date" class="hidden-date"></td>
                 <td data-label="Location">
                   <span class="text-strong">Carlson Gracie RI</span><br>
@@ -1725,7 +1776,7 @@
                   <span class="type-pill type-seminar">Seminar</span>
                 </td>
               </tr>
-              <tr>
+              <tr class="event-row">
                 <td data-label="Date" class="hidden-date"></td>
                 <td data-label="Location">
                   <span class="text-strong">NESF</span><br>
@@ -1744,12 +1795,12 @@
               <tr class="date-row">
                 <td colspan="4">
                   <div class="date-header">
-                    <span class="text-strong">November 2, 2025</span>
-                    <span class="dot">•</span>
-                    <span class="text-soft">Sunday</span>
+                    <span class="date-header-day">Sunday</span>
+                    <span class="date-header-sep">-</span>
+                    <span class="date-header-date">November 2, 2025</span>
                   </div>
                 </td>
-              </tr><tr>
+              </tr><tr class="event-row">
                 <td data-label="Date" class="hidden-date"></td>
                 <td data-label="Location">
                   <span class="text-strong">Team Santos</span><br>
@@ -1764,7 +1815,7 @@
                   <span class="type-pill type-openmat">Open Mat</span>
                 </td>
               </tr>
-              <tr>
+              <tr class="event-row">
                 <td data-label="Date" class="hidden-date"></td>
                 <td data-label="Location">
                   <span class="text-strong">Team Forsa</span><br>
@@ -1779,7 +1830,7 @@
                   <span class="type-pill type-pill">Workshop</span>
                 </td>
               </tr>
-              <tr>
+              <tr class="event-row">
                 <td data-label="Date" class="hidden-date"></td>
                 <td data-label="Location">
                   <span class="text-strong">Solid Base BJJ</span><br>
@@ -1794,7 +1845,7 @@
                   <span class="type-pill type-women">Women's Only</span>
                 </td>
               </tr>
-              <tr>
+              <tr class="event-row">
                 <td data-label="Date" class="hidden-date"></td>
                 <td data-label="Location">
                   <span class="text-strong">Radius Martial Arts</span><br>
@@ -1809,7 +1860,7 @@
                   <span class="type-pill type-women">Women's Only</span>
                 </td>
               </tr>
-              <tr>
+              <tr class="event-row">
                 <td data-label="Date" class="hidden-date"></td>
                 <td data-label="Location">
                   <span class="text-strong">Carlson Gracie CT</span><br>
@@ -1824,7 +1875,7 @@
                   <span class="type-pill type-seminar">Seminar</span>
                 </td>
               </tr>
-              <tr>
+              <tr class="event-row">
                 <td data-label="Date" class="hidden-date"></td>
                 <td data-label="Location">
                   <span class="text-strong">Renzo Gracie Academy</span><br>
@@ -1843,12 +1894,12 @@
               <tr class="date-row">
                 <td colspan="4">
                   <div class="date-header">
-                    <span class="text-strong">November 5, 2025</span>
-                    <span class="dot">•</span>
-                    <span class="text-soft">Wednesday</span>
+                    <span class="date-header-day">Wednesday</span>
+                    <span class="date-header-sep">-</span>
+                    <span class="date-header-date">November 5, 2025</span>
                   </div>
                 </td>
-              </tr><tr>
+              </tr><tr class="event-row">
                 <td data-label="Date" class="hidden-date"></td>
                 <td data-label="Location">
                   <span class="text-strong">Submit Your Friend Academy</span><br>
@@ -1867,12 +1918,12 @@
               <tr class="date-row">
                 <td colspan="4">
                   <div class="date-header">
-                    <span class="text-strong">November 7, 2025</span>
-                    <span class="dot">•</span>
-                    <span class="text-soft">Friday</span>
+                    <span class="date-header-day">Friday</span>
+                    <span class="date-header-sep">-</span>
+                    <span class="date-header-date">November 7, 2025</span>
                   </div>
                 </td>
-              </tr><tr>
+              </tr><tr class="event-row">
                 <td data-label="Date" class="hidden-date"></td>
                 <td data-label="Location">
                   <span class="text-strong">Elements MMA</span><br>
@@ -1887,7 +1938,7 @@
                   <span class="type-pill type-seminar">Seminar</span>
                 </td>
               </tr>
-              <tr>
+              <tr class="event-row">
                 <td data-label="Date" class="hidden-date"></td>
                 <td data-label="Location">
                   <span class="text-strong">Manchester BJJ</span><br>
@@ -1906,12 +1957,12 @@
               <tr class="date-row">
                 <td colspan="4">
                   <div class="date-header">
-                    <span class="text-strong">November 8, 2025</span>
-                    <span class="dot">•</span>
-                    <span class="text-soft">Saturday</span>
+                    <span class="date-header-day">Saturday</span>
+                    <span class="date-header-sep">-</span>
+                    <span class="date-header-date">November 8, 2025</span>
                   </div>
                 </td>
-              </tr><tr>
+              </tr><tr class="event-row">
                 <td data-label="Date" class="hidden-date"></td>
                 <td data-label="Location">
                   <span class="text-strong">nan</span><br>
@@ -1926,7 +1977,7 @@
                   <span class="type-pill type-tournament">Tournament</span>
                 </td>
               </tr>
-              <tr>
+              <tr class="event-row">
                 <td data-label="Date" class="hidden-date"></td>
                 <td data-label="Location">
                   <span class="text-strong">Plainville Martial Arts</span><br>
@@ -1941,7 +1992,7 @@
                   <span class="type-pill type-seminar">Seminar</span>
                 </td>
               </tr>
-              <tr>
+              <tr class="event-row">
                 <td data-label="Date" class="hidden-date"></td>
                 <td data-label="Location">
                   <span class="text-strong">SBG East Coast</span><br>
@@ -1956,7 +2007,7 @@
                   <span class="type-pill type-seminar">Seminar</span>
                 </td>
               </tr>
-              <tr>
+              <tr class="event-row">
                 <td data-label="Date" class="hidden-date"></td>
                 <td data-label="Location">
                   <span class="text-strong">Integrated Martial Arts</span><br>
@@ -1975,12 +2026,12 @@
               <tr class="date-row">
                 <td colspan="4">
                   <div class="date-header">
-                    <span class="text-strong">November 9, 2025</span>
-                    <span class="dot">•</span>
-                    <span class="text-soft">Sunday</span>
+                    <span class="date-header-day">Sunday</span>
+                    <span class="date-header-sep">-</span>
+                    <span class="date-header-date">November 9, 2025</span>
                   </div>
                 </td>
-              </tr><tr>
+              </tr><tr class="event-row">
                 <td data-label="Date" class="hidden-date"></td>
                 <td data-label="Location">
                   <span class="text-strong">SBG East Coast</span><br>
@@ -1995,7 +2046,7 @@
                   <span class="type-pill type-seminar">Seminar</span>
                 </td>
               </tr>
-              <tr>
+              <tr class="event-row">
                 <td data-label="Date" class="hidden-date"></td>
                 <td data-label="Location">
                   <span class="text-strong">Daniel Gracie Academy</span><br>
@@ -2010,7 +2061,7 @@
                   <span class="type-pill type-seminar">Seminar</span>
                 </td>
               </tr>
-              <tr>
+              <tr class="event-row">
                 <td data-label="Date" class="hidden-date"></td>
                 <td data-label="Location">
                   <span class="text-strong">nan</span><br>
@@ -2025,7 +2076,7 @@
                   <span class="type-pill type-tournament">Tournament</span>
                 </td>
               </tr>
-              <tr>
+              <tr class="event-row">
                 <td data-label="Date" class="hidden-date"></td>
                 <td data-label="Location">
                   <span class="text-strong">Nostros MMA</span><br>
@@ -2040,7 +2091,7 @@
                   <span class="type-pill type-pill">Charity Event</span>
                 </td>
               </tr>
-              <tr>
+              <tr class="event-row">
                 <td data-label="Date" class="hidden-date"></td>
                 <td data-label="Location">
                   <span class="text-strong">F.I.T.E. FIT</span><br>
@@ -2059,12 +2110,12 @@
               <tr class="date-row">
                 <td colspan="4">
                   <div class="date-header">
-                    <span class="text-strong">November 11, 2025</span>
-                    <span class="dot">•</span>
-                    <span class="text-soft">Tuesday</span>
+                    <span class="date-header-day">Tuesday</span>
+                    <span class="date-header-sep">-</span>
+                    <span class="date-header-date">November 11, 2025</span>
                   </div>
                 </td>
-              </tr><tr>
+              </tr><tr class="event-row">
                 <td data-label="Date" class="hidden-date"></td>
                 <td data-label="Location">
                   <span class="text-strong">BattleGround JiuJitsu</span><br>
@@ -2083,12 +2134,12 @@
               <tr class="date-row">
                 <td colspan="4">
                   <div class="date-header">
-                    <span class="text-strong">November 12, 2025</span>
-                    <span class="dot">•</span>
-                    <span class="text-soft">Wednesday</span>
+                    <span class="date-header-day">Wednesday</span>
+                    <span class="date-header-sep">-</span>
+                    <span class="date-header-date">November 12, 2025</span>
                   </div>
                 </td>
-              </tr><tr>
+              </tr><tr class="event-row">
                 <td data-label="Date" class="hidden-date"></td>
                 <td data-label="Location">
                   <span class="text-strong">Bernardo Faria Academy</span><br>
@@ -2107,12 +2158,12 @@
               <tr class="date-row">
                 <td colspan="4">
                   <div class="date-header">
-                    <span class="text-strong">November 15, 2025</span>
-                    <span class="dot">•</span>
-                    <span class="text-soft">Saturday</span>
+                    <span class="date-header-day">Saturday</span>
+                    <span class="date-header-sep">-</span>
+                    <span class="date-header-date">November 15, 2025</span>
                   </div>
                 </td>
-              </tr><tr>
+              </tr><tr class="event-row">
                 <td data-label="Date" class="hidden-date"></td>
                 <td data-label="Location">
                   <span class="text-strong">Tri-Force Training Center</span><br>
@@ -2127,7 +2178,7 @@
                   <span class="type-pill type-seminar">Seminar</span>
                 </td>
               </tr>
-              <tr>
+              <tr class="event-row">
                 <td data-label="Date" class="hidden-date"></td>
                 <td data-label="Location">
                   <span class="text-strong">nan</span><br>
@@ -2142,7 +2193,7 @@
                   <span class="type-pill type-tournament">Tournament</span>
                 </td>
               </tr>
-              <tr>
+              <tr class="event-row">
                 <td data-label="Date" class="hidden-date"></td>
                 <td data-label="Location">
                   <span class="text-strong">Umass Lowell BJJ</span><br>
@@ -2157,7 +2208,7 @@
                   <span class="type-pill type-seminar">Seminar</span>
                 </td>
               </tr>
-              <tr>
+              <tr class="event-row">
                 <td data-label="Date" class="hidden-date"></td>
                 <td data-label="Location">
                   <span class="text-strong">Fenix BJJ</span><br>
@@ -2172,7 +2223,7 @@
                   <span class="type-pill type-women">Women's Only</span>
                 </td>
               </tr>
-              <tr>
+              <tr class="event-row">
                 <td data-label="Date" class="hidden-date"></td>
                 <td data-label="Location">
                   <span class="text-strong">Aqueous BJJ</span><br>
@@ -2187,7 +2238,7 @@
                   <span class="type-pill type-seminar">Seminar</span>
                 </td>
               </tr>
-              <tr>
+              <tr class="event-row">
                 <td data-label="Date" class="hidden-date"></td>
                 <td data-label="Location">
                   <span class="text-strong">Unita BJJ</span><br>
@@ -2206,12 +2257,12 @@
               <tr class="date-row">
                 <td colspan="4">
                   <div class="date-header">
-                    <span class="text-strong">November 16, 2025</span>
-                    <span class="dot">•</span>
-                    <span class="text-soft">Sunday</span>
+                    <span class="date-header-day">Sunday</span>
+                    <span class="date-header-sep">-</span>
+                    <span class="date-header-date">November 16, 2025</span>
                   </div>
                 </td>
-              </tr><tr>
+              </tr><tr class="event-row">
                 <td data-label="Date" class="hidden-date"></td>
                 <td data-label="Location">
                   <span class="text-strong">Lauzon MMA</span><br>
@@ -2226,7 +2277,7 @@
                   <span class="type-pill type-pill">Workshop</span>
                 </td>
               </tr>
-              <tr>
+              <tr class="event-row">
                 <td data-label="Date" class="hidden-date"></td>
                 <td data-label="Location">
                   <span class="text-strong">Pajama Strangle Time</span><br>
@@ -2241,7 +2292,7 @@
                   <span class="type-pill type-women">Women's Only</span>
                 </td>
               </tr>
-              <tr>
+              <tr class="event-row">
                 <td data-label="Date" class="hidden-date"></td>
                 <td data-label="Location">
                   <span class="text-strong">Z Team Jiu Jitsu</span><br>
@@ -2253,19 +2304,19 @@
                   </span>
                 </td>
                 <td data-label="Type">
-                  <span class="type-pill type-pill">Tournament (Invite)</span>
+                  <span class="type-pill type-tournament">Tournament (Invite)</span>
                 </td>
               </tr>
               
               <tr class="date-row">
                 <td colspan="4">
                   <div class="date-header">
-                    <span class="text-strong">November 18, 2025</span>
-                    <span class="dot">•</span>
-                    <span class="text-soft">Tuesday</span>
+                    <span class="date-header-day">Tuesday</span>
+                    <span class="date-header-sep">-</span>
+                    <span class="date-header-date">November 18, 2025</span>
                   </div>
                 </td>
-              </tr><tr>
+              </tr><tr class="event-row">
                 <td data-label="Date" class="hidden-date"></td>
                 <td data-label="Location">
                   <span class="text-strong">Team Flo</span><br>
@@ -2284,12 +2335,12 @@
               <tr class="date-row">
                 <td colspan="4">
                   <div class="date-header">
-                    <span class="text-strong">November 21, 2025</span>
-                    <span class="dot">•</span>
-                    <span class="text-soft">Friday</span>
+                    <span class="date-header-day">Friday</span>
+                    <span class="date-header-sep">-</span>
+                    <span class="date-header-date">November 21, 2025</span>
                   </div>
                 </td>
-              </tr><tr>
+              </tr><tr class="event-row">
                 <td data-label="Date" class="hidden-date"></td>
                 <td data-label="Location">
                   <span class="text-strong">Broadway Jiu Jitsu</span><br>
@@ -2308,12 +2359,12 @@
               <tr class="date-row">
                 <td colspan="4">
                   <div class="date-header">
-                    <span class="text-strong">November 22, 2025</span>
-                    <span class="dot">•</span>
-                    <span class="text-soft">Saturday</span>
+                    <span class="date-header-day">Saturday</span>
+                    <span class="date-header-sep">-</span>
+                    <span class="date-header-date">November 22, 2025</span>
                   </div>
                 </td>
-              </tr><tr>
+              </tr><tr class="event-row">
                 <td data-label="Date" class="hidden-date"></td>
                 <td data-label="Location">
                   <span class="text-strong">nan</span><br>
@@ -2325,10 +2376,10 @@
                   </span>
                 </td>
                 <td data-label="Type">
-                  <span class="type-pill type-pill">Tournament (Invite)</span>
+                  <span class="type-pill type-tournament">Tournament (Invite)</span>
                 </td>
               </tr>
-              <tr>
+              <tr class="event-row">
                 <td data-label="Date" class="hidden-date"></td>
                 <td data-label="Location">
                   <span class="text-strong">Combate Real School of Jiu Jitsu</span><br>
@@ -2343,7 +2394,7 @@
                   <span class="type-pill type-seminar">Seminar</span>
                 </td>
               </tr>
-              <tr>
+              <tr class="event-row">
                 <td data-label="Date" class="hidden-date"></td>
                 <td data-label="Location">
                   <span class="text-strong">Greenwich Jiu Jiutsu Academy</span><br>
@@ -2358,7 +2409,7 @@
                   <span class="type-pill type-seminar">Seminar</span>
                 </td>
               </tr>
-              <tr>
+              <tr class="event-row">
                 <td data-label="Date" class="hidden-date"></td>
                 <td data-label="Location">
                   <span class="text-strong">Umass Amherst</span><br>
@@ -2373,7 +2424,7 @@
                   <span class="type-pill type-seminar">Seminar</span>
                 </td>
               </tr>
-              <tr>
+              <tr class="event-row">
                 <td data-label="Date" class="hidden-date"></td>
                 <td data-label="Location">
                   <span class="text-strong">Daniel Gracie Academy</span><br>
@@ -2392,12 +2443,12 @@
               <tr class="date-row">
                 <td colspan="4">
                   <div class="date-header">
-                    <span class="text-strong">November 23, 2025</span>
-                    <span class="dot">•</span>
-                    <span class="text-soft">Sunday</span>
+                    <span class="date-header-day">Sunday</span>
+                    <span class="date-header-sep">-</span>
+                    <span class="date-header-date">November 23, 2025</span>
                   </div>
                 </td>
-              </tr><tr>
+              </tr><tr class="event-row">
                 <td data-label="Date" class="hidden-date"></td>
                 <td data-label="Location">
                   <span class="text-strong">Combate Real School of Jiu Jitsu</span><br>
@@ -2412,7 +2463,7 @@
                   <span class="type-pill type-seminar">Seminar</span>
                 </td>
               </tr>
-              <tr>
+              <tr class="event-row">
                 <td data-label="Date" class="hidden-date"></td>
                 <td data-label="Location">
                   <span class="text-strong">nan</span><br>
@@ -2424,10 +2475,10 @@
                   </span>
                 </td>
                 <td data-label="Type">
-                  <span class="type-pill type-pill">Tournament (Invite)</span>
+                  <span class="type-pill type-tournament">Tournament (Invite)</span>
                 </td>
               </tr>
-              <tr>
+              <tr class="event-row">
                 <td data-label="Date" class="hidden-date"></td>
                 <td data-label="Location">
                   <span class="text-strong">Connors Martial Arts Academy</span><br>
@@ -2446,12 +2497,12 @@
               <tr class="date-row">
                 <td colspan="4">
                   <div class="date-header">
-                    <span class="text-strong">November 25, 2025</span>
-                    <span class="dot">•</span>
-                    <span class="text-soft">Tuesday</span>
+                    <span class="date-header-day">Tuesday</span>
+                    <span class="date-header-sep">-</span>
+                    <span class="date-header-date">November 25, 2025</span>
                   </div>
                 </td>
-              </tr><tr>
+              </tr><tr class="event-row">
                 <td data-label="Date" class="hidden-date"></td>
                 <td data-label="Location">
                   <span class="text-strong">Underdog MMA</span><br>
@@ -2470,12 +2521,12 @@
               <tr class="date-row">
                 <td colspan="4">
                   <div class="date-header">
-                    <span class="text-strong">November 26, 2025</span>
-                    <span class="dot">•</span>
-                    <span class="text-soft">Wednesday</span>
+                    <span class="date-header-day">Wednesday</span>
+                    <span class="date-header-sep">-</span>
+                    <span class="date-header-date">November 26, 2025</span>
                   </div>
                 </td>
-              </tr><tr>
+              </tr><tr class="event-row">
                 <td data-label="Date" class="hidden-date"></td>
                 <td data-label="Location">
                   <span class="text-strong">Recon MMA</span><br>
@@ -2490,7 +2541,7 @@
                   <span class="type-pill type-pill">Workshop</span>
                 </td>
               </tr>
-              <tr>
+              <tr class="event-row">
                 <td data-label="Date" class="hidden-date"></td>
                 <td data-label="Location">
                   <span class="text-strong">Unit 232</span><br>
@@ -2509,12 +2560,12 @@
               <tr class="date-row">
                 <td colspan="4">
                   <div class="date-header">
-                    <span class="text-strong">November 27, 2025</span>
-                    <span class="dot">•</span>
-                    <span class="text-soft">Thursday</span>
+                    <span class="date-header-day">Thursday</span>
+                    <span class="date-header-sep">-</span>
+                    <span class="date-header-date">November 27, 2025</span>
                   </div>
                 </td>
-              </tr><tr>
+              </tr><tr class="event-row">
                 <td data-label="Date" class="hidden-date"></td>
                 <td data-label="Location">
                   <span class="text-strong">Flow State Fighting</span><br>
@@ -2529,7 +2580,7 @@
                   <span class="type-pill type-openmat">Open Mat</span>
                 </td>
               </tr>
-              <tr>
+              <tr class="event-row">
                 <td data-label="Date" class="hidden-date"></td>
                 <td data-label="Location">
                   <span class="text-strong">South Shore Sportfighting</span><br>
@@ -2544,7 +2595,7 @@
                   <span class="type-pill type-openmat">Open Mat</span>
                 </td>
               </tr>
-              <tr>
+              <tr class="event-row">
                 <td data-label="Date" class="hidden-date"></td>
                 <td data-label="Location">
                   <span class="text-strong">Precision Jiujitsu</span><br>
@@ -2559,7 +2610,7 @@
                   <span class="type-pill type-openmat">Open Mat</span>
                 </td>
               </tr>
-              <tr>
+              <tr class="event-row">
                 <td data-label="Date" class="hidden-date"></td>
                 <td data-label="Location">
                   <span class="text-strong">Giannetti Martial Arts</span><br>
@@ -2574,7 +2625,7 @@
                   <span class="type-pill type-openmat">Open Mat</span>
                 </td>
               </tr>
-              <tr>
+              <tr class="event-row">
                 <td data-label="Date" class="hidden-date"></td>
                 <td data-label="Location">
                   <span class="text-strong">Gentle Art Dojo</span><br>
@@ -2589,7 +2640,7 @@
                   <span class="type-pill type-pill">Charity Event</span>
                 </td>
               </tr>
-              <tr>
+              <tr class="event-row">
                 <td data-label="Date" class="hidden-date"></td>
                 <td data-label="Location">
                   <span class="text-strong">Integrated Martial Arts</span><br>
@@ -2604,7 +2655,7 @@
                   <span class="type-pill type-pill">Charity Event</span>
                 </td>
               </tr>
-              <tr>
+              <tr class="event-row">
                 <td data-label="Date" class="hidden-date"></td>
                 <td data-label="Location">
                   <span class="text-strong">Pajama Strangle Time</span><br>
@@ -2619,7 +2670,7 @@
                   <span class="type-pill type-openmat">Open Mat</span>
                 </td>
               </tr>
-              <tr>
+              <tr class="event-row">
                 <td data-label="Date" class="hidden-date"></td>
                 <td data-label="Location">
                   <span class="text-strong">Seaside Jiu Jitsu</span><br>
@@ -2634,7 +2685,7 @@
                   <span class="type-pill type-openmat">Open Mat</span>
                 </td>
               </tr>
-              <tr>
+              <tr class="event-row">
                 <td data-label="Date" class="hidden-date"></td>
                 <td data-label="Location">
                   <span class="text-strong">Primal Jiujitsu</span><br>
@@ -2649,7 +2700,7 @@
                   <span class="type-pill type-openmat">Open Mat</span>
                 </td>
               </tr>
-              <tr>
+              <tr class="event-row">
                 <td data-label="Date" class="hidden-date"></td>
                 <td data-label="Location">
                   <span class="text-strong">Clandestine Submissions</span><br>
@@ -2664,7 +2715,7 @@
                   <span class="type-pill type-openmat">Open Mat</span>
                 </td>
               </tr>
-              <tr>
+              <tr class="event-row">
                 <td data-label="Date" class="hidden-date"></td>
                 <td data-label="Location">
                   <span class="text-strong">South Boston BJJ</span><br>
@@ -2679,7 +2730,7 @@
                   <span class="type-pill type-openmat">Open Mat</span>
                 </td>
               </tr>
-              <tr>
+              <tr class="event-row">
                 <td data-label="Date" class="hidden-date"></td>
                 <td data-label="Location">
                   <span class="text-strong">Connors Martial Arts Academy</span><br>
@@ -2694,7 +2745,7 @@
                   <span class="type-pill type-openmat">Open Mat</span>
                 </td>
               </tr>
-              <tr>
+              <tr class="event-row">
                 <td data-label="Date" class="hidden-date"></td>
                 <td data-label="Location">
                   <span class="text-strong">Ironhold Jiu Jitsu</span><br>
@@ -2709,7 +2760,7 @@
                   <span class="type-pill type-openmat">Open Mat</span>
                 </td>
               </tr>
-              <tr>
+              <tr class="event-row">
                 <td data-label="Date" class="hidden-date"></td>
                 <td data-label="Location">
                   <span class="text-strong">CT Combat Training Center</span><br>
@@ -2724,7 +2775,7 @@
                   <span class="type-pill type-openmat">Open Mat</span>
                 </td>
               </tr>
-              <tr>
+              <tr class="event-row">
                 <td data-label="Date" class="hidden-date"></td>
                 <td data-label="Location">
                   <span class="text-strong">Imperium Martial Arts</span><br>
@@ -2739,7 +2790,7 @@
                   <span class="type-pill type-openmat">Open Mat</span>
                 </td>
               </tr>
-              <tr>
+              <tr class="event-row">
                 <td data-label="Date" class="hidden-date"></td>
                 <td data-label="Location">
                   <span class="text-strong">Underdog MMA</span><br>
@@ -2754,7 +2805,7 @@
                   <span class="type-pill type-openmat">Open Mat</span>
                 </td>
               </tr>
-              <tr>
+              <tr class="event-row">
                 <td data-label="Date" class="hidden-date"></td>
                 <td data-label="Location">
                   <span class="text-strong">Alliance BJJ</span><br>
@@ -2769,7 +2820,7 @@
                   <span class="type-pill type-openmat">Open Mat</span>
                 </td>
               </tr>
-              <tr>
+              <tr class="event-row">
                 <td data-label="Date" class="hidden-date"></td>
                 <td data-label="Location">
                   <span class="text-strong">Hammer Jiu Jitsu</span><br>
@@ -2784,7 +2835,7 @@
                   <span class="type-pill type-openmat">Open Mat</span>
                 </td>
               </tr>
-              <tr>
+              <tr class="event-row">
                 <td data-label="Date" class="hidden-date"></td>
                 <td data-label="Location">
                   <span class="text-strong">Versus Jiujitsu</span><br>
@@ -2803,12 +2854,12 @@
               <tr class="date-row">
                 <td colspan="4">
                   <div class="date-header">
-                    <span class="text-strong">November 28, 2025</span>
-                    <span class="dot">•</span>
-                    <span class="text-soft">Friday</span>
+                    <span class="date-header-day">Friday</span>
+                    <span class="date-header-sep">-</span>
+                    <span class="date-header-date">November 28, 2025</span>
                   </div>
                 </td>
-              </tr><tr>
+              </tr><tr class="event-row">
                 <td data-label="Date" class="hidden-date"></td>
                 <td data-label="Location">
                   <span class="text-strong">Clandestine Submissions</span><br>
@@ -2823,7 +2874,7 @@
                   <span class="type-pill type-openmat">Open Mat</span>
                 </td>
               </tr>
-              <tr>
+              <tr class="event-row">
                 <td data-label="Date" class="hidden-date"></td>
                 <td data-label="Location">
                   <span class="text-strong">Unit 232</span><br>
@@ -2838,7 +2889,7 @@
                   <span class="type-pill type-openmat">Open Mat</span>
                 </td>
               </tr>
-              <tr>
+              <tr class="event-row">
                 <td data-label="Date" class="hidden-date"></td>
                 <td data-label="Location">
                   <span class="text-strong">Precision Jiujitsu</span><br>
@@ -2853,7 +2904,7 @@
                   <span class="type-pill type-openmat">Open Mat</span>
                 </td>
               </tr>
-              <tr>
+              <tr class="event-row">
                 <td data-label="Date" class="hidden-date"></td>
                 <td data-label="Location">
                   <span class="text-strong">Radius Martial Arts</span><br>
@@ -2868,7 +2919,7 @@
                   <span class="type-pill type-openmat">Open Mat</span>
                 </td>
               </tr>
-              <tr>
+              <tr class="event-row">
                 <td data-label="Date" class="hidden-date"></td>
                 <td data-label="Location">
                   <span class="text-strong">Ironhold Jiu Jitsu</span><br>
@@ -2883,7 +2934,7 @@
                   <span class="type-pill type-openmat">Open Mat</span>
                 </td>
               </tr>
-              <tr>
+              <tr class="event-row">
                 <td data-label="Date" class="hidden-date"></td>
                 <td data-label="Location">
                   <span class="text-strong">Atom JiuJitsu</span><br>
@@ -2898,7 +2949,7 @@
                   <span class="type-pill type-openmat">Open Mat</span>
                 </td>
               </tr>
-              <tr>
+              <tr class="event-row">
                 <td data-label="Date" class="hidden-date"></td>
                 <td data-label="Location">
                   <span class="text-strong">Connecticut Submission Grappling</span><br>
@@ -2913,7 +2964,7 @@
                   <span class="type-pill type-openhouse">Open House</span>
                 </td>
               </tr>
-              <tr>
+              <tr class="event-row">
                 <td data-label="Date" class="hidden-date"></td>
                 <td data-label="Location">
                   <span class="text-strong">Connors Martial Arts Academy</span><br>
@@ -2932,12 +2983,12 @@
               <tr class="date-row">
                 <td colspan="4">
                   <div class="date-header">
-                    <span class="text-strong">November 29, 2025</span>
-                    <span class="dot">•</span>
-                    <span class="text-soft">Saturday</span>
+                    <span class="date-header-day">Saturday</span>
+                    <span class="date-header-sep">-</span>
+                    <span class="date-header-date">November 29, 2025</span>
                   </div>
                 </td>
-              </tr><tr>
+              </tr><tr class="event-row">
                 <td data-label="Date" class="hidden-date"></td>
                 <td data-label="Location">
                   <span class="text-strong">Bazzani Martial Arts</span><br>
@@ -2952,7 +3003,7 @@
                   <span class="type-pill type-women">Women's Only</span>
                 </td>
               </tr>
-              <tr>
+              <tr class="event-row">
                 <td data-label="Date" class="hidden-date"></td>
                 <td data-label="Location">
                   <span class="text-strong">BTT Boston</span><br>
@@ -2967,7 +3018,7 @@
                   <span class="type-pill type-seminar">Seminar</span>
                 </td>
               </tr>
-              <tr>
+              <tr class="event-row">
                 <td data-label="Date" class="hidden-date"></td>
                 <td data-label="Location">
                   <span class="text-strong">Boston BJJ</span><br>
@@ -2982,7 +3033,7 @@
                   <span class="type-pill type-seminar">Seminar</span>
                 </td>
               </tr>
-              <tr>
+              <tr class="event-row">
                 <td data-label="Date" class="hidden-date"></td>
                 <td data-label="Location">
                   <span class="text-strong">DF Fitness</span><br>
@@ -2997,7 +3048,7 @@
                   <span class="type-pill type-openmat">Open Mat</span>
                 </td>
               </tr>
-              <tr>
+              <tr class="event-row">
                 <td data-label="Date" class="hidden-date"></td>
                 <td data-label="Location">
                   <span class="text-strong">nan</span><br>
@@ -3016,12 +3067,12 @@
               <tr class="date-row">
                 <td colspan="4">
                   <div class="date-header">
-                    <span class="text-strong">November 30, 2025</span>
-                    <span class="dot">•</span>
-                    <span class="text-soft">Sunday</span>
+                    <span class="date-header-day">Sunday</span>
+                    <span class="date-header-sep">-</span>
+                    <span class="date-header-date">November 30, 2025</span>
                   </div>
                 </td>
-              </tr><tr>
+              </tr><tr class="event-row">
                 <td data-label="Date" class="hidden-date"></td>
                 <td data-label="Location">
                   <span class="text-strong">Fit Club BJJ</span><br>
@@ -3040,12 +3091,12 @@
               <tr class="date-row">
                 <td colspan="4">
                   <div class="date-header">
-                    <span class="text-strong">December 1, 2025</span>
-                    <span class="dot">•</span>
-                    <span class="text-soft">Monday</span>
+                    <span class="date-header-day">Monday</span>
+                    <span class="date-header-sep">-</span>
+                    <span class="date-header-date">December 1, 2025</span>
                   </div>
                 </td>
-              </tr><tr>
+              </tr><tr class="event-row">
                 <td data-label="Date" class="hidden-date"></td>
                 <td data-label="Location">
                   <span class="text-strong">Integrated Martial Arts</span><br>
@@ -3064,12 +3115,12 @@
               <tr class="date-row">
                 <td colspan="4">
                   <div class="date-header">
-                    <span class="text-strong">December 2, 2025</span>
-                    <span class="dot">•</span>
-                    <span class="text-soft">Tuesday</span>
+                    <span class="date-header-day">Tuesday</span>
+                    <span class="date-header-sep">-</span>
+                    <span class="date-header-date">December 2, 2025</span>
                   </div>
                 </td>
-              </tr><tr>
+              </tr><tr class="event-row">
                 <td data-label="Date" class="hidden-date"></td>
                 <td data-label="Location">
                   <span class="text-strong">Whaling City Athletic Club</span><br>
@@ -3088,12 +3139,12 @@
               <tr class="date-row">
                 <td colspan="4">
                   <div class="date-header">
-                    <span class="text-strong">December 5, 2025</span>
-                    <span class="dot">•</span>
-                    <span class="text-soft">Friday</span>
+                    <span class="date-header-day">Friday</span>
+                    <span class="date-header-sep">-</span>
+                    <span class="date-header-date">December 5, 2025</span>
                   </div>
                 </td>
-              </tr><tr>
+              </tr><tr class="event-row">
                 <td data-label="Date" class="hidden-date"></td>
                 <td data-label="Location">
                   <span class="text-strong">Team Lawton Martial Arts</span><br>
@@ -3108,7 +3159,7 @@
                   <span class="type-pill type-women">Women's Only</span>
                 </td>
               </tr>
-              <tr>
+              <tr class="event-row">
                 <td data-label="Date" class="hidden-date"></td>
                 <td data-label="Location">
                   <span class="text-strong">Clandestine Submissions</span><br>
@@ -3127,12 +3178,12 @@
               <tr class="date-row">
                 <td colspan="4">
                   <div class="date-header">
-                    <span class="text-strong">December 6, 2025</span>
-                    <span class="dot">•</span>
-                    <span class="text-soft">Saturday</span>
+                    <span class="date-header-day">Saturday</span>
+                    <span class="date-header-sep">-</span>
+                    <span class="date-header-date">December 6, 2025</span>
                   </div>
                 </td>
-              </tr><tr>
+              </tr><tr class="event-row">
                 <td data-label="Date" class="hidden-date"></td>
                 <td data-label="Location">
                   <span class="text-strong">USMMA</span><br>
@@ -3147,7 +3198,7 @@
                   <span class="type-pill type-seminar">Seminar</span>
                 </td>
               </tr>
-              <tr>
+              <tr class="event-row">
                 <td data-label="Date" class="hidden-date"></td>
                 <td data-label="Location">
                   <span class="text-strong">Boston University</span><br>
@@ -3159,10 +3210,10 @@
                   </span>
                 </td>
                 <td data-label="Type">
-                  <span class="type-pill type-pill">Tournament (Invite)</span>
+                  <span class="type-pill type-tournament">Tournament (Invite)</span>
                 </td>
               </tr>
-              <tr>
+              <tr class="event-row">
                 <td data-label="Date" class="hidden-date"></td>
                 <td data-label="Location">
                   <span class="text-strong">nan</span><br>
@@ -3174,10 +3225,10 @@
                   </span>
                 </td>
                 <td data-label="Type">
-                  <span class="type-pill type-pill">Tournament (Invite)</span>
+                  <span class="type-pill type-tournament">Tournament (Invite)</span>
                 </td>
               </tr>
-              <tr>
+              <tr class="event-row">
                 <td data-label="Date" class="hidden-date"></td>
                 <td data-label="Location">
                   <span class="text-strong">South Boston BJJ</span><br>
@@ -3192,7 +3243,7 @@
                   <span class="type-pill type-seminar">Seminar</span>
                 </td>
               </tr>
-              <tr>
+              <tr class="event-row">
                 <td data-label="Date" class="hidden-date"></td>
                 <td data-label="Location">
                   <span class="text-strong">Fight Sports Boston</span><br>
@@ -3207,7 +3258,7 @@
                   <span class="type-pill type-seminar">Seminar</span>
                 </td>
               </tr>
-              <tr>
+              <tr class="event-row">
                 <td data-label="Date" class="hidden-date"></td>
                 <td data-label="Location">
                   <span class="text-strong">Vermont BJJ Academy</span><br>
@@ -3226,12 +3277,12 @@
               <tr class="date-row">
                 <td colspan="4">
                   <div class="date-header">
-                    <span class="text-strong">December 7, 2025</span>
-                    <span class="dot">•</span>
-                    <span class="text-soft">Sunday</span>
+                    <span class="date-header-day">Sunday</span>
+                    <span class="date-header-sep">-</span>
+                    <span class="date-header-date">December 7, 2025</span>
                   </div>
                 </td>
-              </tr><tr>
+              </tr><tr class="event-row">
                 <td data-label="Date" class="hidden-date"></td>
                 <td data-label="Location">
                   <span class="text-strong">Off Your Back Academy</span><br>
@@ -3246,7 +3297,7 @@
                   <span class="type-pill type-seminar">Seminar</span>
                 </td>
               </tr>
-              <tr>
+              <tr class="event-row">
                 <td data-label="Date" class="hidden-date"></td>
                 <td data-label="Location">
                   <span class="text-strong">nan</span><br>
@@ -3265,12 +3316,12 @@
               <tr class="date-row">
                 <td colspan="4">
                   <div class="date-header">
-                    <span class="text-strong">December 10, 2025</span>
-                    <span class="dot">•</span>
-                    <span class="text-soft">Wednesday</span>
+                    <span class="date-header-day">Wednesday</span>
+                    <span class="date-header-sep">-</span>
+                    <span class="date-header-date">December 10, 2025</span>
                   </div>
                 </td>
-              </tr><tr>
+              </tr><tr class="event-row">
                 <td data-label="Date" class="hidden-date"></td>
                 <td data-label="Location">
                   <span class="text-strong">Royce Gracie Academy</span><br>
@@ -3289,12 +3340,12 @@
               <tr class="date-row">
                 <td colspan="4">
                   <div class="date-header">
-                    <span class="text-strong">December 13, 2025</span>
-                    <span class="dot">•</span>
-                    <span class="text-soft">Saturday</span>
+                    <span class="date-header-day">Saturday</span>
+                    <span class="date-header-sep">-</span>
+                    <span class="date-header-date">December 13, 2025</span>
                   </div>
                 </td>
-              </tr><tr>
+              </tr><tr class="event-row">
                 <td data-label="Date" class="hidden-date"></td>
                 <td data-label="Location">
                   <span class="text-strong">Integrated Martial Arts</span><br>
@@ -3309,7 +3360,7 @@
                   <span class="type-pill type-seminar">Seminar</span>
                 </td>
               </tr>
-              <tr>
+              <tr class="event-row">
                 <td data-label="Date" class="hidden-date"></td>
                 <td data-label="Location">
                   <span class="text-strong">Renzo Gracie Academy</span><br>
@@ -3324,7 +3375,7 @@
                   <span class="type-pill type-seminar">Seminar</span>
                 </td>
               </tr>
-              <tr>
+              <tr class="event-row">
                 <td data-label="Date" class="hidden-date"></td>
                 <td data-label="Location">
                   <span class="text-strong">nan</span><br>
@@ -3339,7 +3390,7 @@
                   <span class="type-pill type-tournament">Tournament</span>
                 </td>
               </tr>
-              <tr>
+              <tr class="event-row">
                 <td data-label="Date" class="hidden-date"></td>
                 <td data-label="Location">
                   <span class="text-strong">nan</span><br>
@@ -3351,19 +3402,19 @@
                   </span>
                 </td>
                 <td data-label="Type">
-                  <span class="type-pill type-pill">Tournament (Invite)</span>
+                  <span class="type-pill type-tournament">Tournament (Invite)</span>
                 </td>
               </tr>
               
               <tr class="date-row">
                 <td colspan="4">
                   <div class="date-header">
-                    <span class="text-strong">December 14, 2025</span>
-                    <span class="dot">•</span>
-                    <span class="text-soft">Sunday</span>
+                    <span class="date-header-day">Sunday</span>
+                    <span class="date-header-sep">-</span>
+                    <span class="date-header-date">December 14, 2025</span>
                   </div>
                 </td>
-              </tr><tr>
+              </tr><tr class="event-row">
                 <td data-label="Date" class="hidden-date"></td>
                 <td data-label="Location">
                   <span class="text-strong">Blue Collar Jiu Jitsu</span><br>
@@ -3378,7 +3429,7 @@
                   <span class="type-pill type-seminar">Seminar</span>
                 </td>
               </tr>
-              <tr>
+              <tr class="event-row">
                 <td data-label="Date" class="hidden-date"></td>
                 <td data-label="Location">
                   <span class="text-strong">Balance Point BJJ</span><br>
@@ -3397,12 +3448,12 @@
               <tr class="date-row">
                 <td colspan="4">
                   <div class="date-header">
-                    <span class="text-strong">December 20, 2025</span>
-                    <span class="dot">•</span>
-                    <span class="text-soft">Saturday</span>
+                    <span class="date-header-day">Saturday</span>
+                    <span class="date-header-sep">-</span>
+                    <span class="date-header-date">December 20, 2025</span>
                   </div>
                 </td>
-              </tr><tr>
+              </tr><tr class="event-row">
                 <td data-label="Date" class="hidden-date"></td>
                 <td data-label="Location">
                   <span class="text-strong">Nostros MMA</span><br>
@@ -3417,7 +3468,7 @@
                   <span class="type-pill type-women">Women's Only</span>
                 </td>
               </tr>
-              <tr>
+              <tr class="event-row">
                 <td data-label="Date" class="hidden-date"></td>
                 <td data-label="Location">
                   <span class="text-strong">Defensive Edge MMA</span><br>
@@ -3436,12 +3487,12 @@
               <tr class="date-row">
                 <td colspan="4">
                   <div class="date-header">
-                    <span class="text-strong">December 28, 2025</span>
-                    <span class="dot">•</span>
-                    <span class="text-soft">Sunday</span>
+                    <span class="date-header-day">Sunday</span>
+                    <span class="date-header-sep">-</span>
+                    <span class="date-header-date">December 28, 2025</span>
                   </div>
                 </td>
-              </tr><tr>
+              </tr><tr class="event-row">
                 <td data-label="Date" class="hidden-date"></td>
                 <td data-label="Location">
                   <span class="text-strong">nan</span><br>
@@ -3460,12 +3511,12 @@
               <tr class="date-row">
                 <td colspan="4">
                   <div class="date-header">
-                    <span class="text-strong">January 3, 2026</span>
-                    <span class="dot">•</span>
-                    <span class="text-soft">Saturday</span>
+                    <span class="date-header-day">Saturday</span>
+                    <span class="date-header-sep">-</span>
+                    <span class="date-header-date">January 3, 2026</span>
                   </div>
                 </td>
-              </tr><tr>
+              </tr><tr class="event-row">
                 <td data-label="Date" class="hidden-date"></td>
                 <td data-label="Location">
                   <span class="text-strong">nan</span><br>
@@ -3480,7 +3531,7 @@
                   <span class="type-pill type-tournament">Tournament</span>
                 </td>
               </tr>
-              <tr>
+              <tr class="event-row">
                 <td data-label="Date" class="hidden-date"></td>
                 <td data-label="Location">
                   <span class="text-strong">Mohegan Sun Arena</span><br>
@@ -3492,19 +3543,19 @@
                   </span>
                 </td>
                 <td data-label="Type">
-                  <span class="type-pill type-pill">Tournament (Invite)</span>
+                  <span class="type-pill type-tournament">Tournament (Invite)</span>
                 </td>
               </tr>
               
               <tr class="date-row">
                 <td colspan="4">
                   <div class="date-header">
-                    <span class="text-strong">January 10, 2026</span>
-                    <span class="dot">•</span>
-                    <span class="text-soft">Saturday</span>
+                    <span class="date-header-day">Saturday</span>
+                    <span class="date-header-sep">-</span>
+                    <span class="date-header-date">January 10, 2026</span>
                   </div>
                 </td>
-              </tr><tr>
+              </tr><tr class="event-row">
                 <td data-label="Date" class="hidden-date"></td>
                 <td data-label="Location">
                   <span class="text-strong">Morselli Jiu Jitsu</span><br>
@@ -3523,12 +3574,12 @@
               <tr class="date-row">
                 <td colspan="4">
                   <div class="date-header">
-                    <span class="text-strong">January 11, 2026</span>
-                    <span class="dot">•</span>
-                    <span class="text-soft">Sunday</span>
+                    <span class="date-header-day">Sunday</span>
+                    <span class="date-header-sep">-</span>
+                    <span class="date-header-date">January 11, 2026</span>
                   </div>
                 </td>
-              </tr><tr>
+              </tr><tr class="event-row">
                 <td data-label="Date" class="hidden-date"></td>
                 <td data-label="Location">
                   <span class="text-strong">RedZone Jiu Jitsu</span><br>
@@ -3547,12 +3598,12 @@
               <tr class="date-row">
                 <td colspan="4">
                   <div class="date-header">
-                    <span class="text-strong">January 17, 2026</span>
-                    <span class="dot">•</span>
-                    <span class="text-soft">Saturday</span>
+                    <span class="date-header-day">Saturday</span>
+                    <span class="date-header-sep">-</span>
+                    <span class="date-header-date">January 17, 2026</span>
                   </div>
                 </td>
-              </tr><tr>
+              </tr><tr class="event-row">
                 <td data-label="Date" class="hidden-date"></td>
                 <td data-label="Location">
                   <span class="text-strong">Integrated Martial Arts</span><br>
@@ -3564,10 +3615,10 @@
                   </span>
                 </td>
                 <td data-label="Type">
-                  <span class="type-pill type-pill">Tournament (Invite)</span>
+                  <span class="type-pill type-tournament">Tournament (Invite)</span>
                 </td>
               </tr>
-              <tr>
+              <tr class="event-row">
                 <td data-label="Date" class="hidden-date"></td>
                 <td data-label="Location">
                   <span class="text-strong">nan</span><br>
@@ -3582,7 +3633,7 @@
                   <span class="type-pill type-tournament">Tournament</span>
                 </td>
               </tr>
-              <tr>
+              <tr class="event-row">
                 <td data-label="Date" class="hidden-date"></td>
                 <td data-label="Location">
                   <span class="text-strong">nan</span><br>
@@ -3594,19 +3645,19 @@
                   </span>
                 </td>
                 <td data-label="Type">
-                  <span class="type-pill type-pill">Tournament (Invite)</span>
+                  <span class="type-pill type-tournament">Tournament (Invite)</span>
                 </td>
               </tr>
               
               <tr class="date-row">
                 <td colspan="4">
                   <div class="date-header">
-                    <span class="text-strong">January 24, 2026</span>
-                    <span class="dot">•</span>
-                    <span class="text-soft">Saturday</span>
+                    <span class="date-header-day">Saturday</span>
+                    <span class="date-header-sep">-</span>
+                    <span class="date-header-date">January 24, 2026</span>
                   </div>
                 </td>
-              </tr><tr>
+              </tr><tr class="event-row">
                 <td data-label="Date" class="hidden-date"></td>
                 <td data-label="Location">
                   <span class="text-strong">Alpha Nerds Facility</span><br>
@@ -3625,12 +3676,12 @@
               <tr class="date-row">
                 <td colspan="4">
                   <div class="date-header">
-                    <span class="text-strong">January 30, 2026</span>
-                    <span class="dot">•</span>
-                    <span class="text-soft">Friday</span>
+                    <span class="date-header-day">Friday</span>
+                    <span class="date-header-sep">-</span>
+                    <span class="date-header-date">January 30, 2026</span>
                   </div>
                 </td>
-              </tr><tr>
+              </tr><tr class="event-row">
                 <td data-label="Date" class="hidden-date"></td>
                 <td data-label="Location">
                   <span class="text-strong">Summit Jiu Jitsu</span><br>
@@ -3649,12 +3700,12 @@
               <tr class="date-row">
                 <td colspan="4">
                   <div class="date-header">
-                    <span class="text-strong">January 31, 2026</span>
-                    <span class="dot">•</span>
-                    <span class="text-soft">Saturday</span>
+                    <span class="date-header-day">Saturday</span>
+                    <span class="date-header-sep">-</span>
+                    <span class="date-header-date">January 31, 2026</span>
                   </div>
                 </td>
-              </tr><tr>
+              </tr><tr class="event-row">
                 <td data-label="Date" class="hidden-date"></td>
                 <td data-label="Location">
                   <span class="text-strong">nan</span><br>
@@ -3673,12 +3724,12 @@
               <tr class="date-row">
                 <td colspan="4">
                   <div class="date-header">
-                    <span class="text-strong">February 8, 2026</span>
-                    <span class="dot">•</span>
-                    <span class="text-soft">Sunday</span>
+                    <span class="date-header-day">Sunday</span>
+                    <span class="date-header-sep">-</span>
+                    <span class="date-header-date">February 8, 2026</span>
                   </div>
                 </td>
-              </tr><tr>
+              </tr><tr class="event-row">
                 <td data-label="Date" class="hidden-date"></td>
                 <td data-label="Location">
                   <span class="text-strong">nan</span><br>
@@ -3697,12 +3748,12 @@
               <tr class="date-row">
                 <td colspan="4">
                   <div class="date-header">
-                    <span class="text-strong">February 14, 2026</span>
-                    <span class="dot">•</span>
-                    <span class="text-soft">Saturday</span>
+                    <span class="date-header-day">Saturday</span>
+                    <span class="date-header-sep">-</span>
+                    <span class="date-header-date">February 14, 2026</span>
                   </div>
                 </td>
-              </tr><tr>
+              </tr><tr class="event-row">
                 <td data-label="Date" class="hidden-date"></td>
                 <td data-label="Location">
                   <span class="text-strong">nan</span><br>
@@ -3721,12 +3772,12 @@
               <tr class="date-row">
                 <td colspan="4">
                   <div class="date-header">
-                    <span class="text-strong">February 21, 2026</span>
-                    <span class="dot">•</span>
-                    <span class="text-soft">Saturday</span>
+                    <span class="date-header-day">Saturday</span>
+                    <span class="date-header-sep">-</span>
+                    <span class="date-header-date">February 21, 2026</span>
                   </div>
                 </td>
-              </tr><tr>
+              </tr><tr class="event-row">
                 <td data-label="Date" class="hidden-date"></td>
                 <td data-label="Location">
                   <span class="text-strong">BTT Boston</span><br>
@@ -3741,7 +3792,7 @@
                   <span class="type-pill type-seminar">Seminar</span>
                 </td>
               </tr>
-              <tr>
+              <tr class="event-row">
                 <td data-label="Date" class="hidden-date"></td>
                 <td data-label="Location">
                   <span class="text-strong">Technique BJJ</span><br>
@@ -3756,7 +3807,7 @@
                   <span class="type-pill type-seminar">Seminar</span>
                 </td>
               </tr>
-              <tr>
+              <tr class="event-row">
                 <td data-label="Date" class="hidden-date"></td>
                 <td data-label="Location">
                   <span class="text-strong">nan</span><br>
@@ -3771,7 +3822,7 @@
                   <span class="type-pill type-tournament">Tournament</span>
                 </td>
               </tr>
-              <tr>
+              <tr class="event-row">
                 <td data-label="Date" class="hidden-date"></td>
                 <td data-label="Location">
                   <span class="text-strong">nan</span><br>
@@ -3783,19 +3834,19 @@
                   </span>
                 </td>
                 <td data-label="Type">
-                  <span class="type-pill type-pill">Tournament (Invite)</span>
+                  <span class="type-pill type-tournament">Tournament (Invite)</span>
                 </td>
               </tr>
               
               <tr class="date-row">
                 <td colspan="4">
                   <div class="date-header">
-                    <span class="text-strong">February 22, 2026</span>
-                    <span class="dot">•</span>
-                    <span class="text-soft">Sunday</span>
+                    <span class="date-header-day">Sunday</span>
+                    <span class="date-header-sep">-</span>
+                    <span class="date-header-date">February 22, 2026</span>
                   </div>
                 </td>
-              </tr><tr>
+              </tr><tr class="event-row">
                 <td data-label="Date" class="hidden-date"></td>
                 <td data-label="Location">
                   <span class="text-strong">Technique BJJ</span><br>
@@ -3814,12 +3865,12 @@
               <tr class="date-row">
                 <td colspan="4">
                   <div class="date-header">
-                    <span class="text-strong">March 8, 2026</span>
-                    <span class="dot">•</span>
-                    <span class="text-soft">Sunday</span>
+                    <span class="date-header-day">Sunday</span>
+                    <span class="date-header-sep">-</span>
+                    <span class="date-header-date">March 8, 2026</span>
                   </div>
                 </td>
-              </tr><tr>
+              </tr><tr class="event-row">
                 <td data-label="Date" class="hidden-date"></td>
                 <td data-label="Location">
                   <span class="text-strong">nan</span><br>
@@ -3838,12 +3889,12 @@
               <tr class="date-row">
                 <td colspan="4">
                   <div class="date-header">
-                    <span class="text-strong">April 4, 2026</span>
-                    <span class="dot">•</span>
-                    <span class="text-soft">Saturday</span>
+                    <span class="date-header-day">Saturday</span>
+                    <span class="date-header-sep">-</span>
+                    <span class="date-header-date">April 4, 2026</span>
                   </div>
                 </td>
-              </tr><tr>
+              </tr><tr class="event-row">
                 <td data-label="Date" class="hidden-date"></td>
                 <td data-label="Location">
                   <span class="text-strong">nan</span><br>
@@ -3862,12 +3913,12 @@
               <tr class="date-row">
                 <td colspan="4">
                   <div class="date-header">
-                    <span class="text-strong">April 11, 2026</span>
-                    <span class="dot">•</span>
-                    <span class="text-soft">Saturday</span>
+                    <span class="date-header-day">Saturday</span>
+                    <span class="date-header-sep">-</span>
+                    <span class="date-header-date">April 11, 2026</span>
                   </div>
                 </td>
-              </tr><tr>
+              </tr><tr class="event-row">
                 <td data-label="Date" class="hidden-date"></td>
                 <td data-label="Location">
                   <span class="text-strong">nan</span><br>
@@ -3886,12 +3937,12 @@
               <tr class="date-row">
                 <td colspan="4">
                   <div class="date-header">
-                    <span class="text-strong">May 2, 2026</span>
-                    <span class="dot">•</span>
-                    <span class="text-soft">Saturday</span>
+                    <span class="date-header-day">Saturday</span>
+                    <span class="date-header-sep">-</span>
+                    <span class="date-header-date">May 2, 2026</span>
                   </div>
                 </td>
-              </tr><tr>
+              </tr><tr class="event-row">
                 <td data-label="Date" class="hidden-date"></td>
                 <td data-label="Location">
                   <span class="text-strong">nan</span><br>
@@ -3910,12 +3961,12 @@
               <tr class="date-row">
                 <td colspan="4">
                   <div class="date-header">
-                    <span class="text-strong">May 23, 2026</span>
-                    <span class="dot">•</span>
-                    <span class="text-soft">Saturday</span>
+                    <span class="date-header-day">Saturday</span>
+                    <span class="date-header-sep">-</span>
+                    <span class="date-header-date">May 23, 2026</span>
                   </div>
                 </td>
-              </tr><tr>
+              </tr><tr class="event-row">
                 <td data-label="Date" class="hidden-date"></td>
                 <td data-label="Location">
                   <span class="text-strong">nan</span><br>
@@ -3934,12 +3985,12 @@
               <tr class="date-row">
                 <td colspan="4">
                   <div class="date-header">
-                    <span class="text-strong">June 21, 2026</span>
-                    <span class="dot">•</span>
-                    <span class="text-soft">Sunday</span>
+                    <span class="date-header-day">Sunday</span>
+                    <span class="date-header-sep">-</span>
+                    <span class="date-header-date">June 21, 2026</span>
                   </div>
                 </td>
-              </tr><tr>
+              </tr><tr class="event-row">
                 <td data-label="Date" class="hidden-date"></td>
                 <td data-label="Location">
                   <span class="text-strong">nan</span><br>
@@ -3958,12 +4009,12 @@
               <tr class="date-row">
                 <td colspan="4">
                   <div class="date-header">
-                    <span class="text-strong">July 11, 2026</span>
-                    <span class="dot">•</span>
-                    <span class="text-soft">Saturday</span>
+                    <span class="date-header-day">Saturday</span>
+                    <span class="date-header-sep">-</span>
+                    <span class="date-header-date">July 11, 2026</span>
                   </div>
                 </td>
-              </tr><tr>
+              </tr><tr class="event-row">
                 <td data-label="Date" class="hidden-date"></td>
                 <td data-label="Location">
                   <span class="text-strong">nan</span><br>
@@ -3982,12 +4033,12 @@
               <tr class="date-row">
                 <td colspan="4">
                   <div class="date-header">
-                    <span class="text-strong">August 7, 2026</span>
-                    <span class="dot">•</span>
-                    <span class="text-soft">Friday</span>
+                    <span class="date-header-day">Friday</span>
+                    <span class="date-header-sep">-</span>
+                    <span class="date-header-date">August 7, 2026</span>
                   </div>
                 </td>
-              </tr><tr>
+              </tr><tr class="event-row">
                 <td data-label="Date" class="hidden-date"></td>
                 <td data-label="Location">
                   <span class="text-strong">nan</span><br>
@@ -4006,12 +4057,12 @@
               <tr class="date-row">
                 <td colspan="4">
                   <div class="date-header">
-                    <span class="text-strong">August 8, 2026</span>
-                    <span class="dot">•</span>
-                    <span class="text-soft">Saturday</span>
+                    <span class="date-header-day">Saturday</span>
+                    <span class="date-header-sep">-</span>
+                    <span class="date-header-date">August 8, 2026</span>
                   </div>
                 </td>
-              </tr><tr>
+              </tr><tr class="event-row">
                 <td data-label="Date" class="hidden-date"></td>
                 <td data-label="Location">
                   <span class="text-strong">nan</span><br>
@@ -4030,12 +4081,12 @@
               <tr class="date-row">
                 <td colspan="4">
                   <div class="date-header">
-                    <span class="text-strong">August 9, 2026</span>
-                    <span class="dot">•</span>
-                    <span class="text-soft">Sunday</span>
+                    <span class="date-header-day">Sunday</span>
+                    <span class="date-header-sep">-</span>
+                    <span class="date-header-date">August 9, 2026</span>
                   </div>
                 </td>
-              </tr><tr>
+              </tr><tr class="event-row">
                 <td data-label="Date" class="hidden-date"></td>
                 <td data-label="Location">
                   <span class="text-strong">nan</span><br>
@@ -4054,12 +4105,12 @@
               <tr class="date-row">
                 <td colspan="4">
                   <div class="date-header">
-                    <span class="text-strong">August 15, 2026</span>
-                    <span class="dot">•</span>
-                    <span class="text-soft">Saturday</span>
+                    <span class="date-header-day">Saturday</span>
+                    <span class="date-header-sep">-</span>
+                    <span class="date-header-date">August 15, 2026</span>
                   </div>
                 </td>
-              </tr><tr>
+              </tr><tr class="event-row">
                 <td data-label="Date" class="hidden-date"></td>
                 <td data-label="Location">
                   <span class="text-strong">nan</span><br>
@@ -4078,12 +4129,12 @@
               <tr class="date-row">
                 <td colspan="4">
                   <div class="date-header">
-                    <span class="text-strong">September 5, 2026</span>
-                    <span class="dot">•</span>
-                    <span class="text-soft">Saturday</span>
+                    <span class="date-header-day">Saturday</span>
+                    <span class="date-header-sep">-</span>
+                    <span class="date-header-date">September 5, 2026</span>
                   </div>
                 </td>
-              </tr><tr>
+              </tr><tr class="event-row">
                 <td data-label="Date" class="hidden-date"></td>
                 <td data-label="Location">
                   <span class="text-strong">nan</span><br>
@@ -4102,12 +4153,12 @@
               <tr class="date-row">
                 <td colspan="4">
                   <div class="date-header">
-                    <span class="text-strong">October 10, 2026</span>
-                    <span class="dot">•</span>
-                    <span class="text-soft">Saturday</span>
+                    <span class="date-header-day">Saturday</span>
+                    <span class="date-header-sep">-</span>
+                    <span class="date-header-date">October 10, 2026</span>
                   </div>
                 </td>
-              </tr><tr>
+              </tr><tr class="event-row">
                 <td data-label="Date" class="hidden-date"></td>
                 <td data-label="Location">
                   <span class="text-strong">nan</span><br>
@@ -4126,12 +4177,12 @@
               <tr class="date-row">
                 <td colspan="4">
                   <div class="date-header">
-                    <span class="text-strong">November 7, 2026</span>
-                    <span class="dot">•</span>
-                    <span class="text-soft">Saturday</span>
+                    <span class="date-header-day">Saturday</span>
+                    <span class="date-header-sep">-</span>
+                    <span class="date-header-date">November 7, 2026</span>
                   </div>
                 </td>
-              </tr><tr>
+              </tr><tr class="event-row">
                 <td data-label="Date" class="hidden-date"></td>
                 <td data-label="Location">
                   <span class="text-strong">nan</span><br>
