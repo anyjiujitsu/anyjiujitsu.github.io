@@ -43,7 +43,7 @@
       color: var(--text);
       display: flex;
       justify-content: center;
-      padding: 32px 16px 40px;
+      padding: 32px 16px;
     }
 
     .shell {
@@ -408,6 +408,7 @@
       color: var(--accent);
     }
 
+    
     .chip-outline {
       border-radius: 999px;
       border: 1px solid rgba(75, 85, 99, 0.9);
@@ -417,6 +418,44 @@
       letter-spacing: 0.07em;
       color: #9ca3af;
     }
+
+    .type-pill {
+      display: inline-flex;
+      align-items: center;
+      border-radius: 999px;
+      padding: 2px 8px;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+    .type-seminar {
+      background: rgba(96, 165, 250, 0.18);
+      color: #bfdbfe;
+      border: 1px solid rgba(59, 130, 246, 0.6);
+    }
+    .type-women {
+      background: rgba(244, 114, 182, 0.20);
+      color: #f9a8d4;
+      border: 1px solid rgba(236, 72, 153, 0.7);
+    }
+    .type-openmat {
+      background: rgba(52, 211, 153, 0.18);
+      color: #a7f3d0;
+      border: 1px solid rgba(16, 185, 129, 0.7);
+    }
+    .type-openhouse {
+      background: rgba(251, 191, 36, 0.18);
+      color: #fde68a;
+      border: 1px solid rgba(245, 158, 11, 0.7);
+    }
+    .type-tournament {
+      background: rgba(248, 113, 113, 0.18);
+      color: #fecaca;
+      border: 1px solid rgba(239, 68, 68, 0.7);
+    }
+
 
     footer {
       margin-top: 10px;
@@ -430,7 +469,7 @@
 
     @media (max-width: 768px) {
       body {
-        padding: 24px 10px 32px;
+        padding: 16px 10px;
       }
 
       .shell {
@@ -504,63 +543,40 @@
       }
     }
   
-    @supports (padding: max(0px)) {
-      body {
-        padding-top: max(24px, env(safe-area-inset-top));
-        padding-bottom: max(32px, env(safe-area-inset-bottom));
+    @media (max-width: 600px) {
+      .table-wrapper {
+        overflow-x: auto;
       }
-    }
-
-    @media (max-width: 480px) {
-      .shell {
-        padding: 12px 10px 16px;
-        border-radius: 18px;
-        box-shadow: 0 10px 24px rgba(0, 0, 0, 0.65);
+      table {
+        min-width: 680px;
+        border-collapse: collapse;
       }
-
+      tbody tr {
+        display: table-row;
+      }
+      td, th {
+        padding: 4px 6px;
+        font-size: 11px;
+        white-space: nowrap;
+      }
+      td::before {
+        display: none;
+      }
+      .location-cell strong,
+      .location-cell span,
+      .tag,
+      .tag-chip,
+      .type-pill {
+        white-space: nowrap;
+      }
       header {
-        gap: 8px;
+        gap: 6px;
       }
-
       h1 {
         font-size: 20px;
       }
-
       .subtitle {
         font-size: 12px;
-      }
-
-      .tabs-header {
-        gap: 10px;
-      }
-
-      .tabs-tools {
-        flex-direction: column;
-        align-items: stretch;
-        gap: 6px;
-      }
-
-      .tag-chip {
-        font-size: 10px;
-        align-self: flex-start;
-      }
-
-      tbody tr {
-        margin-bottom: 10px;
-      }
-
-      td {
-        flex-direction: column;
-        align-items: flex-start;
-      }
-
-      td::before {
-        flex: 0 0 auto;
-        margin-bottom: 2px;
-      }
-
-      td > * {
-        text-align: left;
       }
     }
 </style>
@@ -654,7 +670,7 @@
                   </span>
                 </td>
                 <td data-label="Type">
-                  <span class="chip-outline">Seminar</span>
+                  <span class="type-pill type-seminar">Seminar</span>
                 </td>
               </tr>
               <tr>
@@ -672,7 +688,7 @@
                   </span>
                 </td>
                 <td data-label="Type">
-                  <span class="chip-outline">Seminar</span>
+                  <span class="type-pill type-seminar">Seminar</span>
                 </td>
               </tr>
               <tr>
@@ -690,7 +706,7 @@
                   </span>
                 </td>
                 <td data-label="Type">
-                  <span class="chip-outline">Seminar</span>
+                  <span class="type-pill type-seminar">Seminar</span>
                 </td>
               </tr>
               <tr>
@@ -708,7 +724,7 @@
                   </span>
                 </td>
                 <td data-label="Type">
-                  <span class="chip-outline">Seminar</span>
+                  <span class="type-pill type-seminar">Seminar</span>
                 </td>
               </tr>
               <tr>
@@ -726,7 +742,7 @@
                   </span>
                 </td>
                 <td data-label="Type">
-                  <span class="chip-outline">Seminar</span>
+                  <span class="type-pill type-seminar">Seminar</span>
                 </td>
               </tr>
               <tr>
@@ -744,7 +760,7 @@
                   </span>
                 </td>
                 <td data-label="Type">
-                  <span class="chip-outline">Seminar</span>
+                  <span class="type-pill type-seminar">Seminar</span>
                 </td>
               </tr>
               <tr>
@@ -762,7 +778,7 @@
                   </span>
                 </td>
                 <td data-label="Type">
-                  <span class="chip-outline">Seminar</span>
+                  <span class="type-pill type-seminar">Seminar</span>
                 </td>
               </tr>
               <tr>
@@ -780,7 +796,7 @@
                   </span>
                 </td>
                 <td data-label="Type">
-                  <span class="chip-outline">Open House</span>
+                  <span class="type-pill type-openhouse">Open House</span>
                 </td>
               </tr>
               <tr>
@@ -798,7 +814,7 @@
                   </span>
                 </td>
                 <td data-label="Type">
-                  <span class="chip-outline">Seminar</span>
+                  <span class="type-pill type-seminar">Seminar</span>
                 </td>
               </tr>
               <tr>
@@ -816,7 +832,7 @@
                   </span>
                 </td>
                 <td data-label="Type">
-                  <span class="chip-outline">Seminar</span>
+                  <span class="type-pill type-seminar">Seminar</span>
                 </td>
               </tr>
               <tr>
@@ -834,7 +850,7 @@
                   </span>
                 </td>
                 <td data-label="Type">
-                  <span class="chip-outline">Women's Only</span>
+                  <span class="type-pill type-women">Women's Only</span>
                 </td>
               </tr>
               <tr>
@@ -852,7 +868,7 @@
                   </span>
                 </td>
                 <td data-label="Type">
-                  <span class="chip-outline">Seminar</span>
+                  <span class="type-pill type-seminar">Seminar</span>
                 </td>
               </tr>
               <tr>
@@ -870,7 +886,7 @@
                   </span>
                 </td>
                 <td data-label="Type">
-                  <span class="chip-outline">Charity Event</span>
+                  <span class="type-pill type-pill">Charity Event</span>
                 </td>
               </tr>
               <tr>
@@ -888,7 +904,7 @@
                   </span>
                 </td>
                 <td data-label="Type">
-                  <span class="chip-outline">Tournament</span>
+                  <span class="type-pill type-tournament">Tournament</span>
                 </td>
               </tr>
               <tr>
@@ -906,7 +922,7 @@
                   </span>
                 </td>
                 <td data-label="Type">
-                  <span class="chip-outline">Workshop</span>
+                  <span class="type-pill type-pill">Workshop</span>
                 </td>
               </tr>
               <tr>
@@ -924,7 +940,7 @@
                   </span>
                 </td>
                 <td data-label="Type">
-                  <span class="chip-outline">Women's Only</span>
+                  <span class="type-pill type-women">Women's Only</span>
                 </td>
               </tr>
               <tr>
@@ -942,7 +958,7 @@
                   </span>
                 </td>
                 <td data-label="Type">
-                  <span class="chip-outline">Women's Only</span>
+                  <span class="type-pill type-women">Women's Only</span>
                 </td>
               </tr>
               <tr>
@@ -960,7 +976,7 @@
                   </span>
                 </td>
                 <td data-label="Type">
-                  <span class="chip-outline">Seminar</span>
+                  <span class="type-pill type-seminar">Seminar</span>
                 </td>
               </tr>
               <tr>
@@ -978,7 +994,7 @@
                   </span>
                 </td>
                 <td data-label="Type">
-                  <span class="chip-outline">Seminar</span>
+                  <span class="type-pill type-seminar">Seminar</span>
                 </td>
               </tr>
               <tr>
@@ -996,7 +1012,7 @@
                   </span>
                 </td>
                 <td data-label="Type">
-                  <span class="chip-outline">Seminar</span>
+                  <span class="type-pill type-seminar">Seminar</span>
                 </td>
               </tr>
               <tr>
@@ -1014,7 +1030,7 @@
                   </span>
                 </td>
                 <td data-label="Type">
-                  <span class="chip-outline">Open Mat</span>
+                  <span class="type-pill type-openmat">Open Mat</span>
                 </td>
               </tr>
               <tr>
@@ -1032,7 +1048,7 @@
                   </span>
                 </td>
                 <td data-label="Type">
-                  <span class="chip-outline">Seminar</span>
+                  <span class="type-pill type-seminar">Seminar</span>
                 </td>
               </tr>
               <tr>
@@ -1050,7 +1066,7 @@
                   </span>
                 </td>
                 <td data-label="Type">
-                  <span class="chip-outline">Women's Only</span>
+                  <span class="type-pill type-women">Women's Only</span>
                 </td>
               </tr>
               <tr>
@@ -1068,7 +1084,7 @@
                   </span>
                 </td>
                 <td data-label="Type">
-                  <span class="chip-outline">Women's Only</span>
+                  <span class="type-pill type-women">Women's Only</span>
                 </td>
               </tr>
               <tr>
@@ -1086,7 +1102,7 @@
                   </span>
                 </td>
                 <td data-label="Type">
-                  <span class="chip-outline">Women's Only</span>
+                  <span class="type-pill type-women">Women's Only</span>
                 </td>
               </tr>
               <tr>
@@ -1104,7 +1120,7 @@
                   </span>
                 </td>
                 <td data-label="Type">
-                  <span class="chip-outline">Seminar</span>
+                  <span class="type-pill type-seminar">Seminar</span>
                 </td>
               </tr>
               <tr>
@@ -1122,7 +1138,7 @@
                   </span>
                 </td>
                 <td data-label="Type">
-                  <span class="chip-outline">Seminar</span>
+                  <span class="type-pill type-seminar">Seminar</span>
                 </td>
               </tr>
               <tr>
@@ -1140,7 +1156,7 @@
                   </span>
                 </td>
                 <td data-label="Type">
-                  <span class="chip-outline">Open House</span>
+                  <span class="type-pill type-openhouse">Open House</span>
                 </td>
               </tr>
               <tr>
@@ -1158,7 +1174,7 @@
                   </span>
                 </td>
                 <td data-label="Type">
-                  <span class="chip-outline">Tournament (Invite)</span>
+                  <span class="type-pill type-pill">Tournament (Invite)</span>
                 </td>
               </tr>
               <tr>
@@ -1176,7 +1192,7 @@
                   </span>
                 </td>
                 <td data-label="Type">
-                  <span class="chip-outline">Seminar</span>
+                  <span class="type-pill type-seminar">Seminar</span>
                 </td>
               </tr>
               <tr>
@@ -1194,7 +1210,7 @@
                   </span>
                 </td>
                 <td data-label="Type">
-                  <span class="chip-outline">Seminar</span>
+                  <span class="type-pill type-seminar">Seminar</span>
                 </td>
               </tr>
               <tr>
@@ -1212,7 +1228,7 @@
                   </span>
                 </td>
                 <td data-label="Type">
-                  <span class="chip-outline">Seminar</span>
+                  <span class="type-pill type-seminar">Seminar</span>
                 </td>
               </tr>
               <tr>
@@ -1230,7 +1246,7 @@
                   </span>
                 </td>
                 <td data-label="Type">
-                  <span class="chip-outline">Seminar</span>
+                  <span class="type-pill type-seminar">Seminar</span>
                 </td>
               </tr>
               <tr>
@@ -1248,7 +1264,7 @@
                   </span>
                 </td>
                 <td data-label="Type">
-                  <span class="chip-outline">Kids Event</span>
+                  <span class="type-pill type-pill">Kids Event</span>
                 </td>
               </tr>
               <tr>
@@ -1266,7 +1282,7 @@
                   </span>
                 </td>
                 <td data-label="Type">
-                  <span class="chip-outline">Kids Event</span>
+                  <span class="type-pill type-pill">Kids Event</span>
                 </td>
               </tr>
               <tr>
@@ -1284,7 +1300,7 @@
                   </span>
                 </td>
                 <td data-label="Type">
-                  <span class="chip-outline">Seminar</span>
+                  <span class="type-pill type-seminar">Seminar</span>
                 </td>
               </tr>
               <tr>
@@ -1302,7 +1318,7 @@
                   </span>
                 </td>
                 <td data-label="Type">
-                  <span class="chip-outline">Seminar</span>
+                  <span class="type-pill type-seminar">Seminar</span>
                 </td>
               </tr>
               <tr>
@@ -1320,7 +1336,7 @@
                   </span>
                 </td>
                 <td data-label="Type">
-                  <span class="chip-outline">Seminar</span>
+                  <span class="type-pill type-seminar">Seminar</span>
                 </td>
               </tr>
               <tr>
@@ -1338,7 +1354,7 @@
                   </span>
                 </td>
                 <td data-label="Type">
-                  <span class="chip-outline">Tournament</span>
+                  <span class="type-pill type-tournament">Tournament</span>
                 </td>
               </tr>
               <tr>
@@ -1356,7 +1372,7 @@
                   </span>
                 </td>
                 <td data-label="Type">
-                  <span class="chip-outline">Seminar</span>
+                  <span class="type-pill type-seminar">Seminar</span>
                 </td>
               </tr>
               <tr>
@@ -1374,7 +1390,7 @@
                   </span>
                 </td>
                 <td data-label="Type">
-                  <span class="chip-outline">Seminar</span>
+                  <span class="type-pill type-seminar">Seminar</span>
                 </td>
               </tr>
               <tr>
@@ -1392,7 +1408,7 @@
                   </span>
                 </td>
                 <td data-label="Type">
-                  <span class="chip-outline">Women's Only</span>
+                  <span class="type-pill type-women">Women's Only</span>
                 </td>
               </tr>
               <tr>
@@ -1410,7 +1426,7 @@
                   </span>
                 </td>
                 <td data-label="Type">
-                  <span class="chip-outline">Seminar</span>
+                  <span class="type-pill type-seminar">Seminar</span>
                 </td>
               </tr>
               <tr>
@@ -1428,7 +1444,7 @@
                   </span>
                 </td>
                 <td data-label="Type">
-                  <span class="chip-outline">Tournament</span>
+                  <span class="type-pill type-tournament">Tournament</span>
                 </td>
               </tr>
               <tr>
@@ -1446,7 +1462,7 @@
                   </span>
                 </td>
                 <td data-label="Type">
-                  <span class="chip-outline">Tournament</span>
+                  <span class="type-pill type-tournament">Tournament</span>
                 </td>
               </tr>
               <tr>
@@ -1464,7 +1480,7 @@
                   </span>
                 </td>
                 <td data-label="Type">
-                  <span class="chip-outline">Workshop</span>
+                  <span class="type-pill type-pill">Workshop</span>
                 </td>
               </tr>
               <tr>
@@ -1482,7 +1498,7 @@
                   </span>
                 </td>
                 <td data-label="Type">
-                  <span class="chip-outline">Seminar</span>
+                  <span class="type-pill type-seminar">Seminar</span>
                 </td>
               </tr>
               <tr>
@@ -1500,7 +1516,7 @@
                   </span>
                 </td>
                 <td data-label="Type">
-                  <span class="chip-outline">Seminar</span>
+                  <span class="type-pill type-seminar">Seminar</span>
                 </td>
               </tr>
               <tr>
@@ -1518,7 +1534,7 @@
                   </span>
                 </td>
                 <td data-label="Type">
-                  <span class="chip-outline">Seminar</span>
+                  <span class="type-pill type-seminar">Seminar</span>
                 </td>
               </tr>
               <tr>
@@ -1536,7 +1552,7 @@
                   </span>
                 </td>
                 <td data-label="Type">
-                  <span class="chip-outline">Open Mat</span>
+                  <span class="type-pill type-openmat">Open Mat</span>
                 </td>
               </tr>
               <tr>
@@ -1554,7 +1570,7 @@
                   </span>
                 </td>
                 <td data-label="Type">
-                  <span class="chip-outline">Seminar</span>
+                  <span class="type-pill type-seminar">Seminar</span>
                 </td>
               </tr>
               <tr>
@@ -1572,7 +1588,7 @@
                   </span>
                 </td>
                 <td data-label="Type">
-                  <span class="chip-outline">Tournament</span>
+                  <span class="type-pill type-tournament">Tournament</span>
                 </td>
               </tr>
               <tr>
@@ -1590,7 +1606,7 @@
                   </span>
                 </td>
                 <td data-label="Type">
-                  <span class="chip-outline">Charity Event</span>
+                  <span class="type-pill type-pill">Charity Event</span>
                 </td>
               </tr>
               <tr>
@@ -1608,7 +1624,7 @@
                   </span>
                 </td>
                 <td data-label="Type">
-                  <span class="chip-outline">Tournament (Invite)</span>
+                  <span class="type-pill type-pill">Tournament (Invite)</span>
                 </td>
               </tr>
               <tr>
@@ -1626,7 +1642,7 @@
                   </span>
                 </td>
                 <td data-label="Type">
-                  <span class="chip-outline">Grand Opening</span>
+                  <span class="type-pill type-pill">Grand Opening</span>
                 </td>
               </tr>
               <tr>
@@ -1644,7 +1660,7 @@
                   </span>
                 </td>
                 <td data-label="Type">
-                  <span class="chip-outline">Open Mat</span>
+                  <span class="type-pill type-openmat">Open Mat</span>
                 </td>
               </tr>
               <tr>
@@ -1662,7 +1678,7 @@
                   </span>
                 </td>
                 <td data-label="Type">
-                  <span class="chip-outline">Seminar</span>
+                  <span class="type-pill type-seminar">Seminar</span>
                 </td>
               </tr>
               <tr>
@@ -1680,7 +1696,7 @@
                   </span>
                 </td>
                 <td data-label="Type">
-                  <span class="chip-outline">Seminar</span>
+                  <span class="type-pill type-seminar">Seminar</span>
                 </td>
               </tr>
               <tr>
@@ -1698,7 +1714,7 @@
                   </span>
                 </td>
                 <td data-label="Type">
-                  <span class="chip-outline">Open House</span>
+                  <span class="type-pill type-openhouse">Open House</span>
                 </td>
               </tr>
               <tr>
@@ -1716,7 +1732,7 @@
                   </span>
                 </td>
                 <td data-label="Type">
-                  <span class="chip-outline">Open Mat</span>
+                  <span class="type-pill type-openmat">Open Mat</span>
                 </td>
               </tr>
               <tr>
@@ -1734,7 +1750,7 @@
                   </span>
                 </td>
                 <td data-label="Type">
-                  <span class="chip-outline">Workshop</span>
+                  <span class="type-pill type-pill">Workshop</span>
                 </td>
               </tr>
               <tr>
@@ -1752,7 +1768,7 @@
                   </span>
                 </td>
                 <td data-label="Type">
-                  <span class="chip-outline">Women's Only</span>
+                  <span class="type-pill type-women">Women's Only</span>
                 </td>
               </tr>
               <tr>
@@ -1770,7 +1786,7 @@
                   </span>
                 </td>
                 <td data-label="Type">
-                  <span class="chip-outline">Women's Only</span>
+                  <span class="type-pill type-women">Women's Only</span>
                 </td>
               </tr>
               <tr>
@@ -1788,7 +1804,7 @@
                   </span>
                 </td>
                 <td data-label="Type">
-                  <span class="chip-outline">Seminar</span>
+                  <span class="type-pill type-seminar">Seminar</span>
                 </td>
               </tr>
               <tr>
@@ -1806,7 +1822,7 @@
                   </span>
                 </td>
                 <td data-label="Type">
-                  <span class="chip-outline">Seminar</span>
+                  <span class="type-pill type-seminar">Seminar</span>
                 </td>
               </tr>
               <tr>
@@ -1824,7 +1840,7 @@
                   </span>
                 </td>
                 <td data-label="Type">
-                  <span class="chip-outline">Seminar</span>
+                  <span class="type-pill type-seminar">Seminar</span>
                 </td>
               </tr>
               <tr>
@@ -1842,7 +1858,7 @@
                   </span>
                 </td>
                 <td data-label="Type">
-                  <span class="chip-outline">Seminar</span>
+                  <span class="type-pill type-seminar">Seminar</span>
                 </td>
               </tr>
               <tr>
@@ -1860,7 +1876,7 @@
                   </span>
                 </td>
                 <td data-label="Type">
-                  <span class="chip-outline">Seminar</span>
+                  <span class="type-pill type-seminar">Seminar</span>
                 </td>
               </tr>
               <tr>
@@ -1878,7 +1894,7 @@
                   </span>
                 </td>
                 <td data-label="Type">
-                  <span class="chip-outline">Tournament</span>
+                  <span class="type-pill type-tournament">Tournament</span>
                 </td>
               </tr>
               <tr>
@@ -1896,7 +1912,7 @@
                   </span>
                 </td>
                 <td data-label="Type">
-                  <span class="chip-outline">Seminar</span>
+                  <span class="type-pill type-seminar">Seminar</span>
                 </td>
               </tr>
               <tr>
@@ -1914,7 +1930,7 @@
                   </span>
                 </td>
                 <td data-label="Type">
-                  <span class="chip-outline">Seminar</span>
+                  <span class="type-pill type-seminar">Seminar</span>
                 </td>
               </tr>
               <tr>
@@ -1932,7 +1948,7 @@
                   </span>
                 </td>
                 <td data-label="Type">
-                  <span class="chip-outline">Seminar</span>
+                  <span class="type-pill type-seminar">Seminar</span>
                 </td>
               </tr>
               <tr>
@@ -1950,7 +1966,7 @@
                   </span>
                 </td>
                 <td data-label="Type">
-                  <span class="chip-outline">Seminar</span>
+                  <span class="type-pill type-seminar">Seminar</span>
                 </td>
               </tr>
               <tr>
@@ -1968,7 +1984,7 @@
                   </span>
                 </td>
                 <td data-label="Type">
-                  <span class="chip-outline">Seminar</span>
+                  <span class="type-pill type-seminar">Seminar</span>
                 </td>
               </tr>
               <tr>
@@ -1986,7 +2002,7 @@
                   </span>
                 </td>
                 <td data-label="Type">
-                  <span class="chip-outline">Tournament</span>
+                  <span class="type-pill type-tournament">Tournament</span>
                 </td>
               </tr>
               <tr>
@@ -2004,7 +2020,7 @@
                   </span>
                 </td>
                 <td data-label="Type">
-                  <span class="chip-outline">Charity Event</span>
+                  <span class="type-pill type-pill">Charity Event</span>
                 </td>
               </tr>
               <tr>
@@ -2022,7 +2038,7 @@
                   </span>
                 </td>
                 <td data-label="Type">
-                  <span class="chip-outline">Charity Event</span>
+                  <span class="type-pill type-pill">Charity Event</span>
                 </td>
               </tr>
               <tr>
@@ -2040,7 +2056,7 @@
                   </span>
                 </td>
                 <td data-label="Type">
-                  <span class="chip-outline">Open Mat</span>
+                  <span class="type-pill type-openmat">Open Mat</span>
                 </td>
               </tr>
               <tr>
@@ -2058,7 +2074,7 @@
                   </span>
                 </td>
                 <td data-label="Type">
-                  <span class="chip-outline">Workshop</span>
+                  <span class="type-pill type-pill">Workshop</span>
                 </td>
               </tr>
               <tr>
@@ -2076,7 +2092,7 @@
                   </span>
                 </td>
                 <td data-label="Type">
-                  <span class="chip-outline">Seminar</span>
+                  <span class="type-pill type-seminar">Seminar</span>
                 </td>
               </tr>
               <tr>
@@ -2094,7 +2110,7 @@
                   </span>
                 </td>
                 <td data-label="Type">
-                  <span class="chip-outline">Tournament</span>
+                  <span class="type-pill type-tournament">Tournament</span>
                 </td>
               </tr>
               <tr>
@@ -2112,7 +2128,7 @@
                   </span>
                 </td>
                 <td data-label="Type">
-                  <span class="chip-outline">Seminar</span>
+                  <span class="type-pill type-seminar">Seminar</span>
                 </td>
               </tr>
               <tr>
@@ -2130,7 +2146,7 @@
                   </span>
                 </td>
                 <td data-label="Type">
-                  <span class="chip-outline">Women's Only</span>
+                  <span class="type-pill type-women">Women's Only</span>
                 </td>
               </tr>
               <tr>
@@ -2148,7 +2164,7 @@
                   </span>
                 </td>
                 <td data-label="Type">
-                  <span class="chip-outline">Seminar</span>
+                  <span class="type-pill type-seminar">Seminar</span>
                 </td>
               </tr>
               <tr>
@@ -2166,7 +2182,7 @@
                   </span>
                 </td>
                 <td data-label="Type">
-                  <span class="chip-outline">Seminar</span>
+                  <span class="type-pill type-seminar">Seminar</span>
                 </td>
               </tr>
               <tr>
@@ -2184,7 +2200,7 @@
                   </span>
                 </td>
                 <td data-label="Type">
-                  <span class="chip-outline">Workshop</span>
+                  <span class="type-pill type-pill">Workshop</span>
                 </td>
               </tr>
               <tr>
@@ -2202,7 +2218,7 @@
                   </span>
                 </td>
                 <td data-label="Type">
-                  <span class="chip-outline">Women's Only</span>
+                  <span class="type-pill type-women">Women's Only</span>
                 </td>
               </tr>
               <tr>
@@ -2220,7 +2236,7 @@
                   </span>
                 </td>
                 <td data-label="Type">
-                  <span class="chip-outline">Tournament (Invite)</span>
+                  <span class="type-pill type-pill">Tournament (Invite)</span>
                 </td>
               </tr>
               <tr>
@@ -2238,7 +2254,7 @@
                   </span>
                 </td>
                 <td data-label="Type">
-                  <span class="chip-outline">Women's Only</span>
+                  <span class="type-pill type-women">Women's Only</span>
                 </td>
               </tr>
               <tr>
@@ -2256,7 +2272,7 @@
                   </span>
                 </td>
                 <td data-label="Type">
-                  <span class="chip-outline">Seminar</span>
+                  <span class="type-pill type-seminar">Seminar</span>
                 </td>
               </tr>
               <tr>
@@ -2274,7 +2290,7 @@
                   </span>
                 </td>
                 <td data-label="Type">
-                  <span class="chip-outline">Tournament (Invite)</span>
+                  <span class="type-pill type-pill">Tournament (Invite)</span>
                 </td>
               </tr>
               <tr>
@@ -2292,7 +2308,7 @@
                   </span>
                 </td>
                 <td data-label="Type">
-                  <span class="chip-outline">Seminar</span>
+                  <span class="type-pill type-seminar">Seminar</span>
                 </td>
               </tr>
               <tr>
@@ -2310,7 +2326,7 @@
                   </span>
                 </td>
                 <td data-label="Type">
-                  <span class="chip-outline">Seminar</span>
+                  <span class="type-pill type-seminar">Seminar</span>
                 </td>
               </tr>
               <tr>
@@ -2328,7 +2344,7 @@
                   </span>
                 </td>
                 <td data-label="Type">
-                  <span class="chip-outline">Seminar</span>
+                  <span class="type-pill type-seminar">Seminar</span>
                 </td>
               </tr>
               <tr>
@@ -2346,7 +2362,7 @@
                   </span>
                 </td>
                 <td data-label="Type">
-                  <span class="chip-outline">Seminar</span>
+                  <span class="type-pill type-seminar">Seminar</span>
                 </td>
               </tr>
               <tr>
@@ -2364,7 +2380,7 @@
                   </span>
                 </td>
                 <td data-label="Type">
-                  <span class="chip-outline">Seminar</span>
+                  <span class="type-pill type-seminar">Seminar</span>
                 </td>
               </tr>
               <tr>
@@ -2382,7 +2398,7 @@
                   </span>
                 </td>
                 <td data-label="Type">
-                  <span class="chip-outline">Tournament (Invite)</span>
+                  <span class="type-pill type-pill">Tournament (Invite)</span>
                 </td>
               </tr>
               <tr>
@@ -2400,7 +2416,7 @@
                   </span>
                 </td>
                 <td data-label="Type">
-                  <span class="chip-outline">Open Mat</span>
+                  <span class="type-pill type-openmat">Open Mat</span>
                 </td>
               </tr>
               <tr>
@@ -2418,7 +2434,7 @@
                   </span>
                 </td>
                 <td data-label="Type">
-                  <span class="chip-outline">Seminar</span>
+                  <span class="type-pill type-seminar">Seminar</span>
                 </td>
               </tr>
               <tr>
@@ -2436,7 +2452,7 @@
                   </span>
                 </td>
                 <td data-label="Type">
-                  <span class="chip-outline">Workshop</span>
+                  <span class="type-pill type-pill">Workshop</span>
                 </td>
               </tr>
               <tr>
@@ -2454,7 +2470,7 @@
                   </span>
                 </td>
                 <td data-label="Type">
-                  <span class="chip-outline">Open Mat</span>
+                  <span class="type-pill type-openmat">Open Mat</span>
                 </td>
               </tr>
               <tr>
@@ -2472,7 +2488,7 @@
                   </span>
                 </td>
                 <td data-label="Type">
-                  <span class="chip-outline">Open Mat</span>
+                  <span class="type-pill type-openmat">Open Mat</span>
                 </td>
               </tr>
               <tr>
@@ -2490,7 +2506,7 @@
                   </span>
                 </td>
                 <td data-label="Type">
-                  <span class="chip-outline">Open Mat</span>
+                  <span class="type-pill type-openmat">Open Mat</span>
                 </td>
               </tr>
               <tr>
@@ -2508,7 +2524,7 @@
                   </span>
                 </td>
                 <td data-label="Type">
-                  <span class="chip-outline">Open Mat</span>
+                  <span class="type-pill type-openmat">Open Mat</span>
                 </td>
               </tr>
               <tr>
@@ -2526,7 +2542,7 @@
                   </span>
                 </td>
                 <td data-label="Type">
-                  <span class="chip-outline">Open Mat</span>
+                  <span class="type-pill type-openmat">Open Mat</span>
                 </td>
               </tr>
               <tr>
@@ -2544,7 +2560,7 @@
                   </span>
                 </td>
                 <td data-label="Type">
-                  <span class="chip-outline">Charity Event</span>
+                  <span class="type-pill type-pill">Charity Event</span>
                 </td>
               </tr>
               <tr>
@@ -2562,7 +2578,7 @@
                   </span>
                 </td>
                 <td data-label="Type">
-                  <span class="chip-outline">Charity Event</span>
+                  <span class="type-pill type-pill">Charity Event</span>
                 </td>
               </tr>
               <tr>
@@ -2580,7 +2596,7 @@
                   </span>
                 </td>
                 <td data-label="Type">
-                  <span class="chip-outline">Open Mat</span>
+                  <span class="type-pill type-openmat">Open Mat</span>
                 </td>
               </tr>
               <tr>
@@ -2598,7 +2614,7 @@
                   </span>
                 </td>
                 <td data-label="Type">
-                  <span class="chip-outline">Open Mat</span>
+                  <span class="type-pill type-openmat">Open Mat</span>
                 </td>
               </tr>
               <tr>
@@ -2616,7 +2632,7 @@
                   </span>
                 </td>
                 <td data-label="Type">
-                  <span class="chip-outline">Open Mat</span>
+                  <span class="type-pill type-openmat">Open Mat</span>
                 </td>
               </tr>
               <tr>
@@ -2634,7 +2650,7 @@
                   </span>
                 </td>
                 <td data-label="Type">
-                  <span class="chip-outline">Open Mat</span>
+                  <span class="type-pill type-openmat">Open Mat</span>
                 </td>
               </tr>
               <tr>
@@ -2652,7 +2668,7 @@
                   </span>
                 </td>
                 <td data-label="Type">
-                  <span class="chip-outline">Open Mat</span>
+                  <span class="type-pill type-openmat">Open Mat</span>
                 </td>
               </tr>
               <tr>
@@ -2670,7 +2686,7 @@
                   </span>
                 </td>
                 <td data-label="Type">
-                  <span class="chip-outline">Open Mat</span>
+                  <span class="type-pill type-openmat">Open Mat</span>
                 </td>
               </tr>
               <tr>
@@ -2688,7 +2704,7 @@
                   </span>
                 </td>
                 <td data-label="Type">
-                  <span class="chip-outline">Open Mat</span>
+                  <span class="type-pill type-openmat">Open Mat</span>
                 </td>
               </tr>
               <tr>
@@ -2706,7 +2722,7 @@
                   </span>
                 </td>
                 <td data-label="Type">
-                  <span class="chip-outline">Open Mat</span>
+                  <span class="type-pill type-openmat">Open Mat</span>
                 </td>
               </tr>
               <tr>
@@ -2724,7 +2740,7 @@
                   </span>
                 </td>
                 <td data-label="Type">
-                  <span class="chip-outline">Open Mat</span>
+                  <span class="type-pill type-openmat">Open Mat</span>
                 </td>
               </tr>
               <tr>
@@ -2742,7 +2758,7 @@
                   </span>
                 </td>
                 <td data-label="Type">
-                  <span class="chip-outline">Open Mat</span>
+                  <span class="type-pill type-openmat">Open Mat</span>
                 </td>
               </tr>
               <tr>
@@ -2760,7 +2776,7 @@
                   </span>
                 </td>
                 <td data-label="Type">
-                  <span class="chip-outline">Open Mat</span>
+                  <span class="type-pill type-openmat">Open Mat</span>
                 </td>
               </tr>
               <tr>
@@ -2778,7 +2794,7 @@
                   </span>
                 </td>
                 <td data-label="Type">
-                  <span class="chip-outline">Open Mat</span>
+                  <span class="type-pill type-openmat">Open Mat</span>
                 </td>
               </tr>
               <tr>
@@ -2796,7 +2812,7 @@
                   </span>
                 </td>
                 <td data-label="Type">
-                  <span class="chip-outline">Open Mat</span>
+                  <span class="type-pill type-openmat">Open Mat</span>
                 </td>
               </tr>
               <tr>
@@ -2814,7 +2830,7 @@
                   </span>
                 </td>
                 <td data-label="Type">
-                  <span class="chip-outline">Open Mat</span>
+                  <span class="type-pill type-openmat">Open Mat</span>
                 </td>
               </tr>
               <tr>
@@ -2832,7 +2848,7 @@
                   </span>
                 </td>
                 <td data-label="Type">
-                  <span class="chip-outline">Open Mat</span>
+                  <span class="type-pill type-openmat">Open Mat</span>
                 </td>
               </tr>
               <tr>
@@ -2850,7 +2866,7 @@
                   </span>
                 </td>
                 <td data-label="Type">
-                  <span class="chip-outline">Open Mat</span>
+                  <span class="type-pill type-openmat">Open Mat</span>
                 </td>
               </tr>
               <tr>
@@ -2868,7 +2884,7 @@
                   </span>
                 </td>
                 <td data-label="Type">
-                  <span class="chip-outline">Open Mat</span>
+                  <span class="type-pill type-openmat">Open Mat</span>
                 </td>
               </tr>
               <tr>
@@ -2886,7 +2902,7 @@
                   </span>
                 </td>
                 <td data-label="Type">
-                  <span class="chip-outline">Open Mat</span>
+                  <span class="type-pill type-openmat">Open Mat</span>
                 </td>
               </tr>
               <tr>
@@ -2904,7 +2920,7 @@
                   </span>
                 </td>
                 <td data-label="Type">
-                  <span class="chip-outline">Open Mat</span>
+                  <span class="type-pill type-openmat">Open Mat</span>
                 </td>
               </tr>
               <tr>
@@ -2922,7 +2938,7 @@
                   </span>
                 </td>
                 <td data-label="Type">
-                  <span class="chip-outline">Open House</span>
+                  <span class="type-pill type-openhouse">Open House</span>
                 </td>
               </tr>
               <tr>
@@ -2940,7 +2956,7 @@
                   </span>
                 </td>
                 <td data-label="Type">
-                  <span class="chip-outline">Open Mat</span>
+                  <span class="type-pill type-openmat">Open Mat</span>
                 </td>
               </tr>
               <tr>
@@ -2958,7 +2974,7 @@
                   </span>
                 </td>
                 <td data-label="Type">
-                  <span class="chip-outline">Women's Only</span>
+                  <span class="type-pill type-women">Women's Only</span>
                 </td>
               </tr>
               <tr>
@@ -2976,7 +2992,7 @@
                   </span>
                 </td>
                 <td data-label="Type">
-                  <span class="chip-outline">Seminar</span>
+                  <span class="type-pill type-seminar">Seminar</span>
                 </td>
               </tr>
               <tr>
@@ -2994,7 +3010,7 @@
                   </span>
                 </td>
                 <td data-label="Type">
-                  <span class="chip-outline">Seminar</span>
+                  <span class="type-pill type-seminar">Seminar</span>
                 </td>
               </tr>
               <tr>
@@ -3012,7 +3028,7 @@
                   </span>
                 </td>
                 <td data-label="Type">
-                  <span class="chip-outline">Open Mat</span>
+                  <span class="type-pill type-openmat">Open Mat</span>
                 </td>
               </tr>
               <tr>
@@ -3030,7 +3046,7 @@
                   </span>
                 </td>
                 <td data-label="Type">
-                  <span class="chip-outline">Tournament</span>
+                  <span class="type-pill type-tournament">Tournament</span>
                 </td>
               </tr>
               <tr>
@@ -3048,7 +3064,7 @@
                   </span>
                 </td>
                 <td data-label="Type">
-                  <span class="chip-outline">Seminar</span>
+                  <span class="type-pill type-seminar">Seminar</span>
                 </td>
               </tr>
               <tr>
@@ -3066,7 +3082,7 @@
                   </span>
                 </td>
                 <td data-label="Type">
-                  <span class="chip-outline">Seminar</span>
+                  <span class="type-pill type-seminar">Seminar</span>
                 </td>
               </tr>
               <tr>
@@ -3084,7 +3100,7 @@
                   </span>
                 </td>
                 <td data-label="Type">
-                  <span class="chip-outline">Seminar</span>
+                  <span class="type-pill type-seminar">Seminar</span>
                 </td>
               </tr>
               <tr>
@@ -3102,7 +3118,7 @@
                   </span>
                 </td>
                 <td data-label="Type">
-                  <span class="chip-outline">Women's Only</span>
+                  <span class="type-pill type-women">Women's Only</span>
                 </td>
               </tr>
               <tr>
@@ -3120,7 +3136,7 @@
                   </span>
                 </td>
                 <td data-label="Type">
-                  <span class="chip-outline">Seminar</span>
+                  <span class="type-pill type-seminar">Seminar</span>
                 </td>
               </tr>
               <tr>
@@ -3138,7 +3154,7 @@
                   </span>
                 </td>
                 <td data-label="Type">
-                  <span class="chip-outline">Seminar</span>
+                  <span class="type-pill type-seminar">Seminar</span>
                 </td>
               </tr>
               <tr>
@@ -3156,7 +3172,7 @@
                   </span>
                 </td>
                 <td data-label="Type">
-                  <span class="chip-outline">Tournament (Invite)</span>
+                  <span class="type-pill type-pill">Tournament (Invite)</span>
                 </td>
               </tr>
               <tr>
@@ -3174,7 +3190,7 @@
                   </span>
                 </td>
                 <td data-label="Type">
-                  <span class="chip-outline">Tournament (Invite)</span>
+                  <span class="type-pill type-pill">Tournament (Invite)</span>
                 </td>
               </tr>
               <tr>
@@ -3192,7 +3208,7 @@
                   </span>
                 </td>
                 <td data-label="Type">
-                  <span class="chip-outline">Seminar</span>
+                  <span class="type-pill type-seminar">Seminar</span>
                 </td>
               </tr>
               <tr>
@@ -3210,7 +3226,7 @@
                   </span>
                 </td>
                 <td data-label="Type">
-                  <span class="chip-outline">Seminar</span>
+                  <span class="type-pill type-seminar">Seminar</span>
                 </td>
               </tr>
               <tr>
@@ -3228,7 +3244,7 @@
                   </span>
                 </td>
                 <td data-label="Type">
-                  <span class="chip-outline">Kids Event</span>
+                  <span class="type-pill type-pill">Kids Event</span>
                 </td>
               </tr>
               <tr>
@@ -3246,7 +3262,7 @@
                   </span>
                 </td>
                 <td data-label="Type">
-                  <span class="chip-outline">Seminar</span>
+                  <span class="type-pill type-seminar">Seminar</span>
                 </td>
               </tr>
               <tr>
@@ -3264,7 +3280,7 @@
                   </span>
                 </td>
                 <td data-label="Type">
-                  <span class="chip-outline">Tournament</span>
+                  <span class="type-pill type-tournament">Tournament</span>
                 </td>
               </tr>
               <tr>
@@ -3282,7 +3298,7 @@
                   </span>
                 </td>
                 <td data-label="Type">
-                  <span class="chip-outline">Seminar</span>
+                  <span class="type-pill type-seminar">Seminar</span>
                 </td>
               </tr>
               <tr>
@@ -3300,7 +3316,7 @@
                   </span>
                 </td>
                 <td data-label="Type">
-                  <span class="chip-outline">Seminar</span>
+                  <span class="type-pill type-seminar">Seminar</span>
                 </td>
               </tr>
               <tr>
@@ -3318,7 +3334,7 @@
                   </span>
                 </td>
                 <td data-label="Type">
-                  <span class="chip-outline">Seminar</span>
+                  <span class="type-pill type-seminar">Seminar</span>
                 </td>
               </tr>
               <tr>
@@ -3336,7 +3352,7 @@
                   </span>
                 </td>
                 <td data-label="Type">
-                  <span class="chip-outline">Tournament</span>
+                  <span class="type-pill type-tournament">Tournament</span>
                 </td>
               </tr>
               <tr>
@@ -3354,7 +3370,7 @@
                   </span>
                 </td>
                 <td data-label="Type">
-                  <span class="chip-outline">Tournament (Invite)</span>
+                  <span class="type-pill type-pill">Tournament (Invite)</span>
                 </td>
               </tr>
               <tr>
@@ -3372,7 +3388,7 @@
                   </span>
                 </td>
                 <td data-label="Type">
-                  <span class="chip-outline">Seminar</span>
+                  <span class="type-pill type-seminar">Seminar</span>
                 </td>
               </tr>
               <tr>
@@ -3390,7 +3406,7 @@
                   </span>
                 </td>
                 <td data-label="Type">
-                  <span class="chip-outline">Women's Only</span>
+                  <span class="type-pill type-women">Women's Only</span>
                 </td>
               </tr>
               <tr>
@@ -3408,7 +3424,7 @@
                   </span>
                 </td>
                 <td data-label="Type">
-                  <span class="chip-outline">Women's Only</span>
+                  <span class="type-pill type-women">Women's Only</span>
                 </td>
               </tr>
               <tr>
@@ -3426,7 +3442,7 @@
                   </span>
                 </td>
                 <td data-label="Type">
-                  <span class="chip-outline">Seminar</span>
+                  <span class="type-pill type-seminar">Seminar</span>
                 </td>
               </tr>
               <tr>
@@ -3444,7 +3460,7 @@
                   </span>
                 </td>
                 <td data-label="Type">
-                  <span class="chip-outline">Tournament</span>
+                  <span class="type-pill type-tournament">Tournament</span>
                 </td>
               </tr>
               <tr>
@@ -3462,7 +3478,7 @@
                   </span>
                 </td>
                 <td data-label="Type">
-                  <span class="chip-outline">Tournament</span>
+                  <span class="type-pill type-tournament">Tournament</span>
                 </td>
               </tr>
               <tr>
@@ -3480,7 +3496,7 @@
                   </span>
                 </td>
                 <td data-label="Type">
-                  <span class="chip-outline">Tournament (Invite)</span>
+                  <span class="type-pill type-pill">Tournament (Invite)</span>
                 </td>
               </tr>
               <tr>
@@ -3498,7 +3514,7 @@
                   </span>
                 </td>
                 <td data-label="Type">
-                  <span class="chip-outline">Seminar</span>
+                  <span class="type-pill type-seminar">Seminar</span>
                 </td>
               </tr>
               <tr>
@@ -3516,7 +3532,7 @@
                   </span>
                 </td>
                 <td data-label="Type">
-                  <span class="chip-outline">Women's Only</span>
+                  <span class="type-pill type-women">Women's Only</span>
                 </td>
               </tr>
               <tr>
@@ -3534,7 +3550,7 @@
                   </span>
                 </td>
                 <td data-label="Type">
-                  <span class="chip-outline">Tournament (Invite)</span>
+                  <span class="type-pill type-pill">Tournament (Invite)</span>
                 </td>
               </tr>
               <tr>
@@ -3552,7 +3568,7 @@
                   </span>
                 </td>
                 <td data-label="Type">
-                  <span class="chip-outline">Tournament</span>
+                  <span class="type-pill type-tournament">Tournament</span>
                 </td>
               </tr>
               <tr>
@@ -3570,7 +3586,7 @@
                   </span>
                 </td>
                 <td data-label="Type">
-                  <span class="chip-outline">Tournament (Invite)</span>
+                  <span class="type-pill type-pill">Tournament (Invite)</span>
                 </td>
               </tr>
               <tr>
@@ -3588,7 +3604,7 @@
                   </span>
                 </td>
                 <td data-label="Type">
-                  <span class="chip-outline">Seminar</span>
+                  <span class="type-pill type-seminar">Seminar</span>
                 </td>
               </tr>
               <tr>
@@ -3606,7 +3622,7 @@
                   </span>
                 </td>
                 <td data-label="Type">
-                  <span class="chip-outline">Seminar</span>
+                  <span class="type-pill type-seminar">Seminar</span>
                 </td>
               </tr>
               <tr>
@@ -3624,7 +3640,7 @@
                   </span>
                 </td>
                 <td data-label="Type">
-                  <span class="chip-outline">Tournament</span>
+                  <span class="type-pill type-tournament">Tournament</span>
                 </td>
               </tr>
               <tr>
@@ -3642,7 +3658,7 @@
                   </span>
                 </td>
                 <td data-label="Type">
-                  <span class="chip-outline">Tournament</span>
+                  <span class="type-pill type-tournament">Tournament</span>
                 </td>
               </tr>
               <tr>
@@ -3660,7 +3676,7 @@
                   </span>
                 </td>
                 <td data-label="Type">
-                  <span class="chip-outline">Tournament</span>
+                  <span class="type-pill type-tournament">Tournament</span>
                 </td>
               </tr>
               <tr>
@@ -3678,7 +3694,7 @@
                   </span>
                 </td>
                 <td data-label="Type">
-                  <span class="chip-outline">Seminar</span>
+                  <span class="type-pill type-seminar">Seminar</span>
                 </td>
               </tr>
               <tr>
@@ -3696,7 +3712,7 @@
                   </span>
                 </td>
                 <td data-label="Type">
-                  <span class="chip-outline">Seminar</span>
+                  <span class="type-pill type-seminar">Seminar</span>
                 </td>
               </tr>
               <tr>
@@ -3714,7 +3730,7 @@
                   </span>
                 </td>
                 <td data-label="Type">
-                  <span class="chip-outline">Tournament</span>
+                  <span class="type-pill type-tournament">Tournament</span>
                 </td>
               </tr>
               <tr>
@@ -3732,7 +3748,7 @@
                   </span>
                 </td>
                 <td data-label="Type">
-                  <span class="chip-outline">Tournament (Invite)</span>
+                  <span class="type-pill type-pill">Tournament (Invite)</span>
                 </td>
               </tr>
               <tr>
@@ -3750,7 +3766,7 @@
                   </span>
                 </td>
                 <td data-label="Type">
-                  <span class="chip-outline">Seminar</span>
+                  <span class="type-pill type-seminar">Seminar</span>
                 </td>
               </tr>
               <tr>
@@ -3768,7 +3784,7 @@
                   </span>
                 </td>
                 <td data-label="Type">
-                  <span class="chip-outline">Tournament</span>
+                  <span class="type-pill type-tournament">Tournament</span>
                 </td>
               </tr>
               <tr>
@@ -3786,7 +3802,7 @@
                   </span>
                 </td>
                 <td data-label="Type">
-                  <span class="chip-outline">Tournament</span>
+                  <span class="type-pill type-tournament">Tournament</span>
                 </td>
               </tr>
               <tr>
@@ -3804,7 +3820,7 @@
                   </span>
                 </td>
                 <td data-label="Type">
-                  <span class="chip-outline">Tournament</span>
+                  <span class="type-pill type-tournament">Tournament</span>
                 </td>
               </tr>
               <tr>
@@ -3822,7 +3838,7 @@
                   </span>
                 </td>
                 <td data-label="Type">
-                  <span class="chip-outline">Tournament</span>
+                  <span class="type-pill type-tournament">Tournament</span>
                 </td>
               </tr>
               <tr>
@@ -3840,7 +3856,7 @@
                   </span>
                 </td>
                 <td data-label="Type">
-                  <span class="chip-outline">Tournament</span>
+                  <span class="type-pill type-tournament">Tournament</span>
                 </td>
               </tr>
               <tr>
@@ -3858,7 +3874,7 @@
                   </span>
                 </td>
                 <td data-label="Type">
-                  <span class="chip-outline">Kids Event</span>
+                  <span class="type-pill type-pill">Kids Event</span>
                 </td>
               </tr>
               <tr>
@@ -3876,7 +3892,7 @@
                   </span>
                 </td>
                 <td data-label="Type">
-                  <span class="chip-outline">Tournament</span>
+                  <span class="type-pill type-tournament">Tournament</span>
                 </td>
               </tr>
               <tr>
@@ -3894,7 +3910,7 @@
                   </span>
                 </td>
                 <td data-label="Type">
-                  <span class="chip-outline">Seminar</span>
+                  <span class="type-pill type-seminar">Seminar</span>
                 </td>
               </tr>
               <tr>
@@ -3912,7 +3928,7 @@
                   </span>
                 </td>
                 <td data-label="Type">
-                  <span class="chip-outline">Seminar</span>
+                  <span class="type-pill type-seminar">Seminar</span>
                 </td>
               </tr>
               <tr>
@@ -3930,7 +3946,7 @@
                   </span>
                 </td>
                 <td data-label="Type">
-                  <span class="chip-outline">Seminar</span>
+                  <span class="type-pill type-seminar">Seminar</span>
                 </td>
               </tr>
               <tr>
@@ -3948,7 +3964,7 @@
                   </span>
                 </td>
                 <td data-label="Type">
-                  <span class="chip-outline">Tournament</span>
+                  <span class="type-pill type-tournament">Tournament</span>
                 </td>
               </tr>
               <tr>
@@ -3966,7 +3982,7 @@
                   </span>
                 </td>
                 <td data-label="Type">
-                  <span class="chip-outline">Tournament</span>
+                  <span class="type-pill type-tournament">Tournament</span>
                 </td>
               </tr>
               <tr>
@@ -3984,7 +4000,7 @@
                   </span>
                 </td>
                 <td data-label="Type">
-                  <span class="chip-outline">Tournament</span>
+                  <span class="type-pill type-tournament">Tournament</span>
                 </td>
               </tr>
               <tr>
@@ -4002,7 +4018,7 @@
                   </span>
                 </td>
                 <td data-label="Type">
-                  <span class="chip-outline">Tournament</span>
+                  <span class="type-pill type-tournament">Tournament</span>
                 </td>
               </tr>
             </tbody>
@@ -4041,7 +4057,7 @@
                   <span class="text-soft">Gi &amp; No-Gi friendly</span>
                 </td>
                 <td data-label="Level">
-                  <span class="chip-outline">All Levels</span><br>
+                  <span class="type-pill type-pill">All Levels</span><br>
                   <span class="text-soft">Beginner-friendly</span>
                 </td>
                 <td data-label="Cost">
@@ -4071,7 +4087,7 @@
                   <span class="text-soft">Scenario &amp; shark-tank rounds</span>
                 </td>
                 <td data-label="Level">
-                  <span class="chip-outline">Intermediate+</span><br>
+                  <span class="type-pill type-pill">Intermediate+</span><br>
                   <span class="text-soft">Blue belt &amp; up suggested</span>
                 </td>
                 <td data-label="Cost">
@@ -4101,7 +4117,7 @@
                   <span class="text-soft">Gi only</span>
                 </td>
                 <td data-label="Level">
-                  <span class="chip-outline">Mixed</span><br>
+                  <span class="type-pill type-pill">Mixed</span><br>
                   <span class="text-soft">Visitors welcome</span>
                 </td>
                 <td data-label="Cost">
