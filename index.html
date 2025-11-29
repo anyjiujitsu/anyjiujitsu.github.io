@@ -122,6 +122,16 @@
       color: var(--text-soft);
     }
 
+    .text-strong {
+      font-weight: 500;
+      color: #e5e7eb;
+    }
+
+    .text-soft {
+      color: var(--text-soft);
+      font-size: 12px;
+    }
+
     .header-meta {
       display: flex;
       flex-direction: column;
@@ -241,13 +251,17 @@
       display: flex;
       align-items: center;
       gap: 10px;
-      flex: 1;
-      justify-content: flex-end;
+      margin-top: 6px;
     }
 
     .search-input {
       position: relative;
-      flex: 0 1 230px;
+      flex: 1 1 auto;
+      max-width: 100%;
+    }
+
+    .tag-chip {
+      display: none;
     }
 
     .search-input input {
@@ -381,6 +395,11 @@
     tbody tr:hover {
       background: rgba(30, 64, 175, 0.35);
       transform: translateY(-1px);
+    }
+
+    
+    td[data-label="Location"] {
+      text-align: left;
     }
 
     td {
@@ -557,13 +576,10 @@
       td, th {
         padding: 4px 6px;
         font-size: 11px;
-        white-space: nowrap;
       }
       td::before {
         display: none;
       }
-      .location-cell strong,
-      .location-cell span,
       .tag,
       .tag-chip,
       .type-pill {
