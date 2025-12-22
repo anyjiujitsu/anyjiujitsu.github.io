@@ -1,708 +1,104 @@
-<!DOCTYPE html>
+<!-- Save as: index.html -->
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>ANY • Academy Map</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Upcoming Events</title>
 
-  <!-- Leaflet CSS -->
-  <link
-    rel="stylesheet"
-    href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
-    integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
-    crossorigin=""
-  />
+  <!-- Match the clean, bold sans look -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700;800&display=swap" rel="stylesheet">
 
   <style>
-    :root {
-      --bg: #03301c;       /* deep forest */
-      --panel: #f6efe2;    /* cream */
-      --panel-soft: #fbf4e6;
-      --accent: #14532d;   /* forest green */
-      --text: #102a43;
-      --text-soft: #6b7280;
-      --border-subtle: rgba(20, 83, 45, 0.35);
-      --shadow-soft: 0 18px 45px rgba(0, 0, 0, 0.55);
+    :root{
+      --page-bg: #EBEBEB;        /* background from screenshot */
+      --green:   #234C31;        /* header/title green (35,76,49) */
+      --row-bg:  #E2E4E4;        /* main row fill (226,228,228) */
+      --beige:   #EBDECA;        /* left column fill (235,222,202) */
+      --text:    #1F1F1F;
+      --muted:   #3b3b3b;
     }
 
-    *,
-    *::before,
-    *::after {
-      box-sizing: border-box;
+    *{ box-sizing:border-box; }
+    html,body{ height:100%; }
+    body{
+      margin:0;
+      background:var(--page-bg);
+      font-family:Montserrat, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      color:var(--text);
     }
 
-    body {
-      margin: 0;
-      min-height: 100vh;
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text",
-        sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      display: flex;
-      justify-content: center;
-      padding: 24px 12px 40px;
+    .wrap{
+      max-width: 1320px;
+      margin: 28px auto 60px;
+      padding: 0 18px;
     }
 
-    @supports (padding: max(0px)) {
-      body {
-        padding-bottom: max(40px, env(safe-area-inset-bottom));
-        padding-top: max(24px, env(safe-area-inset-top));
-      }
-    }
-
-    .app-shell {
-      width: 100%;
-      max-width: 960px;
-      background: var(--panel);
-      border-radius: 28px;
-      border: 1px solid var(--border-subtle);
-      box-shadow: var(--shadow-soft);
-      padding: 18px 18px 22px;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .app-inner {
-      position: relative;
-      z-index: 1;
-    }
-
-    header {
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
+    .top{
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap: 16px;
       margin-bottom: 14px;
     }
 
-    .eyebrow {
-      font-size: 11px;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: var(--text-soft);
-    }
-
-    h1 {
-      font-size: 22px;
-      margin: 0;
-      display: flex;
-      gap: 6px;
-      align-items: baseline;
-      color: #052e16;
-    }
-
-    h1 span.highlight {
-      color: var(--accent);
-      font-weight: 650;
-    }
-
-    .subtitle {
-      margin: 2px 0 0;
-      font-size: 13px;
-      color: var(--text-soft);
-    }
-
-    .search-panel {
-      margin-top: 12px;
-      background: var(--panel-soft);
-      border-radius: 18px;
-      border: 1px solid rgba(148, 163, 184, 0.6);
-      padding: 10px 12px;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      align-items: center;
-    }
-
-    .search-input-wrap {
-      flex: 1 1 210px;
-      position: relative;
-    }
-
-    .search-input-wrap input {
-      width: 100%;
-      border-radius: 999px;
-      border: 1px solid rgba(148, 163, 184, 0.7);
-      background: #fffdf6;
-      padding: 9px 34px 9px 30px;
-      color: var(--text);
-      font-size: 13px;
-      outline: none;
-    }
-
-    .search-input-wrap input::placeholder {
-      color: #9ca3af;
-    }
-
-    .search-icon {
-      position: absolute;
-      left: 10px;
-      top: 50%;
-      transform: translateY(-50%);
-      font-size: 14px;
-      opacity: 0.85;
-    }
-
-    .clear-btn {
-      position: absolute;
-      right: 10px;
-      top: 50%;
-      transform: translateY(-50%);
-      border: none;
-      border-radius: 999px;
-      padding: 2px 6px;
-      font-size: 10px;
-      background: rgba(148, 163, 184, 0.2);
-      color: #111827;
-      cursor: pointer;
-      display: none;
-    }
-
-    .clear-btn.visible {
-      display: inline-flex;
-    }
-
-    .search-panel button.locate-btn {
-      border-radius: 999px;
-      border: 1px solid rgba(22, 163, 74, 0.9);
-      padding: 9px 14px;
-      font-size: 12px;
-      font-weight: 500;
-      background: #14532d;
-      color: #fefce8;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      cursor: pointer;
-      white-space: nowrap;
-    }
-
-    .search-panel button.locate-btn span.dot {
-      width: 6px;
-      height: 6px;
-      border-radius: 999px;
-      background: #bbf7d0;
-      box-shadow: 0 0 0 5px rgba(187, 247, 208, 0.7);
-    }
-
-    .search-meta {
-      font-size: 11px;
-      color: var(--text-soft);
-      display: flex;
-      gap: 8px;
-      align-items: center;
-      flex-wrap: wrap;
-    }
-
-    .radius-pill {
-      border-radius: 999px;
-      padding: 4px 9px;
-      background: #fff7e0;
-      border: 1px solid rgba(148, 163, 184, 0.8);
-      font-size: 11px;
-      color: #374151;
-    }
-
-    #map {
-      height: 320px;
-      border-radius: 22px;
-      border: 1px solid rgba(148, 163, 184, 0.9);
-      margin-top: 14px;
-      overflow: hidden;
-      box-shadow: 0 10px 30px rgba(15, 23, 42, 0.25);
-    }
-
-    .leaflet-container {
-      background: #ecfdf3;
-    }
-
-    .results-panel {
-      margin-top: 14px;
-      background: #fffaf0;
-      border-radius: 20px;
-      border: 1px solid rgba(148, 163, 184, 0.6);
-      padding: 12px 12px 10px;
-      max-height: 360px;
-      overflow-y: auto;
-      scroll-behavior: smooth;
-    }
-
-    .results-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: baseline;
-      gap: 8px;
-      margin-bottom: 6px;
-    }
-
-    .results-title {
-      font-size: 13px;
-      font-weight: 600;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      color: var(--accent);
-    }
-
-    .results-count {
-      font-size: 11px;
-      color: var(--text-soft);
-    }
-
-    .list {
-      list-style: none;
+    .title{
+      font-weight:800;
+      letter-spacing: .04em;
+      color:var(--green);
+      font-size: 44px;
+      line-height: 1;
       margin: 6px 0 0;
-      padding: 0;
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
+      text-transform: uppercase;
     }
 
-    .card {
-      border-radius: 14px;
-      padding: 8px 10px;
-      border: 1px solid rgba(148, 163, 184, 0.9);
-      background: #fffdf6;
-      display: flex;
-      flex-direction: column;
-      gap: 2px;
-      cursor: pointer;
+    .logo{
+      width: 150px;
+      height:auto;
+      margin-top: 4px;
     }
 
-    .card-header-line {
-      display: flex;
-      justify-content: space-between;
-      gap: 8px;
-      align-items: center;
+    .card{
+      background: transparent;
+      border-radius: 2px;
+      box-shadow: 0 10px 18px rgba(0,0,0,.18);
+      overflow:hidden;
+      width: 100%;
     }
 
-    .card-title {
-      font-size: 13px;
-      font-weight: 600;
-      color: #052e16;
+    table{
+      width:100%;
+      border-collapse:separate;
+      border-spacing:0;
+      table-layout:fixed;
     }
 
-    .card-distance {
-      font-size: 11px;
-      color: #15803d;
-      white-space: nowrap;
+    thead th{
+      background:var(--green);
+      color:#fff;
+      text-align:left;
+      font-weight:700;
+      padding: 12px 14px;
+      font-size: 14px;
     }
 
-    .card-location {
-      font-size: 12px;
-      color: #1f2937;
-      display: flex;
-      align-items: center;
-      gap: 5px;
+    tbody td{
+      background:var(--row-bg);
+      padding: 18px 14px;
+      font-size: 18px;
+      font-weight:500;
+      color: var(--muted);
+      border-bottom: 1px solid rgba(0,0,0,.06);
+      vertical-align:middle;
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
     }
 
-    .card-location .geo-pin {
-      font-size: 13px;
-    }
-
-    .card-meta {
-      font-size: 11px;
-      color: #4b5563;
-    }
-
-    .card-ig {
-      font-size: 11px;
-      color: #047857;
-    }
-
-    .empty-state {
-      font-size: 12px;
-      color: #6b7280;
-      padding: 4px 0 2px;
-    }
-
-    @media (max-width: 768px) {
-      body {
-        padding: 16px 10px 32px;
-      }
-
-      .app-shell {
-        padding: 14px 14px 18px;
-        border-radius: 24px;
-      }
-
-      #map {
-        height: 260px;
-      }
-
-      .results-panel {
-        max-height: 320px;
-      }
-    }
-
-    @media (max-width: 480px) {
-      .search-panel {
-        flex-direction: column;
-        align-items: stretch;
-      }
-
-      .search-panel button.locate-btn {
-        justify-content: center;
-      }
-    }
-  </style>
-</head>
-<body>
-  <div class="app-shell">
-    <div class="app-inner">
-      <header>
-        <div class="eyebrow">ANY • NE GRAPPLING</div>
-        <h1>
-          <span>Academy</span>
-          <span class="highlight">Map</span>
-        </h1>
-        <p class="subtitle">Search a location to see jiu-jitsu gyms within a 20 mile radius.</p>
-      </header>
-
-      <section class="search-panel">
-        <div class="search-input-wrap">
-          <span class="search-icon">🔍</span>
-          <input
-            id="searchInput"
-            type="text"
-            placeholder="Enter a town, city, or address…"
-          />
-          <button id="clearSearch" class="clear-btn">Clear</button>
-        </div>
-        <button class="locate-btn" id="useMyLocationBtn" type="button">
-          <span class="dot"></span>
-          Use my location
-        </button>
-        <div class="search-meta">
-          <span class="radius-pill">Radius: 20 miles</span>
-        </div>
-      </section>
-
-      <div id="map"></div>
-
-      <section class="results-panel" aria-label="Gyms within 20 miles">
-        <div class="results-header">
-          <div class="results-title">Gyms in range</div>
-          <div class="results-count"><span id="resultsCount">0</span> found</div>
-        </div>
-        <div id="resultsContainer" class="empty-state">
-          Enter a location above to see nearby gyms.
-        </div>
-      </section>
-    </div>
-  </div>
-
-  <!-- Leaflet JS -->
-  <script
-    src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
-    integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
-    crossorigin=""
-  ></script>
-
-  <script>
-    // === CONFIG ===
-    const RADIUS_MILES = 20;
-    const RADIUS_METERS = RADIUS_MILES * 1609.34;
-
-    // Gyms are loaded from gyms.json (precomputed 375 gyms with lat/lng).
-    // gyms.json should be an array of objects:
-    // [
-    //   {
-    //     "id": 1,
-    //     "name": "Black Hole Jiu-Jitsu",
-    //     "town": "Seymour",
-    //     "state": "CT",
-    //     "ig": "blackholebjj",
-    //     "lat": 41.39,
-    //     "lng": -73.09
-    //   },
-    //   ...
-    // ]
-    let gyms = [];
-    let gymsLoaded = false;
-
-    async function ensureGymsLoaded() {
-      if (gymsLoaded) return;
-      const res = await fetch("gyms.json");
-      if (!res.ok) {
-        throw new Error("Could not load gyms.json");
-      }
-      const data = await res.json();
-      gyms = data.filter(g => typeof g.lat === "number" && typeof g.lng === "number");
-      gymsLoaded = true;
-    }
-
-    // Map setup
-    const map = L.map("map", {
-      zoomControl: false,
-    }).setView([42.3601, -71.0589], 7);
-
-    L.control.zoom({ position: "bottomright" }).addTo(map);
-
-    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-      attribution: '&copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a>',
-      maxZoom: 19,
-    }).addTo(map);
-
-    let userMarker = null;
-    let radiusCircle = null;
-    const gymMarkers = [];
-
-    function haversineDistance(lat1, lon1, lat2, lon2) {
-      const toRad = (v) => (v * Math.PI) / 180;
-      const R = 6371;
-      const dLat = toRad(lat2 - lat1);
-      const dLon = toRad(lon2 - lon1);
-      const a =
-        Math.sin(dLat / 2) * Math.sin(dLat / 2) +
-        Math.cos(toRad(lat1)) *
-          Math.cos(toRad(lat2)) *
-          Math.sin(dLon / 2) *
-          Math.sin(dLon / 2);
-      const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-      return R * c;
-    }
-
-    function clearGymMarkers() {
-      gymMarkers.forEach((m) => map.removeLayer(m));
-      gymMarkers.length = 0;
-    }
-
-    function clearRadiusCircle() {
-      if (radiusCircle) {
-        map.removeLayer(radiusCircle);
-        radiusCircle = null;
-      }
-    }
-
-    function drawRadiusCircle(centerLat, centerLng) {
-      clearRadiusCircle();
-      radiusCircle = L.circle([centerLat, centerLng], {
-        radius: RADIUS_METERS,
-        color: "#14532d",
-        weight: 2,
-        fillColor: "#16a34a",
-        fillOpacity: 0.08,
-      }).addTo(map);
-    }
-
-    async function renderResults(centerLat, centerLng) {
-      await ensureGymsLoaded();
-      clearGymMarkers();
-
-      const RADIUS_KM = RADIUS_MILES * 1.60934;
-
-      const enriched = gyms.map(g => {
-        const distanceKm = haversineDistance(centerLat, centerLng, g.lat, g.lng);
-        const distanceMiles = distanceKm / 1.60934;
-        return { ...g, distanceKm, distanceMiles };
-      });
-
-      const nearby = enriched
-        .filter((g) => g.distanceKm <= RADIUS_KM)
-        .sort((a, b) => a.distanceKm - b.distanceKm);
-
-      const resultsContainer = document.getElementById("resultsContainer");
-      const countEl = document.getElementById("resultsCount");
-
-      if (!nearby.length) {
-        resultsContainer.className = "empty-state";
-        resultsContainer.textContent =
-          "No gyms found within 20 miles of this point. Try another location.";
-        countEl.textContent = "0";
-        return;
-      }
-
-      countEl.textContent = nearby.length.toString();
-
-      const list = document.createElement("ul");
-      list.className = "list";
-
-      const bounds = [];
-
-      nearby.forEach((g) => {
-        const marker = L.marker([g.lat, g.lng]).addTo(map);
-        marker.bindPopup(
-          `<strong>${g.name}</strong><br />${g.town}, ${g.state}` +
-          (g.ig ? `<br /><small>@${g.ig}</small>` : "") +
-          `<br /><small>${g.distanceMiles.toFixed(1)} mi away</small>`
-        );
-        gymMarkers.push(marker);
-        bounds.push([g.lat, g.lng]);
-
-        const li = document.createElement("li");
-        li.className = "card";
-        li.dataset.gymId = g.id;
-
-        const headerLine = document.createElement("div");
-        headerLine.className = "card-header-line";
-
-        const title = document.createElement("div");
-        title.className = "card-title";
-        title.textContent = g.name;
-
-        const distance = document.createElement("div");
-        distance.className = "card-distance";
-        distance.textContent = `${g.distanceMiles.toFixed(1)} mi`;
-
-        headerLine.appendChild(title);
-        headerLine.appendChild(distance);
-
-        const locationRow = document.createElement("div");
-        locationRow.className = "card-location";
-        const pin = document.createElement("span");
-        pin.className = "geo-pin";
-        pin.textContent = "📍";
-        const locText = document.createElement("span");
-        locText.textContent = `${g.town}, ${g.state}`;
-        locationRow.appendChild(pin);
-        locationRow.appendChild(locText);
-
-        li.appendChild(headerLine);
-        li.appendChild(locationRow);
-
-        if (g.ig) {
-          const ig = document.createElement("div");
-          ig.className = "card-ig";
-          ig.textContent = `@${g.ig}`;
-          li.appendChild(ig);
-        }
-
-        const meta = document.createElement("div");
-        meta.className = "card-meta";
-        meta.textContent = "Tap to center map";
-        li.appendChild(meta);
-
-        li.addEventListener("click", () => {
-          map.setView([g.lat, g.lng], 11);
-          marker.openPopup();
-        });
-
-        list.appendChild(li);
-      });
-
-      resultsContainer.className = "";
-      resultsContainer.innerHTML = "";
-      resultsContainer.appendChild(list);
-
-      if (bounds.length) {
-        const group = new L.LatLngBounds(bounds);
-        group.extend([centerLat, centerLng]);
-        map.fitBounds(group, { padding: [40, 40] });
-      }
-    }
-
-    async function geocodeLocation(query) {
-      const url = `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(
-        query
-      )}`;
-      const res = await fetch(url, {
-        headers: {
-          "Accept-Language": "en",
-        },
-      });
-      if (!res.ok) throw new Error("Geocoding failed");
-      const data = await res.json();
-      if (!data.length) throw new Error("No results");
-      const best = data[0];
-      return {
-        lat: parseFloat(best.lat),
-        lng: parseFloat(best.lon),
-        label: best.display_name,
-      };
-    }
-
-    function setUserMarker(lat, lng) {
-      if (userMarker) {
-        userMarker.setLatLng([lat, lng]);
-      } else {
-        userMarker = L.circleMarker([lat, lng], {
-          radius: 7,
-          color: "#14532d",
-          weight: 2,
-          fillColor: "#16a34a",
-          fillOpacity: 0.5,
-        }).addTo(map);
-      }
-    }
-
-    async function handleSearch(query) {
-      const resultsContainer = document.getElementById("resultsContainer");
-      const countEl = document.getElementById("resultsCount");
-      try {
-        resultsContainer.className = "empty-state";
-        resultsContainer.textContent = "Searching…";
-        countEl.textContent = "0";
-
-        const loc = await geocodeLocation(query);
-        setUserMarker(loc.lat, loc.lng);
-        drawRadiusCircle(loc.lat, loc.lng);
-        await renderResults(loc.lat, loc.lng);
-      } catch (err) {
-        console.error(err);
-        clearGymMarkers();
-        clearRadiusCircle();
-        if (userMarker) {
-          map.removeLayer(userMarker);
-          userMarker = null;
-        }
-        resultsContainer.className = "empty-state";
-        resultsContainer.textContent =
-          "Could not find that location or no gyms are in range. Try another city or a more specific address.";
-        document.getElementById("resultsCount").textContent = "0";
-      }
-    }
-
-    const searchInput = document.getElementById("searchInput");
-    const clearSearchBtn = document.getElementById("clearSearch");
-
-    searchInput.addEventListener("input", () => {
-      clearSearchBtn.classList.toggle("visible", searchInput.value.trim().length > 0);
-    });
-
-    searchInput.addEventListener("keydown", (e) => {
-      if (e.key === "Enter") {
-        const query = searchInput.value.trim();
-        if (query) {
-          handleSearch(query);
-        }
-      }
-    });
-
-    clearSearchBtn.addEventListener("click", () => {
-      searchInput.value = "";
-      clearSearchBtn.classList.remove("visible");
-      clearGymMarkers();
-      clearRadiusCircle();
-      if (userMarker) {
-        map.removeLayer(userMarker);
-        userMarker = null;
-      }
-      document.getElementById("resultsContainer").className = "empty-state";
-      document.getElementById("resultsContainer").textContent =
-        "Enter a location above to see nearby gyms.";
-      document.getElementById("resultsCount").textContent = "0";
-      map.setView([42.3601, -71.0589], 7);
-    });
-
-    document
-      .getElementById("useMyLocationBtn")
-      .addEventListener("click", async () => {
-        if (!navigator.geolocation) {
-          alert("Geolocation is not supported by your browser.");
-          return;
-        }
-        navigator.geolocation.getCurrentPosition(
-          async (pos) => {
-            const { latitude, longitude } = pos.coords;
-            setUserMarker(latitude, longitude);
-            drawRadiusCircle(latitude, longitude);
-            await renderResults(latitude, longitude);
-          },
-          (err) => {
-            console.error(err);
-            alert("Unable to access your location.");
-          }
-        );
-      });
-  </script>
-</body>
-</html>
+    /* Column widths to match screenshot proportions */
+    col.col-type   { width: 16%; }
+    col.col-for    { width: 32%; }
+    col.col-where  { width: 26%; }
+    col.col-loc    { width: 16%; }
