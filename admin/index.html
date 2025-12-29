@@ -259,7 +259,7 @@
 
         <div class="field">
           <div class="k">Where</div>
-          <div class="v"><input id="f_WHERE" placeholder="Gym / Address line" list="whereList" autocomplete="off" /></div>
+          <div class="v"><input id="f_WHERE" placeholder="Gym / Event Center" list="whereList" autocomplete="off" /></div>
         </div>
 
         <div class="field">
@@ -370,7 +370,7 @@
     const dd = pad2(d.getDate());
     const mm = pad2(d.getMonth() + 1);
     const yyyy = d.getFullYear();
-    $("f_CREATED").value = dd + "/" + mm + "/" + yyyy;
+    $("f_CREATED").value = mm + "/" + dd + "/" + yyyy;
   }
   setCreatedToday();
 
