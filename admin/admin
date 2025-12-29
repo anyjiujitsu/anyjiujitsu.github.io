@@ -1,0 +1,212 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Events CSV Admin</title>
+
+<style>
+body {
+  font-family: system-ui,-apple-system,Segoe UI,Roboto,Arial;
+  margin: 24px;
+}
+h1,h2 { margin-bottom: 6px; }
+.card {
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  padding: 16px;
+  margin-bottom: 16px;
+}
+.row {
+  display: grid;
+  grid-template-columns: 160px 1fr;
+  gap: 10px;
+  margin: 8px 0;
+  align-items: center;
+}
+input,button {
+  padding: 10px;
+  font: inherit;
+}
+button { cursor: pointer; }
+pre {
+  background: #f6f6f6;
+  padding: 12px;
+  border-radius: 8px;
+  white-space: pre-wrap;
+}
+.ok { color: #0a7a2f; }
+.err { color: #b00020; white-space: pre-wrap; }
+.muted { color: #666; }
+</style>
+</head>
+
+<body>
+
+<h1>Events CSV Admin</h1>
+<p class="muted">
+Appends rows to <code>data/events.csv</code> and commits directly to GitHub.
+Token is never hardcoded.
+</p>
+
+<div class="card">
+<h2>Repo Settings</h2>
+
+<div class="row"><label>Owner</label><input id="owner" value="anyjiujitsu.github.iu"></div>
+<div class="row"><label>Repo</label><input id="repo" value="admin"></div>
+<div class="row"><label>Branch</label><input id="branch" value="ANYNE_USER"></div>
+<div class="row"><label>CSV Path</label><input id="path" value="data/events.csv"></div>
+
+<div class="row">
+<label>GitHub Token</label>
+<input id="token" type="password" placeholder="Paste token here">
+</div>
+
+<div class="row">
+<div></div>
+<div>
+<button id="saveToken">Save Token (local)</button>
+<button id="clearToken">Clear Token</button>
+<button id="loadCsv">Load CSV</button>
+</div>
+</div>
+
+<p class="muted">
+Token must have <b>Contents: Read & Write</b> permission on this repo.
+</p>
+</div>
+
+<div class="card">
+<h2>Add Event (CSV Row)</h2>
+<div id="fields"></div>
+
+<div style="margin-top:12px">
+<button id="preview">Preview Row</button>
+<button id="append">Append + Commit</button>
+</div>
+
+<h3>Row Preview</h3>
+<pre id="previewOut"></pre>
+
+<div id="status" class="ok"></div>
+<div id="error" class="err"></div>
+</div>
+
+<div class="card">
+<h2>CSV Snippet</h2>
+<pre id="snippet"></pre>
+</div>
+
+<script>
+const CSV_COLUMNS = ["EVENT","FOR","WHERE","CITY","STATE","DAY","DATE","CREATED"];
+const LS_KEY = "events_admin_token";
+
+const $ = id => document.getElementById(id);
+
+const fieldsDiv = $("fields");
+CSV_COLUMNS.forEach(col => {
+  const r = document.createElement("div");
+  r.className = "row";
+  r.innerHTML = `<label>${col}</label><input id="f_${col}">`;
+  fieldsDiv.appendChild(r);
+});
+
+$("saveToken").onclick = () => {
+  localStorage.setItem(LS_KEY, $("token").value.trim());
+  setStatus("Token saved locally.");
+};
+$("clearToken").onclick = () => {
+  localStorage.removeItem(LS_KEY);
+  $("token").value = "";
+  setStatus("Token cleared.");
+};
+
+const saved = localStorage.getItem(LS_KEY);
+if (saved) $("token").value = saved;
+
+function csvEscape(v) {
+  if (!v) return "";
+  v = v.replace(/\r\n/g,"\n").replace(/\r/g,"\n");
+  if (/[",\n]/.test(v)) v = `"${v.replace(/"/g,'""')}"`;
+  return v;
+}
+
+function buildRow() {
+  return CSV_COLUMNS.map(c => csvEscape($("f_"+c).value.trim())).join(",");
+}
+
+$("preview").onclick = () => {
+  $("previewOut").textContent = buildRow();
+};
+
+async function gh(url, opts={}) {
+  const res = await fetch(url,{
+    method: opts.method||"GET",
+    headers: {
+      "Accept":"application/vnd.github+json",
+      ...(opts.token?{"Authorization":"Bearer "+opts.token}:{})
+    },
+    body: opts.body?JSON.stringify(opts.body):null
+  });
+  const t = await res.text();
+  const j = t?JSON.parse(t):null;
+  if (!res.ok) throw new Error(j?.message||t);
+  return j;
+}
+
+function decode(b64) {
+  return new TextDecoder().decode(Uint8Array.from(atob(b64.replace(/\n/g,"")),c=>c.charCodeAt(0)));
+}
+function encode(s) {
+  return btoa(String.fromCharCode(...new TextEncoder().encode(s)));
+}
+
+async function loadCsv() {
+  const url = `https://api.github.com/repos/${$("owner").value}/${$("repo").value}/contents/${$("path").value}?ref=${$("branch").value}`;
+  const d = await gh(url,{token:$("token").value});
+  const csv = decode(d.content);
+  showSnippet(csv);
+  return {csv,sha:d.sha};
+}
+
+$("loadCsv").onclick = async ()=>{
+  try { await loadCsv(); setStatus("CSV loaded."); }
+  catch(e){ setError(e.message); }
+};
+
+$("append").onclick = async ()=>{
+  try {
+    const {csv,sha} = await loadCsv();
+    let updated = csv.endsWith("\n")?csv:csv+"\n";
+    updated += buildRow()+"\n";
+
+    const body = {
+      message:`Append event ${new Date().toISOString()}`,
+      content: encode(updated),
+      sha,
+      branch:$("branch").value
+    };
+
+    await gh(
+      `https://api.github.com/repos/${$("owner").value}/${$("repo").value}/contents/${$("path").value}`,
+      {method:"PUT",token:$("token").value,body}
+    );
+
+    setStatus("Commit successful.");
+    await loadCsv();
+  } catch(e){ setError(e.message); }
+};
+
+function showSnippet(csv){
+  const l = csv.split("\n");
+  $("snippet").textContent =
+    "--- TOP ---\n"+l.slice(0,5).join("\n")+
+    "\n\n--- BOTTOM ---\n"+l.slice(-8).join("\n");
+}
+
+function setStatus(m){ $("status").textContent=m; $("error").textContent=""; }
+function setError(m){ $("error").textContent=m; $("status").textContent=""; }
+</script>
+
+</body>
+</html>
