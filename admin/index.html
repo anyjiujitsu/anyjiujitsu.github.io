@@ -2,316 +2,548 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>ANY N.E. Events — Admin</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <title>ANY — Admin</title>
   <style>
     :root{
-      --bg:#0b0f0d;
-      --card:#101614;
-      --text:#e9efe9;
-      --muted:#a9b6ae;
-      --line:#233028;
-      --ok:#37c26a;
-      --bad:#ff5a6a;
-      --btn:#1c2a22;
-      --btn2:#203126;
-      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      --bg:#e9e6df;
+      --bar:#1f4f35;
+      --bar2:#17402b;
+      --card:#e6e6e6;
+      --type:#efe1c8;
+      --text:#111;
+      --muted:#6b6b6b;
+      --shadow: 0 10px 18px rgba(0,0,0,.12);
+      --radius: 14px;
+      --pill: 999px;
+      --font: system-ui,-apple-system,Segoe UI,Roboto,Arial;
     }
-    body{margin:24px;font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial;line-height:1.35;background:var(--bg);color:var(--text)}
-    h1{margin:0 0 6px 0;font-size:22px}
-    .muted{color:var(--muted)}
-    .card{border:1px solid var(--line);background:var(--card);border-radius:14px;padding:16px;margin:14px 0}
-    .row{display:grid;grid-template-columns:170px 1fr;gap:10px;margin:10px 0;align-items:center}
-    input,button,textarea{font:inherit;padding:10px;border-radius:10px;border:1px solid var(--line);background:#0d1310;color:var(--text)}
-    button{cursor:pointer;background:var(--btn)}
-    button:hover{background:var(--btn2)}
-    pre{background:#0d1310;border:1px solid var(--line);padding:12px;border-radius:12px;white-space:pre-wrap;font-family:var(--mono);font-size:12px;color:var(--muted)}
-    code{font-family:var(--mono);font-size:12px;background:#0d1310;border:1px solid var(--line);padding:2px 6px;border-radius:8px;color:var(--muted)}
-    .ok{color:var(--ok)}
-    .err{color:var(--bad);white-space:pre-wrap}
-    .btnRow{display:flex;gap:10px;flex-wrap:wrap}
-    .pill{display:inline-block;padding:4px 10px;border-radius:999px;border:1px solid var(--line);color:var(--muted);font-size:12px}
-    .spacer{height:4px}
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family:var(--font);
+      background:var(--bg);
+      color:var(--text);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    /* Header */
+    .top{
+      padding: 18px 16px 10px 16px;
+      display:flex;
+      justify-content:center;
+      position:relative;
+    }
+    .title{
+      font-weight: 900;
+      letter-spacing: 1px;
+      font-size: 38px;
+      line-height: 1;
+      color: var(--bar);
+      text-transform: uppercase;
+    }
+    .logo{
+      position:absolute;
+      right:16px;
+      top:18px;
+      width:54px;
+      height:36px;
+      border:2px solid var(--bar);
+      border-radius:10px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-weight:900;
+      color:var(--bar);
+      background: transparent;
+      transform: skewX(-8deg);
+    }
+    .logo span{transform: skewX(8deg); letter-spacing:1px}
+
+    .bar{
+      background: linear-gradient(180deg, var(--bar) 0%, var(--bar2) 100%);
+      padding: 10px 12px;
+      box-shadow: 0 6px 12px rgba(0,0,0,.20);
+    }
+    .controls{
+      display:flex;
+      gap:10px;
+      align-items:center;
+      justify-content:center;
+      max-width: 980px;
+      margin:0 auto;
+      flex-wrap:wrap;
+    }
+
+    .pill{
+      background: #fff;
+      border: 1px solid rgba(0,0,0,.15);
+      border-radius: var(--pill);
+      height: 36px;
+      display:flex;
+      align-items:center;
+      padding: 0 12px;
+      gap:8px;
+      box-shadow: 0 6px 10px rgba(0,0,0,.10);
+      min-width: 270px;
+    }
+    .pill input{
+      border:0;
+      outline:none;
+      background:transparent;
+      width:100%;
+      font-size:13px;
+    }
+    .pill button{
+      border:0;
+      background:transparent;
+      font-size:12px;
+      color:#333;
+      cursor:pointer;
+      padding:0 6px;
+    }
+
+    .btnPill{
+      height:36px;
+      border-radius: var(--pill);
+      border: 1px solid rgba(0,0,0,.18);
+      background:#fff;
+      padding: 0 12px;
+      font-size:13px;
+      cursor:pointer;
+      box-shadow: 0 6px 10px rgba(0,0,0,.10);
+      display:flex;
+      align-items:center;
+      gap:8px;
+      user-select:none;
+    }
+    .btnPill:active{ transform: translateY(1px); }
+    .btnPill[disabled]{opacity:.55; cursor:not-allowed}
+
+    /* Main */
+    .wrap{
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 14px 12px 28px 12px;
+    }
+    .sectionLabel{
+      margin: 16px 6px 8px 6px;
+      font-weight: 800;
+      letter-spacing: 2px;
+      color:#6a6a6a;
+      font-size: 12px;
+      text-transform: uppercase;
+    }
+    .card{
+      background: var(--card);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow:hidden;
+      border:1px solid rgba(0,0,0,.06);
+    }
+
+    /* iPhone-friendly form card styled like your list rows */
+    .rowCard{
+      display:grid;
+      grid-template-columns: 118px 1fr;
+      min-height: 70px;
+    }
+    .typeStrip{
+      background: var(--type);
+      display:flex;
+      align-items:center;
+      justify-content:flex-start;
+      padding: 12px 12px;
+      font-weight: 800;
+      font-size: 13px;
+      border-right: 1px solid rgba(0,0,0,.06);
+      text-transform: capitalize;
+    }
+    .content{
+      padding: 10px 12px;
+      display:grid;
+      grid-template-columns: 1fr;
+      gap: 8px;
+    }
+    .field{
+      display:grid;
+      grid-template-columns: 82px 1fr;
+      gap:10px;
+      align-items:center;
+    }
+    .k{
+      color:var(--muted);
+      font-size:11px;
+      font-weight: 800;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+    .v input, .v select{
+      width:100%;
+      height:34px;
+      border-radius: 10px;
+      border:1px solid rgba(0,0,0,.14);
+      padding: 0 10px;
+      background: rgba(255,255,255,.65);
+      font-size: 13px;
+      outline:none;
+    }
+    .v input:focus, .v select:focus{ box-shadow: 0 0 0 3px rgba(31,79,53,.18); }
+
+    .actions{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      padding: 12px;
+      border-top: 1px solid rgba(0,0,0,.08);
+      background: rgba(255,255,255,.25);
+    }
+
+    .mini{
+      font-size:12px;
+      color:var(--muted);
+      padding: 10px 12px 0 12px;
+    }
+    .status{
+      margin: 10px 6px 0 6px;
+      font-size: 13px;
+      font-weight: 700;
+      color: #1f4f35;
+    }
+    .error{
+      margin: 8px 6px 0 6px;
+      font-size: 13px;
+      font-weight: 700;
+      color: #b00020;
+      white-space: pre-wrap;
+    }
+    pre{
+      margin: 10px 0 0 0;
+      background: rgba(255,255,255,.55);
+      border:1px solid rgba(0,0,0,.12);
+      border-radius: 12px;
+      padding: 10px;
+      font-size: 11px;
+      overflow:auto;
+    }
+
+    @media (max-width: 420px){
+      .title{ font-size: 36px; }
+      .pill{ min-width: 240px; }
+      .rowCard{ grid-template-columns: 110px 1fr; }
+      .field{ grid-template-columns: 74px 1fr; }
+    }
   </style>
 </head>
 <body>
-  <h1>Events CSV Admin</h1>
-  <div class="muted">
-    Writes directly to <code>data/events.csv</code> in <code>anyjiujitsu/anyjiujitsu.github.io</code> (branch <code>main</code>).
+  <div class="top">
+    <div class="title">Upcoming Events</div>
+    <div class="logo" aria-hidden="true"><span>ANY</span></div>
   </div>
 
-  <div class="card">
-    <div class="pill">Repo locked to: anyjiujitsu / anyjiujitsu.github.io</div>
-    <div class="pill">Branch: main</div>
-    <div class="pill">Path: data/events.csv</div>
+  <div class="bar">
+    <div class="controls">
+      <div class="pill" title="Paste token here (stored locally if you click Save)">
+        <span style="font-size:13px;opacity:.6">🔑</span>
+        <input id="token" type="password" placeholder="GitHub token (fine-grained)" />
+        <button id="toggleToken" type="button" title="Show/Hide">👁</button>
+      </div>
 
-    <div class="spacer"></div>
-
-    <div class="row">
-      <label for="token">GitHub Token</label>
-      <input id="token" type="password" placeholder="Paste fine-grained token (Contents: Read & Write)" />
+      <button class="btnPill" id="saveTokenBtn" type="button">Save</button>
+      <button class="btnPill" id="clearTokenBtn" type="button">Clear</button>
+      <button class="btnPill" id="testBtn" type="button">Test</button>
+      <button class="btnPill" id="loadBtn" type="button">Load CSV</button>
     </div>
-
-    <div class="btnRow">
-      <button id="saveTokenBtn" type="button">Save Token (local)</button>
-      <button id="clearTokenBtn" type="button">Clear Saved Token</button>
-      <button id="testBtn" type="button">Test API Access</button>
-      <button id="loadBtn" type="button">Load CSV</button>
-    </div>
-
-    <div id="status" class="ok" style="margin-top:10px"></div>
-    <div id="error" class="err" style="margin-top:10px"></div>
   </div>
 
-  <div class="card">
-    <h2 style="margin:0 0 8px 0;font-size:16px">Add Row</h2>
-    <div class="muted">Headers locked to: <code>EVENT, FOR, WHERE, CITY, STATE, DAY, DATE, CREATED</code></div>
+  <div class="wrap">
+    <div class="sectionLabel">Add Event</div>
 
-    <div id="fields"></div>
+    <div class="card" aria-label="Add Event Card">
+      <div class="rowCard">
+        <div class="typeStrip">Admin</div>
+        <div class="content">
+          <div class="field"><div class="k">Event</div><div class="v"><input id="f_EVENT" placeholder="Event name" /></div></div>
+          <div class="field"><div class="k">For</div><div class="v"><input id="f_FOR" placeholder="Women’s Open Mat / Seminar / Comp" /></div></div>
+          <div class="field"><div class="k">Where</div><div class="v"><input id="f_WHERE" placeholder="Gym / Address line" /></div></div>
+          <div class="field"><div class="k">City</div><div class="v"><input id="f_CITY" placeholder="City" /></div></div>
 
-    <div class="btnRow" style="margin-top:12px">
-      <button id="fillCreatedBtn" type="button">Set CREATED = now</button>
-      <button id="previewBtn" type="button">Preview Row</button>
-      <button id="appendBtn" type="button">Append + Commit</button>
-      <button id="clearFormBtn" type="button">Clear Form</button>
+          <div class="field">
+            <div class="k">State</div>
+            <div class="v">
+              <select id="f_STATE">
+                <option value="">Select…</option>
+                <option>MA</option><option>NH</option><option>RI</option><option>CT</option><option>VT</option><option>ME</option>
+                <option>NY</option><option>NJ</option>
+                <option value="__custom__">Other…</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="field" id="customStateRow" style="display:none">
+            <div class="k">Custom</div>
+            <div class="v"><input id="customState" placeholder="e.g. CA" maxlength="12" /></div>
+          </div>
+
+          <div class="field"><div class="k">Date</div><div class="v"><input id="f_DATE" type="date" /></div></div>
+          <div class="field"><div class="k">Day</div><div class="v"><input id="f_DAY" placeholder="Auto from date (or type)" /></div></div>
+          <div class="field"><div class="k">Created</div><div class="v"><input id="f_CREATED" placeholder="Auto-filled (editable)" /></div></div>
+        </div>
+      </div>
+
+      <div class="actions">
+        <button class="btnPill" id="fillCreatedBtn" type="button">Set CREATED = now</button>
+        <button class="btnPill" id="previewBtn" type="button">Preview</button>
+        <button class="btnPill" id="appendBtn" type="button">Append + Commit</button>
+        <button class="btnPill" id="clearFormBtn" type="button">Clear Form</button>
+      </div>
+
+      <div class="mini">CSV headers locked to: <b>EVENT, FOR, WHERE, CITY, STATE, DAY, DATE, CREATED</b></div>
+      <pre id="rowPreview" aria-label="Row preview"></pre>
     </div>
 
-    <div style="margin-top:12px" class="muted">Row Preview</div>
-    <pre id="rowPreview"></pre>
-  </div>
+    <div id="status" class="status"></div>
+    <div id="error" class="error"></div>
 
-  <div class="card">
-    <h2 style="margin:0 0 8px 0;font-size:16px">CSV Snippet</h2>
-    <pre id="csvSnippet"></pre>
+    <div class="sectionLabel">CSV Snippet</div>
+    <div class="card" style="padding:12px">
+      <pre id="csvSnippet">Tap “Load CSV” to view top and bottom rows.</pre>
+    </div>
   </div>
 
 <script>
 (() => {
-  // ✅ LOCKED CONFIG (matches your screenshot)
   const OWNER  = "anyjiujitsu";
   const REPO   = "anyjiujitsu.github.io";
   const BRANCH = "main";
   const CSV_PATH = "data/events.csv";
-
-  // ✅ LOCKED HEADERS
   const CSV_COLUMNS = ["EVENT","FOR","WHERE","CITY","STATE","DAY","DATE","CREATED"];
 
   const $ = (id) => document.getElementById(id);
   const tokenEl = $("token");
-  const fieldsEl = $("fields");
-  const rowPreviewEl = $("rowPreview");
   const statusEl = $("status");
   const errorEl = $("error");
+  const rowPreviewEl = $("rowPreview");
   const csvSnippetEl = $("csvSnippet");
 
-  // Make failures visible instead of “nothing happened”
-  window.addEventListener("error", (e) => {
-    setError("Page script error: " + (e.message || "Unknown") + "\nLine: " + (e.lineno || "?"));
-  });
-  window.addEventListener("unhandledrejection", (e) => {
-    setError("Unhandled promise rejection: " + (e.reason?.message || e.reason || "Unknown"));
-  });
+  const btn = {
+    save: $("saveTokenBtn"),
+    clear: $("clearTokenBtn"),
+    test: $("testBtn"),
+    load: $("loadBtn"),
+    fillCreated: $("fillCreatedBtn"),
+    preview: $("previewBtn"),
+    append: $("appendBtn"),
+    clearForm: $("clearFormBtn"),
+  };
 
-  // Token local storage
+  function setBusy(b){ Object.values(btn).forEach(x => x.disabled = !!b); }
+  function setStatus(msg){ statusEl.textContent = msg || ""; errorEl.textContent = ""; }
+  function setError(msg){ errorEl.textContent = msg || ""; statusEl.textContent = ""; }
+  function clearError(){ errorEl.textContent = ""; }
+
+  window.addEventListener("unhandledrejection", (e) => setError("Unhandled: " + (e.reason?.message || e.reason || "Unknown")));
+  window.addEventListener("error", (e) => setError("Script error: " + (e.message || "Unknown")));
+
   const LS_KEY = "anyne_events_admin_token";
   const saved = localStorage.getItem(LS_KEY);
   if (saved) tokenEl.value = saved;
 
-  $("saveTokenBtn").onclick = () => {
+  $("toggleToken").onclick = () => { tokenEl.type = (tokenEl.type === "password") ? "text" : "password"; };
+
+  btn.save.onclick = () => {
     const t = tokenEl.value.trim();
     if (!t) return setError("No token to save.");
     localStorage.setItem(LS_KEY, t);
-    setStatus("Token saved locally (this browser only).");
+    setStatus("Token saved locally.");
   };
 
-  $("clearTokenBtn").onclick = () => {
+  btn.clear.onclick = () => {
     localStorage.removeItem(LS_KEY);
     tokenEl.value = "";
     setStatus("Saved token cleared.");
   };
 
-  // Build form fields
-  function buildFields() {
-    fieldsEl.innerHTML = "";
-    CSV_COLUMNS.forEach((col) => {
-      const row = document.createElement("div");
-      row.className = "row";
-      const label = document.createElement("label");
-      label.textContent = col;
-      label.setAttribute("for", "f_" + col);
-      const input = document.createElement("input");
-      input.id = "f_" + col;
-      input.placeholder = col;
-      row.appendChild(label);
-      row.appendChild(input);
-      fieldsEl.appendChild(row);
-    });
+  function requireToken(){
+    const t = tokenEl.value.trim();
+    if (!t) throw new Error("Missing token.");
+    return t;
   }
-  buildFields();
 
-  $("clearFormBtn").onclick = () => {
-    CSV_COLUMNS.forEach((c) => $("f_" + c).value = "");
+  const stateSel = $("f_STATE");
+  const customRow = $("customStateRow");
+  const customState = $("customState");
+  stateSel.addEventListener("change", () => {
+    if (stateSel.value === "__custom__"){
+      customRow.style.display = "grid";
+      customState.focus();
+    } else {
+      customRow.style.display = "none";
+      customState.value = "";
+    }
+  });
+  function getStateValue(){
+    if (stateSel.value === "__custom__") return (customState.value || "").trim();
+    return (stateSel.value || "").trim();
+  }
+
+  function computeDay(yyyy_mm_dd){
+    if (!yyyy_mm_dd) return "";
+    const [y,m,d] = yyyy_mm_dd.split("-").map(Number);
+    const dt = new Date(y, m-1, d);
+    return dt.toLocaleDateString(undefined, { weekday:"long" });
+  }
+  $("f_DATE").addEventListener("change", (e) => {
+    const day = computeDay(e.target.value);
+    if (day) $("f_DAY").value = day;
+  });
+
+  function setCreatedNow(){ $("f_CREATED").value = new Date().toISOString(); }
+  setCreatedNow();
+  btn.fillCreated.onclick = () => { setCreatedNow(); setStatus("CREATED set to now."); };
+
+  function csvEscape(v){
+    if (v === null || v === undefined) return "";
+    let s = String(v).trim().replace(/\r\n/g,"\n").replace(/\r/g,"\n");
+    if (/[",\n]/.test(s)) s = '"' + s.replace(/"/g,'""') + '"';
+    return s;
+  }
+
+  function makeRow(){
+    let dateOut = "";
+    const dateVal = $("f_DATE").value;
+    if (dateVal){
+      const [y,m,d] = dateVal.split("-").map(Number);
+      dateOut = `${m}/${d}/${y}`;
+    }
+    const map = {
+      EVENT: $("f_EVENT").value,
+      FOR: $("f_FOR").value,
+      WHERE: $("f_WHERE").value,
+      CITY: $("f_CITY").value,
+      STATE: getStateValue(),
+      DAY: $("f_DAY").value,
+      DATE: dateOut,
+      CREATED: $("f_CREATED").value,
+    };
+    return CSV_COLUMNS.map(k => csvEscape(map[k] ?? "")).join(",");
+  }
+
+  btn.preview.onclick = () => { rowPreviewEl.textContent = makeRow(); setStatus("Preview updated."); };
+
+  btn.clearForm.onclick = () => {
+    ["f_EVENT","f_FOR","f_WHERE","f_CITY","f_DAY"].forEach(id => $(id).value = "");
+    $("f_DATE").value = "";
+    $("f_DAY").value = "";
+    stateSel.value = "";
+    customRow.style.display = "none";
+    customState.value = "";
+    setCreatedNow();
     rowPreviewEl.textContent = "";
     setStatus("Form cleared.");
   };
 
-  $("fillCreatedBtn").onclick = () => {
-    const now = new Date();
-    // Friendly timestamp; change if you prefer ISO
-    const stamp = now.toLocaleString(undefined, { year:"numeric", month:"2-digit", day:"2-digit", hour:"2-digit", minute:"2-digit" });
-    $("f_CREATED").value = stamp;
-    setStatus("CREATED set to now.");
-  };
-
-  // CSV escaping
-  function csvEscape(value) {
-    if (value === null || value === undefined) return "";
-    let s = String(value).trim();
-    s = s.replace(/\r\n/g, "\n").replace(/\r/g, "\n");
-    const mustQuote = /[",\n]/.test(s);
-    if (mustQuote) s = '"' + s.replace(/"/g, '""') + '"';
-    return s;
-  }
-
-  function makeRowFromForm() {
-    const values = CSV_COLUMNS.map((c) => csvEscape($("f_" + c).value));
-    return values.join(",");
-  }
-
-  $("previewBtn").onclick = () => {
-    rowPreviewEl.textContent = makeRowFromForm();
-    setStatus("Row preview updated.");
-  };
-
-  // GitHub API helpers
-  async function ghRequest(url, { method="GET", token="", body=null } = {}) {
-    const headers = { "Accept": "application/vnd.github+json" };
+  async function ghRequest(url, { method="GET", token="", body=null } = {}){
+    const headers = { "Accept":"application/vnd.github+json" };
     if (token) headers["Authorization"] = "Bearer " + token;
-
     const res = await fetch(url, {
       method,
-      headers: body ? { ...headers, "Content-Type": "application/json" } : headers,
+      headers: body ? { ...headers, "Content-Type":"application/json" } : headers,
       body: body ? JSON.stringify(body) : null
     });
-
     const text = await res.text();
     let json = null;
     try { json = text ? JSON.parse(text) : null; } catch {}
-
-    if (!res.ok) {
+    if (!res.ok){
       const msg = json?.message || text || ("HTTP " + res.status);
       throw new Error(msg);
     }
     return json;
   }
 
-  function b64DecodeUnicode(str) {
-    str = (str || "").replace(/\n/g, "");
+  function b64DecodeUnicode(str){
+    str = (str || "").replace(/\n/g,"");
     const bin = atob(str);
     const bytes = Uint8Array.from(bin, c => c.charCodeAt(0));
     return new TextDecoder("utf-8").decode(bytes);
   }
-
-  function b64EncodeUnicode(str) {
+  function b64EncodeUnicode(str){
     const bytes = new TextEncoder().encode(str);
     let bin = "";
     bytes.forEach(b => bin += String.fromCharCode(b));
     return btoa(bin);
   }
 
-  function requireToken() {
-    const t = tokenEl.value.trim();
-    if (!t) throw new Error("Missing token. Paste it in the GitHub Token box.");
-    return t;
-  }
-
-  async function testApi() {
-    clearError();
-    setStatus("Testing GitHub API…");
-    const token = requireToken();
-    const data = await ghRequest("https://api.github.com/rate_limit", { token });
-    setStatus("✅ API OK. Remaining requests: " + (data?.rate?.remaining ?? "?"));
-  }
-
-  $("testBtn").onclick = async () => {
-    try { await testApi(); }
-    catch (e) { setError("Test failed: " + e.message); }
-  };
-
-  async function loadCsv() {
-    clearError();
-    setStatus("Loading CSV…");
-    const token = requireToken();
-
-    const url = `https://api.github.com/repos/${encodeURIComponent(OWNER)}/${encodeURIComponent(REPO)}/contents/${CSV_PATH}?ref=${encodeURIComponent(BRANCH)}`;
-    const data = await ghRequest(url, { token });
-
-    const csv = b64DecodeUnicode(data.content || "");
-    showCsvSnippet(csv);
-    setStatus("✅ Loaded CSV successfully.");
-    return { csv, sha: data.sha };
-  }
-
-  function showCsvSnippet(csv) {
-    const lines = csv.split("\n");
-    const head = lines.slice(0, 6).join("\n");
-    const tail = lines.slice(Math.max(lines.length - 10, 0)).join("\n");
-    csvSnippetEl.textContent =
-      `--- TOP (first 6 lines) ---\n${head}\n\n--- BOTTOM (last 10 lines) ---\n${tail}`;
-  }
-
-  $("loadBtn").onclick = async () => {
-    try { await loadCsv(); }
-    catch (e) { setError("Load failed: " + e.message); }
-  };
-
-  $("appendBtn").onclick = async () => {
-    clearError();
-    setStatus("Appending + committing…");
-
-    try {
+  btn.test.onclick = async () => {
+    clearError(); setBusy(true); setStatus("Testing API…");
+    try{
       const token = requireToken();
-      const newRow = makeRowFromForm();
+      const data = await ghRequest("https://api.github.com/rate_limit", { token });
+      setStatus("API OK. Remaining: " + (data?.rate?.remaining ?? "?"));
+    } catch(e){
+      setError("Test failed: " + e.message);
+    } finally {
+      setBusy(false);
+    }
+  };
+
+  btn.load.onclick = async () => {
+    clearError(); setBusy(true); setStatus("Loading CSV…");
+    try{
+      const token = requireToken();
+      const url = `https://api.github.com/repos/${encodeURIComponent(OWNER)}/${encodeURIComponent(REPO)}/contents/${CSV_PATH}?ref=${encodeURIComponent(BRANCH)}`;
+      const data = await ghRequest(url, { token });
+      const csv = b64DecodeUnicode(data.content || "");
+      const lines = csv.split("\n");
+      const head = lines.slice(0, 6).join("\n");
+      const tail = lines.slice(Math.max(lines.length - 10, 0)).join("\n");
+      csvSnippetEl.textContent = `--- TOP (first 6 lines) ---\n${head}\n\n--- BOTTOM (last 10 lines) ---\n${tail}`;
+      setStatus("CSV loaded.");
+    } catch(e){
+      setError("Load failed: " + e.message);
+    } finally {
+      setBusy(false);
+    }
+  };
+
+  btn.append.onclick = async () => {
+    clearError(); setBusy(true); setStatus("Appending + committing…");
+    try{
+      const token = requireToken();
+      const newRow = makeRow();
       rowPreviewEl.textContent = newRow;
 
-      // Load current file + sha
-      const { csv, sha } = await loadCsv();
+      const getUrl = `https://api.github.com/repos/${encodeURIComponent(OWNER)}/${encodeURIComponent(REPO)}/contents/${CSV_PATH}?ref=${encodeURIComponent(BRANCH)}`;
+      const data = await ghRequest(getUrl, { token });
+      const csv = b64DecodeUnicode(data.content || "");
+      const sha = data.sha;
 
-      // Append row (ensure newline)
       let updated = csv;
       if (!updated.endsWith("\n")) updated += "\n";
       updated += newRow + "\n";
 
       const putUrl = `https://api.github.com/repos/${encodeURIComponent(OWNER)}/${encodeURIComponent(REPO)}/contents/${CSV_PATH}`;
-      const nowIso = new Date().toISOString();
       const body = {
-        message: `Append event row (${nowIso})`,
+        message: `Append event row (${new Date().toISOString()})`,
         content: b64EncodeUnicode(updated),
         sha,
         branch: BRANCH
       };
 
-      await ghRequest(putUrl, { method: "PUT", token, body });
+      await ghRequest(putUrl, { method:"PUT", token, body });
 
-      setStatus("✅ Commit succeeded. Reloading…");
-      await loadCsv();
-      setStatus("✅ Done.");
-    } catch (e) {
+      setStatus("✅ Commit succeeded.");
+      btn.load.click();
+    } catch(e){
       setError("Commit failed: " + e.message);
+    } finally {
+      setBusy(false);
     }
   };
 
-  function setStatus(msg) {
-    statusEl.textContent = msg;
-    errorEl.textContent = "";
-  }
-  function setError(msg) {
-    errorEl.textContent = msg;
-    statusEl.textContent = "";
-  }
-  function clearError() { errorEl.textContent = ""; }
-
-  setStatus("Ready. (Tip: click “Test API Access” first.)");
+  setStatus("Ready.");
 })();
 </script>
 </body>
