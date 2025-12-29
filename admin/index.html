@@ -1,212 +1,318 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Events CSV Admin</title>
-
-<style>
-body {
-  font-family: system-ui,-apple-system,Segoe UI,Roboto,Arial;
-  margin: 24px;
-}
-h1,h2 { margin-bottom: 6px; }
-.card {
-  border: 1px solid #ddd;
-  border-radius: 12px;
-  padding: 16px;
-  margin-bottom: 16px;
-}
-.row {
-  display: grid;
-  grid-template-columns: 160px 1fr;
-  gap: 10px;
-  margin: 8px 0;
-  align-items: center;
-}
-input,button {
-  padding: 10px;
-  font: inherit;
-}
-button { cursor: pointer; }
-pre {
-  background: #f6f6f6;
-  padding: 12px;
-  border-radius: 8px;
-  white-space: pre-wrap;
-}
-.ok { color: #0a7a2f; }
-.err { color: #b00020; white-space: pre-wrap; }
-.muted { color: #666; }
-</style>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>ANY N.E. Events — Admin</title>
+  <style>
+    :root{
+      --bg:#0b0f0d;
+      --card:#101614;
+      --text:#e9efe9;
+      --muted:#a9b6ae;
+      --line:#233028;
+      --ok:#37c26a;
+      --bad:#ff5a6a;
+      --btn:#1c2a22;
+      --btn2:#203126;
+      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    }
+    body{margin:24px;font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial;line-height:1.35;background:var(--bg);color:var(--text)}
+    h1{margin:0 0 6px 0;font-size:22px}
+    .muted{color:var(--muted)}
+    .card{border:1px solid var(--line);background:var(--card);border-radius:14px;padding:16px;margin:14px 0}
+    .row{display:grid;grid-template-columns:170px 1fr;gap:10px;margin:10px 0;align-items:center}
+    input,button,textarea{font:inherit;padding:10px;border-radius:10px;border:1px solid var(--line);background:#0d1310;color:var(--text)}
+    button{cursor:pointer;background:var(--btn)}
+    button:hover{background:var(--btn2)}
+    pre{background:#0d1310;border:1px solid var(--line);padding:12px;border-radius:12px;white-space:pre-wrap;font-family:var(--mono);font-size:12px;color:var(--muted)}
+    code{font-family:var(--mono);font-size:12px;background:#0d1310;border:1px solid var(--line);padding:2px 6px;border-radius:8px;color:var(--muted)}
+    .ok{color:var(--ok)}
+    .err{color:var(--bad);white-space:pre-wrap}
+    .btnRow{display:flex;gap:10px;flex-wrap:wrap}
+    .pill{display:inline-block;padding:4px 10px;border-radius:999px;border:1px solid var(--line);color:var(--muted);font-size:12px}
+    .spacer{height:4px}
+  </style>
 </head>
-
 <body>
+  <h1>Events CSV Admin</h1>
+  <div class="muted">
+    Writes directly to <code>data/events.csv</code> in <code>anyjiujitsu/anyjiujitsu.github.io</code> (branch <code>main</code>).
+  </div>
 
-<h1>Events CSV Admin</h1>
-<p class="muted">
-Appends rows to <code>data/events.csv</code> and commits directly to GitHub.
-Token is never hardcoded.
-</p>
+  <div class="card">
+    <div class="pill">Repo locked to: anyjiujitsu / anyjiujitsu.github.io</div>
+    <div class="pill">Branch: main</div>
+    <div class="pill">Path: data/events.csv</div>
 
-<div class="card">
-<h2>Repo Settings</h2>
+    <div class="spacer"></div>
 
-<div class="row"><label>Owner</label><input id="owner" value="anyjiujitsu.github.iu"></div>
-<div class="row"><label>Repo</label><input id="repo" value="admin"></div>
-<div class="row"><label>Branch</label><input id="branch" value="ANYNE_USER"></div>
-<div class="row"><label>CSV Path</label><input id="path" value="data/events.csv"></div>
+    <div class="row">
+      <label for="token">GitHub Token</label>
+      <input id="token" type="password" placeholder="Paste fine-grained token (Contents: Read & Write)" />
+    </div>
 
-<div class="row">
-<label>GitHub Token</label>
-<input id="token" type="password" placeholder="Paste token here">
-</div>
+    <div class="btnRow">
+      <button id="saveTokenBtn" type="button">Save Token (local)</button>
+      <button id="clearTokenBtn" type="button">Clear Saved Token</button>
+      <button id="testBtn" type="button">Test API Access</button>
+      <button id="loadBtn" type="button">Load CSV</button>
+    </div>
 
-<div class="row">
-<div></div>
-<div>
-<button id="saveToken">Save Token (local)</button>
-<button id="clearToken">Clear Token</button>
-<button id="loadCsv">Load CSV</button>
-</div>
-</div>
+    <div id="status" class="ok" style="margin-top:10px"></div>
+    <div id="error" class="err" style="margin-top:10px"></div>
+  </div>
 
-<p class="muted">
-Token must have <b>Contents: Read & Write</b> permission on this repo.
-</p>
-</div>
+  <div class="card">
+    <h2 style="margin:0 0 8px 0;font-size:16px">Add Row</h2>
+    <div class="muted">Headers locked to: <code>EVENT, FOR, WHERE, CITY, STATE, DAY, DATE, CREATED</code></div>
 
-<div class="card">
-<h2>Add Event (CSV Row)</h2>
-<div id="fields"></div>
+    <div id="fields"></div>
 
-<div style="margin-top:12px">
-<button id="preview">Preview Row</button>
-<button id="append">Append + Commit</button>
-</div>
+    <div class="btnRow" style="margin-top:12px">
+      <button id="fillCreatedBtn" type="button">Set CREATED = now</button>
+      <button id="previewBtn" type="button">Preview Row</button>
+      <button id="appendBtn" type="button">Append + Commit</button>
+      <button id="clearFormBtn" type="button">Clear Form</button>
+    </div>
 
-<h3>Row Preview</h3>
-<pre id="previewOut"></pre>
+    <div style="margin-top:12px" class="muted">Row Preview</div>
+    <pre id="rowPreview"></pre>
+  </div>
 
-<div id="status" class="ok"></div>
-<div id="error" class="err"></div>
-</div>
-
-<div class="card">
-<h2>CSV Snippet</h2>
-<pre id="snippet"></pre>
-</div>
+  <div class="card">
+    <h2 style="margin:0 0 8px 0;font-size:16px">CSV Snippet</h2>
+    <pre id="csvSnippet"></pre>
+  </div>
 
 <script>
-const CSV_COLUMNS = ["EVENT","FOR","WHERE","CITY","STATE","DAY","DATE","CREATED"];
-const LS_KEY = "events_admin_token";
+(() => {
+  // ✅ LOCKED CONFIG (matches your screenshot)
+  const OWNER  = "anyjiujitsu";
+  const REPO   = "anyjiujitsu.github.io";
+  const BRANCH = "main";
+  const CSV_PATH = "data/events.csv";
 
-const $ = id => document.getElementById(id);
+  // ✅ LOCKED HEADERS
+  const CSV_COLUMNS = ["EVENT","FOR","WHERE","CITY","STATE","DAY","DATE","CREATED"];
 
-const fieldsDiv = $("fields");
-CSV_COLUMNS.forEach(col => {
-  const r = document.createElement("div");
-  r.className = "row";
-  r.innerHTML = `<label>${col}</label><input id="f_${col}">`;
-  fieldsDiv.appendChild(r);
-});
+  const $ = (id) => document.getElementById(id);
+  const tokenEl = $("token");
+  const fieldsEl = $("fields");
+  const rowPreviewEl = $("rowPreview");
+  const statusEl = $("status");
+  const errorEl = $("error");
+  const csvSnippetEl = $("csvSnippet");
 
-$("saveToken").onclick = () => {
-  localStorage.setItem(LS_KEY, $("token").value.trim());
-  setStatus("Token saved locally.");
-};
-$("clearToken").onclick = () => {
-  localStorage.removeItem(LS_KEY);
-  $("token").value = "";
-  setStatus("Token cleared.");
-};
-
-const saved = localStorage.getItem(LS_KEY);
-if (saved) $("token").value = saved;
-
-function csvEscape(v) {
-  if (!v) return "";
-  v = v.replace(/\r\n/g,"\n").replace(/\r/g,"\n");
-  if (/[",\n]/.test(v)) v = `"${v.replace(/"/g,'""')}"`;
-  return v;
-}
-
-function buildRow() {
-  return CSV_COLUMNS.map(c => csvEscape($("f_"+c).value.trim())).join(",");
-}
-
-$("preview").onclick = () => {
-  $("previewOut").textContent = buildRow();
-};
-
-async function gh(url, opts={}) {
-  const res = await fetch(url,{
-    method: opts.method||"GET",
-    headers: {
-      "Accept":"application/vnd.github+json",
-      ...(opts.token?{"Authorization":"Bearer "+opts.token}:{})
-    },
-    body: opts.body?JSON.stringify(opts.body):null
+  // Make failures visible instead of “nothing happened”
+  window.addEventListener("error", (e) => {
+    setError("Page script error: " + (e.message || "Unknown") + "\nLine: " + (e.lineno || "?"));
   });
-  const t = await res.text();
-  const j = t?JSON.parse(t):null;
-  if (!res.ok) throw new Error(j?.message||t);
-  return j;
-}
+  window.addEventListener("unhandledrejection", (e) => {
+    setError("Unhandled promise rejection: " + (e.reason?.message || e.reason || "Unknown"));
+  });
 
-function decode(b64) {
-  return new TextDecoder().decode(Uint8Array.from(atob(b64.replace(/\n/g,"")),c=>c.charCodeAt(0)));
-}
-function encode(s) {
-  return btoa(String.fromCharCode(...new TextEncoder().encode(s)));
-}
+  // Token local storage
+  const LS_KEY = "anyne_events_admin_token";
+  const saved = localStorage.getItem(LS_KEY);
+  if (saved) tokenEl.value = saved;
 
-async function loadCsv() {
-  const url = `https://api.github.com/repos/${$("owner").value}/${$("repo").value}/contents/${$("path").value}?ref=${$("branch").value}`;
-  const d = await gh(url,{token:$("token").value});
-  const csv = decode(d.content);
-  showSnippet(csv);
-  return {csv,sha:d.sha};
-}
+  $("saveTokenBtn").onclick = () => {
+    const t = tokenEl.value.trim();
+    if (!t) return setError("No token to save.");
+    localStorage.setItem(LS_KEY, t);
+    setStatus("Token saved locally (this browser only).");
+  };
 
-$("loadCsv").onclick = async ()=>{
-  try { await loadCsv(); setStatus("CSV loaded."); }
-  catch(e){ setError(e.message); }
-};
+  $("clearTokenBtn").onclick = () => {
+    localStorage.removeItem(LS_KEY);
+    tokenEl.value = "";
+    setStatus("Saved token cleared.");
+  };
 
-$("append").onclick = async ()=>{
-  try {
-    const {csv,sha} = await loadCsv();
-    let updated = csv.endsWith("\n")?csv:csv+"\n";
-    updated += buildRow()+"\n";
+  // Build form fields
+  function buildFields() {
+    fieldsEl.innerHTML = "";
+    CSV_COLUMNS.forEach((col) => {
+      const row = document.createElement("div");
+      row.className = "row";
+      const label = document.createElement("label");
+      label.textContent = col;
+      label.setAttribute("for", "f_" + col);
+      const input = document.createElement("input");
+      input.id = "f_" + col;
+      input.placeholder = col;
+      row.appendChild(label);
+      row.appendChild(input);
+      fieldsEl.appendChild(row);
+    });
+  }
+  buildFields();
 
-    const body = {
-      message:`Append event ${new Date().toISOString()}`,
-      content: encode(updated),
-      sha,
-      branch:$("branch").value
-    };
+  $("clearFormBtn").onclick = () => {
+    CSV_COLUMNS.forEach((c) => $("f_" + c).value = "");
+    rowPreviewEl.textContent = "";
+    setStatus("Form cleared.");
+  };
 
-    await gh(
-      `https://api.github.com/repos/${$("owner").value}/${$("repo").value}/contents/${$("path").value}`,
-      {method:"PUT",token:$("token").value,body}
-    );
+  $("fillCreatedBtn").onclick = () => {
+    const now = new Date();
+    // Friendly timestamp; change if you prefer ISO
+    const stamp = now.toLocaleString(undefined, { year:"numeric", month:"2-digit", day:"2-digit", hour:"2-digit", minute:"2-digit" });
+    $("f_CREATED").value = stamp;
+    setStatus("CREATED set to now.");
+  };
 
-    setStatus("Commit successful.");
-    await loadCsv();
-  } catch(e){ setError(e.message); }
-};
+  // CSV escaping
+  function csvEscape(value) {
+    if (value === null || value === undefined) return "";
+    let s = String(value).trim();
+    s = s.replace(/\r\n/g, "\n").replace(/\r/g, "\n");
+    const mustQuote = /[",\n]/.test(s);
+    if (mustQuote) s = '"' + s.replace(/"/g, '""') + '"';
+    return s;
+  }
 
-function showSnippet(csv){
-  const l = csv.split("\n");
-  $("snippet").textContent =
-    "--- TOP ---\n"+l.slice(0,5).join("\n")+
-    "\n\n--- BOTTOM ---\n"+l.slice(-8).join("\n");
-}
+  function makeRowFromForm() {
+    const values = CSV_COLUMNS.map((c) => csvEscape($("f_" + c).value));
+    return values.join(",");
+  }
 
-function setStatus(m){ $("status").textContent=m; $("error").textContent=""; }
-function setError(m){ $("error").textContent=m; $("status").textContent=""; }
+  $("previewBtn").onclick = () => {
+    rowPreviewEl.textContent = makeRowFromForm();
+    setStatus("Row preview updated.");
+  };
+
+  // GitHub API helpers
+  async function ghRequest(url, { method="GET", token="", body=null } = {}) {
+    const headers = { "Accept": "application/vnd.github+json" };
+    if (token) headers["Authorization"] = "Bearer " + token;
+
+    const res = await fetch(url, {
+      method,
+      headers: body ? { ...headers, "Content-Type": "application/json" } : headers,
+      body: body ? JSON.stringify(body) : null
+    });
+
+    const text = await res.text();
+    let json = null;
+    try { json = text ? JSON.parse(text) : null; } catch {}
+
+    if (!res.ok) {
+      const msg = json?.message || text || ("HTTP " + res.status);
+      throw new Error(msg);
+    }
+    return json;
+  }
+
+  function b64DecodeUnicode(str) {
+    str = (str || "").replace(/\n/g, "");
+    const bin = atob(str);
+    const bytes = Uint8Array.from(bin, c => c.charCodeAt(0));
+    return new TextDecoder("utf-8").decode(bytes);
+  }
+
+  function b64EncodeUnicode(str) {
+    const bytes = new TextEncoder().encode(str);
+    let bin = "";
+    bytes.forEach(b => bin += String.fromCharCode(b));
+    return btoa(bin);
+  }
+
+  function requireToken() {
+    const t = tokenEl.value.trim();
+    if (!t) throw new Error("Missing token. Paste it in the GitHub Token box.");
+    return t;
+  }
+
+  async function testApi() {
+    clearError();
+    setStatus("Testing GitHub API…");
+    const token = requireToken();
+    const data = await ghRequest("https://api.github.com/rate_limit", { token });
+    setStatus("✅ API OK. Remaining requests: " + (data?.rate?.remaining ?? "?"));
+  }
+
+  $("testBtn").onclick = async () => {
+    try { await testApi(); }
+    catch (e) { setError("Test failed: " + e.message); }
+  };
+
+  async function loadCsv() {
+    clearError();
+    setStatus("Loading CSV…");
+    const token = requireToken();
+
+    const url = `https://api.github.com/repos/${encodeURIComponent(OWNER)}/${encodeURIComponent(REPO)}/contents/${CSV_PATH}?ref=${encodeURIComponent(BRANCH)}`;
+    const data = await ghRequest(url, { token });
+
+    const csv = b64DecodeUnicode(data.content || "");
+    showCsvSnippet(csv);
+    setStatus("✅ Loaded CSV successfully.");
+    return { csv, sha: data.sha };
+  }
+
+  function showCsvSnippet(csv) {
+    const lines = csv.split("\n");
+    const head = lines.slice(0, 6).join("\n");
+    const tail = lines.slice(Math.max(lines.length - 10, 0)).join("\n");
+    csvSnippetEl.textContent =
+      `--- TOP (first 6 lines) ---\n${head}\n\n--- BOTTOM (last 10 lines) ---\n${tail}`;
+  }
+
+  $("loadBtn").onclick = async () => {
+    try { await loadCsv(); }
+    catch (e) { setError("Load failed: " + e.message); }
+  };
+
+  $("appendBtn").onclick = async () => {
+    clearError();
+    setStatus("Appending + committing…");
+
+    try {
+      const token = requireToken();
+      const newRow = makeRowFromForm();
+      rowPreviewEl.textContent = newRow;
+
+      // Load current file + sha
+      const { csv, sha } = await loadCsv();
+
+      // Append row (ensure newline)
+      let updated = csv;
+      if (!updated.endsWith("\n")) updated += "\n";
+      updated += newRow + "\n";
+
+      const putUrl = `https://api.github.com/repos/${encodeURIComponent(OWNER)}/${encodeURIComponent(REPO)}/contents/${CSV_PATH}`;
+      const nowIso = new Date().toISOString();
+      const body = {
+        message: `Append event row (${nowIso})`,
+        content: b64EncodeUnicode(updated),
+        sha,
+        branch: BRANCH
+      };
+
+      await ghRequest(putUrl, { method: "PUT", token, body });
+
+      setStatus("✅ Commit succeeded. Reloading…");
+      await loadCsv();
+      setStatus("✅ Done.");
+    } catch (e) {
+      setError("Commit failed: " + e.message);
+    }
+  };
+
+  function setStatus(msg) {
+    statusEl.textContent = msg;
+    errorEl.textContent = "";
+  }
+  function setError(msg) {
+    errorEl.textContent = msg;
+    statusEl.textContent = "";
+  }
+  function clearError() { errorEl.textContent = ""; }
+
+  setStatus("Ready. (Tip: click “Test API Access” first.)");
+})();
 </script>
-
 </body>
 </html>
