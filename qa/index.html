@@ -3705,5 +3705,22 @@ html, body {
 </script>
 <!-- === END PATCH === -->
 
+
+<!-- === PATCH v6: Nudge EVENTS down to slightly overlap green bar + shift right === -->
+<style>
+  :root{
+    --events-overlap-y: 18px; /* positive moves EVENTS down into the nav bar */
+    --events-shift-x: 18px;   /* positive moves EVENTS to the right */
+  }
+
+  .title{
+    position: relative !important;
+    transform: translateY(var(--events-overlap-y)) translateX(var(--events-shift-x)) !important;
+    z-index: 10001 !important; /* ensure it can sit over the green bar */
+    pointer-events: none !important;
+  }
+</style>
+<!-- === END PATCH v6 === -->
+
 </body>
 </html>
