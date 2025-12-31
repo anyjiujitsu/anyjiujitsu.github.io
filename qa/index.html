@@ -14,14 +14,14 @@
        and scale down on smaller screens so it fits within the viewport. */
     #monthsRoot {
       transform-origin: top center;
-      transform: scale(1.30);
+      transform: scale(1.55);
     }
 
-    @media (max-width: 900px) { #monthsRoot { transform: scale(1.05); } }
+    @media (max-width: 900px) { #monthsRoot { transform: scale(1.20); } }
 
-    @media (max-width: 700px) { #monthsRoot { transform: scale(0.92); } }
+    @media (max-width: 700px) { #monthsRoot { transform: scale(1.05); } }
 
-    @media (max-width: 500px) { #monthsRoot { transform: scale(0.82); } }
+    @media (max-width: 500px) { #monthsRoot { transform: scale(0.90); } }
 
 
     :root {
@@ -127,8 +127,8 @@ display:flex;
     
 
     /* Keep month grouping headers (e.g., NOVEMBER 2026) in view after scaling */
-    .month-label { margin-left: 24px !important; }
-    @media (max-width: 700px) { .month-label { margin-left: 12px !important; } }
+    .month-label { margin-left: 96px !important; }
+    @media (max-width: 700px) { .month-label { margin-left: 48px !important; } }
 
 .card-body {
       position: relative;
