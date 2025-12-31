@@ -1718,6 +1718,22 @@ body{
 }
 </style>
 
+
+<style>
+/* FINAL VERIFIED OVERRIDE: month grouping headers visible, no wrapping, shifted slightly right.
+   Uses padding (not transform) so Safari/iOS reliably renders it without affecting table placement. */
+body .month-label{
+  display: block !important;
+  white-space: nowrap !important;
+  transform: none !important;
+  margin-left: 0 !important;
+  padding-left: 32px !important;   /* slight offset so it starts just wider than the table */
+}
+@media (max-width: 700px){
+  body .month-label{ padding-left: 16px !important; }
+}
+</style>
+
 </head>
 <body>
   <div class="header-freeze">
