@@ -7,26 +7,28 @@
 
 
   <style>
+    /* Global scale: increases all rem-based sizing proportionally */
+    html { font-size: 22px; }
 
-    /* Responsive table scaling for mobile */
-    .table-wrap {
+    /* Scale the entire rendered table/list (text + icons) up on desktop,
+       and scale down on smaller screens so it fits within the viewport. */
+    #monthsRoot {
       transform-origin: top center;
+      transform: scale(1.15);
     }
 
     @media (max-width: 900px) {
-      .table-wrap {
-        transform: scale(0.85);
-      }
+      #monthsRoot { transform: scale(0.90); }
     }
 
-    @media (max-width: 600px) {
-      .table-wrap {
-        transform: scale(0.75);
-      }
+    @media (max-width: 700px) {
+      #monthsRoot { transform: scale(0.82); }
     }
 
-    /* Global scale: increases all rem-based sizing proportionally */
-    html { font-size: 22px; }
+    @media (max-width: 500px) {
+      #monthsRoot { transform: scale(0.74); }
+    }
+
 
     :root {
       --green: #234c31;
