@@ -137,7 +137,7 @@ display:flex;
     /* Month grouping headers: shift right WITHOUT moving the table */
     .month-label{
       white-space: nowrap !important;
-      transform: translateX(160px) !important; /* adjust if needed */
+      transform: translateX(300px) !important; /* adjust if needed */
     }
     @media (max-width: 700px){ .month-label{ transform: translateX(180px) !important; } }
 
@@ -1244,11 +1244,7 @@ body {
       transform: translateX(520px) !important;
       white-space: nowrap !important;
     }
-    @media (max-width: 700px){
-      body .month-label{
-        transform: translateX(260px) !important;
-      }
-    }
+    @media (max-width: 700px){ body .month-label{ transform: translateX(150px) !important; } }
 
 </style>
 
