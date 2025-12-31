@@ -128,23 +128,17 @@ display:flex;
 
     
 
-    
-
-    
-
-    
-
-    
-
-    /* Month grouping headers (keep visible; JS will offset without moving the table) */
+    /* Minimal month header nudge (does NOT move table) */
     .month-label{
-      display:block;
-      white-space:nowrap;
-      transform:none;
-      will-change: transform;
+      white-space: nowrap;
+      transform: translateX(28px);
+    }
+    @media (max-width: 700px){
+      .month-label{ transform: translateX(14px); }
     }
 
-}
+/* Keep month grouping headers (e.g., NOVEMBER 2026) in view after scaling */
+    @media (max-width: 700px) { }
 
 .card-body {
       position: relative;
@@ -1232,9 +1226,6 @@ body {
 /* Keep State on top of itself */
 .state-filter{ z-index: 61 !important; }
 
-
-    }
-
 </style>
 
 <style>
@@ -1706,7 +1697,6 @@ body{
   scroll-padding-top: 160px;
 }
 </style>
-
 
 </head>
 <body>
@@ -3585,50 +3575,6 @@ document.addEventListener('DOMContentLoaded', () => {
   transform: translateX(16px) !important;
 }
 </style>
-
-
-<script>
-/*
-  Month header positioning fix (no table movement):
-  Your table/list is scaled via #monthsRoot { transform: scale(...) }.
-  That can push or clip .month-label. We keep the table exactly as-is,
-  and apply an inverse scale + small translate to ONLY the month labels,
-  so they remain visible and start just slightly to the right of the table edge.
-*/
-(function(){
-  const OFFSET_PX = 14; // "just wider than the table"
-  function getScale(el){
-    const t = getComputedStyle(el).transform;
-    if (!t || t === 'none') return 1;
-    // matrix(a,b,c,d,tx,ty) => scaleX=a, scaleY=d (for uniform scale b/c are 0)
-    const m = t.match(/matrix\(([^)]+)\)/);
-    if (!m) return 1;
-    const parts = m[1].split(',').map(s => parseFloat(s.trim()));
-    const a = parts[0], d = parts[3];
-    // Use scaleX, fallback to 1
-    return (isFinite(a) && a !== 0) ? a : ((isFinite(d) && d !== 0) ? d : 1);
-  }
-
-  function apply(){
-    const root = document.getElementById('monthsRoot');
-    if (!root) return;
-    const s = getScale(root) || 1;
-
-    // translation happens in the scaled coordinate system, so divide by s
-    const t = (OFFSET_PX / s);
-
-    document.querySelectorAll('.month-label').forEach(lbl => {
-      // translate then inverse-scale so effective position = OFFSET_PX and effective scale = 1
-      lbl.style.transform = `translateX(${t}px) scale(${1/s})`;
-      lbl.style.transformOrigin = 'top left';
-    });
-  }
-
-  window.addEventListener('resize', apply, {passive:true});
-  window.addEventListener('load', apply, {passive:true});
-  document.addEventListener('DOMContentLoaded', apply);
-})();
-</script>
 
 </body>
 </html>
