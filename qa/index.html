@@ -1238,6 +1238,18 @@ body {
 /* Keep State on top of itself */
 .state-filter{ z-index: 61 !important; }
 
+
+    /* FINAL OVERRIDE — month headers shift ONLY (table unaffected) */
+    body .month-label{
+      transform: translateX(520px) !important;
+      white-space: nowrap !important;
+    }
+    @media (max-width: 700px){
+      body .month-label{
+        transform: translateX(260px) !important;
+      }
+    }
+
 </style>
 
 <style>
