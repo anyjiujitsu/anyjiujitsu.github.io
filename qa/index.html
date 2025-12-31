@@ -134,24 +134,18 @@ display:flex;
 
     
 
-    /* Month grouping headers: shift right WITHOUT moving the table */
-    .month-label{
-      white-space: nowrap !important;
-      transform: translateX(300px) !important; /* adjust if needed */
-    }
-    @media (max-width: 700px){ .month-label{ transform: translateX(180px) !important; } }
+    
 
-/* Month grouping header alignment (keep visible like original) */
+    /* Month grouping headers (keep visible; JS will offset without moving the table) */
     .month-label{
-      margin-left: 2px !important;
-      white-space: nowrap !important;
+      display:block;
+      white-space:nowrap;
+      transform:none;
+      will-change: transform;
     }
 
-/* Prevent month grouping headers from wrapping */
-    .month-label {
-      white-space: nowrap !important;
-      overflow: visible;
-    }
+}
+
 .card-body {
       position: relative;
       box-shadow: 0 6px 14px rgba(0,0,0,0.12);
@@ -1239,12 +1233,7 @@ body {
 .state-filter{ z-index: 61 !important; }
 
 
-    /* FINAL OVERRIDE — month headers shift ONLY (table unaffected) */
-    body .month-label{
-      transform: translateX(48px) !important;
-      white-space: nowrap !important;
     }
-    @media (max-width: 700px){ body .month-label{ transform: translateX(24px) !important; } }
 
 </style>
 
@@ -1720,19 +1709,7 @@ body{
 
 
 <style>
-/* FINAL VERIFIED OVERRIDE: month grouping headers visible, no wrapping, shifted slightly right.
-   Uses padding (not transform) so Safari/iOS reliably renders it without affecting table placement. */
-body .month-label{
-  display: block !important;
-  white-space: nowrap !important;
-  transform: none !important;
-  margin-left: 0 !important;
-  padding-left: 32px !important;   /* slight offset so it starts just wider than the table */
-}
-@media (max-width: 700px){
-  body .month-label{ padding-left: 16px !important; }
-}
-</style>
+
 
 </head>
 <body>
@@ -3611,6 +3588,50 @@ document.addEventListener('DOMContentLoaded', () => {
   transform: translateX(16px) !important;
 }
 </style>
+
+
+<script>
+/*
+  Month header positioning fix (no table movement):
+  Your table/list is scaled via #monthsRoot { transform: scale(...) }.
+  That can push or clip .month-label. We keep the table exactly as-is,
+  and apply an inverse scale + small translate to ONLY the month labels,
+  so they remain visible and start just slightly to the right of the table edge.
+*/
+(function(){
+  const OFFSET_PX = 14; // "just wider than the table"
+  function getScale(el){
+    const t = getComputedStyle(el).transform;
+    if (!t || t === 'none') return 1;
+    // matrix(a,b,c,d,tx,ty) => scaleX=a, scaleY=d (for uniform scale b/c are 0)
+    const m = t.match(/matrix\(([^)]+)\)/);
+    if (!m) return 1;
+    const parts = m[1].split(',').map(s => parseFloat(s.trim()));
+    const a = parts[0], d = parts[3];
+    // Use scaleX, fallback to 1
+    return (isFinite(a) && a !== 0) ? a : ((isFinite(d) && d !== 0) ? d : 1);
+  }
+
+  function apply(){
+    const root = document.getElementById('monthsRoot');
+    if (!root) return;
+    const s = getScale(root) || 1;
+
+    // translation happens in the scaled coordinate system, so divide by s
+    const t = (OFFSET_PX / s);
+
+    document.querySelectorAll('.month-label').forEach(lbl => {
+      // translate then inverse-scale so effective position = OFFSET_PX and effective scale = 1
+      lbl.style.transform = `translateX(${t}px) scale(${1/s})`;
+      lbl.style.transformOrigin = 'top left';
+    });
+  }
+
+  window.addEventListener('resize', apply, {passive:true});
+  window.addEventListener('load', apply, {passive:true});
+  document.addEventListener('DOMContentLoaded', apply);
+})();
+</script>
 
 </body>
 </html>
