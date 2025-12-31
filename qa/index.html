@@ -1862,15 +1862,38 @@ body{
 
         // Loading state
         root.innerHTML = '<div style="padding:16px;color:rgba(255,255,255,.65);font-size:13px;">Loading events…</div>';
+        const csvCandidates = [
+          'data/events.csv',
+          './data/events.csv',
+          '/data/events.csv',
+          'events.csv',
+          './events.csv'
+        ];
 
-        const csvUrl = 'data/events.csv';
         let csvText = '';
-        try{
-          const res = await fetch(csvUrl, { cache: 'no-store' });
-          if (!res.ok) throw new Error('HTTP ' + res.status);
-          csvText = await res.text();
-        }catch(err){
-          root.innerHTML = `<div style="padding:16px;color:#ffb3b3;font-size:13px;">CSV load error<br><span style="opacity:.75">${(err && err.message) ? err.message : err}</span></div>`;
+        let lastErr = null;
+        let tried = [];
+
+        for (const url of csvCandidates){
+          try{
+            tried.push(url);
+            const res = await fetch(url, { cache: 'no-store' });
+            if (!res.ok) throw new Error('HTTP ' + res.status);
+            csvText = await res.text();
+            if (csvText && csvText.trim().length) break;
+          }catch(err){
+            lastErr = err;
+          }
+        }
+
+        if (!csvText || !csvText.trim().length){
+          const msg = (lastErr && lastErr.message) ? lastErr.message : (lastErr || 'Unknown error');
+          root.innerHTML = `
+            <div style="padding:16px;color:#ffb3b3;font-size:13px;">
+              CSV load error<br>
+              <span style="opacity:.75">${msg}</span><br>
+              <span style="opacity:.6">Tried: ${tried.join(', ')}</span>
+            </div>`;
           return;
         }
 
