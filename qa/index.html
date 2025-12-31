@@ -126,7 +126,15 @@ display:flex;
 
     
 
-    /* Keep month grouping headers (e.g., NOVEMBER 2026) in view after scaling */
+    
+
+    /* Prevent month grouping headers from wrapping */
+    .month-label {
+      white-space: nowrap !important;
+      overflow: visible;
+    }
+
+/* Keep month grouping headers (e.g., NOVEMBER 2026) in view after scaling */
     .month-label { margin-left: 1536px !important; }
     @media (max-width: 700px) { .month-label { margin-left: 768px !important; } }
 
