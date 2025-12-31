@@ -7,22 +7,18 @@
 
 
   <style>
-
-    /* Increase table text size by 50% (table only) */
-    #monthsRoot,
-    #monthsRoot * {
-      font-size: 1.5em;
-    }
-
     /* Global scale: increases all rem-based sizing proportionally */
     html { font-size: 22px; }
 
     /* Scale the entire rendered table/list (text + icons) up on desktop,
        and scale down on smaller screens so it fits within the viewport. */
     #monthsRoot {
+
       transform-origin: top center;
       transform: scale(1.55);
-    }
+    
+  font-size: 1.5em;
+}
 
     @media (max-width: 900px) { #monthsRoot { transform: scale(1.20); } }
 
