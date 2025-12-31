@@ -13,7 +13,7 @@
     /* Scale the entire rendered table/list (text + icons) up on desktop,
        and scale down on smaller screens so it fits within the viewport. */
     #monthsRoot {
-      transform-origin: top left;
+      transform-origin: top center;
       transform: scale(1.55);
     }
 
@@ -132,11 +132,15 @@ display:flex;
 
     
 
-    /* Month grouping header: keep visible like original (no huge offsets, no wrap) */
+    
+
+    /* Month grouping headers: shift right WITHOUT moving the table */
     .month-label{
-      margin-left: 0px !important;
-      padding-left: 0px !important;
       white-space: nowrap !important;
+      transform: translateX(72px) !important; /* adjust if needed */
+    }
+    @media (max-width: 700px){
+      .month-label{ transform: translateX(36px) !important; }
     }
 
 /* Month grouping header alignment (keep visible like original) */
