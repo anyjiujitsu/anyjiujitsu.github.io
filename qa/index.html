@@ -124,7 +124,13 @@ display:flex;
       margin: 0 2px 10px;
     }
 
-    .card-body {
+    
+
+    /* Keep month grouping headers (e.g., NOVEMBER 2026) in view after scaling */
+    .month-label { margin-left: 24px !important; }
+    @media (max-width: 700px) { .month-label { margin-left: 12px !important; } }
+
+.card-body {
       position: relative;
       box-shadow: 0 6px 14px rgba(0,0,0,0.12);
       overflow: visible; /* allow "new" dot to sit just outside the right edge like Index71 */
