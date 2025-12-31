@@ -7,6 +7,24 @@
 
 
   <style>
+
+    /* Responsive table scaling for mobile */
+    .table-wrap {
+      transform-origin: top center;
+    }
+
+    @media (max-width: 900px) {
+      .table-wrap {
+        transform: scale(0.85);
+      }
+    }
+
+    @media (max-width: 600px) {
+      .table-wrap {
+        transform: scale(0.75);
+      }
+    }
+
     /* Global scale: increases all rem-based sizing proportionally */
     html { font-size: 22px; }
 
