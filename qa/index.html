@@ -495,11 +495,11 @@ display:flex;
     }
 
     .row .cell {
-      font-size: 14px;
+      font-size: 13px;
     }
 
     .row .cell small {
-      font-size: 13px;
+      font-size: 12px;
     }
 
 
@@ -3683,6 +3683,21 @@ html, body {
   }
 </style>
 <!-- === END PATCH v6 === -->
+
+
+<!-- OVERRIDE (last-wins): table entry cells only -->
+<style>
+  /* Entries */
+  .row .cell, .cell{
+    font-size: 20px !important;
+    line-height: 1.25 !important;
+  }
+
+  /* Do NOT affect group/month headers */
+  .head-cell, .month-label, .month-header, .group-header{
+    font-size: inherit !important;
+  }
+</style>
 
 </body>
 </html>
