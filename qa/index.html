@@ -1674,10 +1674,9 @@ body{
 
 
 <style>
-  /* TABLE ENTRIES ONLY: increase the event row text (div.cell) without touching month/group headers */
-  .row .cell{
-    font-size: 29px !important; /* 13px * 2.25 ≈ 29px (two half-size bumps) */
-    line-height: 1.25 !important;
+  /* Increase text inside .card-body by exactly 1px */
+  .card-body{
+    font-size: calc(1em + 1px) !important;
   }
 </style>
 
