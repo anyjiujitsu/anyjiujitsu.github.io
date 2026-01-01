@@ -1672,6 +1672,17 @@ body{
 }
 </style>
 
+
+<!-- OVERRIDE: increase ONLY .card-body text by +1px (do not touch month/group headers) -->
+<style>
+  .card-body{
+    font-size: 14px !important; /* +1px from 13px base */
+  }
+  .card-body *{
+    font-size: inherit !important;
+  }
+</style>
+
 </head>
 <body>
   <div class="header-freeze">
@@ -3683,21 +3694,6 @@ html, body {
   }
 </style>
 <!-- === END PATCH v6 === -->
-
-
-<!-- OVERRIDE (last-wins): table entry cells only -->
-<style>
-  /* Entries */
-  .row .cell, .cell{
-    font-size: 20px !important;
-    line-height: 1.25 !important;
-  }
-
-  /* Do NOT affect group/month headers */
-  .head-cell, .month-label, .month-header, .group-header{
-    font-size: inherit !important;
-  }
-</style>
 
 </body>
 </html>
