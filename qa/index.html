@@ -1674,19 +1674,10 @@ body{
 
 
 <style>
-  /* FORCE table content text only (values), exclude headers */
-  table tbody,
-  table tbody *{
-    font-size: 2em !important;
-    line-height: 1.2 !important;
-  }
-
-  /* Explicitly keep group / month headers unchanged */
-  .month-header,
-  .group-header,
-  thead,
-  thead *{
-    font-size: inherit !important;
+  /* TABLE ENTRIES ONLY: increase the event row text (div.cell) without touching month/group headers */
+  .row .cell{
+    font-size: 29px !important; /* 13px * 2.25 ≈ 29px (two half-size bumps) */
+    line-height: 1.25 !important;
   }
 </style>
 
