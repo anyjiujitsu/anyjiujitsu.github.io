@@ -4350,5 +4350,29 @@ body{
 })();
 </script>
 
+
+<style>
+/* === v154: iOS continuous scroll fix (eliminate horizontal/nested scroll capture) === */
+@media (max-width: 900px){
+
+  /* Kill any horizontal scroll containers that can "grab" the gesture */
+  .card-body,
+  .wrap,
+  #monthsRoot,
+  .month-card,
+  .head-grid,
+  .row{
+    overflow-x: hidden !important;
+    -webkit-overflow-scrolling: auto !important;
+    touch-action: pan-y !important;   /* prioritize vertical panning */
+  }
+
+  /* Ensure the document is the ONLY vertical scroller */
+  html, body{
+    overflow-y: auto !important;
+  }
+}
+</style>
+
 </body>
 </html>
