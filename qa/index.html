@@ -4085,5 +4085,71 @@ html, body {
 })();
 </script>
 
+
+<script>
+/* === v146: Restore helper text when X (clear) is clicked === */
+(function(){
+  const input = document.getElementById('nlSearch');
+  const clearBtn = document.querySelector('.clear-search, .search-clear, .nl-clear, button[aria-label="Clear"]');
+  if(!input) return;
+
+  const origPlaceholder = input.dataset.origPlaceholder || input.getAttribute('placeholder') || 'Filter (e.g., "seminar", "maine", "2026")';
+
+  function restoreIfEmpty(){
+    if((input.value || '') === ''){
+      input.setAttribute('placeholder', origPlaceholder);
+    }
+  }
+
+  // When clear (X) is clicked
+  if(clearBtn){
+    clearBtn.addEventListener('click', () => {
+      input.value = '';
+      restoreIfEmpty();
+      input.blur();
+    });
+  }
+
+  // Safety: if value is programmatically cleared elsewhere
+  input.addEventListener('input', restoreIfEmpty);
+})();
+</script>
+
+
+<script>
+/* === v147: Ensure helper text returns immediately when X is clicked === */
+(function(){
+  const input = document.getElementById('nlSearch');
+  const clearBtn = document.querySelector('.head-search-clear');
+  if(!input || !clearBtn) return;
+
+  const origPlaceholder =
+    input.dataset.origPlaceholder ||
+    input.getAttribute('placeholder') ||
+    'Filter (e.g., "seminar", "maine", "2026")';
+
+  function restorePlaceholderNow(){
+    input.setAttribute('placeholder', origPlaceholder);
+  }
+
+  // Make sure the click actually blurs the input (Safari can keep focus)
+  clearBtn.addEventListener('mousedown', (e) => {
+    // Prevent the button from "stealing" focus logic in odd ways
+    e.preventDefault();
+  });
+
+  clearBtn.addEventListener('click', () => {
+    input.value = '';
+    restorePlaceholderNow();
+
+    // Force blur + re-apply placeholder after blur (covers focus handlers that clear placeholder)
+    input.blur();
+    setTimeout(() => {
+      restorePlaceholderNow();
+    }, 0);
+  });
+})();
+</script>
+
 </body>
 </html>
