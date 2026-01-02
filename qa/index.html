@@ -4413,5 +4413,24 @@ body{
 }
 </style>
 
+
+<style>
+/* === v156: Mobile scroll fix - remove fixed header wrapper trapping scroll === */
+@media (max-width: 900px){
+  /* Fixed wrapper causes iOS scroll stalls; use sticky instead */
+  .header-freeze{
+    position: sticky !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+  }
+
+  /* Ensure header area doesn't create its own scroll context */
+  .header-freeze, .header-freeze *{
+    overscroll-behavior: auto !important;
+  }
+}
+</style>
+
 </body>
 </html>
