@@ -4454,5 +4454,27 @@ body{
 }
 </style>
 
+
+<style>
+/* === v158: Mobile continuous scroll (remove transform-based scaling/positioning that stalls iOS) === */
+@media (max-width: 900px){
+
+  /* iOS Safari can "stall" scrolling when large transformed layers enter view.
+     Disable transform-based scaling/positioning on mobile for smooth, uninterrupted scroll. */
+  body, .wrap, #monthsRoot, .months-root,
+  .sticky-head, .header-freeze,
+  .head-search, .event-filter, .year-filter, .state-filter,
+  .month-card, .card-body, .row, .cell {
+    transform: none !important;
+    transform-origin: initial !important;
+  }
+
+  /* Keep nav usable without transform scaling */
+  .head-search{
+    width: 100% !important;
+  }
+}
+</style>
+
 </body>
 </html>
