@@ -4053,5 +4053,37 @@ html, body {
 }
 </style>
 
+
+<script>
+/* === v145: Search input focus behavior ===
+   When user taps/clicks into the search bar:
+   - hide helper/placeholder text immediately
+   - ensure caret starts at the first position
+*/
+(function(){
+  const input = document.getElementById('nlSearch');
+  if(!input) return;
+
+  const origPlaceholder = input.getAttribute('placeholder') || '';
+  input.dataset.origPlaceholder = origPlaceholder;
+
+  input.addEventListener('focus', () => {
+    // Hide helper text while focused
+    input.setAttribute('placeholder', '');
+    // Place caret at start (even if value exists)
+    requestAnimationFrame(() => {
+      try { input.setSelectionRange(0, 0); } catch(e) {}
+    });
+  });
+
+  input.addEventListener('blur', () => {
+    // Restore helper text only if nothing typed
+    if((input.value || '') === ''){
+      input.setAttribute('placeholder', input.dataset.origPlaceholder || origPlaceholder);
+    }
+  });
+})();
+</script>
+
 </body>
 </html>
