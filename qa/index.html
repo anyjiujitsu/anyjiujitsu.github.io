@@ -1672,6 +1672,22 @@ body{
 }
 </style>
 
+
+<style>
+/* === v102: Actually scale the entire nav pill cluster (SEARCH / EVENTS / YEARS / STATES) 2x === */
+/* These four controls all live inside .head-search, so scaling this wrapper scales them equally. */
+.head-search{
+  transform: scale(2) !important;
+  transform-origin: bottom left !important; /* keep the cluster anchored to the green bar */
+}
+
+/* Give the green navigation bar more vertical room so the scaled pills fit cleanly */
+.sticky-head{
+  padding-top: 40px !important;
+  padding-bottom: 40px !important;
+}
+</style>
+
 </head>
 <body>
   <div class="header-freeze">
