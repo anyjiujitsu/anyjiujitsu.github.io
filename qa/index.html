@@ -4432,5 +4432,27 @@ body{
 }
 </style>
 
+
+<style>
+/* === v157: Mobile scroll smooth near month headers (remove transform layers + avoid touch capture) === */
+@media (max-width: 900px){
+  /* Month group headers: avoid translateX transform (can cause iOS scroll stalls) */
+  .month-label{
+    transform: none !important;
+    margin-left: 120px !important;  /* preserves the previous visual offset */
+    pointer-events: none !important; /* never capture taps/gestures */
+    user-select: none !important;
+  }
+
+  /* Inline EVENTS logo: avoid huge transform layer on mobile */
+  .events-logo-inline{
+    transform: none !important;
+    margin-left: 12px !important;
+    top: 0 !important;
+    pointer-events: none !important;
+  }
+}
+</style>
+
 </body>
 </html>
