@@ -4206,5 +4206,47 @@ body{
 })();
 </script>
 
+
+<style>
+/* === v150: Smooth mobile scroll (no sticking) === */
+@media (max-width: 900px){
+  html{ scroll-behavior: auto !important; }
+  html, body{
+    overflow-y: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+  }
+
+  /* Ensure no container traps/blocks vertical scroll */
+  .wrap, #monthsRoot, .month-card, .card-body{
+    overflow-y: visible !important;
+    max-height: none !important;
+    height: auto !important;
+  }
+
+  /* Header should not interfere with pan scroll gestures */
+  .sticky-head{
+    touch-action: pan-y !important;
+    overscroll-behavior: auto !important;
+  }
+}
+</style>
+
+<script>
+/* === v150: Fully neutralize header scroll blockers on mobile === */
+(function(){
+  const header = document.querySelector('.sticky-head');
+  if(!header) return;
+
+  function stopBlockers(e){
+    // Stop older handlers that call preventDefault()
+    e.stopImmediatePropagation();
+  }
+
+  header.addEventListener('touchstart', stopBlockers, { capture: true, passive: true });
+  header.addEventListener('touchmove',  stopBlockers, { capture: true, passive: true });
+  header.addEventListener('wheel',      stopBlockers, { capture: true, passive: true });
+})();
+</script>
+
 </body>
 </html>
