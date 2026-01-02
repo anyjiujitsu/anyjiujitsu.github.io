@@ -1688,6 +1688,73 @@ body{
 }
 </style>
 
+
+<style>
+/* === v103: refine nav bar + pill layout === */
+
+/* Slightly reduce nav bar vertical height */
+.sticky-head {
+  padding-top: 28px !important;
+  padding-bottom: 28px !important;
+}
+
+/* Make SEARCH pill slightly narrower */
+.head-search-box {
+  padding-left: 10px !important;
+  padding-right: 10px !important;
+}
+
+/* Shift EVENTS / YEARS / STATES group slightly left */
+.head-search {
+  transform: scale(2) translateX(-12px) !important;
+  transform-origin: bottom left;
+}
+</style>
+
+
+<style>
+/* === v104: fine-tune SEARCH width + 2px left shift for EVENTS/YEARS/STATES === */
+
+/* Further reduce SEARCH pill horizontal width only */
+.head-search-box {
+  padding-left: 8px !important;
+  padding-right: 8px !important;
+}
+
+/* Shift EVENTS / YEARS / STATES group 2px further left */
+.head-search {
+  transform: scale(2) translateX(-14px) !important; /* was -12px */
+  transform-origin: bottom left;
+}
+</style>
+
+
+<style>
+/* === v107: SEARCH pill true width shrink + shift EVENTS/YEARS/STATES left (SEARCH unchanged) === */
+
+/* SEARCH pill: reduce overall width by 4px (base: 290px -> 286px) */
+.head-search-box{
+  max-width: 286px !important;
+  width: min(286px, 44vw) !important;
+}
+
+/* Shift ONLY EVENTS / YEARS / STATES left a bit more (2px) */
+.event-filter{ transform: translateX(70px) translateY(6px) !important; }  /* was 72px */
+.year-filter { transform: translateX(-76px) translateY(6px) !important; } /* was -74px */
+.state-filter{ transform: translateX(-50px) translateY(6px) !important; } /* was -48px */
+</style>
+
+
+<style>
+/* === v108: further reduce SEARCH pill width only === */
+
+/* SEARCH pill: reduce overall width a bit more */
+.head-search-box{
+  max-width: 278px !important;   /* was 286px */
+  width: min(278px, 44vw) !important;
+}
+</style>
+
 </head>
 <body>
   <div class="header-freeze">
