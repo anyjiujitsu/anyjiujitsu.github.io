@@ -4374,5 +4374,44 @@ body{
 }
 </style>
 
+
+<style>
+/* === v155: iOS continuous scroll - remove transform layers + avoid fixed header on mobile === */
+@media (max-width: 900px){
+
+  /* Avoid iOS scroll bugs with large transformed containers */
+  #monthsRoot{
+    transform: none !important;
+    transform-origin: initial !important;
+  }
+
+  /* Avoid transform-based scaling for the nav controls on mobile (keeps scrolling smooth) */
+  .head-search{
+    transform: none !important;
+  }
+
+  /* Use sticky instead of fixed on iOS to prevent scroll "stall" */
+  .sticky-head{
+    position: sticky !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+  }
+
+  /* Ensure page is a normal document flow scroller */
+  html, body{
+    overflow-y: auto !important;
+    height: auto !important;
+    min-height: 100% !important;
+  }
+
+  /* Make sure nothing is trapping scroll */
+  .wrap, .card-body, .month-card{
+    overflow: visible !important;
+    max-height: none !important;
+  }
+}
+</style>
+
 </body>
 </html>
