@@ -4001,5 +4001,20 @@ html, body {
 }
 </style>
 
+
+<style>
+/* === v142: Mobile fix for EVENTS inline logo === */
+/* Prevent logo from overflowing / appearing in upper-right on mobile */
+@media (max-width: 768px){
+  .events-logo-inline{
+    margin-left: 12px !important;  /* reset huge desktop offset */
+    top: 0px !important;           /* reset vertical nudge */
+  }
+  .events-logo-inline img{
+    height: 0.6em !important;      /* slightly larger for legibility on mobile */
+  }
+}
+</style>
+
 </body>
 </html>
