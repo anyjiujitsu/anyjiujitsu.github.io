@@ -4276,5 +4276,25 @@ body{
 }
 </style>
 
+
+<script>
+/* === v152: Neutralize legacy preventDefault scroll blockers (mobile continuous scroll) ===
+   Some older handlers call e.preventDefault() on touchmove/wheel, causing "stuck until tap".
+   This patch makes preventDefault a no-op ONLY for touchmove + wheel events.
+*/
+(function(){
+  const orig = Event.prototype.preventDefault;
+  if (Event.prototype._pdPatchedForScroll) return;
+  Event.prototype._pdPatchedForScroll = true;
+
+  Event.prototype.preventDefault = function(){
+    if (this && (this.type === 'touchmove' || this.type === 'wheel')) {
+      return;
+    }
+    return orig.call(this);
+  };
+})();
+</script>
+
 </body>
 </html>
