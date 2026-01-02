@@ -4151,5 +4151,26 @@ html, body {
 })();
 </script>
 
+
+<style>
+/* === v148: Restore vertical scrolling to reach full list === */
+html, body{
+  height: auto !important;
+  min-height: 100% !important;
+  overflow-y: auto !important;   /* allow vertical scroll */
+}
+
+/* Keep horizontal behavior as-is, but never block vertical scrolling */
+body{
+  overflow-x: hidden !important;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Ensure list container never traps scroll */
+.card-body{
+  overflow-y: visible !important;
+}
+</style>
+
 </body>
 </html>
