@@ -4172,5 +4172,39 @@ body{
 }
 </style>
 
+
+<style>
+/* === v149: Mobile vertical scroll fix === */
+@media (max-width: 900px){
+  html, body{
+    overflow-y: auto !important;
+    height: auto !important;
+  }
+  /* Do NOT block vertical scrolling inside list container */
+  .card-body{
+    overflow-y: visible !important;
+  }
+}
+</style>
+
+
+<script>
+/* === v149: Allow touch scrolling even when gesture starts on header (mobile) === */
+(function(){
+  const header = document.querySelector('.sticky-head');
+  if(!header) return;
+
+  // Capture and stop the older header touchmove/wheel blockers so page can scroll.
+  header.addEventListener('touchmove', function(e){
+    e.stopImmediatePropagation();
+    // do not preventDefault -> allow scroll
+  }, { capture: true, passive: true });
+
+  header.addEventListener('wheel', function(e){
+    e.stopImmediatePropagation();
+  }, { capture: true, passive: true });
+})();
+</script>
+
 </body>
 </html>
