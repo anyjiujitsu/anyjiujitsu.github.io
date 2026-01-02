@@ -2456,6 +2456,8 @@ function hydrate() {
 
         function updateYearBtnLabel(){
           if (!yearBtn) return;
+          
+          yearBtn.classList.toggle('has-selection', selectedYears.size > 0);
           if (selectedYears.size === 0){
             yearBtn.innerHTML = '<span class="year-label">Years</span><span class="year-caret" aria-hidden="true">▾</span>';
             return;
@@ -2466,10 +2468,13 @@ function hydrate() {
 
         function updateEventBtnLabel(){
           if (!eventBtn) return;
-          if (selectedTypes.size === 0){
+          
+          eventBtn.classList.toggle('has-selection', selectedTypes.size > 0);if (selectedTypes.size === 0){
+            eventBtn.classList.remove('has-selection');
             eventBtn.innerHTML = '<span class="event-label">Events</span><span class="event-caret" aria-hidden="true">▾</span>';
             return;
-          }
+          eventBtn.classList.add('has-selection');
+        }
           const text = Array.from(selectedTypes).sort().join(', ');
           eventBtn.innerHTML = `<span class="event-label">${text}</span><span class="event-caret" aria-hidden="true">▾</span>`;
         }
@@ -2554,6 +2559,8 @@ function hydrate() {
 
         function updateStateBtnLabel(){
           if (!stateBtn) return;
+          
+          stateBtn.classList.toggle('has-selection', selectedStates.size > 0);
           if (selectedStates.size === 0){
             stateBtn.innerHTML = '<span class="state-label">States</span><span class="state-caret" aria-hidden="true">▾</span>';
             return;
