@@ -2405,6 +2405,33 @@ body { overflow-y: auto; }
 .card-body { overflow-y: visible !important; }
 
   </style>
+<style>
+/* === SINGLE SCROLL ENFORCEMENT (mobile-safe) === */
+html, body {
+  height: auto;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.wrap,
+.main,
+.content,
+.month,
+.month-group,
+.events,
+.event-list {
+  overflow-y: visible;
+  max-height: none;
+}
+
+.state-menu,
+.year-menu,
+.event-menu {
+  max-height: 320px;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+</style>
 </head>
 <body>
   <div class="header-freeze">
