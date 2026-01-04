@@ -2522,6 +2522,20 @@ body{
   color: rgba(0,0,0,0.55) !important;
 }
 </style>
+<style>
+/* === v232: Mobile search caret alignment fix ===
+   On mobile, the search caret was visually starting one character in
+   due to padding + inline icon interaction. This forces the caret to
+   start at the true first position without changing desktop behavior.
+*/
+@media (pointer: coarse){
+  #nlSearch{
+    padding-left: 0 !important;
+    text-indent: 0 !important;
+    caret-color: auto;
+  }
+}
+</style>
 </head>
 <body>
   <div class="header-freeze">
