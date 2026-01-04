@@ -2454,6 +2454,21 @@ body{
   touch-action: manipulation;
 }
 </style>
+<style>
+/* === v222: HEADER SCROLL CHAIN FIX ===
+   Symptom: after first scroll, further scrolling "dies" depending on where the pointer/gesture starts.
+   Cause: .sticky-head has overscroll-behavior:none + touch-action:manipulation, which can block scroll chaining.
+   Fix: allow pan-y gestures and restore scroll chaining for header area.
+*/
+.sticky-head{
+  overscroll-behavior: auto !important;
+  touch-action: pan-y !important;
+}
+.header-freeze{
+  overscroll-behavior: auto !important;
+  touch-action: pan-y !important;
+}
+</style>
 </head>
 <body>
   <div class="header-freeze">
@@ -3876,6 +3891,28 @@ document.addEventListener('DOMContentLoaded', () => {
   // Also adjust after any click that might expand/collapse content (safe, cheap via rAF debounce)
   document.addEventListener('click', requestAdjust, {passive:true});
   document.addEventListener('input', requestAdjust, {passive:true});
+})();
+</script>
+
+
+<!-- === v222: Forward scroll gestures that start on the header to the page === -->
+<script>
+(function(){
+  var header = document.querySelector('.header-freeze');
+  if(!header) return;
+
+  // Wheel: if the wheel starts over the header, scroll the page.
+  header.addEventListener('wheel', function(e){
+    // If user is interacting with an input, let it behave normally.
+    var tag = (e.target && e.target.tagName) ? e.target.tagName.toLowerCase() : '';
+    if(tag === 'input' || tag === 'select' || tag === 'textarea') return;
+
+    // Scroll the page explicitly and prevent "dead" wheel behavior.
+    window.scrollBy({ top: e.deltaY, left: 0, behavior: 'auto' });
+    e.preventDefault();
+  }, { passive: false });
+
+  // Touch: allow pan-y. We do NOT preventDefault here; CSS touch-action handles it.
 })();
 </script>
 
