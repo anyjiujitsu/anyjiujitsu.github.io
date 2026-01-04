@@ -2465,16 +2465,16 @@ body{
 /* Superscript NEW tag after WHERE value (glow matches filter pill indicator) */
 .where-new{
   display:inline-block;
-  margin-left:4px;
-  font-size:0.38em; /* much smaller */
+  margin-left:6px;
+  font-size:0.22em; /* ~2x smaller */
   font-weight:700;
   color:#1f4d2b; /* nav bar green */
   position:relative;
-  top:-0.55em; /* gentle superscript without breaking line */
-  letter-spacing:0.35px;
+  top:-0.45em;
+  letter-spacing:0.3px;
   text-shadow:
-    0 0 1px rgba(31,77,43,0.35),
-    0 0 2px rgba(31,77,43,0.22);
+    0 0 2px rgba(120,200,150,0.45),
+    0 0 4px rgba(120,200,150,0.25);
   pointer-events:none;
   white-space:nowrap;
 }
@@ -3861,69 +3861,14 @@ document.addEventListener('DOMContentLoaded', () => {
      This can cause "can't reach bottom/top" and mid-page stall feelings.
      We measure the scaled height and add equivalent bottom padding to body so scrolling is seamless.
 -->
-<script>
-(function(){
-  var scheduled = false;
 
-  function adjustScaledScroll(){
-    scheduled = false;
-    var root = document.getElementById('monthsRoot');
-    if(!root) return;
-
-    // Unscaled layout height (what the document flow thinks it is)
-    var natural = root.scrollHeight || root.offsetHeight || 0;
-
-    // Visual (scaled) height
-    var rect = root.getBoundingClientRect();
-    var visual = rect ? rect.height : natural;
-
-    var extra = Math.max(0, Math.ceil(visual - natural));
-
-    // Apply bottom padding so the body scroll height matches what the user sees
-    document.body.style.paddingBottom = extra + 'px';
-  }
-
-  function requestAdjust(){
-    if(scheduled) return;
-    scheduled = true;
-    requestAnimationFrame(adjustScaledScroll);
-  }
-
-  window.addEventListener('load', requestAdjust, {passive:true});
-  window.addEventListener('resize', requestAdjust, {passive:true});
-
-  // Watch for content changes (filters/search can change height)
-  var root = document.getElementById('monthsRoot');
-  if(root && window.MutationObserver){
-    var obs = new MutationObserver(requestAdjust);
-    obs.observe(root, {subtree:true, childList:true, attributes:true, characterData:true});
-  }
-
-  // Also adjust after any click that might expand/collapse content (safe, cheap via rAF debounce)
-  document.addEventListener('click', requestAdjust, {passive:true});
-  document.addEventListener('input', requestAdjust, {passive:true});
-})();
-</script>
 
 
 
 
 
 <!-- === v228: measure header height for correct body padding on mobile === -->
-<script>
-(function(){
-  function setHeaderPad(){
-    var header = document.querySelector('.header-freeze');
-    if(!header) return;
-    var h = Math.ceil(header.getBoundingClientRect().height || header.offsetHeight || 0);
-    if(h > 0){
-      document.documentElement.style.setProperty('--headerH', h + 'px');
-    }
-  }
-  window.addEventListener('load', setHeaderPad, {passive:true});
-  window.addEventListener('resize', setHeaderPad, {passive:true});
-})();
-</script>
+
 
 
 <!-- === v229: Desktop wheel scroll router ===
@@ -3931,65 +3876,35 @@ document.addEventListener('DOMContentLoaded', () => {
      transformed/stacked content that may block scroll chaining.
      Mobile remains untouched (pointer:coarse).
 -->
-<script>
-(function(){
-  if(!window.matchMedia || !window.matchMedia('(pointer:fine)').matches) return;
 
-  function closestScrollableMenu(el){
-    return el && el.closest ? el.closest('#stateMenu, #yearMenu, #eventMenu, .state-menu, .year-menu, .event-menu') : null;
-  }
-  function canScroll(el, deltaY){
-    if(!el) return false;
-    var max = el.scrollHeight - el.clientHeight;
-    if(max <= 0) return false;
-    if(deltaY > 0) return el.scrollTop < max;
-    if(deltaY < 0) return el.scrollTop > 0;
-    return false;
-  }
 
-  // Capture phase so we win even if something higher in the stack interferes.
-  document.addEventListener('wheel', function(e){
-    var t = e.target;
 
-    // allow normal scrolling inside dropdown menus
-    var menu = closestScrollableMenu(t);
-    if(menu && canScroll(menu, e.deltaY)) return;
 
-    // allow normal behavior inside form fields
-    var tag = t && t.tagName ? t.tagName.toLowerCase() : '';
-    if(tag === 'textarea') return;
-
-    // If the browser is already scrolling normally, we *still* route to window to ensure
-    // consistent behavior across header/body areas.
-    window.scrollBy({ top: e.deltaY, left: 0, behavior: 'auto' });
-    e.preventDefault();
-  }, { passive: false, capture: true });
-})();
-</script>
 
 
 <script>
 (function () {
   const THREE_DAYS_MS = 3 * 24 * 60 * 60 * 1000;
   let applying = false;
-  let rafScheduled = false;
 
-  function pickWhereTarget(row){
-    const mergedWhere = row.querySelector('.for-where'); // WHERE value span (inside merged stack)
-    if (mergedWhere) return mergedWhere;
+  function pickTypeTarget(row){
+    // Event type value lives in first cell as .type-value
+    const typeVal = row.querySelector('.type-value');
+    if (typeVal) return typeVal;
 
+    // Fallback: first cell
     const cells = row.querySelectorAll('.cell');
-    if (cells && cells.length >= 3) return cells[2]; // fallback WHERE cell
+    if (cells && cells.length > 0) return cells[0];
     return null;
   }
 
   function ensureBadge(row, shouldHave){
-    const target = pickWhereTarget(row);
+    const target = pickTypeTarget(row);
     if (!target) return;
 
     const existing = target.querySelector(':scope > .where-new');
     if (shouldHave) {
-      if (existing) return; // already present
+      if (existing) return;
       const sup = document.createElement('span');
       sup.className = 'where-new';
       sup.textContent = '* NEW';
@@ -4005,32 +3920,22 @@ document.addEventListener('DOMContentLoaded', () => {
 
     document.querySelectorAll('.row[data-created-ts]').forEach(row => {
       const ts = Number(row.getAttribute('data-created-ts'));
-      if (!Number.isFinite(ts)) { ensureBadge(row, false); return; }
-
+      if (!Number.isFinite(ts)) {
+        ensureBadge(row, false);
+        return;
+      }
       const diff = nowMs - ts;
-      const shouldHave = (diff >= 0 && diff <= THREE_DAYS_MS);
-      ensureBadge(row, shouldHave);
+      ensureBadge(row, diff >= 0 && diff <= THREE_DAYS_MS);
     });
 
     applying = false;
   }
 
-  function scheduleApply(){
-    if (rafScheduled) return;
-    rafScheduled = true;
-    requestAnimationFrame(() => {
-      rafScheduled = false;
-      applyNewBadges();
-    });
-  }
-
   function startObserver() {
     const root = document.getElementById('monthsRoot') || document.body;
-    scheduleApply();
-
+    applyNewBadges();
     const obs = new MutationObserver(() => {
-      if (applying) return; // ignore mutations caused by our own badge edits
-      scheduleApply();
+      if (!applying) applyNewBadges();
     });
     obs.observe(root, { childList: true, subtree: true });
   }
