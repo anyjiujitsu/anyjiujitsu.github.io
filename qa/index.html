@@ -2443,17 +2443,6 @@ body{
   -webkit-overflow-scrolling: touch;
 }
 </style>
-<style>
-/* === EXTENDED SCROLL BUFFER (diagnostic) ===
-   Purpose: increase total scrollable length to test
-   seamless end-of-page scrolling without layout impact.
-*/
-body::after{
-  content: "";
-  display: block;
-  height: 2000px; /* increases scroll length safely */
-}
-</style>
 </head>
 <body>
   <div class="header-freeze">
@@ -3848,5 +3837,56 @@ document.addEventListener('DOMContentLoaded', () => {
 })();
 
   </script>
+
+<!-- === SCALE-AWARE SCROLL LENGTH FIX ===
+     If main content is visually scaled via CSS transform (e.g., #monthsRoot { transform: scale(...) }),
+     the browser does NOT increase document scroll height to match the scaled visual height.
+     This can cause "can't reach bottom/top" and mid-page stall feelings.
+     We measure the scaled height and add equivalent bottom padding to body so scrolling is seamless.
+-->
+<script>
+(function(){
+  var scheduled = false;
+
+  function adjustScaledScroll(){
+    scheduled = false;
+    var root = document.getElementById('monthsRoot');
+    if(!root) return;
+
+    // Unscaled layout height (what the document flow thinks it is)
+    var natural = root.scrollHeight || root.offsetHeight || 0;
+
+    // Visual (scaled) height
+    var rect = root.getBoundingClientRect();
+    var visual = rect ? rect.height : natural;
+
+    var extra = Math.max(0, Math.ceil(visual - natural));
+
+    // Apply bottom padding so the body scroll height matches what the user sees
+    document.body.style.paddingBottom = extra + 'px';
+  }
+
+  function requestAdjust(){
+    if(scheduled) return;
+    scheduled = true;
+    requestAnimationFrame(adjustScaledScroll);
+  }
+
+  window.addEventListener('load', requestAdjust, {passive:true});
+  window.addEventListener('resize', requestAdjust, {passive:true});
+
+  // Watch for content changes (filters/search can change height)
+  var root = document.getElementById('monthsRoot');
+  if(root && window.MutationObserver){
+    var obs = new MutationObserver(requestAdjust);
+    obs.observe(root, {subtree:true, childList:true, attributes:true, characterData:true});
+  }
+
+  // Also adjust after any click that might expand/collapse content (safe, cheap via rAF debounce)
+  document.addEventListener('click', requestAdjust, {passive:true});
+  document.addEventListener('input', requestAdjust, {passive:true});
+})();
+</script>
+
 </body>
 </html>
