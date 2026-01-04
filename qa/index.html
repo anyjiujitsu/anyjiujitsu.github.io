@@ -2536,6 +2536,32 @@ body{
   }
 }
 </style>
+<style>
+/* === v234: Mobile caret visual alignment (CSS-only, no JS) ===
+   Root cause: the search icon sits inline before the input, while the input
+   itself also has horizontal padding. On iOS, the caret is rendered after
+   the inline icon + padding, making it look 1 character ahead.
+   Fix: absolutely position the icon and give the input a true left inset.
+*/
+.head-search-box{
+  position: relative;
+}
+
+.head-search-icon{
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+@media (pointer: coarse){
+  #nlSearch{
+    padding-left: 30px !important; /* icon (16px) + gap */
+    text-indent: 0 !important;
+  }
+}
+</style>
 </head>
 <body>
   <div class="header-freeze">
