@@ -4023,5 +4023,57 @@ document.addEventListener('DOMContentLoaded', () => {
 })();
 </script>
 
+
+<!-- === v233: Mobile caret normalizer ===
+     Fix iOS oddity where the caret appears one character ahead when typing.
+     If the input value begins with an invisible/whitespace char, remove it and
+     shift the caret back by one. Also force caret to position 0 on focus when empty.
+-->
+<script>
+(function(){
+  if(!window.matchMedia || !window.matchMedia('(pointer:coarse)').matches) return;
+  var input = document.getElementById('nlSearch');
+  if(!input) return;
+
+  function stripLeadingGhostChar(){
+    var v = input.value;
+    if(!v) return false;
+    // Common "ghost" chars: zero-width space, BOM, non-breaking space, leading space
+    var first = v.charCodeAt(0);
+    var isGhost =
+      first === 0x200B || // zero-width space
+      first === 0xFEFF || // BOM
+      first === 0x00A0 || // nbsp
+      v[0] === ' ';
+    if(!isGhost) return false;
+
+    var start = input.selectionStart || 0;
+    var end = input.selectionEnd || 0;
+
+    input.value = v.slice(1);
+
+    // Move caret back one, preserving selection length
+    var newStart = Math.max(0, start - 1);
+    var newEnd = Math.max(0, end - 1);
+    try { input.setSelectionRange(newStart, newEnd); } catch(e){}
+    return true;
+  }
+
+  input.addEventListener('focus', function(){
+    // If empty, force caret to the first position
+    if(input.value === ''){
+      try { input.setSelectionRange(0,0); } catch(e){}
+    } else {
+      // If there's a ghost char, remove and normalize caret
+      stripLeadingGhostChar();
+    }
+  });
+
+  input.addEventListener('input', function(){
+    stripLeadingGhostChar();
+  });
+})();
+</script>
+
 </body>
 </html>
