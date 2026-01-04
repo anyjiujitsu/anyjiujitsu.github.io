@@ -2347,7 +2347,7 @@ body { overflow-y: auto; }
 /* *NEW badge inline with WHERE value (fresh = CREATED within 3 days) */
 .where-new-badge{
   margin-left:4px;
-  font-size:4px !important; /* smaller */
+  font-size:4px !important;
   line-height:1 !important;
   font-weight:700;
   font-style:italic;
@@ -3008,15 +3008,15 @@ function hydrate() {
             const startOfNow = new Date(now.getFullYear(), now.getMonth(), now.getDate()).getTime();
             const diffDays = Math.floor((startOfNow - startOfCreated) / (24*60*60*1000));
             if (diffDays >= 0 && diffDays <= 3){
-              // Add small *NEW tag inline with WHERE value in FOR/WHERE stack – only once
+              // *NEW badge inline with WHERE value (Hosted Location line). Uses existing diffDays logic.
               try{
-                const whereEl = forCell.querySelector('.for-where'); // WHERE value element under FOR stack
+                const whereEl = row.querySelector('.for-where');
                 if (whereEl){
-                  // Remove any stray plain-text NEW/*NEW
-                  whereEl.childNodes.forEach(n=>{
-                    if(n.nodeType===Node.TEXT_NODE){
-                      const t=(n.textContent||'').trim();
-                      if(t==='NEW' || t==='*NEW' || t==='* NEW') n.remove();
+                  // remove stray plain text NEW from prior iterations if any
+                  Array.from(whereEl.childNodes).forEach(n => {
+                    if (n.nodeType === Node.TEXT_NODE) {
+                      const t = (n.textContent || '').trim();
+                      if (t === 'NEW' || t === '*NEW' || t === '* NEW') n.remove();
                     }
                   });
                   if (!whereEl.querySelector('.where-new-badge')){
@@ -3028,7 +3028,7 @@ function hydrate() {
                 }
               }catch(e){}
 
-if (!existingDot){
+              if (!existingDot){
                 const dot = document.createElement('span');
                 dot.className = 'record-new-dot';
                 dot.setAttribute('aria-hidden', 'true');
@@ -3037,13 +3037,18 @@ if (!existingDot){
             } else {
               if (existingDot) existingDot.remove();
               try{
-                const whereEl = forCell ? forCell.querySelector('.for-where') : null;
+                const whereEl = row.querySelector('.for-where');
                 const badge = whereEl ? whereEl.querySelector('.where-new-badge') : null;
                 if (badge) badge.remove();
               }catch(e){}
             }
           } else {
             if (existingDot) existingDot.remove();
+            try{
+              const whereEl = row.querySelector('.for-where');
+              const badge = whereEl ? whereEl.querySelector('.where-new-badge') : null;
+              if (badge) badge.remove();
+            }catch(e){}
           }
         });
       }
