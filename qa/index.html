@@ -2466,16 +2466,17 @@ body{
 .where-new{
   display:inline-block;
   margin-left:6px;
-  font-size:0.09em; /* ~2x smaller again */
+  font-size:6px; /* absolute size to force visible change */
+  line-height:1;
   font-weight:700;
   font-style:italic;
   color:#1f4d2b; /* nav bar green */
   position:relative;
-  top:-0.35em;
+  top:-3px;
   letter-spacing:0.2px;
   text-shadow:
-    0 0 1px rgba(120,200,150,0.3),
-    0 0 2px rgba(120,200,150,0.18);
+    0 0 1px rgba(120,200,150,0.25),
+    0 0 2px rgba(120,200,150,0.15);
   pointer-events:none;
   white-space:nowrap;
 }
