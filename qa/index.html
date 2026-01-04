@@ -2470,19 +2470,32 @@ body{
 }
 </style>
 <style>
-/* === v223: GLOBAL SCROLL ROUTER + CHAINING ===
-   Hard-fix for "scroll works once then dies" by ensuring wheel/touch gestures always
-   reach the main page scroller, unless the gesture starts inside an intentionally
-   scrollable dropdown menu (state/year/event menu).
+/* === v224: NATIVE-MOMENTUM SCROLL FIX ===
+   Keep the "one scroll container" setup, but REMOVE scroll event routing that breaks momentum.
+   Goal: smooth, inertial scrolling on iOS + no "dies" behavior.
 */
-html{ overflow-y: hidden !important; }
-body{ overflow-y: auto !important; -webkit-overflow-scrolling: touch; }
+html{
+  overflow-y: hidden !important;  /* ensure html never becomes a second scroller */
+  height: 100% !important;
+}
+body{
+  overflow-y: auto !important;     /* single scroller */
+  -webkit-overflow-scrolling: touch;
+  min-height: 100% !important;
+  touch-action: pan-y;             /* allow natural vertical panning */
+}
 
-/* Allow scroll chaining everywhere */
-*{ overscroll-behavior: auto !important; }
+/* Allow scroll chaining (don't block body scroll) */
+*{
+  overscroll-behavior: auto !important;
+}
 
-/* Ensure header doesn't block pan-y gestures */
-.header-freeze, .sticky-head{ touch-action: pan-y !important; }
+/* Ensure header does not block vertical gestures */
+.header-freeze,
+.sticky-head{
+  touch-action: pan-y !important;
+  overscroll-behavior: auto !important;
+}
 </style>
 </head>
 <body>
@@ -3911,66 +3924,35 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 
-<!-- === v223: Global scroll router (wheel + touch) === -->
+
+<!-- === v224: Minimal header wheel forwarder (desktop only) === -->
 <script>
 (function(){
-  function closestScrollableMenu(el){
-    if(!el) return null;
-    return el.closest && el.closest('#stateMenu, #yearMenu, #eventMenu, .state-menu, .year-menu, .event-menu');
-  }
+  var header = document.querySelector('.header-freeze');
+  if(!header) return;
 
-  function canScroll(el, deltaY){
-    if(!el) return false;
-    var max = el.scrollHeight - el.clientHeight;
-    if(max <= 0) return false;
-    if(deltaY > 0) return el.scrollTop < max;
-    if(deltaY < 0) return el.scrollTop > 0;
-    return false;
-  }
+  // Only on devices with a fine pointer (desktop / trackpad / mouse)
+  if(!window.matchMedia || !window.matchMedia('(pointer:fine)').matches) return;
 
-  // Wheel router: if wheel starts on non-scrollable overlay/header/etc, force page scroll.
-  document.addEventListener('wheel', function(e){
+  header.addEventListener('wheel', function(e){
     var t = e.target;
     var tag = t && t.tagName ? t.tagName.toLowerCase() : '';
     if(tag === 'input' || tag === 'select' || tag === 'textarea') return;
 
-    var menu = closestScrollableMenu(t);
-    if(menu && canScroll(menu, e.deltaY)){
-      // Let the menu scroll naturally.
-      return;
+    // Let dropdown menus scroll if the wheel is over them
+    var menu = t && t.closest ? t.closest('#stateMenu, #yearMenu, #eventMenu, .state-menu, .year-menu, .event-menu') : null;
+    if(menu){
+      var max = menu.scrollHeight - menu.clientHeight;
+      if(max > 0){
+        if((e.deltaY > 0 && menu.scrollTop < max) || (e.deltaY < 0 && menu.scrollTop > 0)){
+          return; // let menu handle it
+        }
+      }
     }
 
-    // Otherwise, always scroll the page.
     window.scrollBy({ top: e.deltaY, left: 0, behavior: 'auto' });
     e.preventDefault();
   }, { passive: false });
-
-  // Touch router for iOS: force body scrolling unless gesture starts in a scrollable menu.
-  var lastY = null;
-  document.addEventListener('touchstart', function(e){
-    if(!e.touches || !e.touches.length) return;
-    lastY = e.touches[0].clientY;
-  }, { passive: true });
-
-  document.addEventListener('touchmove', function(e){
-    if(!e.touches || !e.touches.length || lastY === null) return;
-    var y = e.touches[0].clientY;
-    var dy = lastY - y;
-    lastY = y;
-
-    var t = e.target;
-    var tag = t && t.tagName ? t.tagName.toLowerCase() : '';
-    if(tag === 'input' || tag === 'select' || tag === 'textarea') return;
-
-    var menu = closestScrollableMenu(t);
-    if(menu && canScroll(menu, dy)){
-      return; // allow native menu scroll
-    }
-
-    window.scrollBy(0, dy);
-    e.preventDefault();
-  }, { passive: false });
-
 })();
 </script>
 
