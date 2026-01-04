@@ -2464,19 +2464,16 @@ body{
 <style>
 /* Superscript NEW tag after WHERE value (glow matches filter pill indicator) */
 .where-new{
-  display:inline-block;
-  margin-left:6px;
-  font-size:6px; /* absolute size to force visible change */
+  display:inline;
+  margin-left:4px;
+  font-size:5px; /* smaller */
   line-height:1;
   font-weight:700;
   font-style:italic;
-  color:#1f4d2b; /* nav bar green */
-  position:relative;
-  top:-3px;
+  color:#fbaf17;
+  vertical-align:baseline; /* inline with WHERE value */
   letter-spacing:0.2px;
-  text-shadow:
-    0 0 1px rgba(120,200,150,0.25),
-    0 0 2px rgba(120,200,150,0.15);
+  text-shadow:none;
   pointer-events:none;
   white-space:nowrap;
 }
@@ -3884,24 +3881,27 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 
+
+
+
 <script>
 (function () {
   const THREE_DAYS_MS = 3 * 24 * 60 * 60 * 1000;
   let applying = false;
 
-  function pickTypeTarget(row){
-    // Event type value lives in first cell as .type-value
-    const typeVal = row.querySelector('.type-value');
-    if (typeVal) return typeVal;
+  function pickWhereTarget(row){
+    // Preferred WHERE value span inside merged stack
+    const whereVal = row.querySelector('.for-where');
+    if (whereVal) return whereVal;
 
-    // Fallback: first cell
+    // Fallback: 3rd cell (WHERE)
     const cells = row.querySelectorAll('.cell');
-    if (cells && cells.length > 0) return cells[0];
+    if (cells && cells.length >= 3) return cells[2];
     return null;
   }
 
   function ensureBadge(row, shouldHave){
-    const target = pickTypeTarget(row);
+    const target = pickWhereTarget(row);
     if (!target) return;
 
     const existing = target.querySelector(':scope > .where-new');
@@ -3922,12 +3922,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     document.querySelectorAll('.row[data-created-ts]').forEach(row => {
       const ts = Number(row.getAttribute('data-created-ts'));
-      if (!Number.isFinite(ts)) {
-        ensureBadge(row, false);
-        return;
-      }
-      const diff = nowMs - ts;
-      ensureBadge(row, diff >= 0 && diff <= THREE_DAYS_MS);
+      const shouldHave = Number.isFinite(ts) && (nowMs - ts >= 0) && (nowMs - ts <= THREE_DAYS_MS);
+      ensureBadge(row, shouldHave);
     });
 
     applying = false;
