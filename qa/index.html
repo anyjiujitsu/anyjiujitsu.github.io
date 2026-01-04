@@ -2516,6 +2516,26 @@ body{
   }
 }
 </style>
+<style>
+/* === v227: iOS root-scroll mode (prevents "dies after first scroll") ===
+   On iOS Safari, using BODY as the scrolling element can intermittently freeze after the first gesture.
+   This switches touch devices back to ROOT scrolling (html/documentElement), while keeping desktop as-is.
+   Visual layout is preserved; only scroll container changes on pointer:coarse.
+*/
+@media (pointer: coarse) {
+  html{
+    overflow-y: auto !important;
+    height: auto !important;
+    -webkit-overflow-scrolling: touch;
+  }
+  body{
+    overflow-y: visible !important;
+    height: auto !important;
+    min-height: 100% !important;
+    touch-action: pan-y;
+  }
+}
+</style>
 </head>
 <body>
   <div class="header-freeze">
