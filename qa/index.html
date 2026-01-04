@@ -2562,6 +2562,17 @@ body{
   }
 }
 </style>
+<style>
+/* === v236: MOBILE placeholder/caret visual fix (CSS-first) ===
+   iOS can render the caret "inside" placeholder text on focus.
+   Hide placeholder ONLY while focused, on touch devices / small screens.
+*/
+@media (max-width: 860px){
+  #nlSearch:focus::placeholder{
+    color: transparent !important;
+  }
+}
+</style>
 </head>
 <body>
   <div class="header-freeze">
@@ -4102,34 +4113,22 @@ document.addEventListener('DOMContentLoaded', () => {
 </script>
 
 
-<!-- === v235: Mobile placeholder focus fix ===
-     On iOS, the caret can appear visually "inside" the placeholder text when focusing an empty input.
-     We temporarily hide the placeholder on focus (mobile only) and restore it on blur if empty.
-     This does NOT change desktop behavior and keeps the same helper text when not focused.
--->
+
+<!-- === v236: Touch focus caret = 0 (robust detection) === -->
 <script>
 (function(){
-  if(!window.matchMedia || !window.matchMedia('(pointer:coarse)').matches) return;
+  var isTouch = ('ontouchstart' in window) || (navigator.maxTouchPoints && navigator.maxTouchPoints > 0);
+  if(!isTouch) return;
+
   var input = document.getElementById('nlSearch');
   if(!input) return;
 
-  function hidePlaceholder(){
-    if(input.value !== '') return;
-    if(!input.dataset.ph) input.dataset.ph = input.getAttribute('placeholder') || '';
-    input.setAttribute('placeholder', '');
-    // ensure caret is at position 0
-    try { input.setSelectionRange(0,0); } catch(e){}
-  }
-
-  function restorePlaceholder(){
-    if(input.value !== '') return;
-    if(typeof input.dataset.ph === 'string'){
-      input.setAttribute('placeholder', input.dataset.ph);
+  input.addEventListener('focus', function(){
+    // If empty, ensure caret is at the true first position
+    if(input.value === ''){
+      try{ input.setSelectionRange(0,0); }catch(e){}
     }
-  }
-
-  input.addEventListener('focus', hidePlaceholder);
-  input.addEventListener('blur', restorePlaceholder);
+  });
 })();
 </script>
 
