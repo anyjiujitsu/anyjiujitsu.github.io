@@ -2462,18 +2462,16 @@ body{
 <style>
 /* Superscript NEW tag after WHERE value (glow matches filter pill indicator) */
 .where-new{
-  display:inline-block;
-  margin-left:6px;
-  font-size:calc(0.68em - 3px); /* 3px smaller */
+  display:inline;
+  margin-left:4px;
+  font-size:0.55em; /* smaller */
   font-weight:700;
   color:#1f4d2b; /* nav bar green */
-  position:relative;
-  top:-0.55em;
-  letter-spacing:0.5px;
+  vertical-align:super; /* true superscript inline */
+  letter-spacing:0.4px;
   text-shadow:
-    0 0 4px rgba(31,77,43,0.95),
-    0 0 8px rgba(31,77,43,0.70),
-    0 0 14px rgba(31,77,43,0.50);
+    0 0 2px rgba(31,77,43,0.55),
+    0 0 4px rgba(31,77,43,0.35);
   pointer-events:none;
   white-space:nowrap;
 }
