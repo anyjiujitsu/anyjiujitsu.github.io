@@ -3962,5 +3962,47 @@ document.addEventListener('DOMContentLoaded', () => {
 })();
 </script>
 
+
+<!-- === v229: Desktop wheel scroll router ===
+     Desktop-only: ensures wheel/trackpad scrolling works even when cursor is over
+     transformed/stacked content that may block scroll chaining.
+     Mobile remains untouched (pointer:coarse).
+-->
+<script>
+(function(){
+  if(!window.matchMedia || !window.matchMedia('(pointer:fine)').matches) return;
+
+  function closestScrollableMenu(el){
+    return el && el.closest ? el.closest('#stateMenu, #yearMenu, #eventMenu, .state-menu, .year-menu, .event-menu') : null;
+  }
+  function canScroll(el, deltaY){
+    if(!el) return false;
+    var max = el.scrollHeight - el.clientHeight;
+    if(max <= 0) return false;
+    if(deltaY > 0) return el.scrollTop < max;
+    if(deltaY < 0) return el.scrollTop > 0;
+    return false;
+  }
+
+  // Capture phase so we win even if something higher in the stack interferes.
+  document.addEventListener('wheel', function(e){
+    var t = e.target;
+
+    // allow normal scrolling inside dropdown menus
+    var menu = closestScrollableMenu(t);
+    if(menu && canScroll(menu, e.deltaY)) return;
+
+    // allow normal behavior inside form fields
+    var tag = t && t.tagName ? t.tagName.toLowerCase() : '';
+    if(tag === 'textarea') return;
+
+    // If the browser is already scrolling normally, we *still* route to window to ensure
+    // consistent behavior across header/body areas.
+    window.scrollBy({ top: e.deltaY, left: 0, behavior: 'auto' });
+    e.preventDefault();
+  }, { passive: false, capture: true });
+})();
+</script>
+
 </body>
 </html>
