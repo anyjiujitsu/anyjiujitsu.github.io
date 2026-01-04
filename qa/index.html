@@ -2406,27 +2406,38 @@ body { overflow-y: auto; }
 
   </style>
 <style>
-/* === SINGLE SCROLL ENFORCEMENT (mobile-safe) === */
-html, body {
-  height: auto;
-  overflow-y: auto;
+/* === SINGLE SCROLL ENFORCEMENT (ONE VERTICAL SCROLLER ONLY) ===
+   Goal: ensure ONLY body scrolls (not html, not inner containers),
+   eliminating "two vertical scrollbars" in desktop overlay-scrollbar UIs
+   and reducing iOS nested-scroll weirdness.
+*/
+html{
+  overflow-y: hidden !important;  /* prevent html from becoming a scroll container */
+  height: 100% !important;
+}
+body{
+  overflow-y: auto !important;     /* the one and only page scroller */
   -webkit-overflow-scrolling: touch;
+  min-height: 100% !important;
 }
 
+/* Prevent any main-content containers from becoming scroll parents */
 .wrap,
 .main,
 .content,
 .month,
 .month-group,
 .events,
-.event-list {
-  overflow-y: visible;
-  max-height: none;
+.event-list,
+#monthsRoot{
+  overflow-y: visible !important;
+  max-height: none !important;
 }
 
+/* Dropdowns keep their own intentional scroll */
 .state-menu,
 .year-menu,
-.event-menu {
+.event-menu{
   max-height: 320px;
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
