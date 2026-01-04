@@ -7,7 +7,67 @@
 
 </style>
 
+<!-- === OVERRIDES: Header up 4x; ANY logo 1x bigger (independent) === -->
 
+<!-- === FIX: Move ONLY ANY logo down 5x (40px) without affecting layout or title === -->
+
+<!-- === UPDATE: Move ANY logo down an additional 4x (total 72px), header untouched === -->
+
+<!-- === UPDATE: Move ANY logo up 2x (net 56px), header untouched === -->
+
+<!-- === UPDATE: Move ANY logo down 1x (net 64px), header untouched === -->
+
+<!-- === UPDATE: Move ANY logo down 0.5x (net 68px), header untouched === -->
+
+<!-- === UPDATE: Move ANY logo right 1x (8px), header untouched === -->
+
+<!-- === UPDATE: Shift UPCOMING EVENTS header left 2x (16px), logo untouched === -->
+
+<!-- === UPDATE: Shift UPCOMING EVENTS header left 1x more (total 24px), logo untouched === -->
+
+<!-- === UPDATE: Shift UPCOMING EVENTS header left 0.5x more (total 28px), logo untouched === -->
+
+<!-- === UPDATE: Reduce Years & States pill widths by ~1.5x === -->
+
+<!-- === UPDATE: Further narrow Years & States pill widths === -->
+
+<!-- === UPDATE: Reduce overall pill shape length (Years & States) === -->
+
+<!-- === UPDATE: Slightly increase overall pill shape size (Years & States) === -->
+
+<!-- === OVERRIDE: Keep Events pill sizing consistent with Years & States === -->
+
+<!-- === PATCH: Place Events pill immediately next to Years pill (same vertical position) === -->
+
+<!-- === FIX: Make Events pill visually identical + aligned with Years/States === -->
+
+<!-- === FIX: Place Events pill with Years/States using stable absolute positioning (no search bar impact) === -->
+
+<!-- === UPDATE: Move States pill right by 10x ( +80px ) — States only === -->
+
+<!-- === UPDATE: Move States pill right by additional 2x ( +16px ) — States only === -->
+
+<!-- === UPDATE: Move States pill left by 1x ( -8px ) — States only === -->
+
+<!-- === UPDATE: Move Years pill right by 5x ( +40px ) — Years only === -->
+
+<!-- === FIX: Move Years pill RIGHT by 5x (+40px) from its current position === -->
+
+<!-- === UPDATE: Move Years pill RIGHT by 30x (+240px) === -->
+
+<!-- === UPDATE: Move Years pill RIGHT by 3x (+24px) === -->
+
+<!-- === UPDATE: Move Years pill LEFT by 0.5x (-4px) === -->
+
+<!-- === UPDATE: Align Events pill to ~32px gap from Years === -->
+
+<!-- === UPDATE: Move Events pill right by 3x (+24px) === -->
+
+<!-- === UPDATE: Move Events pill left by 0.5x (-4px) === -->
+
+<!-- === FIX: EVENTS pill matches YEARS pill text color + behavior === -->
+
+<!-- (removed duplicate Events pill toggle script; unified wiring is handled near the end of the file) -->
 
   <!-- Consolidated styles (cleaned & organized; single source of truth) -->
   <style id="app-styles">
@@ -2346,74 +2406,7 @@ body { overflow-y: auto; }
 
   </style>
 <style>
-/* === SINGLE SCROLL ENFORCEMENT (ONE VERTICAL SCROLLER ONLY) ===
-   Goal: ensure ONLY body scrolls (not html, not inner containers),
-   eliminating "two vertical scrollbars" in desktop overlay-scrollbar UIs
-   and reducing iOS nested-scroll weirdness.
-*/
-html{
-  overflow-y: hidden !important;  /* prevent html from becoming a scroll container */
-  height: 100% !important;
-}
-body{
-  overflow-y: auto !important;     /* the one and only page scroller */
-  -webkit-overflow-scrolling: touch;
-  min-height: 100% !important;
-}
 
-/* Prevent any main-content containers from becoming scroll parents */
-.wrap,
-.main,
-.content,
-.month,
-.month-group,
-.events,
-.event-list,
-#monthsRoot{
-  overflow-y: visible !important;
-  max-height: none !important;
-}
-
-/* Dropdowns keep their own intentional scroll */
-.state-menu,
-.year-menu,
-.event-menu{
-  max-height: 320px;
-  overflow-y: auto;
-  -webkit-overflow-scrolling: touch;
-}
-</style>
-<style>
-/* === SCROLL INPUT FIX (v221) ===
-   Remove header wheel/touchmove preventDefault and ensure page gestures always scroll the body.
-*/
-body{
-  touch-action: pan-y;
-}
-.header-freeze, .sticky-head{
-  touch-action: manipulation;
-}
-</style>
-<style>
-/* === v222: HEADER SCROLL CHAIN FIX ===
-   Symptom: after first scroll, further scrolling "dies" depending on where the pointer/gesture starts.
-   Cause: .sticky-head has overscroll-behavior:none + touch-action:manipulation, which can block scroll chaining.
-   Fix: allow pan-y gestures and restore scroll chaining for header area.
-*/
-.sticky-head{
-  overscroll-behavior: auto !important;
-  touch-action: pan-y !important;
-}
-.header-freeze{
-  overscroll-behavior: auto !important;
-  touch-action: pan-y !important;
-}
-</style>
-<style>
-/* === v224: NATIVE-MOMENTUM SCROLL FIX ===
-   Keep the "one scroll container" setup, but REMOVE scroll event routing that breaks momentum.
-   Goal: smooth, inertial scrolling on iOS + no "dies" behavior.
-*/
 html{
   overflow-y: hidden !important;  /* ensure html never becomes a second scroller */
   height: 100% !important;
@@ -2438,12 +2431,7 @@ body{
 }
 </style>
 <style>
-/* === v226: iOS scroll freeze fix (no visual change on desktop) ===
-   On iOS, a fixed positioned header over a large, transformed/scaled page can intermittently
-   "steal" scroll after the first interaction. On touch devices, switch header wrapper
-   from fixed -> sticky so it participates in normal document flow.
-   Also remove the body padding-top hack that was only needed for fixed positioning.
-*/
+
 @media (pointer: coarse) {
   .header-freeze{
     position: sticky !important;
@@ -2457,11 +2445,7 @@ body{
 }
 </style>
 <style>
-/* === v227: iOS root-scroll mode (prevents "dies after first scroll") ===
-   On iOS Safari, using BODY as the scrolling element can intermittently freeze after the first gesture.
-   This switches touch devices back to ROOT scrolling (html/documentElement), while keeping desktop as-is.
-   Visual layout is preserved; only scroll container changes on pointer:coarse.
-*/
+
 @media (pointer: coarse) {
   html{
     overflow-y: auto !important;
@@ -2473,6 +2457,63 @@ body{
     height: auto !important;
     min-height: 100% !important;
     touch-action: pan-y;
+  }
+}
+</style>
+<style>
+/* === v228: SINGLE ROOT SCROLL + STICKY/FIXED HEADER (NO SCROLL-DEATH) ===
+   - Use ROOT (html/documentElement) scrolling everywhere so wheel/touch works from any cursor position on desktop.
+   - Keep body non-scrollable to avoid dual scrollbars.
+   - Prevent accidental nested vertical scrolling in main content.
+   - Keep dropdown menus scrollable.
+   - Ensure header stays frozen on mobile (pointer:coarse) without breaking scroll.
+*/
+html{
+  overflow-y: auto !important;
+  height: auto !important;
+  -webkit-overflow-scrolling: touch;
+}
+body{
+  overflow-y: visible !important; /* body is NOT the scroll container */
+  height: auto !important;
+  min-height: 100% !important;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Prevent any main-content containers from becoming scroll parents */
+.wrap,
+.main,
+.content,
+.month,
+.month-group,
+.events,
+.event-list,
+#monthsRoot{
+  overflow-y: visible !important;
+  max-height: none !important;
+}
+
+/* Dropdowns keep their own intentional scroll */
+.state-menu,
+.year-menu,
+.event-menu{
+  max-height: 320px;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Mobile: keep header frozen at top */
+@media (pointer: coarse){
+  .header-freeze{
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    width: 100% !important;
+    z-index: 9999 !important;
+  }
+  body{
+    padding-top: var(--headerH, 212px) !important;
   }
 }
 </style>
@@ -3904,34 +3945,20 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 
-<!-- === v224: Minimal header wheel forwarder (desktop only) === -->
+
+<!-- === v228: measure header height for correct body padding on mobile === -->
 <script>
 (function(){
-  var header = document.querySelector('.header-freeze');
-  if(!header) return;
-
-  // Only on devices with a fine pointer (desktop / trackpad / mouse)
-  if(!window.matchMedia || !window.matchMedia('(pointer:fine)').matches) return;
-
-  header.addEventListener('wheel', function(e){
-    var t = e.target;
-    var tag = t && t.tagName ? t.tagName.toLowerCase() : '';
-    if(tag === 'input' || tag === 'select' || tag === 'textarea') return;
-
-    // Let dropdown menus scroll if the wheel is over them
-    var menu = t && t.closest ? t.closest('#stateMenu, #yearMenu, #eventMenu, .state-menu, .year-menu, .event-menu') : null;
-    if(menu){
-      var max = menu.scrollHeight - menu.clientHeight;
-      if(max > 0){
-        if((e.deltaY > 0 && menu.scrollTop < max) || (e.deltaY < 0 && menu.scrollTop > 0)){
-          return; // let menu handle it
-        }
-      }
+  function setHeaderPad(){
+    var header = document.querySelector('.header-freeze');
+    if(!header) return;
+    var h = Math.ceil(header.getBoundingClientRect().height || header.offsetHeight || 0);
+    if(h > 0){
+      document.documentElement.style.setProperty('--headerH', h + 'px');
     }
-
-    window.scrollBy({ top: e.deltaY, left: 0, behavior: 'auto' });
-    e.preventDefault();
-  }, { passive: false });
+  }
+  window.addEventListener('load', setHeaderPad, {passive:true});
+  window.addEventListener('resize', setHeaderPad, {passive:true});
 })();
 </script>
 
