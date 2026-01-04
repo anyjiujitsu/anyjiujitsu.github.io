@@ -2466,15 +2466,16 @@ body{
 .where-new{
   display:inline-block;
   margin-left:6px;
-  font-size:0.22em; /* ~2x smaller */
+  font-size:0.18em; /* smaller again */
   font-weight:700;
+  font-style:italic;
   color:#1f4d2b; /* nav bar green */
   position:relative;
-  top:-0.45em;
-  letter-spacing:0.3px;
+  top:-0.4em;
+  letter-spacing:0.25px;
   text-shadow:
-    0 0 2px rgba(120,200,150,0.45),
-    0 0 4px rgba(120,200,150,0.25);
+    0 0 1px rgba(120,200,150,0.35),
+    0 0 3px rgba(120,200,150,0.2);
   pointer-events:none;
   white-space:nowrap;
 }
@@ -3907,7 +3908,7 @@ document.addEventListener('DOMContentLoaded', () => {
       if (existing) return;
       const sup = document.createElement('span');
       sup.className = 'where-new';
-      sup.textContent = '* NEW';
+      sup.textContent = 'NEW';
       target.appendChild(sup);
     } else {
       if (existing) existing.remove();
