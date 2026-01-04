@@ -2443,6 +2443,17 @@ body{
   -webkit-overflow-scrolling: touch;
 }
 </style>
+<style>
+/* === SCROLL INPUT FIX (v221) ===
+   Remove header wheel/touchmove preventDefault and ensure page gestures always scroll the body.
+*/
+body{
+  touch-action: pan-y;
+}
+.header-freeze, .sticky-head{
+  touch-action: manipulation;
+}
+</style>
 </head>
 <body>
   <div class="header-freeze">
@@ -3699,26 +3710,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
   wire('yearBtn','yearMenu','year-label','year-caret','Years');
   wire('stateBtn','stateMenu','state-label','state-caret','States');
-})();
-
-// === Block 14 ===
-/* v94: Lock page scrolling when gesture starts on the header (no visual/layout changes).
-   - Allows taps/clicks on search + pills.
-   - Prevents wheel/touch scroll from moving the page when pointer is over the header.
-*/
-(function(){
-  const header = document.querySelector('.sticky-head');
-  if(!header) return;
-
-  // Block wheel scrolling when over header (trackpad/mousewheel)
-  header.addEventListener('wheel', function(e){
-    e.preventDefault();
-  }, { passive: false });
-
-  // Block touch scrolling when touch starts on header (mobile)
-  header.addEventListener('touchmove', function(e){
-    e.preventDefault();
-  }, { passive: false });
 })();
 
 // === Block 15 ===
