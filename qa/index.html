@@ -352,6 +352,8 @@ display:flex;
     .for-where {
       font-size: 11px;
       color: rgba(0,0,0,0.55);
+      display: inline-block; /* keep badge inline with value */
+      white-space: nowrap;   /* prevent wrapping between value and badge */
     }
 
     .forwhere-inline{
@@ -2462,16 +2464,17 @@ body{
 <style>
 /* Superscript NEW tag after WHERE value (glow matches filter pill indicator) */
 .where-new{
-  display:inline;
+  display:inline-block;
   margin-left:4px;
-  font-size:0.55em; /* smaller */
+  font-size:0.38em; /* much smaller */
   font-weight:700;
   color:#1f4d2b; /* nav bar green */
-  vertical-align:super; /* true superscript inline */
-  letter-spacing:0.4px;
+  position:relative;
+  top:-0.55em; /* gentle superscript without breaking line */
+  letter-spacing:0.35px;
   text-shadow:
-    0 0 2px rgba(31,77,43,0.55),
-    0 0 4px rgba(31,77,43,0.35);
+    0 0 1px rgba(31,77,43,0.35),
+    0 0 2px rgba(31,77,43,0.22);
   pointer-events:none;
   white-space:nowrap;
 }
