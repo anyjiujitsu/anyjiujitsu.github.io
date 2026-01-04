@@ -365,6 +365,7 @@ display:flex;
     .search-icon svg{width:16px;height:16px;fill:rgba(0,0,0,0.45);}
 
     #nlSearch{
+      transform:none !important;
       width:100%;
       border:0;
       outline:none;
@@ -865,7 +866,7 @@ display:flex;
     .event-clear{
       border:0;
       background:transparent;
-      font-weight:800;
+      font-weight:600;
       font-size:12px;
       color: var(--green);
       cursor:pointer;
@@ -2122,10 +2123,7 @@ body{
 .search-container,
 .search-wrapper,
 #searchBar,
-.search-input{
-  transform: translateX(10px) !important;
-}
-
+.search-
 /* === Block 103 === */
 /* Index60: move ONLY the search pill (.head-search-box) slightly RIGHT */
 .head-search-box{
@@ -2515,6 +2513,13 @@ body{
   body{
     padding-top: var(--headerH, 212px) !important;
   }
+}
+</style>
+<style>
+/* === v231: Match Event Menu Clear to Events Pill Clear === */
+.event-clear{
+  font-weight: 400 !important;
+  color: rgba(0,0,0,0.55) !important;
 }
 </style>
 </head>
