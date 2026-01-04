@@ -7,67 +7,7 @@
 
 </style>
 
-<!-- === OVERRIDES: Header up 4x; ANY logo 1x bigger (independent) === -->
 
-<!-- === FIX: Move ONLY ANY logo down 5x (40px) without affecting layout or title === -->
-
-<!-- === UPDATE: Move ANY logo down an additional 4x (total 72px), header untouched === -->
-
-<!-- === UPDATE: Move ANY logo up 2x (net 56px), header untouched === -->
-
-<!-- === UPDATE: Move ANY logo down 1x (net 64px), header untouched === -->
-
-<!-- === UPDATE: Move ANY logo down 0.5x (net 68px), header untouched === -->
-
-<!-- === UPDATE: Move ANY logo right 1x (8px), header untouched === -->
-
-<!-- === UPDATE: Shift UPCOMING EVENTS header left 2x (16px), logo untouched === -->
-
-<!-- === UPDATE: Shift UPCOMING EVENTS header left 1x more (total 24px), logo untouched === -->
-
-<!-- === UPDATE: Shift UPCOMING EVENTS header left 0.5x more (total 28px), logo untouched === -->
-
-<!-- === UPDATE: Reduce Years & States pill widths by ~1.5x === -->
-
-<!-- === UPDATE: Further narrow Years & States pill widths === -->
-
-<!-- === UPDATE: Reduce overall pill shape length (Years & States) === -->
-
-<!-- === UPDATE: Slightly increase overall pill shape size (Years & States) === -->
-
-<!-- === OVERRIDE: Keep Events pill sizing consistent with Years & States === -->
-
-<!-- === PATCH: Place Events pill immediately next to Years pill (same vertical position) === -->
-
-<!-- === FIX: Make Events pill visually identical + aligned with Years/States === -->
-
-<!-- === FIX: Place Events pill with Years/States using stable absolute positioning (no search bar impact) === -->
-
-<!-- === UPDATE: Move States pill right by 10x ( +80px ) — States only === -->
-
-<!-- === UPDATE: Move States pill right by additional 2x ( +16px ) — States only === -->
-
-<!-- === UPDATE: Move States pill left by 1x ( -8px ) — States only === -->
-
-<!-- === UPDATE: Move Years pill right by 5x ( +40px ) — Years only === -->
-
-<!-- === FIX: Move Years pill RIGHT by 5x (+40px) from its current position === -->
-
-<!-- === UPDATE: Move Years pill RIGHT by 30x (+240px) === -->
-
-<!-- === UPDATE: Move Years pill RIGHT by 3x (+24px) === -->
-
-<!-- === UPDATE: Move Years pill LEFT by 0.5x (-4px) === -->
-
-<!-- === UPDATE: Align Events pill to ~32px gap from Years === -->
-
-<!-- === UPDATE: Move Events pill right by 3x (+24px) === -->
-
-<!-- === UPDATE: Move Events pill left by 0.5x (-4px) === -->
-
-<!-- === FIX: EVENTS pill matches YEARS pill text color + behavior === -->
-
-<!-- (removed duplicate Events pill toggle script; unified wiring is handled near the end of the file) -->
 
   <!-- Consolidated styles (cleaned & organized; single source of truth) -->
   <style id="app-styles">
@@ -365,7 +305,6 @@ display:flex;
     .search-icon svg{width:16px;height:16px;fill:rgba(0,0,0,0.45);}
 
     #nlSearch{
-      transform:none !important;
       width:100%;
       border:0;
       outline:none;
@@ -866,7 +805,7 @@ display:flex;
     .event-clear{
       border:0;
       background:transparent;
-      font-weight:600;
+      font-weight:800;
       font-size:12px;
       color: var(--green);
       cursor:pointer;
@@ -1235,7 +1174,7 @@ body {
   margin-left: 6px;
 }
 
-< style>
+<style>
 .event-check{
   color: #2e7d32;
   font-weight: 600;
@@ -2123,7 +2062,10 @@ body{
 .search-container,
 .search-wrapper,
 #searchBar,
-.search-
+.search-input{
+  transform: translateX(10px) !important;
+}
+
 /* === Block 103 === */
 /* Index60: move ONLY the search pill (.head-search-box) slightly RIGHT */
 .head-search-box{
@@ -2512,64 +2454,6 @@ body{
   }
   body{
     padding-top: var(--headerH, 212px) !important;
-  }
-}
-</style>
-<style>
-/* === v231: Match Event Menu Clear to Events Pill Clear === */
-.event-clear{
-  font-weight: 400 !important;
-  color: rgba(0,0,0,0.55) !important;
-}
-</style>
-<style>
-/* === v232: Mobile search caret alignment fix ===
-   On mobile, the search caret was visually starting one character in
-   due to padding + inline icon interaction. This forces the caret to
-   start at the true first position without changing desktop behavior.
-*/
-@media (pointer: coarse){
-  #nlSearch{
-    padding-left: 0 !important;
-    text-indent: 0 !important;
-    caret-color: auto;
-  }
-}
-</style>
-<style>
-/* === v234: Mobile caret visual alignment (CSS-only, no JS) ===
-   Root cause: the search icon sits inline before the input, while the input
-   itself also has horizontal padding. On iOS, the caret is rendered after
-   the inline icon + padding, making it look 1 character ahead.
-   Fix: absolutely position the icon and give the input a true left inset.
-*/
-.head-search-box{
-  position: relative;
-}
-
-.head-search-icon{
-  position: absolute;
-  left: 10px;
-  top: 50%;
-  transform: translateY(-50%);
-  pointer-events: none;
-}
-
-@media (pointer: coarse){
-  #nlSearch{
-    padding-left: 30px !important; /* icon (16px) + gap */
-    text-indent: 0 !important;
-  }
-}
-</style>
-<style>
-/* === v236: MOBILE placeholder/caret visual fix (CSS-first) ===
-   iOS can render the caret "inside" placeholder text on focus.
-   Hide placeholder ONLY while focused, on touch devices / small screens.
-*/
-@media (max-width: 860px){
-  #nlSearch:focus::placeholder{
-    color: transparent !important;
   }
 }
 </style>
@@ -4061,74 +3945,73 @@ document.addEventListener('DOMContentLoaded', () => {
 </script>
 
 
-<!-- === v233: Mobile caret normalizer ===
-     Fix iOS oddity where the caret appears one character ahead when typing.
-     If the input value begins with an invisible/whitespace char, remove it and
-     shift the caret back by one. Also force caret to position 0 on focus when empty.
--->
+<!-- === v300 PATCH: Fix Events Clear styling + ensure scroll works anywhere on desktop + iOS caret fix === -->
+<style>
+/* v300.1: Events menu "Clear" should match Years/States (not bold, not green) */
+.event-clear{
+  font-weight: 400 !important;
+  color: rgba(0,0,0,0.55) !important;
+  padding: 2px 6px !important;
+  border-radius: 8px !important;
+}
+.event-clear:hover{ background: rgba(0,0,0,0.05) !important; }
+
+/* v300.2: When search is focused on iOS Safari, remove transforms that can offset caret rendering */
+body.search-focus .head-search{
+  transform: none !important;
+  left: calc(var(--table-start, 0px) + 28px) !important;
+  right: auto !important;
+}
+</style>
+
 <script>
+/* v300.3: Desktop wheel-scroll should work no matter where the cursor is (even over non-scrollable cards) */
 (function(){
-  if(!window.matchMedia || !window.matchMedia('(pointer:coarse)').matches) return;
-  var input = document.getElementById('nlSearch');
-  if(!input) return;
-
-  function stripLeadingGhostChar(){
-    var v = input.value;
-    if(!v) return false;
-    // Common "ghost" chars: zero-width space, BOM, non-breaking space, leading space
-    var first = v.charCodeAt(0);
-    var isGhost =
-      first === 0x200B || // zero-width space
-      first === 0xFEFF || // BOM
-      first === 0x00A0 || // nbsp
-      v[0] === ' ';
-    if(!isGhost) return false;
-
-    var start = input.selectionStart || 0;
-    var end = input.selectionEnd || 0;
-
-    input.value = v.slice(1);
-
-    // Move caret back one, preserving selection length
-    var newStart = Math.max(0, start - 1);
-    var newEnd = Math.max(0, end - 1);
-    try { input.setSelectionRange(newStart, newEnd); } catch(e){}
-    return true;
+  function isScrollable(el){
+    if(!el || el === document.body || el === document.documentElement) return false;
+    const cs = getComputedStyle(el);
+    const oy = cs.overflowY;
+    if(oy !== 'auto' && oy !== 'scroll') return false;
+    return el.scrollHeight > el.clientHeight + 1;
   }
 
-  input.addEventListener('focus', function(){
-    // If empty, force caret to the first position
-    if(input.value === ''){
-      try { input.setSelectionRange(0,0); } catch(e){}
-    } else {
-      // If there's a ghost char, remove and normalize caret
-      stripLeadingGhostChar();
-    }
-  });
+  function canScroll(el, dy){
+    if(!isScrollable(el)) return false;
+    if(dy > 0) return el.scrollTop + el.clientHeight < el.scrollHeight - 1;
+    if(dy < 0) return el.scrollTop > 0;
+    return false;
+  }
 
-  input.addEventListener('input', function(){
-    stripLeadingGhostChar();
-  });
+  document.addEventListener('wheel', function(e){
+    // allow browser zoom, horizontal gestures, etc.
+    if(e.ctrlKey) return;
+
+    const dy = e.deltaY;
+    if(!dy) return;
+
+    // If the event originated inside a scrollable menu/list, let it behave normally.
+    let node = e.target;
+    while(node && node !== document.body){
+      if(canScroll(node, dy)) return;
+      node = node.parentElement;
+    }
+
+    // Otherwise force page scroll.
+    e.preventDefault();
+    window.scrollBy({ top: dy, left: 0, behavior: 'auto' });
+  }, { passive: false, capture: true });
 })();
-</script>
 
-
-
-<!-- === v236: Touch focus caret = 0 (robust detection) === -->
-<script>
+/* v300.4: iOS caret offset fix (only while focused) */
 (function(){
-  var isTouch = ('ontouchstart' in window) || (navigator.maxTouchPoints && navigator.maxTouchPoints > 0);
-  if(!isTouch) return;
-
-  var input = document.getElementById('nlSearch');
+  const input = document.getElementById('nlSearch');
   if(!input) return;
+  const ua = navigator.userAgent || '';
+  const isIOS = /iP(hone|ad|od)/.test(ua) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+  if(!isIOS) return;
 
-  input.addEventListener('focus', function(){
-    // If empty, ensure caret is at the true first position
-    if(input.value === ''){
-      try{ input.setSelectionRange(0,0); }catch(e){}
-    }
-  });
+  input.addEventListener('focus', () => document.body.classList.add('search-focus'));
+  input.addEventListener('blur',  () => document.body.classList.remove('search-focus'));
 })();
 </script>
 
