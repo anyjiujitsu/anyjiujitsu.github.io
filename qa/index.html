@@ -1174,7 +1174,7 @@ body {
   margin-left: 6px;
 }
 
-<style>
+< style>
 .event-check{
   color: #2e7d32;
   font-weight: 600;
@@ -2457,6 +2457,17 @@ body{
   }
 }
 </style>
+
+<style>
+.where-new {
+  color: white;
+  font-size: 0.65em;
+  vertical-align: super;
+  margin-left: 6px;
+  font-weight: 600;
+}
+</style>
+
 </head>
 <body>
   <div class="header-freeze">
@@ -3945,73 +3956,26 @@ document.addEventListener('DOMContentLoaded', () => {
 </script>
 
 
-<!-- === v300 PATCH: Fix Events Clear styling + ensure scroll works anywhere on desktop + iOS caret fix === -->
-<style>
-/* v300.1: Events menu "Clear" should match Years/States (not bold, not green) */
-.event-clear{
-  font-weight: 400 !important;
-  color: rgba(0,0,0,0.55) !important;
-  padding: 2px 6px !important;
-  border-radius: 8px !important;
-}
-.event-clear:hover{ background: rgba(0,0,0,0.05) !important; }
-
-/* v300.2: When search is focused on iOS Safari, remove transforms that can offset caret rendering */
-body.search-focus .head-search{
-  transform: none !important;
-  left: calc(var(--table-start, 0px) + 28px) !important;
-  right: auto !important;
-}
-</style>
-
 <script>
-/* v300.3: Desktop wheel-scroll should work no matter where the cursor is (even over non-scrollable cards) */
-(function(){
-  function isScrollable(el){
-    if(!el || el === document.body || el === document.documentElement) return false;
-    const cs = getComputedStyle(el);
-    const oy = cs.overflowY;
-    if(oy !== 'auto' && oy !== 'scroll') return false;
-    return el.scrollHeight > el.clientHeight + 1;
-  }
+(function () {
+  const TODAY = new Date();
+  const THREE_DAYS_MS = 3 * 24 * 60 * 60 * 1000;
 
-  function canScroll(el, dy){
-    if(!isScrollable(el)) return false;
-    if(dy > 0) return el.scrollTop + el.clientHeight < el.scrollHeight - 1;
-    if(dy < 0) return el.scrollTop > 0;
-    return false;
-  }
+  document.querySelectorAll('[data-created]').forEach(el => {
+    const createdStr = el.getAttribute('data-created');
+    if (!createdStr) return;
 
-  document.addEventListener('wheel', function(e){
-    // allow browser zoom, horizontal gestures, etc.
-    if(e.ctrlKey) return;
+    const createdDate = new Date(createdStr);
+    if (isNaN(createdDate)) return;
 
-    const dy = e.deltaY;
-    if(!dy) return;
-
-    // If the event originated inside a scrollable menu/list, let it behave normally.
-    let node = e.target;
-    while(node && node !== document.body){
-      if(canScroll(node, dy)) return;
-      node = node.parentElement;
+    const diff = TODAY - createdDate;
+    if (diff <= THREE_DAYS_MS) {
+      const sup = document.createElement('span');
+      sup.className = 'where-new';
+      sup.textContent = '* NEW';
+      el.appendChild(sup);
     }
-
-    // Otherwise force page scroll.
-    e.preventDefault();
-    window.scrollBy({ top: dy, left: 0, behavior: 'auto' });
-  }, { passive: false, capture: true });
-})();
-
-/* v300.4: iOS caret offset fix (only while focused) */
-(function(){
-  const input = document.getElementById('nlSearch');
-  if(!input) return;
-  const ua = navigator.userAgent || '';
-  const isIOS = /iP(hone|ad|od)/.test(ua) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
-  if(!isIOS) return;
-
-  input.addEventListener('focus', () => document.body.classList.add('search-focus'));
-  input.addEventListener('blur',  () => document.body.classList.remove('search-focus'));
+  });
 })();
 </script>
 
