@@ -2464,15 +2464,15 @@ body{
 <style>
 /* Superscript NEW tag after WHERE value (glow matches filter pill indicator) */
 .where-new{
-  display:inline;
+  display:inline-block;
   margin-left:4px;
-  font-size:5px; /* smaller */
+  font-size:6px; /* much smaller */
   line-height:1;
   font-weight:700;
   font-style:italic;
   color:#fbaf17;
-  vertical-align:baseline; /* inline with WHERE value */
-  letter-spacing:0.2px;
+  vertical-align:baseline;
+  letter-spacing:0.15px;
   text-shadow:none;
   pointer-events:none;
   white-space:nowrap;
@@ -3884,36 +3884,49 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 
+
 <script>
 (function () {
   const THREE_DAYS_MS = 3 * 24 * 60 * 60 * 1000;
   let applying = false;
 
   function pickWhereTarget(row){
-    // Preferred WHERE value span inside merged stack
     const whereVal = row.querySelector('.for-where');
     if (whereVal) return whereVal;
 
-    // Fallback: 3rd cell (WHERE)
     const cells = row.querySelectorAll('.cell');
     if (cells && cells.length >= 3) return cells[2];
     return null;
   }
 
+  function cleanupStrayNewText(target){
+    // Remove trailing text nodes that are exactly NEW/*NEW/* NEW (from earlier attempts)
+    const nodes = Array.from(target.childNodes);
+    nodes.forEach(n => {
+      if (n.nodeType === Node.TEXT_NODE) {
+        const t = (n.textContent || '').trim();
+        if (t === 'NEW' || t === '*NEW' || t === '* NEW') {
+          n.remove();
+        }
+      }
+    });
+  }
+
   function ensureBadge(row, shouldHave){
+    // Remove any existing badges anywhere in the row to prevent duplicates
+    row.querySelectorAll('.where-new').forEach(n => n.remove());
+
     const target = pickWhereTarget(row);
     if (!target) return;
 
-    const existing = target.querySelector(':scope > .where-new');
-    if (shouldHave) {
-      if (existing) return;
-      const sup = document.createElement('span');
-      sup.className = 'where-new';
-      sup.textContent = 'NEW';
-      target.appendChild(sup);
-    } else {
-      if (existing) existing.remove();
-    }
+    cleanupStrayNewText(target);
+
+    if (!shouldHave) return;
+
+    const sup = document.createElement('span');
+    sup.className = 'where-new';
+    sup.textContent = '*NEW';
+    target.appendChild(sup);
   }
 
   function applyNewBadges() {
