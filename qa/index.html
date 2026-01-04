@@ -5,6 +5,18 @@
 <meta charset="UTF-8" />
   <title>ANY N.E. - Events</title>
 
+
+    .where-new-badge{
+      margin-left:6px;
+      font-size:6px;
+      line-height:1;
+      font-weight:700;
+      font-style:italic;
+      color:#fbaf17;
+      letter-spacing:0.2px;
+      white-space:nowrap;
+    }
+
 </style>
 
 
@@ -352,8 +364,6 @@ display:flex;
     .for-where {
       font-size: 11px;
       color: rgba(0,0,0,0.55);
-      display: inline-block; /* keep badge inline with value */
-      white-space: nowrap;   /* prevent wrapping between value and badge */
     }
 
     .forwhere-inline{
@@ -2459,26 +2469,6 @@ body{
   }
 }
 </style>
-
-
-<style>
-/* Superscript NEW tag after WHERE value (glow matches filter pill indicator) */
-.where-new{
-  display:inline-block;
-  margin-left:4px;
-  font-size:6px; /* much smaller */
-  line-height:1;
-  font-weight:700;
-  font-style:italic;
-  color:#fbaf17;
-  vertical-align:baseline;
-  letter-spacing:0.15px;
-  text-shadow:none;
-  pointer-events:none;
-  white-space:nowrap;
-}
-</style>
-
 </head>
 <body>
   <div class="header-freeze">
@@ -3018,6 +3008,17 @@ function hydrate() {
             const startOfNow = new Date(now.getFullYear(), now.getMonth(), now.getDate()).getTime();
             const diffDays = Math.floor((startOfNow - startOfCreated) / (24*60*60*1000));
             if (diffDays >= 0 && diffDays <= 3){
+              // Add small *NEW tag inline with WHERE value (city) – only once
+              try{
+                const cityEl = locCell.querySelector('.location-city');
+                if (cityEl && !cityEl.querySelector('.where-new-badge')){
+                  const tag = document.createElement('span');
+                  tag.className = 'where-new-badge';
+                  tag.textContent = '*NEW';
+                  cityEl.appendChild(tag);
+                }
+              }catch(e){}
+
               if (!existingDot){
                 const dot = document.createElement('span');
                 dot.className = 'record-new-dot';
@@ -3026,6 +3027,11 @@ function hydrate() {
               }
             } else {
               if (existingDot) existingDot.remove();
+              try{
+                const cityEl = locCell.querySelector('.location-city');
+                const badge = cityEl ? cityEl.querySelector('.where-new-badge') : null;
+                if (badge) badge.remove();
+              }catch(e){}
             }
           } else {
             if (existingDot) existingDot.remove();
@@ -3860,14 +3866,69 @@ document.addEventListener('DOMContentLoaded', () => {
      This can cause "can't reach bottom/top" and mid-page stall feelings.
      We measure the scaled height and add equivalent bottom padding to body so scrolling is seamless.
 -->
+<script>
+(function(){
+  var scheduled = false;
 
+  function adjustScaledScroll(){
+    scheduled = false;
+    var root = document.getElementById('monthsRoot');
+    if(!root) return;
+
+    // Unscaled layout height (what the document flow thinks it is)
+    var natural = root.scrollHeight || root.offsetHeight || 0;
+
+    // Visual (scaled) height
+    var rect = root.getBoundingClientRect();
+    var visual = rect ? rect.height : natural;
+
+    var extra = Math.max(0, Math.ceil(visual - natural));
+
+    // Apply bottom padding so the body scroll height matches what the user sees
+    document.body.style.paddingBottom = extra + 'px';
+  }
+
+  function requestAdjust(){
+    if(scheduled) return;
+    scheduled = true;
+    requestAnimationFrame(adjustScaledScroll);
+  }
+
+  window.addEventListener('load', requestAdjust, {passive:true});
+  window.addEventListener('resize', requestAdjust, {passive:true});
+
+  // Watch for content changes (filters/search can change height)
+  var root = document.getElementById('monthsRoot');
+  if(root && window.MutationObserver){
+    var obs = new MutationObserver(requestAdjust);
+    obs.observe(root, {subtree:true, childList:true, attributes:true, characterData:true});
+  }
+
+  // Also adjust after any click that might expand/collapse content (safe, cheap via rAF debounce)
+  document.addEventListener('click', requestAdjust, {passive:true});
+  document.addEventListener('input', requestAdjust, {passive:true});
+})();
+</script>
 
 
 
 
 
 <!-- === v228: measure header height for correct body padding on mobile === -->
-
+<script>
+(function(){
+  function setHeaderPad(){
+    var header = document.querySelector('.header-freeze');
+    if(!header) return;
+    var h = Math.ceil(header.getBoundingClientRect().height || header.offsetHeight || 0);
+    if(h > 0){
+      document.documentElement.style.setProperty('--headerH', h + 'px');
+    }
+  }
+  window.addEventListener('load', setHeaderPad, {passive:true});
+  window.addEventListener('resize', setHeaderPad, {passive:true});
+})();
+</script>
 
 
 <!-- === v229: Desktop wheel scroll router ===
@@ -3875,87 +3936,39 @@ document.addEventListener('DOMContentLoaded', () => {
      transformed/stacked content that may block scroll chaining.
      Mobile remains untouched (pointer:coarse).
 -->
-
-
-
-
-
-
-
-
-
-
 <script>
-(function () {
-  const THREE_DAYS_MS = 3 * 24 * 60 * 60 * 1000;
-  let applying = false;
+(function(){
+  if(!window.matchMedia || !window.matchMedia('(pointer:fine)').matches) return;
 
-  function pickWhereTarget(row){
-    const whereVal = row.querySelector('.for-where');
-    if (whereVal) return whereVal;
-
-    const cells = row.querySelectorAll('.cell');
-    if (cells && cells.length >= 3) return cells[2];
-    return null;
+  function closestScrollableMenu(el){
+    return el && el.closest ? el.closest('#stateMenu, #yearMenu, #eventMenu, .state-menu, .year-menu, .event-menu') : null;
+  }
+  function canScroll(el, deltaY){
+    if(!el) return false;
+    var max = el.scrollHeight - el.clientHeight;
+    if(max <= 0) return false;
+    if(deltaY > 0) return el.scrollTop < max;
+    if(deltaY < 0) return el.scrollTop > 0;
+    return false;
   }
 
-  function cleanupStrayNewText(target){
-    // Remove trailing text nodes that are exactly NEW/*NEW/* NEW (from earlier attempts)
-    const nodes = Array.from(target.childNodes);
-    nodes.forEach(n => {
-      if (n.nodeType === Node.TEXT_NODE) {
-        const t = (n.textContent || '').trim();
-        if (t === 'NEW' || t === '*NEW' || t === '* NEW') {
-          n.remove();
-        }
-      }
-    });
-  }
+  // Capture phase so we win even if something higher in the stack interferes.
+  document.addEventListener('wheel', function(e){
+    var t = e.target;
 
-  function ensureBadge(row, shouldHave){
-    // Remove any existing badges anywhere in the row to prevent duplicates
-    row.querySelectorAll('.where-new').forEach(n => n.remove());
+    // allow normal scrolling inside dropdown menus
+    var menu = closestScrollableMenu(t);
+    if(menu && canScroll(menu, e.deltaY)) return;
 
-    const target = pickWhereTarget(row);
-    if (!target) return;
+    // allow normal behavior inside form fields
+    var tag = t && t.tagName ? t.tagName.toLowerCase() : '';
+    if(tag === 'textarea') return;
 
-    cleanupStrayNewText(target);
-
-    if (!shouldHave) return;
-
-    const sup = document.createElement('span');
-    sup.className = 'where-new';
-    sup.textContent = '*NEW';
-    target.appendChild(sup);
-  }
-
-  function applyNewBadges() {
-    applying = true;
-    const nowMs = Date.now();
-
-    document.querySelectorAll('.row[data-created-ts]').forEach(row => {
-      const ts = Number(row.getAttribute('data-created-ts'));
-      const shouldHave = Number.isFinite(ts) && (nowMs - ts >= 0) && (nowMs - ts <= THREE_DAYS_MS);
-      ensureBadge(row, shouldHave);
-    });
-
-    applying = false;
-  }
-
-  function startObserver() {
-    const root = document.getElementById('monthsRoot') || document.body;
-    applyNewBadges();
-    const obs = new MutationObserver(() => {
-      if (!applying) applyNewBadges();
-    });
-    obs.observe(root, { childList: true, subtree: true });
-  }
-
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', startObserver);
-  } else {
-    startObserver();
-  }
+    // If the browser is already scrolling normally, we *still* route to window to ensure
+    // consistent behavior across header/body areas.
+    window.scrollBy({ top: e.deltaY, left: 0, behavior: 'auto' });
+    e.preventDefault();
+  }, { passive: false, capture: true });
 })();
 </script>
 
