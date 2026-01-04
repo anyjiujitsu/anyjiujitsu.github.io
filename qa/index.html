@@ -7,7 +7,67 @@
 
 </style>
 
+<!-- === OVERRIDES: Header up 4x; ANY logo 1x bigger (independent) === -->
 
+<!-- === FIX: Move ONLY ANY logo down 5x (40px) without affecting layout or title === -->
+
+<!-- === UPDATE: Move ANY logo down an additional 4x (total 72px), header untouched === -->
+
+<!-- === UPDATE: Move ANY logo up 2x (net 56px), header untouched === -->
+
+<!-- === UPDATE: Move ANY logo down 1x (net 64px), header untouched === -->
+
+<!-- === UPDATE: Move ANY logo down 0.5x (net 68px), header untouched === -->
+
+<!-- === UPDATE: Move ANY logo right 1x (8px), header untouched === -->
+
+<!-- === UPDATE: Shift UPCOMING EVENTS header left 2x (16px), logo untouched === -->
+
+<!-- === UPDATE: Shift UPCOMING EVENTS header left 1x more (total 24px), logo untouched === -->
+
+<!-- === UPDATE: Shift UPCOMING EVENTS header left 0.5x more (total 28px), logo untouched === -->
+
+<!-- === UPDATE: Reduce Years & States pill widths by ~1.5x === -->
+
+<!-- === UPDATE: Further narrow Years & States pill widths === -->
+
+<!-- === UPDATE: Reduce overall pill shape length (Years & States) === -->
+
+<!-- === UPDATE: Slightly increase overall pill shape size (Years & States) === -->
+
+<!-- === OVERRIDE: Keep Events pill sizing consistent with Years & States === -->
+
+<!-- === PATCH: Place Events pill immediately next to Years pill (same vertical position) === -->
+
+<!-- === FIX: Make Events pill visually identical + aligned with Years/States === -->
+
+<!-- === FIX: Place Events pill with Years/States using stable absolute positioning (no search bar impact) === -->
+
+<!-- === UPDATE: Move States pill right by 10x ( +80px ) — States only === -->
+
+<!-- === UPDATE: Move States pill right by additional 2x ( +16px ) — States only === -->
+
+<!-- === UPDATE: Move States pill left by 1x ( -8px ) — States only === -->
+
+<!-- === UPDATE: Move Years pill right by 5x ( +40px ) — Years only === -->
+
+<!-- === FIX: Move Years pill RIGHT by 5x (+40px) from its current position === -->
+
+<!-- === UPDATE: Move Years pill RIGHT by 30x (+240px) === -->
+
+<!-- === UPDATE: Move Years pill RIGHT by 3x (+24px) === -->
+
+<!-- === UPDATE: Move Years pill LEFT by 0.5x (-4px) === -->
+
+<!-- === UPDATE: Align Events pill to ~32px gap from Years === -->
+
+<!-- === UPDATE: Move Events pill right by 3x (+24px) === -->
+
+<!-- === UPDATE: Move Events pill left by 0.5x (-4px) === -->
+
+<!-- === FIX: EVENTS pill matches YEARS pill text color + behavior === -->
+
+<!-- (removed duplicate Events pill toggle script; unified wiring is handled near the end of the file) -->
 
   <!-- Consolidated styles (cleaned & organized; single source of truth) -->
   <style id="app-styles">
@@ -305,6 +365,7 @@ display:flex;
     .search-icon svg{width:16px;height:16px;fill:rgba(0,0,0,0.45);}
 
     #nlSearch{
+      transform:none !important;
       width:100%;
       border:0;
       outline:none;
@@ -805,7 +866,7 @@ display:flex;
     .event-clear{
       border:0;
       background:transparent;
-      font-weight:800;
+      font-weight:600;
       font-size:12px;
       color: var(--green);
       cursor:pointer;
@@ -2062,10 +2123,7 @@ body{
 .search-container,
 .search-wrapper,
 #searchBar,
-.search-input{
-  transform: translateX(10px) !important;
-}
-
+.search-
 /* === Block 103 === */
 /* Index60: move ONLY the search pill (.head-search-box) slightly RIGHT */
 .head-search-box{
@@ -2344,19 +2402,7 @@ body { overflow-y: auto; }
 .wrap { overflow: visible !important; }
 .card-body { overflow-y: visible !important; }
 
-/* *NEW badge appended to WHERE value (in FOR/WHERE stack) for records created within last 3 days */
-.where-new-badge{
-  margin-left:4px;
-  font-size:6px;
-  line-height:1;
-  font-weight:700;
-  font-style:italic;
-  color:#fbaf17;
-  letter-spacing:0.2px;
-  white-space:nowrap;
-}
-
-</style>
+  </style>
 <style>
 
 html{
@@ -2467,6 +2513,13 @@ body{
   body{
     padding-top: var(--headerH, 212px) !important;
   }
+}
+</style>
+<style>
+/* === v231: Match Event Menu Clear to Events Pill Clear === */
+.event-clear{
+  font-weight: 400 !important;
+  color: rgba(0,0,0,0.55) !important;
 }
 </style>
 </head>
@@ -3008,19 +3061,6 @@ function hydrate() {
             const startOfNow = new Date(now.getFullYear(), now.getMonth(), now.getDate()).getTime();
             const diffDays = Math.floor((startOfNow - startOfCreated) / (24*60*60*1000));
             if (diffDays >= 0 && diffDays <= 3){
-              // Add *NEW tag after WHERE value (the .for-where line inside the FOR/WHERE stack)
-              try{
-                const whereEl = row.querySelector('.for-where');
-                if (whereEl){
-                  if (!whereEl.querySelector('.where-new-badge')){
-                    const tag = document.createElement('span');
-                    tag.className = 'where-new-badge';
-                    tag.textContent = ' *NEW';
-                    whereEl.appendChild(tag);
-                  }
-                }
-              }catch(e){}
-
               if (!existingDot){
                 const dot = document.createElement('span');
                 dot.className = 'record-new-dot';
@@ -3029,21 +3069,9 @@ function hydrate() {
               }
             } else {
               if (existingDot) existingDot.remove();
-              try{
-                const whereEl = row.querySelector('.for-where');
-                const badge = whereEl ? whereEl.querySelector('.where-new-badge') : null;
-                if (badge) badge.remove();
-              }catch(e){}
-
             }
           } else {
             if (existingDot) existingDot.remove();
-              try{
-                const whereEl = row.querySelector('.for-where');
-                const badge = whereEl ? whereEl.querySelector('.where-new-badge') : null;
-                if (badge) badge.remove();
-              }catch(e){}
-
           }
         });
       }
