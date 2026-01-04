@@ -2458,13 +2458,24 @@ body{
 }
 </style>
 
+
 <style>
-.where-new {
-  color: white;
-  font-size: 0.65em;
-  vertical-align: super;
-  margin-left: 6px;
-  font-weight: 600;
+/* Superscript NEW tag after WHERE value (glow matches filter pill indicator) */
+.where-new{
+  display:inline-block;
+  margin-left:6px;
+  font-size:0.68em;
+  font-weight:700;
+  color:#ffffff;
+  position:relative;
+  top:-0.55em; /* superscript feel even inside flex layouts */
+  letter-spacing:0.5px;
+  text-shadow:
+    0 0 4px rgba(40,167,69,0.95),
+    0 0 8px rgba(40,167,69,0.70),
+    0 0 14px rgba(40,167,69,0.50);
+  pointer-events:none;
+  white-space:nowrap;
 }
 </style>
 
@@ -3988,6 +3999,63 @@ document.addEventListener('DOMContentLoaded', () => {
     applyNewBadges();
 
     // Re-apply whenever the list is re-rendered (filters, search, etc.)
+    const obs = new MutationObserver(() => applyNewBadges());
+    obs.observe(root, { childList: true, subtree: true });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', startObserver);
+  } else {
+    startObserver();
+  }
+})();
+</script>
+
+
+<script>
+(function () {
+  const THREE_DAYS_MS = 3 * 24 * 60 * 60 * 1000;
+
+  function pickWhereTarget(row){
+    // Preferred: the rendered WHERE line lives inside the merged FOR/WHERE stack
+    const mergedWhere = row.querySelector('.for-where');
+    if (mergedWhere) return mergedWhere;
+
+    // Fallback: original 3rd cell (WHERE) if merge logic ever changes
+    const cells = row.querySelectorAll('.cell');
+    if (cells && cells.length >= 3) return cells[2];
+
+    return null;
+  }
+
+  function applyNewBadges() {
+    const nowMs = Date.now();
+
+    document.querySelectorAll('.row[data-created-ts]').forEach(row => {
+      // Remove any stray/previous NEW tags in this row so we never show twice
+      row.querySelectorAll('.where-new').forEach(n => n.remove());
+
+      const ts = Number(row.getAttribute('data-created-ts'));
+      if (!Number.isFinite(ts)) return;
+
+      const diff = nowMs - ts;
+      if (diff < 0 || diff > THREE_DAYS_MS) return;
+
+      const target = pickWhereTarget(row);
+      if (!target) return;
+
+      // Append once
+      const sup = document.createElement('span');
+      sup.className = 'where-new';
+      sup.textContent = '* NEW';
+      target.appendChild(sup);
+    });
+  }
+
+  function startObserver() {
+    const root = document.getElementById('monthsRoot') || document.body;
+    applyNewBadges();
+
     const obs = new MutationObserver(() => applyNewBadges());
     obs.observe(root, { childList: true, subtree: true });
   }
