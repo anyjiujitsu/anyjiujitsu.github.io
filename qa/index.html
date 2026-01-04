@@ -5,18 +5,6 @@
 <meta charset="UTF-8" />
   <title>ANY N.E. - Events</title>
 
-
-    .where-new-badge{
-      margin-left:6px;
-      font-size:6px;
-      line-height:1;
-      font-weight:700;
-      font-style:italic;
-      color:#fbaf17;
-      letter-spacing:0.2px;
-      white-space:nowrap;
-    }
-
 </style>
 
 
@@ -2356,7 +2344,19 @@ body { overflow-y: auto; }
 .wrap { overflow: visible !important; }
 .card-body { overflow-y: visible !important; }
 
-  </style>
+/* *NEW badge inline with WHERE value (fresh = CREATED within 3 days) */
+.where-new-badge{
+  margin-left:4px;
+  font-size:6px;
+  line-height:1;
+  font-weight:700;
+  font-style:italic;
+  color:#fbaf17;
+  letter-spacing:0.2px;
+  white-space:nowrap;
+}
+
+</style>
 <style>
 
 html{
@@ -3011,11 +3011,20 @@ function hydrate() {
               // Add small *NEW tag inline with WHERE value (city) – only once
               try{
                 const cityEl = locCell.querySelector('.location-city');
-                if (cityEl && !cityEl.querySelector('.where-new-badge')){
-                  const tag = document.createElement('span');
-                  tag.className = 'where-new-badge';
-                  tag.textContent = '*NEW';
-                  cityEl.appendChild(tag);
+                if (cityEl){
+                  // Remove any stray plain-text NEW/*NEW
+                  cityEl.childNodes.forEach(n=>{
+                    if(n.nodeType===Node.TEXT_NODE){
+                      const t=(n.textContent||'').trim();
+                      if(t==='NEW' || t==='*NEW' || t==='* NEW') n.remove();
+                    }
+                  });
+                  if (!cityEl.querySelector('.where-new-badge')){
+                    const tag = document.createElement('span');
+                    tag.className = 'where-new-badge';
+                    tag.textContent = ' *NEW';
+                    cityEl.appendChild(tag);
+                  }
                 }
               }catch(e){}
 
