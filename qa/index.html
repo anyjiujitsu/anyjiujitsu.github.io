@@ -3957,29 +3957,46 @@ document.addEventListener('DOMContentLoaded', () => {
 
 <script>
 (function () {
-  const now = new Date();
   const THREE_DAYS_MS = 3 * 24 * 60 * 60 * 1000;
 
-  document.querySelectorAll('.row[data-created-ts]').forEach(row => {
-    const ts = Number(row.getAttribute('data-created-ts'));
-    if (!Number.isFinite(ts)) return;
+  function applyNewBadges() {
+    const nowMs = Date.now();
 
-    const diff = now.getTime() - ts;
-    if (diff < 0 || diff > THREE_DAYS_MS) return; // only last 3 days
+    document.querySelectorAll('.row[data-created-ts]').forEach(row => {
+      const ts = Number(row.getAttribute('data-created-ts'));
+      if (!Number.isFinite(ts)) return;
 
-    const cells = row.querySelectorAll('.cell');
-    if (!cells || cells.length < 3) return;
+      const diff = nowMs - ts;
+      if (diff < 0 || diff > THREE_DAYS_MS) return;
 
-    const whereCell = cells[2];
+      const cells = row.querySelectorAll('.cell');
+      if (!cells || cells.length < 3) return;
 
-    // Avoid duplicates
-    if (whereCell.querySelector('.where-new')) return;
+      const whereCell = cells[2]; // WHERE column
+      if (whereCell.querySelector('.where-new')) return;
 
-    const sup = document.createElement('span');
-    sup.className = 'where-new';
-    sup.textContent = '* NEW';
-    whereCell.appendChild(sup);
-  });
+      const sup = document.createElement('span');
+      sup.className = 'where-new';
+      sup.textContent = '* NEW';
+      whereCell.appendChild(sup);
+    });
+  }
+
+  function startObserver() {
+    const root = document.getElementById('monthsRoot') || document.body;
+    // Apply once on start
+    applyNewBadges();
+
+    // Re-apply whenever the list is re-rendered (filters, search, etc.)
+    const obs = new MutationObserver(() => applyNewBadges());
+    obs.observe(root, { childList: true, subtree: true });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', startObserver);
+  } else {
+    startObserver();
+  }
 })();
 </script>
 
