@@ -3955,26 +3955,30 @@ document.addEventListener('DOMContentLoaded', () => {
 })();
 </script>
 
-
 <script>
 (function () {
-  const TODAY = new Date();
+  const now = new Date();
   const THREE_DAYS_MS = 3 * 24 * 60 * 60 * 1000;
 
-  document.querySelectorAll('[data-created]').forEach(el => {
-    const createdStr = el.getAttribute('data-created');
-    if (!createdStr) return;
+  document.querySelectorAll('.row[data-created-ts]').forEach(row => {
+    const ts = Number(row.getAttribute('data-created-ts'));
+    if (!Number.isFinite(ts)) return;
 
-    const createdDate = new Date(createdStr);
-    if (isNaN(createdDate)) return;
+    const diff = now.getTime() - ts;
+    if (diff < 0 || diff > THREE_DAYS_MS) return; // only last 3 days
 
-    const diff = TODAY - createdDate;
-    if (diff <= THREE_DAYS_MS) {
-      const sup = document.createElement('span');
-      sup.className = 'where-new';
-      sup.textContent = '* NEW';
-      el.appendChild(sup);
-    }
+    const cells = row.querySelectorAll('.cell');
+    if (!cells || cells.length < 3) return;
+
+    const whereCell = cells[2];
+
+    // Avoid duplicates
+    if (whereCell.querySelector('.where-new')) return;
+
+    const sup = document.createElement('span');
+    sup.className = 'where-new';
+    sup.textContent = '* NEW';
+    whereCell.appendChild(sup);
   });
 })();
 </script>
