@@ -2344,11 +2344,11 @@ body { overflow-y: auto; }
 .wrap { overflow: visible !important; }
 .card-body { overflow-y: visible !important; }
 
-/* *NEW badge inline with WHERE value (fresh = CREATED within 3 days) */
+/* *NEW badge appended to WHERE value (in FOR/WHERE stack) for records created within last 3 days */
 .where-new-badge{
   margin-left:4px;
-  font-size:4px !important;
-  line-height:1 !important;
+  font-size:6px;
+  line-height:1;
   font-weight:700;
   font-style:italic;
   color:#fbaf17;
@@ -3008,17 +3008,10 @@ function hydrate() {
             const startOfNow = new Date(now.getFullYear(), now.getMonth(), now.getDate()).getTime();
             const diffDays = Math.floor((startOfNow - startOfCreated) / (24*60*60*1000));
             if (diffDays >= 0 && diffDays <= 3){
-              // *NEW badge inline with WHERE value (Hosted Location line). Uses existing diffDays logic.
+              // Add *NEW tag after WHERE value (the .for-where line inside the FOR/WHERE stack)
               try{
                 const whereEl = row.querySelector('.for-where');
                 if (whereEl){
-                  // remove stray plain text NEW from prior iterations if any
-                  Array.from(whereEl.childNodes).forEach(n => {
-                    if (n.nodeType === Node.TEXT_NODE) {
-                      const t = (n.textContent || '').trim();
-                      if (t === 'NEW' || t === '*NEW' || t === '* NEW') n.remove();
-                    }
-                  });
                   if (!whereEl.querySelector('.where-new-badge')){
                     const tag = document.createElement('span');
                     tag.className = 'where-new-badge';
@@ -3041,14 +3034,16 @@ function hydrate() {
                 const badge = whereEl ? whereEl.querySelector('.where-new-badge') : null;
                 if (badge) badge.remove();
               }catch(e){}
+
             }
           } else {
             if (existingDot) existingDot.remove();
-            try{
-              const whereEl = row.querySelector('.for-where');
-              const badge = whereEl ? whereEl.querySelector('.where-new-badge') : null;
-              if (badge) badge.remove();
-            }catch(e){}
+              try{
+                const whereEl = row.querySelector('.for-where');
+                const badge = whereEl ? whereEl.querySelector('.where-new-badge') : null;
+                if (badge) badge.remove();
+              }catch(e){}
+
           }
         });
       }
