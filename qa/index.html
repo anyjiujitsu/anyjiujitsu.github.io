@@ -3,7 +3,7 @@
 <head>
   <meta name="viewport" content="width=1200, initial-scale=0.32, maximum-scale=0.32, user-scalable=no, viewport-fit=cover" />
 <meta charset="UTF-8" />
-  <title>ANY N.E. - Events</title>
+  <title>ANY N.E. - Events1</title>
 
 </style>
 
@@ -2441,6 +2441,17 @@ body{
   max-height: 320px;
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
+}
+</style>
+<style>
+/* === EXTENDED SCROLL BUFFER (diagnostic) ===
+   Purpose: increase total scrollable length to test
+   seamless end-of-page scrolling without layout impact.
+*/
+body::after{
+  content: "";
+  display: block;
+  height: 2000px; /* increases scroll length safely */
 }
 </style>
 </head>
