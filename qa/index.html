@@ -2468,7 +2468,7 @@ body{
   font-weight:700;
   color:#ffffff;
   position:relative;
-  top:-0.55em; /* superscript feel even inside flex layouts */
+  top:-0.55em;
   letter-spacing:0.5px;
   text-shadow:
     0 0 4px rgba(40,167,69,0.95),
@@ -3966,97 +3966,71 @@ document.addEventListener('DOMContentLoaded', () => {
 })();
 </script>
 
-<script>
-(function () {
-  const THREE_DAYS_MS = 3 * 24 * 60 * 60 * 1000;
-
-  function applyNewBadges() {
-    const nowMs = Date.now();
-
-    document.querySelectorAll('.row[data-created-ts]').forEach(row => {
-      const ts = Number(row.getAttribute('data-created-ts'));
-      if (!Number.isFinite(ts)) return;
-
-      const diff = nowMs - ts;
-      if (diff < 0 || diff > THREE_DAYS_MS) return;
-
-      const cells = row.querySelectorAll('.cell');
-      if (!cells || cells.length < 3) return;
-
-      const whereCell = cells[2]; // WHERE column
-      if (whereCell.querySelector('.where-new')) return;
-
-      const sup = document.createElement('span');
-      sup.className = 'where-new';
-      sup.textContent = '* NEW';
-      whereCell.appendChild(sup);
-    });
-  }
-
-  function startObserver() {
-    const root = document.getElementById('monthsRoot') || document.body;
-    // Apply once on start
-    applyNewBadges();
-
-    // Re-apply whenever the list is re-rendered (filters, search, etc.)
-    const obs = new MutationObserver(() => applyNewBadges());
-    obs.observe(root, { childList: true, subtree: true });
-  }
-
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', startObserver);
-  } else {
-    startObserver();
-  }
-})();
-</script>
-
 
 <script>
 (function () {
   const THREE_DAYS_MS = 3 * 24 * 60 * 60 * 1000;
+  let applying = false;
+  let rafScheduled = false;
 
   function pickWhereTarget(row){
-    // Preferred: the rendered WHERE line lives inside the merged FOR/WHERE stack
-    const mergedWhere = row.querySelector('.for-where');
+    const mergedWhere = row.querySelector('.for-where'); // WHERE value span (inside merged stack)
     if (mergedWhere) return mergedWhere;
 
-    // Fallback: original 3rd cell (WHERE) if merge logic ever changes
     const cells = row.querySelectorAll('.cell');
-    if (cells && cells.length >= 3) return cells[2];
-
+    if (cells && cells.length >= 3) return cells[2]; // fallback WHERE cell
     return null;
   }
 
-  function applyNewBadges() {
-    const nowMs = Date.now();
+  function ensureBadge(row, shouldHave){
+    const target = pickWhereTarget(row);
+    if (!target) return;
 
-    document.querySelectorAll('.row[data-created-ts]').forEach(row => {
-      // Remove any stray/previous NEW tags in this row so we never show twice
-      row.querySelectorAll('.where-new').forEach(n => n.remove());
-
-      const ts = Number(row.getAttribute('data-created-ts'));
-      if (!Number.isFinite(ts)) return;
-
-      const diff = nowMs - ts;
-      if (diff < 0 || diff > THREE_DAYS_MS) return;
-
-      const target = pickWhereTarget(row);
-      if (!target) return;
-
-      // Append once
+    const existing = target.querySelector(':scope > .where-new');
+    if (shouldHave) {
+      if (existing) return; // already present
       const sup = document.createElement('span');
       sup.className = 'where-new';
       sup.textContent = '* NEW';
       target.appendChild(sup);
+    } else {
+      if (existing) existing.remove();
+    }
+  }
+
+  function applyNewBadges() {
+    applying = true;
+    const nowMs = Date.now();
+
+    document.querySelectorAll('.row[data-created-ts]').forEach(row => {
+      const ts = Number(row.getAttribute('data-created-ts'));
+      if (!Number.isFinite(ts)) { ensureBadge(row, false); return; }
+
+      const diff = nowMs - ts;
+      const shouldHave = (diff >= 0 && diff <= THREE_DAYS_MS);
+      ensureBadge(row, shouldHave);
+    });
+
+    applying = false;
+  }
+
+  function scheduleApply(){
+    if (rafScheduled) return;
+    rafScheduled = true;
+    requestAnimationFrame(() => {
+      rafScheduled = false;
+      applyNewBadges();
     });
   }
 
   function startObserver() {
     const root = document.getElementById('monthsRoot') || document.body;
-    applyNewBadges();
+    scheduleApply();
 
-    const obs = new MutationObserver(() => applyNewBadges());
+    const obs = new MutationObserver(() => {
+      if (applying) return; // ignore mutations caused by our own badge edits
+      scheduleApply();
+    });
     obs.observe(root, { childList: true, subtree: true });
   }
 
