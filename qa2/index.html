@@ -7,7 +7,69 @@
 
 </style>
 
+<!-- === OVERRIDES: Header up 4x; ANY logo 1x bigger (independent) === -->
 
+<!-- === FIX: Move ONLY ANY logo down 5x (40px) without affecting layout or title === -->
+
+<!-- === UPDATE: Move ANY logo down an additional 4x (total 72px), header untouched === -->
+
+<!-- === UPDATE: Move ANY logo up 2x (net 56px), header untouched === -->
+
+<!-- === UPDATE: Move ANY logo down 1x (net 64px), header untouched === -->
+
+<!-- === UPDATE: Move ANY logo down 0.5x (net 68px), header untouched === -->
+
+<!-- === UPDATE: Move ANY logo right 1x (8px), header untouched === -->
+
+<!-- === UPDATE: Shift UPCOMING EVENTS header left 2x (16px), logo untouched === -->
+
+<!-- === UPDATE: Shift UPCOMING EVENTS header left 1x more (total 24px), logo untouched === -->
+
+<!-- === UPDATE: Shift UPCOMING EVENTS header left 0.5x more (total 28px), logo untouched === -->
+
+<!-- === UPDATE: Reduce Years & States pill widths by ~1.5x === -->
+
+<!-- === UPDATE: Further narrow Years & States pill widths === -->
+
+<!-- === UPDATE: Reduce overall pill shape length (Years & States) === -->
+
+<!-- === UPDATE: Slightly increase overall pill shape size (Years & States) === -->
+
+<!-- === OVERRIDE: Keep Events pill sizing consistent with Years & States === -->
+
+<!-- === PATCH: Place Events pill immediately next to Years pill (same vertical position) === -->
+
+<!-- === FIX: Make Events pill visually identical + aligned with Years/States === -->
+
+<!-- === FIX: Place Events pill with Years/States using stable absolute positioning (no search bar impact) === -->
+
+<!-- === UPDATE: Move States pill right by 10x ( +80px ) — States only === -->
+
+<!-- === UPDATE: Move States pill right by additional 2x ( +16px ) — States only === -->
+
+<!-- === UPDATE: Move States pill left by 1x ( -8px ) — States only === -->
+
+<!-- === UPDATE: Move Years pill right by 5x ( +40px ) — Years only === -->
+
+<!-- === FIX: Move Years pill RIGHT by 5x (+40px) from its current position === -->
+
+<!-- === UPDATE: Move Years pill RIGHT by 30x (+240px) === -->
+
+<!-- === UPDATE: Move Years pill RIGHT by 3x (+24px) === -->
+
+<!-- === UPDATE: Move Years pill LEFT by 0.5x (-4px) === -->
+
+<!-- === UPDATE: Align Events pill to ~32px gap from Years === -->
+
+<!-- === UPDATE: Move Events pill right by 3x (+24px) === -->
+
+<!-- === UPDATE: Move Events pill left by 0.5x (-4px) === -->
+
+<!-- === FIX: EVENTS pill matches YEARS pill text color + behavior === -->
+
+<!-- (removed duplicate Events pill toggle script; unified wiring is handled near the end of the file) -->
+
+  <!-- Consolidated styles (cleaned & organized; single source of truth) -->
   <style id="app-styles">
 /* === Block 1 === */
 /* Global scale: increases all rem-based sizing proportionally */
@@ -2680,6 +2742,8 @@ body{
         // IMPORTANT: this site may be hosted in a subfolder (e.g., /qa2/ on GitHub Pages),
         // so use RELATIVE paths only (no leading slash).
         const csvCandidates = [
+          '/data/directory.csv',
+          '../data/directory.csv',
           'data/directory.csv',
           './data/directory.csv',
           'directory.csv',
