@@ -3,130 +3,151 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Directory (CSV test)</title>
+  <title>Directory CSV Loader (Clean)</title>
 </head>
 <body>
-  <h1>Directory</h1>
-  <div id="status">Loading…</div>
-  <div id="out"></div>
 
-  <script>
-    (async function () {
-      const statusEl = document.getElementById('status');
-      const outEl = document.getElementById('out');
+<h1>Directory</h1>
+<div id="status">Loading…</div>
+<div id="out"></div>
 
-      const candidates = [
-        'data/directory.csv',
-        './data/directory.csv',
-        '/data/directory.csv',
-        'directory.csv',
-        './directory.csv'
-      ];
+<script>
+(async function () {
+  const statusEl = document.getElementById("status");
+  const outEl = document.getElementById("out");
 
-      let csvText = '';
-      let lastErr = null;
-      const tried = [];
+  const CSV_CANDIDATES = [
+    "data/directory.csv",
+    "./data/directory.csv",
+    "/data/directory.csv"
+  ];
 
-      for (const url of candidates) {
-        try {
-          tried.push(url);
-          const res = await fetch(url, { cache: 'no-store' });
-          if (!res.ok) throw new Error(`HTTP ${res.status} for ${url}`);
-          csvText = await res.text();
-          if (csvText && csvText.trim()) break;
-        } catch (e) {
-          lastErr = e;
-        }
+  let csvText = "";
+  let lastErr = null;
+
+  for (const url of CSV_CANDIDATES) {
+    try {
+      const res = await fetch(url, { cache: "no-store" });
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      csvText = await res.text();
+      if (csvText.trim()) break;
+    } catch (e) {
+      lastErr = e;
+    }
+  }
+
+  if (!csvText.trim()) {
+    statusEl.textContent = "CSV load error ❌";
+    outEl.innerHTML = `<pre>${String(lastErr)}</pre>`;
+    return;
+  }
+
+  // Detect delimiter (TAB preferred)
+  const firstLine = csvText.split(/\r?\n/).find(l => l.trim()) || "";
+  const DELIM = firstLine.includes("\t") ? "\t" : ",";
+
+  function parseDelimited(text, d) {
+    const rows = [];
+    let row = [], cur = "", inQ = false;
+
+    for (let i = 0; i < text.length; i++) {
+      const c = text[i];
+      const n = text[i + 1];
+
+      if (inQ) {
+        if (c === '"' && n === '"') { cur += '"'; i++; }
+        else if (c === '"') inQ = false;
+        else cur += c;
+      } else {
+        if (c === '"') inQ = true;
+        else if (c === d) { row.push(cur); cur = ""; }
+        else if (c === "\n") {
+          row.push(cur); cur = "";
+          if (row.some(v => v.trim())) rows.push(row);
+          row = [];
+        } else if (c !== "\r") cur += c;
       }
+    }
 
-      if (!csvText || !csvText.trim()) {
-        statusEl.textContent = 'CSV load error';
-        outEl.innerHTML = `
-          <pre>
-${String(lastErr || 'Unknown error')}
-Tried:
-- ${tried.join('\n- ')}
-          </pre>`;
-        return;
-      }
+    row.push(cur);
+    if (row.some(v => v.trim())) rows.push(row);
+    return rows;
+  }
 
-      // Detect delimiter: prefer TAB if header line contains tabs
-      const firstLine = csvText.split(/\r?\n/).find(l => l.trim().length) || '';
-      const delimiter = firstLine.includes('\t') ? '\t' : ',';
+  const matrix = parseDelimited(csvText, DELIM);
+  if (!matrix.length) {
+    statusEl.textContent = "CSV empty ❌";
+    return;
+  }
 
-      function parseDelimited(text, delim) {
-        // Minimal CSV/TSV parser with quotes
-        const rows = [];
-        let row = [], cur = '', inQ = false;
+  const EXPECTED = ["STATE", "CITY", "NAME", "IG", "SAT", "SUN", "OTA"];
+  const headers = matrix[0].map(h => h.trim().toUpperCase());
+  const idx = Object.fromEntries(headers.map((h, i) => [h, i]));
 
-        for (let i = 0; i < text.length; i++) {
-          const ch = text[i];
+  const missing = EXPECTED.filter(h => !(h in idx));
+  if (missing.length) {
+    statusEl.textContent = "Header mismatch ❌";
+    outEl.innerHTML = `
+<pre>
+Missing: ${missing.join(", ")}
+Found: ${headers.join(", ")}
+</pre>`;
+    return;
+  }
 
-          if (inQ) {
-            if (ch === '"') {
-              if (text[i + 1] === '"') { cur += '"'; i++; }
-              else inQ = false;
-            } else {
-              cur += ch;
-            }
-          } else {
-            if (ch === '"') inQ = true;
-            else if (ch === delim) { row.push(cur); cur = ''; }
-            else if (ch === '\n') {
-              row.push(cur); cur = '';
-              if (row.some(v => (v || '').trim() !== '')) rows.push(row);
-              row = [];
-            } else if (ch !== '\r') {
-              cur += ch;
-            }
-          }
-        }
-        row.push(cur);
-        if (row.some(v => (v || '').trim() !== '')) rows.push(row);
-        return rows;
-      }
+  function normOTA(v) {
+    const s = String(v ?? "").trim().toUpperCase();
+    if (!s) return "";
+    if (["Y", "YES", "TRUE", "1"].includes(s)) return "Y";
+    if (["N", "NO", "FALSE", "0"].includes(s)) return "N";
+    return "";
+  }
 
-      const matrix = parseDelimited(csvText, delimiter);
-      if (!matrix.length) {
-        statusEl.textContent = 'CSV loaded but empty';
-        return;
-      }
+  const rows = matrix.slice(1)
+    .filter(r => r.some(c => String(c ?? "").trim()))
+    .map(r => ({
+      STATE: r[idx.STATE]?.trim() ?? "",
+      CITY:  r[idx.CITY]?.trim()  ?? "",
+      NAME:  r[idx.NAME]?.trim()  ?? "",
+      IG:    r[idx.IG]?.trim()    ?? "",
+      SAT:   r[idx.SAT]?.trim()   ?? "",
+      SUN:   r[idx.SUN]?.trim()   ?? "",
+      OTA:   normOTA(r[idx.OTA])
+    }));
 
-      const headers = matrix[0].map(h => (h || '').trim());
-      const dataRows = matrix.slice(1);
+  // Render plain table
+  const table = document.createElement("table");
+  table.border = "1";
+  table.cellPadding = "6";
+  table.style.borderCollapse = "collapse";
 
-      // Build a super plain table
-      const table = document.createElement('table');
-      table.border = '1';
-      table.cellPadding = '6';
-      table.style.borderCollapse = 'collapse';
+  const thead = document.createElement("thead");
+  const trh = document.createElement("tr");
+  EXPECTED.forEach(h => {
+    const th = document.createElement("th");
+    th.textContent = h;
+    trh.appendChild(th);
+  });
+  thead.appendChild(trh);
+  table.appendChild(thead);
 
-      const thead = document.createElement('thead');
-      const trh = document.createElement('tr');
-      headers.forEach(h => {
-        const th = document.createElement('th');
-        th.textContent = h;
-        trh.appendChild(th);
-      });
-      thead.appendChild(trh);
-      table.appendChild(thead);
+  const tbody = document.createElement("tbody");
+  rows.forEach(obj => {
+    const tr = document.createElement("tr");
+    EXPECTED.forEach(h => {
+      const td = document.createElement("td");
+      td.textContent = obj[h];
+      tr.appendChild(td);
+    });
+    tbody.appendChild(tr);
+  });
+  table.appendChild(tbody);
 
-      const tbody = document.createElement('tbody');
-      dataRows.forEach(r => {
-        const tr = document.createElement('tr');
-        headers.forEach((_, i) => {
-          const td = document.createElement('td');
-          td.textContent = (r[i] ?? '').toString().trim();
-          tr.appendChild(td);
-        });
-        tbody.appendChild(tr);
-      });
-      table.appendChild(tbody);
+  statusEl.textContent = `Loaded ${rows.length} rows (OTA normalized)`;
+  outEl.innerHTML = "";
+  outEl.appendChild(table);
+})();
+</script>
 
-      statusEl.textContent = `Loaded ${dataRows.length} rows from directory.csv (delimiter: ${delimiter === '\t' ? 'TAB' : 'COMMA'})`;
-      outEl.innerHTML = '';
-      outEl.appendChild(table);
-    })();
-  </script>
 </body>
 </html>
