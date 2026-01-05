@@ -2612,7 +2612,6 @@ body{
 </div>
 
   <div class="wrap" style="padding-top: 0px;">
-  <div id="loadStatusBar" style="max-width:1200px;margin:8px auto 12px auto;padding:10px 12px;border-radius:12px;background:rgba(255,255,255,.92);border:1px solid rgba(0,0,0,.12);font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;font-size:12px;line-height:1.35;color:#111;"><b>Loading directory…</b> <span style="opacity:.75">Starting…</span></div>
   <div id="monthsRoot" aria-live="polite"></div>
 </div>
 
@@ -2735,12 +2734,6 @@ body{
       // Render Directory from CSV (STATE/CITY/NAME/IG/SAT/SUN/OTA)
       async function renderFromCSV(){
         const root = document.getElementById('monthsRoot');
-        const statusBar = document.getElementById('loadStatusBar');
-        function setLoadStatus(html){
-          if(!statusBar) return;
-          statusBar.innerHTML = html;
-        }
-
         if (!root) return;
 
         // Loading state (dark text on light background)
@@ -2762,17 +2755,11 @@ body{
         let tried = [];
 
         for (const url of csvCandidates){
-          setLoadStatus(`<b>Loading directory…</b> <span style="opacity:.75">Trying:</span> <code>${url}</code>`);
-          console.log('[Directory] trying CSV:', url);
           try{
             tried.push(url);
             const res = await fetch(url, { cache: 'no-store' });
             if (!res.ok) throw new Error('HTTP ' + res.status);
             csvText = await res.text();
-            if (csvText && csvText.trim().length){
-              setLoadStatus(`<b>Loaded directory.csv</b> <span style="opacity:.75">from</span> <code>${url}</code> <span style="opacity:.6">(${csvText.trim().length} chars)</span>`);
-              console.log('[Directory] loaded CSV from', url, 'chars=', (csvText||'').length);
-            }
             if (csvText && csvText.trim().length) break;
           }catch(err){
             lastErr = err;
@@ -3376,8 +3363,7 @@ if (eventClear){
 applyFilter();
       }
 
-      try{
-        renderFromCSV().then(() => {
+      renderFromCSV().then(() => {
 
       hydrate();
 
