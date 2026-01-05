@@ -2,550 +2,567 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-
-  <!-- MATCH EVENTS PAGE VIEWPORT BEHAVIOR -->
   <meta name="viewport" content="width=1200, initial-scale=0.32, maximum-scale=0.32, user-scalable=no, viewport-fit=cover" />
-
-  <title>DIRECTORY 9</title>
+  <title>ANY N.E. - Directory</title>
 
   <style>
+    /* === Match EVENTS page global scaling behavior === */
+    html { font-size: 22px; }
+
     :root{
-      --bg: #e9e9e9;
-      --green: #1f4e35;
-      --pill: #ffffff;
-      --pill-border: rgba(0,0,0,.18);
-      --text: #111;
-      --muted: rgba(0,0,0,.55);
-      --gridline: rgba(0,0,0,.12);
-      --ota-yes: #1fb86a;
-      --ota-no: #d24b4b;
+      --green: #234c31;
+      --bg: #ebebeb;
+      --row: #e2e4e4;
+      --shadow: rgba(0,0,0,0.18);
+      --shadow2: rgba(0,0,0,0.10);
+      --radius: 4px;
+
+      /* EVENTS file uses these alignment tokens */
+      --left-gutter: 28px;
+      --table-start: 64px; /* visual left edge of table content (matches EVENTS tuning) */
     }
 
-    *{ box-sizing:border-box; }
-    html,body{ height:100%; }
+    * { box-sizing: border-box; }
     body{
-      margin:0;
-      background: var(--bg);
-      color: var(--text);
+      margin: 0;
       font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+      background: var(--bg);
+      color: #111;
     }
 
-    /* MATCH EVENTS: Fixture font (local) + same fallback chain */
+    /* Fixture (same approach as index (6).html) */
     @font-face{
       font-family: 'Fixture';
       src: local('Fixture'), local('Fixture Display'), local('Fixture Condensed');
-      font-style: normal;
       font-weight: 400 900;
+      font-style: normal;
     }
 
-    /* =========================
-       TITLE STRIP (MATCH EVENTS)
-       ========================= */
-    .top-title{
-      width:100%;
-      position:relative;
-      overflow:hidden;        /* allows left-crop like EVENTS */
-      background: var(--bg);
-      padding: 10px 0 0 0;
-    }
-
-    /* Align to same content column as filters/table */
-    .title-inner{
-      max-width: 1100px;
+    .wrap{
+      max-width: 100%;
+      width: 100%;
       margin: 0 auto;
-      padding: 0 18px;
-      position: relative;
-      min-height: 140px;
-      display:flex;
-      align-items:flex-end;
+      padding: 0px 28px 0px;
     }
 
-    .title-inner h1{
-      margin:0;
-      color: var(--green);
+    /* === TOP TITLE ROW (match EVENTS layout) === */
+    .top{
+      position: relative;
+      z-index: 60;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
 
-      /* EXACT family chain requested (Fixture first) */
+      /* this is the key “overlap” behavior you see in EVENTS */
+      margin-bottom: -80px;
+    }
+
+    .title{
+      /* EVENTS uses table alignment for the title */
+      padding-left: var(--table-start) !important;
+
       font-family: 'Fixture', Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
-
+      font-size: 72px;              /* DO NOT change: this is what becomes “huge” under initial-scale=0.32 */
+      letter-spacing: -0.04em;
       font-weight: 900;
-      line-height: .78;
-      letter-spacing: -6px;
-
-      /* EVENTS look: huge + tight */
-      font-size: 200px;
-
-      /* EVENTS feel: slightly condensed + left-cropped into gutter */
-      display:inline-block;
-      transform-origin: left bottom;
-      transform: scaleX(0.82);
-      position: relative;
-      left: -26px;
+      color: var(--green);
+      margin: 0;
+      text-transform: uppercase;
+      line-height: 0.86;            /* tighter like EVENTS */
+      white-space: nowrap;
     }
 
-    /* ANY logo positioned without affecting title layout */
-    .any-mark{
-      position:absolute;
-      right: 22px;
-      top: 26px;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      height: 74px;
+    /* ANY logo (top right) */
+    .any-logo{
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
       width: 120px;
-      border: 3px solid var(--green);
-      border-radius: 999px;
-      color: var(--green);
-      font-weight: 900;
-      font-family: 'Fixture', Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
-      font-size: 46px;
-      line-height: 1;
-      background: transparent;
-      pointer-events:none;
+      height: 72px;
+      margin-right: 8px;
+    }
+    .any-logo img{
+      width: 100%;
+      height: auto;
+      display: block;
     }
 
-    /* ===== Green bar with pills ===== */
-    .sticky-bar{
+    /* === STICKY GREEN BAR (match EVENTS) === */
+    .sticky-head{
       position: sticky;
       top: 0;
-      z-index: 50;
+      z-index: 40;
       background: var(--green);
-      padding: 14px 14px;
-      box-shadow: 0 2px 10px rgba(0,0,0,.18);
+      box-shadow: 0 4px 10px rgba(0,0,0,0.10);
+      padding: 12px 0;
     }
-    .bar-inner{
-      max-width: 1100px;
+
+    .head-inner{
+      position: relative;
+      max-width: 100%;
       margin: 0 auto;
-      display:flex;
-      align-items:center;
+      padding: 0 28px;
+
+      display: flex;
+      align-items: center;
       gap: 16px;
     }
 
-    .search-pill{
-      flex: 1 1 520px;
-      height: 44px;
-      border-radius: 999px;
-      background: var(--pill);
-      border: 1px solid var(--pill-border);
-      box-shadow: 0 1px 0 rgba(0,0,0,.10);
-      display:flex;
-      align-items:center;
-      padding: 0 12px;
-      gap: 10px;
-    }
-    .search-icon{
-      width: 18px;
-      height: 18px;
-      opacity: .55;
+    /* === Search pill (match EVENTS sizing) === */
+    .head-search{
+      margin-left: calc(var(--table-start) - 28px);
       flex: 0 0 auto;
     }
-    .search-input{
-      width: 100%;
-      border: 0;
-      outline: none;
-      font-size: 18px;
-      background: transparent;
-      color: #222;
-    }
-    .search-clear{
-      border:0;
-      background: transparent;
-      font-size: 26px;
-      line-height: 1;
-      padding: 0 6px;
-      cursor: pointer;
-      opacity: .55;
-    }
-    .search-clear:hover{ opacity: .8; }
 
-    .pill-group{
-      flex: 0 0 auto;
+    .head-search-box{
       display:flex;
       align-items:center;
-      gap: 14px;
+      gap:6px;
+      height:28px;
+      padding:0 10px;
+      border-radius:999px;
+      background:#ffffff;
+      border:1px solid rgba(0,0,0,0.16);
+      box-shadow:0 2px 10px rgba(0,0,0,0.10);
+      max-width:290px;
+      width:min(290px, 44vw);
     }
-    .filter-pill{
-      height: 44px;
-      min-width: 190px;
-      padding: 0 18px;
-      border-radius: 999px;
-      background: var(--pill);
-      border: 1px solid var(--pill-border);
-      display:flex;
+
+    .head-search-icon{
+      width:16px;height:16px;opacity:0.65;flex:0 0 auto;
+      display:inline-flex;align-items:center;justify-content:center;
+    }
+    .head-search-icon svg{ width:16px;height:16px; fill: rgba(0,0,0,0.55); }
+
+    #nlSearch{
+      width:100%;
+      border:0;
+      outline:none;
+      background:transparent;
+      color:#1f2a1f;
+      font-size:12px;
+      line-height:1;
+    }
+    #nlSearch::placeholder{ color: rgba(0,0,0,0.45); }
+
+    .head-search-clear{
+      width: 22px;
+      height: 22px;
+      border: 0;
+      background: transparent;
+      color: rgba(0,0,0,0.6);
+      cursor: pointer;
+      font-size: 18px;
+      line-height: 1;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* === Pills group (visual-only for now; you can wire later) === */
+    .pill-row{
+      flex: 1 1 auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding-right: 16px;
+    }
+
+    .pill{
+      height:28px;
+      display:inline-flex;
       align-items:center;
-      justify-content:space-between;
-      gap: 12px;
-      box-shadow: 0 1px 0 rgba(0,0,0,.10);
-      user-select:none;
+      justify-content: space-between;
+      gap:8px;
+      padding:0 12px;
+      border-radius:999px;
+      background:#ffffff;
+      border:1px solid rgba(0,0,0,0.16);
+      box-shadow:0 2px 10px rgba(0,0,0,0.10);
+      font-size:12px;
+      color: rgba(0,0,0,0.6);
+      min-width: 110px;
+      user-select: none;
       cursor: default;
     }
-    .filter-pill span{
-      font-size: 20px;
-      color: rgba(0,0,0,.45);
-      font-weight: 600;
-    }
-    .caret{
-      font-size: 18px;
-      color: rgba(0,0,0,.35);
+    .pill .caret{
+      opacity: 0.7;
+      font-size: 10px;
       transform: translateY(1px);
     }
 
-    /* ===== Table area ===== */
-    .wrap{
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 18px;
+    /* === TABLE === */
+    .table-wrap{
+      max-width: 100%;
+      padding: 18px 28px 40px;
     }
-    .table{
+    table{
       width: 100%;
       border-collapse: collapse;
-      background: rgba(255,255,255,.20);
+      background: #f0f0f0;
+      box-shadow: 0 6px 14px rgba(0,0,0,0.12);
     }
-    .table thead th{
-      text-align:left;
-      font-size: 14px;
-      letter-spacing: .08em;
+    thead th{
+      text-align: left;
+      font-size: 11px;
+      letter-spacing: 0.12em;
       text-transform: uppercase;
-      color: rgba(0,0,0,.55);
-      padding: 10px 12px;
-      border-bottom: 1px solid var(--gridline);
+      color: rgba(0,0,0,0.55);
+      padding: 12px 14px;
+      border-bottom: 1px solid rgba(0,0,0,0.10);
+      background: #ededed;
     }
-    .table tbody td{
-      padding: 0;
-      border-bottom: 1px solid var(--gridline);
+    tbody td{
+      padding: 14px;
+      border-top: 1px solid rgba(0,0,0,0.10);
+      vertical-align: top;
+      background: #e9e9e9;
     }
 
-    .row-grid{
-      display:grid;
-      grid-template-columns: 1.25fr 1.15fr 0.9fr 90px;
-      align-items: stretch;
-      min-height: 74px;
-      background: rgba(255,255,255,.12);
-    }
-    .cell{
-      padding: 12px 12px;
+    .stack{
       display:flex;
       flex-direction:column;
-      justify-content:center;
-      gap: 4px;
-      border-right: 1px solid var(--gridline);
+      line-height:1.15;
+      gap: 3px;
     }
-    .cell:last-child{ border-right: 0; }
-
-    .topline{
-      font-weight: 800;
-      font-size: 18px;
-      line-height: 1.05;
-      color: #111;
-    }
-    .botline{
-      font-size: 16px;
-      line-height: 1.05;
-      color: rgba(0,0,0,.55);
-    }
-
-    .times{ gap: 6px; }
-    .time-row{
-      display:flex;
-      align-items:baseline;
-      gap: 10px;
-      line-height: 1.05;
-    }
-    .time-label{
-      width: 42px;
-      font-weight: 900;
-      font-size: 18px;
-      color: #111;
-    }
-    .time-val{
-      font-size: 18px;
-      color: rgba(0,0,0,.55);
+    .primary{
       font-weight: 700;
+      font-size: 13px;
+      color:#111;
+    }
+    .secondary{
+      font-size: 11px;
+      color: rgba(0,0,0,0.55);
     }
 
-    .ota-wrap{
-      align-items:center;
-      justify-content:center;
+    .satSunRow{
+      display:flex;
+      align-items:flex-start;
       gap: 10px;
     }
-    .ota-label{
-      font-weight: 900;
-      font-size: 14px;
-      letter-spacing: .08em;
-      color: rgba(0,0,0,.55);
-      text-transform: uppercase;
+    .dayLabelCol{
+      width: 34px;
+      flex: 0 0 34px;
+      display:flex;
+      flex-direction:column;
+      gap: 8px;
     }
-    .ota-dot{
-      width: 18px;
-      height: 18px;
-      border-radius: 999px;
-      background: rgba(0,0,0,.20);
-      box-shadow: inset 0 0 0 2px rgba(0,0,0,.12);
+    .dayLabel{
+      font-weight: 800;
+      color:#111;
+      font-size: 13px;
     }
-    .ota-yes{ background: var(--ota-yes); box-shadow:none; }
-    .ota-no{ background: var(--ota-no); box-shadow:none; }
+    .timeCol{
+      display:flex;
+      flex-direction:column;
+      gap: 8px;
+    }
+    .timeVal{
+      font-weight: 600;
+      color: rgba(0,0,0,0.55);
+      font-size: 13px;
+      min-height: 16px;
+    }
 
-    @media (max-width: 900px){
-      .pill-group{ display:none; }
+    .otaCell{
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      gap: 10px;
+      padding-top: 6px;
+    }
+    .otaLabel{
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(0,0,0,0.55);
+      font-weight: 800;
+    }
+    .dot{
+      width: 14px;
+      height: 14px;
+      border-radius: 999px;
+      background: #bdbdbd;
+      border: 1px solid rgba(0,0,0,0.18);
+    }
+    .dot.y{ background: #19b56b; border-color: rgba(0,0,0,0.10); }
+    .dot.n{ background: #d84b4b; border-color: rgba(0,0,0,0.10); }
+
+    .error{
+      color:#b40000;
+      font-weight: 700;
+      padding: 12px 14px;
     }
   </style>
 </head>
 
 <body>
-
-  <!-- Title strip -->
-  <div class="top-title">
-    <div class="title-inner">
-      <!-- Per your rule: show the iteration number here -->
-      <h1>DIRECTORY4</h1>
-      <div class="any-mark">(ANY)</div>
-    </div>
-  </div>
-
-  <!-- Green bar -->
-  <div class="sticky-bar">
-    <div class="bar-inner">
-
-      <div class="search-pill" role="search">
-        <svg class="search-icon" viewBox="0 0 24 24" aria-hidden="true">
-          <path d="M10 18a8 8 0 1 1 5.292-14.001A8 8 0 0 1 10 18Zm11.707 2.293-5.4-5.4a10 10 0 1 0-1.414 1.414l5.4 5.4a1 1 0 0 0 1.414-1.414Z"/>
-        </svg>
-        <input id="searchInput" class="search-input" type="text" autocomplete="off" spellcheck="false"
-               placeholder='Filter (e.g., "boston", "ma", "10:00 AM")' />
-        <button id="searchClear" class="search-clear" type="button" aria-label="Clear filter" title="Clear">×</button>
-      </div>
-
-      <div class="pill-group" aria-hidden="true">
-        <div class="filter-pill"><span>Events</span><span class="caret">▾</span></div>
-        <div class="filter-pill" style="min-width:170px;"><span>Years</span><span class="caret">▾</span></div>
-        <div class="filter-pill" style="min-width:170px;"><span>States</span><span class="caret">▾</span></div>
-      </div>
-
-    </div>
-  </div>
-
-  <!-- Table -->
   <div class="wrap">
-    <table class="table" aria-label="Gym Directory">
+    <div class="top">
+      <h1 class="title">DIRECTORY5</h1>
+
+      <!-- ANY logo (same position as EVENTS screenshot) -->
+      <div class="any-logo" aria-label="ANY logo">
+        <!-- If you already have your own logo asset path, replace the src with it. -->
+        <img
+          alt="ANY"
+          src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 240 140'%3E%3Crect x='8' y='12' width='224' height='116' rx='34' ry='34' fill='none' stroke='%23234c31' stroke-width='6'/%3E%3Ctext x='120' y='92' text-anchor='middle' font-family='Fixture, Impact, Arial Narrow, sans-serif' font-size='72' font-weight='900' fill='%23234c31'%3EANY%3C/text%3E%3C/svg%3E"
+        />
+      </div>
+    </div>
+  </div>
+
+  <div class="sticky-head">
+    <div class="head-inner">
+      <div class="head-search">
+        <div class="head-search-box">
+          <span class="head-search-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M10 18a8 8 0 1 1 5.293-14.02A8 8 0 0 1 10 18Zm11.707 2.293-5.386-5.386a9.5 9.5 0 1 0-1.414 1.414l5.386 5.386a1 1 0 0 0 1.414-1.414Z"/></svg>
+          </span>
+          <input id="nlSearch" type="text" placeholder='Filter (e.g., "boston", "ma", "10:00 AM")' />
+          <button class="head-search-clear" id="clearBtn" aria-label="Clear">×</button>
+        </div>
+      </div>
+
+      <div class="pill-row" aria-hidden="true">
+        <div class="pill">Events <span class="caret">▼</span></div>
+        <div class="pill">Years <span class="caret">▼</span></div>
+        <div class="pill">States <span class="caret">▼</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="table-wrap">
+    <table>
       <thead>
         <tr>
-          <th style="width:50%;">Name / IG</th>
-          <th style="width:25%;">City / State</th>
-          <th style="width:20%;">Sat / Sun</th>
-          <th style="width:5%;">OTA</th>
+          <th style="width: 44%;">NAME / IG</th>
+          <th style="width: 22%;">CITY / STATE</th>
+          <th style="width: 22%;">SAT / SUN</th>
+          <th style="width: 12%;">OTA</th>
         </tr>
       </thead>
-      <tbody id="tbody"></tbody>
+      <tbody id="rowsBody">
+        <tr><td class="error" colspan="4">Loading…</td></tr>
+      </tbody>
     </table>
   </div>
 
-<script>
-  function toProper(s){
-    s = (s ?? "").toString().trim();
-    if(!s) return "";
-    return s.toLowerCase().split(/\s+/).map(w => w ? w[0].toUpperCase() + w.slice(1) : "").join(" ");
-  }
-  function toLower(s){ return (s ?? "").toString().trim().toLowerCase(); }
+  <script>
+    const CSV_PATH = "data/directory.csv"; // keep your git path
+    const rowsBody = document.getElementById("rowsBody");
+    const nlSearch = document.getElementById("nlSearch");
+    const clearBtn = document.getElementById("clearBtn");
 
-  function formatTime(s){
-    s = (s ?? "").toString().trim();
-    if(!s) return "";
-    const raw = s.replace(/\./g,"").replace(/\s+/g," ").trim();
-
-    const ampmMatch =
-      raw.match(/^(\d{1,2})(?::(\d{2}))?\s*(a|p|am|pm)$/i) ||
-      raw.match(/^(\d{1,2})(?::(\d{2}))?\s*(am|pm)$/i) ||
-      raw.match(/^(\d{1,2})(?::(\d{2}))?\s*(a|p)$/i);
-
-    if (ampmMatch){
-      let h = parseInt(ampmMatch[1], 10);
-      let m = parseInt(ampmMatch[2] || "00", 10);
-      const apRaw = (ampmMatch[3] || "").toLowerCase();
-      const ap = (apRaw === "a" ? "AM" : apRaw === "p" ? "PM" : apRaw.toUpperCase());
-      if (h === 0) h = 12;
-      if (h > 12) h = ((h - 1) % 12) + 1;
-      return `${h}:${String(m).padStart(2,"0")} ${ap}`;
+    function toProper(str){
+      const s = (str ?? "").toString().trim();
+      if(!s) return "";
+      return s
+        .toLowerCase()
+        .split(/(\s+|[-/])/g)
+        .map(part => {
+          if (part.trim() === "" || part === "-" || part === "/") return part;
+          return part.charAt(0).toUpperCase() + part.slice(1);
+        })
+        .join("");
     }
 
-    const h24 = raw.match(/^(\d{1,2}):(\d{2})$/);
-    if (h24){
-      let h = parseInt(h24[1], 10);
-      let m = parseInt(h24[2], 10);
-      if (h >= 0 && h <= 23 && m >= 0 && m <= 59){
-        const ap = h >= 12 ? "PM" : "AM";
-        h = h % 12; if (h === 0) h = 12;
-        return `${h}:${String(m).padStart(2,"0")} ${ap}`;
+    function toLowerSafe(str){
+      return (str ?? "").toString().trim().toLowerCase();
+    }
+
+    function normalizeTime(t){
+      const raw = (t ?? "").toString().trim();
+      if(!raw) return "";
+      const up = raw.replace(/\s+/g, " ").trim().toUpperCase();
+
+      // Accept already formatted "H:MM AM/PM"
+      if (/^\d{1,2}:\d{2}\s?(AM|PM)$/.test(up)) return up.replace(" ", " ");
+
+      // Accept "H AM" / "HPM" / "H:MMam"
+      const m = up.match(/^(\d{1,2})(?::(\d{2}))?\s*(A|P)M?$/);
+      if(!m) return up;
+
+      let hh = parseInt(m[1], 10);
+      let mm = m[2] ? parseInt(m[2], 10) : 0;
+      const ap = m[3] === "A" ? "AM" : "PM";
+
+      if (Number.isNaN(hh) || hh < 1 || hh > 12) return up;
+      if (Number.isNaN(mm) || mm < 0 || mm > 59) mm = 0;
+
+      const mmStr = String(mm).padStart(2, "0");
+      return `${hh}:${mmStr} ${ap}`;
+    }
+
+    function normalizeDate(d){
+      const raw = (d ?? "").toString().trim();
+      if(!raw) return "";
+      // Expect MM/DD/YYYY already; keep if valid-ish
+      if (/^\d{1,2}\/\d{1,2}\/\d{4}$/.test(raw)) {
+        const [m, day, y] = raw.split("/").map(x => x.padStart(2, "0"));
+        return `${m}/${day}/${y}`;
       }
+      return raw;
     }
 
-    const justHour = raw.match(/^(\d{1,2})$/);
-    if (justHour){
-      let h = parseInt(justHour[1], 10);
-      if (h >= 1 && h <= 12) return `${h}:00 AM`;
-      if (h >= 13 && h <= 23){
-        const ap = "PM";
-        h = h % 12;
-        return `${h}:00 ${ap}`;
+    function parseCSV(text){
+      // Simple CSV parser with quotes support
+      const rows = [];
+      let cur = [];
+      let val = "";
+      let inQuotes = false;
+
+      for (let i = 0; i < text.length; i++){
+        const ch = text[i];
+        const next = text[i+1];
+
+        if (ch === '"' ){
+          if (inQuotes && next === '"'){ val += '"'; i++; }
+          else inQuotes = !inQuotes;
+          continue;
+        }
+
+        if (!inQuotes && (ch === "," || ch === "\n" || ch === "\r")){
+          if (ch === "\r" && next === "\n"){ /* windows newline */ }
+          cur.push(val);
+          val = "";
+
+          if (ch === "\n" || ch === "\r"){
+            if (cur.length > 1 || cur.some(c => (c ?? "").trim() !== "")) rows.push(cur);
+            cur = [];
+          }
+          continue;
+        }
+
+        val += ch;
       }
+      cur.push(val);
+      rows.push(cur);
+      return rows;
     }
 
-    const hhmm = raw.match(/^(\d{1,2}):(\d{2})$/);
-    if (hhmm){
-      let h = parseInt(hhmm[1], 10);
-      let m = parseInt(hhmm[2], 10);
-      if (h >= 1 && h <= 12 && m >= 0 && m <= 59) return `${h}:${String(m).padStart(2,"0")} AM`;
-    }
-
-    return raw;
-  }
-
-  function parseCSV(text){
-    const rows = [];
-    let cur = "", inQuotes = false;
-    const out = [];
-    const pushCell = () => { out.push(cur); cur = ""; };
-    const pushRow = () => { rows.push(out.splice(0)); };
-
-    for(let i=0;i<text.length;i++){
-      const c = text[i];
-      if(c === '"'){
-        if(inQuotes && text[i+1] === '"'){ cur += '"'; i++; }
-        else inQuotes = !inQuotes;
-      } else if(c === "," && !inQuotes){
-        pushCell();
-      } else if((c === "\n" || c === "\r") && !inQuotes){
-        if(c === "\r" && text[i+1] === "\n") i++;
-        pushCell(); pushRow();
-      } else {
-        cur += c;
+    let allRows = [];
+    function render(rows){
+      if(!rows.length){
+        rowsBody.innerHTML = `<tr><td class="error" colspan="4">No rows found.</td></tr>`;
+        return;
       }
+
+      rowsBody.innerHTML = rows.map(r => {
+        const name = toProper(r.NAME);
+        const ig = toLowerSafe(r.IG);
+        const city = toProper(r.CITY);
+        const state = toProper(r.STATE);
+
+        const sat = normalizeTime(r.SAT);
+        const sun = normalizeTime(r.SUN);
+
+        const ota = (r.OTA ?? "").toString().trim().toUpperCase(); // Y / N / blank
+        const dotClass = ota === "Y" ? "y" : (ota === "N" ? "n" : "");
+
+        return `
+          <tr>
+            <td>
+              <div class="stack">
+                <div class="primary">${escapeHTML(name)}</div>
+                <div class="secondary">${escapeHTML(ig)}</div>
+              </div>
+            </td>
+            <td>
+              <div class="stack">
+                <div class="primary">${escapeHTML(city)}</div>
+                <div class="secondary">${escapeHTML(state)}</div>
+              </div>
+            </td>
+            <td>
+              <div class="satSunRow">
+                <div class="dayLabelCol">
+                  <div class="dayLabel">Sat.</div>
+                  <div class="dayLabel">Sun.</div>
+                </div>
+                <div class="timeCol">
+                  <div class="timeVal">${escapeHTML(sat)}</div>
+                  <div class="timeVal">${escapeHTML(sun)}</div>
+                </div>
+              </div>
+            </td>
+            <td>
+              <div class="otaCell">
+                <div class="otaLabel">OTA</div>
+                <div class="dot ${dotClass}"></div>
+              </div>
+            </td>
+          </tr>
+        `;
+      }).join("");
     }
-    if(cur.length || out.length){ pushCell(); pushRow(); }
-    return rows.filter(r => r.some(v => (v ?? "").toString().trim() !== ""));
-  }
 
-  function makeRow(rec){
-    const name  = toProper(rec.NAME);
-    const ig    = toLower(rec.IG);
-    const city  = toProper(rec.CITY);
-    const state = toProper(rec.STATE);
-    const sat   = formatTime(rec.SAT);
-    const sun   = formatTime(rec.SUN);
-    const otaRaw = (rec.OTA ?? "").toString().trim().toUpperCase();
+    function escapeHTML(s){
+      return (s ?? "").toString()
+        .replaceAll("&","&amp;")
+        .replaceAll("<","&lt;")
+        .replaceAll(">","&gt;")
+        .replaceAll('"',"&quot;")
+        .replaceAll("'","&#039;");
+    }
 
-    const tr = document.createElement("tr");
-    const td = document.createElement("td");
-    td.colSpan = 4;
+    function applySearch(){
+      const q = (nlSearch.value ?? "").toString().trim().toLowerCase();
+      if(!q){ render(allRows); return; }
 
-    const grid = document.createElement("div");
-    grid.className = "row-grid";
+      const filtered = allRows.filter(r => {
+        const blob = [
+          r.STATE, r.CITY, r.NAME, r.IG, r.SAT, r.SUN, r.OTA, r.CREATED
+        ].map(x => (x ?? "").toString().toLowerCase()).join(" ");
+        return blob.includes(q);
+      });
+      render(filtered);
+    }
 
-    const c1 = document.createElement("div");
-    c1.className = "cell";
-    c1.innerHTML = `<div class="topline">${name || "—"}</div><div class="botline">${ig || "—"}</div>`;
+    clearBtn.addEventListener("click", () => {
+      nlSearch.value = "";
+      applySearch();
+      nlSearch.focus();
+    });
 
-    const c2 = document.createElement("div");
-    c2.className = "cell";
-    c2.innerHTML = `<div class="topline">${city || "—"}</div><div class="botline">${state || "—"}</div>`;
+    nlSearch.addEventListener("input", applySearch);
 
-    const c3 = document.createElement("div");
-    c3.className = "cell times";
-    c3.innerHTML = `
-      <div class="time-row"><div class="time-label">Sat.</div><div class="time-val">${sat || ""}</div></div>
-      <div class="time-row"><div class="time-label">Sun.</div><div class="time-val">${sun || ""}</div></div>
-    `;
-
-    const c4 = document.createElement("div");
-    c4.className = "cell ota-wrap";
-    c4.innerHTML = `<div class="ota-label">OTA</div>`;
-    const dot = document.createElement("div");
-    dot.className = "ota-dot";
-    if (otaRaw === "Y") dot.classList.add("ota-yes");
-    else if (otaRaw === "N") dot.classList.add("ota-no");
-    c4.appendChild(dot);
-
-    grid.appendChild(c1);
-    grid.appendChild(c2);
-    grid.appendChild(c3);
-    grid.appendChild(c4);
-
-    td.appendChild(grid);
-    tr.appendChild(td);
-    return tr;
-  }
-
-  const tbody = document.getElementById("tbody");
-  let allRecords = [];
-
-  async function fetchFirst(urls){
-    let lastErr = null;
-    for(const u of urls){
+    (async function init(){
       try{
-        const res = await fetch(u, { cache: "no-store" });
-        if(!res.ok) throw new Error(`Failed to load ${u} (${res.status})`);
-        const txt = await res.text();
-        if(txt.trim()) return txt;
-      }catch(e){ lastErr = e; }
-    }
-    throw lastErr || new Error("Failed to load CSV");
-  }
+        const res = await fetch(CSV_PATH, { cache: "no-store" });
+        if(!res.ok) throw new Error(`Failed to load ${CSV_PATH} (${res.status})`);
+        const text = await res.text();
 
-  async function loadDirectory(){
-    const text = await fetchFirst([
-      "data/directory.csv",
-      "./data/directory.csv",
-      "/data/directory.csv"
-    ]);
+        const parsed = parseCSV(text);
+        const header = parsed.shift().map(h => (h ?? "").toString().trim().toUpperCase());
 
-    const rows = parseCSV(text);
-    const header = rows.shift().map(h => (h ?? "").toString().trim().toUpperCase());
+        const idx = (name) => header.indexOf(name);
 
-    allRecords = rows.map(r => {
-      const obj = {};
-      header.forEach((h, i) => obj[h] = (r[i] ?? "").toString().trim());
-      return {
-        STATE: obj.STATE ?? "",
-        CITY: obj.CITY ?? "",
-        NAME: obj.NAME ?? "",
-        IG: obj.IG ?? "",
-        SAT: obj.SAT ?? "",
-        SUN: obj.SUN ?? "",
-        OTA: obj.OTA ?? ""
-      };
-    });
+        allRows = parsed
+          .map(cols => {
+            const get = (h) => {
+              const i = idx(h);
+              return i >= 0 ? (cols[i] ?? "").toString().trim() : "";
+            };
+            return {
+              STATE: get("STATE"),
+              CITY: get("CITY"),
+              NAME: get("NAME"),
+              IG: get("IG"),
+              SAT: get("SAT"),
+              SUN: get("SUN"),
+              OTA: get("OTA"),
+              CREATED: get("CREATED")
+            };
+          });
 
-    render(allRecords);
-  }
-
-  function render(list){
-    tbody.innerHTML = "";
-    list.forEach(rec => tbody.appendChild(makeRow(rec)));
-  }
-
-  const searchInput = document.getElementById("searchInput");
-  const searchClear = document.getElementById("searchClear");
-
-  function applyFilter(){
-    const q = searchInput.value.trim().toLowerCase();
-    if(!q){ render(allRecords); return; }
-    const filtered = allRecords.filter(r => {
-      const hay = [r.STATE, r.CITY, r.NAME, r.IG, r.SAT, r.SUN, r.OTA].join(" ").toLowerCase();
-      return hay.includes(q);
-    });
-    render(filtered);
-  }
-
-  searchInput.addEventListener("input", applyFilter);
-  searchClear.addEventListener("click", () => {
-    searchInput.value = "";
-    applyFilter();
-    searchInput.focus();
-  });
-
-  loadDirectory().catch(err => {
-    console.error(err);
-    tbody.innerHTML = `<tr><td style="padding:16px;color:#a00;font-weight:700;">${err.message}</td></tr>`;
-  });
-</script>
-
+        render(allRows);
+      }catch(err){
+        rowsBody.innerHTML = `<tr><td class="error" colspan="4">${escapeHTML(err.message)}</td></tr>`;
+      }
+    })();
+  </script>
 </body>
 </html>
