@@ -5,7 +5,6 @@
 <meta charset="UTF-8" />
   <title>ANY N.E. - Events</title>
 
-
 </style>
 
 <!-- === OVERRIDES: Header up 4x; ANY logo 1x bigger (independent) === -->
@@ -2416,9 +2415,6 @@ h1.title::before{
   pointer-events:none;
 }
 
-
-.ig-link{color:inherit;text-decoration:none;font-weight:700;}
-.ig-link:hover{text-decoration:underline;}
 </style>
 <style>
 
@@ -2748,11 +2744,11 @@ body{
           'data/directory.csv',
           './data/directory.csv',
 
-          // friendly fallbacks for local / ad-hoc testing
+          // friendly fallbacks for local testing
           'gymdirectory.csv',
           './gymdirectory.csv',
-          'directory.csv',
-          './directory.csv'
+          'data/gymdirectory.csv',
+          './data/gymdirectory.csv'
         ];
 
         let csvText = '';
@@ -2785,23 +2781,29 @@ body{
         function parseCSV(text){
           const rows = [];
           let row = [], cur = '', inQ = false;
-          for (let i=0;i<text.length;i++){
+          for (let i = 0; i < text.length; i++){
             const ch = text[i];
             if (inQ){
               if (ch === '"'){
                 if (text[i+1] === '"'){ cur += '"'; i++; }
                 else inQ = false;
-              } else cur += ch;
+              } else {
+                cur += ch;
+              }
             } else {
-              if (ch === '"') inQ = true;
-              else if (ch === ','){ row.push(cur); cur=''; }
-              else if (ch === '
-'){
-                row.push(cur); cur='';
+              if (ch === '"'){
+                inQ = true;
+              } else if (ch === ','){
+                row.push(cur); cur = '';
+              } else if (ch === '\\n'){
+                row.push(cur); cur = '';
                 if (row.some(v => (v || '').trim() !== '')) rows.push(row);
                 row = [];
-              } else if (ch !== '
-') cur += ch;
+              } else if (ch === '\\r'){
+                // ignore CR
+              } else {
+                cur += ch;
+              }
             }
           }
           row.push(cur);
@@ -2831,13 +2833,13 @@ body{
         };
 
         const alias = {
-          state: ['state'],
-          city: ['city'],
-          name: ['name'],
-          ig:   ['ig'],
-          sat:  ['sat'],
-          sun:  ['sun'],
-          ota:  ['ota']
+          state: ['state', 'st'],
+          city: ['city', 'town'],
+          name: ['name', 'gym', 'academy', 'school'],
+          ig: ['ig', 'instagram', 'handle'],
+          sat: ['sat', 'saturday'],
+          sun: ['sun', 'sunday'],
+          ota: ['ota', 'open to all', 'open_to_all']
         };
 
         const gyms = [];
@@ -2908,7 +2910,7 @@ body{
             // 0: Gym (beige), 1: Instagram, 2: Saturday, 3: Location (icon logic already targets this column), 4: Sunday, 5: OTA
             rowEl.innerHTML = `
               <div class="cell type"><strong>${escapeHtml(g.name)}</strong></div>
-              <div class="cell">${g.ig ? `<a class="ig-link" href="https://instagram.com/${encodeURIComponent(g.ig.replace(/^@/, ''))}" target="_blank" rel="noopener noreferrer">@${escapeHtml(g.ig.replace(/^@/, ''))}</a>` : `<span style="opacity:.6">—</span>`}</div>
+              <div class="cell"><strong>${escapeHtml(g.ig)}</strong></div>
               <div class="cell">${escapeHtml(g.sat)}</div>
               <div class="cell">${escapeHtml(loc)}</div>
               <div class="cell">${escapeHtml(g.sun)}</div>
