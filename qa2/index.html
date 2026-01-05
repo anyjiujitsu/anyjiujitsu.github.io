@@ -3,18 +3,20 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Directory CSV Loader (Clean)</title>
+  <title>DIRECTORY 2</title>
 </head>
 <body>
 
-<h1>Directory</h1>
+<h1>DIRECTORY 2</h1>
 <div id="status">Loading…</div>
 <div id="out"></div>
+<pre id="meta"></pre>
 
 <script>
 (async function () {
   const statusEl = document.getElementById("status");
   const outEl = document.getElementById("out");
+  const metaEl = document.getElementById("meta");
 
   const CSV_CANDIDATES = [
     "data/directory.csv",
@@ -22,15 +24,33 @@
     "/data/directory.csv"
   ];
 
+  const EXPECTED = ["STATE", "CITY", "NAME", "IG", "SAT", "SUN", "OTA"];
+
+  const toText = (v) => String(v ?? "").trim();
+
+  // OTA is the only boolean field (Y/N/blank)
+  const normOTA = (v) => {
+    const s = toText(v).toUpperCase();
+    if (!s) return "";
+    if (["Y", "YES", "TRUE", "1"].includes(s)) return "Y";
+    if (["N", "NO", "FALSE", "0"].includes(s)) return "N";
+    return "";
+  };
+
   let csvText = "";
+  let usedUrl = "";
   let lastErr = null;
 
   for (const url of CSV_CANDIDATES) {
     try {
       const res = await fetch(url, { cache: "no-store" });
-      if (!res.ok) throw new Error(`HTTP ${res.status}`);
-      csvText = await res.text();
-      if (csvText.trim()) break;
+      if (!res.ok) throw new Error(`HTTP ${res.status} (${url})`);
+      const txt = await res.text();
+      if (txt.trim()) {
+        csvText = txt;
+        usedUrl = url;
+        break;
+      }
     } catch (e) {
       lastErr = e;
     }
@@ -39,6 +59,7 @@
   if (!csvText.trim()) {
     statusEl.textContent = "CSV load error ❌";
     outEl.innerHTML = `<pre>${String(lastErr)}</pre>`;
+    metaEl.textContent = `Tried:\n- ${CSV_CANDIDATES.join("\n- ")}`;
     return;
   }
 
@@ -63,25 +84,25 @@
         else if (c === d) { row.push(cur); cur = ""; }
         else if (c === "\n") {
           row.push(cur); cur = "";
-          if (row.some(v => v.trim())) rows.push(row);
+          if (row.some(v => toText(v))) rows.push(row);
           row = [];
         } else if (c !== "\r") cur += c;
       }
     }
 
     row.push(cur);
-    if (row.some(v => v.trim())) rows.push(row);
+    if (row.some(v => toText(v))) rows.push(row);
     return rows;
   }
 
   const matrix = parseDelimited(csvText, DELIM);
   if (!matrix.length) {
     statusEl.textContent = "CSV empty ❌";
+    metaEl.textContent = `Loaded from: ${usedUrl}\nDelimiter: ${DELIM === "\t" ? "TAB" : "COMMA"}`;
     return;
   }
 
-  const EXPECTED = ["STATE", "CITY", "NAME", "IG", "SAT", "SUN", "OTA"];
-  const headers = matrix[0].map(h => h.trim().toUpperCase());
+  const headers = matrix[0].map(h => toText(h).toUpperCase());
   const idx = Object.fromEntries(headers.map((h, i) => [h, i]));
 
   const missing = EXPECTED.filter(h => !(h in idx));
@@ -92,30 +113,22 @@
 Missing: ${missing.join(", ")}
 Found: ${headers.join(", ")}
 </pre>`;
+    metaEl.textContent = `Loaded from: ${usedUrl}\nDelimiter: ${DELIM === "\t" ? "TAB" : "COMMA"}`;
     return;
   }
 
-  function normOTA(v) {
-    const s = String(v ?? "").trim().toUpperCase();
-    if (!s) return "";
-    if (["Y", "YES", "TRUE", "1"].includes(s)) return "Y";
-    if (["N", "NO", "FALSE", "0"].includes(s)) return "N";
-    return "";
-  }
-
   const rows = matrix.slice(1)
-    .filter(r => r.some(c => String(c ?? "").trim()))
+    .filter(r => r.some(c => toText(c)))
     .map(r => ({
-      STATE: r[idx.STATE]?.trim() ?? "",
-      CITY:  r[idx.CITY]?.trim()  ?? "",
-      NAME:  r[idx.NAME]?.trim()  ?? "",
-      IG:    r[idx.IG]?.trim()    ?? "",
-      SAT:   r[idx.SAT]?.trim()   ?? "",
-      SUN:   r[idx.SUN]?.trim()   ?? "",
+      STATE: toText(r[idx.STATE]),
+      CITY:  toText(r[idx.CITY]),
+      NAME:  toText(r[idx.NAME]),
+      IG:    toText(r[idx.IG]),
+      SAT:   toText(r[idx.SAT]),
+      SUN:   toText(r[idx.SUN]),
       OTA:   normOTA(r[idx.OTA])
     }));
 
-  // Render plain table
   const table = document.createElement("table");
   table.border = "1";
   table.cellPadding = "6";
@@ -146,6 +159,11 @@ Found: ${headers.join(", ")}
   statusEl.textContent = `Loaded ${rows.length} rows (OTA normalized)`;
   outEl.innerHTML = "";
   outEl.appendChild(table);
+
+  metaEl.textContent =
+    `Loaded from: ${usedUrl}\n` +
+    `Delimiter: ${DELIM === "\t" ? "TAB" : "COMMA"}\n` +
+    `Columns: ${headers.join(", ")}`;
 })();
 </script>
 
