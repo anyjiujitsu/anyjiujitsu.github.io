@@ -3,7 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>DIRECTORY1</title>
+  <title>DIRECTORY 7</title>
+
   <style>
     :root{
       --bg: #e9e9e9;
@@ -26,31 +27,50 @@
       font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
     }
 
-    /* ===== Top title (DIRECTORY) — MATCH EVENTS ===== */
-.top-title{
-  display:flex;
-  align-items:flex-end;
-  justify-content:flex-start;   /* ← left aligned like EVENTS */
-  padding: 6px 18px 0 18px;      /* ← pulls title down */
-  max-width: 1100px;             /* ← EXACT match to EVENTS column */
-  margin: 0 auto;
-}
+    /* ===== TOP TITLE (match EVENTS) ===== */
+    .top-title{
+      display:flex;
+      align-items:flex-end;
+      justify-content:space-between;   /* keeps logo on right */
+      max-width: 1100px;              /* match EVENTS content width */
+      margin: 0 auto;
+      padding: 14px 18px 0 18px;      /* matches EVENTS spacing above bar */
+    }
 
-.top-title h1{
-  margin:0;
-  line-height: .82;              /* ← tighter vertically */
-  font-weight: 900;
-  letter-spacing: -3px;          /* ← tighter tracking */
-  font-size: clamp(84px, 11vw, 150px); /* ← larger than before */
-  color: var(--green);
+    .top-title h1{
+      margin:0;
+      color: var(--green);
+      font-weight: 900;
+      line-height: .80;               /* tighter like EVENTS */
+      letter-spacing: -3px;
 
-  /* Condensed look */
-  font-family: "Impact", "Arial Narrow", "Haettenschweiler", "Anton", system-ui, sans-serif;
-  display:inline-block;
-  transform: scaleX(0.78);       /* ← THIS is the key */
-  transform-origin: left bottom;
-}
+      /* Bigger + condensed like EVENTS */
+      font-size: clamp(78px, 10.8vw, 148px);
+      font-family: "Impact","Arial Narrow","Haettenschweiler","Anton",system-ui,sans-serif;
+      display:inline-block;
+      transform: scaleX(0.78);        /* KEY: condensed look */
+      transform-origin: left bottom;
 
+      /* Nudge left slightly to match EVENTS feel */
+      margin-left: -6px;
+    }
+
+    .any-mark{
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      height: 70px;
+      width: 110px;
+      border: 3px solid var(--green);
+      border-radius: 999px;
+      color: var(--green);
+      font-weight: 900;
+      font-family: "Impact", "Arial Black", "Anton", system-ui, sans-serif;
+      font-size: 44px;
+      line-height: 1;
+      margin-bottom: 8px;
+      background: transparent;
+    }
 
     /* ===== Green bar with pills ===== */
     .sticky-bar{
@@ -75,7 +95,7 @@
       border-radius: 999px;
       background: var(--pill);
       border: 1px solid var(--pill-border);
-      box-shadow: 0 1px 0 rgba(0,0,0,.10), inset 0 0 0 rgba(0,0,0,0);
+      box-shadow: 0 1px 0 rgba(0,0,0,.10);
       display:flex;
       align-items:center;
       padding: 0 12px;
@@ -125,7 +145,7 @@
       gap: 12px;
       box-shadow: 0 1px 0 rgba(0,0,0,.10);
       user-select:none;
-      cursor: default; /* placeholders for now */
+      cursor: default;
     }
     .filter-pill span{
       font-size: 20px;
@@ -163,11 +183,9 @@
       border-bottom: 1px solid var(--gridline);
     }
 
-    /* One row uses a grid to match your "stacked" layout */
     .row-grid{
       display:grid;
-      grid-template-columns: 1.25fr 1.15fr 0.9fr 90px; /* name/ig | city/state | sat/sun | ota */
-      column-gap: 0;
+      grid-template-columns: 1.25fr 1.15fr 0.9fr 90px;
       align-items: stretch;
       min-height: 74px;
       background: rgba(255,255,255,.12);
@@ -194,14 +212,10 @@
       color: rgba(0,0,0,.55);
     }
 
-    /* Sat/Sun cell: bold labels at left like screenshot */
-    .times{
-      gap: 6px;
-    }
+    .times{ gap: 6px; }
     .time-row{
       display:flex;
       align-items:baseline;
-      justify-content:flex-start;
       gap: 10px;
       line-height: 1.05;
     }
@@ -217,7 +231,6 @@
       font-weight: 700;
     }
 
-    /* OTA cell */
     .ota-wrap{
       align-items:center;
       justify-content:center;
@@ -234,16 +247,14 @@
       width: 18px;
       height: 18px;
       border-radius: 999px;
-      background: rgba(0,0,0,.20); /* blank */
+      background: rgba(0,0,0,.20);
       box-shadow: inset 0 0 0 2px rgba(0,0,0,.12);
     }
     .ota-yes{ background: var(--ota-yes); box-shadow:none; }
     .ota-no{ background: var(--ota-no); box-shadow:none; }
 
-    /* Responsive: keep header layout stable */
     @media (max-width: 900px){
-      .pill-group{ display:none; } /* just like your reference later; can re-enable */
-      .top-title{ padding-bottom: 8px; }
+      .pill-group{ display:none; }
       .any-mark{ height: 56px; width: 90px; font-size: 38px; }
     }
   </style>
@@ -253,7 +264,8 @@
 
   <!-- Title row -->
   <div class="top-title">
-    <h1>DIRECTORY1</h1>
+    <!-- ONLY visible change vs EVENTS: the word -->
+    <h1>DIRECTORY3</h1>
     <div class="any-mark">(ANY)</div>
   </div>
 
@@ -270,7 +282,6 @@
         <button id="searchClear" class="search-clear" type="button" aria-label="Clear filter" title="Clear">×</button>
       </div>
 
-      <!-- placeholders for now (visual match first) -->
       <div class="pill-group" aria-hidden="true">
         <div class="filter-pill"><span>Events</span><span class="caret">▾</span></div>
         <div class="filter-pill" style="min-width:170px;"><span>Years</span><span class="caret">▾</span></div>
@@ -306,25 +317,18 @@
       .map(w => w ? (w[0].toUpperCase() + w.slice(1)) : "")
       .join(" ");
   }
-
-  function toLower(s){
-    return (s ?? "").toString().trim().toLowerCase();
-  }
+  function toLower(s){ return (s ?? "").toString().trim().toLowerCase(); }
 
   function formatTime(s){
-    // Accepts things like: "10:00 AM", "10am", "10", "10:00a", "18:30", ""
     s = (s ?? "").toString().trim();
     if(!s) return "";
-
-    // Normalize separators
     const raw = s.replace(/\./g,"").replace(/\s+/g," ").trim();
 
-    // If already contains AM/PM-ish
-    const ampmMatch = raw.match(/^(\d{1,2})(?::(\d{2}))?\s*(a|p|am|pm)$/i) ||
-                      raw.match(/^(\d{1,2})(?::(\d{2}))?\s*(am|pm)$/i) ||
-                      raw.match(/^(\d{1,2})(?::(\d{2}))?\s*(a|p)$/i);
+    const ampmMatch =
+      raw.match(/^(\d{1,2})(?::(\d{2}))?\s*(a|p|am|pm)$/i) ||
+      raw.match(/^(\d{1,2})(?::(\d{2}))?\s*(am|pm)$/i) ||
+      raw.match(/^(\d{1,2})(?::(\d{2}))?\s*(a|p)$/i);
 
-    // If includes am/pm with or without colon
     if (ampmMatch){
       let h = parseInt(ampmMatch[1], 10);
       let m = parseInt(ampmMatch[2] || "00", 10);
@@ -335,7 +339,6 @@
       return `${h}:${String(m).padStart(2,"0")} ${ap}`;
     }
 
-    // If 24-hour like 18:30
     const h24 = raw.match(/^(\d{1,2}):(\d{2})$/);
     if (h24){
       let h = parseInt(h24[1], 10);
@@ -347,7 +350,6 @@
       }
     }
 
-    // If "10" or "7" => assume AM
     const justHour = raw.match(/^(\d{1,2})$/);
     if (justHour){
       let h = parseInt(justHour[1], 10);
@@ -359,7 +361,6 @@
       }
     }
 
-    // If "10:30" => assume AM
     const hhmm = raw.match(/^(\d{1,2}):(\d{2})$/);
     if (hhmm){
       let h = parseInt(hhmm[1], 10);
@@ -367,13 +368,20 @@
       if (h >= 1 && h <= 12 && m >= 0 && m <= 59) return `${h}:${String(m).padStart(2,"0")} AM`;
     }
 
-    return raw; // fallback (don’t blank unexpected inputs)
+    return raw;
   }
 
   function formatCreated(s){
-    // normalize to MM/DD/YYYY if parseable
     const t = (s ?? "").toString().trim();
     if(!t) return "";
+    const m = t.match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})$/);
+    if(m){
+      return `${String(m[1]).padStart(2,"0")}/${String(m[2]).padStart(2,"0")}/${m[3]}`;
+    }
+    const iso = t.match(/^(\d{4})-(\d{2})-(\d{2})$/);
+    if(iso){
+      return `${iso[2]}/${iso[3]}/${iso[1]}`;
+    }
     const d = new Date(t);
     if(!isNaN(d.getTime())){
       const mm = String(d.getMonth()+1).padStart(2,"0");
@@ -381,15 +389,10 @@
       const yy = d.getFullYear();
       return `${mm}/${dd}/${yy}`;
     }
-    // Already MM/DD/YYYY-ish
-    const m = t.match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})$/);
-    if(m){
-      return `${String(m[1]).padStart(2,"0")}/${String(m[2]).padStart(2,"0")}/${m[3]}`;
-    }
     return t;
   }
 
-  // ===== CSV parsing (simple + safe for your dataset) =====
+  // ===== CSV parsing =====
   function parseCSV(text){
     const rows = [];
     let cur = "", inQuotes = false;
@@ -457,18 +460,16 @@
         <div class="time-label">Sun.</div>
         <div class="time-val">${sun || ""}</div>
       </div>
-      ${created ? `<div style="margin-top:8px;font-size:12px;color:rgba(0,0,0,.45);">Created: ${created}</div>` : ``}
+      ${created ? `<div style="margin-top:8px;font-size:12px;color:rgba(0,0,0,.45);display:none;">Created: ${created}</div>` : ``}
     `;
 
     const c4 = document.createElement("div");
     c4.className = "cell ota-wrap";
+    c4.innerHTML = `<div class="ota-label">OTA</div>`;
     const dot = document.createElement("div");
     dot.className = "ota-dot";
     if (otaRaw === "Y") dot.classList.add("ota-yes");
     else if (otaRaw === "N") dot.classList.add("ota-no");
-
-    c4.appendChild(document.createElement("div")).outerHTML; // no-op safeguard
-    c4.innerHTML = `<div class="ota-label">OTA</div>`;
     c4.appendChild(dot);
 
     grid.appendChild(c1);
@@ -481,21 +482,36 @@
     return tr;
   }
 
-  // ===== Load + render =====
+  // ===== Load + render (robust paths to avoid 404) =====
   const tbody = document.getElementById("tbody");
   let allRecords = [];
 
+  async function fetchFirst(urls){
+    let lastErr = null;
+    for(const u of urls){
+      try{
+        const res = await fetch(u, { cache: "no-store" });
+        if(!res.ok) throw new Error(`HTTP ${res.status} (${u})`);
+        const txt = await res.text();
+        if(txt.trim()) return txt;
+      }catch(e){ lastErr = e; }
+    }
+    throw lastErr || new Error("Failed to load CSV");
+  }
+
   async function loadDirectory(){
-    const res = await fetch("data/directory.csv", { cache: "no-store" });
-    if(!res.ok) throw new Error(`Failed to load data/directory.csv (${res.status})`);
-    const text = await res.text();
+    const text = await fetchFirst([
+      "data/directory.csv",
+      "./data/directory.csv",
+      "/data/directory.csv"
+    ]);
 
     const rows = parseCSV(text);
     const header = rows.shift().map(h => (h ?? "").toString().trim().toUpperCase());
+
     allRecords = rows.map(r => {
       const obj = {};
       header.forEach((h, i) => obj[h] = (r[i] ?? "").toString().trim());
-      // normalize keys to your expected names
       return {
         STATE: obj.STATE ?? "",
         CITY: obj.CITY ?? "",
@@ -524,9 +540,7 @@
     const q = searchInput.value.trim().toLowerCase();
     if(!q){ render(allRecords); return; }
     const filtered = allRecords.filter(r => {
-      const hay = [
-        r.STATE, r.CITY, r.NAME, r.IG, r.SAT, r.SUN, r.OTA, r.CREATED
-      ].join(" ").toLowerCase();
+      const hay = [r.STATE, r.CITY, r.NAME, r.IG, r.SAT, r.SUN, r.OTA, r.CREATED].join(" ").toLowerCase();
       return hay.includes(q);
     });
     render(filtered);
