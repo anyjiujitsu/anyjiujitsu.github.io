@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>directory.csv loader (minimal)</title>
+</head>
+<body>
+  <h1>directory.csv loader (minimal)</h1>
+
+  <p><strong>Status:</strong> <span id="status">Starting…</span></p>
+  <pre id="debug" style="white-space: pre-wrap;"></pre>
+
+  <div id="tableMount"></div>
+
+  <script>
+    const CSV_PATH = "./data/directory.csv"; // adjust only if your path differs
+
+    const statusEl = document.getElementById("status");
+    const debugEl = document.getElementById("debug");
+    const mountEl = document.getElementById("tableMount");
+
+    function setStatus(msg) {
+      statusEl.textContent = msg;
+    }
+    function debug(msg) {
+      debugEl.textContent += msg + "\n";
+    }
+
+    // Robust CSV parser (handles quotes, commas inside quotes, CRLF/LF)
+    function parseCSV(text) {
+      const rows = [];
+      let row = [];
+      let field = "";
+      let inQuotes = false;
+
+      // Normalize newlines
+      text = text.replace(/\r\n/g, "\n").replace(/\r/g, "\n");
+
+      for (let i = 0; i < text.length; i++) {
+        const c = text[i];
+        const next = text[i + 1];
+
+        if (inQuotes) {
+          if (c === '"' && next === '"') {
+            // Escaped quote
+            field += '"';
+            i++;
+          } else if (c === '"') {
+            inQuotes = false;
+          } else {
+            field += c;
+          }
+        } else {
+          if (c === '"') {
+            inQuotes = true;
+          } else if (c === ",") {
+            row.push(field);
+            field = "";
+          } else if (c === "\n") {
+            row.push(field);
+            field = "";
+            // Ignore fully empty trailing lines
+            const isEmpty = row.length === 1 && row[0] === "";
+            if (!isEmpty) rows.push(row);
+            row = [];
+          } else {
+            field += c;
+          }
+        }
+      }
+
+      // Final field/row
+      row.push(field);
+      if (!(row.length === 1 && row[0] === "")) rows.push(row);
+
+      return rows;
+    }
+
+    function escapeHtml(s) {
+      return String(s)
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#039;");
+    }
+
+    function renderTable(rows) {
+      if (!rows || rows.length === 0) {
+        mountEl.innerHTML = "<p><strong>No rows found.</strong></p>";
+        return;
+      }
+
+      const headers = rows[0];
+      const bodyRows = rows.slice(1).filter(r => r.some(cell => String(cell).trim() !== ""));
+
+      debug(`Parsed rows: ${rows.length}`);
+      debug(`Headers detected: ${headers.join(" | ")}`);
+      debug(`Body rows: ${bodyRows.length}`);
+
+      const table = document.createElement("table");
+      table.border = "1";
+      table.cellPadding = "6";
+      table.style.borderCollapse = "collapse";
+
+      const thead = document.createElement("thead");
+      const trh = document.createElement("tr");
+      headers.forEach(h => {
+        const th = document.createElement("th");
+        th.textContent = h;
+        trh.appendChild(th);
+      });
+      thead.appendChild(trh);
+
+      const tbody = document.createElement("tbody");
+      bodyRows.forEach(r => {
+        const tr = document.createElement("tr");
+        headers.forEach((_, idx) => {
+          const td = document.createElement("td");
+          td.textContent = (r[idx] ?? "").trim();
+          tr.appendChild(td);
+        });
+        tbody.appendChild(tr);
+      });
+
+      table.appendChild(thead);
+      table.appendChild(tbody);
+
+      mountEl.innerHTML = "";
+      mountEl.appendChild(table);
+    }
+
+    async function main() {
+      setStatus(`Fetching ${CSV_PATH} …`);
+      debug(`Attempting fetch: ${CSV_PATH}`);
+      debug(`Page URL: ${location.href}`);
+
+      try {
+        const res = await fetch(CSV_PATH, { cache: "no-store" });
+
+        debug(`Fetch status: ${res.status} ${res.statusText}`);
+        debug(`Content-Type: ${res.headers.get("content-type") || "(none)"}`);
+
+        if (!res.ok) {
+          throw new Error(`Fetch failed (${res.status}). If this is GitHub Pages, confirm the file exists at: ${CSV_PATH}`);
+        }
+
+        const text = await res.text();
+        debug(`CSV bytes: ${text.length}`);
+
+        const rows = parseCSV(text);
+
+        // Basic validation: expects at least header row
+        if (!rows.length) throw new Error("CSV parsed to 0 rows (empty file?)");
+
+        setStatus("Loaded ✅ (rendering table)");
+        renderTable(rows);
+        setStatus("Rendered ✅");
+      } catch (err) {
+        setStatus("Error ❌");
+        debug(`\nERROR: ${err && err.message ? err.message : String(err)}`);
+        mountEl.innerHTML = `
+          <p><strong>Failed to load CSV.</strong></p>
+          <p>Common causes:</p>
+          <ul>
+            <li>Opening the file via <code>file://</code> instead of a web server</li>
+            <li>Wrong relative path (expected <code>./data/directory.csv</code>)</li>
+            <li>GitHub Pages not serving the file (case-sensitive path or missing commit)</li>
+          </ul>
+        `;
+      }
+    }
+
+    main();
+  </script>
+</body>
+</html>
