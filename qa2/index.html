@@ -5,6 +5,7 @@
 <meta charset="UTF-8" />
   <title>ANY N.E. - Events</title>
 
+
 </style>
 
 <!-- === OVERRIDES: Header up 4x; ANY logo 1x bigger (independent) === -->
@@ -163,7 +164,7 @@ display:flex;
       margin: 0 auto;
       padding: 0 28px;
       display: grid;
-      grid-template-columns: 190px 190px 470px 260px 90px 90px 80px;
+      grid-template-columns: 138px 170px 124px 138px 80px 120px;;
       align-items: center;
     }
 
@@ -222,7 +223,7 @@ display:flex;
 
     .row {
       display: grid;
-      grid-template-columns: 190px 190px 470px 260px 90px 90px 80px;
+      grid-template-columns: 138px 190px 124px 138px 60px 110px;
       border-bottom: 1px solid rgba(0,0,0,0.06);
       align-items: center;
       position: relative; /* anchor for per-row "new" dot */
@@ -2415,6 +2416,9 @@ h1.title::before{
   pointer-events:none;
 }
 
+
+.ig-link{color:inherit;text-decoration:none;font-weight:700;}
+.ig-link:hover{text-decoration:underline;}
 </style>
 <style>
 
@@ -2547,14 +2551,14 @@ body{
 
   <div class="sticky-head">
     <div class="head-grid">
-      <div class="head-cell">STATE</div>
-      <div class="head-cell">CITY</div>
-      <div class="head-cell">NAME</div>
-      <div class="head-cell">IG</div>
-      <div class="head-cell">SAT</div>
-      <div class="head-cell">SUN</div>
-      <div class="head-cell">OTA</div>
-<div class="head-search" aria-label="Filter directory">
+      <div class="head-cell"></div>
+      <div class="head-cell"></div>
+      <div class="head-cell"></div>
+      <div class="head-cell"></div>
+      <div class="head-cell"></div>
+      <div class="head-cell"></div>
+
+  <div class="head-search" aria-label="Filter directory">
     <div class="head-search-box">
       <span class="head-search-icon" aria-hidden="true">
         <svg viewBox="0 0 24 24">
@@ -2646,7 +2650,7 @@ body{
 // === Block 1 ===
 // Add data-labels for mobile stacked layout
     (function() {
-      const labels = ["STATE","CITY","NAME","IG","SAT","SUN","OTA"];
+      const labels = ["Gym","Instagram","Saturday","Location","Sunday","OTA"];
       document.querySelectorAll(".row").forEach(row => {
         const cells = row.querySelectorAll(".cell");
         cells.forEach((cell, i) => cell.setAttribute("data-label", labels[i] || ""));
@@ -2730,20 +2734,23 @@ body{
       // Hydrate rows: blank "nan", split location into city + FULL state name in data attributes,
       // and render location as two-line City / Full State (as requested).
 
-      
-      // Render Directory from CSV (STATE/CITY/NAME/IG/SAT/SUN/OTA)
       async function renderFromCSV(){
         const root = document.getElementById('monthsRoot');
         if (!root) return;
 
-        // Loading state (readable on light bg)
+        // Loading state
         root.innerHTML = '<div style="padding:16px;color:rgba(0,0,0,.55);font-size:13px;">Loading directory…</div>';
 
+        // CSV will live at: data/directory.csv (per repo convention)
         const csvCandidates = [
           '/data/directory.csv',
           '../data/directory.csv',
           'data/directory.csv',
           './data/directory.csv',
+
+          // friendly fallbacks for local / ad-hoc testing
+          'gymdirectory.csv',
+          './gymdirectory.csv',
           'directory.csv',
           './directory.csv'
         ];
@@ -2788,100 +2795,125 @@ body{
             } else {
               if (ch === '"') inQ = true;
               else if (ch === ','){ row.push(cur); cur=''; }
-              else if (ch === '\n'){
+              else if (ch === '
+'){
                 row.push(cur); cur='';
                 if (row.some(v => (v || '').trim() !== '')) rows.push(row);
                 row = [];
-              } else if (ch === '\r'){
-                // ignore
-              } else cur += ch;
+              } else if (ch !== '
+') cur += ch;
             }
           }
-          if (cur.length || row.length){
-            row.push(cur);
-            if (row.some(v => (v || '').trim() !== '')) rows.push(row);
-          }
+          row.push(cur);
+          if (row.some(v => (v || '').trim() !== '')) rows.push(row);
           return rows;
         }
 
-        const grid = parseCSV(csvText);
-        if (!grid.length){
-          root.innerHTML = '<div style="padding:16px;color:rgba(0,0,0,.55);font-size:13px;">No rows found in CSV.</div>';
+        const matrix = parseCSV(csvText);
+        if (!matrix.length){
+          root.innerHTML = '<div style="padding:16px;color:#b00020;font-size:13px;">CSV load error<br><span style="opacity:.75">Empty file</span></div>';
           return;
         }
 
-        const headers = grid[0].map(h => (h || '').trim());
-        const dataRows = grid.slice(1);
+        const headers = matrix[0].map(h => (h || '').trim());
+        const lower = headers.map(h => h.toLowerCase());
+        const dataRows = matrix.slice(1);
 
-        // Map rows to objects by header
-        const rows = dataRows.map(r => {
-          const obj = {};
-          headers.forEach((h, idx) => { obj[h] = (r[idx] ?? '').toString().trim(); });
-          return obj;
-        }).filter(obj => Object.values(obj).some(v => (v || '').trim() !== ''));
+        const pick = (obj, keys) => {
+          for (const k of keys){
+            const idx = lower.indexOf(k.toLowerCase());
+            if (idx !== -1){
+              const v = obj[idx];
+              if (v !== undefined && v !== null && String(v).trim() !== '') return String(v).trim();
+            }
+          }
+          return '';
+        };
 
-        // Expect: STATE,CITY,NAME,IG,SAT,SUN,OTA (but tolerate missing OTA)
-        // Group by STATE for the same "month-card" look/feel.
-        const byState = new Map();
-        for (const r of rows){
-          const st = (r.STATE || r.State || r.state || '—').trim() || '—';
-          if (!byState.has(st)) byState.set(st, []);
-          byState.get(st).push(r);
-        }
+        const alias = {
+          state: ['state'],
+          city: ['city'],
+          name: ['name'],
+          ig:   ['ig'],
+          sat:  ['sat'],
+          sun:  ['sun'],
+          ota:  ['ota']
+        };
 
-        // Sort states A->Z, and within state sort by City then Name
-        const stateKeys = Array.from(byState.keys()).sort((a,b)=>a.localeCompare(b));
-        for (const st of stateKeys){
-          byState.get(st).sort((a,b)=>{
-            const ac = (a.CITY||'').localeCompare(b.CITY||'');
-            if (ac) return ac;
-            return (a.NAME||'').localeCompare(b.NAME||'');
+        const gyms = [];
+        for (const row of dataRows){
+          const state = pick(row, alias.state);
+          const city = pick(row, alias.city);
+          const name = pick(row, alias.name);
+          const ig = pick(row, alias.ig);
+          const sat = pick(row, alias.sat);
+          const sun = pick(row, alias.sun);
+          const otaRaw = pick(row, alias.ota);
+
+          // skip empty rows
+          if (!state && !city && !name && !ig && !sat && !sun && !otaRaw) continue;
+
+          const ota = (otaRaw || '').toString().trim();
+          gyms.push({
+            state: state || '—',
+            city: city || '',
+            name: name || '—',
+            ig: ig || '—',
+            sat: sat || '—',
+            sun: sun || '—',
+            ota: ota ? (ota.toLowerCase()==='y' ? 'Y' : ota) : '—'
           });
         }
 
+        gyms.sort((a,b)=>{
+          const s = a.state.localeCompare(b.state);
+          if (s) return s;
+          const c = a.city.localeCompare(b.city);
+          if (c) return c;
+          return a.name.localeCompare(b.name);
+        });
+
         root.innerHTML = '';
-        if (!rows.length){
-          root.innerHTML = '<div style="padding:16px;color:rgba(0,0,0,.55);font-size:13px;">No directory rows found.</div>';
+        const byState = new Map();
+        for (const g of gyms){
+          const key = g.state || '—';
+          if (!byState.has(key)) byState.set(key, []);
+          byState.get(key).push(g);
+        }
+
+        if (!gyms.length){
+          root.innerHTML = '<div style="padding:16px;color:rgba(255,255,255,.65);font-size:13px;">No gyms found in CSV.</div>';
           return;
         }
 
-        for (const st of stateKeys){
-          const items = byState.get(st);
-
+        for (const [stateName, items] of byState.entries()){
           const card = document.createElement('section');
           card.className = 'month-card';
-          card.setAttribute('aria-label', st);
+          card.setAttribute('aria-label', stateName);
 
           const head = document.createElement('div');
           head.className = 'month-label';
-          head.textContent = st;
+          head.textContent = stateName;
 
           const body = document.createElement('div');
           body.className = 'card-body';
 
-          for (const item of items){
+          for (const g of items){
             const rowEl = document.createElement('div');
             rowEl.className = 'row';
-            rowEl.dataset.state = st;
-            rowEl.dataset.city = (item.CITY || '').trim();
 
-            const cells = [
-              st,
-              (item.CITY || ''),
-              (item.NAME || ''),
-              (item.IG || ''),
-              (item.SAT || ''),
-              (item.SUN || ''),
-              (item.OTA || '')
-            ];
+            const loc = [g.city, g.state].filter(Boolean).join(', ').replace(/^, /,'').trim() || '—';
 
-            cells.forEach((val) => {
-              const c = document.createElement('div');
-              c.className = 'cell';
-              c.textContent = (val || '').toString();
-              rowEl.appendChild(c);
-            });
-
+            // Preserve existing 6-column layout:
+            // 0: Gym (beige), 1: Instagram, 2: Saturday, 3: Location (icon logic already targets this column), 4: Sunday, 5: OTA
+            rowEl.innerHTML = `
+              <div class="cell type"><strong>${escapeHtml(g.name)}</strong></div>
+              <div class="cell">${g.ig ? `<a class="ig-link" href="https://instagram.com/${encodeURIComponent(g.ig.replace(/^@/, ''))}" target="_blank" rel="noopener noreferrer">@${escapeHtml(g.ig.replace(/^@/, ''))}</a>` : `<span style="opacity:.6">—</span>`}</div>
+              <div class="cell">${escapeHtml(g.sat)}</div>
+              <div class="cell">${escapeHtml(loc)}</div>
+              <div class="cell">${escapeHtml(g.sun)}</div>
+              <div class="cell">${escapeHtml(g.ota)}</div>
+            `;
             body.appendChild(rowEl);
           }
 
@@ -2891,7 +2923,7 @@ body{
         }
       }
 
-      function escapeHtml(str){(str){
+      function escapeHtml(str){
         return String(str ?? '')
           .replaceAll('&','&amp;')
           .replaceAll('<','&lt;')
@@ -2901,33 +2933,45 @@ body{
       }
 
 function hydrate() {
-        // Minimal hydration for Directory view:
-        // - attach dataset.state/city for filtering
-        // - make IG handles clickable (instagram) when present
+
+        const pin = `<span class="geo-icon" aria-hidden="true">
+  <svg viewBox="0 0 24 24" focusable="false">
+    <path d="M12 2c-3.86 0-7 3.14-7 7 0 5.25 7 13 7 13s7-7.75 7-13c0-3.86-3.14-7-7-7zm0 9.5A2.5 2.5 0 1 1 12 6a2.5 2.5 0 0 1 0 5.5z"/>
+  </svg>
+</span>`;
+
         document.querySelectorAll('.row').forEach(row => {
           const cells = row.querySelectorAll('.cell');
-          if (cells.length < 7) return;
+          if (!cells.length) return;
 
-          const state = (cells[0].textContent || '').trim();
-          const city  = (cells[1].textContent || '').trim();
-          row.dataset.state = state;
-          row.dataset.city  = city;
+          // clear 'nan'
+          cells.forEach((c, i) => {
+            const t = (c.textContent || '').trim();
+            if (t.toLowerCase() === 'nan') c.textContent = (i === 2) ? 'Hosted Location' : '';
+          });
 
-          const igCell = cells[3];
-          const handle = (igCell.textContent || '').trim();
-          if (handle && handle.toLowerCase() !== 'nan' && !igCell.querySelector('a')) {
-            const a = document.createElement('a');
-            a.href = 'https://www.instagram.com/' + handle.replace(/^@/,'');
-            a.textContent = handle;
-            a.target = '_blank';
-            a.rel = 'noopener noreferrer';
-            a.style.color = 'inherit';
-            a.style.textDecoration = 'none';
-            igCell.textContent = '';
-            igCell.appendChild(a);
-          }
-        });
-      }
+          if (cells.length < 4) return;
+          const locCell = cells[3];
+
+          // get current visible location text excluding icons
+          const clone = locCell.cloneNode(true);
+          clone.querySelectorAll('.geo-icon, .bldg-icon, .location-stack').forEach(n => n.remove());
+          const locText = (clone.textContent || '').trim();
+
+          let city = '';
+          let abbr = '';
+          let fullStateFromText = '';
+          if (locText.includes(',')) {
+            const parts = locText.split(',');
+            city = (parts[0] || '').trim();
+            const rawState = (parts[1] || '').trim();
+            // If the CSV provides a full state name (e.g., "Massachusetts"), keep its casing.
+            if (rawState && !/^[A-Za-z]{2}$/.test(rawState)) {
+              fullStateFromText = rawState;
+              abbr = (stateNameToAbbr[rawState.toLowerCase()] || '').toUpperCase();
+            } else {
+              abbr = rawState.toUpperCase();
+            }
           } else {
             const parts = locText.split(/\s+/).filter(Boolean);
             if (parts.length >= 2) {
@@ -3039,7 +3083,23 @@ function hydrate() {
           return t.replace(/\s+/g,' ').trim();
         }
 
-        function extractYearFromRow(r){ return (r && r.dataset && r.dataset.year) ? r.dataset.year : ''; }
+        function extractYearFromRow(row){
+          // 1) Prefer pre-hydrated dataset.year (set during hydrate() before any re-render)
+          const y = (row && row.dataset) ? (row.dataset.year || '') : '';
+          if (/^\d{4}$/.test(y)) return y;
+
+          // 2) If the row sits under a month-card like "October 2025", use that (most reliable)
+          const card = row ? row.closest('.month-card') : null;
+          const cardLabel = (card?.getAttribute('aria-label') || card?.querySelector('.month-label')?.textContent || '').trim();
+          const cm = cardLabel.match(/\b(\d{4})\b/);
+          if (cm) return cm[1];
+
+          // 3) Fall back to parsing the Date cell content (works after your date cell is re-rendered)
+          const cells = row ? row.querySelectorAll('.cell') : [];
+          const dt = (cells[5]?.innerText || cells[5]?.textContent || '').trim();
+          const m = dt.match(/\b(\d{4})\b/);
+          return m ? m[1] : '';
+        }
 
         function updateYearBtnLabel(){
           if (!yearBtn) return;
@@ -3311,9 +3371,36 @@ applyFilter();
 
       hydrate();
 
-      setupSearch();
+      // Display FOR value above WHERE value, with building icon to the left (LOCATION-style)
+      document.querySelectorAll('.row').forEach(row => {
+        const cells = row.querySelectorAll('.cell');
+        if (cells.length < 3) return;
+
+        const forCell = cells[1];
+        const whereCell = cells[2];
+
+        const forText = (forCell.textContent || '').trim();
+        let whereText = (whereCell.textContent || '').trim();
+        if (!whereText || whereText.toLowerCase() === 'nan') whereText = 'Hosted Location';
+
+        forCell.innerHTML = `
+          <div class="forwhere-inline">
+            <span class="bldg-icon" aria-hidden="true">
+  <svg viewBox="0 0 24 24" focusable="false">
+    <path d="M3 21h18v-2H3v2zm2-4h14V3H5v14zm2-2V5h10v10H7zm1-8h2v2H8V7zm0 3h2v2H8v-2zm0 3h2v2H8v-2zm4-6h2v2h-2V7zm0 3h2v2h-2v-2zm0 3h2v2h-2v-2z"/>
+  </svg>
+</span>
+            <div class="for-where-stack">
+              <div class="for-main">${forText}</div>
+              <div class="for-where">${whereText}</div>
+            </div>
+          </div>
+        `;
+
+        whereCell.textContent = '';
       });
-// Stack DAY above DATE with calendar icon on the LEFT (LOCATION-style)
+
+      // Stack DAY above DATE with calendar icon on the LEFT (LOCATION-style)
       document.querySelectorAll('.row').forEach(row => {
         const cells = row.querySelectorAll('.cell');
         if (cells.length < 6) return;
