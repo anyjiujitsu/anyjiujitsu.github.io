@@ -2,177 +2,131 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>directory.csv loader (minimal)</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Directory (CSV test)</title>
 </head>
 <body>
-  <h1>directory.csv loader (minimal)</h1>
-
-  <p><strong>Status:</strong> <span id="status">Starting…</span></p>
-  <pre id="debug" style="white-space: pre-wrap;"></pre>
-
-  <div id="tableMount"></div>
+  <h1>Directory</h1>
+  <div id="status">Loading…</div>
+  <div id="out"></div>
 
   <script>
-    const CSV_PATH = "./data/directory.csv"; // adjust only if your path differs
+    (async function () {
+      const statusEl = document.getElementById('status');
+      const outEl = document.getElementById('out');
 
-    const statusEl = document.getElementById("status");
-    const debugEl = document.getElementById("debug");
-    const mountEl = document.getElementById("tableMount");
+      const candidates = [
+        'data/directory.csv',
+        './data/directory.csv',
+        '/data/directory.csv',
+        'directory.csv',
+        './directory.csv'
+      ];
 
-    function setStatus(msg) {
-      statusEl.textContent = msg;
-    }
-    function debug(msg) {
-      debugEl.textContent += msg + "\n";
-    }
+      let csvText = '';
+      let lastErr = null;
+      const tried = [];
 
-    // Robust CSV parser (handles quotes, commas inside quotes, CRLF/LF)
-    function parseCSV(text) {
-      const rows = [];
-      let row = [];
-      let field = "";
-      let inQuotes = false;
-
-      // Normalize newlines
-      text = text.replace(/\r\n/g, "\n").replace(/\r/g, "\n");
-
-      for (let i = 0; i < text.length; i++) {
-        const c = text[i];
-        const next = text[i + 1];
-
-        if (inQuotes) {
-          if (c === '"' && next === '"') {
-            // Escaped quote
-            field += '"';
-            i++;
-          } else if (c === '"') {
-            inQuotes = false;
-          } else {
-            field += c;
-          }
-        } else {
-          if (c === '"') {
-            inQuotes = true;
-          } else if (c === ",") {
-            row.push(field);
-            field = "";
-          } else if (c === "\n") {
-            row.push(field);
-            field = "";
-            // Ignore fully empty trailing lines
-            const isEmpty = row.length === 1 && row[0] === "";
-            if (!isEmpty) rows.push(row);
-            row = [];
-          } else {
-            field += c;
-          }
+      for (const url of candidates) {
+        try {
+          tried.push(url);
+          const res = await fetch(url, { cache: 'no-store' });
+          if (!res.ok) throw new Error(`HTTP ${res.status} for ${url}`);
+          csvText = await res.text();
+          if (csvText && csvText.trim()) break;
+        } catch (e) {
+          lastErr = e;
         }
       }
 
-      // Final field/row
-      row.push(field);
-      if (!(row.length === 1 && row[0] === "")) rows.push(row);
-
-      return rows;
-    }
-
-    function escapeHtml(s) {
-      return String(s)
-        .replaceAll("&", "&amp;")
-        .replaceAll("<", "&lt;")
-        .replaceAll(">", "&gt;")
-        .replaceAll('"', "&quot;")
-        .replaceAll("'", "&#039;");
-    }
-
-    function renderTable(rows) {
-      if (!rows || rows.length === 0) {
-        mountEl.innerHTML = "<p><strong>No rows found.</strong></p>";
+      if (!csvText || !csvText.trim()) {
+        statusEl.textContent = 'CSV load error';
+        outEl.innerHTML = `
+          <pre>
+${String(lastErr || 'Unknown error')}
+Tried:
+- ${tried.join('\n- ')}
+          </pre>`;
         return;
       }
 
-      const headers = rows[0];
-      const bodyRows = rows.slice(1).filter(r => r.some(cell => String(cell).trim() !== ""));
+      // Detect delimiter: prefer TAB if header line contains tabs
+      const firstLine = csvText.split(/\r?\n/).find(l => l.trim().length) || '';
+      const delimiter = firstLine.includes('\t') ? '\t' : ',';
 
-      debug(`Parsed rows: ${rows.length}`);
-      debug(`Headers detected: ${headers.join(" | ")}`);
-      debug(`Body rows: ${bodyRows.length}`);
+      function parseDelimited(text, delim) {
+        // Minimal CSV/TSV parser with quotes
+        const rows = [];
+        let row = [], cur = '', inQ = false;
 
-      const table = document.createElement("table");
-      table.border = "1";
-      table.cellPadding = "6";
-      table.style.borderCollapse = "collapse";
+        for (let i = 0; i < text.length; i++) {
+          const ch = text[i];
 
-      const thead = document.createElement("thead");
-      const trh = document.createElement("tr");
+          if (inQ) {
+            if (ch === '"') {
+              if (text[i + 1] === '"') { cur += '"'; i++; }
+              else inQ = false;
+            } else {
+              cur += ch;
+            }
+          } else {
+            if (ch === '"') inQ = true;
+            else if (ch === delim) { row.push(cur); cur = ''; }
+            else if (ch === '\n') {
+              row.push(cur); cur = '';
+              if (row.some(v => (v || '').trim() !== '')) rows.push(row);
+              row = [];
+            } else if (ch !== '\r') {
+              cur += ch;
+            }
+          }
+        }
+        row.push(cur);
+        if (row.some(v => (v || '').trim() !== '')) rows.push(row);
+        return rows;
+      }
+
+      const matrix = parseDelimited(csvText, delimiter);
+      if (!matrix.length) {
+        statusEl.textContent = 'CSV loaded but empty';
+        return;
+      }
+
+      const headers = matrix[0].map(h => (h || '').trim());
+      const dataRows = matrix.slice(1);
+
+      // Build a super plain table
+      const table = document.createElement('table');
+      table.border = '1';
+      table.cellPadding = '6';
+      table.style.borderCollapse = 'collapse';
+
+      const thead = document.createElement('thead');
+      const trh = document.createElement('tr');
       headers.forEach(h => {
-        const th = document.createElement("th");
+        const th = document.createElement('th');
         th.textContent = h;
         trh.appendChild(th);
       });
       thead.appendChild(trh);
+      table.appendChild(thead);
 
-      const tbody = document.createElement("tbody");
-      bodyRows.forEach(r => {
-        const tr = document.createElement("tr");
-        headers.forEach((_, idx) => {
-          const td = document.createElement("td");
-          td.textContent = (r[idx] ?? "").trim();
+      const tbody = document.createElement('tbody');
+      dataRows.forEach(r => {
+        const tr = document.createElement('tr');
+        headers.forEach((_, i) => {
+          const td = document.createElement('td');
+          td.textContent = (r[i] ?? '').toString().trim();
           tr.appendChild(td);
         });
         tbody.appendChild(tr);
       });
-
-      table.appendChild(thead);
       table.appendChild(tbody);
 
-      mountEl.innerHTML = "";
-      mountEl.appendChild(table);
-    }
-
-    async function main() {
-      setStatus(`Fetching ${CSV_PATH} …`);
-      debug(`Attempting fetch: ${CSV_PATH}`);
-      debug(`Page URL: ${location.href}`);
-
-      try {
-        const res = await fetch(CSV_PATH, { cache: "no-store" });
-
-        debug(`Fetch status: ${res.status} ${res.statusText}`);
-        debug(`Content-Type: ${res.headers.get("content-type") || "(none)"}`);
-
-        if (!res.ok) {
-          throw new Error(`Fetch failed (${res.status}). If this is GitHub Pages, confirm the file exists at: ${CSV_PATH}`);
-        }
-
-        const text = await res.text();
-        debug(`CSV bytes: ${text.length}`);
-
-        const rows = parseCSV(text);
-
-        // Basic validation: expects at least header row
-        if (!rows.length) throw new Error("CSV parsed to 0 rows (empty file?)");
-
-        setStatus("Loaded ✅ (rendering table)");
-        renderTable(rows);
-        setStatus("Rendered ✅");
-      } catch (err) {
-        setStatus("Error ❌");
-        debug(`\nERROR: ${err && err.message ? err.message : String(err)}`);
-        mountEl.innerHTML = `
-          <p><strong>Failed to load CSV.</strong></p>
-          <p>Common causes:</p>
-          <ul>
-            <li>Opening the file via <code>file://</code> instead of a web server</li>
-            <li>Wrong relative path (expected <code>./data/directory.csv</code>)</li>
-            <li>GitHub Pages not serving the file (case-sensitive path or missing commit)</li>
-          </ul>
-        `;
-      }
-    }
-
-    main();
+      statusEl.textContent = `Loaded ${dataRows.length} rows from directory.csv (delimiter: ${delimiter === '\t' ? 'TAB' : 'COMMA'})`;
+      outEl.innerHTML = '';
+      outEl.appendChild(table);
+    })();
   </script>
 </body>
 </html>
