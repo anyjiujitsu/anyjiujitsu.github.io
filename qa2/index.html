@@ -2,8 +2,11 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>DIRECTORY 8</title>
+
+  <!-- MATCH EVENTS PAGE VIEWPORT BEHAVIOR -->
+  <meta name="viewport" content="width=1200, initial-scale=0.32, maximum-scale=0.32, user-scalable=no, viewport-fit=cover" />
+
+  <title>DIRECTORY 9</title>
 
   <style>
     :root{
@@ -18,7 +21,7 @@
       --ota-no: #d24b4b;
     }
 
-    *{ box-sizing: border-box; }
+    *{ box-sizing:border-box; }
     html,body{ height:100%; }
     body{
       margin:0;
@@ -27,69 +30,77 @@
       font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
     }
 
+    /* MATCH EVENTS: Fixture font (local) + same fallback chain */
+    @font-face{
+      font-family: 'Fixture';
+      src: local('Fixture'), local('Fixture Display'), local('Fixture Condensed');
+      font-style: normal;
+      font-weight: 400 900;
+    }
+
     /* =========================
        TITLE STRIP (MATCH EVENTS)
        ========================= */
     .top-title{
-      width: 100%;
-      position: relative;
-      overflow: hidden;            /* enables the left-crop feel */
+      width:100%;
+      position:relative;
+      overflow:hidden;        /* allows left-crop like EVENTS */
       background: var(--bg);
       padding: 10px 0 0 0;
     }
 
-    /* This inner matches the same left gutter the green bar uses */
+    /* Align to same content column as filters/table */
     .title-inner{
       max-width: 1100px;
       margin: 0 auto;
       padding: 0 18px;
       position: relative;
-      min-height: 120px;
+      min-height: 140px;
       display:flex;
       align-items:flex-end;
     }
 
-    /* The big word */
     .title-inner h1{
-      margin: 0;
+      margin:0;
       color: var(--green);
+
+      /* EXACT family chain requested (Fixture first) */
+      font-family: 'Fixture', Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+
       font-weight: 900;
-      line-height: .78;            /* tight like EVENTS */
-      letter-spacing: -4px;
-      font-size: clamp(92px, 12vw, 175px);
+      line-height: .78;
+      letter-spacing: -6px;
 
-      font-family: "Impact","Arial Narrow","Haettenschweiler","Anton",system-ui,sans-serif;
+      /* EVENTS look: huge + tight */
+      font-size: 200px;
 
+      /* EVENTS feel: slightly condensed + left-cropped into gutter */
       display:inline-block;
-
-      /* MORE condensed than before (this is the missing “EVENTS” feel) */
-      transform: scaleX(0.70);
-
-      /* This is the subtle “crop into the left edge” trick */
       transform-origin: left bottom;
+      transform: scaleX(0.82);
       position: relative;
-      left: -18px;                 /* pushes into the gutter like EVENTS */
+      left: -26px;
     }
 
-    /* ANY logo should NOT affect title width/position */
+    /* ANY logo positioned without affecting title layout */
     .any-mark{
-      position: absolute;
+      position:absolute;
       right: 22px;
-      top: 30px;
+      top: 26px;
       display:flex;
       align-items:center;
       justify-content:center;
-      height: 70px;
-      width: 110px;
+      height: 74px;
+      width: 120px;
       border: 3px solid var(--green);
       border-radius: 999px;
       color: var(--green);
       font-weight: 900;
-      font-family: "Impact", "Arial Black", "Anton", system-ui, sans-serif;
-      font-size: 44px;
+      font-family: 'Fixture', Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+      font-size: 46px;
       line-height: 1;
       background: transparent;
-      pointer-events: none;
+      pointer-events:none;
     }
 
     /* ===== Green bar with pills ===== */
@@ -275,9 +286,6 @@
 
     @media (max-width: 900px){
       .pill-group{ display:none; }
-      .title-inner{ min-height: 96px; }
-      .any-mark{ height: 56px; width: 90px; font-size: 38px; top: 22px; right: 18px; }
-      .title-inner h1{ font-size: clamp(76px, 14vw, 140px); left: -14px; transform: scaleX(0.72); }
     }
   </style>
 </head>
@@ -287,8 +295,8 @@
   <!-- Title strip -->
   <div class="top-title">
     <div class="title-inner">
-      <!-- Keep your commit marker in the word if you want: DIRECTORY3 -->
-      <h1>DIRECTORY3</h1>
+      <!-- Per your rule: show the iteration number here -->
+      <h1>DIRECTORY4</h1>
       <div class="any-mark">(ANY)</div>
     </div>
   </div>
@@ -331,15 +339,10 @@
   </div>
 
 <script>
-  // ===== Formatting helpers =====
   function toProper(s){
     s = (s ?? "").toString().trim();
     if(!s) return "";
-    return s
-      .toLowerCase()
-      .split(/\s+/)
-      .map(w => w ? (w[0].toUpperCase() + w.slice(1)) : "")
-      .join(" ");
+    return s.toLowerCase().split(/\s+/).map(w => w ? w[0].toUpperCase() + w.slice(1) : "").join(" ");
   }
   function toLower(s){ return (s ?? "").toString().trim().toLowerCase(); }
 
@@ -395,7 +398,6 @@
     return raw;
   }
 
-  // ===== CSV parsing =====
   function parseCSV(text){
     const rows = [];
     let cur = "", inQuotes = false;
@@ -439,29 +441,17 @@
 
     const c1 = document.createElement("div");
     c1.className = "cell";
-    c1.innerHTML = `
-      <div class="topline">${name || "—"}</div>
-      <div class="botline">${ig || "—"}</div>
-    `;
+    c1.innerHTML = `<div class="topline">${name || "—"}</div><div class="botline">${ig || "—"}</div>`;
 
     const c2 = document.createElement("div");
     c2.className = "cell";
-    c2.innerHTML = `
-      <div class="topline">${city || "—"}</div>
-      <div class="botline">${state || "—"}</div>
-    `;
+    c2.innerHTML = `<div class="topline">${city || "—"}</div><div class="botline">${state || "—"}</div>`;
 
     const c3 = document.createElement("div");
     c3.className = "cell times";
     c3.innerHTML = `
-      <div class="time-row">
-        <div class="time-label">Sat.</div>
-        <div class="time-val">${sat || ""}</div>
-      </div>
-      <div class="time-row">
-        <div class="time-label">Sun.</div>
-        <div class="time-val">${sun || ""}</div>
-      </div>
+      <div class="time-row"><div class="time-label">Sat.</div><div class="time-val">${sat || ""}</div></div>
+      <div class="time-row"><div class="time-label">Sun.</div><div class="time-val">${sun || ""}</div></div>
     `;
 
     const c4 = document.createElement("div");
@@ -483,7 +473,6 @@
     return tr;
   }
 
-  // ===== Load + render (robust paths) =====
   const tbody = document.getElementById("tbody");
   let allRecords = [];
 
@@ -492,7 +481,7 @@
     for(const u of urls){
       try{
         const res = await fetch(u, { cache: "no-store" });
-        if(!res.ok) throw new Error(`HTTP ${res.status} (${u})`);
+        if(!res.ok) throw new Error(`Failed to load ${u} (${res.status})`);
         const txt = await res.text();
         if(txt.trim()) return txt;
       }catch(e){ lastErr = e; }
@@ -532,7 +521,6 @@
     list.forEach(rec => tbody.appendChild(makeRow(rec)));
   }
 
-  // ===== Filter =====
   const searchInput = document.getElementById("searchInput");
   const searchClear = document.getElementById("searchClear");
 
