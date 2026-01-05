@@ -26,40 +26,31 @@
       font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
     }
 
-    /* ===== Top title (DIRECTORY1 + logo) ===== */
-    .top-title{
-      display:flex;
-      align-items:flex-end;
-      justify-content:space-between;
-      padding: 18px 18px 0 18px;
-      max-width: 1100px;
-      margin: 0 auto;
-    }
-    .top-title h1{
-      margin:0;
-      line-height: .9;
-      font-weight: 900;
-      letter-spacing: -1px;
-      font-size: clamp(56px, 9vw, 120px);
-      color: var(--green);
-      font-family: "Impact", "Arial Black", "Anton", system-ui, sans-serif;
-    }
-    .any-mark{
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      height: 70px;
-      width: 110px;
-      border: 3px solid var(--green);
-      border-radius: 999px;
-      color: var(--green);
-      font-weight: 900;
-      font-family: "Impact", "Arial Black", "Anton", system-ui, sans-serif;
-      font-size: 44px;
-      line-height: 1;
-      margin-bottom: 6px;
-      background: transparent;
-    }
+    /* ===== Top title (DIRECTORY) — MATCH EVENTS ===== */
+.top-title{
+  display:flex;
+  align-items:flex-end;
+  justify-content:flex-start;   /* ← left aligned like EVENTS */
+  padding: 6px 18px 0 18px;      /* ← pulls title down */
+  max-width: 1100px;             /* ← EXACT match to EVENTS column */
+  margin: 0 auto;
+}
+
+.top-title h1{
+  margin:0;
+  line-height: .82;              /* ← tighter vertically */
+  font-weight: 900;
+  letter-spacing: -3px;          /* ← tighter tracking */
+  font-size: clamp(84px, 11vw, 150px); /* ← larger than before */
+  color: var(--green);
+
+  /* Condensed look */
+  font-family: "Impact", "Arial Narrow", "Haettenschweiler", "Anton", system-ui, sans-serif;
+  display:inline-block;
+  transform: scaleX(0.78);       /* ← THIS is the key */
+  transform-origin: left bottom;
+}
+
 
     /* ===== Green bar with pills ===== */
     .sticky-bar{
