@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>DIRECTORY 7</title>
+  <title>DIRECTORY 8</title>
 
   <style>
     :root{
@@ -27,35 +27,55 @@
       font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
     }
 
-    /* ===== TOP TITLE (match EVENTS) ===== */
+    /* =========================
+       TITLE STRIP (MATCH EVENTS)
+       ========================= */
     .top-title{
+      width: 100%;
+      position: relative;
+      overflow: hidden;            /* enables the left-crop feel */
+      background: var(--bg);
+      padding: 10px 0 0 0;
+    }
+
+    /* This inner matches the same left gutter the green bar uses */
+    .title-inner{
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 18px;
+      position: relative;
+      min-height: 120px;
       display:flex;
       align-items:flex-end;
-      justify-content:space-between;   /* keeps logo on right */
-      max-width: 1100px;              /* match EVENTS content width */
-      margin: 0 auto;
-      padding: 14px 18px 0 18px;      /* matches EVENTS spacing above bar */
     }
 
-    .top-title h1{
-      margin:0;
+    /* The big word */
+    .title-inner h1{
+      margin: 0;
       color: var(--green);
       font-weight: 900;
-      line-height: .80;               /* tighter like EVENTS */
-      letter-spacing: -3px;
+      line-height: .78;            /* tight like EVENTS */
+      letter-spacing: -4px;
+      font-size: clamp(92px, 12vw, 175px);
 
-      /* Bigger + condensed like EVENTS */
-      font-size: clamp(78px, 10.8vw, 148px);
       font-family: "Impact","Arial Narrow","Haettenschweiler","Anton",system-ui,sans-serif;
-      display:inline-block;
-      transform: scaleX(0.78);        /* KEY: condensed look */
-      transform-origin: left bottom;
 
-      /* Nudge left slightly to match EVENTS feel */
-      margin-left: -6px;
+      display:inline-block;
+
+      /* MORE condensed than before (this is the missing “EVENTS” feel) */
+      transform: scaleX(0.70);
+
+      /* This is the subtle “crop into the left edge” trick */
+      transform-origin: left bottom;
+      position: relative;
+      left: -18px;                 /* pushes into the gutter like EVENTS */
     }
 
+    /* ANY logo should NOT affect title width/position */
     .any-mark{
+      position: absolute;
+      right: 22px;
+      top: 30px;
       display:flex;
       align-items:center;
       justify-content:center;
@@ -68,8 +88,8 @@
       font-family: "Impact", "Arial Black", "Anton", system-ui, sans-serif;
       font-size: 44px;
       line-height: 1;
-      margin-bottom: 8px;
       background: transparent;
+      pointer-events: none;
     }
 
     /* ===== Green bar with pills ===== */
@@ -255,18 +275,22 @@
 
     @media (max-width: 900px){
       .pill-group{ display:none; }
-      .any-mark{ height: 56px; width: 90px; font-size: 38px; }
+      .title-inner{ min-height: 96px; }
+      .any-mark{ height: 56px; width: 90px; font-size: 38px; top: 22px; right: 18px; }
+      .title-inner h1{ font-size: clamp(76px, 14vw, 140px); left: -14px; transform: scaleX(0.72); }
     }
   </style>
 </head>
 
 <body>
 
-  <!-- Title row -->
+  <!-- Title strip -->
   <div class="top-title">
-    <!-- ONLY visible change vs EVENTS: the word -->
-    <h1>DIRECTORY3</h1>
-    <div class="any-mark">(ANY)</div>
+    <div class="title-inner">
+      <!-- Keep your commit marker in the word if you want: DIRECTORY3 -->
+      <h1>DIRECTORY3</h1>
+      <div class="any-mark">(ANY)</div>
+    </div>
   </div>
 
   <!-- Green bar -->
@@ -371,27 +395,6 @@
     return raw;
   }
 
-  function formatCreated(s){
-    const t = (s ?? "").toString().trim();
-    if(!t) return "";
-    const m = t.match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})$/);
-    if(m){
-      return `${String(m[1]).padStart(2,"0")}/${String(m[2]).padStart(2,"0")}/${m[3]}`;
-    }
-    const iso = t.match(/^(\d{4})-(\d{2})-(\d{2})$/);
-    if(iso){
-      return `${iso[2]}/${iso[3]}/${iso[1]}`;
-    }
-    const d = new Date(t);
-    if(!isNaN(d.getTime())){
-      const mm = String(d.getMonth()+1).padStart(2,"0");
-      const dd = String(d.getDate()).padStart(2,"0");
-      const yy = d.getFullYear();
-      return `${mm}/${dd}/${yy}`;
-    }
-    return t;
-  }
-
   // ===== CSV parsing =====
   function parseCSV(text){
     const rows = [];
@@ -426,7 +429,6 @@
     const sat   = formatTime(rec.SAT);
     const sun   = formatTime(rec.SUN);
     const otaRaw = (rec.OTA ?? "").toString().trim().toUpperCase();
-    const created = formatCreated(rec.CREATED);
 
     const tr = document.createElement("tr");
     const td = document.createElement("td");
@@ -460,7 +462,6 @@
         <div class="time-label">Sun.</div>
         <div class="time-val">${sun || ""}</div>
       </div>
-      ${created ? `<div style="margin-top:8px;font-size:12px;color:rgba(0,0,0,.45);display:none;">Created: ${created}</div>` : ``}
     `;
 
     const c4 = document.createElement("div");
@@ -482,7 +483,7 @@
     return tr;
   }
 
-  // ===== Load + render (robust paths to avoid 404) =====
+  // ===== Load + render (robust paths) =====
   const tbody = document.getElementById("tbody");
   let allRecords = [];
 
@@ -519,8 +520,7 @@
         IG: obj.IG ?? "",
         SAT: obj.SAT ?? "",
         SUN: obj.SUN ?? "",
-        OTA: obj.OTA ?? "",
-        CREATED: obj.CREATED ?? ""
+        OTA: obj.OTA ?? ""
       };
     });
 
@@ -540,7 +540,7 @@
     const q = searchInput.value.trim().toLowerCase();
     if(!q){ render(allRecords); return; }
     const filtered = allRecords.filter(r => {
-      const hay = [r.STATE, r.CITY, r.NAME, r.IG, r.SAT, r.SUN, r.OTA, r.CREATED].join(" ").toLowerCase();
+      const hay = [r.STATE, r.CITY, r.NAME, r.IG, r.SAT, r.SUN, r.OTA].join(" ").toLowerCase();
       return hay.includes(q);
     });
     render(filtered);
