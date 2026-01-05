@@ -2537,6 +2537,8 @@ body{
 </style>
 </head>
 <body>
+<div id="dataErrorBanner" style="display:none;max-width:1100px;margin:10px auto 0 auto;padding:10px 12px;border:1px solid rgba(0,0,0,.15);border-radius:10px;background:#fff;color:#111;font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;font-size:13px;line-height:1.35;"></div>
+
   <div class="header-freeze">
 <div class="wrap">
     <div class="top">
@@ -3855,7 +3857,18 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 })();
 
-  </script>
+  
+try{
+  const b=document.getElementById('dataErrorBanner');
+  if(b){
+    b.style.display='block';
+    b.innerHTML = '<b>Directory data could not be loaded.</b> I tried <code>/data/directory.csv</code> and <code>data/directory.csv</code> but the request failed. ' +
+                  'If you are opening this page as <code>file://</code>, Chrome blocks CSV fetches. Run a local server (e.g., <code>python3 -m http.server</code>) or view on GitHub Pages. ' +
+                  'Also confirm your repo structure is <code>index.html</code> at the root with <code>data/directory.csv</code>.';
+  }
+}catch(e){}
+
+</script>
 
 <!-- === SCALE-AWARE SCROLL LENGTH FIX ===
      If main content is visually scaled via CSS transform (e.g., #monthsRoot { transform: scale(...) }),
