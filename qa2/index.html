@@ -2537,8 +2537,6 @@ body{
 </style>
 </head>
 <body>
-<div id="dataErrorBanner" style="display:none;max-width:1100px;margin:10px auto 0 auto;padding:10px 12px;border:1px solid rgba(0,0,0,.15);border-radius:10px;background:#fff;color:#111;font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;font-size:13px;line-height:1.35;"></div>
-
   <div class="header-freeze">
 <div class="wrap">
     <div class="top">
@@ -2732,24 +2730,22 @@ body{
       // Hydrate rows: blank "nan", split location into city + FULL state name in data attributes,
       // and render location as two-line City / Full State (as requested).
 
+      
+      // Render Directory from CSV (STATE/CITY/NAME/IG/SAT/SUN/OTA)
       async function renderFromCSV(){
         const root = document.getElementById('monthsRoot');
         if (!root) return;
 
-        // Loading state
-        root.innerHTML = '<div style="padding:16px;color:rgba(255,255,255,.65);font-size:13px;">Loading directory…</div>';
+        // Loading state (dark text on light background)
+        root.innerHTML = '<div style="padding:16px;color:rgba(0,0,0,.55);font-size:13px;">Loading directory…</div>';
 
-        // CSV will live at: data/directory.csv (per repo convention)
+        // IMPORTANT: this site may be hosted in a subfolder (e.g., /qa2/ on GitHub Pages),
+        // so use RELATIVE paths only (no leading slash).
         const csvCandidates = [
           'data/directory.csv',
           './data/directory.csv',
-          '/data/directory.csv',
-
-          // friendly fallbacks for local testing
-          'gymdirectory.csv',
-          './gymdirectory.csv',
-          'data/gymdirectory.csv',
-          './data/gymdirectory.csv'
+          'directory.csv',
+          './directory.csv'
         ];
 
         let csvText = '';
@@ -2771,7 +2767,7 @@ body{
         if (!csvText || !csvText.trim().length){
           const msg = (lastErr && lastErr.message) ? lastErr.message : (lastErr || 'Unknown error');
           root.innerHTML = `
-            <div style="padding:16px;color:#ffb3b3;font-size:13px;">
+            <div style="padding:16px;color:#b00020;font-size:13px;">
               CSV load error<br>
               <span style="opacity:.75">${msg}</span><br>
               <span style="opacity:.6">Tried: ${tried.join(', ')}</span>
@@ -2808,7 +2804,7 @@ body{
 
         const matrix = parseCSV(csvText);
         if (!matrix.length){
-          root.innerHTML = '<div style="padding:16px;color:#ffb3b3;font-size:13px;">CSV load error<br><span style="opacity:.75">Empty file</span></div>';
+          root.innerHTML = '<div style="padding:16px;color:#b00020;font-size:13px;">CSV load error<br><span style="opacity:.75">Empty file</span></div>';
           return;
         }
 
@@ -2816,81 +2812,73 @@ body{
         const lower = headers.map(h => h.toLowerCase());
         const dataRows = matrix.slice(1);
 
-        const pick = (obj, keys) => {
+        const pick = (row, keys) => {
           for (const k of keys){
             const idx = lower.indexOf(k.toLowerCase());
             if (idx !== -1){
-              const v = obj[idx];
+              const v = row[idx];
               if (v !== undefined && v !== null && String(v).trim() !== '') return String(v).trim();
             }
           }
           return '';
         };
 
-        const alias = {
-          state: ['state', 'st'],
-          city: ['city', 'town'],
-          name: ['name', 'gym', 'academy', 'school'],
-          ig: ['ig', 'instagram', 'handle'],
-          sat: ['sat', 'saturday'],
-          sun: ['sun', 'sunday'],
-          ota: ['ota', 'open to all', 'open_to_all']
-        };
-
+        // Directory row mapping
         const gyms = [];
         for (const row of dataRows){
-          const state = pick(row, alias.state);
-          const city = pick(row, alias.city);
-          const name = pick(row, alias.name);
-          const ig = pick(row, alias.ig);
-          const sat = pick(row, alias.sat);
-          const sun = pick(row, alias.sun);
-          const otaRaw = pick(row, alias.ota);
+          const state = pick(row, ['state']);
+          const city  = pick(row, ['city']);
+          const name  = pick(row, ['name']);
+          const ig    = pick(row, ['ig','instagram']);
+          const sat   = pick(row, ['sat','saturday']);
+          const sun   = pick(row, ['sun','sunday']);
+          const ota   = pick(row, ['ota','open to all','open_to_all']);
 
-          // skip empty rows
-          if (!state && !city && !name && !ig && !sat && !sun && !otaRaw) continue;
+          // skip fully blank lines
+          if (![state, city, name, ig, sat, sun, ota].some(v => (v || '').trim() !== '')) continue;
 
-          const ota = (otaRaw || '').toString().trim();
           gyms.push({
             state: state || '—',
-            city: city || '',
+            city: city || '—',
             name: name || '—',
             ig: ig || '—',
-            sat: sat || '—',
-            sun: sun || '—',
-            ota: ota ? (ota.toLowerCase()==='y' ? 'Y' : ota) : '—'
+            sat: sat || '',
+            sun: sun || '',
+            ota: ota || ''
           });
         }
 
+        // Sort: State, then City, then Name
         gyms.sort((a,b)=>{
-          const s = a.state.localeCompare(b.state);
-          if (s) return s;
-          const c = a.city.localeCompare(b.city);
-          if (c) return c;
-          return a.name.localeCompare(b.name);
+          const A = (a.state||'').toLowerCase(), B = (b.state||'').toLowerCase();
+          if (A!==B) return A.localeCompare(B);
+          const Ac = (a.city||'').toLowerCase(), Bc = (b.city||'').toLowerCase();
+          if (Ac!==Bc) return Ac.localeCompare(Bc);
+          return (a.name||'').toLowerCase().localeCompare((b.name||'').toLowerCase());
         });
 
+        // Group by state (reuse month-card styles for a consistent look)
         root.innerHTML = '';
         const byState = new Map();
         for (const g of gyms){
-          const key = g.state || '—';
+          const key = g.state;
           if (!byState.has(key)) byState.set(key, []);
           byState.get(key).push(g);
         }
 
         if (!gyms.length){
-          root.innerHTML = '<div style="padding:16px;color:rgba(255,255,255,.65);font-size:13px;">No gyms found in CSV.</div>';
+          root.innerHTML = '<div style="padding:16px;color:rgba(0,0,0,.55);font-size:13px;">No directory entries found in CSV.</div>';
           return;
         }
 
-        for (const [stateName, items] of byState.entries()){
+        for (const [state, items] of byState.entries()){
           const card = document.createElement('section');
           card.className = 'month-card';
-          card.setAttribute('aria-label', stateName);
+          card.setAttribute('aria-label', state);
 
           const head = document.createElement('div');
           head.className = 'month-label';
-          head.textContent = stateName;
+          head.textContent = state;
 
           const body = document.createElement('div');
           body.className = 'card-body';
@@ -2899,15 +2887,19 @@ body{
             const rowEl = document.createElement('div');
             rowEl.className = 'row';
 
-            const loc = [g.city, g.state].filter(Boolean).join(', ').replace(/^, /,'').trim() || '—';
-
-            // Preserve existing 6-column layout:
-            // 0: Gym (beige), 1: Instagram, 2: Saturday, 3: Location (icon logic already targets this column), 4: Sunday, 5: OTA
+            // Keep the SAME 6-cell structure so the existing CSS + mobile stacking works.
+            // Map:
+            // 0 Type  -> NAME
+            // 1 For   -> IG
+            // 2 Where -> SAT
+            // 3 Location -> CITY, STATE
+            // 4 Day   -> SUN
+            // 5 Date  -> OTA
             rowEl.innerHTML = `
               <div class="cell type"><strong>${escapeHtml(g.name)}</strong></div>
               <div class="cell"><strong>${escapeHtml(g.ig)}</strong></div>
               <div class="cell">${escapeHtml(g.sat)}</div>
-              <div class="cell">${escapeHtml(loc)}</div>
+              <div class="cell">${escapeHtml(`${g.city}, ${g.state}`)}</div>
               <div class="cell">${escapeHtml(g.sun)}</div>
               <div class="cell">${escapeHtml(g.ota)}</div>
             `;
@@ -2918,7 +2910,12 @@ body{
           card.appendChild(body);
           root.appendChild(card);
         }
+
+        // Run the existing row hydration + filters after rendering
+        try { hydrate(); } catch(e) {}
+        try { setupSearch(); } catch(e) {}
       }
+
 
       function escapeHtml(str){
         return String(str ?? '')
@@ -3857,18 +3854,7 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 })();
 
-  
-try{
-  const b=document.getElementById('dataErrorBanner');
-  if(b){
-    b.style.display='block';
-    b.innerHTML = '<b>Directory data could not be loaded.</b> I tried <code>/data/directory.csv</code> and <code>data/directory.csv</code> but the request failed. ' +
-                  'If you are opening this page as <code>file://</code>, Chrome blocks CSV fetches. Run a local server (e.g., <code>python3 -m http.server</code>) or view on GitHub Pages. ' +
-                  'Also confirm your repo structure is <code>index.html</code> at the root with <code>data/directory.csv</code>.';
-  }
-}catch(e){}
-
-</script>
+  </script>
 
 <!-- === SCALE-AWARE SCROLL LENGTH FIX ===
      If main content is visually scaled via CSS transform (e.g., #monthsRoot { transform: scale(...) }),
