@@ -2734,7 +2734,7 @@ body{
       // Hydrate rows: blank "nan", split location into city + FULL state name in data attributes,
       // and render location as two-line City / Full State (as requested).
 
-      async function renderFromCSV(){
+      async async function renderFromCSV(){
         const root = document.getElementById('monthsRoot');
         if (!root) return;
 
@@ -2882,7 +2882,7 @@ body{
         }
 
         if (!gyms.length){
-          root.innerHTML = '<div style="padding:16px;color:rgba(255,255,255,.65);font-size:13px;">No gyms found in CSV.</div>';
+          root.innerHTML = '<div style="padding:16px;color:rgba(0,0,0,.55);font-size:13px;">No gyms found in CSV.</div>';
           return;
         }
 
