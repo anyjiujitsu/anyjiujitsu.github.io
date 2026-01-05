@@ -3,11 +3,11 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>DIRECTORY 2</title>
+  <title>DIRECTORY 3</title>
 </head>
 <body>
 
-<h1>DIRECTORY 2</h1>
+<h1>DIRECTORY 3</h1>
 <div id="status">Loading…</div>
 <div id="out"></div>
 <pre id="meta"></pre>
@@ -28,15 +28,90 @@
 
   const toText = (v) => String(v ?? "").trim();
 
+  // --- Standardizers (only what you requested) ---
+
+  function properCaseBasic(input) {
+    const s = toText(input);
+    if (!s) return "";
+
+    // If it's a 2-letter state abbreviation, keep as uppercase (e.g., "ma" -> "MA")
+    if (/^[a-zA-Z]{2}$/.test(s)) return s.toUpperCase();
+
+    // Title-case words, preserving hyphens/apostrophes reasonably
+    return s
+      .toLowerCase()
+      .split(" ")
+      .filter(Boolean)
+      .map(word => {
+        // Handle hyphenated words: "north-attleboro"
+        const parts = word.split("-").map(part => {
+          // Handle apostrophes: "o'connor"
+          const aposParts = part.split("'").map(p =>
+            p ? (p[0].toUpperCase() + p.slice(1)) : ""
+          );
+          return aposParts.join("'");
+        });
+        return parts.join("-");
+      })
+      .join(" ");
+  }
+
+  function lowerCaseIG(input) {
+    const s = toText(input);
+    if (!s) return "";
+    return s.toLowerCase(); // keep @ if present
+  }
+
+  // Convert many time inputs into "H:MM AM/PM"
+  // Accepts examples: "9", "9a", "9am", "9:30a", "09:30 AM", "21:15", "9 pm"
+  function formatTimeHMM_A(input) {
+    let s = toText(input);
+    if (!s) return "";
+
+    s = s.toLowerCase().replace(/\./g, "").replace(/\s+/g, "");
+
+    // If range present (e.g., "10a-12p"), keep as-is for now
+    if (s.includes("-") || s.includes("–") || s.includes("to")) return toText(input);
+
+    // Match 24h like "21:15"
+    let m = s.match(/^([01]?\d|2[0-3]):([0-5]\d)$/);
+    if (m) {
+      let hh = parseInt(m[1], 10);
+      const mm = m[2];
+      const ampm = hh >= 12 ? "PM" : "AM";
+      hh = hh % 12;
+      if (hh === 0) hh = 12;
+      return `${hh}:${mm} ${ampm}`;
+    }
+
+    // Match "9am", "9:30am", "9a", "9:30p"
+    m = s.match(/^(\d{1,2})(?::([0-5]\d))?(a|p|am|pm)$/);
+    if (m) {
+      let hh = parseInt(m[1], 10);
+      const mm = (m[2] ?? "00");
+      const ap = m[3].startsWith("p") ? "PM" : "AM";
+      if (hh === 0) hh = 12;
+      if (hh > 12) hh = hh % 12;
+      return `${hh}:${mm} ${ap}`;
+    }
+
+    // Match "9:30" (assume it's already local-format; keep as-is)
+    if (/^\d{1,2}:\d{2}$/.test(s)) return toText(input);
+
+    // Match "9" (no am/pm). Can't infer AM/PM safely—keep original.
+    return toText(input);
+  }
+
   // OTA is the only boolean field (Y/N/blank)
-  const normOTA = (v) => {
+  function normOTA(v) {
     const s = toText(v).toUpperCase();
     if (!s) return "";
     if (["Y", "YES", "TRUE", "1"].includes(s)) return "Y";
     if (["N", "NO", "FALSE", "0"].includes(s)) return "N";
     return "";
-  };
+  }
 
+  // --- Loader ---
   let csvText = "";
   let usedUrl = "";
   let lastErr = null;
@@ -120,15 +195,16 @@ Found: ${headers.join(", ")}
   const rows = matrix.slice(1)
     .filter(r => r.some(c => toText(c)))
     .map(r => ({
-      STATE: toText(r[idx.STATE]),
-      CITY:  toText(r[idx.CITY]),
-      NAME:  toText(r[idx.NAME]),
-      IG:    toText(r[idx.IG]),
-      SAT:   toText(r[idx.SAT]),
-      SUN:   toText(r[idx.SUN]),
+      STATE: properCaseBasic(r[idx.STATE]),
+      CITY:  properCaseBasic(r[idx.CITY]),
+      NAME:  properCaseBasic(r[idx.NAME]),
+      IG:    lowerCaseIG(r[idx.IG]),
+      SAT:   formatTimeHMM_A(r[idx.SAT]),
+      SUN:   formatTimeHMM_A(r[idx.SUN]),
       OTA:   normOTA(r[idx.OTA])
     }));
 
+  // Render plain table
   const table = document.createElement("table");
   table.border = "1";
   table.cellPadding = "6";
@@ -156,7 +232,7 @@ Found: ${headers.join(", ")}
   });
   table.appendChild(tbody);
 
-  statusEl.textContent = `Loaded ${rows.length} rows (OTA normalized)`;
+  statusEl.textContent = `Loaded ${rows.length} rows (STATE/CITY/NAME proper, IG lowercase, SAT/SUN formatted, OTA normalized)`;
   outEl.innerHTML = "";
   outEl.appendChild(table);
 
