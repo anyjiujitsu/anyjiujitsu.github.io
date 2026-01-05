@@ -3,11 +3,11 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>DIRECTORY 5</title>
+  <title>DIRECTORY 6</title>
 </head>
 <body>
 
-<h1>DIRECTORY 5</h1>
+<h1>DIRECTORY 6</h1>
 <div id="status">Loading…</div>
 <div id="out"></div>
 <pre id="meta"></pre>
@@ -18,18 +18,14 @@
   const outEl = document.getElementById("out");
   const metaEl = document.getElementById("meta");
 
-  const CSV_CANDIDATES = [
-    "data/directory.csv",
-    "./data/directory.csv",
-    "/data/directory.csv"
-  ];
+  const CSV_CANDIDATES = ["data/directory.csv", "./data/directory.csv", "/data/directory.csv"];
 
-  // NOTE: CREATED stays in the schema for validation + later use, but is hidden in the UI.
-  const EXPECTED = ["STATE", "CITY", "NAME", "IG", "SAT", "SUN", "OTA", "CREATED"];
+  // Required columns in the CSV (CREATED required but not displayed)
+  const REQUIRED = ["STATE", "CITY", "NAME", "IG", "SAT", "SUN", "OTA", "CREATED"];
 
   const toText = (v) => String(v ?? "").trim();
 
-  // ------------------ Normalizers ------------------
+  // -------- Normalizers (same intent as before) --------
 
   function properCaseBasic(input) {
     const s = toText(input);
@@ -41,9 +37,7 @@
       .filter(Boolean)
       .map(w =>
         w.split("-").map(p =>
-          p.split("'").map(x =>
-            x ? x[0].toUpperCase() + x.slice(1) : ""
-          ).join("'")
+          p.split("'").map(x => (x ? x[0].toUpperCase() + x.slice(1) : "")).join("'")
         ).join("-")
       )
       .join(" ");
@@ -52,16 +46,15 @@
   const lowerCaseIG = (v) => toText(v).toLowerCase();
 
   function formatTimeHMM_A(input) {
-    let s = toText(input);
-    if (!s) return "";
+    let raw = toText(input);
+    if (!raw) return "";
 
-    const raw = s;
-    s = s.toLowerCase().replace(/\./g, "").replace(/\s+/g, "");
+    let s = raw.toLowerCase().replace(/\./g, "").replace(/\s+/g, "");
 
-    // If a range is present, keep as-is for now (we'll standardize ranges later if desired)
+    // Keep ranges as-is for now
     if (s.includes("-") || s.includes("–") || s.includes("to")) return raw;
 
-    // 24h like "21:15"
+    // 24h "21:15"
     let m = s.match(/^([01]?\d|2[0-3]):([0-5]\d)$/);
     if (m) {
       let h = parseInt(m[1], 10);
@@ -92,50 +85,64 @@
     return "";
   }
 
+  // More predictable CREATED parsing:
+  // Accepts: MM/DD/YYYY, M/D/YYYY, YYYY-MM-DD, and falls back to original text.
   function normCreated(v) {
     const s = toText(v);
     if (!s) return "";
+
+    // MM/DD/YYYY
     if (/^\d{2}\/\d{2}\/\d{4}$/.test(s)) return s;
 
-    const d = new Date(s);
-    if (isNaN(d)) return s;
-
-    const mm = String(d.getMonth() + 1).padStart(2, "0");
-    const dd = String(d.getDate()).padStart(2, "0");
-    const yyyy = d.getFullYear();
-    return `${mm}/${dd}/${yyyy}`;
-  }
-
-  // ------------------ Load CSV ------------------
-
-  let csvText = "";
-  let usedUrl = "";
-  let lastErr = null;
-
-  for (const url of CSV_CANDIDATES) {
-    try {
-      const res = await fetch(url, { cache: "no-store" });
-      if (!res.ok) throw new Error(`HTTP ${res.status} (${url})`);
-      const txt = await res.text();
-      if (txt.trim()) {
-        csvText = txt;
-        usedUrl = url;
-        break;
-      }
-    } catch (e) {
-      lastErr = e;
+    // M/D/YYYY or MM/D/YYYY etc.
+    let m = s.match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})$/);
+    if (m) {
+      const mm = String(parseInt(m[1], 10)).padStart(2, "0");
+      const dd = String(parseInt(m[2], 10)).padStart(2, "0");
+      const yyyy = m[3];
+      return `${mm}/${dd}/${yyyy}`;
     }
+
+    // YYYY-MM-DD
+    m = s.match(/^(\d{4})-(\d{2})-(\d{2})$/);
+    if (m) {
+      return `${m[2]}/${m[3]}/${m[1]}`;
+    }
+
+    // Fallback: try Date, but only if it produces a valid date
+    const d = new Date(s);
+    if (!isNaN(d)) {
+      const mm = String(d.getMonth() + 1).padStart(2, "0");
+      const dd = String(d.getDate()).padStart(2, "0");
+      const yyyy = d.getFullYear();
+      return `${mm}/${dd}/${yyyy}`;
+    }
+
+    return s;
   }
 
-  if (!csvText.trim()) {
-    statusEl.textContent = "CSV load error ❌";
-    outEl.innerHTML = `<pre>${String(lastErr)}</pre>`;
-    metaEl.textContent = `Tried:\n- ${CSV_CANDIDATES.join("\n- ")}`;
-    return;
+  // -------- CSV loading + parsing --------
+
+  async function loadCSV() {
+    let lastErr = null;
+
+    for (const url of CSV_CANDIDATES) {
+      try {
+        const res = await fetch(url, { cache: "no-store" });
+        if (!res.ok) throw new Error(`HTTP ${res.status} (${url})`);
+        const txt = await res.text();
+        if (txt.trim()) return { text: txt, usedUrl: url };
+      } catch (e) {
+        lastErr = e;
+      }
+    }
+    throw lastErr || new Error("Failed to load CSV");
   }
 
-  const firstLine = csvText.split(/\r?\n/).find(l => l.trim()) || "";
-  const DELIM = firstLine.includes("\t") ? "\t" : ",";
+  function detectDelimiter(csvText) {
+    const firstLine = csvText.split(/\r?\n/).find(l => l.trim()) || "";
+    return firstLine.includes("\t") ? "\t" : ",";
+  }
 
   function parseDelimited(text, d) {
     const rows = [];
@@ -159,122 +166,111 @@
         } else if (c !== "\r") cur += c;
       }
     }
-
     row.push(cur);
     if (row.some(v => toText(v))) rows.push(row);
     return rows;
   }
 
-  const matrix = parseDelimited(csvText, DELIM);
-  if (!matrix.length) {
-    statusEl.textContent = "CSV empty ❌";
-    return;
+  function buildIndex(headersRow) {
+    const headers = headersRow.map(h => toText(h).toUpperCase());
+    const idx = Object.fromEntries(headers.map((h, i) => [h, i]));
+    return { headers, idx };
   }
 
-  const headers = matrix[0].map(h => toText(h).toUpperCase());
-  const idx = Object.fromEntries(headers.map((h, i) => [h, i]));
+  // -------- Render (same layout, faster HTML string) --------
 
-  const missing = EXPECTED.filter(h => !(h in idx));
-  if (missing.length) {
-    statusEl.textContent = "Header mismatch ❌";
-    outEl.innerHTML = `<pre>Missing: ${missing.join(", ")}\nFound: ${headers.join(", ")}</pre>`;
-    return;
-  }
-
-  const rows = matrix.slice(1)
-    .filter(r => r.some(c => toText(c)))
-    .map(r => ({
-      STATE:   properCaseBasic(r[idx.STATE]),
-      CITY:    properCaseBasic(r[idx.CITY]),
-      NAME:    properCaseBasic(r[idx.NAME]),
-      IG:      lowerCaseIG(r[idx.IG]),
-      SAT:     formatTimeHMM_A(r[idx.SAT]),
-      SUN:     formatTimeHMM_A(r[idx.SUN]),
-      OTA:     normOTA(r[idx.OTA]),
-      CREATED: normCreated(r[idx.CREATED])
-    }));
-
-  // ------------------ Render (stacked layout) ------------------
-  // Layout per row (top row OTA only, as requested):
-  // [ NAME ] [ CITY ] [ Sat. SAT ] [ OTA dot ]
-  // [  IG  ] [STATE ] [ Sun. SUN ] [ (blank) ]
-
-  function otaDot(ota) {
+  function otaDotHTML(ota) {
     if (ota === "Y") return `<span style="display:inline-block;font-size:18px;line-height:1;color:green;">●</span>`;
     if (ota === "N") return `<span style="display:inline-block;font-size:18px;line-height:1;color:red;">●</span>`;
     return "";
   }
 
-  const wrap = document.createElement("div");
+  // Minimal inline styles (still “unstyled”, just structure)
+  const cardStyle = "display:grid;grid-template-columns:1fr 1fr 1fr 60px;border:1px solid #000;margin-bottom:8px;";
+  const cellTop = "padding:10px;border-right:1px solid #000;border-bottom:1px solid #000;";
+  const cellTopNoRight = "padding:10px;border-bottom:1px solid #000;";
+  const cellBottom = "padding:10px;border-right:1px solid #000;";
+  const cellBottomNoRight = "padding:10px;";
 
-  rows.forEach(obj => {
-    const card = document.createElement("div");
-    card.style.display = "grid";
-    card.style.gridTemplateColumns = "1fr 1fr 1fr 60px";
-    card.style.border = "1px solid #000";
-    card.style.marginBottom = "8px";
+  function lvCell(label, value, topRow) {
+    const base = topRow ? cellTop : cellBottom;
+    return `<div style="${base}"><span style="font-weight:700;">${label}</span>&nbsp;&nbsp;<span>${escapeHTML(value ?? "")}</span></div>`;
+  }
 
-    function cell(text, opts = {}) {
-      const d = document.createElement("div");
-      d.style.padding = "10px";
-      d.style.borderRight = opts.noRightBorder ? "none" : "1px solid #000";
-      d.style.borderBottom = opts.noBottomBorder ? "none" : "1px solid #000";
-      d.textContent = text ?? "";
-      return d;
+  function escapeHTML(s) {
+    return String(s ?? "")
+      .replaceAll("&", "&amp;")
+      .replaceAll("<", "&lt;")
+      .replaceAll(">", "&gt;")
+      .replaceAll('"', "&quot;")
+      .replaceAll("'", "&#039;");
+  }
+
+  function renderCards(rows) {
+    let html = "";
+
+    for (const r of rows) {
+      html += `
+        <div style="${cardStyle}">
+          <div style="${cellTop}">${escapeHTML(r.NAME)}</div>
+          <div style="${cellTop}">${escapeHTML(r.CITY)}</div>
+          ${lvCell("Sat.", r.SAT, true)}
+          <div style="${cellTopNoRight}">${otaDotHTML(r.OTA)}</div>
+
+          <div style="${cellBottom}">${escapeHTML(r.IG)}</div>
+          <div style="${cellBottom}">${escapeHTML(r.STATE)}</div>
+          ${lvCell("Sun.", r.SUN, false)}
+          <div style="${cellBottomNoRight}"></div>
+        </div>
+      `;
     }
 
-    function labelValueCell(label, value, isTopRow) {
-      const d = document.createElement("div");
-      d.style.padding = "10px";
-      d.style.borderRight = "1px solid #000";
-      d.style.borderBottom = isTopRow ? "1px solid #000" : "none";
-      d.innerHTML =
-        `<span style="font-weight:700;">${label}</span>` +
-        `&nbsp;&nbsp;` +
-        `<span>${(value ?? "")}</span>`;
-      return d;
+    outEl.innerHTML = html;
+  }
+
+  // -------- Main --------
+
+  try {
+    const { text, usedUrl } = await loadCSV();
+    const delim = detectDelimiter(text);
+    const matrix = parseDelimited(text, delim);
+
+    if (!matrix.length) throw new Error("CSV empty");
+
+    const { headers, idx } = buildIndex(matrix[0]);
+
+    const missing = REQUIRED.filter(h => !(h in idx));
+    if (missing.length) {
+      statusEl.textContent = "Header mismatch ❌";
+      outEl.innerHTML = `<pre>Missing: ${missing.join(", ")}\nFound: ${headers.join(", ")}</pre>`;
+      metaEl.textContent = `Loaded from: ${usedUrl}\nDelimiter: ${delim === "\t" ? "TAB" : "COMMA"}`;
+      return;
     }
 
-    // Row 1
-    card.appendChild(cell(obj.NAME, { }));                    // col 1
-    card.appendChild(cell(obj.CITY, { }));                    // col 2
-    card.appendChild(labelValueCell("Sat.", obj.SAT, true));  // col 3
+    const rows = matrix.slice(1)
+      .filter(r => r.some(c => toText(c)))
+      .map(r => ({
+        STATE:   properCaseBasic(r[idx.STATE]),
+        CITY:    properCaseBasic(r[idx.CITY]),
+        NAME:    properCaseBasic(r[idx.NAME]),
+        IG:      lowerCaseIG(r[idx.IG]),
+        SAT:     formatTimeHMM_A(r[idx.SAT]),
+        SUN:     formatTimeHMM_A(r[idx.SUN]),
+        OTA:     normOTA(r[idx.OTA]),
+        CREATED: normCreated(r[idx.CREATED])
+      }));
 
-    const otaCell = document.createElement("div");            // col 4
-    otaCell.style.padding = "10px";
-    otaCell.style.borderBottom = "1px solid #000";
-    otaCell.style.borderRight = "none";
-    otaCell.innerHTML = otaDot(obj.OTA); // top row only
-    card.appendChild(otaCell);
+    statusEl.textContent = `Loaded ${rows.length} rows (stacked layout + OTA dot)`;
+    renderCards(rows);
 
-    // Row 2
-    const igCell = cell(obj.IG, { noBottomBorder: true });
-    igCell.style.borderBottom = "none";
-    card.appendChild(igCell);
-
-    const stateCell = cell(obj.STATE, { noBottomBorder: true });
-    stateCell.style.borderBottom = "none";
-    card.appendChild(stateCell);
-
-    card.appendChild(labelValueCell("Sun.", obj.SUN, false)); // col 3, row 2
-
-    const blank = document.createElement("div");              // col 4, row 2
-    blank.style.padding = "10px";
-    blank.style.borderRight = "none";
-    blank.style.borderBottom = "none";
-    blank.innerHTML = ""; // intentionally blank
-    card.appendChild(blank);
-
-    wrap.appendChild(card);
-  });
-
-  statusEl.textContent = `Loaded ${rows.length} rows (stacked layout + OTA dot)`;
-  outEl.innerHTML = "";
-  outEl.appendChild(wrap);
-
-  metaEl.textContent =
-    `Loaded from: ${usedUrl}\n` +
-    `Delimiter: ${DELIM === "\t" ? "TAB" : "COMMA"}`;
+    metaEl.textContent =
+      `Loaded from: ${usedUrl}\n` +
+      `Delimiter: ${delim === "\t" ? "TAB" : "COMMA"}`;
+  } catch (e) {
+    statusEl.textContent = "CSV load error ❌";
+    outEl.innerHTML = `<pre>${String(e)}</pre>`;
+    metaEl.textContent = `Tried:\n- ${CSV_CANDIDATES.join("\n- ")}`;
+  }
 })();
 </script>
 
