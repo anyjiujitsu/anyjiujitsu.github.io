@@ -2724,11 +2724,11 @@ body{
         // Loading state
         root.innerHTML = '<div style="padding:16px;color:rgba(255,255,255,.65);font-size:13px;">Loading directory…</div>';
 
-        // CSV will live at: directory/index.html (per repo convention)
+        // CSV will live at: data/directory.csv (per repo convention)
         const csvCandidates = [
-          'directory/index.html',
-          './directory/index.html',
-          '/directory/index.html',
+          'data/directory.csv',
+          './data/directory.csv',
+          '/data/directory.csv',
 
           // friendly fallbacks for local testing
           'gymdirectory.csv',
