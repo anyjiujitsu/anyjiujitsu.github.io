@@ -1,277 +1,557 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>DIRECTORY 6</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>DIRECTORY1</title>
+  <style>
+    :root{
+      --bg: #e9e9e9;
+      --green: #1f4e35;
+      --pill: #ffffff;
+      --pill-border: rgba(0,0,0,.18);
+      --text: #111;
+      --muted: rgba(0,0,0,.55);
+      --gridline: rgba(0,0,0,.12);
+      --ota-yes: #1fb86a;
+      --ota-no: #d24b4b;
+    }
+
+    *{ box-sizing: border-box; }
+    html,body{ height:100%; }
+    body{
+      margin:0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+    }
+
+    /* ===== Top title (DIRECTORY1 + logo) ===== */
+    .top-title{
+      display:flex;
+      align-items:flex-end;
+      justify-content:space-between;
+      padding: 18px 18px 0 18px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .top-title h1{
+      margin:0;
+      line-height: .9;
+      font-weight: 900;
+      letter-spacing: -1px;
+      font-size: clamp(56px, 9vw, 120px);
+      color: var(--green);
+      font-family: "Impact", "Arial Black", "Anton", system-ui, sans-serif;
+    }
+    .any-mark{
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      height: 70px;
+      width: 110px;
+      border: 3px solid var(--green);
+      border-radius: 999px;
+      color: var(--green);
+      font-weight: 900;
+      font-family: "Impact", "Arial Black", "Anton", system-ui, sans-serif;
+      font-size: 44px;
+      line-height: 1;
+      margin-bottom: 6px;
+      background: transparent;
+    }
+
+    /* ===== Green bar with pills ===== */
+    .sticky-bar{
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: var(--green);
+      padding: 14px 14px;
+      box-shadow: 0 2px 10px rgba(0,0,0,.18);
+    }
+    .bar-inner{
+      max-width: 1100px;
+      margin: 0 auto;
+      display:flex;
+      align-items:center;
+      gap: 16px;
+    }
+
+    .search-pill{
+      flex: 1 1 520px;
+      height: 44px;
+      border-radius: 999px;
+      background: var(--pill);
+      border: 1px solid var(--pill-border);
+      box-shadow: 0 1px 0 rgba(0,0,0,.10), inset 0 0 0 rgba(0,0,0,0);
+      display:flex;
+      align-items:center;
+      padding: 0 12px;
+      gap: 10px;
+    }
+    .search-icon{
+      width: 18px;
+      height: 18px;
+      opacity: .55;
+      flex: 0 0 auto;
+    }
+    .search-input{
+      width: 100%;
+      border: 0;
+      outline: none;
+      font-size: 18px;
+      background: transparent;
+      color: #222;
+    }
+    .search-clear{
+      border:0;
+      background: transparent;
+      font-size: 26px;
+      line-height: 1;
+      padding: 0 6px;
+      cursor: pointer;
+      opacity: .55;
+    }
+    .search-clear:hover{ opacity: .8; }
+
+    .pill-group{
+      flex: 0 0 auto;
+      display:flex;
+      align-items:center;
+      gap: 14px;
+    }
+    .filter-pill{
+      height: 44px;
+      min-width: 190px;
+      padding: 0 18px;
+      border-radius: 999px;
+      background: var(--pill);
+      border: 1px solid var(--pill-border);
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap: 12px;
+      box-shadow: 0 1px 0 rgba(0,0,0,.10);
+      user-select:none;
+      cursor: default; /* placeholders for now */
+    }
+    .filter-pill span{
+      font-size: 20px;
+      color: rgba(0,0,0,.45);
+      font-weight: 600;
+    }
+    .caret{
+      font-size: 18px;
+      color: rgba(0,0,0,.35);
+      transform: translateY(1px);
+    }
+
+    /* ===== Table area ===== */
+    .wrap{
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 18px;
+    }
+    .table{
+      width: 100%;
+      border-collapse: collapse;
+      background: rgba(255,255,255,.20);
+    }
+    .table thead th{
+      text-align:left;
+      font-size: 14px;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: rgba(0,0,0,.55);
+      padding: 10px 12px;
+      border-bottom: 1px solid var(--gridline);
+    }
+    .table tbody td{
+      padding: 0;
+      border-bottom: 1px solid var(--gridline);
+    }
+
+    /* One row uses a grid to match your "stacked" layout */
+    .row-grid{
+      display:grid;
+      grid-template-columns: 1.25fr 1.15fr 0.9fr 90px; /* name/ig | city/state | sat/sun | ota */
+      column-gap: 0;
+      align-items: stretch;
+      min-height: 74px;
+      background: rgba(255,255,255,.12);
+    }
+    .cell{
+      padding: 12px 12px;
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+      gap: 4px;
+      border-right: 1px solid var(--gridline);
+    }
+    .cell:last-child{ border-right: 0; }
+
+    .topline{
+      font-weight: 800;
+      font-size: 18px;
+      line-height: 1.05;
+      color: #111;
+    }
+    .botline{
+      font-size: 16px;
+      line-height: 1.05;
+      color: rgba(0,0,0,.55);
+    }
+
+    /* Sat/Sun cell: bold labels at left like screenshot */
+    .times{
+      gap: 6px;
+    }
+    .time-row{
+      display:flex;
+      align-items:baseline;
+      justify-content:flex-start;
+      gap: 10px;
+      line-height: 1.05;
+    }
+    .time-label{
+      width: 42px;
+      font-weight: 900;
+      font-size: 18px;
+      color: #111;
+    }
+    .time-val{
+      font-size: 18px;
+      color: rgba(0,0,0,.55);
+      font-weight: 700;
+    }
+
+    /* OTA cell */
+    .ota-wrap{
+      align-items:center;
+      justify-content:center;
+      gap: 10px;
+    }
+    .ota-label{
+      font-weight: 900;
+      font-size: 14px;
+      letter-spacing: .08em;
+      color: rgba(0,0,0,.55);
+      text-transform: uppercase;
+    }
+    .ota-dot{
+      width: 18px;
+      height: 18px;
+      border-radius: 999px;
+      background: rgba(0,0,0,.20); /* blank */
+      box-shadow: inset 0 0 0 2px rgba(0,0,0,.12);
+    }
+    .ota-yes{ background: var(--ota-yes); box-shadow:none; }
+    .ota-no{ background: var(--ota-no); box-shadow:none; }
+
+    /* Responsive: keep header layout stable */
+    @media (max-width: 900px){
+      .pill-group{ display:none; } /* just like your reference later; can re-enable */
+      .top-title{ padding-bottom: 8px; }
+      .any-mark{ height: 56px; width: 90px; font-size: 38px; }
+    }
+  </style>
 </head>
+
 <body>
 
-<h1>DIRECTORY 6</h1>
-<div id="status">Loading…</div>
-<div id="out"></div>
-<pre id="meta"></pre>
+  <!-- Title row -->
+  <div class="top-title">
+    <h1>DIRECTORY1</h1>
+    <div class="any-mark">(ANY)</div>
+  </div>
+
+  <!-- Green bar -->
+  <div class="sticky-bar">
+    <div class="bar-inner">
+
+      <div class="search-pill" role="search">
+        <svg class="search-icon" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M10 18a8 8 0 1 1 5.292-14.001A8 8 0 0 1 10 18Zm11.707 2.293-5.4-5.4a10 10 0 1 0-1.414 1.414l5.4 5.4a1 1 0 0 0 1.414-1.414Z"/>
+        </svg>
+        <input id="searchInput" class="search-input" type="text" autocomplete="off" spellcheck="false"
+               placeholder='Filter (e.g., "boston", "ma", "10:00 AM")' />
+        <button id="searchClear" class="search-clear" type="button" aria-label="Clear filter" title="Clear">×</button>
+      </div>
+
+      <!-- placeholders for now (visual match first) -->
+      <div class="pill-group" aria-hidden="true">
+        <div class="filter-pill"><span>Events</span><span class="caret">▾</span></div>
+        <div class="filter-pill" style="min-width:170px;"><span>Years</span><span class="caret">▾</span></div>
+        <div class="filter-pill" style="min-width:170px;"><span>States</span><span class="caret">▾</span></div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Table -->
+  <div class="wrap">
+    <table class="table" aria-label="Gym Directory">
+      <thead>
+        <tr>
+          <th style="width:50%;">Name / IG</th>
+          <th style="width:25%;">City / State</th>
+          <th style="width:20%;">Sat / Sun</th>
+          <th style="width:5%;">OTA</th>
+        </tr>
+      </thead>
+      <tbody id="tbody"></tbody>
+    </table>
+  </div>
 
 <script>
-(async function () {
-  const statusEl = document.getElementById("status");
-  const outEl = document.getElementById("out");
-  const metaEl = document.getElementById("meta");
-
-  const CSV_CANDIDATES = ["data/directory.csv", "./data/directory.csv", "/data/directory.csv"];
-
-  // Required columns in the CSV (CREATED required but not displayed)
-  const REQUIRED = ["STATE", "CITY", "NAME", "IG", "SAT", "SUN", "OTA", "CREATED"];
-
-  const toText = (v) => String(v ?? "").trim();
-
-  // -------- Normalizers (same intent as before) --------
-
-  function properCaseBasic(input) {
-    const s = toText(input);
-    if (!s) return "";
-    if (/^[a-zA-Z]{2}$/.test(s)) return s.toUpperCase();
+  // ===== Formatting helpers =====
+  function toProper(s){
+    s = (s ?? "").toString().trim();
+    if(!s) return "";
     return s
       .toLowerCase()
-      .split(" ")
-      .filter(Boolean)
-      .map(w =>
-        w.split("-").map(p =>
-          p.split("'").map(x => (x ? x[0].toUpperCase() + x.slice(1) : "")).join("'")
-        ).join("-")
-      )
+      .split(/\s+/)
+      .map(w => w ? (w[0].toUpperCase() + w.slice(1)) : "")
       .join(" ");
   }
 
-  const lowerCaseIG = (v) => toText(v).toLowerCase();
-
-  function formatTimeHMM_A(input) {
-    let raw = toText(input);
-    if (!raw) return "";
-
-    let s = raw.toLowerCase().replace(/\./g, "").replace(/\s+/g, "");
-
-    // Keep ranges as-is for now
-    if (s.includes("-") || s.includes("–") || s.includes("to")) return raw;
-
-    // 24h "21:15"
-    let m = s.match(/^([01]?\d|2[0-3]):([0-5]\d)$/);
-    if (m) {
-      let h = parseInt(m[1], 10);
-      const mm = m[2];
-      const ap = h >= 12 ? "PM" : "AM";
-      h = h % 12 || 12;
-      return `${h}:${mm} ${ap}`;
-    }
-
-    // "9am", "9:30am", "9a", "9:30p"
-    m = s.match(/^(\d{1,2})(?::([0-5]\d))?(a|p|am|pm)$/);
-    if (m) {
-      let h = parseInt(m[1], 10);
-      const mm = m[2] ?? "00";
-      const ap = m[3].startsWith("p") ? "PM" : "AM";
-      h = h % 12 || 12;
-      return `${h}:${mm} ${ap}`;
-    }
-
-    return raw;
+  function toLower(s){
+    return (s ?? "").toString().trim().toLowerCase();
   }
 
-  function normOTA(v) {
-    const s = toText(v).toUpperCase();
-    if (!s) return "";
-    if (["Y", "YES", "TRUE", "1"].includes(s)) return "Y";
-    if (["N", "NO", "FALSE", "0"].includes(s)) return "N";
-    return "";
-  }
+  function formatTime(s){
+    // Accepts things like: "10:00 AM", "10am", "10", "10:00a", "18:30", ""
+    s = (s ?? "").toString().trim();
+    if(!s) return "";
 
-  // More predictable CREATED parsing:
-  // Accepts: MM/DD/YYYY, M/D/YYYY, YYYY-MM-DD, and falls back to original text.
-  function normCreated(v) {
-    const s = toText(v);
-    if (!s) return "";
+    // Normalize separators
+    const raw = s.replace(/\./g,"").replace(/\s+/g," ").trim();
 
-    // MM/DD/YYYY
-    if (/^\d{2}\/\d{2}\/\d{4}$/.test(s)) return s;
+    // If already contains AM/PM-ish
+    const ampmMatch = raw.match(/^(\d{1,2})(?::(\d{2}))?\s*(a|p|am|pm)$/i) ||
+                      raw.match(/^(\d{1,2})(?::(\d{2}))?\s*(am|pm)$/i) ||
+                      raw.match(/^(\d{1,2})(?::(\d{2}))?\s*(a|p)$/i);
 
-    // M/D/YYYY or MM/D/YYYY etc.
-    let m = s.match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})$/);
-    if (m) {
-      const mm = String(parseInt(m[1], 10)).padStart(2, "0");
-      const dd = String(parseInt(m[2], 10)).padStart(2, "0");
-      const yyyy = m[3];
-      return `${mm}/${dd}/${yyyy}`;
+    // If includes am/pm with or without colon
+    if (ampmMatch){
+      let h = parseInt(ampmMatch[1], 10);
+      let m = parseInt(ampmMatch[2] || "00", 10);
+      const apRaw = (ampmMatch[3] || "").toLowerCase();
+      const ap = (apRaw === "a" ? "AM" : apRaw === "p" ? "PM" : apRaw.toUpperCase());
+      if (h === 0) h = 12;
+      if (h > 12) h = ((h - 1) % 12) + 1;
+      return `${h}:${String(m).padStart(2,"0")} ${ap}`;
     }
 
-    // YYYY-MM-DD
-    m = s.match(/^(\d{4})-(\d{2})-(\d{2})$/);
-    if (m) {
-      return `${m[2]}/${m[3]}/${m[1]}`;
-    }
-
-    // Fallback: try Date, but only if it produces a valid date
-    const d = new Date(s);
-    if (!isNaN(d)) {
-      const mm = String(d.getMonth() + 1).padStart(2, "0");
-      const dd = String(d.getDate()).padStart(2, "0");
-      const yyyy = d.getFullYear();
-      return `${mm}/${dd}/${yyyy}`;
-    }
-
-    return s;
-  }
-
-  // -------- CSV loading + parsing --------
-
-  async function loadCSV() {
-    let lastErr = null;
-
-    for (const url of CSV_CANDIDATES) {
-      try {
-        const res = await fetch(url, { cache: "no-store" });
-        if (!res.ok) throw new Error(`HTTP ${res.status} (${url})`);
-        const txt = await res.text();
-        if (txt.trim()) return { text: txt, usedUrl: url };
-      } catch (e) {
-        lastErr = e;
+    // If 24-hour like 18:30
+    const h24 = raw.match(/^(\d{1,2}):(\d{2})$/);
+    if (h24){
+      let h = parseInt(h24[1], 10);
+      let m = parseInt(h24[2], 10);
+      if (h >= 0 && h <= 23 && m >= 0 && m <= 59){
+        const ap = h >= 12 ? "PM" : "AM";
+        h = h % 12; if (h === 0) h = 12;
+        return `${h}:${String(m).padStart(2,"0")} ${ap}`;
       }
     }
-    throw lastErr || new Error("Failed to load CSV");
+
+    // If "10" or "7" => assume AM
+    const justHour = raw.match(/^(\d{1,2})$/);
+    if (justHour){
+      let h = parseInt(justHour[1], 10);
+      if (h >= 1 && h <= 12) return `${h}:00 AM`;
+      if (h >= 13 && h <= 23){
+        const ap = "PM";
+        h = h % 12;
+        return `${h}:00 ${ap}`;
+      }
+    }
+
+    // If "10:30" => assume AM
+    const hhmm = raw.match(/^(\d{1,2}):(\d{2})$/);
+    if (hhmm){
+      let h = parseInt(hhmm[1], 10);
+      let m = parseInt(hhmm[2], 10);
+      if (h >= 1 && h <= 12 && m >= 0 && m <= 59) return `${h}:${String(m).padStart(2,"0")} AM`;
+    }
+
+    return raw; // fallback (don’t blank unexpected inputs)
   }
 
-  function detectDelimiter(csvText) {
-    const firstLine = csvText.split(/\r?\n/).find(l => l.trim()) || "";
-    return firstLine.includes("\t") ? "\t" : ",";
+  function formatCreated(s){
+    // normalize to MM/DD/YYYY if parseable
+    const t = (s ?? "").toString().trim();
+    if(!t) return "";
+    const d = new Date(t);
+    if(!isNaN(d.getTime())){
+      const mm = String(d.getMonth()+1).padStart(2,"0");
+      const dd = String(d.getDate()).padStart(2,"0");
+      const yy = d.getFullYear();
+      return `${mm}/${dd}/${yy}`;
+    }
+    // Already MM/DD/YYYY-ish
+    const m = t.match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})$/);
+    if(m){
+      return `${String(m[1]).padStart(2,"0")}/${String(m[2]).padStart(2,"0")}/${m[3]}`;
+    }
+    return t;
   }
 
-  function parseDelimited(text, d) {
+  // ===== CSV parsing (simple + safe for your dataset) =====
+  function parseCSV(text){
     const rows = [];
-    let row = [], cur = "", inQ = false;
+    let cur = "", inQuotes = false;
+    const out = [];
+    const pushCell = () => { out.push(cur); cur = ""; };
+    const pushRow = () => { rows.push(out.splice(0)); };
 
-    for (let i = 0; i < text.length; i++) {
+    for(let i=0;i<text.length;i++){
       const c = text[i];
-      const n = text[i + 1];
-
-      if (inQ) {
-        if (c === '"' && n === '"') { cur += '"'; i++; }
-        else if (c === '"') inQ = false;
-        else cur += c;
+      if(c === '"'){
+        if(inQuotes && text[i+1] === '"'){ cur += '"'; i++; }
+        else inQuotes = !inQuotes;
+      } else if(c === "," && !inQuotes){
+        pushCell();
+      } else if((c === "\n" || c === "\r") && !inQuotes){
+        if(c === "\r" && text[i+1] === "\n") i++;
+        pushCell(); pushRow();
       } else {
-        if (c === '"') inQ = true;
-        else if (c === d) { row.push(cur); cur = ""; }
-        else if (c === "\n") {
-          row.push(cur); cur = "";
-          if (row.some(v => toText(v))) rows.push(row);
-          row = [];
-        } else if (c !== "\r") cur += c;
+        cur += c;
       }
     }
-    row.push(cur);
-    if (row.some(v => toText(v))) rows.push(row);
-    return rows;
+    if(cur.length || out.length){ pushCell(); pushRow(); }
+    return rows.filter(r => r.some(v => (v ?? "").toString().trim() !== ""));
   }
 
-  function buildIndex(headersRow) {
-    const headers = headersRow.map(h => toText(h).toUpperCase());
-    const idx = Object.fromEntries(headers.map((h, i) => [h, i]));
-    return { headers, idx };
+  function makeRow(rec){
+    const name  = toProper(rec.NAME);
+    const ig    = toLower(rec.IG);
+    const city  = toProper(rec.CITY);
+    const state = toProper(rec.STATE);
+    const sat   = formatTime(rec.SAT);
+    const sun   = formatTime(rec.SUN);
+    const otaRaw = (rec.OTA ?? "").toString().trim().toUpperCase();
+    const created = formatCreated(rec.CREATED);
+
+    const tr = document.createElement("tr");
+    const td = document.createElement("td");
+    td.colSpan = 4;
+
+    const grid = document.createElement("div");
+    grid.className = "row-grid";
+
+    const c1 = document.createElement("div");
+    c1.className = "cell";
+    c1.innerHTML = `
+      <div class="topline">${name || "—"}</div>
+      <div class="botline">${ig || "—"}</div>
+    `;
+
+    const c2 = document.createElement("div");
+    c2.className = "cell";
+    c2.innerHTML = `
+      <div class="topline">${city || "—"}</div>
+      <div class="botline">${state || "—"}</div>
+    `;
+
+    const c3 = document.createElement("div");
+    c3.className = "cell times";
+    c3.innerHTML = `
+      <div class="time-row">
+        <div class="time-label">Sat.</div>
+        <div class="time-val">${sat || ""}</div>
+      </div>
+      <div class="time-row">
+        <div class="time-label">Sun.</div>
+        <div class="time-val">${sun || ""}</div>
+      </div>
+      ${created ? `<div style="margin-top:8px;font-size:12px;color:rgba(0,0,0,.45);">Created: ${created}</div>` : ``}
+    `;
+
+    const c4 = document.createElement("div");
+    c4.className = "cell ota-wrap";
+    const dot = document.createElement("div");
+    dot.className = "ota-dot";
+    if (otaRaw === "Y") dot.classList.add("ota-yes");
+    else if (otaRaw === "N") dot.classList.add("ota-no");
+
+    c4.appendChild(document.createElement("div")).outerHTML; // no-op safeguard
+    c4.innerHTML = `<div class="ota-label">OTA</div>`;
+    c4.appendChild(dot);
+
+    grid.appendChild(c1);
+    grid.appendChild(c2);
+    grid.appendChild(c3);
+    grid.appendChild(c4);
+
+    td.appendChild(grid);
+    tr.appendChild(td);
+    return tr;
   }
 
-  // -------- Render (same layout, faster HTML string) --------
+  // ===== Load + render =====
+  const tbody = document.getElementById("tbody");
+  let allRecords = [];
 
-  function otaDotHTML(ota) {
-    if (ota === "Y") return `<span style="display:inline-block;font-size:18px;line-height:1;color:green;">●</span>`;
-    if (ota === "N") return `<span style="display:inline-block;font-size:18px;line-height:1;color:red;">●</span>`;
-    return "";
+  async function loadDirectory(){
+    const res = await fetch("data/directory.csv", { cache: "no-store" });
+    if(!res.ok) throw new Error(`Failed to load data/directory.csv (${res.status})`);
+    const text = await res.text();
+
+    const rows = parseCSV(text);
+    const header = rows.shift().map(h => (h ?? "").toString().trim().toUpperCase());
+    allRecords = rows.map(r => {
+      const obj = {};
+      header.forEach((h, i) => obj[h] = (r[i] ?? "").toString().trim());
+      // normalize keys to your expected names
+      return {
+        STATE: obj.STATE ?? "",
+        CITY: obj.CITY ?? "",
+        NAME: obj.NAME ?? "",
+        IG: obj.IG ?? "",
+        SAT: obj.SAT ?? "",
+        SUN: obj.SUN ?? "",
+        OTA: obj.OTA ?? "",
+        CREATED: obj.CREATED ?? ""
+      };
+    });
+
+    render(allRecords);
   }
 
-  // Minimal inline styles (still “unstyled”, just structure)
-  const cardStyle = "display:grid;grid-template-columns:1fr 1fr 1fr 60px;border:1px solid #000;margin-bottom:8px;";
-  const cellTop = "padding:10px;border-right:1px solid #000;border-bottom:1px solid #000;";
-  const cellTopNoRight = "padding:10px;border-bottom:1px solid #000;";
-  const cellBottom = "padding:10px;border-right:1px solid #000;";
-  const cellBottomNoRight = "padding:10px;";
-
-  function lvCell(label, value, topRow) {
-    const base = topRow ? cellTop : cellBottom;
-    return `<div style="${base}"><span style="font-weight:700;">${label}</span>&nbsp;&nbsp;<span>${escapeHTML(value ?? "")}</span></div>`;
+  function render(list){
+    tbody.innerHTML = "";
+    list.forEach(rec => tbody.appendChild(makeRow(rec)));
   }
 
-  function escapeHTML(s) {
-    return String(s ?? "")
-      .replaceAll("&", "&amp;")
-      .replaceAll("<", "&lt;")
-      .replaceAll(">", "&gt;")
-      .replaceAll('"', "&quot;")
-      .replaceAll("'", "&#039;");
+  // ===== Filter =====
+  const searchInput = document.getElementById("searchInput");
+  const searchClear = document.getElementById("searchClear");
+
+  function applyFilter(){
+    const q = searchInput.value.trim().toLowerCase();
+    if(!q){ render(allRecords); return; }
+    const filtered = allRecords.filter(r => {
+      const hay = [
+        r.STATE, r.CITY, r.NAME, r.IG, r.SAT, r.SUN, r.OTA, r.CREATED
+      ].join(" ").toLowerCase();
+      return hay.includes(q);
+    });
+    render(filtered);
   }
 
-  function renderCards(rows) {
-    let html = "";
+  searchInput.addEventListener("input", applyFilter);
+  searchClear.addEventListener("click", () => {
+    searchInput.value = "";
+    applyFilter();
+    searchInput.focus();
+  });
 
-    for (const r of rows) {
-      html += `
-        <div style="${cardStyle}">
-          <div style="${cellTop}">${escapeHTML(r.NAME)}</div>
-          <div style="${cellTop}">${escapeHTML(r.CITY)}</div>
-          ${lvCell("Sat.", r.SAT, true)}
-          <div style="${cellTopNoRight}">${otaDotHTML(r.OTA)}</div>
-
-          <div style="${cellBottom}">${escapeHTML(r.IG)}</div>
-          <div style="${cellBottom}">${escapeHTML(r.STATE)}</div>
-          ${lvCell("Sun.", r.SUN, false)}
-          <div style="${cellBottomNoRight}"></div>
-        </div>
-      `;
-    }
-
-    outEl.innerHTML = html;
-  }
-
-  // -------- Main --------
-
-  try {
-    const { text, usedUrl } = await loadCSV();
-    const delim = detectDelimiter(text);
-    const matrix = parseDelimited(text, delim);
-
-    if (!matrix.length) throw new Error("CSV empty");
-
-    const { headers, idx } = buildIndex(matrix[0]);
-
-    const missing = REQUIRED.filter(h => !(h in idx));
-    if (missing.length) {
-      statusEl.textContent = "Header mismatch ❌";
-      outEl.innerHTML = `<pre>Missing: ${missing.join(", ")}\nFound: ${headers.join(", ")}</pre>`;
-      metaEl.textContent = `Loaded from: ${usedUrl}\nDelimiter: ${delim === "\t" ? "TAB" : "COMMA"}`;
-      return;
-    }
-
-    const rows = matrix.slice(1)
-      .filter(r => r.some(c => toText(c)))
-      .map(r => ({
-        STATE:   properCaseBasic(r[idx.STATE]),
-        CITY:    properCaseBasic(r[idx.CITY]),
-        NAME:    properCaseBasic(r[idx.NAME]),
-        IG:      lowerCaseIG(r[idx.IG]),
-        SAT:     formatTimeHMM_A(r[idx.SAT]),
-        SUN:     formatTimeHMM_A(r[idx.SUN]),
-        OTA:     normOTA(r[idx.OTA]),
-        CREATED: normCreated(r[idx.CREATED])
-      }));
-
-    statusEl.textContent = `Loaded ${rows.length} rows (stacked layout + OTA dot)`;
-    renderCards(rows);
-
-    metaEl.textContent =
-      `Loaded from: ${usedUrl}\n` +
-      `Delimiter: ${delim === "\t" ? "TAB" : "COMMA"}`;
-  } catch (e) {
-    statusEl.textContent = "CSV load error ❌";
-    outEl.innerHTML = `<pre>${String(e)}</pre>`;
-    metaEl.textContent = `Tried:\n- ${CSV_CANDIDATES.join("\n- ")}`;
-  }
-})();
+  loadDirectory().catch(err => {
+    console.error(err);
+    tbody.innerHTML = `<tr><td style="padding:16px;color:#a00;font-weight:700;">${err.message}</td></tr>`;
+  });
 </script>
 
 </body>
