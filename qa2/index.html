@@ -2,11 +2,14 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
+
+  <!-- EXACT same viewport as index (6).html -->
   <meta name="viewport" content="width=1200, initial-scale=0.32, maximum-scale=0.32, user-scalable=no, viewport-fit=cover" />
+
   <title>ANY N.E. - Directory</title>
 
   <style>
-    /* === Match EVENTS page global scaling behavior === */
+    /* === MATCH index (6).html global scale === */
     html { font-size: 22px; }
 
     :root{
@@ -17,25 +20,24 @@
       --shadow2: rgba(0,0,0,0.10);
       --radius: 4px;
 
-      /* EVENTS file uses these alignment tokens */
+      /* index uses this gutter pattern */
       --left-gutter: 28px;
-      --table-start: 64px; /* visual left edge of table content (matches EVENTS tuning) */
     }
 
-    * { box-sizing: border-box; }
+    *{ box-sizing:border-box; }
     body{
-      margin: 0;
+      margin:0;
       font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
       background: var(--bg);
-      color: #111;
+      color:#111;
     }
 
-    /* Fixture (same approach as index (6).html) */
+    /* === Fixture (same approach as index (6).html) === */
     @font-face{
       font-family: 'Fixture';
       src: local('Fixture'), local('Fixture Display'), local('Fixture Condensed');
-      font-weight: 400 900;
       font-style: normal;
+      font-weight: 400 900;
     }
 
     .wrap{
@@ -45,50 +47,50 @@
       padding: 0px 28px 0px;
     }
 
-    /* === TOP TITLE ROW (match EVENTS layout) === */
+    /* === TOP (copied structure from index (6).html) === */
     .top{
       position: relative;
       z-index: 60;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
       gap: 16px;
 
-      /* this is the key “overlap” behavior you see in EVENTS */
+      /* this overlap is part of the EVENTS look */
       margin-bottom: -80px;
     }
 
     .title{
-      /* EVENTS uses table alignment for the title */
-      padding-left: var(--table-start) !important;
+      padding-left: var(--left-gutter);
 
       font-family: 'Fixture', Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
-      font-size: 72px;              /* DO NOT change: this is what becomes “huge” under initial-scale=0.32 */
+      font-size: 72px;
       letter-spacing: -0.04em;
       font-weight: 900;
       color: var(--green);
       margin: 0;
       text-transform: uppercase;
-      line-height: 0.86;            /* tighter like EVENTS */
+      line-height: 0.86;
       white-space: nowrap;
     }
 
-    /* ANY logo (top right) */
+    /* === ANY logo block (kept independent like EVENTS page) === */
     .any-logo{
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      width: 120px;
-      height: 72px;
-      margin-right: 8px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      width: 130px;
+      height: 96px;
+      margin-right: 6px;
+      transform: translateY(68px); /* matches the “logo moved down” tuning in index comments */
     }
     .any-logo img{
       width: 100%;
       height: auto;
-      display: block;
+      display:block;
     }
 
-    /* === STICKY GREEN BAR (match EVENTS) === */
+    /* === STICKY GREEN BAR (copied behavior from index) === */
     .sticky-head{
       position: sticky;
       top: 0;
@@ -99,103 +101,94 @@
     }
 
     .head-inner{
-      position: relative;
       max-width: 100%;
       margin: 0 auto;
       padding: 0 28px;
-
-      display: flex;
-      align-items: center;
-      gap: 16px;
-    }
-
-    /* === Search pill (match EVENTS sizing) === */
-    .head-search{
-      margin-left: calc(var(--table-start) - 28px);
-      flex: 0 0 auto;
-    }
-
-    .head-search-box{
       display:flex;
       align-items:center;
-      gap:6px;
-      height:28px;
-      padding:0 10px;
-      border-radius:999px;
-      background:#ffffff;
-      border:1px solid rgba(0,0,0,0.16);
-      box-shadow:0 2px 10px rgba(0,0,0,0.10);
-      max-width:290px;
-      width:min(290px, 44vw);
+      gap: 16px;
+      position: relative;
+      z-index: 40;
     }
 
-    .head-search-icon{
-      width:16px;height:16px;opacity:0.65;flex:0 0 auto;
-      display:inline-flex;align-items:center;justify-content:center;
+    /* Search pill (match EVENTS proportions) */
+    .head-search{
+      flex: 0 0 auto;
+      width: 520px;
+      max-width: 520px;
     }
-    .head-search-icon svg{ width:16px;height:16px; fill: rgba(0,0,0,0.55); }
-
-    #nlSearch{
-      width:100%;
-      border:0;
-      outline:none;
-      background:transparent;
-      color:#1f2a1f;
-      font-size:12px;
-      line-height:1;
+    .search-pill{
+      height: 44px;
+      border-radius: 999px;
+      background: #fff;
+      border: 1px solid rgba(0,0,0,0.16);
+      box-shadow: 0 2px 10px rgba(0,0,0,0.10);
+      display:flex;
+      align-items:center;
+      gap: 10px;
+      padding: 0 12px;
     }
-    #nlSearch::placeholder{ color: rgba(0,0,0,0.45); }
-
-    .head-search-clear{
-      width: 22px;
-      height: 22px;
+    .search-icon{
+      width: 18px;
+      height: 18px;
+      opacity: .55;
+      flex: 0 0 auto;
+    }
+    #searchInput{
+      width: 100%;
       border: 0;
+      outline: none;
       background: transparent;
-      color: rgba(0,0,0,0.6);
-      cursor: pointer;
       font-size: 18px;
-      line-height: 1;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
+      color: #222;
     }
+    #searchInput::placeholder{ color: rgba(0,0,0,0.45); }
 
-    /* === Pills group (visual-only for now; you can wire later) === */
+    #searchClear{
+      border:0;
+      background: transparent;
+      font-size: 26px;
+      line-height: 1;
+      padding: 0 6px;
+      cursor: pointer;
+      opacity: .55;
+    }
+    #searchClear:hover{ opacity: .8; }
+
+    /* Pills row (visual-only right now) */
     .pill-row{
       flex: 1 1 auto;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-      padding-right: 16px;
-    }
-
-    .pill{
-      height:28px;
-      display:inline-flex;
+      display:flex;
       align-items:center;
-      justify-content: space-between;
-      gap:8px;
-      padding:0 12px;
-      border-radius:999px;
-      background:#ffffff;
-      border:1px solid rgba(0,0,0,0.16);
-      box-shadow:0 2px 10px rgba(0,0,0,0.10);
-      font-size:12px;
-      color: rgba(0,0,0,0.6);
-      min-width: 110px;
-      user-select: none;
+      justify-content:center;
+      gap: 14px;
+    }
+    .pill{
+      height: 44px;
+      min-width: 190px;
+      padding: 0 18px;
+      border-radius: 999px;
+      background: #fff;
+      border: 1px solid rgba(0,0,0,0.16);
+      box-shadow: 0 2px 10px rgba(0,0,0,0.10);
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap: 12px;
+      user-select:none;
       cursor: default;
+      color: rgba(0,0,0,0.45);
+      font-weight: 600;
+      font-size: 20px;
     }
     .pill .caret{
-      opacity: 0.7;
-      font-size: 10px;
+      font-size: 18px;
+      color: rgba(0,0,0,.35);
       transform: translateY(1px);
     }
 
-    /* === TABLE === */
+    /* === TABLE (keep your directory layout) === */
     .table-wrap{
-      max-width: 100%;
       padding: 18px 28px 40px;
     }
     table{
@@ -299,13 +292,14 @@
 </head>
 
 <body>
+  <!-- TITLE ROW -->
   <div class="wrap">
     <div class="top">
-      <h1 class="title">DIRECTORY5</h1>
+      <!-- iteration marker -->
+      <h1 class="title">DIRECTORY10</h1>
 
-      <!-- ANY logo (same position as EVENTS screenshot) -->
+      <!-- ANY (use your real asset here if you have it; this is just a safe placeholder) -->
       <div class="any-logo" aria-label="ANY logo">
-        <!-- If you already have your own logo asset path, replace the src with it. -->
         <img
           alt="ANY"
           src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 240 140'%3E%3Crect x='8' y='12' width='224' height='116' rx='34' ry='34' fill='none' stroke='%23234c31' stroke-width='6'/%3E%3Ctext x='120' y='92' text-anchor='middle' font-family='Fixture, Impact, Arial Narrow, sans-serif' font-size='72' font-weight='900' fill='%23234c31'%3EANY%3C/text%3E%3C/svg%3E"
@@ -314,34 +308,37 @@
     </div>
   </div>
 
+  <!-- GREEN BAR -->
   <div class="sticky-head">
     <div class="head-inner">
       <div class="head-search">
-        <div class="head-search-box">
-          <span class="head-search-icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24"><path d="M10 18a8 8 0 1 1 5.293-14.02A8 8 0 0 1 10 18Zm11.707 2.293-5.386-5.386a9.5 9.5 0 1 0-1.414 1.414l5.386 5.386a1 1 0 0 0 1.414-1.414Z"/></svg>
-          </span>
-          <input id="nlSearch" type="text" placeholder='Filter (e.g., "boston", "ma", "10:00 AM")' />
-          <button class="head-search-clear" id="clearBtn" aria-label="Clear">×</button>
+        <div class="search-pill" role="search">
+          <svg class="search-icon" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M10 18a8 8 0 1 1 5.293-14.02A8 8 0 0 1 10 18Zm11.707 2.293-5.386-5.386a9.5 9.5 0 1 0-1.414 1.414l5.386 5.386a1 1 0 0 0 1.414-1.414Z"/>
+          </svg>
+          <input id="searchInput" type="text" autocomplete="off" spellcheck="false"
+                 placeholder='Filter (e.g., "boston", "ma", "10:00 AM")' />
+          <button id="searchClear" type="button" aria-label="Clear filter" title="Clear">×</button>
         </div>
       </div>
 
       <div class="pill-row" aria-hidden="true">
-        <div class="pill">Events <span class="caret">▼</span></div>
-        <div class="pill">Years <span class="caret">▼</span></div>
-        <div class="pill">States <span class="caret">▼</span></div>
+        <div class="pill"><span>Events</span><span class="caret">▾</span></div>
+        <div class="pill" style="min-width:170px;"><span>Years</span><span class="caret">▾</span></div>
+        <div class="pill" style="min-width:170px;"><span>States</span><span class="caret">▾</span></div>
       </div>
     </div>
   </div>
 
+  <!-- TABLE -->
   <div class="table-wrap">
     <table>
       <thead>
         <tr>
-          <th style="width: 44%;">NAME / IG</th>
-          <th style="width: 22%;">CITY / STATE</th>
-          <th style="width: 22%;">SAT / SUN</th>
-          <th style="width: 12%;">OTA</th>
+          <th style="width:44%;">NAME / IG</th>
+          <th style="width:22%;">CITY / STATE</th>
+          <th style="width:22%;">SAT / SUN</th>
+          <th style="width:12%;">OTA</th>
         </tr>
       </thead>
       <tbody id="rowsBody">
@@ -351,10 +348,17 @@
   </div>
 
   <script>
-    const CSV_PATH = "data/directory.csv"; // keep your git path
     const rowsBody = document.getElementById("rowsBody");
-    const nlSearch = document.getElementById("nlSearch");
-    const clearBtn = document.getElementById("clearBtn");
+    const searchInput = document.getElementById("searchInput");
+    const searchClear = document.getElementById("searchClear");
+
+    // IMPORTANT: try multiple locations so /qa2/ works even if /data is at site root
+    const CSV_CANDIDATES = [
+      "/data/directory.csv",        // site root (works on GitHub Pages even from /qa2/)
+      "./data/directory.csv",       // same folder as this page
+      "data/directory.csv",         // relative
+      "../data/directory.csv"       // one level up (common in /qa2/ setups)
+    ];
 
     function toProper(str){
       const s = (str ?? "").toString().trim();
@@ -368,20 +372,15 @@
         })
         .join("");
     }
-
-    function toLowerSafe(str){
-      return (str ?? "").toString().trim().toLowerCase();
-    }
+    function toLowerSafe(str){ return (str ?? "").toString().trim().toLowerCase(); }
 
     function normalizeTime(t){
       const raw = (t ?? "").toString().trim();
       if(!raw) return "";
       const up = raw.replace(/\s+/g, " ").trim().toUpperCase();
 
-      // Accept already formatted "H:MM AM/PM"
-      if (/^\d{1,2}:\d{2}\s?(AM|PM)$/.test(up)) return up.replace(" ", " ");
+      if (/^\d{1,2}:\d{2}\s?(AM|PM)$/.test(up)) return up.replace(/\s+/g," ").trim();
 
-      // Accept "H AM" / "HPM" / "H:MMam"
       const m = up.match(/^(\d{1,2})(?::(\d{2}))?\s*(A|P)M?$/);
       if(!m) return up;
 
@@ -392,23 +391,19 @@
       if (Number.isNaN(hh) || hh < 1 || hh > 12) return up;
       if (Number.isNaN(mm) || mm < 0 || mm > 59) mm = 0;
 
-      const mmStr = String(mm).padStart(2, "0");
-      return `${hh}:${mmStr} ${ap}`;
+      return `${hh}:${String(mm).padStart(2,"0")} ${ap}`;
     }
 
-    function normalizeDate(d){
-      const raw = (d ?? "").toString().trim();
-      if(!raw) return "";
-      // Expect MM/DD/YYYY already; keep if valid-ish
-      if (/^\d{1,2}\/\d{1,2}\/\d{4}$/.test(raw)) {
-        const [m, day, y] = raw.split("/").map(x => x.padStart(2, "0"));
-        return `${m}/${day}/${y}`;
-      }
-      return raw;
+    function escapeHTML(s){
+      return (s ?? "").toString()
+        .replaceAll("&","&amp;")
+        .replaceAll("<","&lt;")
+        .replaceAll(">","&gt;")
+        .replaceAll('"',"&quot;")
+        .replaceAll("'","&#039;");
     }
 
     function parseCSV(text){
-      // Simple CSV parser with quotes support
       const rows = [];
       let cur = [];
       let val = "";
@@ -418,18 +413,18 @@
         const ch = text[i];
         const next = text[i+1];
 
-        if (ch === '"' ){
+        if (ch === '"'){
           if (inQuotes && next === '"'){ val += '"'; i++; }
           else inQuotes = !inQuotes;
           continue;
         }
 
         if (!inQuotes && (ch === "," || ch === "\n" || ch === "\r")){
-          if (ch === "\r" && next === "\n"){ /* windows newline */ }
           cur.push(val);
           val = "";
 
           if (ch === "\n" || ch === "\r"){
+            if (ch === "\r" && next === "\n") i++;
             if (cur.length > 1 || cur.some(c => (c ?? "").trim() !== "")) rows.push(cur);
             cur = [];
           }
@@ -439,11 +434,12 @@
         val += ch;
       }
       cur.push(val);
-      rows.push(cur);
+      if (cur.length) rows.push(cur);
       return rows;
     }
 
     let allRows = [];
+
     function render(rows){
       if(!rows.length){
         rowsBody.innerHTML = `<tr><td class="error" colspan="4">No rows found.</td></tr>`;
@@ -455,7 +451,6 @@
         const ig = toLowerSafe(r.IG);
         const city = toProper(r.CITY);
         const state = toProper(r.STATE);
-
         const sat = normalizeTime(r.SAT);
         const sun = normalizeTime(r.SUN);
 
@@ -499,19 +494,9 @@
       }).join("");
     }
 
-    function escapeHTML(s){
-      return (s ?? "").toString()
-        .replaceAll("&","&amp;")
-        .replaceAll("<","&lt;")
-        .replaceAll(">","&gt;")
-        .replaceAll('"',"&quot;")
-        .replaceAll("'","&#039;");
-    }
-
     function applySearch(){
-      const q = (nlSearch.value ?? "").toString().trim().toLowerCase();
+      const q = (searchInput.value ?? "").toString().trim().toLowerCase();
       if(!q){ render(allRows); return; }
-
       const filtered = allRows.filter(r => {
         const blob = [
           r.STATE, r.CITY, r.NAME, r.IG, r.SAT, r.SUN, r.OTA, r.CREATED
@@ -521,46 +506,54 @@
       render(filtered);
     }
 
-    clearBtn.addEventListener("click", () => {
-      nlSearch.value = "";
+    searchInput.addEventListener("input", applySearch);
+    searchClear.addEventListener("click", () => {
+      searchInput.value = "";
       applySearch();
-      nlSearch.focus();
+      searchInput.focus();
     });
 
-    nlSearch.addEventListener("input", applySearch);
+    async function fetchFirst(urls){
+      let lastErr = null;
+      for(const u of urls){
+        try{
+          const res = await fetch(u, { cache: "no-store" });
+          if(!res.ok) throw new Error(`${u} (${res.status})`);
+          const txt = await res.text();
+          if (txt.trim()) return txt;
+        }catch(e){ lastErr = e; }
+      }
+      throw lastErr || new Error("Failed to load CSV");
+    }
 
     (async function init(){
       try{
-        const res = await fetch(CSV_PATH, { cache: "no-store" });
-        if(!res.ok) throw new Error(`Failed to load ${CSV_PATH} (${res.status})`);
-        const text = await res.text();
-
+        const text = await fetchFirst(CSV_CANDIDATES);
         const parsed = parseCSV(text);
-        const header = parsed.shift().map(h => (h ?? "").toString().trim().toUpperCase());
 
+        const header = parsed.shift().map(h => (h ?? "").toString().trim().toUpperCase());
         const idx = (name) => header.indexOf(name);
 
-        allRows = parsed
-          .map(cols => {
-            const get = (h) => {
-              const i = idx(h);
-              return i >= 0 ? (cols[i] ?? "").toString().trim() : "";
-            };
-            return {
-              STATE: get("STATE"),
-              CITY: get("CITY"),
-              NAME: get("NAME"),
-              IG: get("IG"),
-              SAT: get("SAT"),
-              SUN: get("SUN"),
-              OTA: get("OTA"),
-              CREATED: get("CREATED")
-            };
-          });
+        allRows = parsed.map(cols => {
+          const get = (h) => {
+            const i = idx(h);
+            return i >= 0 ? (cols[i] ?? "").toString().trim() : "";
+          };
+          return {
+            STATE: get("STATE"),
+            CITY: get("CITY"),
+            NAME: get("NAME"),
+            IG: get("IG"),
+            SAT: get("SAT"),
+            SUN: get("SUN"),
+            OTA: get("OTA"),
+            CREATED: get("CREATED")
+          };
+        });
 
         render(allRows);
       }catch(err){
-        rowsBody.innerHTML = `<tr><td class="error" colspan="4">${escapeHTML(err.message)}</td></tr>`;
+        rowsBody.innerHTML = `<tr><td class="error" colspan="4">Failed to load directory.csv — tried: ${escapeHTML(CSV_CANDIDATES.join(", "))}</td></tr>`;
       }
     })();
   </script>
