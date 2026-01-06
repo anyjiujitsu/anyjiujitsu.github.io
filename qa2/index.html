@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=1200, initial-scale=0.32, maximum-scale=0.32, user-scalable=no, viewport-fit=cover" />
+  <title>ANY N.E. – Directory</title>
+
+  <style>
+    :root{
+      --green:#234c31;
+      --bg:#ebebeb;
+      --row:#e2e4e4;
+      --beige:#ebdeca;
+    }
+
+    @font-face{
+      font-family:'Fixture';
+      src: local('Fixture'), local('Fixture Display'), local('Fixture Condensed');
+      font-weight: 400 900;
+    }
+
+    *{ box-sizing:border-box; }
+
+    body{
+      margin:0;
+      background:var(--bg);
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+    }
+
+    .wrap{
+      padding:24px;
+    }
+
+    .title{
+      font-family:'Fixture', Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+      font-size:72px;
+      font-weight:900;
+      letter-spacing:-0.04em;
+      color:var(--green);
+      margin-bottom:18px;
+    }
+
+    .state-group{
+      margin-bottom:28px;
+    }
+
+    .state-label{
+      font-size:12px;
+      font-weight:800;
+      letter-spacing:0.08em;
+      color:rgba(0,0,0,0.55);
+      margin-left:240px;
+      margin-bottom:10px;
+    }
+
+    .card-body{
+      background:var(--row);
+      box-shadow:0 6px 14px rgba(0,0,0,0.12);
+      width:fit-content;
+      margin:auto;
+    }
+
+    .row{
+      display:grid;
+      grid-template-columns:220px 170px 150px 120px 120px 70px;
+      border-bottom:1px solid rgba(0,0,0,0.06);
+      align-items:center;
+    }
+
+    .row:last-child{ border-bottom:none; }
+
+    .cell{
+      padding:10px 14px;
+      font-size:12px;
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
+    }
+
+    .cell.first{
+      background:var(--beige);
+      font-weight:900;
+      display:flex;
+      align-items:center;
+      gap:6px;
+    }
+
+    .ico{
+      width:14px;
+      height:14px;
+      opacity:.35;
+    }
+
+    .inline{
+      display:flex;
+      align-items:center;
+      gap:6px;
+    }
+
+    .dot{
+      width:10px;
+      height:10px;
+      border-radius:50%;
+      background:#bbb;
+    }
+
+    .dot.y{
+      background:#28a745;
+      box-shadow:0 0 6px rgba(40,167,69,.9);
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+    <div class="title">DIRECTORY</div>
+    <div id="directoryRoot"></div>
+  </div>
+
+  <script>
+    fetch('./directory.csv',{cache:'no-store'})
+      .then(r=>r.text())
+      .then(text=>{
+        const lines=text.trim().split('\n');
+        const headers=lines.shift().split(',');
+        const rows=lines.map(l=>{
+          const o={};
+          l.split(',').forEach((v,i)=>o[headers[i]]=v.trim());
+          return o;
+        });
+
+        const byState={};
+        rows.forEach(r=>{
+          if(!byState[r.STATE]) byState[r.STATE]=[];
+          byState[r.STATE].push(r);
+        });
+
+        Object.keys(byState).sort().forEach(state=>{
+          const group=document.createElement('div');
+          group.className='state-group';
+
+          const label=document.createElement('div');
+          label.className='state-label';
+          label.textContent=state;
+          group.appendChild(label);
+
+          const body=document.createElement('div');
+          body.className='card-body';
+
+          byState[state]
+            .sort((a,b)=>a.NAME.localeCompare(b.NAME))
+            .forEach(r=>{
+              const row=document.createElement('div');
+              row.className='row';
+
+              row.innerHTML=`
+                <div class="cell first"><span class="ico">■</span>${r.NAME}</div>
+                <div class="cell"><div class="inline"><span class="ico">■</span>${r.CITY}</div></div>
+                <div class="cell"><div class="inline"><span class="ico">■</span>${r.IG}</div></div>
+                <div class="cell"><div class="inline"><span class="ico">■</span>${r.SAT}</div></div>
+                <div class="cell"><div class="inline"><span class="ico">■</span>${r.SUN}</div></div>
+                <div class="cell"><div class="inline"><span class="dot ${r.OTA==='Y'?'y':''}"></span></div></div>
+              `;
+              body.appendChild(row);
+            });
+
+          group.appendChild(body);
+          directoryRoot.appendChild(group);
+        });
+      });
+  </script>
+</body>
+</html>
