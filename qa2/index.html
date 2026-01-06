@@ -1,22 +1,27 @@
-<!-- DIRECTORY 11 -->
 <!doctype html>
+<!-- DIRECTORY 12 -->
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>DIRECTORY 11</title>
+  <!-- Keep standard viewport. If your EVENTS page uses a fixed viewport+scale, copy it here verbatim. -->
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ANY N.E. – DIRECTORY12</title>
 
   <style>
     :root{
       --green:#234c31;
       --bg:#ebebeb;
+      --panel:#f0f0f0;
       --row:#e9e9e9;
       --row2:#e6e6e6;
       --line:rgba(0,0,0,0.10);
-      --shadow: rgba(0,0,0,0.20);
-      --white:#ffffff;
+      --shadow: 0 10px 18px rgba(0,0,0,0.10);
       --pillShadow: 0 2px 10px rgba(0,0,0,0.10);
       --wrapPad: 28px;
+
+      --ota-yes:#18b15b;
+      --ota-no:#d74b4b;
+      --ota-neutral:#bdbdbd;
     }
 
     *{ box-sizing:border-box; }
@@ -27,7 +32,7 @@
       color:#111;
     }
 
-    /* Fixture (match EVENTS page behavior: local only) */
+    /* Fixture (local install) */
     @font-face{
       font-family:'Fixture';
       src: local('Fixture'), local('Fixture Display'), local('Fixture Condensed');
@@ -35,7 +40,7 @@
       font-style: normal;
     }
 
-    /* ===== Top Title Row (matches EVENTS layout) ===== */
+    /* ===== Title Row ===== */
     .top{
       display:flex;
       align-items:flex-end;
@@ -43,7 +48,6 @@
       padding: 18px var(--wrapPad) 6px;
       gap:16px;
     }
-
     .title{
       margin:0;
       font-family:'Fixture', Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
@@ -51,14 +55,10 @@
       text-transform:uppercase;
       letter-spacing:-0.04em;
       color:var(--green);
-
-      /* This is the key to matching EVENTS: big, but NOT centered, and tight vertically */
       font-size: 96px;
       line-height: 0.82;
       white-space:nowrap;
     }
-
-    /* Right logo (simple “ANY” pill like your DIRECTORY screenshot) */
     .any-logo{
       display:flex;
       align-items:center;
@@ -76,7 +76,7 @@
       flex: 0 0 auto;
     }
 
-    /* ===== Green Nav Bar ===== */
+    /* ===== Sticky Green Bar ===== */
     .sticky-head{
       position: sticky;
       top: 0;
@@ -85,7 +85,6 @@
       padding: 12px var(--wrapPad);
       box-shadow: 0 6px 14px rgba(0,0,0,0.18);
     }
-
     .head-inner{
       display:flex;
       align-items:center;
@@ -102,7 +101,7 @@
       height: 36px;
       padding: 0 12px;
       border-radius: 999px;
-      background: var(--white);
+      background: #fff;
       border: 1px solid rgba(0,0,0,0.16);
       box-shadow: var(--pillShadow);
     }
@@ -131,7 +130,7 @@
       color: rgba(0,0,0,0.55);
     }
 
-    /* Filter pills (visual only for now) */
+    /* Visual-only pills */
     .pill-row{
       display:flex;
       align-items:center;
@@ -143,7 +142,7 @@
       height: 36px;
       padding: 0 18px;
       border-radius: 999px;
-      background: var(--white);
+      background: #fff;
       border: 1px solid rgba(0,0,0,0.16);
       box-shadow: var(--pillShadow);
       color: rgba(0,0,0,0.55);
@@ -173,7 +172,7 @@
       border-collapse: separate;
       border-spacing: 0;
       background: transparent;
-      box-shadow: 0 10px 18px rgba(0,0,0,0.08);
+      box-shadow: var(--shadow);
     }
     thead th{
       text-align:left;
@@ -182,15 +181,11 @@
       text-transform: uppercase;
       color: rgba(0,0,0,0.55);
       padding: 14px 16px;
-      background: #f0f0f0;
+      background: var(--panel);
       border-bottom: 1px solid var(--line);
     }
-    tbody tr{
-      background: var(--row);
-    }
-    tbody tr:nth-child(even){
-      background: var(--row2);
-    }
+    tbody tr{ background: var(--row); }
+    tbody tr:nth-child(even){ background: var(--row2); }
     tbody td{
       padding: 16px;
       vertical-align: middle;
@@ -199,13 +194,11 @@
     }
     tbody td:last-child{ border-right: 0; }
 
-    /* Column widths similar to screenshot */
     .col-name{ width: 44%; }
     .col-city{ width: 24%; }
     .col-times{ width: 20%; }
     .col-ota{ width: 12%; text-align:center; }
 
-    /* Stacked cell styles */
     .stack{
       display:flex;
       flex-direction:column;
@@ -235,6 +228,7 @@
     .timeval{
       font-weight: 600;
       color: rgba(0,0,0,0.55);
+      white-space: nowrap;
     }
 
     .ota-cell{
@@ -256,20 +250,25 @@
       height: 16px;
       border-radius: 50%;
       border: 2px solid rgba(0,0,0,0.18);
-      background: #bdbdbd; /* blank/default */
+      background: var(--ota-neutral);
     }
     .dot.y{
-      background: #18b15b;
+      background: var(--ota-yes);
       border-color: rgba(0,0,0,0.10);
       box-shadow: 0 0 0 6px rgba(24,177,91,0.12);
     }
     .dot.n{
-      background: #d74b4b;
+      background: var(--ota-no);
       border-color: rgba(0,0,0,0.10);
       box-shadow: 0 0 0 6px rgba(215,75,75,0.12);
     }
 
-    /* ===== Responsive (keep feel similar) ===== */
+    .err{
+      padding: 16px;
+      color: #b30000;
+      font-weight: 700;
+    }
+
     @media (max-width: 1100px){
       .title{ font-size: 78px; }
       .head-search{ min-width: 320px; }
@@ -281,31 +280,28 @@
       .any-logo{ width: 108px; height: 52px; font-size: 30px; }
       .head-inner{ gap: 12px; }
       .head-search{ min-width: 0; flex: 1 1 auto; }
-      .pill-row{ display:none; } /* like your EVENTS mobile behavior */
+      .pill-row{ display:none; }
       .main{ font-size: 16px; }
     }
   </style>
 </head>
 
 <body>
-  <!-- Title Row -->
   <div class="top">
-    <h1 class="title">DIRECTORY11</h1>
+    <h1 class="title">DIRECTORY12</h1>
     <div class="any-logo">ANY</div>
   </div>
 
-  <!-- Green bar -->
   <div class="sticky-head">
     <div class="head-inner">
       <div class="head-search" role="search">
         <svg class="search-ico" viewBox="0 0 24 24" aria-hidden="true">
-          <path fill="rgba(0,0,0,0.55)" d="M10 18a8 8 0 1 1 5.29-14.01A8 8 0 0 1 10 18Zm11.71 2.29-5.4-5.4a10 10 0 1 0-1.41 1.41l5.4 5.4a1 1 0 0 0 1.41-1.41Z"/>
+          <path fill="rgba(0,0,0,0.55)" d="M10 18a8 8 0 1 1 5.292-14.001A8 8 0 0 1 10 18Zm11.707 2.293-5.4-5.4a10 10 0 1 0-1.414 1.414l5.4 5.4a1 1 0 0 0 1.414-1.414Z"/>
         </svg>
         <input id="searchInput" type="text" placeholder='Filter (e.g., "boston", "ma", "10:00 AM")' />
         <button class="clear-btn" id="clearBtn" aria-label="Clear">×</button>
       </div>
 
-      <!-- Visual only (kept to match screenshot) -->
       <div class="pill-row" aria-hidden="true">
         <div class="pill">Events <span class="caret"></span></div>
         <div class="pill">Years <span class="caret"></span></div>
@@ -314,9 +310,8 @@
     </div>
   </div>
 
-  <!-- Table -->
   <div class="wrap">
-    <table class="table" id="dirTable">
+    <table class="table">
       <thead>
         <tr>
           <th class="col-name">NAME / IG</th>
@@ -332,9 +327,44 @@
   </div>
 
   <script>
-    // ===== Formatting helpers =====
+    // ===== CSV path robustness for GitHub Pages subfolders =====
+    function csvPathCandidates(filename){
+      const basePath = location.pathname.endsWith("/")
+        ? location.pathname
+        : location.pathname.slice(0, location.pathname.lastIndexOf("/") + 1);
+
+      return [
+        `data/${filename}`,
+        `./data/${filename}`,
+        `${basePath}data/${filename}`,
+        `../data/${filename}`,
+        `/data/${filename}`,
+      ];
+    }
+
+    async function fetchFirstOk(paths){
+      let lastErr;
+      for(const p of paths){
+        try{
+          const res = await fetch(p, { cache: "no-store" });
+          if(res.ok) return { res, path: p };
+          lastErr = new Error(`${p} (${res.status})`);
+        }catch(e){
+          lastErr = e;
+        }
+      }
+      throw lastErr || new Error("All CSV paths failed.");
+    }
+
+    // ===== Helpers =====
+    function escapeHTML(s){
+      return (s ?? "").toString().replace(/[&<>"']/g, c => ({
+        "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
+      }[c]));
+    }
+
     function toProper(str){
-      const s = (str ?? "").trim();
+      const s = (str ?? "").toString().trim();
       if(!s) return "";
       return s
         .toLowerCase()
@@ -343,52 +373,44 @@
         .join(" ");
     }
 
-    function normalizeIG(str){
-      return (str ?? "").trim().toLowerCase();
-    }
+    function normalizeIG(str){ return (str ?? "").toString().trim().toLowerCase(); }
 
     function normalizeOta(str){
-      const v = (str ?? "").trim().toUpperCase();
+      const v = (str ?? "").toString().trim().toUpperCase();
       if(v === "Y") return "Y";
       if(v === "N") return "N";
-      return ""; // blank/other
+      return "";
     }
 
     function normalizeTime(str){
-      // Goal: H:MM AM (or blank)
-      const raw = (str ?? "").trim();
+      // Desired output: H:MM AM (or blank). Keeps unknown formats as-is.
+      const raw = (str ?? "").toString().trim();
       if(!raw) return "";
 
-      // Accept: "11am", "11:00AM", "11:00 AM", "11", "11 a", etc.
       const m = raw
         .replace(/\./g,"")
         .replace(/\s+/g," ")
         .toUpperCase()
         .match(/^(\d{1,2})(?::?(\d{2}))?\s*(A|P)?M?$/);
 
-      if(!m) return raw; // don't destroy unknown formats
+      if(!m) return raw;
 
       let hh = parseInt(m[1], 10);
       let mm = m[2] ? parseInt(m[2], 10) : 0;
-      let ap = m[3] ? (m[3] === "A" ? "AM" : "PM") : "";
+      const ap = m[3] ? (m[3] === "A" ? "AM" : "PM") : "";
 
-      // If AM/PM missing, keep original raw (user might want blank)
-      if(!ap) return raw;
+      if(!ap) return raw; // don’t guess AM/PM
 
-      // Clamp minutes to 0-59
       if(Number.isNaN(mm) || mm < 0 || mm > 59) mm = 0;
-
-      // Convert to 12-hour safely
       if(hh === 0) hh = 12;
       if(hh > 12) hh = hh % 12 || 12;
 
-      const mm2 = String(mm).padStart(2,"0");
-      return `${hh}:${mm2} ${ap}`;
+      return `${hh}:${String(mm).padStart(2,"0")} ${ap}`;
     }
 
     function normalizeCreated(str){
-      // Goal: MM/DD/YYYY (or blank)
-      const raw = (str ?? "").trim();
+      // Desired: MM/DD/YYYY (or blank). Keeps unknown formats as-is.
+      const raw = (str ?? "").toString().trim();
       if(!raw) return "";
       const m = raw.match(/^(\d{1,2})[\/\-](\d{1,2})[\/\-](\d{2}|\d{4})$/);
       if(!m) return raw;
@@ -399,7 +421,7 @@
       return `${mm}/${dd}/${yy}`;
     }
 
-    // Simple CSV parse that respects quoted commas.
+    // CSV parser (handles quoted commas)
     function parseCSV(text){
       const rows = [];
       let cur = [];
@@ -419,17 +441,12 @@
 
         if(ch === '"'){ inQ = true; continue; }
 
-        if(ch === ","){
-          cur.push(val);
-          val = "";
-          continue;
-        }
+        if(ch === ","){ cur.push(val); val=""; continue; }
 
         if(ch === "\n"){
           cur.push(val);
           rows.push(cur);
-          cur = [];
-          val = "";
+          cur=[]; val="";
           continue;
         }
 
@@ -438,7 +455,6 @@
         val += ch;
       }
 
-      // last field
       if(val.length || cur.length){
         cur.push(val);
         rows.push(cur);
@@ -447,8 +463,6 @@
     }
 
     // ===== Render =====
-    const CSV_PATH = "data/directory.csv"; // keep as requested
-
     const tbody = document.getElementById("tbody");
     const searchInput = document.getElementById("searchInput");
     const clearBtn = document.getElementById("clearBtn");
@@ -457,60 +471,42 @@
 
     function render(list){
       tbody.innerHTML = "";
-
       if(!list.length){
-        const tr = document.createElement("tr");
-        tr.innerHTML = `<td colspan="4" style="padding:18px;color:rgba(0,0,0,0.55);">No matches.</td>`;
-        tbody.appendChild(tr);
+        tbody.innerHTML = `<tr><td colspan="4" style="padding:18px;color:rgba(0,0,0,0.55);">No matches.</td></tr>`;
         return;
       }
 
       for(const r of list){
-        const tr = document.createElement("tr");
-
-        const nameCell = `
-          <div class="stack">
-            <div class="main">${escapeHTML(r.NAME)}</div>
-            <div class="sub">${escapeHTML(r.IG)}</div>
-          </div>
-        `;
-
-        const cityCell = `
-          <div class="stack">
-            <div class="main">${escapeHTML(r.CITY)}</div>
-            <div class="sub">${escapeHTML(r.STATE)}</div>
-          </div>
-        `;
-
-        const timesCell = `
-          <div class="stack">
-            <div class="times-row"><span class="daylbl">Sat.</span><span class="timeval">${escapeHTML(r.SAT)}</span></div>
-            <div class="times-row"><span class="daylbl">Sun.</span><span class="timeval">${escapeHTML(r.SUN)}</span></div>
-          </div>
-        `;
-
         const dotClass = r.OTA === "Y" ? "dot y" : (r.OTA === "N" ? "dot n" : "dot");
-        const otaCell = `
-          <div class="ota-cell">
-            <div class="ota-label">OTA</div>
-            <div class="${dotClass}" title="${r.OTA === "Y" ? "Y" : (r.OTA === "N" ? "N" : "—")}"></div>
-          </div>
-        `;
-
+        const tr = document.createElement("tr");
         tr.innerHTML = `
-          <td class="col-name">${nameCell}</td>
-          <td class="col-city">${cityCell}</td>
-          <td class="col-times">${timesCell}</td>
-          <td class="col-ota">${otaCell}</td>
+          <td class="col-name">
+            <div class="stack">
+              <div class="main">${escapeHTML(r.NAME)}</div>
+              <div class="sub">${escapeHTML(r.IG)}</div>
+            </div>
+          </td>
+          <td class="col-city">
+            <div class="stack">
+              <div class="main">${escapeHTML(r.CITY)}</div>
+              <div class="sub">${escapeHTML(r.STATE)}</div>
+            </div>
+          </td>
+          <td class="col-times">
+            <div class="stack">
+              <div class="times-row"><span class="daylbl">Sat.</span><span class="timeval">${escapeHTML(r.SAT)}</span></div>
+              <div class="times-row"><span class="daylbl">Sun.</span><span class="timeval">${escapeHTML(r.SUN)}</span></div>
+            </div>
+          </td>
+          <td class="col-ota">
+            <div class="ota-cell">
+              <div class="ota-label">OTA</div>
+              <div class="${dotClass}" title="${r.OTA || "—"}"></div>
+            </div>
+          </td>
         `;
         tbody.appendChild(tr);
       }
-    }
-
-    function escapeHTML(s){
-      return (s ?? "").replace(/[&<>"']/g, c => ({
-        "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
-      }[c]));
     }
 
     function applySearch(){
@@ -532,11 +528,12 @@
 
     (async function init(){
       try{
-        const res = await fetch(CSV_PATH, { cache: "no-store" });
-        if(!res.ok) throw new Error(`Failed to load ${CSV_PATH} (${res.status})`);
+        const filename = "directory.csv";
+        const paths = csvPathCandidates(filename);
+        const { res, path } = await fetchFirstOk(paths);
         const text = await res.text();
-        const rows = parseCSV(text);
 
+        const rows = parseCSV(text);
         if(rows.length < 2){
           data = [];
           render(data);
@@ -556,7 +553,7 @@
         const iCRE   = idx("CREATED");
 
         data = rows.slice(1)
-          .filter(r => r.some(x => (x ?? "").trim() !== ""))
+          .filter(r => r.some(x => (x ?? "").toString().trim() !== ""))
           .map(r => ({
             STATE: toProper(r[iSTATE]),
             CITY:  toProper(r[iCITY]),
@@ -568,9 +565,10 @@
             CREATED: normalizeCreated(r[iCRE]),
           }));
 
+        console.log("Loaded CSV from:", path, "rows:", data.length);
         render(data);
       }catch(err){
-        tbody.innerHTML = `<tr><td colspan="4" style="padding:18px;color:#b30000;font-weight:700;">${escapeHTML(err.message)}</td></tr>`;
+        tbody.innerHTML = `<tr><td colspan="4" class="err">${escapeHTML(err.message)}</td></tr>`;
       }
     })();
   </script>
