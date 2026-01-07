@@ -2347,7 +2347,7 @@ body { overflow-y: auto; }
 @media (max-width: 500px) { #directoryRoot { transform: scale(0.90); } }
 
 /* State group label: same feel as .month-label */
-.state-card{ margin: 18px auto 22px; width: 880px; }
+.state-card{ margin: 18px auto 22px; width: fit-content; max-width: calc(100% - 40px); }
 .state-label{ font-weight:800; color: rgba(0,0,0,0.55); letter-spacing:0.08em; text-transform:uppercase; font-size:12px; margin: 0 0 10px; white-space:nowrap; overflow: visible; }
 @media (max-width: 700px){ .state-label{ font-weight:800; color: rgba(0,0,0,0.55); letter-spacing:0.08em; text-transform:uppercase; font-size:12px; margin: 0 0 10px; white-space:nowrap; overflow: visible; } }
 
@@ -2355,7 +2355,9 @@ body { overflow-y: auto; }
 
 /* Table shell: matches reference card-body density (no headers) */
 .directory-table{
-  width: min(920px, calc(100% - 40px));
+  display: inline-table;
+  width: max-content;
+  max-width: calc(100% - 40px);
   margin: 0 auto;
   table-layout: fixed;
   margin: 0 auto;
@@ -2377,12 +2379,12 @@ body { overflow-y: auto; }
 }
 .directory-table tbody tr:last-child td{ border-bottom: none; }
 .directory-table tbody td:last-child{ border-right: 0; }
-.directory-table tbody td.dir-col-times{ width: 140px; padding-left: 6px; padding-right: 6px; }
-.directory-table tbody td.dir-col-ota{ width: 34px; padding-left: 4px; padding-right: 4px; }
+.directory-table tbody td.dir-col-times{ width: 120px; padding-left: 6px; padding-right: 6px; }
+.directory-table tbody td.dir-col-ota{ width: 26px; padding-left: 4px; padding-right: 4px; }
 
 /* Column sizing to mirror the reference grid feel */
-.directory-table tbody td.dir-col-name{ width: 340px; }
-.directory-table tbody td.dir-col-city{ width: 200px; padding-left:10px; padding-right:10px; }
+.directory-table tbody td.dir-col-name{ width: 320px; }
+.directory-table tbody td.dir-col-city{ width: 160px; padding-left:10px; padding-right:10px; }
 
 .dir-col-name{ width: 220px; background: var(--beige); font-weight: 900; }
 .dir-col-city{ width: 200px; padding-left:10px; padding-right:10px; }
@@ -2448,13 +2450,12 @@ body { overflow-y: auto; }
 .dir-err{ padding:16px; color:#b30000; font-weight:700; }
 
   
-/* === WIDTH TUNE v502 (match EVENTS cardbody) === */
-.directory-table{ width: min(920px, calc(100% - 40px)); }
-.dir-col-name{ width: 200px !important; }
-.dir-col-city{ width: 180px !important; }
-.dir-col-times{ width: 140px !important; padding-left: 6px; padding-right: 6px; }
-.dir-col-ota{ width: 28px !important; padding-left: 4px; padding-right: 4px; }
-
+/* === WIDTH TUNE v504 (match EVENTS cardbody) === */
+.directory-table{ display: inline-table; width: max-content; max-width: calc(100% - 40px); }
+.dir-col-name{ width: 320px !important; }
+.dir-col-city{ width: 160px !important; }
+.dir-col-times{ width: 120px !important; padding-left: 6px; padding-right: 6px; }
+.dir-col-ota{ width: 26px !important; padding-left: 4px; padding-right: 4px; }
 </style>
 </head>
 <body>
