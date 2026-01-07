@@ -28,7 +28,7 @@
     @media (max-width: 500px) { #monthsRoot { transform: scale(0.90); } }
 
     :root {
-      --dir-table-width: 680px;
+      --dir-table-width: 670px;
       --green: #234c31;
       --bg: #ebebeb;
       --row: #e2e4e4;
@@ -2395,10 +2395,10 @@ body { overflow-y: auto; }
 .directory-table tbody tr:last-child td{ border-bottom: none; }
 .directory-table tbody td:last-child{ border-right: 0; }
 .directory-table tbody td.dir-col-times{ width: 120px; padding-left: 6px; padding-right: 6px; }
-.directory-table tbody td.dir-col-ota{ width: 26px; padding-left: 0px; padding-right: 14px; }
+.directory-table tbody td.dir-col-ota{ width: 12px; padding-left: 0px; padding-right: 0px; }
 
 /* Column sizing to mirror the reference grid feel */
-.directory-table tbody td.dir-col-name{ width: 280px; }
+.directory-table tbody td.dir-col-name{ width: 320px; }
 .directory-table tbody td.dir-col-city{ width: 140px; padding-left:10px; padding-right:10px; }
 
 .dir-col-name{ width: 220px; background: var(--beige); font-weight: 900; }
@@ -2411,9 +2411,9 @@ body { overflow-y: auto; }
 .dir-main{ font-weight:600; color:#111; font-size:13px; overflow:hidden; text-overflow:ellipsis; }
 .dir-sub{ font-size: 11px; color: rgba(0,0,0,0.55); font-weight: 500; }
 
-.dir-times-row{ display:flex; align-items:baseline; gap:4px; }
+.dir-times-row{ display:flex; align-items:baseline; gap:6px; }
 .dir-daylbl{ font-weight:800; color:#111; min-width:28px; font-size:11px; }
-.dir-timeval{ font-weight:600; color:rgba(0,0,0,0.55); white-space:nowrap; font-size:11px; }
+.dir-timeval{font-weight:600; color:rgba(0,0,0,0.55); white-space:nowrap; font-size:11px; margin-left:auto; text-align:right; }
 
 /* Icons: size/opacity/placement matched to reference (placeholder icons for now) */
 .dir-with-icon{
@@ -2444,7 +2444,7 @@ body { overflow-y: auto; }
 
 /* OTA: dot only (no icon, no label) */
 .dir-ota-cell{ display:flex; align-items:center; justify-content:center; height:100%; }
-.dir-dot{ width:10px; height:10px; border-radius:50%; border: 1px solid rgba(0,0,0,0.12); background:#bdbdbd; }
+.dir-dot{ width:12px; height:12px; border-radius:50%; background:transparent; border:2px solid rgba(0,0,0,0.25); }
 .dir-dot.y{
   background-color: #28a745;
   border-color: rgba(0,0,0,0.10);
@@ -2458,6 +2458,7 @@ body { overflow-y: auto; }
   border-color: rgba(0,0,0,0.10);
   box-shadow: 0 0 8px rgba(215,75,75,0.35);
 }
+.dir-dot.blank{ background:transparent; border-color:rgba(0,0,0,0.18); opacity:0.35; box-shadow:none; }
 
 .dir-empty{ padding: 18px; color: rgba(0,0,0,0.55); font-size:12px; }
 
@@ -2591,8 +2592,6 @@ body { overflow-y: auto; }
   max-width: 270px !important; /* leave room for icon + gap */
 }
 
-
-.directory-table tbody td.dir-col-days{ padding-left: 10px; padding-right: 6px; }
 </style>
 </head>
 <body>
@@ -2833,9 +2832,9 @@ body { overflow-y: auto; }
         return (a.NAME || "").localeCompare((b.NAME || ""));
       }).forEach(function(r){
         var otaVal = (r.OTA || "").trim().toUpperCase();
-        var dotHTML = "";
-        if(otaVal==="Y") dotHTML = `<div class="dir-dot y" title="Y"></div>`;
-        else if(otaVal==="N") dotHTML = `<div class="dir-dot n" title="N"></div>`;
+        var dotClass = (otaVal==="Y") ? "y" : (otaVal==="N") ? "n" : "blank";
+        var dotTitle = (otaVal==="Y") ? "Y" : (otaVal==="N") ? "N" : "—";
+        var dotHTML = `<div class="dir-dot ${dotClass}" title="${dotTitle}"></div>`;
         var tr = document.createElement("tr");
 
         tr.innerHTML = `
