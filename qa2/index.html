@@ -2390,22 +2390,22 @@ body { overflow-y: auto; }
 }
 .directory-table tbody tr:last-child td{ border-bottom: none; }
 .directory-table tbody td:last-child{ border-right: 0; }
-.directory-table tbody td.dir-col-times{ padding-left: 10px; padding-right: 10px; }
-.directory-table tbody td.dir-col-ota{ padding-left: 8px; padding-right: 8px; }
+.directory-table tbody td.dir-col-times{ width: 160px; padding-left: 6px; padding-right: 6px; }
+.directory-table tbody td.dir-col-ota{ width: 44px; padding-left: 4px; padding-right: 4px; }
 
 /* Column sizing to mirror the reference grid feel */
 .dir-col-name{ width: 220px; background: var(--beige); font-weight: 900; }
 .dir-col-city{ width: 190px; }
-.dir-col-times{ width: 160px; }
-.dir-col-ota{ width: 54px; text-align:center; }
+.dir-col-times{ width: 160px; padding-left: 6px; padding-right: 6px; }
+.dir-col-ota{ width: 44px; padding-left: 4px; padding-right: 4px; }
 
 /* Keep your existing stacking layout (do not change structure) */
 .dir-stack{ display:flex; flex-direction:column; gap:2px; line-height:1.15; min-width:0; }
 .dir-main{ font-weight:600; color:#111; font-size:13px; overflow:hidden; text-overflow:ellipsis; }
 .dir-sub{ font-size:11px; color:rgba(0,0,0,0.55); overflow:hidden; text-overflow:ellipsis; }
 
-.dir-times-row{ display:flex; align-items:baseline; gap:6px; }
-.dir-daylbl{ font-weight:800; color:#111; min-width:34px; font-size:11px; }
+.dir-times-row{ display:flex; align-items:baseline; gap:4px; }
+.dir-daylbl{ font-weight:800; color:#111; min-width:28px; font-size:11px; }
 .dir-timeval{ font-weight:600; color:rgba(0,0,0,0.55); white-space:nowrap; font-size:11px; }
 
 /* Icons: size/opacity/placement matched to reference (placeholder icons for now) */
@@ -2585,7 +2585,15 @@ body { overflow-y: auto; }
     throw lastErr || new Error("All CSV paths failed.");
   }
 
-  function escapeHTML(s){
+  function clampText(s, max){
+      var str = (s === null || s === undefined) ? "" : String(s);
+      str = str.trim();
+      if(!str) return "—";
+      if(str.length <= max) return str;
+      return str.slice(0, Math.max(0, max-1)) + "…";
+    }
+
+    function escapeHTML(s){
     return (s ?? "").toString().replace(/[&<>"']/g, c => ({
       "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
     }[c]));
@@ -2688,7 +2696,10 @@ body { overflow-y: auto; }
       groups[st].sort(function(a,b){
         return (a.NAME || "").localeCompare((b.NAME || ""));
       }).forEach(function(r){
-        var dotClass = r.OTA==="Y" ? "dir-dot y" : (r.OTA==="N" ? "dir-dot n" : "dir-dot");
+        var otaVal = (r.OTA || "").trim().toUpperCase();
+        var dotHTML = "";
+        if(otaVal==="Y") dotHTML = `<div class="dir-dot y" title="Y"></div>`;
+        else if(otaVal==="N") dotHTML = `<div class="dir-dot n" title="N"></div>`;
         var tr = document.createElement("tr");
 
         tr.innerHTML = `
@@ -2696,7 +2707,7 @@ body { overflow-y: auto; }
             <div class="dir-with-icon">
               <span class="dir-ico" aria-hidden="true">${DIR_ICONS.bldg}</span>
               <div class="dir-stack">
-                <div class="dir-main">${escapeHTML(r.NAME)}</div>
+                <div class="dir-main">${escapeHTML(clampText(r.NAME, 40))}</div>
                 <div class="dir-sub">${escapeHTML(r.IG)}</div>
               </div>
             </div>
@@ -2724,7 +2735,7 @@ body { overflow-y: auto; }
 
           <td class="dir-col-ota">
             <div class="dir-ota-cell">
-              <div class="${dotClass}" title="${r.OTA || "—"}"></div>
+              ${dotHTML}
             </div>
           </td>
         `;
