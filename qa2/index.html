@@ -140,13 +140,16 @@ display:flex;
       font-weight:800;
       color: rgba(0,0,0,0.55);
       letter-spacing:0.08em;
-      text-transform:uppercase;
+      text-transform:none;
       font-size:12px;
-      margin: 0 0 10px;
+      margin: 0 auto 10px;
       white-space: nowrap;
-      transform: translateX(240px);
-    }
-    @media (max-width: 700px){ .dir-group-label{ transform: translateX(120px); } }
+      transform:none;
+      width: 760px;
+  max-width: 760px;
+  padding-left: 2px;
+}
+    @media (max-width: 700px){ .dir-group-label{ width: 760px; max-width:760px; } }
 
 
 /* Keep month grouping headers (e.g., NOVEMBER 2026) in view after scaling */
@@ -2369,14 +2372,15 @@ body { overflow-y: auto; }
 .directory-wrap{ padding: 22px 0 60px; }
 
 /* Table shell: matches reference card-body density (no headers) */
-.directory-table{width: fit-content;
-  max-width: 100%;
+.directory-table{width: 760px;
+  max-width: 760px;
   margin: 0 auto;
   table-layout: fixed;
   border-collapse: separate;
   border-spacing: 0;
   background: var(--row);
-  box-shadow: 0 6px 14px rgba(0,0,0,0.12);}
+  box-shadow: 0 6px 14px rgba(0,0,0,0.12);  min-width: 760px;
+}
 
 
 /* Rows + cells */
