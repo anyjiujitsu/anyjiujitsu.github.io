@@ -2337,25 +2337,12 @@ body { overflow-y: auto; }
 /* ===== DIRECTORY (state-grouped, reference-matched) ===== */
 
 /* Match reference zoom behavior (like #monthsRoot in index (8)) */
-#directoryRoot{
-  --dirScale: 1.55;
+#directoryRoot {
   transform-origin: top center;
-  transform: scale(var(--dirScale));
+  transform: scale(1.55);
   font-size: 1.5em;
 }
-
-/* Prefer zoom to avoid "scroll stops early" from transform scaling */
-@supports (zoom: 1){
-  #directoryRoot{
-    zoom: var(--dirScale);
-    transform: none;
-  }
-}
-
-@media (max-width: 900px){ #directoryRoot{ --dirScale: 1.20; } }
-@media (max-width: 700px){ #directoryRoot{ --dirScale: 1.05; } }
-@media (max-width: 500px){ #directoryRoot{ --dirScale: 0.90; } }
-}
+@media (max-width: 900px) { #directoryRoot { transform: scale(1.20); } }
 @media (max-width: 700px) { #directoryRoot { transform: scale(1.05); } }
 @media (max-width: 500px) { #directoryRoot { transform: scale(0.90); } }
 
@@ -2393,7 +2380,7 @@ body { overflow-y: auto; }
 .directory-table tbody td.dir-col-ota{ width: 34px; padding-left: 4px; padding-right: 4px; }
 
 /* Column sizing to mirror the reference grid feel */
-.directory-table tbody td.dir-col-name{ width: 380px; }
+.directory-table tbody td.dir-col-name{ width: 400px; }
 .directory-table tbody td.dir-col-city{ width: 246px; }
 
 .dir-col-name{ width: 220px; background: var(--beige); font-weight: 900; }
@@ -2598,14 +2585,7 @@ body { overflow-y: auto; }
     function escapeHTML(s){
     return (s ?? "").toString().replace(/[&<>"']/g, c => ({
       "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
-    }
-  function clamp(str, max){
-    var s = (str ?? "").toString();
-    if(!s) return "";
-    if(s.length <= max) return s;
-    return s.slice(0, Math.max(0, max-1)) + "…";
-  }
-[c]));
+    }[c]));
   }
 
   function toProper(str){
@@ -2676,8 +2656,7 @@ body { overflow-y: auto; }
     }
 
     // Group by STATE (A→Z), then sort by NAME within each state (A→Z)
-    var groups = {  fixScaledHeight();
-  };
+    var groups = {};
     list.forEach(function(r){
       var st = (r.STATE || "").toString().trim().toUpperCase();
       if(!st) st = "—";
@@ -2760,12 +2739,12 @@ body { overflow-y: auto; }
 
 function applySearch(){
     var q = (searchInput && searchInput.value ? searchInput.value : "").trim().toLowerCase();
-    if(!q){ render(data); fixScaledHeight(); return; }
+    if(!q){ render(data); return; }
     var filtered = data.filter(function(r){
       var hay = (r.NAME+" "+r.IG+" "+r.CITY+" "+r.STATE+" "+r.SAT+" "+r.SUN+" "+r.OTA).toLowerCase();
       return hay.includes(q);
     });
-    render(filtered); fixScaledHeight();
+    render(filtered);
   }
 
   if(clearBtn){
@@ -2779,42 +2758,14 @@ function applySearch(){
     searchInput.addEventListener("input", applySearch);
   }
 
-  
-  function fixScaledHeight(){
-    var root = document.getElementById("directoryRoot");
-    if(!root) return;
-    var cs = getComputedStyle(root);
-    var t = cs.transform;
-    // If we're using transform scaling (zoom unsupported), ensure body can scroll full height.
-    if(t && t !== "none"){
-      // Extract scaleX from matrix
-      var scale = 1;
-      var m = t.match(/matrix\(([^)]+)\)/);
-      if(m){
-        var parts = m[1].split(",").map(function(x){ return parseFloat(x); });
-        if(parts.length>=1 && !Number.isNaN(parts[0])) scale = parts[0];
-      }
-      // Expand a spacer to compensate for transform not affecting layout height.
-      var spacer = document.getElementById("dirScaleSpacer");
-      if(!spacer){
-        spacer = document.createElement("div");
-        spacer.id = "dirScaleSpacer";
-        spacer.style.width = "1px";
-        spacer.style.height = "0px";
-        root.parentNode.appendChild(spacer);
-      }
-      var h = root.scrollHeight * (scale - 1);
-      spacer.style.height = (h > 0 ? h : 0) + "px";
-    }
-  }
-(async function init(){
+  (async function init(){
     try{
       var filename = "directory.csv";
       var paths = csvPathCandidates(filename);
       var out = await fetchFirstOk(paths);
       var csvText = await out.res.text();
       var rows = parseCSV(csvText);
-      if(rows.length < 2){ data=[]; render(data); fixScaledHeight(); return; }
+      if(rows.length < 2){ data=[]; render(data); return; }
       var header = rows[0].map(function(h){ return (h||"").trim().toUpperCase(); });
       function idx(name){ return header.indexOf(name); }
 
@@ -2942,5 +2893,47 @@ function applySearch(){
 })();
 
 </script>
+
+<script>
+/* Fix: transform-scale (#monthsRoot) can make the document scroll height too short.
+   Add a bottom spacer equal to the extra visual height so you can scroll to the true end. */
+(function(){
+  function getScale(){
+    var w = window.innerWidth || document.documentElement.clientWidth || 1200;
+    if(w <= 500) return 0.90;
+    if(w <= 700) return 1.05;
+    if(w <= 900) return 1.20;
+    return 1.55;
+  }
+
+  function ensureSpacer(){
+    var root = document.getElementById('monthsRoot') || document.getElementById('directoryRoot');
+    if(!root) return;
+
+    var spacer = document.getElementById('scaleSpacer');
+    if(!spacer){
+      spacer = document.createElement('div');
+      spacer.id = 'scaleSpacer';
+      spacer.style.width = '1px';
+      spacer.style.height = '0px';
+      root.parentNode.appendChild(spacer);
+    }
+
+    // Use unscaled scrollHeight and known scale to compute missing flow height.
+    var scale = getScale();
+    var extra = Math.max(0, Math.ceil(root.scrollHeight * (scale - 1)));
+    spacer.style.height = extra + 'px';
+  }
+
+  // Run after layout/paint
+  window.addEventListener('load', function(){ setTimeout(ensureSpacer, 0); setTimeout(ensureSpacer, 250); });
+  window.addEventListener('resize', function(){ setTimeout(ensureSpacer, 0); setTimeout(ensureSpacer, 150); });
+
+  // Also re-run after any filter re-render (custom event hook if present)
+  document.addEventListener('any:rerender', function(){ setTimeout(ensureSpacer, 0); });
+
+})();
+</script>
+
 </body>
 </html>
