@@ -2355,7 +2355,8 @@ body { overflow-y: auto; }
 
 /* Table shell: matches reference card-body density (no headers) */
 .directory-table{
-  width: 100%;
+  width: min(1040px, calc(100% - 40px));
+  margin: 0 auto;
   table-layout: fixed;
   margin: 0 auto;
   border-collapse: separate;
@@ -2380,7 +2381,7 @@ body { overflow-y: auto; }
 .directory-table tbody td.dir-col-ota{ width: 34px; padding-left: 4px; padding-right: 4px; }
 
 /* Column sizing to mirror the reference grid feel */
-.directory-table tbody td.dir-col-name{ width: 400px; }
+.directory-table tbody td.dir-col-name{ width: 340px; }
 .directory-table tbody td.dir-col-city{ width: 246px; }
 
 .dir-col-name{ width: 220px; background: var(--beige); font-weight: 900; }
