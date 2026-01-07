@@ -679,13 +679,7 @@ display:flex;
       max-width: 360px;
       justify-content: space-between;
     }
-    .state-label{
-      flex: 1 1 auto;
-      min-width: 0;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
+    .state-label{ font-weight:800; color: rgba(0,0,0,0.55); letter-spacing:0.08em; text-transform:uppercase; font-size:12px; margin: 0 0 10px; white-space:nowrap; overflow: visible; }
     .state-caret{ flex: 0 0 auto; opacity:0.7; }
     .state-btn:focus{
       outline:none;
@@ -2353,31 +2347,23 @@ body { overflow-y: auto; }
 @media (max-width: 500px) { #directoryRoot { transform: scale(0.90); } }
 
 /* State group label: same feel as .month-label */
-.state-card { background: transparent; margin: 18px 0 22px; }
-.state-label {
-  font-weight: 800;
-  color: rgba(0,0,0,0.55);
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  font-size: 12px;
-  margin: 0 2px 10px;
-  white-space: nowrap;
-  transform: translateX(240px);
-}
-@media (max-width: 700px){ .state-label{ transform: translateX(120px); } }
+.state-card{ margin: 18px auto 22px; width: 880px; }
+.state-label{ font-weight:800; color: rgba(0,0,0,0.55); letter-spacing:0.08em; text-transform:uppercase; font-size:12px; margin: 0 0 10px; white-space:nowrap; overflow: visible; }
+@media (max-width: 700px){ .state-label{ font-weight:800; color: rgba(0,0,0,0.55); letter-spacing:0.08em; text-transform:uppercase; font-size:12px; margin: 0 0 10px; white-space:nowrap; overflow: visible; } }
 
 .directory-wrap{ padding: 22px 0 60px; }
 
 /* Table shell: matches reference card-body density (no headers) */
 .directory-table{
-  width: fit-content;
-  max-width: 100%;
+  width: 100%;
+  table-layout: fixed;
   margin: 0 auto;
   border-collapse: separate;
   border-spacing: 0;
   background: var(--row);
   box-shadow: 0 6px 14px rgba(0,0,0,0.12);
 }
+
 
 /* Rows + cells */
 .directory-table tbody tr{ background: transparent; }
@@ -2390,10 +2376,13 @@ body { overflow-y: auto; }
 }
 .directory-table tbody tr:last-child td{ border-bottom: none; }
 .directory-table tbody td:last-child{ border-right: 0; }
-.directory-table tbody td.dir-col-times{ width: 160px; padding-left: 6px; padding-right: 6px; }
-.directory-table tbody td.dir-col-ota{ width: 44px; padding-left: 4px; padding-right: 4px; }
+.directory-table tbody td.dir-col-times{ width: 140px; padding-left: 6px; padding-right: 6px; }
+.directory-table tbody td.dir-col-ota{ width: 34px; padding-left: 4px; padding-right: 4px; }
 
 /* Column sizing to mirror the reference grid feel */
+.directory-table tbody td.dir-col-name{ width: 460px; }
+.directory-table tbody td.dir-col-city{ width: 246px; }
+
 .dir-col-name{ width: 220px; background: var(--beige); font-weight: 900; }
 .dir-col-city{ width: 190px; }
 .dir-col-times{ width: 160px; padding-left: 6px; padding-right: 6px; }
@@ -2402,7 +2391,7 @@ body { overflow-y: auto; }
 /* Keep your existing stacking layout (do not change structure) */
 .dir-stack{ display:flex; flex-direction:column; gap:2px; line-height:1.15; min-width:0; }
 .dir-main{ font-weight:600; color:#111; font-size:13px; overflow:hidden; text-overflow:ellipsis; }
-.dir-sub{ font-size:11px; color:rgba(0,0,0,0.55); overflow:hidden; text-overflow:ellipsis; }
+.dir-sub{ font-size: 11px; color: rgba(0,0,0,0.55); font-weight: 500; }
 
 .dir-times-row{ display:flex; align-items:baseline; gap:4px; }
 .dir-daylbl{ font-weight:800; color:#111; min-width:28px; font-size:11px; }
@@ -2550,10 +2539,10 @@ body { overflow-y: auto; }
 
   // Directory icons (placeholders for now) — sized/opacity/placement via CSS to match reference
   var DIR_ICONS = {
-    bldg: '<svg viewBox="0 0 24 24"><path d="M4 21V3h10v6h6v12H4zm2-2h2v-2H6v2zm0-4h2v-2H6v2zm0-4h2V9H6v2zm0-4h2V5H6v2zm4 12h2v-2h-2v2zm0-4h2v-2h-2v2zm0-4h2V9h-2v2zM16 21h2v-2h-2v2zm0-4h2v-2h-2v2zm0-4h2v-2h-2v2z"/></svg>',
-    pin:  '<svg viewBox="0 0 24 24"><path d="M12 21s7-4.5 7-11a7 7 0 1 0-14 0c0 6.5 7 11 7 11z"></path><path d="M12 10.5a2 2 0 1 0 0-4 2 2 0 0 0 0 4z"></path></svg>',
-    cal:  '<svg viewBox="0 0 24 24"><path d="M8 3v3"></path><path d="M16 3v3"></path><path d="M4 9h16"></path><rect x="4" y="5" width="16" height="16" rx="2"></rect></svg>'
-  };
+  bldg: `<svg viewBox="0 0 24 24" focusable="false">     <path d="M3 21h18v-2H3v2zm2-4h14V3H5v14zm2-2V5h10v10H7zm1-8h2v2H8V7zm0 3h2v2H8v-2zm0 3h2v2H8v-2zm4-6h2v2h-2V7zm0 3h2v2h-2v-2zm0 3h2v2h-2v-2z"/>   </svg>`,
+  pin:  `<svg viewBox="0 0 24 24" focusable="false">     <path d="M12 2c-3.86 0-7 3.14-7 7 0 5.25 7 13 7 13s7-7.75 7-13c0-3.86-3.14-7-7-7zm0 9.5A2.5 2.5 0 1 1 12 6a2.5 2.5 0 0 1 0 5.5z"/>   </svg>`,
+  cal:  `<svg viewBox="0 0 24 24" focusable="false">                 <path d="M7 3v3M17 3v3M4.5 8.5h15"/>                 <path d="M6 5h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2z"/>                 <path d="M8 12h3M8 15h3M13 12h3M13 15h3"/>               </svg>`
+};
 
 
   function csvPathCandidates(filename){
