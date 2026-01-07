@@ -2591,44 +2591,6 @@ body { overflow-y: auto; }
   max-width: 270px !important; /* leave room for icon + gap */
 }
 
-
-/* ===== FINAL OVERRIDES (index516) — keep matched card width; micro-shifts + OTA always ===== */
-:root{
-  --dir-card-w: 700px;
-  --dir-col-name: 380px;
-  --dir-col-city: 190px;
-  --dir-col-times: 90px;
-  --dir-col-ota: 40px;
-}
-
-/* lock the table/card width */
-.dir-table{ width: var(--dir-card-w) !important; max-width: var(--dir-card-w) !important; }
-.dir-row{
-  grid-template-columns: var(--dir-col-name) var(--dir-col-city) var(--dir-col-times) var(--dir-col-ota) !important;
-}
-
-/* group header position should match EVENTS month label */
-.dir-group-label{
-  font-size: 12px !important;
-  letter-spacing: 2px !important;
-  transform: translateX(240px) !important;
-  margin: 0 2px 10px !important;
-  text-align: left !important;
-}
-
-/* subtle balancing: push Sat/Sun slightly right, pull OTA dot slightly left (away from edge) */
-.dir-col-times{ padding: 0 10px 0 18px !important; } /* +8px left padding */
-.dir-col-ota{ justify-content: flex-start !important; padding-left: 10px !important; padding-right: 0 !important; }
-
-/* OTA dot states: Y filled, N outlined, blank outlined faint (but still visible) */
-.dir-dot{
-  width: 14px !important; height: 14px !important; border-radius: 50% !important;
-  box-sizing: border-box !important;
-}
-.dir-dot.y{ background: #2c8a57 !important; box-shadow: 0 0 0 2px rgba(44,138,87,.18), 0 2px 8px rgba(44,138,87,.20) !important; }
-.dir-dot.n{ background: transparent !important; border: 2px solid rgba(0,0,0,.28) !important; }
-.dir-dot.empty{ background: transparent !important; border: 2px solid rgba(0,0,0,.18) !important; opacity: .45 !important; }
-
 </style>
 </head>
 <body>
@@ -2869,12 +2831,9 @@ body { overflow-y: auto; }
         return (a.NAME || "").localeCompare((b.NAME || ""));
       }).forEach(function(r){
         var otaVal = (r.OTA || "").trim().toUpperCase();
-        // OTA indicator: always render a dot placeholder. Filled for Y, outlined for N/blank.
-        var dotCls = "empty";
-        var dotTitle = "";
-        if (otaVal === "Y") { dotCls = "y"; dotTitle = "Y"; }
-        else if (otaVal === "N") { dotCls = "n"; dotTitle = "N"; }
-        var dotHTML = `<div class="dir-dot ${dotCls}"${dotTitle?` title="${dotTitle}"`:""}></div>`;
+        var dotHTML = "";
+        if(otaVal==="Y") dotHTML = `<div class="dir-dot y" title="Y"></div>`;
+        else if(otaVal==="N") dotHTML = `<div class="dir-dot n" title="N"></div>`;
         var tr = document.createElement("tr");
 
         tr.innerHTML = `
