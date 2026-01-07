@@ -7,7 +7,7 @@
   <title>ANY N.E. – DIRECTORY13</title>
   <style>
 
-
+/* === Block 1 === */
 /* Global scale: increases all rem-based sizing proportionally */
     html { font-size: 22px; }
 
@@ -2509,7 +2509,43 @@ body { overflow-y: auto; }
       text-overflow: ellipsis !important;
     }
 
-  </style>
+  
+/* ===== OVERRIDES (index508) — match EVENTS card width + header placement ===== */
+
+/* 1) STATE header placement: same left gutter behavior as EVENTS month labels */
+.state-card{ width:100% !important; max-width:none !important; }
+.state-label{
+  margin: 0 0 10px 0 !important;
+  padding-left: var(--left-gutter) !important;
+  text-align: left !important;
+  transform: none !important;
+}
+
+/* 2) Lock directory card/table width to match EVENTS row grid (760px) */
+.directory-table{
+  width: 760px !important;
+  max-width: 760px !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  table-layout: fixed !important;
+}
+
+/* 3) True column width reductions (affects overall cardbody width) */
+.directory-table tbody td.dir-col-name{ width: 360px !important; }
+.directory-table tbody td.dir-col-city{ width: 170px !important; }
+.directory-table tbody td.dir-col-times{ width: 218px !important; }
+.directory-table tbody td.dir-col-ota{ width: 12px !important; padding-left:0 !important; padding-right:0 !important; }
+
+/* Keep truncation consistent with the locked column widths */
+.directory-table .name-main,
+.directory-table .name-sub{
+  max-width: 300px; /* inside 360px cell after icon + padding */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+</style>
 </head>
 <body>
 <div class="header-freeze">
