@@ -2394,7 +2394,7 @@ body { overflow-y: auto; }
 }
 .directory-table tbody tr:last-child td{ border-bottom: none; }
 .directory-table tbody td:last-child{ border-right: 0; }
-.directory-table tbody td.dir-col-times{ width: 120px; padding-left: 10px; padding-right: 6px; }
+.directory-table tbody td.dir-col-times{ width: 120px; padding-left: 6px; padding-right: 6px; }
 .directory-table tbody td.dir-col-ota{ width: 12px; padding-left: 0px; padding-right: 0px; }
 
 /* Column sizing to mirror the reference grid feel */
@@ -2445,7 +2445,6 @@ body { overflow-y: auto; }
 /* OTA: dot only (no icon, no label) */
 .dir-ota-cell{ display:flex; align-items:center; justify-content:center; height:100%; }
 .dir-dot{ width:10px; height:10px; border-radius:50%; border: 1px solid rgba(0,0,0,0.12); background:#bdbdbd; }
-.directory-table .dir-dot{ transform: translateX(-6px); }
 .dir-dot.y{
   background-color: #28a745;
   border-color: rgba(0,0,0,0.10);
@@ -2590,6 +2589,18 @@ body { overflow-y: auto; }
 .directory-table td.dir-col-name .dir-main,
 .directory-table td.dir-col-name .dir-sub{
   max-width: 270px !important; /* leave room for icon + gap */
+}
+
+
+/* === micro-shifts (no cardbody width changes) === */
+.directory-table tbody td.dir-col-times{
+  /* nudge Sat/Sun block slightly to the right */
+  padding-left: 10px !important; /* was ~6px */
+}
+.dir-ota-cell{
+  /* bring OTA dot inward from the right edge */
+  justify-content: flex-start !important;
+  padding-left: 2px !important;
 }
 
 </style>
