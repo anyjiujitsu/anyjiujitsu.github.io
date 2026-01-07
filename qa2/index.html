@@ -2592,18 +2592,14 @@ body { overflow-y: auto; }
 }
 
 
-/* --- index511 tweaks: keep cardbody width, shift SAT/SUN content right, shift OTA dot left --- */
-.directory-table tbody td.dir-col-times .dir-stack{
-  margin-left: auto !important;
-  align-items: flex-end !important;
-  text-align: right !important;
-}
-.directory-table tbody td.dir-col-times .dir-times-row{
-  justify-content: flex-end !important;
-}
-.directory-table tbody td.dir-col-ota .dir-ota-cell{
-  justify-content: flex-start !important;
-}
+
+/* --- index512 micro tweaks: keep cardbody width, subtle balance --- */
+/* Slightly shift Sat/Sun stack to the right within its fixed column (do NOT right-align) */
+.directory-table tbody td.dir-col-times{ padding-left: 14px !important; padding-right: 6px !important; }
+/* Keep rows natural (no flex-end) */
+.directory-table tbody td.dir-col-times .dir-stack{ align-items: flex-start !important; text-align: left !important; }
+/* Move OTA indicator slightly left to give breathing room from card edge without changing column width */
+.directory-table tbody td.dir-col-ota .dir-dot{ transform: translateX(-6px); }
 
 </style>
 </head>
