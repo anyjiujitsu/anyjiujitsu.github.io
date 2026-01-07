@@ -2340,113 +2340,86 @@ body { overflow-y: auto; }
 
   
 
-/* ===== DIRECTORY table (add-on) ===== */
+/* ===== DIRECTORY (state-grouped, reference-matched) ===== */
+
+/* Match reference zoom behavior (like #monthsRoot in index (8)) */
+#directoryRoot {
+  transform-origin: top center;
+  transform: scale(1.55);
+  font-size: 1.5em;
+}
+@media (max-width: 900px) { #directoryRoot { transform: scale(1.20); } }
+@media (max-width: 700px) { #directoryRoot { transform: scale(1.05); } }
+@media (max-width: 500px) { #directoryRoot { transform: scale(0.90); } }
+
+/* State group label: same feel as .month-label */
+.state-card { background: transparent; margin: 18px 0 22px; }
+.state-label {
+  font-weight: 800;
+  color: rgba(0,0,0,0.55);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-size: 12px;
+  margin: 0 2px 10px;
+  white-space: nowrap;
+  transform: translateX(240px);
+}
+@media (max-width: 700px){ .state-label{ transform: translateX(120px); } }
+
 .directory-wrap{ padding: 22px 0 60px; }
+
+/* Table shell: matches reference card-body density (no headers) */
 .directory-table{
-  width: min(1250px, calc(100% - 40px));
+  width: fit-content;
+  max-width: 100%;
   margin: 0 auto;
   border-collapse: separate;
   border-spacing: 0;
-  background: rgba(240,240,240,0.85);
-  box-shadow: 0 10px 18px rgba(0,0,0,0.10);
+  background: var(--row);
+  box-shadow: 0 6px 14px rgba(0,0,0,0.12);
 }
-.directory-table thead th{
-  text-align:left;
-  font-size: 12px;
-  letter-spacing: 0.10em;
-  text-transform: uppercase;
-  color: rgba(0,0,0,0.55);
-  padding: 14px 16px;
-  background: rgba(240,240,240,0.92);
-  border-bottom: 1px solid rgba(0,0,0,0.12);
-}
-.directory-table tbody tr{ background: rgba(233,233,233,0.9); }
-.directory-table tbody tr:nth-child(even){ background: rgba(230,230,230,0.9); }
+
+/* Rows + cells */
+.directory-table tbody tr{ background: transparent; }
 .directory-table tbody td{
-  padding: 16px;
+  padding: 10px 14px;
   vertical-align: middle;
-  border-bottom: 1px solid rgba(0,0,0,0.10);
-  border-right: 1px solid rgba(0,0,0,0.10);
+  border-bottom: 1px solid rgba(0,0,0,0.06);
+  border-right: 1px solid rgba(0,0,0,0.06);
+  white-space: nowrap;
 }
+.directory-table tbody tr:last-child td{ border-bottom: none; }
 .directory-table tbody td:last-child{ border-right: 0; }
 
-.dir-col-name{ width: 44%; }
-.dir-col-city{ width: 24%; }
-.dir-col-times{ width: 20%; }
-.dir-col-ota{ width: 12%; text-align:center; }
+/* Column sizing to mirror the reference grid feel */
+.dir-col-name{ width: 220px; background: var(--beige); font-weight: 900; }
+.dir-col-city{ width: 190px; }
+.dir-col-times{ width: 220px; }
+.dir-col-ota{ width: 80px; text-align:center; }
 
-.dir-stack{ display:flex; flex-direction:column; gap:4px; line-height:1.15; }
-.dir-main{ font-weight:700; color:#111; font-size:18px; }
-.dir-sub{ font-size:14px; color:rgba(0,0,0,0.55); }
+/* Keep your existing stacking layout (do not change structure) */
+.dir-stack{ display:flex; flex-direction:column; gap:2px; line-height:1.15; min-width:0; }
+.dir-main{ font-weight:600; color:#111; font-size:13px; overflow:hidden; text-overflow:ellipsis; }
+.dir-sub{ font-size:11px; color:rgba(0,0,0,0.55); overflow:hidden; text-overflow:ellipsis; }
 
-.dir-times-row{ display:flex; align-items:baseline; gap:10px; }
-.dir-daylbl{ font-weight:800; color:#111; min-width:46px; }
-.dir-timeval{ font-weight:600; color:rgba(0,0,0,0.55); white-space:nowrap; }
+.dir-times-row{ display:flex; align-items:baseline; gap:8px; }
+.dir-daylbl{ font-weight:800; color:#111; min-width:42px; font-size:11px; }
+.dir-timeval{ font-weight:600; color:rgba(0,0,0,0.55); white-space:nowrap; font-size:11px; }
 
-.dir-ota-cell{ display:flex; flex-direction:column; align-items:center; gap:10px; justify-content:center; }
-.dir-ota-label{ font-size:12px; letter-spacing:0.10em; text-transform:uppercase; color:rgba(0,0,0,0.55); font-weight:700; }
-.dir-dot{ width:16px; height:16px; border-radius:50%; border:2px solid rgba(0,0,0,0.18); background:#bdbdbd; }
-.dir-dot.y{ background:#18b15b; border-color: rgba(0,0,0,0.10); box-shadow: 0 0 0 6px rgba(24,177,91,0.12); }
-.dir-dot.n{ background:#d74b4b; border-color: rgba(0,0,0,0.10); box-shadow: 0 0 0 6px rgba(215,75,75,0.12); }
-
-.dir-err{ padding:16px; color:#b30000; font-weight:700; }
-/* ===== Directory card-body (match reference look/feel) ===== */
-#dirRoot{ width: 100%; }
-
-.row.dir-row{
-  /* Directory has 6 columns (NAME, CITY, IG, SAT, SUN, OTA) */
-  grid-template-columns: 220px 170px 170px 120px 120px 80px;
-}
-
-.cell.dir-first{
-  background: var(--beige);
-  font-weight: 900;
-  align-self: stretch;
+/* Icons: size/opacity/placement matched to reference (placeholder icons for now) */
+.dir-with-icon{
   display:flex;
   align-items:center;
-  gap: 6px;
-}
-
-.dir-inline{
-  display:flex;
-  align-items:center;
-  gap: 6px;
-  min-width: 0;
-}
-
-.dir-stack{
-  display:flex;
-  flex-direction: column;
-  line-height: 1.15;
-  min-width: 0;
-}
-
-.dir-main{
-  font-weight: 600;
-  font-size: 13px;
-}
-
-.dir-sub{
-  font-size: 11px;
-  color: rgba(0,0,0,0.55);
-}
-
-.dir-ellipsis{
+  gap:6px;
   min-width:0;
-  overflow:hidden;
-  text-overflow:ellipsis;
-  white-space:nowrap;
 }
-
-/* Icon sizing/opacity aligned to reference icon classes */
-.ig-icon, .link-icon{
+.dir-ico{
   display:inline-flex;
   width:14px;
   height:14px;
-  flex:0 0 auto;
-  opacity:0.9;
+  flex: 0 0 auto;
 }
-.ig-icon svg, .link-icon svg{
+.dir-ico svg{
   width:14px;
   height:14px;
   fill:none;
@@ -2455,28 +2428,32 @@ body { overflow-y: auto; }
   stroke-linecap:round;
   stroke-linejoin:round;
 }
-
-/* Building icon: matches ref bldg-icon */
-.bldg-icon{
-  display:inline-flex;
-  width:14px;
-  height:14px;
-  flex:0 0 auto;
-  opacity:0.9;
-}
-.bldg-icon svg{
-  width:14px;
-  height:14px;
+.dir-col-name .dir-ico svg{
   fill: rgba(0,0,0,0.35);
-  stroke:none;
+  stroke: none;
 }
 
-/* Keep OTA cell centered like existing */
-.row.dir-row .cell:last-child{
-  padding-left: 10px;
-  padding-right: 10px;
+/* OTA: dot only (no icon, no label) */
+.dir-ota-cell{ display:flex; align-items:center; justify-content:center; height:100%; }
+.dir-dot{ width:10px; height:10px; border-radius:50%; border: 1px solid rgba(0,0,0,0.12); background:#bdbdbd; }
+.dir-dot.y{
+  background-color: #28a745;
+  border-color: rgba(0,0,0,0.10);
+  box-shadow:
+    0 0 4px rgba(40,167,69,0.9),
+    0 0 8px rgba(40,167,69,0.7),
+    0 0 14px rgba(40,167,69,0.5);
+}
+.dir-dot.n{
+  background-color: #d74b4b;
+  border-color: rgba(0,0,0,0.10);
+  box-shadow: 0 0 8px rgba(215,75,75,0.35);
 }
 
+.dir-empty{ padding: 18px; color: rgba(0,0,0,0.55); font-size:12px; }
+
+
+.dir-err{ padding:16px; color:#b30000; font-weight:700; }
 
   </style>
 </head>
@@ -2557,7 +2534,9 @@ body { overflow-y: auto; }
 </div> <!-- close header-freeze (in ref it wraps more; we close here intentionally) -->
 
 <div class="directory-wrap">
-  <div id="dirRoot" aria-label="Directory"></div>
+  <div id="directoryRoot" class="directory-root" aria-label="Directory">
+    <div class="dir-empty" style="padding:18px;color:rgba(0,0,0,0.55);">Loading…</div>
+  </div>
 </div>
 
 
@@ -2566,6 +2545,14 @@ body { overflow-y: auto; }
   // Use existing header search if present, otherwise fall back.
   var searchInput = document.getElementById('nlSearch') || document.getElementById('searchInput');
   var clearBtn = document.querySelector('.head-search-clear') || document.getElementById('clearBtn');
+
+  // Directory icons (placeholders for now) — sized/opacity/placement via CSS to match reference
+  var DIR_ICONS = {
+    bldg: '<svg viewBox="0 0 24 24"><path d="M4 21V3h10v6h6v12H4zm2-2h2v-2H6v2zm0-4h2v-2H6v2zm0-4h2V9H6v2zm0-4h2V5H6v2zm4 12h2v-2h-2v2zm0-4h2v-2h-2v2zm0-4h2V9h-2v2zM16 21h2v-2h-2v2zm0-4h2v-2h-2v2zm0-4h2v-2h-2v2z"/></svg>',
+    pin:  '<svg viewBox="0 0 24 24"><path d="M12 21s7-4.5 7-11a7 7 0 1 0-14 0c0 6.5 7 11 7 11z"></path><path d="M12 10.5a2 2 0 1 0 0-4 2 2 0 0 0 0 4z"></path></svg>',
+    cal:  '<svg viewBox="0 0 24 24"><path d="M8 3v3"></path><path d="M16 3v3"></path><path d="M4 9h16"></path><rect x="4" y="5" width="16" height="16" rx="2"></rect></svg>'
+  };
+
 
   function csvPathCandidates(filename){
     var basePath = location.pathname.endsWith("/")
@@ -2657,132 +2644,97 @@ body { overflow-y: auto; }
     return rows;
   }
 
-  
-  var root = document.getElementById("dirRoot");
+  var dirRoot = document.getElementById("directoryRoot");
   var data = [];
 
-  function norm(str){ return (str ?? "").toString().trim(); }
-
   function render(list){
-    if(!root) return;
-    root.innerHTML = "";
+    if(!dirRoot) return;
+    dirRoot.innerHTML = "";
 
     if(!list.length){
-      root.innerHTML = '<div class="dir-err">No matches.</div>';
+      dirRoot.innerHTML = '<div class="dir-empty">No matches.</div>';
       return;
     }
 
-    // Group by STATE, sort states alpha; sort rows by NAME within state
+    // Group by STATE (A→Z), then sort by NAME within each state (A→Z)
     var groups = {};
     list.forEach(function(r){
-      var st = norm(r.STATE).toUpperCase();
+      var st = (r.STATE || "").toString().trim().toUpperCase();
       if(!st) st = "—";
-      (groups[st] = groups[st] || []).push(r);
+      if(!groups[st]) groups[st] = [];
+      groups[st].push(r);
     });
 
-    Object.keys(groups).sort(function(a,b){ return a.localeCompare(b); }).forEach(function(st){
-      var card = document.createElement("div");
-      card.className = "month-card"; // reuse reference spacing
+    var states = Object.keys(groups).sort(function(a,b){ return a.localeCompare(b); });
+
+    states.forEach(function(st){
+      var section = document.createElement("section");
+      section.className = "state-card";
 
       var label = document.createElement("div");
-      label.className = "month-label month-label-nudge";
+      label.className = "state-label";
       label.textContent = st;
+      section.appendChild(label);
 
-      var body = document.createElement("div");
-      body.className = "card-body";
+      var table = document.createElement("table");
+      table.className = "directory-table";
+      table.setAttribute("role","table");
+      table.setAttribute("aria-label","Directory " + st);
 
-      var items = groups[st].slice().sort(function(a,b){
-        return norm(a.NAME).toLowerCase().localeCompare(norm(b.NAME).toLowerCase());
-      });
+      var tbody = document.createElement("tbody");
 
-      items.forEach(function(r){
-        var row = document.createElement("div");
-        row.className = "row dir-row";
+      groups[st].sort(function(a,b){
+        return (a.NAME || "").localeCompare((b.NAME || ""));
+      }).forEach(function(r){
+        var dotClass = r.OTA==="Y" ? "dir-dot y" : (r.OTA==="N" ? "dir-dot n" : "dir-dot");
+        var tr = document.createElement("tr");
 
-        // icons: reuse reference icon sizing/opacity; placeholders OK for now
-        var name = escapeHTML(norm(r.NAME) || "—");
-        var city = escapeHTML(norm(r.CITY) || "—");
-        var ig   = escapeHTML(norm(r.IG) || "—");
-        var sat  = escapeHTML(norm(r.SAT) || "—");
-        var sun  = escapeHTML(norm(r.SUN) || "—");
-        var ota  = norm(r.OTA).toUpperCase();
-
-        var dotClass = ota==="Y" ? "dir-dot y" : (ota==="N" ? "dir-dot n" : "dir-dot");
-
-        row.innerHTML = `
-          <div class="cell dir-first" title="${name}">
-            <span class="bldg-icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24"><path d="M4 21V3h10v6h6v12H4zM6 19h2v-2H6v2zm0-4h2v-2H6v2zm0-4h2V9H6v2zm0-4h2V5H6v2zm4 12h2v-2h-2v2zm0-4h2v-2h-2v2zm0-4h2V9h-2v2zM16 21h2v-2h-2v2zm0-4h2v-2h-2v2zm0-4h2v-2h-2v2z"/></svg>
-            </span>
-            <span class="dir-ellipsis">${name}</span>
-          </div>
-
-          <div class="cell" title="${city}">
-            <div class="dir-inline">
-              <span class="geo-icon" aria-hidden="true">
-                <svg viewBox="0 0 24 24"><path d="M12 21s7-4.5 7-11a7 7 0 1 0-14 0c0 6.5 7 11 7 11z"></path><path d="M12 10.5a2 2 0 1 0 0-4 2 2 0 0 0 0 4z"></path></svg>
-              </span>
+        tr.innerHTML = `
+          <td class="dir-col-name">
+            <div class="dir-with-icon">
+              <span class="dir-ico" aria-hidden="true">${DIR_ICONS.bldg}</span>
               <div class="dir-stack">
-                <div class="dir-main">${city}</div>
-                <div class="dir-sub">${escapeHTML(st)}</div>
+                <div class="dir-main">${escapeHTML(r.NAME)}</div>
+                <div class="dir-sub">${escapeHTML(r.IG)}</div>
               </div>
             </div>
-          </div>
+          </td>
 
-          <div class="cell" title="${ig}">
-            <div class="dir-inline">
-              <span class="ig-icon" aria-hidden="true">
-                <svg viewBox="0 0 24 24"><rect x="5" y="5" width="14" height="14" rx="4"></rect><path d="M16.5 7.5h.01"></path><path d="M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"></path></svg>
-              </span>
+          <td class="dir-col-city">
+            <div class="dir-with-icon">
+              <span class="dir-ico" aria-hidden="true">${DIR_ICONS.pin}</span>
               <div class="dir-stack">
-                <div class="dir-main">${ig}</div>
-                <div class="dir-sub">Instagram</div>
+                <div class="dir-main">${escapeHTML(r.CITY)}</div>
+                <div class="dir-sub">${escapeHTML(r.STATE)}</div>
               </div>
             </div>
-          </div>
+          </td>
 
-          <div class="cell" title="${sat}">
-            <div class="dir-inline">
-              <span class="cal-icon" aria-hidden="true">
-                <svg viewBox="0 0 24 24"><path d="M8 3v3"></path><path d="M16 3v3"></path><path d="M4 9h16"></path><rect x="4" y="5" width="16" height="16" rx="2"></rect></svg>
-              </span>
+          <td class="dir-col-times">
+            <div class="dir-with-icon">
+              <span class="dir-ico" aria-hidden="true">${DIR_ICONS.cal}</span>
               <div class="dir-stack">
-                <div class="dir-main">${sat}</div>
-                <div class="dir-sub">Sat</div>
+                <div class="dir-times-row"><span class="dir-daylbl">Sat.</span><span class="dir-timeval">${escapeHTML(r.SAT)}</span></div>
+                <div class="dir-times-row"><span class="dir-daylbl">Sun.</span><span class="dir-timeval">${escapeHTML(r.SUN)}</span></div>
               </div>
             </div>
-          </div>
+          </td>
 
-          <div class="cell" title="${sun}">
-            <div class="dir-inline">
-              <span class="cal-icon" aria-hidden="true">
-                <svg viewBox="0 0 24 24"><path d="M8 3v3"></path><path d="M16 3v3"></path><path d="M4 9h16"></path><rect x="4" y="5" width="16" height="16" rx="2"></rect></svg>
-              </span>
-              <div class="dir-stack">
-                <div class="dir-main">${sun}</div>
-                <div class="dir-sub">Sun</div>
-              </div>
-            </div>
-          </div>
-
-          <div class="cell" title="${escapeHTML(ota)}">
+          <td class="dir-col-ota">
             <div class="dir-ota-cell">
-              <span class="link-icon" aria-hidden="true">
-                <svg viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.07 0l1.42-1.42a5 5 0 0 0-7.07-7.07L10.5 4.43"></path><path d="M14 11a5 5 0 0 0-7.07 0L5.5 12.43a5 5 0 0 0 7.07 7.07L13.5 19.57"></path></svg>
-              </span>
-              <span class="${dotClass}"></span>
+              <div class="${dotClass}" title="${r.OTA || "—"}"></div>
             </div>
-          </div>
+          </td>
         `;
-
-        body.appendChild(row);
+        tbody.appendChild(tr);
       });
 
-      card.appendChild(label);
-      card.appendChild(body);
-      root.appendChild(card);
+      table.appendChild(tbody);
+      section.appendChild(table);
+      dirRoot.appendChild(section);
     });
   }
+
 function applySearch(){
     var q = (searchInput && searchInput.value ? searchInput.value : "").trim().toLowerCase();
     if(!q){ render(data); return; }
@@ -2834,7 +2786,7 @@ function applySearch(){
 
       render(data);
     }catch(err){
-      root.innerHTML = '<div class="dir-err">'+ escapeHTML(err.message) +'</div>';
+      if(dirRoot){ dirRoot.innerHTML = '<div class="dir-err">'+ escapeHTML(err.message) +'</div>'; }
     }
   })();
 })();
