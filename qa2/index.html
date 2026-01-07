@@ -694,7 +694,7 @@ display:flex;
       max-width: 360px;
       justify-content: space-between;
     }
-    .state-label{ font-weight:800; color: rgba(0,0,0,0.55); letter-spacing:0.08em; text-transform:uppercase; font-size:12px; margin: 0 0 10px; white-space:nowrap; overflow: visible; }
+    .state-label{ font-weight: 800; color: rgba(0,0,0,0.55); letter-spacing: 0.08em; text-transform: uppercase; font-size: 12px; margin: 0 2px 10px; white-space: nowrap; overflow: visible; text-align: left; }
     .state-caret{ flex: 0 0 auto; opacity:0.7; }
     .state-btn:focus{
       outline:none;
@@ -2362,25 +2362,21 @@ body { overflow-y: auto; }
 @media (max-width: 500px) { #directoryRoot { transform: scale(0.90); } }
 
 /* State group label: same feel as .month-label */
-.state-card{ margin: 18px auto 22px; width: fit-content; max-width: calc(100% - 40px); }
+.state-card{ margin: 18px 0 22px; width: 100%; max-width: none; }
 .state-label{ font-weight:800; color: rgba(0,0,0,0.55); letter-spacing:0.08em; text-transform:uppercase; font-size:12px; margin: 0 0 10px; white-space:nowrap; overflow: visible; }
 @media (max-width: 700px){ .state-label{ font-weight:800; color: rgba(0,0,0,0.55); letter-spacing:0.08em; text-transform:uppercase; font-size:12px; margin: 0 0 10px; white-space:nowrap; overflow: visible; } }
 
 .directory-wrap{ padding: 22px 0 60px; }
 
 /* Table shell: matches reference card-body density (no headers) */
-.directory-table{
-  display: inline-table;
-  width: max-content;
-  max-width: calc(100% - 40px);
+.directory-table{width: fit-content;
+  max-width: 100%;
   margin: 0 auto;
   table-layout: fixed;
-  margin: 0 auto;
   border-collapse: separate;
   border-spacing: 0;
   background: var(--row);
-  box-shadow: 0 6px 14px rgba(0,0,0,0.12);
-}
+  box-shadow: 0 6px 14px rgba(0,0,0,0.12);}
 
 
 /* Rows + cells */
@@ -2395,11 +2391,11 @@ body { overflow-y: auto; }
 .directory-table tbody tr:last-child td{ border-bottom: none; }
 .directory-table tbody td:last-child{ border-right: 0; }
 .directory-table tbody td.dir-col-times{ width: 120px; padding-left: 6px; padding-right: 6px; }
-.directory-table tbody td.dir-col-ota{ width: 16px; padding-left: 2px; padding-right: 2px; }
+.directory-table tbody td.dir-col-ota{ width: 12px; padding-left: 0px; padding-right: 0px; }
 
 /* Column sizing to mirror the reference grid feel */
 .directory-table tbody td.dir-col-name{ width: 320px; }
-.directory-table tbody td.dir-col-city{ width: 160px; padding-left:10px; padding-right:10px; }
+.directory-table tbody td.dir-col-city{ width: 140px; padding-left:10px; padding-right:10px; }
 
 .dir-col-name{ width: 220px; background: var(--beige); font-weight: 900; }
 .dir-col-city{ width: 200px; padding-left:10px; padding-right:10px; }
