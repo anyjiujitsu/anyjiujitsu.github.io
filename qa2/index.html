@@ -135,6 +135,20 @@ display:flex;
     }
     @media (max-width: 700px){ .month-label{ transform: translateX(120px); } }
 
+    /* Directory group headers (STATE) should align exactly like month labels on EVENTS */
+    .dir-group-label{
+      font-weight:800;
+      color: rgba(0,0,0,0.55);
+      letter-spacing:0.08em;
+      text-transform:uppercase;
+      font-size:12px;
+      margin: 0 0 10px;
+      white-space: nowrap;
+      transform: translateX(240px);
+    }
+    @media (max-width: 700px){ .dir-group-label{ transform: translateX(120px); } }
+
+
 /* Keep month grouping headers (e.g., NOVEMBER 2026) in view after scaling */
     @media (max-width: 700px) { }
 
@@ -2381,7 +2395,7 @@ body { overflow-y: auto; }
 .directory-table tbody tr:last-child td{ border-bottom: none; }
 .directory-table tbody td:last-child{ border-right: 0; }
 .directory-table tbody td.dir-col-times{ width: 120px; padding-left: 6px; padding-right: 6px; }
-.directory-table tbody td.dir-col-ota{ width: 26px; padding-left: 4px; padding-right: 4px; }
+.directory-table tbody td.dir-col-ota{ width: 16px; padding-left: 2px; padding-right: 2px; }
 
 /* Column sizing to mirror the reference grid feel */
 .directory-table tbody td.dir-col-name{ width: 320px; }
@@ -2390,7 +2404,7 @@ body { overflow-y: auto; }
 .dir-col-name{ width: 220px; background: var(--beige); font-weight: 900; }
 .dir-col-city{ width: 200px; padding-left:10px; padding-right:10px; }
 .dir-col-times{ width: 160px; padding-left: 6px; padding-right: 6px; }
-.dir-col-ota{ width: 44px; padding-left: 4px; padding-right: 4px; }
+.dir-col-ota{ width: 16px; padding-left: 2px; padding-right: 2px; }
 
 /* Keep your existing stacking layout (do not change structure) */
 .dir-stack{ display:flex; flex-direction:column; gap:2px; line-height:1.15; min-width:0; }
@@ -2456,7 +2470,7 @@ body { overflow-y: auto; }
 .dir-col-name{ width: 320px !important; }
 .dir-col-city{ width: 160px !important; }
 .dir-col-times{ width: 120px !important; padding-left: 6px; padding-right: 6px; }
-.dir-col-ota{ width: 26px !important; padding-left: 4px; padding-right: 4px; }
+.dir-col-ota{ width: 26px !important; padding-left: 2px; padding-right: 2px; }
 
     /* === DIRECTORY WIDTH STANDARDIZATION (match EVENTS cardbody) === */
     .state-card{
@@ -2724,7 +2738,7 @@ body { overflow-y: auto; }
       section.className = "state-card";
 
       var label = document.createElement("div");
-      label.className = "state-label";
+      label.className = "dir-group-label";
       label.textContent = st;
       section.appendChild(label);
 
