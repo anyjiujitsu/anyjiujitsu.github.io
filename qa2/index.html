@@ -2355,7 +2355,7 @@ body { overflow-y: auto; }
 
 /* Table shell: matches reference card-body density (no headers) */
 .directory-table{
-  width: min(1040px, calc(100% - 40px));
+  width: min(920px, calc(100% - 40px));
   margin: 0 auto;
   table-layout: fixed;
   margin: 0 auto;
@@ -2447,7 +2447,15 @@ body { overflow-y: auto; }
 
 .dir-err{ padding:16px; color:#b30000; font-weight:700; }
 
-  </style>
+  
+/* === WIDTH TUNE v502 (match EVENTS cardbody) === */
+.directory-table{ width: min(920px, calc(100% - 40px)); }
+.dir-col-name{ width: 200px !important; }
+.dir-col-city{ width: 180px !important; }
+.dir-col-times{ width: 140px !important; padding-left: 6px; padding-right: 6px; }
+.dir-col-ota{ width: 28px !important; padding-left: 4px; padding-right: 4px; }
+
+</style>
 </head>
 <body>
 <div class="header-freeze">
