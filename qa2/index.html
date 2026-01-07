@@ -2591,19 +2591,29 @@ body { overflow-y: auto; }
   max-width: 270px !important; /* leave room for icon + gap */
 }
 
-
-/* === micro-shifts (no cardbody width changes) === */
-.directory-table tbody td.dir-col-times{
-  /* nudge Sat/Sun block slightly to the right */
-  padding-left: 10px !important; /* was ~6px */
-}
-.dir-ota-cell{
-  /* bring OTA dot inward from the right edge */
-  justify-content: flex-start !important;
-  padding-left: 2px !important;
-}
-
 </style>
+
+<style id="dir-micro-tweaks">
+  /* Keep cardbody width EXACT; only micro-position tweaks */
+
+  /* Match EVENTS group label placement (left aligned, same margin rhythm) */
+  .dir-group .dir-group-label{
+    margin: 0 2px 10px !important;
+    text-transform: uppercase !important;
+  }
+
+  /* Move Sat./Sun. values slightly RIGHT (without changing column width) */
+  .dir-col-times .dir-times-row{
+    gap: 8px !important; /* was 4px */
+  }
+
+  /* Move OTA dot slightly LEFT (more breathing room from right edge) */
+  .dir-col-ota .dir-ota-cell{
+    justify-content: flex-start !important;
+    padding-left: 10px !important;
+  }
+</style>
+
 </head>
 <body>
 <div class="header-freeze">
