@@ -2591,6 +2591,20 @@ body { overflow-y: auto; }
   max-width: 270px !important; /* leave room for icon + gap */
 }
 
+
+/* --- index511 tweaks: keep cardbody width, shift SAT/SUN content right, shift OTA dot left --- */
+.directory-table tbody td.dir-col-times .dir-stack{
+  margin-left: auto !important;
+  align-items: flex-end !important;
+  text-align: right !important;
+}
+.directory-table tbody td.dir-col-times .dir-times-row{
+  justify-content: flex-end !important;
+}
+.directory-table tbody td.dir-col-ota .dir-ota-cell{
+  justify-content: flex-start !important;
+}
+
 </style>
 </head>
 <body>
