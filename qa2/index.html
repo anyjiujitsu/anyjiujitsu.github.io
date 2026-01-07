@@ -2394,7 +2394,7 @@ body { overflow-y: auto; }
 }
 .directory-table tbody tr:last-child td{ border-bottom: none; }
 .directory-table tbody td:last-child{ border-right: 0; }
-.directory-table tbody td.dir-col-times{ width: 120px; padding-left: 6px; padding-right: 6px; }
+.directory-table tbody td.dir-col-times{ width: 120px; padding-left: 10px; padding-right: 6px; }
 .directory-table tbody td.dir-col-ota{ width: 12px; padding-left: 0px; padding-right: 0px; }
 
 /* Column sizing to mirror the reference grid feel */
@@ -2445,6 +2445,7 @@ body { overflow-y: auto; }
 /* OTA: dot only (no icon, no label) */
 .dir-ota-cell{ display:flex; align-items:center; justify-content:center; height:100%; }
 .dir-dot{ width:10px; height:10px; border-radius:50%; border: 1px solid rgba(0,0,0,0.12); background:#bdbdbd; }
+.directory-table .dir-dot{ transform: translateX(-6px); }
 .dir-dot.y{
   background-color: #28a745;
   border-color: rgba(0,0,0,0.10);
@@ -2590,16 +2591,6 @@ body { overflow-y: auto; }
 .directory-table td.dir-col-name .dir-sub{
   max-width: 270px !important; /* leave room for icon + gap */
 }
-
-
-
-/* --- index512 micro tweaks: keep cardbody width, subtle balance --- */
-/* Slightly shift Sat/Sun stack to the right within its fixed column (do NOT right-align) */
-.directory-table tbody td.dir-col-times{ padding-left: 14px !important; padding-right: 6px !important; }
-/* Keep rows natural (no flex-end) */
-.directory-table tbody td.dir-col-times .dir-stack{ align-items: flex-start !important; text-align: left !important; }
-/* Move OTA indicator slightly left to give breathing room from card edge without changing column width */
-.directory-table tbody td.dir-col-ota .dir-dot{ transform: translateX(-6px); }
 
 </style>
 </head>
