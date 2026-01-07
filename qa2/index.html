@@ -2545,6 +2545,48 @@ body { overflow-y: auto; }
   text-overflow: ellipsis;
 }
 
+
+/* ===== INDEX509 OVERRIDES: Match EVENTS cardbody width + header placement ===== */
+
+/* 1) Make each state section full-width like EVENTS month sections */
+.state-group{
+  width: 100% !important;
+  max-width: none !important;
+  margin: 0 0 26px 0 !important;
+}
+
+/* Left-align the state header exactly like EVENTS month label (not centered over card) */
+.state-group .state-label{
+  display:block !important;
+  width: 100% !important;
+  max-width: none !important;
+  margin: 18px 0 10px 0 !important;
+  padding-left: 22px !important;
+  text-align: left !important;
+  transform: none !important;
+}
+
+/* 2) Lock directory cardbody to EVENTS width (tighter than previous) */
+.directory-table{
+  width: 700px !important;
+  max-width: 700px !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  table-layout: fixed !important;
+}
+
+/* 3) Column widths (sum = 700px) */
+.directory-table td.dir-col-name{ width: 320px !important; max-width: 320px !important; }
+.directory-table td.dir-col-city{ width: 150px !important; max-width: 150px !important; }
+.directory-table td.dir-col-times{ width: 200px !important; max-width: 200px !important; }
+.directory-table td.dir-col-ota{ width: 30px !important; max-width: 30px !important; padding-left: 0 !important; padding-right: 0 !important; text-align:center !important; }
+
+/* Keep ellipsis working within narrower NAME/IG */
+.directory-table td.dir-col-name .dir-main,
+.directory-table td.dir-col-name .dir-sub{
+  max-width: 270px !important; /* leave room for icon + gap */
+}
+
 </style>
 </head>
 <body>
