@@ -2811,6 +2811,11 @@ body { overflow-y: auto; }
 .directory-table tbody td.dir-col-name .dir-ota-inline{
   margin-left: 4px !important; /* was 6px */
 }
+</style><style>
+/* Index626: Guaranteed visual left shift of OTA dot ONLY (no column/value movement) */
+.directory-table tbody td.dir-col-name .dir-ota-inline .dir-dot{
+  transform: translateX(-8px) !important;
+}
 </style></head>
 <body>
 <div class="header-freeze">
