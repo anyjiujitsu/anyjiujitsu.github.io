@@ -2818,25 +2818,11 @@ body { overflow-y: auto; }
   left: -8px;
 }
 </style><style>
-/* Index632: Move inline OTA dot LEFT by adding right inset to NAME/IG cell (no column/value reordering) */
-
-/* Increase right padding on NAME/IG cell only (doesn't move text/icon; just reduces right-edge dead space so dot sits left) */
+/* Index635: Visually shift inline OTA indicator to the RIGHT (user-perceived), without moving other columns/values.
+   Mechanism: reduce the extra right inset on the NAME/IG cell so the inline OTA dot can sit closer to the cell edge.
+*/
 .directory-table tbody td.dir-col-name{
-  padding-right: 26px !important;
-}
-</style><style>
-/* Index633: Move inline OTA indicator LEFT by 10px (OTA only, stable) */
-
-/* Increase right inset on NAME/IG cell by +10px so OTA sits further left */
-.directory-table tbody td.dir-col-name{
-  padding-right: 36px !important; /* was 26px */
-}
-</style><style>
-/* Index634: Micro-adjust OTA slightly RIGHT (reduce inset) */
-
-/* Reduce right inset so OTA moves right a bit */
-.directory-table tbody td.dir-col-name{
-  padding-right: 32px !important; /* was 36px */
+  padding-right: 22px !important; /* smaller than before -> dot appears more to the RIGHT */
 }
 </style></head>
 <body>
