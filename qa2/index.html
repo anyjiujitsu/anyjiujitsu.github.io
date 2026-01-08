@@ -2884,13 +2884,13 @@ body { overflow-y: auto; }
 <input autocomplete="off" id="nlSearch" placeholder='Filter (e.g., "seminar", "maine", "2026")' spellcheck="false" type="text"/>
 <button aria-label="Clear filter" class="head-search-clear" title="Clear" type="button">×</button>
 </div>
-<div aria-label="Filter by event type" class="event-filter">
+<div aria-label="Filter by state" class="event-filter">
 <button aria-expanded="false" aria-haspopup="true" class="event-btn" id="eventBtn" type="button">
-<span class="event-label">Events</span><span aria-hidden="true" class="event-caret">▾</span>
+<span class="event-label">States</span><span aria-hidden="true" class="event-caret">▾</span>
 </button>
 <div class="event-menu" hidden="" id="eventMenu">
 <div class="event-menu-header">
-<span class="event-menu-title">Event Types</span>
+<span class="event-menu-title">States</span>
 <button class="event-clear" id="eventClear" type="button">Clear</button>
 </div>
 <div class="event-list" id="eventList"></div>
@@ -2934,6 +2934,78 @@ body { overflow-y: auto; }
   // Use existing header search if present, otherwise fall back.
   var searchInput = document.getElementById('nlSearch') || document.getElementById('searchInput');
   var clearBtn = document.querySelector('.head-search-clear') || document.getElementById('clearBtn');
+  // Directory STATE filter (repurposed from the former Event Types pill)
+  var dirStateBtn = document.getElementById('eventBtn');
+  var dirStateMenu = document.getElementById('eventMenu');
+  var dirStateList = document.getElementById('eventList');
+  var dirStateClear = document.getElementById('eventClear');
+  var selectedDirStates = new Set();
+
+  function closeDirStateMenu(){
+    if(!dirStateMenu || !dirStateBtn) return;
+    dirStateMenu.hidden = true;
+    dirStateBtn.setAttribute('aria-expanded','false');
+  }
+  function toggleDirStateMenu(){
+    if(!dirStateMenu || !dirStateBtn) return;
+    var isOpen = !dirStateMenu.hidden;
+    dirStateMenu.hidden = isOpen;
+    dirStateBtn.setAttribute('aria-expanded', String(!isOpen));
+  }
+  if(dirStateBtn){
+    dirStateBtn.addEventListener('click', function(e){ e.preventDefault(); toggleDirStateMenu(); });
+  }
+  document.addEventListener('click', function(e){
+    if(!dirStateMenu || dirStateMenu.hidden) return;
+    if(dirStateMenu.contains(e.target) || (dirStateBtn && dirStateBtn.contains(e.target))) return;
+    closeDirStateMenu();
+  });
+  document.addEventListener('keydown', function(e){ if(e.key==='Escape') closeDirStateMenu(); });
+  if(dirStateClear){
+    dirStateClear.addEventListener('click', function(){
+      selectedDirStates.clear();
+      if(dirStateList){
+        var inputs = dirStateList.querySelectorAll('input[type=checkbox]');
+        inputs.forEach(function(cb){ cb.checked = false; });
+      }
+      applySearch();
+    });
+  }
+
+  function buildDirStateMenuOptions(list){
+    if(!dirStateList) return;
+    // unique states from directory data
+    var set = {};
+    list.forEach(function(r){
+      var st = (r.STATE || '').toString().trim();
+      if(st) set[st] = true;
+    });
+    var states = Object.keys(set).sort(function(a,b){ return a.localeCompare(b); });
+    dirStateList.innerHTML = '';
+    states.forEach(function(st){
+      var row = document.createElement('label');
+      row.className = 'event-item';
+      row.style.display = 'flex';
+      row.style.alignItems = 'center';
+      row.style.gap = '8px';
+      row.style.padding = '8px 10px';
+      row.style.cursor = 'pointer';
+      var cb = document.createElement('input');
+      cb.type = 'checkbox';
+      cb.value = st;
+      cb.checked = selectedDirStates.has(st);
+      cb.addEventListener('change', function(){
+        if(cb.checked) selectedDirStates.add(st); else selectedDirStates.delete(st);
+        applySearch();
+      });
+      var span = document.createElement('span');
+      span.textContent = st;
+      row.appendChild(cb);
+      row.appendChild(span);
+      dirStateList.appendChild(row);
+    });
+  }
+
 
   // Directory icons (placeholders for now) — sized/opacity/placement via CSS to match reference
   var DIR_ICONS = {
@@ -3147,6 +3219,11 @@ function applySearch(){
     var q = (searchInput && searchInput.value ? searchInput.value : "").trim().toLowerCase();
     if(!q){ render(data); return; }
     var filtered = data.filter(function(r){
+      // STATE dropdown filter (if any selected)
+      if(selectedDirStates && selectedDirStates.size){
+        if(!selectedDirStates.has((r.STATE||'').toString().trim())) return false;
+      }
+      if(!q) return true;
       var hay = (r.NAME+" "+r.IG+" "+r.CITY+" "+r.STATE+" "+r.SAT+" "+r.SUN+" "+r.OTA).toLowerCase();
       return hay.includes(q);
     });
@@ -3192,6 +3269,7 @@ function applySearch(){
         };
       });
 
+      buildDirStateMenuOptions(data);
       render(data);
     }catch(err){
       if(dirRoot){ dirRoot.innerHTML = '<div class="dir-err">'+ escapeHTML(err.message) +'</div>'; }
