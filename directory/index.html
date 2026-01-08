@@ -5,7 +5,7 @@
 <head>
 <meta charset="utf-8"/>
 <meta content="width=1200, initial-scale=0.32, maximum-scale=0.32, user-scalable=no, viewport-fit=cover" name="viewport"/>
-<title>ANY N.E. – DIRECTORY13</title>
+<title>ANY N.E. – GYM INDEX</title>
 <style>
 
 /* === Block 1 === */
@@ -2064,7 +2064,7 @@ body{
 /* Index58: move Search pill RIGHT 5x more (total 10px right) */
 .search-filter,
 .search-bar{
-  transform: translateX(10px) !important;
+  transform: translateX(20px) !important;
 }
 
 /* === Block 102 === */
@@ -2858,6 +2858,46 @@ body { overflow-y: auto; }
   }
 </style>
 
+
+<style>
+  /* Index107: Clear weight matches other text (no bold) */
+  .event-clear{ font-weight: 400 !important; }
+</style>
+
+
+<style>
+  /* Index111: year clear weight matches others */
+  .year-clear{ font-weight: 400 !important; }
+</style>
+
+
+<style>
+  /* Index123: shift group (month) names right by 10px only */
+  .month-label {
+    margin-left: 10px;
+  }
+</style>
+
+
+<style>
+  /* Index124: shift ONLY group header labels (month/state group names) right by 10px */
+  .dir-group-label,
+  .month-label,
+  .group-label{
+    transform: translateX(10px) !important;
+  }
+</style>
+
+
+<style>
+  /* Index127: force additional 10px right shift on group labels */
+  .dir-group-label,
+  .month-label,
+  .group-label{
+    transform: translateX(30px) !important;
+  }
+</style>
+
 </head>
 <body>
 <div class="header-freeze">
@@ -2881,16 +2921,16 @@ body { overflow-y: auto; }
 <path d="M10 18a8 8 0 1 1 5.292-14.001A8 8 0 0 1 10 18Zm11.707 2.293-5.4-5.4a10 10 0 1 0-1.414 1.414l5.4 5.4a1 1 0 0 0 1.414-1.414Z"></path>
 </svg>
 </span>
-<input autocomplete="off" id="nlSearch" placeholder='Filter (e.g., "seminar", "maine", "2026")' spellcheck="false" type="text"/>
+<input autocomplete="off" id="nlSearch" placeholder='Filter (e.g., "boston", "maine", "gym name")' spellcheck="false" type="text"/>
 <button aria-label="Clear filter" class="head-search-clear" title="Clear" type="button">×</button>
 </div>
-<div aria-label="Filter by event type" class="event-filter">
+<div aria-label="Filter by state" class="event-filter">
 <button aria-expanded="false" aria-haspopup="true" class="event-btn" id="eventBtn" type="button">
-<span class="event-label">Events</span><span aria-hidden="true" class="event-caret">▾</span>
+<span class="event-label">States</span><span aria-hidden="true" class="event-caret">▾</span>
 </button>
 <div class="event-menu" hidden="" id="eventMenu">
 <div class="event-menu-header">
-<span class="event-menu-title">Event Types</span>
+<span class="event-menu-title">States</span>
 <button class="event-clear" id="eventClear" type="button">Clear</button>
 </div>
 <div class="event-list" id="eventList"></div>
@@ -2898,11 +2938,11 @@ body { overflow-y: auto; }
 </div>
 <div aria-label="Filter by year" class="year-filter">
 <button aria-expanded="false" aria-haspopup="true" class="year-btn" id="yearBtn" type="button">
-<span class="year-label">Years</span><span aria-hidden="true" class="year-caret">▾</span>
+<span class="year-label">OpenMat</span><span aria-hidden="true" class="year-caret">▾</span>
 </button>
 <div class="year-menu" hidden="" id="yearMenu">
 <div class="year-menu-header">
-<span class="year-menu-title">Years</span>
+<span class="year-menu-title">OpenMat</span>
 <button class="year-clear" id="yearClear" type="button">Clear</button>
 </div>
 <div class="year-list" id="yearList"></div>
@@ -2910,11 +2950,11 @@ body { overflow-y: auto; }
 </div>
 <div aria-label="Filter by state" class="state-filter">
 <button aria-expanded="false" aria-haspopup="true" class="state-btn" id="stateBtn" type="button">
-      States <span aria-hidden="true" class="state-caret">▾</span>
+<span class="year-label">Guests</span><span aria-hidden="true" class="year-caret">▾</span>
 </button>
 <div class="state-menu" hidden="" id="stateMenu">
 <div class="state-menu-header">
-<span class="state-menu-title">States</span>
+<span class="state-menu-title">Guests</span>
 <button class="state-clear" id="stateClear" type="button">Clear</button>
 </div>
 <div class="state-list" id="stateList"></div>
@@ -3051,6 +3091,255 @@ body { overflow-y: auto; }
   var dirRoot = document.getElementById("directoryRoot");
   var data = [];
 
+  // === Index106: Directory STATE filter wiring (uses existing pill UIs; no layout changes) ===
+  var selectedStatesDir = new Set();
+
+  // === Index111: Open Mat filter (repurposes Year pill) ===
+  // openMatMode: "" | "all" | "sat" | "sun"
+  var openMatMode = "";
+
+  // === Index120: Guests filter (right pill) ===
+  var guestsMode = false;
+
+
+  function updateYearGlow(){
+    var yb = document.getElementById('yearBtn');
+    if(!yb) return;
+    yb.classList.toggle('has-selection', !!openMatMode);
+  }
+
+  function buildOpenMatMenu(){
+    var listEl = document.getElementById('yearList');
+    if(!listEl) return;
+
+    listEl.innerHTML = '';
+
+    function addOption(val, label){
+      var row = document.createElement('label');
+      row.className = 'event-item';
+      row.style.display = 'flex';
+      row.style.alignItems = 'center';
+      row.style.gap = '8px';
+      row.style.padding = '8px 10px';
+      row.style.cursor = 'pointer';
+
+      var rb = document.createElement('input');
+      rb.type = 'checkbox';
+      rb.name = 'openmat';
+      rb.value = val;
+      rb.checked = (openMatMode === val);
+      rb.addEventListener('change', function(){
+        // single-select checkbox behavior
+        if(rb.checked){
+          openMatMode = val;
+          // uncheck other options
+          var list = document.getElementById('yearList');
+          if(list){
+            list.querySelectorAll('input[type=checkbox][name=openmat]').forEach(function(x){
+              if(x !== rb) x.checked = false;
+            });
+          }
+        }else{
+          openMatMode = '';
+        }
+        updateYearGlow();
+        applySearch();
+      });
+
+      var span = document.createElement('span');
+      span.textContent = label;
+
+      row.appendChild(rb);
+      row.appendChild(span);
+      listEl.appendChild(row);
+    }
+
+    addOption('all', 'All');
+    addOption('sat', 'Saturday');
+    addOption('sun', 'Sunday');
+  }
+
+  function clearOpenMat(){
+    openMatMode = "";
+    var listEl = document.getElementById('yearList');
+    if(listEl){
+      listEl.querySelectorAll('input[type=checkbox][name=openmat]').forEach(function(r){ r.checked = false; });
+    }
+    updateYearGlow();
+    // close menu
+    var btn = document.getElementById('yearBtn');
+    var menu = document.getElementById('yearMenu');
+    if(menu) menu.hidden = true;
+    if(btn) btn.setAttribute('aria-expanded','false');
+    applySearch();
+  }
+
+
+  function getUniqueStates(list){
+    var set = {};
+    list.forEach(function(r){
+      var st = (r.STATE || "").toString().trim();
+      if(st) set[st] = true;
+    });
+    return Object.keys(set).sort(function(a,b){ return a.localeCompare(b); });
+  }
+
+  function updatePillGlow(btnEl){
+    if(!btnEl) return;
+    // left States pill
+    btnEl.classList.toggle('has-selection', selectedStatesDir.size > 0);
+  }
+
+  function updateGuestsGlow(){
+    var sb = document.getElementById('stateBtn');
+    if(!sb) return;
+    sb.classList.toggle('has-selection', !!guestsMode);
+  }
+
+  function syncAllPillsGlow(){
+    updatePillGlow(document.getElementById('eventBtn'));
+    updateYearGlow();
+    updateGuestsGlow();
+  }
+
+  function buildGuestsMenu(listEl){
+    if(!listEl) return;
+    listEl.innerHTML = '';
+
+    var row = document.createElement('label');
+    row.className = 'event-item';
+    row.style.display = 'flex';
+    row.style.alignItems = 'center';
+    row.style.gap = '8px';
+    row.style.padding = '8px 10px';
+    row.style.cursor = 'pointer';
+
+    var cb = document.createElement('input');
+    cb.type = 'checkbox';
+    cb.name = 'guests';
+    cb.checked = !!guestsMode;
+    cb.addEventListener('change', function(){
+      guestsMode = !!cb.checked;
+      updateGuestsGlow();
+      applySearch();
+    });
+
+    var span = document.createElement('span');
+    span.textContent = 'Guests Welcome';
+
+    row.appendChild(cb);
+    row.appendChild(span);
+    listEl.appendChild(row);
+  }
+
+  function buildStateMenu(listEl, states){
+    if(!listEl) return;
+    listEl.innerHTML = "";
+    states.forEach(function(st){
+      var label = document.createElement('label');
+      label.className = 'event-item';
+      label.style.display = 'flex';
+      label.style.alignItems = 'center';
+      label.style.gap = '8px';
+      label.style.padding = '8px 10px';
+      label.style.cursor = 'pointer';
+
+      var cb = document.createElement('input');
+      cb.type = 'checkbox';
+      cb.value = st;
+      cb.checked = selectedStatesDir.has(st);
+      cb.addEventListener('change', function(){
+        if(cb.checked) selectedStatesDir.add(st);
+        else selectedStatesDir.delete(st);
+        // keep other menu checkbox in sync
+        ['eventList'].forEach(function(id){
+          var otherList = document.getElementById(id);
+          if(!otherList) return;
+          var other = otherList.querySelector('input[type="checkbox"][value="'+st.replace(/"/g,'&quot;')+'"]');
+          if(other && other !== cb) other.checked = cb.checked;
+        });
+        syncAllPillsGlow();
+        applySearch();
+      });
+
+      var span = document.createElement('span');
+      span.textContent = st;
+
+      label.appendChild(cb);
+      label.appendChild(span);
+      listEl.appendChild(label);
+    });
+  }
+
+  function setupMenu(btnId, menuId, listId, clearId){
+    var btn = document.getElementById(btnId);
+    var menu = document.getElementById(menuId);
+    var listEl = document.getElementById(listId);
+    var clear = document.getElementById(clearId);
+
+    if(btn && menu){
+      btn.addEventListener('click', function(e){
+        e.preventDefault();
+        menu.hidden = !menu.hidden;
+        btn.setAttribute('aria-expanded', String(!menu.hidden));
+      });
+    }
+
+    if(clear){
+      clear.addEventListener('click', function(e){
+        e.preventDefault();
+        // Right pill: Guests
+        if(clearId === 'stateClear'){
+          guestsMode = false;
+          var sl = document.getElementById('stateList');
+          if(sl){
+            sl.querySelectorAll('input[type="checkbox"][name="guests"]').forEach(function(cb){ cb.checked = false; });
+          }
+          syncAllPillsGlow();
+          applySearch();
+          if(menu) menu.hidden = true;
+          if(btn) btn.setAttribute('aria-expanded','false');
+          return;
+        }
+        selectedStatesDir.clear();
+        // uncheck all checkboxes in both lists
+        ['eventList'].forEach(function(id){
+          var el = document.getElementById(id);
+          if(!el) return;
+          el.querySelectorAll('input[type="checkbox"]').forEach(function(cb){ cb.checked = false; });
+        });
+        syncAllPillsGlow();
+        applySearch();
+      });
+    }
+
+    return {btn:btn, menu:menu, listEl:listEl};
+  }
+
+  var menus = [
+    setupMenu('eventBtn','eventMenu','eventList','eventClear'),
+    setupMenu('yearBtn','yearMenu','yearList','yearClear'),
+    setupMenu('stateBtn','stateMenu','stateList','stateClear')
+  ];
+
+  document.addEventListener('click', function(e){
+    menus.forEach(function(m){
+      if(!m || !m.menu || !m.btn) return;
+      if(m.menu.hidden) return;
+      if(m.menu.contains(e.target) || m.btn.contains(e.target)) return;
+      m.menu.hidden = true;
+      m.btn.setAttribute('aria-expanded','false');
+    });
+  });
+  document.addEventListener('keydown', function(e){
+    if(e.key !== 'Escape') return;
+    menus.forEach(function(m){
+      if(!m || !m.menu || !m.btn) return;
+      m.menu.hidden = true;
+      m.btn.setAttribute('aria-expanded','false');
+    });
+  });
+
   function render(list){
     if(!dirRoot) return;
     dirRoot.innerHTML = "";
@@ -3145,8 +3434,29 @@ body { overflow-y: auto; }
 
 function applySearch(){
     var q = (searchInput && searchInput.value ? searchInput.value : "").trim().toLowerCase();
-    if(!q){ render(data); return; }
     var filtered = data.filter(function(r){
+      if(typeof selectedStatesDir !== "undefined" && selectedStatesDir.size){
+        var st = (r.STATE || "").toString().trim();
+        if(!selectedStatesDir.has(st)) return false;
+      }
+      // Open Mat filter
+      if(typeof openMatMode !== "undefined" && openMatMode){
+        var sat = (r.SAT || "").toString().trim();
+        var sun = (r.SUN || "").toString().trim();
+        if(openMatMode === 'all'){
+          if(!sat && !sun) return false;
+        }else if(openMatMode === 'sat'){
+          if(!sat) return false;
+        }else if(openMatMode === 'sun'){
+          if(!sun) return false;
+        }
+      }
+      // Guests filter (OTA = Y)
+      if(typeof guestsMode !== "undefined" && guestsMode){
+        var ota = (r.OTA || "").toString().trim().toUpperCase();
+        if(ota !== "Y") return false;
+      }
+      if(!q) return true;
       var hay = (r.NAME+" "+r.IG+" "+r.CITY+" "+r.STATE+" "+r.SAT+" "+r.SUN+" "+r.OTA).toLowerCase();
       return hay.includes(q);
     });
@@ -3191,6 +3501,33 @@ function applySearch(){
           OTA:   normalizeOta(r[iOTA])
         };
       });
+
+      // Index107: populate left States pill (repurposed from Events) from directory STATE values
+      try{
+        if(typeof getUniqueStates === "function" && typeof buildStateMenu === "function"){
+          var statesForLeft = getUniqueStates(data);
+          buildStateMenu(document.getElementById('eventList'), statesForLeft);
+          buildOpenMatMenu();
+          updateYearGlow();
+          buildGuestsMenu(document.getElementById('stateList'));
+          updateGuestsGlow();
+          // Index119: ensure Open Mat Clear always resets Open Mat state
+          try{
+            var yc = document.getElementById('yearClear');
+            if(yc && !yc.__boundOpenMatClear){
+              yc.__boundOpenMatClear = true;
+              yc.addEventListener('click', function(e){
+                e.preventDefault();
+                if(typeof clearOpenMat === 'function') clearOpenMat();
+              });
+            }
+          }catch(e){}
+
+          // glow reflects selection state
+          if(typeof syncAllPillsGlow === "function") syncAllPillsGlow();
+        }
+      }catch(e){}
+
 
       render(data);
     }catch(err){
