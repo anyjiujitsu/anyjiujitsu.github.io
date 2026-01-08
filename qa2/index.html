@@ -2842,6 +2842,22 @@ body { overflow-y: auto; }
       }
     </style>
     
+
+<style>
+  /* Index102: Make NAME/IG Instagram icon match other icons (stroke weight/opacity) */
+  .directory-table td.dir-col-name .dir-ico svg{
+    fill: none !important;
+    stroke: rgba(0,0,0,0.35) !important;
+    stroke-width: 1.8 !important;
+    stroke-linecap: round !important;
+    stroke-linejoin: round !important;
+  }
+  .directory-table td.dir-col-name .dir-ico svg .ig-fill{
+    fill: rgba(0,0,0,0.35) !important;
+    stroke: none !important;
+  }
+</style>
+
 </head>
 <body>
 <div class="header-freeze">
@@ -2923,9 +2939,9 @@ body { overflow-y: auto; }
   var DIR_ICONS = {
 
     ig: `<svg viewBox="0 0 24 24" aria-hidden="true">
-      <rect x="3" y="3" width="18" height="18" rx="5" ry="5" fill="none" stroke="rgba(0,0,0,0.35)" stroke-width="2"/>
-      <circle cx="12" cy="12" r="4" fill="none" stroke="rgba(0,0,0,0.35)" stroke-width="2"/>
-      <circle cx="17.5" cy="6.5" r="1.2" fill="rgba(0,0,0,0.35)"/>
+      <rect x="3" y="3" width="18" height="18" rx="5" ry="5"/>
+      <circle cx="12" cy="12" r="4"/>
+      <circle class="ig-fill" cx="17.5" cy="6.5" r="1.2"/>
     </svg>`,
     
   bldg: `<svg viewBox="0 0 24 24" focusable="false">     <path d="M3 21h18v-2H3v2zm2-4h14V3H5v14zm2-2V5h10v10H7zm1-8h2v2H8V7zm0 3h2v2H8v-2zm0 3h2v2H8v-2zm4-6h2v2h-2V7zm0 3h2v2h-2v-2zm0 3h2v2h-2v-2z"/>   </svg>`,
