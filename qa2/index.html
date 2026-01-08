@@ -2747,16 +2747,16 @@ body { overflow-y: auto; }
   margin-bottom: 4px !important;
 }
 </style><style>
-/* Index613: Definitive vertical nudge using transform (visual-only, no reflow) */
+/* Index614: Shift directory groups up by reducing TOP padding (no transforms, no value movement) */
 
-/* Shift entire month group block up */
-.month-group{
-  transform: translateY(-8px) !important;
+/* Pull the whole directory section upward */
+.directory-wrap{
+  padding-top: 14px !important; /* was 22px */
 }
 
-/* Backup: if month-group not present, shift card wrapper */
-.directory-card{
-  transform: translateY(-8px) !important;
+/* Slightly tighten header-to-table spacing inside each STATE group */
+.dir-group-label{
+  margin-bottom: 6px !important; /* was 10px */
 }
 </style></head>
 <body>
