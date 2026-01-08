@@ -2812,17 +2812,12 @@ body { overflow-y: auto; }
   margin-left: 4px !important; /* was 6px */
 }
 </style><style>
-/* Index628: Visible left shift using relative positioning (OTA only, no reflow) */
-.directory-table tbody td.dir-col-name .dir-ota-inline{
-  position: relative;
-  left: -8px;
-}
-</style><style>
-/* Index635: Visually shift inline OTA indicator to the RIGHT (user-perceived), without moving other columns/values.
-   Mechanism: reduce the extra right inset on the NAME/IG cell so the inline OTA dot can sit closer to the cell edge.
-*/
-.directory-table tbody td.dir-col-name{
-  padding-right: 22px !important; /* smaller than before -> dot appears more to the RIGHT */
+/* Index636: Guaranteed visual RIGHT shift of inline OTA indicator (dot only; no other values/columns move) */
+
+/* Keep the inline OTA container in place, but move ONLY the dot to the right */
+.directory-table tbody td.dir-col-name .dir-ota-inline .dir-dot{
+  position: relative !important;
+  left: 8px !important; /* -> moves dot RIGHT on screen */
 }
 </style></head>
 <body>
