@@ -2934,141 +2934,6 @@ body { overflow-y: auto; }
   // Use existing header search if present, otherwise fall back.
   var searchInput = document.getElementById('nlSearch') || document.getElementById('searchInput');
   var clearBtn = document.querySelector('.head-search-clear') || document.getElementById('clearBtn');
-  // Directory STATE filter (repurposed from the former Event Types pill)
-  var dirStateBtn = document.getElementById('eventBtn');
-  var dirStateMenu = document.getElementById('eventMenu');
-  var dirStateList = document.getElementById('eventList');
-  var dirStateClear = document.getElementById('eventClear');
-  var selectedDirStates = new Set();
-
-  // Mirror wiring for the existing rightmost States pill (stateBtn) so it also works
-  var legacyStateBtn = document.getElementById('stateBtn');
-  var legacyStateMenu = document.getElementById('stateMenu');
-  var legacyStateList = document.getElementById('stateList');
-  var legacyStateClear = document.getElementById('stateClear');
-
-  function closeLegacyStateMenu(){
-    if(!legacyStateMenu || !legacyStateBtn) return;
-    legacyStateMenu.hidden = true;
-    legacyStateBtn.setAttribute('aria-expanded','false');
-  }
-  function toggleLegacyStateMenu(){
-    if(!legacyStateMenu || !legacyStateBtn) return;
-    var isOpen = !legacyStateMenu.hidden;
-    legacyStateMenu.hidden = isOpen;
-    legacyStateBtn.setAttribute('aria-expanded', String(!isOpen));
-  }
-  if(legacyStateBtn){
-    legacyStateBtn.addEventListener('click', function(e){ e.preventDefault(); toggleLegacyStateMenu(); });
-  }
-  if(legacyStateClear){
-    legacyStateClear.addEventListener('click', function(){
-      selectedDirStates.clear();
-      if(legacyStateList){
-        legacyStateList.querySelectorAll('input[type=checkbox]').forEach(function(cb){ cb.checked = false; });
-      }
-      if(dirStateList){
-        dirStateList.querySelectorAll('input[type=checkbox]').forEach(function(cb){ cb.checked = false; });
-      }
-      applySearch();
-    });
-  }
-
-
-  function closeDirStateMenu(){
-    if(!dirStateMenu || !dirStateBtn) return;
-    dirStateMenu.hidden = true;
-    dirStateBtn.setAttribute('aria-expanded','false');
-  }
-  function toggleDirStateMenu(){
-    if(!dirStateMenu || !dirStateBtn) return;
-    var isOpen = !dirStateMenu.hidden;
-    dirStateMenu.hidden = isOpen;
-    dirStateBtn.setAttribute('aria-expanded', String(!isOpen));
-  }
-  if(dirStateBtn){
-    dirStateBtn.addEventListener('click', function(e){ e.preventDefault(); toggleDirStateMenu(); });
-  }
-  document.addEventListener('click', function(e){
-    // close former-Events(now States) menu
-    if(dirStateMenu && !dirStateMenu.hidden){
-      if(!(dirStateMenu.contains(e.target) || (dirStateBtn && dirStateBtn.contains(e.target)))){
-        closeDirStateMenu();
-      }
-    }
-    // close existing rightmost States menu
-    if(legacyStateMenu && !legacyStateMenu.hidden){
-      if(!(legacyStateMenu.contains(e.target) || (legacyStateBtn && legacyStateBtn.contains(e.target)))){
-        closeLegacyStateMenu();
-      }
-    }
-  });
-  document.addEventListener('keydown', function(e){
-    if(e.key==='Escape'){
-      closeDirStateMenu();
-      closeLegacyStateMenu();
-    }
-  });
-  if(dirStateClear){
-    dirStateClear.addEventListener('click', function(){
-      selectedDirStates.clear();
-      if(dirStateList){
-        var inputs = dirStateList.querySelectorAll('input[type=checkbox]');
-        inputs.forEach(function(cb){ cb.checked = false; });
-      }
-      applySearch();
-    });
-  }
-
-  function buildDirStateMenuOptions(list){
-    // populate both state menus with the same STATE values
-    if(!dirStateList) return;
-    // unique states from directory data
-    var set = {};
-    list.forEach(function(r){
-      var st = (r.STATE || '').toString().trim();
-      if(st) set[st] = true;
-    });
-    var states = Object.keys(set).sort(function(a,b){ return a.localeCompare(b); });
-    dirStateList.innerHTML = '';
-    if(legacyStateList) legacyStateList.innerHTML = '';
-    states.forEach(function(st){
-      var row = document.createElement('label');
-      row.className = 'event-item';
-      row.style.display = 'flex';
-      row.style.alignItems = 'center';
-      row.style.gap = '8px';
-      row.style.padding = '8px 10px';
-      row.style.cursor = 'pointer';
-      var cb = document.createElement('input');
-      cb.type = 'checkbox';
-      cb.value = st;
-      cb.checked = selectedDirStates.has(st);
-      cb.addEventListener('change', function(){
-        if(cb.checked) selectedDirStates.add(st); else selectedDirStates.delete(st);
-        applySearch();
-      });
-      var span = document.createElement('span');
-      span.textContent = st;
-      row.appendChild(cb);
-      row.appendChild(span);
-      dirStateList.appendChild(row);
-      if(legacyStateList){
-        var row2 = row.cloneNode(true);
-        var cb2 = row2.querySelector('input[type=checkbox]');
-        cb2.checked = selectedDirStates.has(st);
-        cb2.addEventListener('change', function(){
-          if(cb2.checked) selectedDirStates.add(st); else selectedDirStates.delete(st);
-          // keep other menu checkbox in sync
-          var other = dirStateList.querySelector('input[type=checkbox][value="'+st.replace(/"/g,'')+'"]');
-          if(other) other.checked = cb2.checked;
-          applySearch();
-        });
-        legacyStateList.appendChild(row2);
-      }
-    });
-  }
-
 
   // Directory icons (placeholders for now) — sized/opacity/placement via CSS to match reference
   var DIR_ICONS = {
@@ -3186,6 +3051,122 @@ body { overflow-y: auto; }
   var dirRoot = document.getElementById("directoryRoot");
   var data = [];
 
+  // === Index106: Directory STATE filter wiring (uses existing pill UIs; no layout changes) ===
+  var selectedStatesDir = new Set();
+
+  function getUniqueStates(list){
+    var set = {};
+    list.forEach(function(r){
+      var st = (r.STATE || "").toString().trim();
+      if(st) set[st] = true;
+    });
+    return Object.keys(set).sort(function(a,b){ return a.localeCompare(b); });
+  }
+
+  function updatePillGlow(btnEl){
+    if(!btnEl) return;
+    btnEl.classList.toggle('has-selection', selectedStatesDir.size > 0);
+  }
+
+  function syncAllPillsGlow(){
+    updatePillGlow(document.getElementById('eventBtn'));
+    updatePillGlow(document.getElementById('stateBtn'));
+  }
+
+  function buildStateMenu(listEl, states){
+    if(!listEl) return;
+    listEl.innerHTML = "";
+    states.forEach(function(st){
+      var label = document.createElement('label');
+      label.className = 'event-item';
+      label.style.display = 'flex';
+      label.style.alignItems = 'center';
+      label.style.gap = '8px';
+      label.style.padding = '8px 10px';
+      label.style.cursor = 'pointer';
+
+      var cb = document.createElement('input');
+      cb.type = 'checkbox';
+      cb.value = st;
+      cb.checked = selectedStatesDir.has(st);
+      cb.addEventListener('change', function(){
+        if(cb.checked) selectedStatesDir.add(st);
+        else selectedStatesDir.delete(st);
+        // keep other menu checkbox in sync
+        ['eventList','stateList'].forEach(function(id){
+          var otherList = document.getElementById(id);
+          if(!otherList) return;
+          var other = otherList.querySelector('input[type="checkbox"][value="'+st.replace(/"/g,'&quot;')+'"]');
+          if(other && other !== cb) other.checked = cb.checked;
+        });
+        syncAllPillsGlow();
+        applySearch();
+      });
+
+      var span = document.createElement('span');
+      span.textContent = st;
+
+      label.appendChild(cb);
+      label.appendChild(span);
+      listEl.appendChild(label);
+    });
+  }
+
+  function setupMenu(btnId, menuId, listId, clearId){
+    var btn = document.getElementById(btnId);
+    var menu = document.getElementById(menuId);
+    var listEl = document.getElementById(listId);
+    var clear = document.getElementById(clearId);
+
+    if(btn && menu){
+      btn.addEventListener('click', function(e){
+        e.preventDefault();
+        menu.hidden = !menu.hidden;
+        btn.setAttribute('aria-expanded', String(!menu.hidden));
+      });
+    }
+
+    if(clear){
+      clear.addEventListener('click', function(e){
+        e.preventDefault();
+        selectedStatesDir.clear();
+        // uncheck all checkboxes in both lists
+        ['eventList','stateList'].forEach(function(id){
+          var el = document.getElementById(id);
+          if(!el) return;
+          el.querySelectorAll('input[type="checkbox"]').forEach(function(cb){ cb.checked = false; });
+        });
+        syncAllPillsGlow();
+        applySearch();
+      });
+    }
+
+    return {btn:btn, menu:menu, listEl:listEl};
+  }
+
+  var menus = [
+    setupMenu('eventBtn','eventMenu','eventList','eventClear'),
+    setupMenu('stateBtn','stateMenu','stateList','stateClear')
+  ];
+
+  document.addEventListener('click', function(e){
+    menus.forEach(function(m){
+      if(!m || !m.menu || !m.btn) return;
+      if(m.menu.hidden) return;
+      if(m.menu.contains(e.target) || m.btn.contains(e.target)) return;
+      m.menu.hidden = true;
+      m.btn.setAttribute('aria-expanded','false');
+    });
+  });
+  document.addEventListener('keydown', function(e){
+    if(e.key !== 'Escape') return;
+    menus.forEach(function(m){
+      if(!m || !m.menu || !m.btn) return;
+      m.menu.hidden = true;
+      m.btn.setAttribute('aria-expanded','false');
+    });
+  });
+
   function render(list){
     if(!dirRoot) return;
     dirRoot.innerHTML = "";
@@ -3280,31 +3261,17 @@ body { overflow-y: auto; }
 
 function applySearch(){
     var q = (searchInput && searchInput.value ? searchInput.value : "").trim().toLowerCase();
-
-    // Keep the pill glow/dot in sync with selections
-    if(dirStateBtn){
-      dirStateBtn.classList.toggle('has-selection', !!(selectedDirStates && selectedDirStates.size));
-    }
-    if(legacyStateBtn){
-      legacyStateBtn.classList.toggle('has-selection', !!(selectedDirStates && selectedDirStates.size));
-    }
-
     var filtered = data.filter(function(r){
-      // STATE dropdown filter (if any selected)
-      if(selectedDirStates && selectedDirStates.size){
-        if(!selectedDirStates.has((r.STATE||'').toString().trim())) return false;
+      if(typeof selectedStatesDir !== "undefined" && selectedStatesDir.size){
+        var st = (r.STATE || "").toString().trim();
+        if(!selectedStatesDir.has(st)) return false;
       }
-
-      // Text filter (optional)
       if(!q) return true;
       var hay = (r.NAME+" "+r.IG+" "+r.CITY+" "+r.STATE+" "+r.SAT+" "+r.SUN+" "+r.OTA).toLowerCase();
       return hay.includes(q);
     });
-
     render(filtered);
   }
-
-}
 
   if(clearBtn){
     clearBtn.addEventListener("click", function(){
@@ -3345,7 +3312,6 @@ function applySearch(){
         };
       });
 
-      buildDirStateMenuOptions(data);
       render(data);
     }catch(err){
       if(dirRoot){ dirRoot.innerHTML = '<div class="dir-err">'+ escapeHTML(err.message) +'</div>'; }
