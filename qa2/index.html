@@ -2824,6 +2824,11 @@ body { overflow-y: auto; }
 .directory-table tbody td.dir-col-name .dir-ota-inline .dir-dot{
   transform: translateX(4px) !important; /* was 8px right, now halfway back */
 }
+</style><style>
+/* Index639: Move OTA indicator 10px LEFT (dot only, user-visible) */
+.directory-table tbody td.dir-col-name .dir-ota-inline .dir-dot{
+  transform: translateX(-6px) !important; /* from +4px to -6px = 10px left */
+}
 </style></head>
 <body>
 <div class="header-freeze">
