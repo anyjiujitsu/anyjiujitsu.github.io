@@ -2864,6 +2864,12 @@ body { overflow-y: auto; }
   .event-clear{ font-weight: 400 !important; }
 </style>
 
+
+<style>
+  /* Index111: year clear weight matches others */
+  .year-clear{ font-weight: 400 !important; }
+</style>
+
 </head>
 <body>
 <div class="header-freeze">
@@ -2902,13 +2908,13 @@ body { overflow-y: auto; }
 <div class="event-list" id="eventList"></div>
 </div>
 </div>
-<div aria-label="Filter open mat" class="year-filter">
+<div aria-label="Filter by year" class="year-filter">
 <button aria-expanded="false" aria-haspopup="true" class="year-btn" id="yearBtn" type="button">
 <span class="year-label">Open Mat</span><span aria-hidden="true" class="year-caret">▾</span>
 </button>
 <div class="year-menu" hidden="" id="yearMenu">
 <div class="year-menu-header">
-<span class="year-menu-title">Open Mat</span>
+<span class="year-menu-title">Years</span>
 <button class="year-clear" id="yearClear" type="button">Clear</button>
 </div>
 <div class="year-list" id="yearList"></div>
@@ -3060,57 +3066,63 @@ body { overflow-y: auto; }
   // === Index106: Directory STATE filter wiring (uses existing pill UIs; no layout changes) ===
   var selectedStatesDir = new Set();
 
-  // === Index108: Open Mat filter (repurposed from Years pill) ===
-  // Modes: "" (none), "all" (SAT or SUN present), "sat" (SAT present), "sun" (SUN present)
+  // === Index111: Open Mat filter (repurposes Year pill) ===
+  // openMatMode: "" | "all" | "sat" | "sun"
   var openMatMode = "";
 
-  function setOpenMatMode(mode){
-    openMatMode = mode || "";
-    // update pill glow (match other pills behavior)
+  function updateYearGlow(){
     var yb = document.getElementById('yearBtn');
-    if(yb) yb.classList.toggle('has-selection', !!openMatMode);
-    applySearch();
+    if(!yb) return;
+    yb.classList.toggle('has-selection', !!openMatMode);
   }
 
-  function initOpenMatMenu(){
-    var listEl = document.getElementById('yearList') || document.getElementById('yearList');
-    if(listEl){
-      listEl.innerHTML = `
-<label class="event-item" style="display:flex;align-items:center;gap:8px;padding:8px 10px;cursor:pointer;">
-  <input type="radio" name="openmat" value="all">
-  <span>All</span>
-</label>
-<label class="event-item" style="display:flex;align-items:center;gap:8px;padding:8px 10px;cursor:pointer;">
-  <input type="radio" name="openmat" value="sat">
-  <span>Saturday</span>
-</label>
-<label class="event-item" style="display:flex;align-items:center;gap:8px;padding:8px 10px;cursor:pointer;">
-  <input type="radio" name="openmat" value="sun">
-  <span>Sunday</span>
-</label>
-`;
-      // default: none selected
-      var radios = listEl.querySelectorAll('input[type=radio][name=openmat]');
-      radios.forEach(function(r){
-        r.addEventListener('change', function(){
-          setOpenMatMode(r.value);
-        });
-      });
-    }
-    var clearEl = document.getElementById('yearClear') || document.getElementById('yearClear');
-    if(clearEl){
-      clearEl.addEventListener('click', function(e){
-        e.preventDefault();
-        openMatMode = "";
-        // clear radio selection
-        if(listEl){
-          listEl.querySelectorAll('input[type=radio][name=openmat]').forEach(function(r){ r.checked = false; });
-        }
-        var yb = document.getElementById('yearBtn');
-        if(yb) yb.classList.remove('has-selection');
+  function buildOpenMatMenu(){
+    var listEl = document.getElementById('yearList');
+    if(!listEl) return;
+
+    listEl.innerHTML = '';
+
+    function addOption(val, label){
+      var row = document.createElement('label');
+      row.className = 'event-item';
+      row.style.display = 'flex';
+      row.style.alignItems = 'center';
+      row.style.gap = '8px';
+      row.style.padding = '8px 10px';
+      row.style.cursor = 'pointer';
+
+      var rb = document.createElement('input');
+      rb.type = 'radio';
+      rb.name = 'openmat';
+      rb.value = val;
+      rb.checked = (openMatMode === val);
+      rb.addEventListener('change', function(){
+        openMatMode = val;
+        updateYearGlow();
         applySearch();
       });
+
+      var span = document.createElement('span');
+      span.textContent = label;
+
+      row.appendChild(rb);
+      row.appendChild(span);
+      listEl.appendChild(row);
     }
+
+    addOption('all', 'All');
+    addOption('sat', 'Saturday');
+    addOption('sun', 'Sunday');
+  }
+
+  function clearOpenMat(){
+    openMatMode = "";
+    var listEl = document.getElementById('yearList');
+    if(listEl){
+      listEl.querySelectorAll('input[type=radio][name=openmat]').forEach(function(r){ r.checked = false; });
+    }
+    updateYearGlow();
+    applySearch();
   }
 
 
@@ -3130,7 +3142,7 @@ body { overflow-y: auto; }
 
   function syncAllPillsGlow(){
     updatePillGlow(document.getElementById('eventBtn'));
-    updatePillGlow(document.getElementById('yearBtn'));
+    updateYearGlow();
     updatePillGlow(document.getElementById('stateBtn'));
   }
 
@@ -3174,8 +3186,6 @@ body { overflow-y: auto; }
   }
 
   function setupMenu(btnId, menuId, listId, clearId){
-    // Index110: avoid double-binding yearClear (Open Mat clear handled in initOpenMatMenu)
-
     var btn = document.getElementById(btnId);
     var menu = document.getElementById(menuId);
     var listEl = document.getElementById(listId);
@@ -3190,25 +3200,15 @@ body { overflow-y: auto; }
     }
 
     if(clear){
-      if(clearId === 'yearClear'){
-        clear.addEventListener('click', function(){
-          // let initOpenMatMenu handle clearing; just close menu
-          if(menu && btn){ menu.hidden = true; btn.setAttribute('aria-expanded','false'); }
+      clear.addEventListener('click', function(e){
+        e.preventDefault();
+        selectedStatesDir.clear();
+        // uncheck all checkboxes in both lists
+        ['eventList','stateList'].forEach(function(id){
+          var el = document.getElementById(id);
+          if(!el) return;
+          el.querySelectorAll('input[type="checkbox"]').forEach(function(cb){ cb.checked = false; });
         });
-      }else{
-        clear.addEventListener('click', function(e){
-          e.preventDefault();
-          selectedStatesDir.clear();
-          ['eventList','stateList'].forEach(function(id){
-            var el = document.getElementById(id);
-            if(!el) return;
-            el.querySelectorAll('input[type=checkbox]').forEach(function(cb){ cb.checked = false; });
-          });
-          syncAllPillsGlow();
-          applySearch();
-        });
-      }
-    });
         syncAllPillsGlow();
         applySearch();
       });
@@ -3371,8 +3371,6 @@ function applySearch(){
   }
 
   (async function init(){
-    try{ if(typeof initOpenMatMenu === 'function') initOpenMatMenu(); }catch(e){}
-
     try{
       var filename = "directory.csv";
       var paths = csvPathCandidates(filename);
@@ -3405,11 +3403,12 @@ function applySearch(){
         if(typeof getUniqueStates === "function" && typeof buildStateMenu === "function"){
           var statesForLeft = getUniqueStates(data);
           buildStateMenu(document.getElementById('eventList'), statesForLeft);
+          buildOpenMatMenu();
+          updateYearGlow();
           // glow reflects selection state
           if(typeof syncAllPillsGlow === "function") syncAllPillsGlow();
         }
       }catch(e){}
-      try{ if(typeof initOpenMatMenu === "function") initOpenMatMenu(); }catch(e){}
 
 
       render(data);
