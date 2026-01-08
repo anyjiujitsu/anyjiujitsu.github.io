@@ -2902,13 +2902,13 @@ body { overflow-y: auto; }
 <div class="event-list" id="eventList"></div>
 </div>
 </div>
-<div aria-label="Filter by year" class="year-filter">
+<div aria-label="Filter open mat" class="year-filter">
 <button aria-expanded="false" aria-haspopup="true" class="year-btn" id="yearBtn" type="button">
-<span class="year-label">Years</span><span aria-hidden="true" class="year-caret">▾</span>
+<span class="year-label">Open Mat</span><span aria-hidden="true" class="year-caret">▾</span>
 </button>
 <div class="year-menu" hidden="" id="yearMenu">
 <div class="year-menu-header">
-<span class="year-menu-title">Years</span>
+<span class="year-menu-title">Open Mat</span>
 <button class="year-clear" id="yearClear" type="button">Clear</button>
 </div>
 <div class="year-list" id="yearList"></div>
@@ -3059,6 +3059,60 @@ body { overflow-y: auto; }
 
   // === Index106: Directory STATE filter wiring (uses existing pill UIs; no layout changes) ===
   var selectedStatesDir = new Set();
+
+  // === Index108: Open Mat filter (repurposed from Years pill) ===
+  // Modes: "" (none), "all" (SAT or SUN present), "sat" (SAT present), "sun" (SUN present)
+  var openMatMode = "";
+
+  function setOpenMatMode(mode){
+    openMatMode = mode || "";
+    // update pill glow (match other pills behavior)
+    var yb = document.getElementById('yearsBtn');
+    if(yb) yb.classList.toggle('has-selection', !!openMatMode);
+    applySearch();
+  }
+
+  function initOpenMatMenu(){
+    var listEl = document.getElementById('yearsList') || document.getElementById('yearList');
+    if(listEl){
+      listEl.innerHTML = `
+<label class="event-item" style="display:flex;align-items:center;gap:8px;padding:8px 10px;cursor:pointer;">
+  <input type="radio" name="openmat" value="all">
+  <span>All</span>
+</label>
+<label class="event-item" style="display:flex;align-items:center;gap:8px;padding:8px 10px;cursor:pointer;">
+  <input type="radio" name="openmat" value="sat">
+  <span>Saturday</span>
+</label>
+<label class="event-item" style="display:flex;align-items:center;gap:8px;padding:8px 10px;cursor:pointer;">
+  <input type="radio" name="openmat" value="sun">
+  <span>Sunday</span>
+</label>
+`;
+      // default: none selected
+      var radios = listEl.querySelectorAll('input[type=radio][name=openmat]');
+      radios.forEach(function(r){
+        r.addEventListener('change', function(){
+          setOpenMatMode(r.value);
+        });
+      });
+    }
+    var clearEl = document.getElementById('yearsClear') || document.getElementById('yearClear');
+    if(clearEl){
+      clearEl.addEventListener('click', function(e){
+        e.preventDefault();
+        openMatMode = "";
+        // clear radio selection
+        if(listEl){
+          listEl.querySelectorAll('input[type=radio][name=openmat]').forEach(function(r){ r.checked = false; });
+        }
+        var yb = document.getElementById('yearsBtn');
+        if(yb) yb.classList.remove('has-selection');
+        applySearch();
+      });
+    }
+  }
+
 
   function getUniqueStates(list){
     var set = {};
@@ -3272,6 +3326,18 @@ function applySearch(){
         var st = (r.STATE || "").toString().trim();
         if(!selectedStatesDir.has(st)) return false;
       }
+      // Open Mat filter
+      if(typeof openMatMode !== "undefined" && openMatMode){
+        var sat = (r.SAT || "").toString().trim();
+        var sun = (r.SUN || "").toString().trim();
+        if(openMatMode === 'all'){
+          if(!sat && !sun) return false;
+        }else if(openMatMode === 'sat'){
+          if(!sat) return false;
+        }else if(openMatMode === 'sun'){
+          if(!sun) return false;
+        }
+      }
       if(!q) return true;
       var hay = (r.NAME+" "+r.IG+" "+r.CITY+" "+r.STATE+" "+r.SAT+" "+r.SUN+" "+r.OTA).toLowerCase();
       return hay.includes(q);
@@ -3327,6 +3393,7 @@ function applySearch(){
           if(typeof syncAllPillsGlow === "function") syncAllPillsGlow();
         }
       }catch(e){}
+      try{ if(typeof initOpenMatMenu === "function") initOpenMatMenu(); }catch(e){}
 
 
       render(data);
