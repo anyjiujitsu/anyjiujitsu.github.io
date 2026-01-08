@@ -2818,11 +2818,11 @@ body { overflow-y: auto; }
   left: -8px;
 }
 </style><style>
-/* Index631: Move OTA further LEFT using spacer offset (OTA only, stable) */
+/* Index632: Move inline OTA dot LEFT by adding right inset to NAME/IG cell (no column/value reordering) */
 
-/* Create guaranteed left shift by pulling the inline container back */
-.directory-table tbody td.dir-col-name .dir-ota-inline{
-  margin-left: -10px !important;
+/* Increase right padding on NAME/IG cell only (doesn't move text/icon; just reduces right-edge dead space so dot sits left) */
+.directory-table tbody td.dir-col-name{
+  padding-right: 26px !important;
 }
 </style></head>
 <body>
