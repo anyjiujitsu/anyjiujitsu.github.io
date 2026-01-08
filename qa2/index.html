@@ -2746,6 +2746,18 @@ body { overflow-y: auto; }
 .directory-group .group-header{
   margin-bottom: 4px !important;
 }
+</style><style>
+/* Index613: Definitive vertical nudge using transform (visual-only, no reflow) */
+
+/* Shift entire month group block up */
+.month-group{
+  transform: translateY(-8px) !important;
+}
+
+/* Backup: if month-group not present, shift card wrapper */
+.directory-card{
+  transform: translateY(-8px) !important;
+}
 </style></head>
 <body>
 <div class="header-freeze">
