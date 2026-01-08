@@ -2858,6 +2858,12 @@ body { overflow-y: auto; }
   }
 </style>
 
+
+<style>
+  /* Index107: Clear weight matches other text (no bold) */
+  .event-clear{ font-weight: 400 !important; }
+</style>
+
 </head>
 <body>
 <div class="header-freeze">
@@ -3311,6 +3317,17 @@ function applySearch(){
           OTA:   normalizeOta(r[iOTA])
         };
       });
+
+      // Index107: populate left States pill (repurposed from Events) from directory STATE values
+      try{
+        if(typeof getUniqueStates === "function" && typeof buildStateMenu === "function"){
+          var statesForLeft = getUniqueStates(data);
+          buildStateMenu(document.getElementById('eventList'), statesForLeft);
+          // glow reflects selection state
+          if(typeof syncAllPillsGlow === "function") syncAllPillsGlow();
+        }
+      }catch(e){}
+
 
       render(data);
     }catch(err){
