@@ -2910,7 +2910,7 @@ body { overflow-y: auto; }
 </div>
 <div aria-label="Filter by year" class="year-filter">
 <button aria-expanded="false" aria-haspopup="true" class="year-btn" id="yearBtn" type="button">
-<span class="year-label">OpenMat</span><span aria-hidden="true" class="year-caret">▾</span>
+<span class="year-label">Open Mat</span><span aria-hidden="true" class="year-caret">▾</span>
 </button>
 <div class="year-menu" hidden="" id="yearMenu">
 <div class="year-menu-header">
@@ -3131,16 +3131,16 @@ body { overflow-y: auto; }
     openMatMode = "";
     var listEl = document.getElementById('yearList');
     if(listEl){
-      listEl.querySelectorAll('input[name=openmat]').forEach(function(r){ r.checked = false; });
+      listEl.querySelectorAll('input[name=openmat]').forEach(function(x){ x.checked = false; });
     }
-    // remove glow
+    // remove indicator
     var yb = document.getElementById('yearBtn');
     if(yb) yb.classList.remove('has-selection');
     // close menu
     var menu = document.getElementById('yearMenu');
     if(menu) menu.hidden = true;
     if(yb) yb.setAttribute('aria-expanded','false');
-    applySearch();
+    if(typeof applySearch === 'function') applySearch();
   }
     updateYearGlow();
     // close menu
@@ -3430,21 +3430,19 @@ function applySearch(){
           var statesForLeft = getUniqueStates(data);
           buildStateMenu(document.getElementById('eventList'), statesForLeft);
           buildOpenMatMenu();
-          // Index114: force Open Mat Clear behavior (capture phase)
+          updateYearGlow();
+          // Index115: bind Open Mat Clear (single source of truth)
           try{
             var yc = document.getElementById('yearClear');
-            if(yc && !yc.__openMatClearBound){
-              yc.__openMatClearBound = true;
+            if(yc && !yc.__openMatBound){
+              yc.__openMatBound = true;
               yc.addEventListener('click', function(e){
                 e.preventDefault();
-                e.stopPropagation();
-                if(e.stopImmediatePropagation) e.stopImmediatePropagation();
                 clearOpenMat();
-              }, true);
+              });
             }
           }catch(e){}
 
-          updateYearGlow();
           // glow reflects selection state
           if(typeof syncAllPillsGlow === "function") syncAllPillsGlow();
         }
