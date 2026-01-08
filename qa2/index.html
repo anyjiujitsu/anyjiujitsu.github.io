@@ -2941,6 +2941,40 @@ body { overflow-y: auto; }
   var dirStateClear = document.getElementById('eventClear');
   var selectedDirStates = new Set();
 
+  // Mirror wiring for the existing rightmost States pill (stateBtn) so it also works
+  var legacyStateBtn = document.getElementById('stateBtn');
+  var legacyStateMenu = document.getElementById('stateMenu');
+  var legacyStateList = document.getElementById('stateList');
+  var legacyStateClear = document.getElementById('stateClear');
+
+  function closeLegacyStateMenu(){
+    if(!legacyStateMenu || !legacyStateBtn) return;
+    legacyStateMenu.hidden = true;
+    legacyStateBtn.setAttribute('aria-expanded','false');
+  }
+  function toggleLegacyStateMenu(){
+    if(!legacyStateMenu || !legacyStateBtn) return;
+    var isOpen = !legacyStateMenu.hidden;
+    legacyStateMenu.hidden = isOpen;
+    legacyStateBtn.setAttribute('aria-expanded', String(!isOpen));
+  }
+  if(legacyStateBtn){
+    legacyStateBtn.addEventListener('click', function(e){ e.preventDefault(); toggleLegacyStateMenu(); });
+  }
+  if(legacyStateClear){
+    legacyStateClear.addEventListener('click', function(){
+      selectedDirStates.clear();
+      if(legacyStateList){
+        legacyStateList.querySelectorAll('input[type=checkbox]').forEach(function(cb){ cb.checked = false; });
+      }
+      if(dirStateList){
+        dirStateList.querySelectorAll('input[type=checkbox]').forEach(function(cb){ cb.checked = false; });
+      }
+      applySearch();
+    });
+  }
+
+
   function closeDirStateMenu(){
     if(!dirStateMenu || !dirStateBtn) return;
     dirStateMenu.hidden = true;
@@ -2956,11 +2990,25 @@ body { overflow-y: auto; }
     dirStateBtn.addEventListener('click', function(e){ e.preventDefault(); toggleDirStateMenu(); });
   }
   document.addEventListener('click', function(e){
-    if(!dirStateMenu || dirStateMenu.hidden) return;
-    if(dirStateMenu.contains(e.target) || (dirStateBtn && dirStateBtn.contains(e.target))) return;
-    closeDirStateMenu();
+    // close former-Events(now States) menu
+    if(dirStateMenu && !dirStateMenu.hidden){
+      if(!(dirStateMenu.contains(e.target) || (dirStateBtn && dirStateBtn.contains(e.target)))){
+        closeDirStateMenu();
+      }
+    }
+    // close existing rightmost States menu
+    if(legacyStateMenu && !legacyStateMenu.hidden){
+      if(!(legacyStateMenu.contains(e.target) || (legacyStateBtn && legacyStateBtn.contains(e.target)))){
+        closeLegacyStateMenu();
+      }
+    }
   });
-  document.addEventListener('keydown', function(e){ if(e.key==='Escape') closeDirStateMenu(); });
+  document.addEventListener('keydown', function(e){
+    if(e.key==='Escape'){
+      closeDirStateMenu();
+      closeLegacyStateMenu();
+    }
+  });
   if(dirStateClear){
     dirStateClear.addEventListener('click', function(){
       selectedDirStates.clear();
@@ -2973,6 +3021,7 @@ body { overflow-y: auto; }
   }
 
   function buildDirStateMenuOptions(list){
+    // populate both state menus with the same STATE values
     if(!dirStateList) return;
     // unique states from directory data
     var set = {};
@@ -2982,6 +3031,7 @@ body { overflow-y: auto; }
     });
     var states = Object.keys(set).sort(function(a,b){ return a.localeCompare(b); });
     dirStateList.innerHTML = '';
+    if(legacyStateList) legacyStateList.innerHTML = '';
     states.forEach(function(st){
       var row = document.createElement('label');
       row.className = 'event-item';
@@ -3003,6 +3053,19 @@ body { overflow-y: auto; }
       row.appendChild(cb);
       row.appendChild(span);
       dirStateList.appendChild(row);
+      if(legacyStateList){
+        var row2 = row.cloneNode(true);
+        var cb2 = row2.querySelector('input[type=checkbox]');
+        cb2.checked = selectedDirStates.has(st);
+        cb2.addEventListener('change', function(){
+          if(cb2.checked) selectedDirStates.add(st); else selectedDirStates.delete(st);
+          // keep other menu checkbox in sync
+          var other = dirStateList.querySelector('input[type=checkbox][value="'+st.replace(/"/g,'')+'"]');
+          if(other) other.checked = cb2.checked;
+          applySearch();
+        });
+        legacyStateList.appendChild(row2);
+      }
     });
   }
 
@@ -3221,6 +3284,9 @@ function applySearch(){
     // Keep the pill glow/dot in sync with selections
     if(dirStateBtn){
       dirStateBtn.classList.toggle('has-selection', !!(selectedDirStates && selectedDirStates.size));
+    }
+    if(legacyStateBtn){
+      legacyStateBtn.classList.toggle('has-selection', !!(selectedDirStates && selectedDirStates.size));
     }
 
     var filtered = data.filter(function(r){
