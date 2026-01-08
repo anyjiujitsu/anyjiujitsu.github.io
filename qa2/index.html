@@ -2805,29 +2805,31 @@ body { overflow-y: auto; }
 
 </style>
 <style>
-/* Index637: Visually shift inline OTA indicator to the RIGHT (dot only) without moving any other values/columns.
-   If prior attempts looked unchanged, the dot was likely being clipped at the cell edge.
-*/
+/* Index625: Nudge OTA indicator left ONLY (no other values or columns move) */
 
-/* Ensure the dot isn't clipped when nudged */
-.directory-table tbody td.dir-col-name,
-.directory-table tbody td.dir-col-name .dir-with-icon{
-  overflow: visible !important;
-}
-
-/* Move ONLY the dot to the right */
-.directory-table tbody td.dir-col-name .dir-ota-inline .dir-dot{
-  transform: translateX(8px) !important;
+/* Shift inline OTA dot slightly left */
+.directory-table tbody td.dir-col-name .dir-ota-inline{
+  margin-left: 4px !important; /* was 6px */
 }
 </style><style>
-/* Index638: Micro-correct OTA position back LEFT slightly (dot only) */
-.directory-table tbody td.dir-col-name .dir-ota-inline .dir-dot{
-  transform: translateX(4px) !important; /* was 8px right, now halfway back */
+/* Index628: Visible left shift using relative positioning (OTA only, no reflow) */
+.directory-table tbody td.dir-col-name .dir-ota-inline{
+  position: relative;
+  left: -8px;
 }
 </style><style>
-/* Index639: Move OTA indicator 10px LEFT (dot only, user-visible) */
-.directory-table tbody td.dir-col-name .dir-ota-inline .dir-dot{
-  transform: translateX(-6px) !important; /* from +4px to -6px = 10px left */
+/* Index632: Move inline OTA dot LEFT by adding right inset to NAME/IG cell (no column/value reordering) */
+
+/* Increase right padding on NAME/IG cell only (doesn't move text/icon; just reduces right-edge dead space so dot sits left) */
+.directory-table tbody td.dir-col-name{
+  padding-right: 26px !important;
+}
+</style><style>
+/* Index633: Move inline OTA indicator LEFT by 10px (OTA only, stable) */
+
+/* Increase right inset on NAME/IG cell by +10px so OTA sits further left */
+.directory-table tbody td.dir-col-name{
+  padding-right: 36px !important; /* was 26px */
 }
 </style></head>
 <body>
