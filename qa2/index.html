@@ -3067,13 +3067,13 @@ body { overflow-y: auto; }
   function setOpenMatMode(mode){
     openMatMode = mode || "";
     // update pill glow (match other pills behavior)
-    var yb = document.getElementById('yearsBtn');
+    var yb = document.getElementById('yearBtn');
     if(yb) yb.classList.toggle('has-selection', !!openMatMode);
     applySearch();
   }
 
   function initOpenMatMenu(){
-    var listEl = document.getElementById('yearsList') || document.getElementById('yearList');
+    var listEl = document.getElementById('yearList') || document.getElementById('yearList');
     if(listEl){
       listEl.innerHTML = `
 <label class="event-item" style="display:flex;align-items:center;gap:8px;padding:8px 10px;cursor:pointer;">
@@ -3097,7 +3097,7 @@ body { overflow-y: auto; }
         });
       });
     }
-    var clearEl = document.getElementById('yearsClear') || document.getElementById('yearClear');
+    var clearEl = document.getElementById('yearClear') || document.getElementById('yearClear');
     if(clearEl){
       clearEl.addEventListener('click', function(e){
         e.preventDefault();
@@ -3106,7 +3106,7 @@ body { overflow-y: auto; }
         if(listEl){
           listEl.querySelectorAll('input[type=radio][name=openmat]').forEach(function(r){ r.checked = false; });
         }
-        var yb = document.getElementById('yearsBtn');
+        var yb = document.getElementById('yearBtn');
         if(yb) yb.classList.remove('has-selection');
         applySearch();
       });
@@ -3357,6 +3357,8 @@ function applySearch(){
   }
 
   (async function init(){
+    try{ if(typeof initOpenMatMenu === 'function') initOpenMatMenu(); }catch(e){}
+
     try{
       var filename = "directory.csv";
       var paths = csvPathCandidates(filename);
