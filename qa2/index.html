@@ -2910,7 +2910,7 @@ body { overflow-y: auto; }
 </div>
 <div aria-label="Filter by year" class="year-filter">
 <button aria-expanded="false" aria-haspopup="true" class="year-btn" id="yearBtn" type="button">
-<span class="year-label">Open Mat</span><span aria-hidden="true" class="year-caret">▾</span>
+<span class="year-label">OpenMat</span><span aria-hidden="true" class="year-caret">▾</span>
 </button>
 <div class="year-menu" hidden="" id="yearMenu">
 <div class="year-menu-header">
@@ -3131,15 +3131,8 @@ body { overflow-y: auto; }
     openMatMode = "";
     var listEl = document.getElementById('yearList');
     if(listEl){
-      listEl.querySelectorAll('input[name=openmat]').forEach(function(x){ x.checked = false; });
+      listEl.querySelectorAll('input[type=checkbox][name=openmat]').forEach(function(r){ r.checked = false; });
     }
-    var yb = document.getElementById('yearBtn');
-    if(yb) yb.classList.remove('has-selection');
-    var menu = document.getElementById('yearMenu');
-    if(menu) menu.hidden = true;
-    if(yb) yb.setAttribute('aria-expanded','false');
-    applySearch();
-  }
     updateYearGlow();
     // close menu
     var btn = document.getElementById('yearBtn');
@@ -3226,10 +3219,6 @@ body { overflow-y: auto; }
     if(clear){
       clear.addEventListener('click', function(e){
         e.preventDefault();
-        if(btnId === 'yearBtn'){
-          clearOpenMat();
-          return;
-        }
         selectedStatesDir.clear();
         // uncheck all checkboxes in both lists
         ['eventList','stateList'].forEach(function(id){
