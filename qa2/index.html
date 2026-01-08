@@ -2672,6 +2672,20 @@ body { overflow-y: auto; }
 .directory-table tbody td.dir-col-name .dir-ig{
   white-space: unset !important;
 }
+</style><style>
+/* Index606: Remove dead space from NAME/IG column to tighten overall card body */
+
+/* Force table to respect explicit column widths */
+.directory-table{
+  table-layout: fixed !important;
+}
+
+/* Shrink NAME / IG column width only */
+.directory-table col.dir-col-name,
+.directory-table td.dir-col-name{
+  width: 190px !important;
+  max-width: 190px !important;
+}
 </style></head>
 <body>
 <div class="header-freeze">
