@@ -23,12 +23,12 @@
 
     @media (max-width: 900px) { #monthsRoot { transform: scale(1.20); } }
 
-    @media (max-width: 700px) { #monthsRoot { transform: scale(1.05); } }
+    @media (max-width: 660px) { #monthsRoot { transform: scale(1.05); } }
 
     @media (max-width: 500px) { #monthsRoot { transform: scale(0.90); } }
 
     :root {
-      --dir-table-width: 670px;
+      --dir-table-width: 724px;
       --green: #234c31;
       --bg: #ebebeb;
       --row: #e2e4e4;
@@ -2411,9 +2411,9 @@ body { overflow-y: auto; }
 .dir-main{ font-weight:600; color:#111; font-size:13px; overflow:hidden; text-overflow:ellipsis; }
 .dir-sub{ font-size: 11px; color: rgba(0,0,0,0.55); font-weight: 500; }
 
-.dir-times-row{ display:flex; align-items:baseline; gap:6px; }
+.dir-times-row{ display:flex; align-items:baseline; gap:4px; }
 .dir-daylbl{ font-weight:800; color:#111; min-width:28px; font-size:11px; }
-.dir-timeval{font-weight:600; color:rgba(0,0,0,0.55); white-space:nowrap; font-size:11px; margin-left:auto; text-align:right; }
+.dir-timeval{ font-weight:600; color:rgba(0,0,0,0.55); white-space:nowrap; font-size:11px; }
 
 /* Icons: size/opacity/placement matched to reference (placeholder icons for now) */
 .dir-with-icon{
@@ -2444,7 +2444,7 @@ body { overflow-y: auto; }
 
 /* OTA: dot only (no icon, no label) */
 .dir-ota-cell{ display:flex; align-items:center; justify-content:center; height:100%; }
-.dir-dot{ width:12px; height:12px; border-radius:50%; background:transparent; border:2px solid rgba(0,0,0,0.25); }
+.dir-dot{ width:10px; height:10px; border-radius:50%; border: 1px solid rgba(0,0,0,0.12); background:#bdbdbd; }
 .dir-dot.y{
   background-color: #28a745;
   border-color: rgba(0,0,0,0.10);
@@ -2458,7 +2458,6 @@ body { overflow-y: auto; }
   border-color: rgba(0,0,0,0.10);
   box-shadow: 0 0 8px rgba(215,75,75,0.35);
 }
-.dir-dot.blank{ background:transparent; border-color:rgba(0,0,0,0.18); opacity:0.35; box-shadow:none; }
 
 .dir-empty{ padding: 18px; color: rgba(0,0,0,0.55); font-size:12px; }
 
@@ -2573,15 +2572,15 @@ body { overflow-y: auto; }
 
 /* 2) Lock directory cardbody to EVENTS width (tighter than previous) */
 .directory-table{
-  width: 700px !important;
-  max-width: 700px !important;
+  width: 660px !important;
+  max-width: 660px !important;
   margin-left: auto !important;
   margin-right: auto !important;
   table-layout: fixed !important;
 }
 
-/* 3) Column widths (sum = 700px) */
-.directory-table td.dir-col-name{ width: 320px !important; max-width: 320px !important; }
+/* 3) Column widths (sum = 660px) */
+.directory-table td.dir-col-name{ width: 280px !important; max-width: 280px !important; }
 .directory-table td.dir-col-city{ width: 150px !important; max-width: 150px !important; }
 .directory-table td.dir-col-times{ width: 200px !important; max-width: 200px !important; }
 .directory-table td.dir-col-ota{ width: 30px !important; max-width: 30px !important; padding-left: 0 !important; padding-right: 0 !important; text-align:center !important; }
@@ -2589,7 +2588,7 @@ body { overflow-y: auto; }
 /* Keep ellipsis working within narrower NAME/IG */
 .directory-table td.dir-col-name .dir-main,
 .directory-table td.dir-col-name .dir-sub{
-  max-width: 270px !important; /* leave room for icon + gap */
+  max-width: 235px !important; /* leave room for icon + gap */
 }
 
 </style>
@@ -2832,9 +2831,9 @@ body { overflow-y: auto; }
         return (a.NAME || "").localeCompare((b.NAME || ""));
       }).forEach(function(r){
         var otaVal = (r.OTA || "").trim().toUpperCase();
-        var dotClass = (otaVal==="Y") ? "y" : (otaVal==="N") ? "n" : "blank";
-        var dotTitle = (otaVal==="Y") ? "Y" : (otaVal==="N") ? "N" : "—";
-        var dotHTML = `<div class="dir-dot ${dotClass}" title="${dotTitle}"></div>`;
+        var dotHTML = "";
+        if(otaVal==="Y") dotHTML = `<div class="dir-dot y" title="Y"></div>`;
+        else if(otaVal==="N") dotHTML = `<div class="dir-dot n" title="N"></div>`;
         var tr = document.createElement("tr");
 
         tr.innerHTML = `
