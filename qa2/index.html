@@ -3086,7 +3086,7 @@ body { overflow-y: auto; }
               <span class="dir-ico" aria-hidden="true">${DIR_ICONS.ig}</span>
               <div class="dir-stack">
                 <div class="dir-main">${escapeHTML(clampText(r.NAME, 42))}</div>
-                <div class="dir-sub"><a class="ig-link" href="https://www.instagram.com/${escapeHTML(r.IG)}/" target="_blank" rel="noopener">@${escapeHTML(r.IG)}</a></div>
+                <div class="dir-sub dir-ig"><a class="ig-link" href="https://www.instagram.com/${escapeHTML(r.IG)}/" target="_blank" rel="noopener">@${escapeHTML(r.IG)}</a></div>
               </div>
               <div class="dir-ota-inline" aria-label="OTA">
                 ${dotHTML}
@@ -3099,7 +3099,7 @@ body { overflow-y: auto; }
               <span class="dir-ico" aria-hidden="true">${DIR_ICONS.pin}</span>
               <div class="dir-stack">
                 <div class="dir-main">${escapeHTML(r.CITY)}</div>
-                <div class="dir-sub"><a class="ig-link" href="https://www.instagram.com/${escapeHTML(r.STATE)}/" target="_blank" rel="noopener">@${escapeHTML(r.STATE)}</a></div>
+                <div class="dir-sub">${escapeHTML(r.STATE)}</div>
               </div>
             </div>
           </td>
@@ -3312,7 +3312,7 @@ function applySearch(){
     spacer.style.height = extra + 'px';
   }
 
-  
+  // Run after layout/paint
   window.addEventListener('load', function(){ setTimeout(ensureSpacer, 0); setTimeout(ensureSpacer, 250); });
   window.addEventListener('resize', function(){ setTimeout(ensureSpacer, 0); setTimeout(ensureSpacer, 150); });
 
