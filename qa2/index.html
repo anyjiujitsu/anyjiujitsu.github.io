@@ -2804,7 +2804,14 @@ body { overflow-y: auto; }
 }
 
 </style>
-</head>
+<style>
+/* Index625: Nudge OTA indicator left ONLY (no other values or columns move) */
+
+/* Shift inline OTA dot slightly left */
+.directory-table tbody td.dir-col-name .dir-ota-inline{
+  margin-left: 4px !important; /* was 6px */
+}
+</style></head>
 <body>
 <div class="header-freeze">
 <div class="wrap">
