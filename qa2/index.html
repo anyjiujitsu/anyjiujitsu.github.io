@@ -2701,6 +2701,18 @@ body { overflow-y: auto; }
 .directory-table tbody td.dir-col-city{ width: 120px !important; }  /* CITY */
 .directory-table tbody td.dir-col-times{ width: 120px !important; } /* SAT / SUN */
 .directory-table tbody td.dir-col-ota{ width: 16px !important; }    /* OTA */
+</style><style>
+/* Index609: Reduce SAT/SUN column width to further shrink overall card-body width (columns only) */
+
+/* Narrow SAT/SUN column */
+.directory-table tbody td.dir-col-times{ width: 100px !important; }
+
+/* Tighten overall table width to match reduced columns */
+.directory-table{
+  width: 680px !important;
+  max-width: 680px !important;
+  min-width: 680px !important;
+}
 </style></head>
 <body>
 <div class="header-freeze">
