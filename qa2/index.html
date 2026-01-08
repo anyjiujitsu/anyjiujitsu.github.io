@@ -3564,7 +3564,7 @@ function applySearch(){
     spacer.style.height = extra + 'px';
   }
 
-  // Run after layout/paint
+  // Ru after layout/paint
   window.addEventListener('load', function(){ setTimeout(ensureSpacer, 0); setTimeout(ensureSpacer, 250); });
   window.addEventListener('resize', function(){ setTimeout(ensureSpacer, 0); setTimeout(ensureSpacer, 150); });
 
