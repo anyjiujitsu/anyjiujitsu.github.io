@@ -3217,18 +3217,28 @@ body { overflow-y: auto; }
 
 function applySearch(){
     var q = (searchInput && searchInput.value ? searchInput.value : "").trim().toLowerCase();
-    if(!q){ render(data); return; }
+
+    // Keep the pill glow/dot in sync with selections
+    if(dirStateBtn){
+      dirStateBtn.classList.toggle('has-selection', !!(selectedDirStates && selectedDirStates.size));
+    }
+
     var filtered = data.filter(function(r){
       // STATE dropdown filter (if any selected)
       if(selectedDirStates && selectedDirStates.size){
         if(!selectedDirStates.has((r.STATE||'').toString().trim())) return false;
       }
+
+      // Text filter (optional)
       if(!q) return true;
       var hay = (r.NAME+" "+r.IG+" "+r.CITY+" "+r.STATE+" "+r.SAT+" "+r.SUN+" "+r.OTA).toLowerCase();
       return hay.includes(q);
     });
+
     render(filtered);
   }
+
+}
 
   if(clearBtn){
     clearBtn.addEventListener("click", function(){
