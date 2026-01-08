@@ -3130,6 +3130,7 @@ body { overflow-y: auto; }
 
   function syncAllPillsGlow(){
     updatePillGlow(document.getElementById('eventBtn'));
+    updatePillGlow(document.getElementById('yearBtn'));
     updatePillGlow(document.getElementById('stateBtn'));
   }
 
@@ -3173,6 +3174,8 @@ body { overflow-y: auto; }
   }
 
   function setupMenu(btnId, menuId, listId, clearId){
+    // Index110: avoid double-binding yearClear (Open Mat clear handled in initOpenMatMenu)
+
     var btn = document.getElementById(btnId);
     var menu = document.getElementById(menuId);
     var listEl = document.getElementById(listId);
@@ -3187,15 +3190,25 @@ body { overflow-y: auto; }
     }
 
     if(clear){
-      clear.addEventListener('click', function(e){
-        e.preventDefault();
-        selectedStatesDir.clear();
-        // uncheck all checkboxes in both lists
-        ['eventList','stateList'].forEach(function(id){
-          var el = document.getElementById(id);
-          if(!el) return;
-          el.querySelectorAll('input[type="checkbox"]').forEach(function(cb){ cb.checked = false; });
+      if(clearId === 'yearClear'){
+        clear.addEventListener('click', function(){
+          // let initOpenMatMenu handle clearing; just close menu
+          if(menu && btn){ menu.hidden = true; btn.setAttribute('aria-expanded','false'); }
         });
+      }else{
+        clear.addEventListener('click', function(e){
+          e.preventDefault();
+          selectedStatesDir.clear();
+          ['eventList','stateList'].forEach(function(id){
+            var el = document.getElementById(id);
+            if(!el) return;
+            el.querySelectorAll('input[type=checkbox]').forEach(function(cb){ cb.checked = false; });
+          });
+          syncAllPillsGlow();
+          applySearch();
+        });
+      }
+    });
         syncAllPillsGlow();
         applySearch();
       });
@@ -3206,6 +3219,7 @@ body { overflow-y: auto; }
 
   var menus = [
     setupMenu('eventBtn','eventMenu','eventList','eventClear'),
+    setupMenu('yearBtn','yearMenu','yearList','yearClear'),
     setupMenu('stateBtn','stateMenu','stateList','stateClear')
   ];
 
