@@ -2624,6 +2624,20 @@ body { overflow-y: auto; }
 .card-body .directory-table td.dir-col-ota .dir-ota-cell{
   transform: translateX(-12px) !important;
 }
+</style><style>
+/* Index603: OTA dot inset + narrower SAT/SUN column (no other layout changes) */
+
+/* 1) OTA indicator: visually shift dot left without changing column widths/layout */
+.directory-table td.dir-col-ota .dir-dot{
+  transform: translateX(-10px) !important;
+}
+
+/* 2) SAT/SUN column (dir-col-times): make narrower and trim internal padding only */
+.directory-table tbody td.dir-col-times{
+  width: 92px !important;
+  padding-left: 4px !important;
+  padding-right: 4px !important;
+}
 </style></head>
 <body>
 <div class="header-freeze">
