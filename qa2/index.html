@@ -2914,7 +2914,7 @@ body { overflow-y: auto; }
 </button>
 <div class="year-menu" hidden="" id="yearMenu">
 <div class="year-menu-header">
-<span class="year-menu-title">Years</span>
+<span class="year-menu-title">Open Mat</span>
 <button class="year-clear" id="yearClear" type="button">Clear</button>
 </div>
 <div class="year-list" id="yearList"></div>
@@ -3128,27 +3128,10 @@ body { overflow-y: auto; }
   }
 
   function clearOpenMat(){
-  openMatMode = "";
-
-  // uncheck all Open Mat options
-  var yl = document.getElementById('yearList');
-  if(yl){
-    yl.querySelectorAll('input[name=openmat]').forEach(function(cb){
-      cb.checked = false;
-    });
-  }
-
-  // remove green indicator on pill
-  var yb = document.getElementById('yearBtn');
-  if(yb) yb.classList.remove('has-selection');
-
-  // close menu + aria
-  var menu = document.getElementById('yearMenu');
-  if(menu) menu.hidden = true;
-  if(yb) yb.setAttribute('aria-expanded','false');
-
-  applySearch();
-});
+    openMatMode = "";
+    var listEl = document.getElementById('yearList');
+    if(listEl){
+      listEl.querySelectorAll('input[type=checkbox][name=openmat]').forEach(function(r){ r.checked = false; });
     }
     updateYearGlow();
     // close menu
@@ -3235,21 +3218,13 @@ body { overflow-y: auto; }
 
     if(clear){
       clear.addEventListener('click', function(e){
-    e.preventDefault();
-
-    // Open Mat (Year pill repurposed)
-    if(clearId === 'yearClear'){
-      clearOpenMat();
-      return;
-    }
-
-e.preventDefault();
+        e.preventDefault();
         selectedStatesDir.clear();
         // uncheck all checkboxes in both lists
         ['eventList','stateList'].forEach(function(id){
           var el = document.getElementById(id);
           if(!el) return;
-          el.querySelectorAll('input[type="checkbox"]').forEach(function(cb){ cb.checked = false;});
+          el.querySelectorAll('input[type="checkbox"]').forEach(function(cb){ cb.checked = false; });
         });
         syncAllPillsGlow();
         applySearch();
@@ -3447,6 +3422,18 @@ function applySearch(){
           buildStateMenu(document.getElementById('eventList'), statesForLeft);
           buildOpenMatMenu();
           updateYearGlow();
+          // Index119: ensure Open Mat Clear always resets Open Mat state
+          try{
+            var yc = document.getElementById('yearClear');
+            if(yc && !yc.__boundOpenMatClear){
+              yc.__boundOpenMatClear = true;
+              yc.addEventListener('click', function(e){
+                e.preventDefault();
+                if(typeof clearOpenMat === 'function') clearOpenMat();
+              });
+            }
+          }catch(e){}
+
           // glow reflects selection state
           if(typeof syncAllPillsGlow === "function") syncAllPillsGlow();
         }
