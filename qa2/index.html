@@ -2638,6 +2638,21 @@ body { overflow-y: auto; }
   padding-left: 4px !important;
   padding-right: 4px !important;
 }
+</style><style>
+/* Index604: Reduce NAME/IG column width to compensate and tighten card body */
+
+/* NAME / IG column: reduce width + trim horizontal padding only */
+.directory-table tbody td.dir-col-name{
+  width: 220px !important;
+  padding-left: 8px !important;
+  padding-right: 6px !important;
+}
+
+/* Ensure text does not wrap unexpectedly */
+.directory-table tbody td.dir-col-name .dir-name,
+.directory-table tbody td.dir-col-name .dir-ig{
+  white-space: nowrap;
+}
 </style></head>
 <body>
 <div class="header-freeze">
