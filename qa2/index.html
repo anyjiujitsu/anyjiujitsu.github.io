@@ -23,7 +23,7 @@
 
     @media (max-width: 900px) { #monthsRoot { transform: scale(1.20); } }
 
-    @media (max-width: 660px) { #monthsRoot { transform: scale(1.05); } }
+    @media (max-width: 700px) { #monthsRoot { transform: scale(1.05); } }
 
     @media (max-width: 500px) { #monthsRoot { transform: scale(0.90); } }
 
@@ -146,7 +146,7 @@ display:flex;
       white-space: nowrap;
       transform:none;
       width: 760px;
-  max-width: 760px;
+  max-width: 720px;
   padding-left: 2px;
 }
     @media (max-width: 700px){ .dir-group-label{ width: 760px; max-width:760px; } }
@@ -2373,7 +2373,7 @@ body { overflow-y: auto; }
 
 /* Table shell: matches reference card-body density (no headers) */
 .directory-table{width: 760px;
-  max-width: 760px;
+  max-width: 720px;
   margin: 0 auto;
   table-layout: fixed;
   border-collapse: separate;
@@ -2572,15 +2572,15 @@ body { overflow-y: auto; }
 
 /* 2) Lock directory cardbody to EVENTS width (tighter than previous) */
 .directory-table{
-  width: 660px !important;
-  max-width: 660px !important;
+  width: 700px !important;
+  max-width: 700px !important;
   margin-left: auto !important;
   margin-right: auto !important;
   table-layout: fixed !important;
 }
 
-/* 3) Column widths (sum = 660px) */
-.directory-table td.dir-col-name{ width: 280px !important; max-width: 280px !important; }
+/* 3) Column widths (sum = 700px) */
+.directory-table td.dir-col-name{ width: 320px !important; max-width: 320px !important; }
 .directory-table td.dir-col-city{ width: 150px !important; max-width: 150px !important; }
 .directory-table td.dir-col-times{ width: 200px !important; max-width: 200px !important; }
 .directory-table td.dir-col-ota{ width: 30px !important; max-width: 30px !important; padding-left: 0 !important; padding-right: 0 !important; text-align:center !important; }
@@ -2588,7 +2588,7 @@ body { overflow-y: auto; }
 /* Keep ellipsis working within narrower NAME/IG */
 .directory-table td.dir-col-name .dir-main,
 .directory-table td.dir-col-name .dir-sub{
-  max-width: 235px !important; /* leave room for icon + gap */
+  max-width: 270px !important; /* leave room for icon + gap */
 }
 
 </style>
