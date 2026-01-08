@@ -2653,6 +2653,25 @@ body { overflow-y: auto; }
 .directory-table tbody td.dir-col-name .dir-ig{
   white-space: nowrap;
 }
+</style><style>
+/* Index605: Shrink NAME/IG column width ONLY (no text/padding shift) */
+
+/* Reduce only the column width */
+.directory-table tbody td.dir-col-name{
+  width: 210px !important;
+}
+
+/* Undo the prior padding tweaks so text position stays exactly as before */
+.directory-table tbody td.dir-col-name{
+  padding-left: unset !important;
+  padding-right: unset !important;
+}
+
+/* Undo forced nowrap (let existing stylesheet control it) */
+.directory-table tbody td.dir-col-name .dir-name,
+.directory-table tbody td.dir-col-name .dir-ig{
+  white-space: unset !important;
+}
 </style></head>
 <body>
 <div class="header-freeze">
