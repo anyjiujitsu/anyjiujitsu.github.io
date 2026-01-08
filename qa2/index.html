@@ -2784,7 +2784,41 @@ body { overflow-y: auto; }
 .directory-root{
   margin-top: -10px !important; /* was -6px */
 }
-</style></head>
+</style><style>
+
+/* Index622: OTA indicator appears after NAME/IG (only OTA moves). End OTA column stays empty. */
+
+/* Make NAME/IG cell content allow an inline OTA dot at the end */
+.directory-table tbody td.dir-col-name .dir-with-icon{
+  width: 100%;
+}
+.directory-table tbody td.dir-col-name .dir-stack{
+  flex: 1 1 auto;
+  min-width: 0;
+}
+.directory-table tbody td.dir-col-name .dir-ota-inline{
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  margin-left: 8px;
+}
+
+/* Recolor OTA dot to match NAME/IG (neutral, no glow) */
+.directory-table tbody td.dir-col-name .dir-ota-inline .dir-dot{
+  width: 10px;
+  height: 10px;
+  background: rgba(0,0,0,0.55) !important;
+  border-color: rgba(0,0,0,0.18) !important;
+  box-shadow: none !important;
+}
+.directory-table tbody td.dir-col-name .dir-ota-inline .dir-dot.y,
+.directory-table tbody td.dir-col-name .dir-ota-inline .dir-dot.n{
+  background: rgba(0,0,0,0.55) !important;
+  box-shadow: none !important;
+}
+
+</style>
+</head>
 <body>
 <div class="header-freeze">
 <div class="wrap">
@@ -3023,6 +3057,9 @@ body { overflow-y: auto; }
                 <div class="dir-main">${escapeHTML(clampText(r.NAME, 42))}</div>
                 <div class="dir-sub">${escapeHTML(r.IG)}</div>
               </div>
+              <div class="dir-ota-inline" aria-label="OTA">
+                ${dotHTML}
+              </div>
             </div>
           </td>
 
@@ -3047,9 +3084,7 @@ body { overflow-y: auto; }
           </td>
 
           <td class="dir-col-ota">
-            <div class="dir-ota-cell">
-              ${dotHTML}
-            </div>
+            <div class="dir-ota-cell" aria-label="OTA (empty)"></div>
           </td>
         `;
         tbody.appendChild(tr);
