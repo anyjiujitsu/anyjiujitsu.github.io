@@ -5,7 +5,7 @@
 <head>
 <meta charset="utf-8"/>
 <meta content="width=1200, initial-scale=0.32, maximum-scale=0.32, user-scalable=no, viewport-fit=cover" name="viewport"/>
-<title>ANY N.E. – DIRECTORY13</title>
+<title>ANY N.E. – GYM INDEX</title>
 <style>
 
 /* === Block 1 === */
@@ -2950,7 +2950,7 @@ body { overflow-y: auto; }
 </div>
 <div aria-label="Filter by state" class="state-filter">
 <button aria-expanded="false" aria-haspopup="true" class="state-btn" id="stateBtn" type="button">
-<span class="year-label">Guests</span><span aria-hidden="true" class="year-caret">▾</span>
+<span class="year-label">Guests</span><span aria-hidden="true" class="state-caret">▾</span>
 </button>
 <div class="state-menu" hidden="" id="stateMenu">
 <div class="state-menu-header">
@@ -3288,6 +3288,14 @@ body { overflow-y: auto; }
     if(clear){
       clear.addEventListener('click', function(e){
         e.preventDefault();
+
+        // Middle pill: OpenMat (Year pill repurposed)
+        if(clearId === 'yearClear'){
+          if(typeof clearOpenMat === 'function') clearOpenMat();
+          // clearOpenMat already closes the menu and updates glow
+          return;
+        }
+
         // Right pill: Guests
         if(clearId === 'stateClear'){
           guestsMode = false;
@@ -3301,6 +3309,8 @@ body { overflow-y: auto; }
           if(btn) btn.setAttribute('aria-expanded','false');
           return;
         }
+
+        // Left pill: States
         selectedStatesDir.clear();
         // uncheck all checkboxes in both lists
         ['eventList'].forEach(function(id){
