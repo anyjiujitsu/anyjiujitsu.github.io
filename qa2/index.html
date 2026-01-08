@@ -2619,6 +2619,11 @@ body { overflow-y: auto; }
 .card-body td:last-child {
   padding-right: 16px !important;
 }
+</style><style>
+/* Move OTA dot left without impacting other card-body layout */
+.card-body .directory-table td.dir-col-ota .dir-ota-cell{
+  transform: translateX(-12px) !important;
+}
 </style></head>
 <body>
 <div class="header-freeze">
