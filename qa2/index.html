@@ -2812,14 +2812,10 @@ body { overflow-y: auto; }
   margin-left: 4px !important; /* was 6px */
 }
 </style><style>
-/* Index626: Guaranteed visual left shift of OTA dot ONLY (no column/value movement) */
-.directory-table tbody td.dir-col-name .dir-ota-inline .dir-dot{
-  transform: translateX(-8px) !important;
-}
-</style><style>
-/* Index627: Micro-adjust OTA dot further left (dot only, no reflow) */
-.directory-table tbody td.dir-col-name .dir-ota-inline .dir-dot{
-  transform: translateX(-10px) !important; /* was -8px */
+/* Index628: Visible left shift using relative positioning (OTA only, no reflow) */
+.directory-table tbody td.dir-col-name .dir-ota-inline{
+  position: relative;
+  left: -8px;
 }
 </style></head>
 <body>
