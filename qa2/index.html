@@ -2922,7 +2922,7 @@ body { overflow-y: auto; }
 </div>
 <div aria-label="Filter by state" class="state-filter">
 <button aria-expanded="false" aria-haspopup="true" class="state-btn" id="stateBtn" type="button">
-      Guests <span aria-hidden="true" class="state-caret">▾</span>
+<span class="state-label">Guests</span><span aria-hidden="true" class="state-caret">▾</span>
 </button>
 <div class="state-menu" hidden="" id="stateMenu">
 <div class="state-menu-header">
@@ -3422,6 +3422,11 @@ function applySearch(){
         }else if(openMatMode === 'sun'){
           if(!sun) return false;
         }
+      }
+      // Guests filter (OTA = Y)
+      if(typeof guestsMode !== "undefined" && guestsMode){
+        var ota = (r.OTA || "").toString().trim().toUpperCase();
+        if(ota !== "Y") return false;
       }
       if(!q) return true;
       var hay = (r.NAME+" "+r.IG+" "+r.CITY+" "+r.STATE+" "+r.SAT+" "+r.SUN+" "+r.OTA).toLowerCase();
