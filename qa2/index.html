@@ -3133,14 +3133,12 @@ body { overflow-y: auto; }
     if(listEl){
       listEl.querySelectorAll('input[name=openmat]').forEach(function(x){ x.checked = false; });
     }
-    // remove indicator
     var yb = document.getElementById('yearBtn');
     if(yb) yb.classList.remove('has-selection');
-    // close menu
     var menu = document.getElementById('yearMenu');
     if(menu) menu.hidden = true;
     if(yb) yb.setAttribute('aria-expanded','false');
-    if(typeof applySearch === 'function') applySearch();
+    applySearch();
   }
     updateYearGlow();
     // close menu
@@ -3228,6 +3226,10 @@ body { overflow-y: auto; }
     if(clear){
       clear.addEventListener('click', function(e){
         e.preventDefault();
+        if(btnId === 'yearBtn'){
+          clearOpenMat();
+          return;
+        }
         selectedStatesDir.clear();
         // uncheck all checkboxes in both lists
         ['eventList','stateList'].forEach(function(id){
@@ -3431,18 +3433,6 @@ function applySearch(){
           buildStateMenu(document.getElementById('eventList'), statesForLeft);
           buildOpenMatMenu();
           updateYearGlow();
-          // Index115: bind Open Mat Clear (single source of truth)
-          try{
-            var yc = document.getElementById('yearClear');
-            if(yc && !yc.__openMatBound){
-              yc.__openMatBound = true;
-              yc.addEventListener('click', function(e){
-                e.preventDefault();
-                clearOpenMat();
-              });
-            }
-          }catch(e){}
-
           // glow reflects selection state
           if(typeof syncAllPillsGlow === "function") syncAllPillsGlow();
         }
