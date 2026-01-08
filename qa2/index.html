@@ -2759,16 +2759,16 @@ body { overflow-y: auto; }
   margin-bottom: 6px !important; /* was 10px */
 }
 </style><style>
-/* Index615: Slightly more vertical tightening (still spacing-only) */
+/* Index616: Move group name + cardbody UP TOGETHER (preserve their internal spacing) */
 
-/* Pull directory section up a bit more */
+/* Shift the whole directory block upward */
 .directory-wrap{
-  padding-top: 10px !important; /* was 14px */
+  padding-top: 6px !important; /* was 10px before Index615; internal gaps preserved */
 }
 
-/* Tighten STATE label to card spacing a touch more */
+/* Restore original spacing between group label and cardbody */
 .dir-group-label{
-  margin-bottom: 4px !important; /* was 6px */
+  margin-bottom: 10px !important; /* restore baseline gap */
 }
 </style></head>
 <body>
