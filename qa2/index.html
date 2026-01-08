@@ -2686,6 +2686,21 @@ body { overflow-y: auto; }
   width: 190px !important;
   max-width: 190px !important;
 }
+</style><style>
+/* Index607: Shrink overall card-body width by reducing COLUMN widths (no value-position tweaks) */
+
+/* 1) Reduce the directory card/table shell width itself (otherwise leftover space just redistributes) */
+.directory-table{
+  width: 700px !important;
+  max-width: 700px !important;
+  min-width: 700px !important;
+}
+
+/* 2) Reduce actual column widths (no padding changes) */
+.directory-table tbody td.dir-col-name{ width: 270px !important; }  /* NAME / IG */
+.directory-table tbody td.dir-col-city{ width: 120px !important; }  /* CITY */
+.directory-table tbody td.dir-col-times{ width: 120px !important; } /* SAT / SUN */
+.directory-table tbody td.dir-col-ota{ width: 16px !important; }    /* OTA */
 </style></head>
 <body>
 <div class="header-freeze">
