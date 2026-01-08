@@ -2819,6 +2819,11 @@ body { overflow-y: auto; }
 .directory-table tbody td.dir-col-name .dir-ota-inline .dir-dot{
   transform: translateX(8px) !important;
 }
+</style><style>
+/* Index638: Micro-correct OTA position back LEFT slightly (dot only) */
+.directory-table tbody td.dir-col-name .dir-ota-inline .dir-dot{
+  transform: translateX(4px) !important; /* was 8px right, now halfway back */
+}
 </style></head>
 <body>
 <div class="header-freeze">
