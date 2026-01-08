@@ -2580,7 +2580,7 @@ body { overflow-y: auto; }
 }
 
 /* 3) Column widths (sum = 660px) */
-.directory-table td.dir-col-name{ width: 260px !important; max-width: >260px !important; }
+.directory-table td.dir-col-name{ width: 280px !important; max-width: 280px !important; }
 .directory-table td.dir-col-city{ width: 150px !important; max-width: 150px !important; }
 .directory-table td.dir-col-times{ width: 200px !important; max-width: 200px !important; }
 .directory-table td.dir-col-ota{ width: 30px !important; max-width: 30px !important; padding-left: 0 !important; padding-right: 0 !important; text-align:center !important; }
@@ -2588,7 +2588,25 @@ body { overflow-y: auto; }
 /* Keep ellipsis working within narrower NAME/IG */
 .directory-table td.dir-col-name .dir-main,
 .directory-table td.dir-col-name .dir-sub{
-  max-width: 215px !important; /* leave room for icon + gap */
+  max-width: 235px !important; /* leave room for icon + gap */
+}
+
+
+/* === FINAL WIDTH OVERRIDE v527 (shrink NAME/IG a bit more; keep layout stable) === */
+.directory-table{
+  width: 640px !important;
+  max-width: 640px !important;
+  table-layout: fixed !important;
+}
+.directory-table td.dir-col-name{ width: 260px !important; max-width: 260px !important; }
+.directory-table td.dir-col-city{ width: 150px !important; max-width: 150px !important; }
+.directory-table td.dir-col-times{ width: 200px !important; max-width: 200px !important; }
+.directory-table td.dir-col-ota{ width: 30px !important; max-width: 30px !important; padding-left:0 !important; padding-right:0 !important; text-align:center !important; }
+
+/* Keep ellipsis working within narrower NAME/IG */
+.directory-table td.dir-col-name .dir-main,
+.directory-table td.dir-col-name .dir-sub{
+  max-width: 215px !important; /* room for icon + gap */
 }
 
 </style>
