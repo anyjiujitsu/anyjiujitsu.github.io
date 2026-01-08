@@ -3092,12 +3092,24 @@ body { overflow-y: auto; }
       row.style.cursor = 'pointer';
 
       var rb = document.createElement('input');
-      rb.type = 'radio';
+      rb.type = 'checkbox';
       rb.name = 'openmat';
       rb.value = val;
       rb.checked = (openMatMode === val);
       rb.addEventListener('change', function(){
-        openMatMode = val;
+        // single-select checkbox behavior
+        if(rb.checked){
+          openMatMode = val;
+          // uncheck other options
+          var list = document.getElementById('yearList');
+          if(list){
+            list.querySelectorAll('input[type=checkbox][name=openmat]').forEach(function(x){
+              if(x !== rb) x.checked = false;
+            });
+          }
+        }else{
+          openMatMode = '';
+        }
         updateYearGlow();
         applySearch();
       });
@@ -3119,9 +3131,14 @@ body { overflow-y: auto; }
     openMatMode = "";
     var listEl = document.getElementById('yearList');
     if(listEl){
-      listEl.querySelectorAll('input[type=radio][name=openmat]').forEach(function(r){ r.checked = false; });
+      listEl.querySelectorAll('input[type=checkbox][name=openmat]').forEach(function(r){ r.checked = false; });
     }
     updateYearGlow();
+    // close menu
+    var btn = document.getElementById('yearBtn');
+    var menu = document.getElementById('yearMenu');
+    if(menu) menu.hidden = true;
+    if(btn) btn.setAttribute('aria-expanded','false');
     applySearch();
   }
 
