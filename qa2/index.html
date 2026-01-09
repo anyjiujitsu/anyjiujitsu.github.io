@@ -2611,6 +2611,18 @@ body { overflow-y: auto; }
   max-width: 175px !important; /* room for icon + gap */
 }
 
+
+
+/* === Index204: iOS caret fix ===
+   iOS Safari misplaces the text caret when an input is inside any transformed ancestor (even translateX).
+   We remove transform on the search pill wrapper for mobile and use margin instead (same visual position). */
+@media (max-width: 700px){
+  .head-search-box{
+    transform: none !important;
+    margin-left: 16px !important; /* matches prior translateX(16px) */
+  }
+}
+
 </style>
 <style>
 /* Shift OTA value left slightly without affecting other columns */
