@@ -2611,18 +2611,6 @@ body { overflow-y: auto; }
   max-width: 175px !important; /* room for icon + gap */
 }
 
-
-
-/* === Index204: iOS caret fix ===
-   iOS Safari misplaces the text caret when an input is inside any transformed ancestor (even translateX).
-   We remove transform on the search pill wrapper for mobile and use margin instead (same visual position). */
-@media (max-width: 700px){
-  .head-search-box{
-    transform: none !important;
-    margin-left: 16px !important; /* matches prior translateX(16px) */
-  }
-}
-
 </style>
 <style>
 /* Shift OTA value left slightly without affecting other columns */
@@ -2934,7 +2922,7 @@ body { overflow-y: auto; }
 <path d="M10 18a8 8 0 1 1 5.292-14.001A8 8 0 0 1 10 18Zm11.707 2.293-5.4-5.4a10 10 0 1 0-1.414 1.414l5.4 5.4a1 1 0 0 0 1.414-1.414Z"></path>
 </svg>
 </span>
-<input autocomplete="off" id="nlSearch" placeholder='Filter (e.g., "bos", "maine", "gym name")' spellcheck="false" type="text"/>
+<input autocomplete="off" id="nlSearch" placeholder='Filter (e.g., "boston", "maine", "gym name")' spellcheck="false" type="text"/>
 <button aria-label="Clear filter" class="head-search-clear" title="Clear" type="button">×</button>
 </div>
 <div aria-label="Filter by state" class="event-filter">
@@ -3532,30 +3520,6 @@ function applySearch(){
     searchInput.addEventListener("input", applySearch);
   }
 
-  // Index203: Mobile cursor should start at the very beginning when tapping into an empty search.
-  // iOS Safari can sometimes place the caret after the first glyph of the placeholder; we force 0,0.
-  function forceCaretAtStartIfEmpty(el){
-    if(!el) return;
-    var v = (el.value || "");
-    if(v.length) return; // only intervene when empty (placeholder showing)
-
-    var set0 = function(){
-      try{ el.setSelectionRange(0, 0); }catch(e){}
-    };
-
-    // Run after focus settles (covers iOS + Android).
-    try{ requestAnimationFrame(set0); }catch(e){ setTimeout(set0, 0); }
-    setTimeout(set0, 0);
-    setTimeout(set0, 30);
-  }
-
-  if(searchInput){
-    // focus + touch/click cover desktop and mobile tap behaviors
-    searchInput.addEventListener('focus', function(){ forceCaretAtStartIfEmpty(searchInput); });
-    searchInput.addEventListener('click', function(){ forceCaretAtStartIfEmpty(searchInput); });
-    searchInput.addEventListener('touchstart', function(){ forceCaretAtStartIfEmpty(searchInput); }, {passive:true});
-  }
-
   (async function init(){
     try{
       var filename = "directory.csv";
@@ -3756,299 +3720,103 @@ function applySearch(){
 
 })();
 </script>
+
 <script>
-(()=>{
-  const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) || (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
-  if(!isIOS) return;
+/* iOS caret debug overlay (only active when ?debugCaret=1) */
+(function(){
+  const params = new URLSearchParams(location.search);
+  if(params.get('debugCaret') !== '1') return;
 
-  const real = document.getElementById("nlSearch");
-  if(!real) return;
+  const box = document.createElement('div');
+  box.id = 'caret-debug-box';
+  box.style.cssText = [
+    'position:fixed',
+    'left:8px','right:8px','bottom:8px',
+    'z-index:999999',
+    'background:rgba(0,0,0,0.78)',
+    'color:#fff',
+    'font:12px/1.35 -apple-system,BlinkMacSystemFont,system-ui,Segoe UI,Roboto,Arial,sans-serif',
+    'padding:10px 12px',
+    'border-radius:12px',
+    'max-height:38vh',
+    'overflow:auto',
+    'white-space:pre-wrap',
+    'box-shadow:0 8px 24px rgba(0,0,0,0.35)'
+  ].join(';');
+  document.documentElement.appendChild(box);
 
-  let overlay = null;
+  const logLines = [];
+  const maxLines = 18;
 
-  function buildOverlay(){
-    if(overlay) return overlay;
-
-    // Measure the *visual* box (post-transform)
-    const r = real.getBoundingClientRect();
-    const cs = window.getComputedStyle(real);
-
-    // Estimate scale applied by transformed ancestors (head-search scales cluster)
-    const ow = real.offsetWidth || parseFloat(cs.width) || 1;
-    const oh = real.offsetHeight || parseFloat(cs.height) || 1;
-    const scaleX = r.width / ow;
-    const scaleY = r.height / oh;
-
-    overlay = document.createElement("input");
-    overlay.type = real.type === "search" ? "search" : "text";
-    overlay.autocomplete = "off";
-    overlay.spellcheck = false;
-    overlay.setAttribute("inputmode", "search");
-    overlay.setAttribute("enterkeyhint", "search");
-    overlay.setAttribute("autocapitalize", "none");
-    overlay.setAttribute("autocorrect", "off");
-
-    // Keep placeholder/value identical
-    overlay.placeholder = real.getAttribute("placeholder") || "";
-    overlay.value = real.value || "";
-
-    // Fixed-position clone: not inside transformed containers => iOS caret renders correctly
-    overlay.style.position = "fixed";
-    overlay.style.left = r.left + "px";
-    overlay.style.top = r.top + "px";
-    overlay.style.width = r.width + "px";
-    overlay.style.height = r.height + "px";
-    overlay.style.zIndex = "2147483647";
-    overlay.style.margin = "0";
-
-    // Match appearance (scaled) without using transforms on the input itself
-    overlay.style.boxSizing = cs.boxSizing;
-    overlay.style.border = cs.border;
-    overlay.style.borderRadius = (parseFloat(cs.borderRadius)||0) * Math.min(scaleX, scaleY) + "px";
-    overlay.style.background = cs.backgroundColor === "rgba(0, 0, 0, 0)" ? cs.background : cs.backgroundColor;
-    overlay.style.color = cs.color;
-    overlay.style.fontFamily = cs.fontFamily;
-    overlay.style.fontWeight = cs.fontWeight;
-    overlay.style.letterSpacing = cs.letterSpacing;
-
-    const fs = parseFloat(cs.fontSize) || 16;
-    const lh = parseFloat(cs.lineHeight) || (fs * 1.2);
-    overlay.style.fontSize = (fs * scaleX) + "px";
-    overlay.style.lineHeight = (lh * scaleY) + "px";
-
-    // Padding scaled so text start aligns exactly
-    overlay.style.paddingTop = (parseFloat(cs.paddingTop)||0) * scaleY + "px";
-    overlay.style.paddingBottom = (parseFloat(cs.paddingBottom)||0) * scaleY + "px";
-    overlay.style.paddingLeft = (parseFloat(cs.paddingLeft)||0) * scaleX + "px";
-    overlay.style.paddingRight = (parseFloat(cs.paddingRight)||0) * scaleX + "px";
-
-    // Remove iOS decorations if type=search
-    overlay.style.webkitAppearance = "none";
-    overlay.style.appearance = "none";
-    overlay.style.outline = "none";
-
-    // Sync -> real input so existing search logic works unchanged
-    overlay.addEventListener("input", ()=>{
-      real.value = overlay.value;
-      real.dispatchEvent(new Event("input", {bubbles:true}));
-    });
-
-    overlay.addEventListener("keydown", (e)=>{
-      // Enter should just blur (like normal search)
-      if(e.key === "Enter"){
-        e.preventDefault();
-        overlay.blur();
-      }
-    });
-
-    overlay.addEventListener("blur", ()=>{
-      if(!overlay) return;
-      real.value = overlay.value;
-      real.dispatchEvent(new Event("input", {bubbles:true}));
-      overlay.remove();
-      overlay = null;
-      real.style.opacity = "";
-      real.style.pointerEvents = "";
-    });
-
-    document.body.appendChild(overlay);
-
-    // Hide the real input while overlay is active (layout stays the same)
-    real.style.opacity = "0";
-    real.style.pointerEvents = "none";
-
-    // Focus overlay and force caret to true start
-    overlay.focus({preventScroll:true});
-    try{ overlay.setSelectionRange(overlay.value.length, overlay.value.length); }catch(_){}
-    return overlay;
+  function fmtEl(el){
+    if(!el) return 'null';
+    let s = el.tagName.toLowerCase();
+    if(el.id) s += '#' + el.id;
+    if(el.className && typeof el.className === 'string') s += '.' + el.className.trim().split(/\s+/).slice(0,3).join('.');
+    return s;
   }
 
-  // Intercept focus/click on iOS to route to overlay
-  function activate(e){
-    // If user taps while empty, caret must start at 0 (true left)
-    e.preventDefault();
-    e.stopPropagation();
-    const o = buildOverlay();
-    if(o && !o.value){
-      try{ o.setSelectionRange(0,0); }catch(_){}
+  function getTransformChain(el){
+    const chain = [];
+    let cur = el;
+    let hops = 0;
+    while(cur && hops < 12){
+      const cs = getComputedStyle(cur);
+      const t = cs.transform || 'none';
+      const z = cs.zoom || 'normal';
+      const pos = cs.position;
+      if(t !== 'none' || z !== 'normal'){
+        chain.push(`${fmtEl(cur)}  transform=${t}  zoom=${z}  pos=${pos}`);
+      }
+      cur = cur.parentElement;
+      hops++;
     }
+    return chain.length ? chain.join('\n') : '(no transform/zoom found in first 12 ancestors)';
   }
 
-  // Use pointer/touch first so iOS doesnt focus the real input
-  real.addEventListener("touchstart", activate, {passive:false});
-  real.addEventListener("mousedown", activate);
+  function snapshot(reason){
+    const ae = document.activeElement;
+    const nl = document.getElementById('nlSearch');
+    const isActive = ae === nl;
+    const sel = (nl && typeof nl.selectionStart === 'number')
+      ? `sel=${nl.selectionStart}-${nl.selectionEnd}`
+      : 'sel=?';
+    const val = nl ? nl.value : '';
+    const ph = nl ? nl.getAttribute('placeholder') : '';
+    const rect = nl ? nl.getBoundingClientRect() : null;
 
-  // Also keep clear button working when overlay is active
-  const clearBtn = document.querySelector(".head-search-clear");
-  if(clearBtn){
-    clearBtn.addEventListener("click", ()=>{
-      if(overlay){
-        overlay.value = "";
-        real.value = "";
-        real.dispatchEvent(new Event("input", {bubbles:true}));
-      }
+    const head = [];
+    head.push(`reason: ${reason}`);
+    head.push(`active: ${fmtEl(ae)}  (nlSearch active: ${isActive})`);
+    head.push(`nlSearch value="${val.replace(/\n/g,'\\n')}" (len=${val.length})  placeholder="${ph}"`);
+    head.push(sel);
+    if(rect){
+      head.push(`nlSearch rect: x=${rect.x.toFixed(1)} y=${rect.y.toFixed(1)} w=${rect.width.toFixed(1)} h=${rect.height.toFixed(1)}`);
+    }
+    head.push(`\ntransform/zoom chain from nlSearch:\n${nl ? getTransformChain(nl) : 'nlSearch not found'}`);
+    head.push(`\nrecent events:\n${logLines.join('\n')}`);
+    box.textContent = head.join('\n');
+  }
+
+  function log(evt){
+    const nl = document.getElementById('nlSearch');
+    const ae = document.activeElement;
+    const s = (nl && typeof nl.selectionStart === 'number') ? nl.selectionStart : '?';
+    const e = (nl && typeof nl.selectionEnd === 'number') ? nl.selectionEnd : '?';
+    const v = nl ? nl.value : '';
+    logLines.unshift(`${new Date().toLocaleTimeString()}  ${evt}  active=${fmtEl(ae)}  sel=${s}-${e}  vlen=${v.length}`);
+    if(logLines.length > maxLines) logLines.length = maxLines;
+    snapshot(evt);
+  }
+
+  ['focus','click','touchstart','input','keydown','keyup'].forEach(ev=>{
+    document.addEventListener(ev, (e)=>{
+      if(e.target && (e.target.id === 'nlSearch' || e.target.closest && e.target.closest('#nlSearch'))) log(ev);
     }, true);
-  }
-})();
-</script>
-<script>
-(() => {
-  const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) ||
-    (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
-  if (!isIOS) return;
-
-  const real = document.getElementById('nlSearch');
-  if (!real) return;
-
-  let overlay = null;
-  let active = false;
-
-  function getScale() {
-    const rect = real.getBoundingClientRect();
-    const ow = real.offsetWidth || 0;
-    if (!ow) return 1;
-    const s = rect.width / ow;
-    return (s && isFinite(s) && s > 0) ? s : 1;
-  }
-
-  function positionOverlay() {
-    if (!overlay) return;
-    const rect = real.getBoundingClientRect();
-    overlay.style.left = rect.left + 'px';
-    overlay.style.top = rect.top + 'px';
-    overlay.style.width = rect.width + 'px';
-    overlay.style.height = rect.height + 'px';
-  }
-
-  function ensureOverlay() {
-    if (overlay) return overlay;
-
-    const scale = getScale();
-    const cs = getComputedStyle(real);
-    overlay = document.createElement('input');
-    overlay.type = real.getAttribute('type') || 'text';
-    overlay.autocomplete = real.getAttribute('autocomplete') || 'off';
-    overlay.spellcheck = real.spellcheck;
-    overlay.autocorrect = 'off';
-    overlay.autocapitalize = 'none';
-    overlay.inputMode = real.inputMode || 'text';
-    overlay.setAttribute('enterkeyhint', 'search');
-    overlay.placeholder = real.placeholder;
-
-    // Visual matching (scaled to the *visual* size seen on screen)
-    overlay.style.position = 'fixed';
-    overlay.style.zIndex = '2147483647';
-    overlay.style.boxSizing = 'border-box';
-    overlay.style.background = cs.backgroundColor;
-    overlay.style.color = cs.color;
-    overlay.style.fontFamily = cs.fontFamily;
-    overlay.style.fontWeight = cs.fontWeight;
-    overlay.style.letterSpacing = cs.letterSpacing;
-    overlay.style.textTransform = cs.textTransform;
-    overlay.style.textAlign = cs.textAlign;
-    overlay.style.borderStyle = cs.borderStyle;
-    overlay.style.borderColor = cs.borderColor;
-
-    // Scale-sensitive fields
-    const px = (v) => (parseFloat(v) || 0);
-    overlay.style.fontSize = (px(cs.fontSize) * scale) + 'px';
-    overlay.style.lineHeight = (px(cs.lineHeight) * scale) + 'px';
-    overlay.style.paddingTop = (px(cs.paddingTop) * scale) + 'px';
-    overlay.style.paddingRight = (px(cs.paddingRight) * scale) + 'px';
-    overlay.style.paddingBottom = (px(cs.paddingBottom) * scale) + 'px';
-    overlay.style.paddingLeft = (px(cs.paddingLeft) * scale) + 'px';
-    overlay.style.borderWidth = (px(cs.borderTopWidth) * scale) + 'px';
-    overlay.style.borderRadius = (px(cs.borderTopLeftRadius) * scale) + 'px';
-
-    // Remove default iOS decorations
-    overlay.style.webkitAppearance = 'none';
-    overlay.style.appearance = 'none';
-
-    positionOverlay();
-
-    // Sync overlay -> real
-    overlay.addEventListener('input', () => {
-      real.value = overlay.value;
-      real.dispatchEvent(new Event('input', { bubbles: true }));
-    });
-
-    overlay.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape') {
-        e.preventDefault();
-        overlay.blur();
-      }
-    });
-
-    overlay.addEventListener('blur', () => {
-      teardownOverlay();
-    });
-
-    document.body.appendChild(overlay);
-    return overlay;
-  }
-
-  function teardownOverlay() {
-    active = false;
-    if (!overlay) return;
-    try {
-      real.value = overlay.value;
-      real.dispatchEvent(new Event('input', { bubbles: true }));
-    } catch (_) {}
-    overlay.remove();
-    overlay = null;
-    window.removeEventListener('scroll', onViewport, true);
-    window.removeEventListener('resize', onViewport, true);
-  }
-
-  function onViewport() {
-    if (!overlay) return;
-    positionOverlay();
-  }
-
-  function activate() {
-    if (active) return;
-    active = true;
-    const o = ensureOverlay();
-    o.value = real.value || '';
-    // Ensure caret at beginning for empty field
-    requestAnimationFrame(() => {
-      o.focus();
-      if (!o.value) {
-        try { o.setSelectionRange(0, 0); } catch (_) {}
-      }
-    });
-
-    window.addEventListener('scroll', onViewport, true);
-    window.addEventListener('resize', onViewport, true);
-  }
-
-  // Intercept iOS tap to avoid focusing the transformed input (which triggers the caret bug)
-  real.addEventListener('touchstart', (e) => {
-    // Allow scrolling gestures to pass through
-    if (e.touches && e.touches.length > 1) return;
-    e.preventDefault();
-    activate();
-  }, { passive: false });
-
-  // Fallback: if it somehow receives focus, immediately redirect to overlay
-  real.addEventListener('focus', () => {
-    requestAnimationFrame(() => {
-      real.blur();
-      activate();
-    });
   });
+  document.addEventListener('selectionchange', ()=>log('selectionchange'), true);
 
-  // Keep clear button working: when user taps the X, also clear overlay if present
-  const clearBtn = document.querySelector('.head-search-clear');
-  if (clearBtn) {
-    clearBtn.addEventListener('click', () => {
-      if (overlay) {
-        overlay.value = '';
-        real.value = '';
-        real.dispatchEvent(new Event('input', { bubbles: true }));
-      }
-    }, true);
-  }
+  snapshot('debugCaret=1 loaded');
 })();
 </script>
 
