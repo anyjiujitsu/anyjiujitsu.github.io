@@ -1411,6 +1411,7 @@ body {
 /* Dot appears before caret when selected */
 .year-btn.has-selection .year-caret::before,
 .state-btn.has-selection .state-caret::before,
+.state-caret.has-selection::before,
 .event-btn.has-selection .event-caret::before {
   content: "";
   width: 10px;
@@ -2921,7 +2922,7 @@ body { overflow-y: auto; }
 <path d="M10 18a8 8 0 1 1 5.292-14.001A8 8 0 0 1 10 18Zm11.707 2.293-5.4-5.4a10 10 0 1 0-1.414 1.414l5.4 5.4a1 1 0 0 0 1.414-1.414Z"></path>
 </svg>
 </span>
-<input autocomplete="off" id="nlSearch" placeholder='Filter (e.g., "boston", "maine", "gym name")' spellcheck="false" type="text"/>
+<input autocomplete="off" id="nlSearch" placeholder='Filter (e.g., "sunday", "maine", "gym name")' spellcheck="false" type="text"/>
 <button aria-label="Clear filter" class="head-search-clear" title="Clear" type="button">×</button>
 </div>
 <div aria-label="Filter by state" class="event-filter">
@@ -2950,7 +2951,7 @@ body { overflow-y: auto; }
 </div>
 <div aria-label="Filter by state" class="state-filter">
 <button aria-expanded="false" aria-haspopup="true" class="state-btn" id="stateBtn" type="button">
-<span class="year-label">Guests</span><span aria-hidden="true" class="year-caret">▾</span>
+<span class="year-label">Guests</span><span aria-hidden="true" class="state-caret">▾</span>
 </button>
 <div class="state-menu" hidden="" id="stateMenu">
 <div class="state-menu-header">
@@ -3193,7 +3194,12 @@ body { overflow-y: auto; }
   function updateGuestsGlow(){
     var sb = document.getElementById('stateBtn');
     if(!sb) return;
-    sb.classList.toggle('has-selection', !!guestsMode);
+    var hasSel = !!guestsMode;
+    sb.classList.toggle('has-selection', hasSel);
+    // Also toggle on the caret itself to make the green indicator reliable
+    // even if button-level class selectors are overridden elsewhere.
+    var caret = sb.querySelector('.state-caret');
+    if(caret) caret.classList.toggle('has-selection', hasSel);
   }
 
   function syncAllPillsGlow(){
@@ -3288,6 +3294,14 @@ body { overflow-y: auto; }
     if(clear){
       clear.addEventListener('click', function(e){
         e.preventDefault();
+
+        // Middle pill: OpenMat (Year pill repurposed)
+        if(clearId === 'yearClear'){
+          if(typeof clearOpenMat === 'function') clearOpenMat();
+          // clearOpenMat already closes the menu and updates glow
+          return;
+        }
+
         // Right pill: Guests
         if(clearId === 'stateClear'){
           guestsMode = false;
@@ -3301,6 +3315,8 @@ body { overflow-y: auto; }
           if(btn) btn.setAttribute('aria-expanded','false');
           return;
         }
+
+        // Left pill: States
         selectedStatesDir.clear();
         // uncheck all checkboxes in both lists
         ['eventList'].forEach(function(id){
@@ -3433,8 +3449,14 @@ body { overflow-y: auto; }
   }
 
 function applySearch(){
-    var q = (searchInput && searchInput.value ? searchInput.value : "").trim().toLowerCase();
+    var raw = (searchInput && searchInput.value ? searchInput.value : "");
+    var q = raw.trim().toLowerCase();
+
+    // Support comma-separated AND terms, e.g. "massachusetts, saturday"
+    var terms = q ? q.split(",").map(function(s){ return s.trim(); }).filter(Boolean) : [];
+
     var filtered = data.filter(function(r){
+      // Guests/States/OpenMat pills (existing behavior)
       if(typeof selectedStatesDir !== "undefined" && selectedStatesDir.size){
         var st = (r.STATE || "").toString().trim();
         if(!selectedStatesDir.has(st)) return false;
@@ -3456,10 +3478,34 @@ function applySearch(){
         var ota = (r.OTA || "").toString().trim().toUpperCase();
         if(ota !== "Y") return false;
       }
-      if(!q) return true;
+
+      // Natural language search
+      if(!terms.length) return true;
+
+      var satVal = (r.SAT || "").toString().trim();
+      var sunVal = (r.SUN || "").toString().trim();
       var hay = (r.NAME+" "+r.IG+" "+r.CITY+" "+r.STATE+" "+r.SAT+" "+r.SUN+" "+r.OTA).toLowerCase();
-      return hay.includes(q);
+
+      for(var i=0;i<terms.length;i++){
+        var t = terms[i];
+        if(!t) continue;
+
+        // Saturday / Sunday keywords -> require non-blank SAT/SUN
+        if(t === "saturday" || t === "sat"){
+          if(!satVal) return false;
+          continue;
+        }
+        if(t === "sunday" || t === "sun"){
+          if(!sunVal) return false;
+          continue;
+        }
+
+        // Default: substring match across fields
+        if(!hay.includes(t)) return false;
+      }
+      return true;
     });
+
     render(filtered);
   }
 
