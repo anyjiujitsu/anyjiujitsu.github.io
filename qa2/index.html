@@ -3449,8 +3449,14 @@ body { overflow-y: auto; }
   }
 
 function applySearch(){
-    var q = (searchInput && searchInput.value ? searchInput.value : "").trim().toLowerCase();
+    var raw = (searchInput && searchInput.value ? searchInput.value : "");
+    var q = raw.trim().toLowerCase();
+
+    // Support comma-separated AND terms, e.g. "massachusetts, saturday"
+    var terms = q ? q.split(",").map(function(s){ return s.trim(); }).filter(Boolean) : [];
+
     var filtered = data.filter(function(r){
+      // Guests/States/OpenMat pills (existing behavior)
       if(typeof selectedStatesDir !== "undefined" && selectedStatesDir.size){
         var st = (r.STATE || "").toString().trim();
         if(!selectedStatesDir.has(st)) return false;
@@ -3472,10 +3478,34 @@ function applySearch(){
         var ota = (r.OTA || "").toString().trim().toUpperCase();
         if(ota !== "Y") return false;
       }
-      if(!q) return true;
+
+      // Natural language search
+      if(!terms.length) return true;
+
+      var satVal = (r.SAT || "").toString().trim();
+      var sunVal = (r.SUN || "").toString().trim();
       var hay = (r.NAME+" "+r.IG+" "+r.CITY+" "+r.STATE+" "+r.SAT+" "+r.SUN+" "+r.OTA).toLowerCase();
-      return hay.includes(q);
+
+      for(var i=0;i<terms.length;i++){
+        var t = terms[i];
+        if(!t) continue;
+
+        // Saturday / Sunday keywords -> require non-blank SAT/SUN
+        if(t === "saturday" || t === "sat"){
+          if(!satVal) return false;
+          continue;
+        }
+        if(t === "sunday" || t === "sun"){
+          if(!sunVal) return false;
+          continue;
+        }
+
+        // Default: substring match across fields
+        if(!hay.includes(t)) return false;
+      }
+      return true;
     });
+
     render(filtered);
   }
 
