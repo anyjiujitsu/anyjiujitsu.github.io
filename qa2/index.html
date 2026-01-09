@@ -1411,6 +1411,7 @@ body {
 /* Dot appears before caret when selected */
 .year-btn.has-selection .year-caret::before,
 .state-btn.has-selection .state-caret::before,
+.state-caret.has-selection::before,
 .event-btn.has-selection .event-caret::before {
   content: "";
   width: 10px;
@@ -3193,7 +3194,12 @@ body { overflow-y: auto; }
   function updateGuestsGlow(){
     var sb = document.getElementById('stateBtn');
     if(!sb) return;
-    sb.classList.toggle('has-selection', !!guestsMode);
+    var hasSel = !!guestsMode;
+    sb.classList.toggle('has-selection', hasSel);
+    // Also toggle on the caret itself to make the green indicator reliable
+    // even if button-level class selectors are overridden elsewhere.
+    var caret = sb.querySelector('.state-caret');
+    if(caret) caret.classList.toggle('has-selection', hasSel);
   }
 
   function syncAllPillsGlow(){
