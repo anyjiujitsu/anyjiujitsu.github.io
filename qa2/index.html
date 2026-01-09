@@ -3520,6 +3520,30 @@ function applySearch(){
     searchInput.addEventListener("input", applySearch);
   }
 
+  // Index203: Mobile cursor should start at the very beginning when tapping into an empty search.
+  // iOS Safari can sometimes place the caret after the first glyph of the placeholder; we force 0,0.
+  function forceCaretAtStartIfEmpty(el){
+    if(!el) return;
+    var v = (el.value || "");
+    if(v.length) return; // only intervene when empty (placeholder showing)
+
+    var set0 = function(){
+      try{ el.setSelectionRange(0, 0); }catch(e){}
+    };
+
+    // Run after focus settles (covers iOS + Android).
+    try{ requestAnimationFrame(set0); }catch(e){ setTimeout(set0, 0); }
+    setTimeout(set0, 0);
+    setTimeout(set0, 30);
+  }
+
+  if(searchInput){
+    // focus + touch/click cover desktop and mobile tap behaviors
+    searchInput.addEventListener('focus', function(){ forceCaretAtStartIfEmpty(searchInput); });
+    searchInput.addEventListener('click', function(){ forceCaretAtStartIfEmpty(searchInput); });
+    searchInput.addEventListener('touchstart', function(){ forceCaretAtStartIfEmpty(searchInput); }, {passive:true});
+  }
+
   (async function init(){
     try{
       var filename = "directory.csv";
