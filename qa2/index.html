@@ -2909,57 +2909,19 @@ body { overflow-y: auto; }
   .group-label{
     transform: translateX(30px) !important;
   }
+</style>
 
 
-/* index205: iOS cursor/caret fix
-   iOS Safari can offset the caret when an input is inside a transformed ancestor (scale/translate).
-   Our nav cluster was scaled via transform on .head-search. On iOS only, remove transforms and instead size controls explicitly. */
-.is-ios .head-search{
-  transform: none !important;
-  -webkit-transform: none !important;
-}
-
-/* keep the same visual size as the previous scale(2) on iOS */
-.is-ios .head-search-box{
-  transform: none !important;
-  -webkit-transform: none !important;
-  height: 56px !important;
-  padding: 0 20px !important;
-  gap: 12px !important;
-  max-width: 580px !important;
-  width: min(580px, 88vw) !important;
-}
-.is-ios .head-search-icon{
-  width: 28px !important;
-  height: 28px !important;
-}
-.is-ios .head-search-icon svg{
-  width: 28px !important;
-  height: 28px !important;
-}
-.is-ios #nlSearch{
-  font-size: 24px !important;
-  line-height: 1.1 !important;
-}
-.is-ios .head-search-clear{
-  font-size: 32px !important;
-  padding: 0 6px !important;
-}
-
-/* Scale the filter pills (States / OpenMat / Guests) to match the former scale(2) on iOS */
-.is-ios .event-btn{
-  height: 56px !important;
-  padding: 0 20px !important;
-  font-size: 24px !important;
-}
-.is-ios .event-caret{
-  font-size: 20px !important;
-}
-
-/* If the search pill was previously nudged with translateX, use margin instead (avoid transforms on iOS). */
-.is-ios .head-search-box{
-  margin-left: 16px !important;
-}
+<style>
+  /* Index207: iOS Safari caret can render ~1 glyph to the right inside scaled/flex headers.
+     Apply a tiny optical offset so caret and glyphs align at position 0.
+     This does NOT change the search pill's outer layout. */
+  @supports (-webkit-touch-callout: none) {
+    #nlSearch{
+      padding-left: 0.6ch;
+      text-indent: -0.6ch;
+    }
+  }
 </style>
 
 </head>
@@ -3034,15 +2996,6 @@ body { overflow-y: auto; }
 </div>
 </div>
 <script>
-// index205: detect iOS (Safari) and add class to avoid iOS caret offset caused by CSS transforms
-(function(){
-  var ua = navigator.userAgent || '';
-  var isIOS = /iP(hone|ad|od)/.test(ua) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
-  if(isIOS){
-    document.documentElement.classList.add('is-ios');
-  }
-})();
-
 (function(){
   // Use existing header search if present, otherwise fall back.
   var searchInput = document.getElementById('nlSearch') || document.getElementById('searchInput');
