@@ -2911,20 +2911,6 @@ body { overflow-y: auto; }
   }
 </style>
 
-
-<!-- Index220: iOS caret fix without layout changes -->
-<style>
-@media (max-width: 900px){
-  @supports (-webkit-touch-callout: none){
-    /* iOS Safari: avoid caret rendering offset caused by transforming the search pill */
-    .head-search-box{
-      transform: none !important;
-      margin-left: 16px !important; /* preserves the prior translateX(16px) visual position */
-    }
-  }
-}
-</style>
-
 </head>
 <body>
 <div class="header-freeze">
@@ -2948,7 +2934,7 @@ body { overflow-y: auto; }
 <path d="M10 18a8 8 0 1 1 5.292-14.001A8 8 0 0 1 10 18Zm11.707 2.293-5.4-5.4a10 10 0 1 0-1.414 1.414l5.4 5.4a1 1 0 0 0 1.414-1.414Z"></path>
 </svg>
 </span>
-<input autocomplete="off" id="nlSearch" placeholder='Filter (e.g., "sunday", "maine", "gym name")' spellcheck="false" type="text"/>
+<input autocomplete="off" id="nlSearch" placeholder='Filter (e.g., "boston", "maine", "gym name")' spellcheck="false" type="text"/>
 <button aria-label="Clear filter" class="head-search-clear" title="Clear" type="button">×</button>
 </div>
 <div aria-label="Filter by state" class="event-filter">
@@ -3546,31 +3532,91 @@ function applySearch(){
     searchInput.addEventListener("input", applySearch);
   }
 
-  // Index203: Mobile cursor should start at the very beginning when tapping into an empty search.
-  // iOS Safari can sometimes place the caret after the first glyph of the placeholder; we force 0,0.
-  function forceCaretAtStartIfEmpty(el){
-    if(!el) return;
-    var v = (el.value || "");
-    if(v.length) return; // only intervene when empty (placeholder showing)
+  // Index203/221: iOS Safari can render the caret one glyph to the right when an input shows a placeholder.
+// We fix the *visual* caret by temporarily removing the placeholder while focused on iOS (no layout changes).
+var __isIOS = (function(){
+  var ua = navigator.userAgent || "";
+  var iOS = /iP(hone|od|ad)/.test(ua);
+  // iPadOS reports as Mac; detect touch-capable Mac as iPad
+  var iPadOS = (navigator.platform === "MacIntel" && navigator.maxTouchPoints && navigator.maxTouchPoints > 1);
+  return iOS || iPadOS;
+})();
 
-    var set0 = function(){
-      try{ el.setSelectionRange(0, 0); }catch(e){}
-    };
+function stashPlaceholder(el){
+  if(!el) return;
+  if(el.__phStored) return;
+  el.__phStored = true;
+  el.__phValue = el.getAttribute("placeholder") || "";
+}
 
-    // Run after focus settles (covers iOS + Android).
-    try{ requestAnimationFrame(set0); }catch(e){ setTimeout(set0, 0); }
-    setTimeout(set0, 0);
-    setTimeout(set0, 30);
+function removePlaceholderWhileFocused(el){
+  if(!__isIOS || !el) return;
+  stashPlaceholder(el);
+  // Only remove placeholder when empty; that is when iOS shows the buggy caret offset.
+  if((el.value || "").length === 0){
+    el.setAttribute("placeholder", "");
   }
+}
 
-  if(searchInput){
-    // focus + touch/click cover desktop and mobile tap behaviors
-    searchInput.addEventListener('focus', function(){ forceCaretAtStartIfEmpty(searchInput); });
-    searchInput.addEventListener('click', function(){ forceCaretAtStartIfEmpty(searchInput); });
-    searchInput.addEventListener('touchstart', function(){ forceCaretAtStartIfEmpty(searchInput); }, {passive:true});
+function restorePlaceholderIfEmpty(el){
+  if(!__isIOS || !el) return;
+  if(!el.__phStored) return;
+  if((el.value || "").length === 0){
+    el.setAttribute("placeholder", el.__phValue || "");
+  }else{
+    // keep placeholder empty while typed; normal browser behavior won't show it anyway
+    el.setAttribute("placeholder", el.__phValue || "");
   }
+}
 
-  (async function init(){
+// Keep the logical caret at 0 when empty (harmless everywhere), but iOS needs the placeholder removal above
+// for the caret to *render* at the true start.
+function forceCaretAtStartIfEmpty(el){
+  if(!el) return;
+  var v = (el.value || "");
+  if(v.length) return;
+
+  var set0 = function(){
+    try{ el.setSelectionRange(0, 0); }catch(e){}
+    try{ el.scrollLeft = 0; }catch(e){}
+  };
+
+  try{ requestAnimationFrame(set0); }catch(e){ setTimeout(set0, 0); }
+  setTimeout(set0, 0);
+  setTimeout(set0, 30);
+}
+
+if(searchInput){
+  // focus + touch/click cover desktop and mobile tap behaviors
+  searchInput.addEventListener('focus', function(){
+    removePlaceholderWhileFocused(searchInput);
+    forceCaretAtStartIfEmpty(searchInput);
+  });
+  searchInput.addEventListener('click', function(){
+    removePlaceholderWhileFocused(searchInput);
+    forceCaretAtStartIfEmpty(searchInput);
+  });
+  searchInput.addEventListener('touchstart', function(){
+    removePlaceholderWhileFocused(searchInput);
+    forceCaretAtStartIfEmpty(searchInput);
+  }, {passive:true});
+
+  searchInput.addEventListener('blur', function(){
+    // Restore placeholder once focus leaves (keeps helper text behavior identical to desktop).
+    restorePlaceholderIfEmpty(searchInput);
+  });
+
+  // If the field is programmatically cleared while focused on iOS, keep placeholder removed to avoid caret bug.
+  searchInput.addEventListener('input', function(){
+    if(__isIOS && document.activeElement === searchInput){
+      if((searchInput.value || "").length === 0){
+        searchInput.setAttribute("placeholder", "");
+      }
+    }
+  });
+}
+
+(async function init(){
     try{
       var filename = "directory.csv";
       var paths = csvPathCandidates(filename);
