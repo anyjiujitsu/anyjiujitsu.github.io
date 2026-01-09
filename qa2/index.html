@@ -2911,6 +2911,18 @@ body { overflow-y: auto; }
   }
 </style>
 
+<style>
+@supports (-webkit-touch-callout: none) {
+  /* iOS: avoid caret offset bug from transformed ancestors by replacing transform-scaling with zoom-scaling. */
+  .head-search{
+    transform: none !important;
+    zoom: 2;
+    margin-left: -28px !important;
+    transform-origin: bottom left !important;
+  }
+}
+</style>
+
 </head>
 <body>
 <div class="header-freeze">
@@ -2934,7 +2946,7 @@ body { overflow-y: auto; }
 <path d="M10 18a8 8 0 1 1 5.292-14.001A8 8 0 0 1 10 18Zm11.707 2.293-5.4-5.4a10 10 0 1 0-1.414 1.414l5.4 5.4a1 1 0 0 0 1.414-1.414Z"></path>
 </svg>
 </span>
-<input autocomplete="off" id="nlSearch" placeholder='Filter (e.g., "boston", "maine", "gym name")' spellcheck="false" type="text"/>
+<input autocomplete="off" id="nlSearch" placeholder='Filter (e.g., "bos", "maine", "gym name")' spellcheck="false" type="text"/>
 <button aria-label="Clear filter" class="head-search-clear" title="Clear" type="button">×</button>
 </div>
 <div aria-label="Filter by state" class="event-filter">
@@ -3756,120 +3768,5 @@ function applySearch(){
 
 })();
 </script>
-<script>
-// Index227: iOS Safari caret fix for the natural-language search.
-// iOS sometimes renders the caret one character to the right when an input sits inside a
-// transformed/filtered header. SelectionRange calls may not move the *rendered* caret.
-// Workaround: on iOS only, create a fixed-position overlay input (outside transformed ancestors)
-// that handles text entry + caret, then sync its value back to #nlSearch so existing filters work.
-(function(){
-  var ua = navigator.userAgent || "";
-  var isIOS = /iP(hone|od|ad)/.test(ua) || (ua.indexOf('Mac')>-1 && 'ontouchend' in document);
-  if(!isIOS) return;
-
-  var real = document.getElementById('nlSearch');
-  if(!real) return;
-
-  var clearBtn = document.querySelector('.head-search-clear');
-  var overlay = null;
-  var active = false;
-
-  function placeOverlay(){
-    if(!overlay) return;
-    var r = real.getBoundingClientRect();
-    overlay.style.left = r.left + 'px';
-    overlay.style.top = r.top + 'px';
-    overlay.style.width = r.width + 'px';
-    overlay.style.height = r.height + 'px';
-  }
-
-  function sync(trigger){
-    if(!overlay) return;
-    if(real.value !== overlay.value) real.value = overlay.value;
-    if(trigger) real.dispatchEvent(new Event('input', {bubbles:true}));
-  }
-
-  function deactivate(){
-    if(!active) return;
-    active = false;
-    real.style.caretColor = '';
-    real.style.color = '';
-    if(overlay && overlay.parentNode) overlay.parentNode.removeChild(overlay);
-    overlay = null;
-  }
-
-  function activate(){
-    if(active) return;
-    active = true;
-
-    var cs = window.getComputedStyle(real);
-    overlay = document.createElement('input');
-    overlay.type = real.type || 'text';
-    overlay.autocomplete = 'off';
-    overlay.spellcheck = real.spellcheck;
-    overlay.placeholder = real.getAttribute('placeholder') || '';
-    overlay.value = real.value || '';
-    overlay.setAttribute('aria-label', real.getAttribute('aria-label') || 'Filter');
-
-    overlay.style.position = 'fixed';
-    overlay.style.zIndex = '9999';
-    overlay.style.background = 'transparent';
-    overlay.style.border = 'none';
-    overlay.style.outline = 'none';
-    overlay.style.margin = '0';
-    overlay.style.padding = cs.padding;
-    overlay.style.font = cs.font;
-    overlay.style.letterSpacing = cs.letterSpacing;
-    overlay.style.lineHeight = cs.lineHeight;
-    overlay.style.color = cs.color;
-    overlay.style.caretColor = (cs.caretColor && cs.caretColor !== 'auto') ? cs.caretColor : cs.color;
-    overlay.style.boxSizing = 'border-box';
-    overlay.style.webkitAppearance = 'none';
-    overlay.style.appearance = 'none';
-
-    document.body.appendChild(overlay);
-    placeOverlay();
-
-    // Hide real caret/text but keep layout untouched.
-    real.style.caretColor = 'transparent';
-    real.style.color = 'transparent';
-    real.blur();
-
-    overlay.addEventListener('input', function(){ sync(true); }, {passive:true});
-    overlay.addEventListener('blur', function(){ sync(true); deactivate(); });
-
-    // Focus overlay and force caret to the very beginning.
-    setTimeout(function(){
-      try{ overlay.focus({preventScroll:true}); }catch(e){ try{ overlay.focus(); }catch(_){} }
-      try{ overlay.setSelectionRange(0,0); }catch(e){}
-    }, 0);
-  }
-
-  // Keep overlay aligned during scroll/resize.
-  window.addEventListener('scroll', function(){ if(active) placeOverlay(); }, {passive:true});
-  window.addEventListener('resize', function(){ if(active) placeOverlay(); }, {passive:true});
-
-  // Activate on iOS tap/focus. Capture touchstart to stop iOS placing a native caret in the real input.
-  real.addEventListener('touchstart', function(e){
-    if(active) return;
-    e.preventDefault();
-    activate();
-  }, {passive:false});
-
-  real.addEventListener('focus', function(){ if(!active) activate(); }, {passive:true});
-  real.addEventListener('click', function(){ if(!active) activate(); }, {passive:true});
-
-  if(clearBtn){
-    clearBtn.addEventListener('click', function(){
-      if(active && overlay){
-        overlay.value = '';
-        sync(true);
-        setTimeout(function(){ try{ overlay.focus({preventScroll:true}); }catch(e){ try{ overlay.focus(); }catch(_){} } }, 0);
-      }
-    }, true);
-  }
-})();
-</script>
-
 </body>
 </html>
