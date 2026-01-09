@@ -2611,6 +2611,17 @@ body { overflow-y: auto; }
   max-width: 175px !important; /* room for icon + gap */
 }
 
+
+/* iOS caret fix: use a fixed-position overlay input while focused (prevents transformed caret drift) */
+.ios-overlay-active #nlSearch{
+  color: transparent !important;
+  caret-color: transparent !important;
+  -webkit-text-fill-color: transparent !important;
+}
+.ios-overlay-active #nlSearch::placeholder{
+  color: transparent !important;
+  -webkit-text-fill-color: transparent !important;
+}
 </style>
 <style>
 /* Shift OTA value left slightly without affecting other columns */
@@ -2899,86 +2910,6 @@ body { overflow-y: auto; }
   }
 </style>
 
-<script>
-  // Add an iOS flag for targeted CSS.
-  (function(){
-    var ua = navigator.userAgent || '';
-    var isIOS = /iP(hone|ad|od)/.test(ua);
-    if(isIOS) document.documentElement.classList.add('ios');
-  })();
-</script>
-
-<style>
-  /*
-    iOS caret bug fix (root cause verified via debugCaret overlay):
-    iOS Safari can draw the text caret 1 glyph to the right when an <input>
-    is inside a transformed ancestor (e.g., .head-search { transform: scale(2) ... }).
-    Solution: On iOS, remove the transform from .head-search and instead scale the
-    individual pills with explicit sizing (non-transform), so the visual layout remains
-    the same while the caret behaves normally.
-  */
-  html.ios .head-search{ transform: none !important; }
-
-  /* Restore the same 2x visual size without transforms */
-  html.ios .head-search-box{
-    height: 56px !important;              /* 28px * 2 */
-    padding: 0 20px !important;           /* 10px * 2 */
-    gap: 12px !important;                 /* 6px * 2 */
-    max-width: 572px !important;          /* 286px * 2 (matches your latest width tweaks) */
-    width: min(572px, 88vw) !important;
-    border-radius: 999px !important;
-  }
-  html.ios .head-search-icon{
-    width: 28px !important;
-    height: 28px !important;
-  }
-  html.ios .head-search-icon svg{
-    width: 28px !important;
-    height: 28px !important;
-  }
-  html.ios #nlSearch{
-    font-size: 24px !important;           /* 12px * 2 */
-    line-height: 1.1 !important;
-  }
-  html.ios .head-search-clear{
-    font-size: 32px !important;           /* 16px * 2 */
-  }
-
-  /* Pills */
-  html.ios .state-btn,
-  html.ios .event-btn,
-  html.ios .year-btn,
-  html.ios .guest-btn{
-    height: 56px !important;
-    padding: 0 24px !important;
-    font-size: 24px !important;
-  }
-
-  /* Dropdown menus scale to match */
-  html.ios .state-menu,
-  html.ios .event-menu,
-  html.ios .year-menu,
-  html.ios .guest-menu{
-    transform: none !important;
-    font-size: 24px !important;
-  }
-
-  /* Ensure the green bar has enough vertical room for the now truly 2x pills */
-  html.ios .sticky-head{
-    padding-top: 28px !important;
-    padding-bottom: 28px !important;
-  }
-
-  /* Keep the controls aligned vertically on iOS */
-  html.ios .head-search,
-  html.ios .state-filter,
-  html.ios .event-filter,
-  html.ios .year-filter,
-  html.ios .guest-filter{
-    bottom: 6px !important;
-  }
-</style>
-
 </head>
 <body>
 <div class="header-freeze">
@@ -3002,7 +2933,7 @@ body { overflow-y: auto; }
 <path d="M10 18a8 8 0 1 1 5.292-14.001A8 8 0 0 1 10 18Zm11.707 2.293-5.4-5.4a10 10 0 1 0-1.414 1.414l5.4 5.4a1 1 0 0 0 1.414-1.414Z"></path>
 </svg>
 </span>
-<input autocomplete="off" id="nlSearch" placeholder='Filter (e.g., "bos", "maine", "gym name")' spellcheck="false" type="text"/>
+<input autocomplete="off" id="nlSearch" placeholder='Filter (e.g., "boston", "maine", "gym name")' spellcheck="false" type="text"/>
 <button aria-label="Clear filter" class="head-search-clear" title="Clear" type="button">×</button>
 </div>
 <div aria-label="Filter by state" class="event-filter">
@@ -3055,6 +2986,195 @@ body { overflow-y: auto; }
   // Use existing header search if present, otherwise fall back.
   var searchInput = document.getElementById('nlSearch') || document.getElementById('searchInput');
   var clearBtn = document.querySelector('.head-search-clear') || document.getElementById('clearBtn');
+
+  // iOS Safari caret fix:
+  // The header search area is transformed (scale/translate) for layout; iOS Safari mispositions the caret
+  // inside transformed inputs. We solve this by temporarily using an overlay <input> that is NOT inside
+  // any transformed ancestor, while syncing its value back to the real input.
+  var _iosOverlay = null;
+  var _iosOverlayActive = false;
+
+  function _parseScaleFromTransform(t){
+    // handles: matrix(a,b,c,d,tx,ty) or matrix3d(...)
+    if(!t || t === 'none') return 1;
+    var m = t.match(/matrix\(([^)]+)\)/);
+    if(m){
+      var parts = m[1].split(',').map(function(s){ return parseFloat(s.trim()); });
+      if(parts.length >= 4 && isFinite(parts[0])) return Math.abs(parts[0]) || 1;
+    }
+    var m3 = t.match(/matrix3d\(([^)]+)\)/);
+    if(m3){
+      var p = m3[1].split(',').map(function(s){ return parseFloat(s.trim()); });
+      // scaleX is p[0], scaleY is p[5]
+      if(p.length >= 6 && isFinite(p[0])) return Math.abs(p[0]) || 1;
+    }
+    return 1;
+  }
+
+  function _findEffectiveScale(el){
+    var node = el;
+    while(node && node !== document.documentElement){
+      var tr = window.getComputedStyle(node).transform;
+      if(tr && tr !== 'none'){
+        return _parseScaleFromTransform(tr);
+      }
+      node = node.parentElement;
+    }
+    return 1;
+  }
+
+  function _copyScaledBoxStyles(fromEl, toEl, scale){
+    var cs = window.getComputedStyle(fromEl);
+    // font metrics
+    var fs = parseFloat(cs.fontSize) || 16;
+    var lh = cs.lineHeight === 'normal' ? (fs * 1.2) : (parseFloat(cs.lineHeight) || (fs * 1.2));
+    toEl.style.fontFamily = cs.fontFamily;
+    toEl.style.fontWeight = cs.fontWeight;
+    toEl.style.fontStyle  = cs.fontStyle;
+    toEl.style.letterSpacing = cs.letterSpacing;
+    toEl.style.fontSize = (fs * scale) + 'px';
+    toEl.style.lineHeight = (lh * scale) + 'px';
+
+    // padding/border radius
+    function px(v){ return (parseFloat(v) || 0); }
+    toEl.style.paddingTop    = (px(cs.paddingTop) * scale) + 'px';
+    toEl.style.paddingRight  = (px(cs.paddingRight) * scale) + 'px';
+    toEl.style.paddingBottom = (px(cs.paddingBottom) * scale) + 'px';
+    toEl.style.paddingLeft   = (px(cs.paddingLeft) * scale) + 'px';
+    toEl.style.borderRadius  = (px(cs.borderTopLeftRadius) * scale) + 'px';
+    toEl.style.border = cs.border;
+    toEl.style.outline = 'none';
+    toEl.style.boxShadow = 'none';
+    toEl.style.background = cs.backgroundColor || '#fff';
+    toEl.style.color = cs.color;
+    toEl.style.caretColor = cs.caretColor || 'auto';
+    // iOS needs this for consistent rendering
+    toEl.style.webkitAppearance = 'none';
+    toEl.style.appearance = 'none';
+  }
+
+  function _activateIosOverlay(){
+    if(!searchInput || searchInput.id !== 'nlSearch') return;
+    if(_iosOverlayActive) return;
+
+    var ua = navigator.userAgent || '';
+    var isIOS = /iP(hone|od|ad)/.test(ua) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+    if(!isIOS) return;
+
+    _iosOverlayActive = true;
+    document.body.classList.add('ios-overlay-active');
+
+    // create overlay once
+    _iosOverlay = document.createElement('input');
+    _iosOverlay.type = 'search';
+    _iosOverlay.autocomplete = 'off';
+    _iosOverlay.autocapitalize = 'none';
+    _iosOverlay.spellcheck = false;
+    _iosOverlay.inputMode = searchInput.inputMode || '';
+    _iosOverlay.value = searchInput.value || '';
+    _iosOverlay.placeholder = searchInput.placeholder || '';
+    _iosOverlay.setAttribute('aria-label', searchInput.getAttribute('aria-label') || 'Filter');
+
+    // place above everything (but still inside page)
+    _iosOverlay.style.position = 'fixed';
+    _iosOverlay.style.zIndex = '99999';
+    _iosOverlay.style.margin = '0';
+    _iosOverlay.style.border = 'none';
+
+    // size/position
+    var rect = searchInput.getBoundingClientRect();
+    _iosOverlay.style.left = rect.left + 'px';
+    _iosOverlay.style.top = rect.top + 'px';
+    _iosOverlay.style.width = rect.width + 'px';
+    _iosOverlay.style.height = rect.height + 'px';
+
+    // copy styles, scaled to match transformed visual size
+    var scale = _findEffectiveScale(searchInput);
+    _copyScaledBoxStyles(searchInput, _iosOverlay, scale);
+
+    document.body.appendChild(_iosOverlay);
+
+    // keep in sync
+    var syncing = false;
+    _iosOverlay.addEventListener('input', function(){
+      if(syncing) return;
+      syncing = true;
+      searchInput.value = _iosOverlay.value;
+      // trigger existing listeners
+      try{
+        searchInput.dispatchEvent(new Event('input', { bubbles:true }));
+      }catch(e){
+        var ev = document.createEvent('Event'); ev.initEvent('input', true, true);
+        searchInput.dispatchEvent(ev);
+      }
+      syncing = false;
+    });
+
+    // when overlay blurs, remove it and restore normal input rendering
+    function teardown(){
+      if(!_iosOverlayActive) return;
+      _iosOverlayActive = false;
+      document.body.classList.remove('ios-overlay-active');
+      try{
+        searchInput.value = _iosOverlay.value;
+      }catch(e){}
+      if(_iosOverlay && _iosOverlay.parentNode){
+        _iosOverlay.parentNode.removeChild(_iosOverlay);
+      }
+      _iosOverlay = null;
+    }
+
+    _iosOverlay.addEventListener('blur', teardown);
+
+    // keep overlay aligned on resize/scroll while focused
+    function reposition(){
+      if(!_iosOverlay) return;
+      var r = searchInput.getBoundingClientRect();
+      _iosOverlay.style.left = r.left + 'px';
+      _iosOverlay.style.top = r.top + 'px';
+      _iosOverlay.style.width = r.width + 'px';
+      _iosOverlay.style.height = r.height + 'px';
+    }
+    window.addEventListener('scroll', reposition, { passive:true });
+    window.addEventListener('resize', reposition);
+
+    // focus and put caret at the TRUE beginning (position 0)
+    requestAnimationFrame(function(){
+      try{
+        _iosOverlay.focus({ preventScroll:true });
+      }catch(e){
+        _iosOverlay.focus();
+      }
+      try{
+        _iosOverlay.setSelectionRange(0,0);
+      }catch(e){}
+    });
+
+    // also make sure tapping the clear button clears overlay
+    if(clearBtn){
+      clearBtn.addEventListener('click', function(){
+        if(_iosOverlay){
+          _iosOverlay.value = '';
+          try{ _iosOverlay.setSelectionRange(0,0); }catch(e){}
+        }
+      }, { passive:true });
+    }
+  }
+
+  // On iOS, intercept taps so the overlay handles typing/caret (no layout changes).
+  if(searchInput && searchInput.id === 'nlSearch'){
+    searchInput.addEventListener('touchstart', function(e){
+      // prevent iOS from focusing the transformed input
+      e.preventDefault();
+      _activateIosOverlay();
+    }, { passive:false });
+
+    // fallback: if focus happens (external keyboard), still enforce caret at 0
+    searchInput.addEventListener('focus', function(){
+      // desktop behavior stays normal; iOS overlay will handle touch focus
+      try{ searchInput.setSelectionRange(0,0); }catch(e){}
+    });
+  }
 
   // Directory icons (placeholders for now) — sized/opacity/placement via CSS to match reference
   var DIR_ICONS = {
