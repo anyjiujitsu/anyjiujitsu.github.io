@@ -963,7 +963,25 @@ display:flex;
     :root{ --search-muted: rgba(0,0,0,0.42); }
     #nlSearch::placeholder{ color: var(--search-muted) !important; }
 
-    .year-btn, .state-btn{
+    
+    /* Index218: iOS caret bug workaround — replace native placeholder with overlay text (no layout changes) */
+    .nlsearch-wrap{position:relative;flex:1;width:100%;}
+    .nlsearch-wrap #nlSearch{position:relative;z-index:2;}
+    .nl-placeholder{
+      position:absolute;
+      left:0;
+      top:50%;
+      transform:translateY(-50%);
+      z-index:1;
+      pointer-events:none;
+      color:rgba(0,0,0,0.42);
+      font:inherit;
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
+      max-width:100%;
+    }
+.year-btn, .state-btn{
   height: 40px;
   font-size: 13px;
       color: var(--search-muted) !important;
@@ -2611,6 +2629,18 @@ body { overflow-y: auto; }
   max-width: 175px !important; /* room for icon + gap */
 }
 
+
+
+/* === Index204: iOS caret fix ===
+   iOS Safari misplaces the text caret when an input is inside any transformed ancestor (even translateX).
+   We remove transform on the search pill wrapper for mobile and use margin instead (same visual position). */
+@media (max-width: 700px){
+  .head-search-box{
+    transform: none !important;
+    margin-left: 16px !important; /* matches prior translateX(16px) */
+  }
+}
+
 </style>
 <style>
 /* Shift OTA value left slightly without affecting other columns */
@@ -2922,7 +2952,7 @@ body { overflow-y: auto; }
 <path d="M10 18a8 8 0 1 1 5.292-14.001A8 8 0 0 1 10 18Zm11.707 2.293-5.4-5.4a10 10 0 1 0-1.414 1.414l5.4 5.4a1 1 0 0 0 1.414-1.414Z"></path>
 </svg>
 </span>
-<input autocomplete="off" id="nlSearch" placeholder='Filter (e.g., "boston", "maine", "gym name")' spellcheck="false" type="text"/>
+<div class="nlsearch-wrap"><input autocomplete="off" id="nlSearch" spellcheck="false" type="text"/><span id="nlPh" class="nl-placeholder">Filter (e.g., "boston", "maine", "gym name")</span></div>
 <button aria-label="Clear filter" class="head-search-clear" title="Clear" type="button">×</button>
 </div>
 <div aria-label="Filter by state" class="event-filter">
@@ -2974,52 +3004,14 @@ body { overflow-y: auto; }
 (function(){
   // Use existing header search if present, otherwise fall back.
   var searchInput = document.getElementById('nlSearch') || document.getElementById('searchInput');
+  var nlPh = document.getElementById('nlPh');
+  function syncNlPlaceholder(){
+    if(!nlPh || !searchInput) return;
+    var empty = !(searchInput.value && searchInput.value.length);
+    var focused = (document.activeElement === searchInput);
+    nlPh.style.display = (empty && !focused) ? 'block' : 'none';
+  }
   var clearBtn = document.querySelector('.head-search-clear') || document.getElementById('clearBtn');
-
-  // === iOS caret visual fix for header search ===
-  // iOS Safari sometimes renders the caret ~1 character to the RIGHT when an input is inside
-  // transformed/scaled ancestors. We work around this by keeping a leading zero‑width char
-  // in the value *only on iOS*, then stripping it for filtering logic.
-  var __ZWSP = "\u200B";
-  function __isIOS(){
-    try{
-      var ua = navigator.userAgent || "";
-      var plat = navigator.platform || "";
-      var iOS = /iP(hone|ad|od)/.test(plat) || (/Mac/.test(plat) && 'ontouchend' in document);
-      // Exclude iPadOS desktop mode edge-cases by also checking UA for Safari + touch.
-      if(!iOS && /iP(hone|ad|od)/.test(ua)) iOS = true;
-      return !!iOS;
-    }catch(e){ return false; }
-  }
-  var __ios = __isIOS();
-
-  function __setCaret(el, pos){
-    try{
-      el.setSelectionRange(pos, pos);
-    }catch(e){}
-  }
-
-  function __ensureZWSP(){
-    if(!__ios || !searchInput) return;
-    // If user taps into an empty search, put caret visually before the first visible character.
-    if(searchInput.value === ""){
-      searchInput.value = __ZWSP;
-      // rAF + short timeout makes this reliable on iOS
-      requestAnimationFrame(function(){ __setCaret(searchInput, 1); });
-      setTimeout(function(){ __setCaret(searchInput, 1); }, 0);
-      setTimeout(function(){ __setCaret(searchInput, 1); }, 30);
-    }else if(searchInput.value && searchInput.value[0] !== __ZWSP){
-      // If something populates the field without the sentinel, add it (keeps caret alignment).
-      var cur = searchInput.selectionStart || 0;
-      searchInput.value = __ZWSP + searchInput.value;
-      __setCaret(searchInput, cur + 1);
-    }
-  }
-
-  function __stripZWSP(v){
-    return (v || "").replace(/\u200B/g, "");
-  }
-
 
   // Directory icons (placeholders for now) — sized/opacity/placement via CSS to match reference
   var DIR_ICONS = {
@@ -3494,7 +3486,7 @@ body { overflow-y: auto; }
   }
 
 function applySearch(){
-    var raw = __stripZWSP((searchInput && searchInput.value ? searchInput.value : ""));
+    var raw = (searchInput && searchInput.value ? searchInput.value : "");
     var q = raw.trim().toLowerCase();
 
     // Support comma-separated AND terms, e.g. "massachusetts, saturday"
@@ -3558,32 +3550,18 @@ function applySearch(){
     clearBtn.addEventListener("click", function(){
       if(searchInput) searchInput.value="";
       applySearch();
+      syncNlPlaceholder();
       if(searchInput) searchInput.focus();
     });
   }
   if(searchInput){
-    // iOS: ensure caret starts visually at the true beginning (no phantom 1-char gap).
-    if(__ios){
-      ['focus','click','touchstart'].forEach(function(evt){
-        try{ searchInput.addEventListener(evt, __ensureZWSP, {passive:true}); }catch(e){
-          // older Safari
-          searchInput.addEventListener(evt, __ensureZWSP);
-        }
-      });
-      try{
-        searchInput.addEventListener('blur', function(){
-          if(searchInput.value === __ZWSP) searchInput.value = '';
-        }, {passive:true});
-      }catch(e){
-        searchInput.addEventListener('blur', function(){
-          if(searchInput.value === __ZWSP) searchInput.value = '';
-        });
-      }
-    }
-
-    searchInput.addEventListener("input", applySearch);
+    searchInput.addEventListener("input", function(){ applySearch(); syncNlPlaceholder(); });
+    searchInput.addEventListener("focus", syncNlPlaceholder);
+    searchInput.addEventListener("blur", syncNlPlaceholder);
+    searchInput.addEventListener("click", syncNlPlaceholder);
+    searchInput.addEventListener("touchstart", syncNlPlaceholder, {passive:true});
+    syncNlPlaceholder();
   }
-
   (async function init(){
     try{
       var filename = "directory.csv";
