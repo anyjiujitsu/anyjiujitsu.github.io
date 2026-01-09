@@ -963,25 +963,7 @@ display:flex;
     :root{ --search-muted: rgba(0,0,0,0.42); }
     #nlSearch::placeholder{ color: var(--search-muted) !important; }
 
-    
-    
-    .nlsearch-wrap{position:relative;flex:1;width:100%;}
-    .nlsearch-wrap #nlSearch{position:relative;z-index:2;}
-    .nl-placeholder{
-      position:absolute;
-      left:0;
-      top:50%;
-      transform:translateY(-50%);
-      z-index:1;
-      pointer-events:none;
-      color:rgba(0,0,0,0.42);
-      font:inherit;
-      white-space:nowrap;
-      overflow:hidden;
-      text-overflow:ellipsis;
-      max-width:100%;
-    }
-.year-btn, .state-btn{
+    .year-btn, .state-btn{
   height: 40px;
   font-size: 13px;
       color: var(--search-muted) !important;
@@ -2641,19 +2623,6 @@ body { overflow-y: auto; }
   }
 }
 
-
-/* === Index219: iOS Safari caret fix — remove transform from search container ONLY on touch iOS.
-   Keeps the search bar in the exact same visual position by replacing translateX with left. === */
-@supports (-webkit-touch-callout: none) {
-  @media (max-width: 768px) {
-    .head-search{
-      transform: none !important;
-      left: calc(var(--table-start, 64px) + 28px) !important; /* was translateX(28px) */
-      right: auto !important;
-    }
-  }
-}
-
 </style>
 <style>
 /* Shift OTA value left slightly without affecting other columns */
@@ -2942,6 +2911,20 @@ body { overflow-y: auto; }
   }
 </style>
 
+
+<!-- Index220: iOS caret fix without layout changes -->
+<style>
+@media (max-width: 900px){
+  @supports (-webkit-touch-callout: none){
+    /* iOS Safari: avoid caret rendering offset caused by transforming the search pill */
+    .head-search-box{
+      transform: none !important;
+      margin-left: 16px !important; /* preserves the prior translateX(16px) visual position */
+    }
+  }
+}
+</style>
+
 </head>
 <body>
 <div class="header-freeze">
@@ -2965,7 +2948,7 @@ body { overflow-y: auto; }
 <path d="M10 18a8 8 0 1 1 5.292-14.001A8 8 0 0 1 10 18Zm11.707 2.293-5.4-5.4a10 10 0 1 0-1.414 1.414l5.4 5.4a1 1 0 0 0 1.414-1.414Z"></path>
 </svg>
 </span>
-<input autocomplete="off" id="nlSearch" spellcheck="false" type="text" placeholder=\'Filter (e.g. "saturday", "maine", "gym name")\'/>
+<input autocomplete="off" id="nlSearch" placeholder='Filter (e.g., "sunday", "maine", "gym name")' spellcheck="false" type="text"/>
 <button aria-label="Clear filter" class="head-search-clear" title="Clear" type="button">×</button>
 </div>
 <div aria-label="Filter by state" class="event-filter">
@@ -3017,13 +3000,6 @@ body { overflow-y: auto; }
 (function(){
   // Use existing header search if present, otherwise fall back.
   var searchInput = document.getElementById('nlSearch') || document.getElementById('searchInput');
-  var nlPh = document.getElementById('nlPh');
-  function syncNlPlaceholder(){
-    if(!nlPh || !searchInput) return;
-    var empty = !(searchInput.value && searchInput.value.length);
-    var focused = (document.activeElement === searchInput);
-    nlPh.style.display = (empty && !focused) ? 'block' : 'none';
-  }
   var clearBtn = document.querySelector('.head-search-clear') || document.getElementById('clearBtn');
 
   // Directory icons (placeholders for now) — sized/opacity/placement via CSS to match reference
@@ -3563,18 +3539,37 @@ function applySearch(){
     clearBtn.addEventListener("click", function(){
       if(searchInput) searchInput.value="";
       applySearch();
-      syncNlPlaceholder();
       if(searchInput) searchInput.focus();
     });
   }
   if(searchInput){
-    searchInput.addEventListener("input", function(){ applySearch(); syncNlPlaceholder(); });
-    searchInput.addEventListener("focus", syncNlPlaceholder);
-    searchInput.addEventListener("blur", syncNlPlaceholder);
-    searchInput.addEventListener("click", syncNlPlaceholder);
-    searchInput.addEventListener("touchstart", syncNlPlaceholder, {passive:true});
-    syncNlPlaceholder();
+    searchInput.addEventListener("input", applySearch);
   }
+
+  // Index203: Mobile cursor should start at the very beginning when tapping into an empty search.
+  // iOS Safari can sometimes place the caret after the first glyph of the placeholder; we force 0,0.
+  function forceCaretAtStartIfEmpty(el){
+    if(!el) return;
+    var v = (el.value || "");
+    if(v.length) return; // only intervene when empty (placeholder showing)
+
+    var set0 = function(){
+      try{ el.setSelectionRange(0, 0); }catch(e){}
+    };
+
+    // Run after focus settles (covers iOS + Android).
+    try{ requestAnimationFrame(set0); }catch(e){ setTimeout(set0, 0); }
+    setTimeout(set0, 0);
+    setTimeout(set0, 30);
+  }
+
+  if(searchInput){
+    // focus + touch/click cover desktop and mobile tap behaviors
+    searchInput.addEventListener('focus', function(){ forceCaretAtStartIfEmpty(searchInput); });
+    searchInput.addEventListener('click', function(){ forceCaretAtStartIfEmpty(searchInput); });
+    searchInput.addEventListener('touchstart', function(){ forceCaretAtStartIfEmpty(searchInput); }, {passive:true});
+  }
+
   (async function init(){
     try{
       var filename = "directory.csv";
