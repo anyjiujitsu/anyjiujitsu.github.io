@@ -2624,6 +2624,30 @@ body { overflow-y: auto; }
 }
 
 </style>
+
+  <!-- iOS caret rendering fix: avoid transformed ancestor on the text input by using zoom (iOS only) -->
+  <style>
+    /* JS adds html.is-ios on iPhone/iPad Safari */
+    html.is-ios .head-search{
+      /* iOS Safari can mis-render the caret inside inputs when any ancestor has a CSS transform.
+         This project uses transforms on .head-search to scale the pill cluster.
+         On iOS only, swap transform-scaling for zoom (no layout/formatting regressions).
+      */
+      transform: none !important;
+      -webkit-transform: none !important;
+      zoom: 2;
+      transform-origin: bottom left !important;
+      -webkit-transform-origin: bottom left !important;
+    }
+
+    /* Ensure the input itself isn't independently transformed by other rules */
+    html.is-ios #nlSearch{
+      transform: none !important;
+      -webkit-transform: none !important;
+      -webkit-appearance: none;
+      appearance: none;
+    }
+  </style>
 <style>
 /* Shift OTA value left slightly without affecting other columns */
 .card-body .ota,
@@ -2911,19 +2935,6 @@ body { overflow-y: auto; }
   }
 </style>
 
-
-<style>
-  /* Index207: iOS Safari caret can render ~1 glyph to the right inside scaled/flex headers.
-     Apply a tiny optical offset so caret and glyphs align at position 0.
-     This does NOT change the search pill's outer layout. */
-  @supports (-webkit-touch-callout: none) {
-    #nlSearch{
-      padding-left: 0.6ch;
-      text-indent: -0.6ch;
-    }
-  }
-</style>
-
 </head>
 <body>
 <div class="header-freeze">
@@ -2947,7 +2958,7 @@ body { overflow-y: auto; }
 <path d="M10 18a8 8 0 1 1 5.292-14.001A8 8 0 0 1 10 18Zm11.707 2.293-5.4-5.4a10 10 0 1 0-1.414 1.414l5.4 5.4a1 1 0 0 0 1.414-1.414Z"></path>
 </svg>
 </span>
-<input autocomplete="off" id="nlSearch" placeholder='Filter (e.g., "saturday", "maine", "gym name")' spellcheck="false" type="text"/>
+<input autocomplete="off" id="nlSearch" placeholder='Filter (e.g., "boston", "maine", "gym name")' spellcheck="false" type="text"/>
 <button aria-label="Clear filter" class="head-search-clear" title="Clear" type="button">×</button>
 </div>
 <div aria-label="Filter by state" class="event-filter">
@@ -3767,6 +3778,21 @@ function applySearch(){
   // Also re-run after any filter re-render (custom event hook if present)
   document.addEventListener('any:rerender', function(){ setTimeout(ensureSpacer, 0); });
 
+})();
+</script>
+
+<script>
+// Index208: iOS caret bug fix (no layout changes)
+// iOS Safari can render the caret one character to the right when an input is inside any transformed ancestor.
+// We add a class so CSS can swap transform-scaling for zoom on iOS only.
+(function(){
+  try{
+    var ua = navigator.userAgent || '';
+    var isIOS = /iP(hone|od|ad)/.test(ua) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+    if(isIOS){
+      document.documentElement.classList.add('is-ios');
+    }
+  }catch(e){}
 })();
 </script>
 </body>
