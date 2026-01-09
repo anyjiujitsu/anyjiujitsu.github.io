@@ -964,7 +964,7 @@ display:flex;
     #nlSearch::placeholder{ color: var(--search-muted) !important; }
 
     
-    /* Index218: iOS caret bug workaround — replace native placeholder with overlay text (no layout changes) */
+    
     .nlsearch-wrap{position:relative;flex:1;width:100%;}
     .nlsearch-wrap #nlSearch{position:relative;z-index:2;}
     .nl-placeholder{
@@ -2641,6 +2641,19 @@ body { overflow-y: auto; }
   }
 }
 
+
+/* === Index219: iOS Safari caret fix — remove transform from search container ONLY on touch iOS.
+   Keeps the search bar in the exact same visual position by replacing translateX with left. === */
+@supports (-webkit-touch-callout: none) {
+  @media (max-width: 768px) {
+    .head-search{
+      transform: none !important;
+      left: calc(var(--table-start, 64px) + 28px) !important; /* was translateX(28px) */
+      right: auto !important;
+    }
+  }
+}
+
 </style>
 <style>
 /* Shift OTA value left slightly without affecting other columns */
@@ -2952,7 +2965,7 @@ body { overflow-y: auto; }
 <path d="M10 18a8 8 0 1 1 5.292-14.001A8 8 0 0 1 10 18Zm11.707 2.293-5.4-5.4a10 10 0 1 0-1.414 1.414l5.4 5.4a1 1 0 0 0 1.414-1.414Z"></path>
 </svg>
 </span>
-<div class="nlsearch-wrap"><input autocomplete="off" id="nlSearch" spellcheck="false" type="text"/><span id="nlPh" class="nl-placeholder">Filter (e.g., "boston", "maine", "gym name")</span></div>
+<input autocomplete="off" id="nlSearch" spellcheck="false" type="text" placeholder=\'Filter (e.g. "saturday", "maine", "gym name")\'/>
 <button aria-label="Clear filter" class="head-search-clear" title="Clear" type="button">×</button>
 </div>
 <div aria-label="Filter by state" class="event-filter">
