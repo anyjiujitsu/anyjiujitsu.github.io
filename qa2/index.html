@@ -2611,18 +2611,6 @@ body { overflow-y: auto; }
   max-width: 175px !important; /* room for icon + gap */
 }
 
-
-
-/* === Index204: iOS caret fix ===
-   iOS Safari misplaces the text caret when an input is inside any transformed ancestor (even translateX).
-   We remove transform on the search pill wrapper for mobile and use margin instead (same visual position). */
-@media (max-width: 700px){
-  .head-search-box{
-    transform: none !important;
-    margin-left: 16px !important; /* matches prior translateX(16px) */
-  }
-}
-
 </style>
 <style>
 /* Shift OTA value left slightly without affecting other columns */
@@ -2934,7 +2922,7 @@ body { overflow-y: auto; }
 <path d="M10 18a8 8 0 1 1 5.292-14.001A8 8 0 0 1 10 18Zm11.707 2.293-5.4-5.4a10 10 0 1 0-1.414 1.414l5.4 5.4a1 1 0 0 0 1.414-1.414Z"></path>
 </svg>
 </span>
-<input autocomplete="off" id="nlSearch" placeholder='Filter (e.g., "bos", "maine", "gym name")' spellcheck="false" type="text"/>
+<input autocomplete="off" id="nlSearch" placeholder='Filter (e.g., "boston", "maine", "gym name")' spellcheck="false" type="text"/>
 <button aria-label="Clear filter" class="head-search-clear" title="Clear" type="button">×</button>
 </div>
 <div aria-label="Filter by state" class="event-filter">
@@ -3532,30 +3520,6 @@ function applySearch(){
     searchInput.addEventListener("input", applySearch);
   }
 
-  // Index203: Mobile cursor should start at the very beginning when tapping into an empty search.
-  // iOS Safari can sometimes place the caret after the first glyph of the placeholder; we force 0,0.
-  function forceCaretAtStartIfEmpty(el){
-    if(!el) return;
-    var v = (el.value || "");
-    if(v.length) return; // only intervene when empty (placeholder showing)
-
-    var set0 = function(){
-      try{ el.setSelectionRange(0, 0); }catch(e){}
-    };
-
-    // Run after focus settles (covers iOS + Android).
-    try{ requestAnimationFrame(set0); }catch(e){ setTimeout(set0, 0); }
-    setTimeout(set0, 0);
-    setTimeout(set0, 30);
-  }
-
-  if(searchInput){
-    // focus + touch/click cover desktop and mobile tap behaviors
-    searchInput.addEventListener('focus', function(){ forceCaretAtStartIfEmpty(searchInput); });
-    searchInput.addEventListener('click', function(){ forceCaretAtStartIfEmpty(searchInput); });
-    searchInput.addEventListener('touchstart', function(){ forceCaretAtStartIfEmpty(searchInput); }, {passive:true});
-  }
-
   (async function init(){
     try{
       var filename = "directory.csv";
@@ -3757,155 +3721,223 @@ function applySearch(){
 })();
 </script>
 
+<!-- === index230: iOS caret/cursor render fix for #nlSearch (no layout/pill changes) === -->
 <script>
-/* iOS Safari caret rendering fix: temporarily "teleport" the real search input out of transformed ancestors while focused.
-   This preserves your exact styling by copying computed styles, but removes the iOS caret/typing offset bug. */
-(function () {
-  const ua = navigator.userAgent || "";
-  const isIOS = /iP(hone|od|ad)/.test(ua) || (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
-  const isMobile = window.matchMedia && window.matchMedia("(max-width: 820px)").matches;
-  if (!isIOS || !isMobile) return;
+(function(){
+  var ua = navigator.userAgent || '';
+  var isIOS = /iPad|iPhone|iPod/.test(ua) && !window.MSStream;
+  if(!isIOS) return;
 
-  const input = document.getElementById("nlSearch");
-  if (!input) return;
+  function numPx(v){
+    var n = parseFloat(v);
+    return isFinite(n) ? n : 0;
+  }
 
-  let placeholder = null;
-  let original = null;
-  let originalParent = null;
-  let originalNext = null;
+  function mulPx(v, m){
+    if(!v) return v;
+    // handle values like "12px"; ignore non-px.
+    if(v.endsWith('px')) return (numPx(v) * m) + 'px';
+    return v;
+  }
 
-  function copyStylesFromComputed(el, computed) {
-    // Copy only what affects text/caret geometry and visible shape
-    const props = [
-      "boxSizing","font","fontSize","fontFamily","fontWeight","fontStyle","lineHeight",
-      "letterSpacing","textTransform","textRendering",
-      "paddingTop","paddingRight","paddingBottom","paddingLeft",
-      "borderTopWidth","borderRightWidth","borderBottomWidth","borderLeftWidth",
-      "borderTopStyle","borderRightStyle","borderBottomStyle","borderLeftStyle",
-      "borderTopColor","borderRightColor","borderBottomColor","borderLeftColor",
-      "borderRadius","backgroundColor","color","caretColor","textAlign","textIndent"
-    ];
-    props.forEach(p => {
-      try { el.style[p] = computed[p]; } catch(e) {}
+  function computeScale(el, rect){
+    // offsetWidth is untransformed layout width; rect.width is rendered width (after transforms)
+    var ow = el.offsetWidth || 0;
+    if(ow <= 0) return 1;
+    var s = rect.width / ow;
+    // clamp to something sensible
+    if(!isFinite(s) || s <= 0) return 1;
+    return s;
+  }
+
+  function copyStylesScaled(fromEl, toEl, scale){
+    var cs = window.getComputedStyle(fromEl);
+
+    // Core typography
+    toEl.style.fontFamily = cs.fontFamily;
+    toEl.style.fontWeight = cs.fontWeight;
+    toEl.style.fontStyle  = cs.fontStyle;
+    toEl.style.letterSpacing = cs.letterSpacing;
+    toEl.style.textTransform = cs.textTransform;
+
+    // Scale-sensitive bits
+    toEl.style.fontSize = mulPx(cs.fontSize, scale);
+    // line-height can be 'normal' or px
+    toEl.style.lineHeight = cs.lineHeight === 'normal' ? 'normal' : mulPx(cs.lineHeight, scale);
+
+    // Box model
+    toEl.style.boxSizing = 'border-box';
+    toEl.style.paddingTop = mulPx(cs.paddingTop, scale);
+    toEl.style.paddingRight = mulPx(cs.paddingRight, scale);
+    toEl.style.paddingBottom = mulPx(cs.paddingBottom, scale);
+    toEl.style.paddingLeft = mulPx(cs.paddingLeft, scale);
+
+    toEl.style.borderTopWidth = mulPx(cs.borderTopWidth, scale);
+    toEl.style.borderRightWidth = mulPx(cs.borderRightWidth, scale);
+    toEl.style.borderBottomWidth = mulPx(cs.borderBottomWidth, scale);
+    toEl.style.borderLeftWidth = mulPx(cs.borderLeftWidth, scale);
+    toEl.style.borderTopStyle = cs.borderTopStyle;
+    toEl.style.borderRightStyle = cs.borderRightStyle;
+    toEl.style.borderBottomStyle = cs.borderBottomStyle;
+    toEl.style.borderLeftStyle = cs.borderLeftStyle;
+    toEl.style.borderTopColor = cs.borderTopColor;
+    toEl.style.borderRightColor = cs.borderRightColor;
+    toEl.style.borderBottomColor = cs.borderBottomColor;
+    toEl.style.borderLeftColor = cs.borderLeftColor;
+
+    // Border radius may be multiple values; keep as-is and scale px tokens crudely
+    // We'll just set the computed radius string and let iOS handle it.
+    toEl.style.borderRadius = cs.borderRadius;
+
+    // Colors/background
+    toEl.style.color = cs.color;
+    toEl.style.backgroundColor = cs.backgroundColor;
+    toEl.style.backgroundImage = cs.backgroundImage;
+    toEl.style.backgroundRepeat = cs.backgroundRepeat;
+    toEl.style.backgroundSize = cs.backgroundSize;
+    toEl.style.backgroundPosition = cs.backgroundPosition;
+
+    // Other
+    toEl.style.outline = 'none';
+    toEl.style.caretColor = cs.caretColor;
+  }
+
+  function makeOverlay(){
+    var real = document.getElementById('nlSearch');
+    if(!real) return null;
+
+    var rect = real.getBoundingClientRect();
+    var scale = computeScale(real, rect);
+
+    var o = document.createElement('input');
+    o.type = 'text';
+    o.autocomplete = 'off';
+    o.spellcheck = real.spellcheck;
+    o.inputMode = real.inputMode || '';
+    o.setAttribute('enterkeyhint', real.getAttribute('enterkeyhint') || '');
+    o.placeholder = real.placeholder || '';
+    o.value = real.value || '';
+
+    // Position in viewport coordinates (fixed)
+    o.style.position = 'fixed';
+    o.style.left = rect.left + 'px';
+    o.style.top  = rect.top + 'px';
+    o.style.width = rect.width + 'px';
+    o.style.height = rect.height + 'px';
+    o.style.zIndex = '999999';
+
+    copyStylesScaled(real, o, scale);
+
+    // Ensure text aligns exactly like the real input
+    o.style.textAlign = window.getComputedStyle(real).textAlign;
+
+    // Keep overlay transparent to events outside
+    document.body.appendChild(o);
+
+    return { overlay: o, real: real };
+  }
+
+  var active = null;
+
+  function activate(){
+    if(active) return;
+    var real = document.getElementById('nlSearch');
+    if(!real) return;
+
+    // Build overlay and hide the real caret/text without changing layout
+    active = makeOverlay();
+    if(!active) return;
+
+    // Hide real input text/caret but keep it in flow
+    real.style.caretColor = 'transparent';
+    real.style.color = 'transparent';
+    real.style.textShadow = '0 0 0 transparent';
+
+    // Sync overlay -> real
+    active.overlay.addEventListener('input', function(){
+      active.real.value = active.overlay.value;
+      active.real.dispatchEvent(new Event('input', { bubbles: true }));
     });
-    // Recompose border shorthand to avoid missing pieces on some WebKit builds
-    el.style.borderTop = computed.borderTop;
-    el.style.borderRight = computed.borderRight;
-    el.style.borderBottom = computed.borderBottom;
-    el.style.borderLeft = computed.borderLeft;
-  }
 
-  function updateFixedPosition() {
-    if (!original) return;
-    const r = placeholder.getBoundingClientRect();
-    input.style.left = r.left + "px";
-    input.style.top = r.top + "px";
-    input.style.width = r.width + "px";
-    input.style.height = r.height + "px";
-  }
-
-  function enterFixedMode() {
-    if (original) return;
-
-    const cs = window.getComputedStyle(input);
-    const r = input.getBoundingClientRect();
-
-    original = {
-      style: input.getAttribute("style") || ""
+    // Sync real -> overlay if any code updates real value programmatically
+    var syncFromReal = function(){
+      if(!active) return;
+      if(active.overlay.value !== active.real.value) active.overlay.value = active.real.value;
     };
-    originalParent = input.parentNode;
-    originalNext = input.nextSibling;
+    active.real.addEventListener('input', syncFromReal);
 
-    // Placeholder keeps layout exactly the same
-    placeholder = document.createElement("div");
-    placeholder.setAttribute("data-ios-caret-placeholder", "1");
-    placeholder.style.width = r.width + "px";
-    placeholder.style.height = r.height + "px";
-    placeholder.style.display = cs.display === "inline" ? "inline-block" : "block";
-    // Preserve flex/grid sizing behavior
-    placeholder.style.flex = cs.flex;
-    placeholder.style.alignSelf = cs.alignSelf;
-
-    originalParent.insertBefore(placeholder, input);
-
-    // Move the REAL input to body to escape transformed ancestors
-    document.body.appendChild(input);
-
-    // Fix positioning + ensure it sits above everything while typing
-    input.style.position = "fixed";
-    input.style.left = r.left + "px";
-    input.style.top = r.top + "px";
-    input.style.width = r.width + "px";
-    input.style.height = r.height + "px";
-    input.style.zIndex = "9999";
-    input.style.margin = "0";
-    input.style.transform = "none";
-    input.style.webkitTransform = "none";
-    input.style.backfaceVisibility = "hidden";
-    input.style.webkitBackfaceVisibility = "hidden";
-
-    // Copy computed styles so visual appearance/typing size stays identical
-    copyStylesFromComputed(input, cs);
-
-    // Keep caret truly at start on empty focus
-    if (!input.value) {
-      try { input.setSelectionRange(0, 0); } catch(e) {}
-    }
-
-    // Track viewport changes (keyboard/scroll) and keep it aligned
-    window.addEventListener("scroll", updateFixedPosition, { passive: true });
-    window.addEventListener("resize", updateFixedPosition);
-    if (window.visualViewport) {
-      window.visualViewport.addEventListener("scroll", updateFixedPosition, { passive: true });
-      window.visualViewport.addEventListener("resize", updateFixedPosition);
-    }
-  }
-
-  function exitFixedMode() {
-    if (!original) return;
-
-    window.removeEventListener("scroll", updateFixedPosition);
-    window.removeEventListener("resize", updateFixedPosition);
-    if (window.visualViewport) {
-      window.visualViewport.removeEventListener("scroll", updateFixedPosition);
-      window.visualViewport.removeEventListener("resize", updateFixedPosition);
-    }
-
-    // Move back to original DOM location
-    if (originalNext && originalNext.parentNode === originalParent) {
-      originalParent.insertBefore(input, originalNext);
-    } else {
-      originalParent.appendChild(input);
-    }
-
-    // Remove placeholder
-    if (placeholder && placeholder.parentNode) placeholder.parentNode.removeChild(placeholder);
-    placeholder = null;
-
-    // Restore original inline styles exactly
-    input.setAttribute("style", original.style);
-    original = null;
-    originalParent = null;
-    originalNext = null;
-  }
-
-  // Use capture so we run before other focus handlers
-  input.addEventListener("focus", function () {
-    // Defer one frame to let iOS finish focus/scroll into view
-    requestAnimationFrame(() => {
-      enterFixedMode();
-      // Second tick helps after iOS scrolls the page to reveal the field
-      setTimeout(updateFixedPosition, 0);
-      setTimeout(updateFixedPosition, 50);
+    // Cleanup on blur
+    active.overlay.addEventListener('blur', function(){
+      deactivate();
     });
+
+    // Focus overlay and place caret at true beginning for empty, or end for existing
+    active.overlay.focus({ preventScroll: true });
+    try{
+      if((active.overlay.value || '').length === 0){
+        active.overlay.setSelectionRange(0,0);
+      } else {
+        var L = active.overlay.value.length;
+        active.overlay.setSelectionRange(L, L);
+      }
+    } catch(e){}
+  }
+
+  function deactivate(){
+    if(!active) return;
+    var real = active.real;
+
+    // Restore real styles
+    real.style.caretColor = '';
+    real.style.color = '';
+    real.style.textShadow = '';
+
+    // Remove overlay
+    if(active.overlay && active.overlay.parentNode) active.overlay.parentNode.removeChild(active.overlay);
+    active = null;
+  }
+
+  // Activate only on mobile-ish iOS (where the bug occurs)
+  function isSmall(){
+    return (window.innerWidth || 9999) <= 900;
+  }
+
+  // Use pointer/touchstart to intercept before the native caret is painted.
+  document.addEventListener('touchstart', function(e){
+    if(!isSmall()) return;
+    var t = e.target;
+    if(t && t.id === 'nlSearch'){
+      // Prevent native focus/caret paint; use overlay
+      e.preventDefault();
+      activate();
+    }
+  }, { passive: false, capture: true });
+
+  // Fallback: if something focuses it anyway
+  document.addEventListener('focusin', function(e){
+    if(!isSmall()) return;
+    if(e.target && e.target.id === 'nlSearch'){
+      // If focus came from keyboard navigation, swap quickly
+      setTimeout(function(){
+        if(document.activeElement && document.activeElement.id === 'nlSearch'){
+          activate();
+        }
+      }, 0);
+    }
   }, true);
 
-  input.addEventListener("blur", function () {
-    // Let blur finish, then restore
-    setTimeout(exitFixedMode, 0);
-  }, true);
+  // Reposition overlay on rotate/resize/scroll
+  window.addEventListener('resize', function(){
+    if(!active) return;
+    // rebuild with new rect
+    var v = active.overlay.value;
+    deactivate();
+    var real = document.getElementById('nlSearch');
+    if(real) real.value = v;
+    activate();
+  });
+
 })();
 </script>
-
 </body>
 </html>
