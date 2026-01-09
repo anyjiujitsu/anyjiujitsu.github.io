@@ -2899,19 +2899,6 @@ body { overflow-y: auto; }
   }
 </style>
 
-
-<style>
-/* === Block 999: iOS caret workaround (Option A) ===
-   Goal: keep your layout/pills unchanged, but shift where typing STARTS (not the caret)
-   so iOS's transformed-caret render offset no longer appears as a "phantom space".
-   We only apply the shift once the user starts typing (value length > 0). */
-@supports (-webkit-touch-callout: none) {
-  #nlSearch.ios-typing-shift{
-    text-indent: 0.85ch !important; /* ~1 character width */
-  }
-}
-</style>
-
 </head>
 <body>
 <div class="header-freeze">
@@ -2935,7 +2922,7 @@ body { overflow-y: auto; }
 <path d="M10 18a8 8 0 1 1 5.292-14.001A8 8 0 0 1 10 18Zm11.707 2.293-5.4-5.4a10 10 0 1 0-1.414 1.414l5.4 5.4a1 1 0 0 0 1.414-1.414Z"></path>
 </svg>
 </span>
-<input autocomplete="off" id="nlSearch" placeholder='Filter (e.g., "boston", "maine", "gym name")' spellcheck="false" type="text"/>
+<input autocomplete="off" id="nlSearch" placeholder='Filter (e.g., "bos", "maine", "gym name")' spellcheck="false" type="text"/>
 <button aria-label="Clear filter" class="head-search-clear" title="Clear" type="button">×</button>
 </div>
 <div aria-label="Filter by state" class="event-filter">
@@ -2988,43 +2975,6 @@ body { overflow-y: auto; }
   // Use existing header search if present, otherwise fall back.
   var searchInput = document.getElementById('nlSearch') || document.getElementById('searchInput');
   var clearBtn = document.querySelector('.head-search-clear') || document.getElementById('clearBtn');
-  // === iOS typing-start shift (Option A) ===
-  // iOS Safari can render the caret one glyph "ahead" when inputs are inside transformed ancestors.
-  // Rather than fighting caret rendering, we shift the TEXT START slightly to the right *only while typing*
-  // so the typed characters visually line up with the caret.
-  (function(){
-    var ua = navigator.userAgent || "";
-    var isIOS = /iPad|iPhone|iPod/.test(ua) || (ua.includes("Mac") && "ontouchend" in document);
-    if(!isIOS || !searchInput) return;
-
-    function syncClass(){
-      if(!searchInput) return;
-      if((searchInput.value || "").length > 0) searchInput.classList.add('ios-typing-shift');
-      else searchInput.classList.remove('ios-typing-shift');
-    }
-
-    // Ensure first character is shifted immediately (before the first paint after keydown)
-    searchInput.addEventListener('keydown', function(){
-      if((searchInput.value || "").length === 0){
-        searchInput.classList.add('ios-typing-shift');
-      }
-    }, { passive: true });
-
-    // Keep in sync for paste/clear/backspace
-    searchInput.addEventListener('input', syncClass, { passive: true });
-
-    // If your clear button is used, remove shift after clearing
-    if(clearBtn){
-      clearBtn.addEventListener('click', function(){
-        // let existing clear logic run first, then sync
-        setTimeout(syncClass, 0);
-      }, { passive: true });
-    }
-
-    // Initial state
-    syncClass();
-  })();
-
 
   // Directory icons (placeholders for now) — sized/opacity/placement via CSS to match reference
   var DIR_ICONS = {
@@ -3770,5 +3720,197 @@ function applySearch(){
 
 })();
 </script>
+
+<!-- === index245: iOS caret rendering fix (overlay input only over the text field; no layout changes) === -->
+<style>
+  /* Overlay input lives in the viewport; it only appears on iOS mobile when tapping the search field */
+  #nlSearchOverlay{
+    position: fixed;
+    z-index: 2147483647;
+    border: 0;
+    outline: none;
+    background: transparent;
+    padding: 0;
+    margin: 0;
+    border-radius: 0;
+    box-shadow: none;
+    -webkit-appearance: none;
+    appearance: none;
+    caret-color: currentColor;
+  }
+  #nlSearchOverlay::placeholder{ opacity: 1; }
+  /* While overlay is active, hide the real input's text/caret to prevent double-render overlap */
+  .ios-nl-overlay-active #nlSearch{
+    color: transparent !important;
+    caret-color: transparent !important;
+    -webkit-text-fill-color: transparent !important;
+  }
+  .ios-nl-overlay-active #nlSearch::placeholder{
+    color: transparent !important;
+  }
+</style>
+
+<script>
+(function(){
+  const isIOS = (() => {
+    const ua = navigator.userAgent || "";
+    const iOSLike = /iPad|iPhone|iPod/.test(ua);
+    const iPadOS13Plus = (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
+    return iOSLike || iPadOS13Plus;
+  })();
+
+  const isMobileWidth = () => window.matchMedia && window.matchMedia("(max-width: 900px)").matches;
+
+  if(!isIOS) return;
+
+  const real = document.getElementById("nlSearch");
+  if(!real) return;
+
+  let overlay = null;
+
+  function getScaleFromTransform(el){
+    if(!el) return 1;
+    const t = getComputedStyle(el).transform;
+    if(!t || t === "none") return 1;
+    const m = t.match(/matrix\(([^)]+)\)/);
+    if(!m) return 1;
+    const parts = m[1].split(",").map(s => parseFloat(s.trim())).filter(n => !Number.isNaN(n));
+    // matrix(a,b,c,d,tx,ty)
+    const a = parts[0];
+    const d = parts[3];
+    const s = (Math.abs(a) + Math.abs(d)) / 2;
+    return (s && s > 0.1) ? s : 1;
+  }
+
+  function ensureOverlay(){
+    if(overlay) return overlay;
+    overlay = document.createElement("input");
+    overlay.id = "nlSearchOverlay";
+    overlay.type = "text";
+    overlay.autocomplete = "off";
+    overlay.autocapitalize = "none";
+    overlay.autocorrect = "off";
+    overlay.spellcheck = false;
+    overlay.inputMode = "search";
+    overlay.enterKeyHint = "search";
+
+    document.body.appendChild(overlay);
+
+    // Sync value -> real input
+    overlay.addEventListener("input", () => {
+      real.value = overlay.value;
+      real.dispatchEvent(new Event("input", { bubbles: true }));
+    });
+
+    // Blur handling: restore real input visuals
+    overlay.addEventListener("blur", () => {
+      document.documentElement.classList.remove("ios-nl-overlay-active");
+      // Ensure real input has the latest value
+      real.value = overlay.value;
+      real.dispatchEvent(new Event("input", { bubbles: true }));
+      // hide overlay offscreen
+      overlay.style.left = "-9999px";
+      overlay.style.top = "-9999px";
+      overlay.style.width = "1px";
+      overlay.style.height = "1px";
+    });
+
+    return overlay;
+  }
+
+  function positionOverlay(){
+    const o = ensureOverlay();
+
+    const rect = real.getBoundingClientRect();
+    // Identify transformed ancestor for scale factor (head-search is the known one)
+    const hs = real.closest(".head-search");
+    const scale = getScaleFromTransform(hs);
+
+    const cs = getComputedStyle(real);
+
+    // Place overlay exactly over the real input area (already scaled in viewport coordinates)
+    o.style.left = rect.left + "px";
+    o.style.top = rect.top + "px";
+    o.style.width = rect.width + "px";
+    o.style.height = rect.height + "px";
+
+    // Match visual typography by multiplying the unscaled computed font sizes by the scale factor
+    const fontSize = parseFloat(cs.fontSize) || 11;
+    o.style.fontSize = (fontSize * scale) + "px";
+
+    // If line-height is "normal", use the rect height; otherwise scale it
+    const lh = cs.lineHeight;
+    if(!lh || lh === "normal"){
+      o.style.lineHeight = rect.height + "px";
+    } else {
+      const lhn = parseFloat(lh);
+      o.style.lineHeight = (Number.isFinite(lhn) ? (lhn * scale) : rect.height) + "px";
+    }
+
+    o.style.fontFamily = cs.fontFamily;
+    o.style.fontWeight = cs.fontWeight;
+    o.style.letterSpacing = cs.letterSpacing;
+    o.style.color = cs.color;
+
+    // Background behind the input is the pill; keep overlay transparent
+    o.style.backgroundColor = "transparent";
+
+    // Remove any default inner padding on iOS inputs
+    o.style.paddingLeft = "0px";
+    o.style.paddingRight = "0px";
+
+    // Placeholder: copy text + use the same placeholder color as real (from CSS)
+    o.placeholder = real.placeholder || "";
+  }
+
+  function activateOverlay(){
+    if(!isMobileWidth()) return; // only apply on mobile layout
+    const o = ensureOverlay();
+    positionOverlay();
+    document.documentElement.classList.add("ios-nl-overlay-active");
+    o.value = real.value || "";
+    // Focus and force caret at start
+    o.focus({ preventScroll: true });
+    try { o.setSelectionRange(0, 0); } catch(e) {}
+  }
+
+  // Intercept direct taps/clicks on the real input on iOS mobile
+  real.addEventListener("touchstart", (e) => {
+    if(!isMobileWidth()) return;
+    e.preventDefault();
+    activateOverlay();
+  }, { passive: false });
+
+  real.addEventListener("mousedown", (e) => {
+    if(!isMobileWidth()) return;
+    e.preventDefault();
+    activateOverlay();
+  });
+
+  // If clear button is pressed while overlay active, clear overlay too
+  const clearBtn = document.querySelector(".head-search-clear");
+  if(clearBtn){
+    clearBtn.addEventListener("click", () => {
+      if(!overlay) return;
+      overlay.value = "";
+      real.value = "";
+      real.dispatchEvent(new Event("input", { bubbles: true }));
+      // keep caret at start in overlay if focused
+      if(document.activeElement === overlay){
+        try { overlay.setSelectionRange(0, 0); } catch(e) {}
+      }
+    }, true);
+  }
+
+  // Reposition overlay on scroll/resize while active
+  window.addEventListener("scroll", () => {
+    if(document.documentElement.classList.contains("ios-nl-overlay-active")) positionOverlay();
+  }, { passive: true });
+  window.addEventListener("resize", () => {
+    if(document.documentElement.classList.contains("ios-nl-overlay-active")) positionOverlay();
+  }, { passive: true });
+})();
+</script>
+
 </body>
 </html>
