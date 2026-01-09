@@ -2623,14 +2623,6 @@ body { overflow-y: auto; }
   }
 }
 
-
-
-/* === iOS caret visual offset fix (search input only; no pill layout changes) === */
-html.ios-caret-fix #nlSearch{
-  text-indent: -0.65ch !important;
-  padding-left: 0.65ch !important;
-}
-
 </style>
 <style>
 /* Shift OTA value left slightly without affecting other columns */
@@ -2919,6 +2911,31 @@ html.ios-caret-fix #nlSearch{
   }
 </style>
 
+
+<style id="iosCaretFix_v2">
+/* iOS Safari caret offset fix: avoid caret rendering bug caused by transforms on input ancestors.
+   Keep layout identical by replacing translateX with equivalent left/margin offsets on iOS only. */
+@supports (-webkit-touch-callout: none) {
+  @media (max-width: 900px) {
+    /* Remove transforms affecting the search input rendering */
+    .head-search { 
+      transform: none !important;
+      /* replicate the existing translateX(28px) positioning while keeping table-start alignment */
+      left: calc(var(--table-start, 64px) + 28px) !important;
+      right: auto !important;
+    }
+    .head-search-box{
+      transform: none !important;   /* was translateX(16px) */
+      margin-left: 16px !important; /* preserves the tuned nudge */
+    }
+    /* Ensure the input itself isn't inheriting any transform */
+    #nlSearch{
+      -webkit-transform: none !important;
+      transform: none !important;
+    }
+  }
+}
+</style>
 </head>
 <body>
 <div class="header-freeze">
@@ -2942,7 +2959,7 @@ html.ios-caret-fix #nlSearch{
 <path d="M10 18a8 8 0 1 1 5.292-14.001A8 8 0 0 1 10 18Zm11.707 2.293-5.4-5.4a10 10 0 1 0-1.414 1.414l5.4 5.4a1 1 0 0 0 1.414-1.414Z"></path>
 </svg>
 </span>
-<input autocomplete="off" id="nlSearch" placeholder='Filter (e.g., "sunday", "maine", "gym name")' spellcheck="false" type="text"/>
+<input autocomplete="off" id="nlSearch" placeholder='Filter (e.g., "boston", "maine", "gym name")' spellcheck="false" type="text"/>
 <button aria-label="Clear filter" class="head-search-clear" title="Clear" type="button">×</button>
 </div>
 <div aria-label="Filter by state" class="event-filter">
@@ -2992,13 +3009,6 @@ html.ios-caret-fix #nlSearch{
 </div>
 <script>
 (function(){
-  // iOS Safari caret draw offset fix (search input only)
-  try{
-    var ua = navigator.userAgent || "";
-    var isIOS = /iP(ad|hone|od)/.test(ua) || (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
-    if(isIOS) document.documentElement.classList.add("ios-caret-fix");
-  }catch(e){}
-
   // Use existing header search if present, otherwise fall back.
   var searchInput = document.getElementById('nlSearch') || document.getElementById('searchInput');
   var clearBtn = document.querySelector('.head-search-clear') || document.getElementById('clearBtn');
