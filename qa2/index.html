@@ -2611,19 +2611,6 @@ body { overflow-y: auto; }
   max-width: 175px !important; /* room for icon + gap */
 }
 
-
-/* === index243: iOS mobile search typing start shift (Option A, correct) ===
-   iOS Safari draws the caret ~1 glyph to the right inside the transformed header cluster.
-   We don't move the caret; we shift the rendered text start to match the caret.
-   This is intentionally limited to iOS + coarse pointer (mobile). */
-@supports (-webkit-touch-callout: none) {
-  @media (hover: none) and (pointer: coarse) {
-    #nlSearch{
-      text-indent: 0.65em !important; /* approx 1 character at current font size */
-    }
-  }
-}
-
 </style>
 <style>
 /* Shift OTA value left slightly without affecting other columns */
@@ -2912,6 +2899,19 @@ body { overflow-y: auto; }
   }
 </style>
 
+
+<style>
+/* === Block 999: iOS caret workaround (Option A) ===
+   Goal: keep your layout/pills unchanged, but shift where typing STARTS (not the caret)
+   so iOS's transformed-caret render offset no longer appears as a "phantom space".
+   We only apply the shift once the user starts typing (value length > 0). */
+@supports (-webkit-touch-callout: none) {
+  #nlSearch.ios-typing-shift{
+    text-indent: 0.85ch !important; /* ~1 character width */
+  }
+}
+</style>
+
 </head>
 <body>
 <div class="header-freeze">
@@ -2935,7 +2935,7 @@ body { overflow-y: auto; }
 <path d="M10 18a8 8 0 1 1 5.292-14.001A8 8 0 0 1 10 18Zm11.707 2.293-5.4-5.4a10 10 0 1 0-1.414 1.414l5.4 5.4a1 1 0 0 0 1.414-1.414Z"></path>
 </svg>
 </span>
-<input autocomplete="off" id="nlSearch" placeholder='Filter (e.g., "bos", "maine", "gym name")' spellcheck="false" type="text"/>
+<input autocomplete="off" id="nlSearch" placeholder='Filter (e.g., "boston", "maine", "gym name")' spellcheck="false" type="text"/>
 <button aria-label="Clear filter" class="head-search-clear" title="Clear" type="button">×</button>
 </div>
 <div aria-label="Filter by state" class="event-filter">
@@ -2988,6 +2988,43 @@ body { overflow-y: auto; }
   // Use existing header search if present, otherwise fall back.
   var searchInput = document.getElementById('nlSearch') || document.getElementById('searchInput');
   var clearBtn = document.querySelector('.head-search-clear') || document.getElementById('clearBtn');
+  // === iOS typing-start shift (Option A) ===
+  // iOS Safari can render the caret one glyph "ahead" when inputs are inside transformed ancestors.
+  // Rather than fighting caret rendering, we shift the TEXT START slightly to the right *only while typing*
+  // so the typed characters visually line up with the caret.
+  (function(){
+    var ua = navigator.userAgent || "";
+    var isIOS = /iPad|iPhone|iPod/.test(ua) || (ua.includes("Mac") && "ontouchend" in document);
+    if(!isIOS || !searchInput) return;
+
+    function syncClass(){
+      if(!searchInput) return;
+      if((searchInput.value || "").length > 0) searchInput.classList.add('ios-typing-shift');
+      else searchInput.classList.remove('ios-typing-shift');
+    }
+
+    // Ensure first character is shifted immediately (before the first paint after keydown)
+    searchInput.addEventListener('keydown', function(){
+      if((searchInput.value || "").length === 0){
+        searchInput.classList.add('ios-typing-shift');
+      }
+    }, { passive: true });
+
+    // Keep in sync for paste/clear/backspace
+    searchInput.addEventListener('input', syncClass, { passive: true });
+
+    // If your clear button is used, remove shift after clearing
+    if(clearBtn){
+      clearBtn.addEventListener('click', function(){
+        // let existing clear logic run first, then sync
+        setTimeout(syncClass, 0);
+      }, { passive: true });
+    }
+
+    // Initial state
+    syncClass();
+  })();
+
 
   // Directory icons (placeholders for now) — sized/opacity/placement via CSS to match reference
   var DIR_ICONS = {
