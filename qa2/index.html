@@ -329,6 +329,10 @@ display:flex;
       font-size:12px;
       line-height:1;
     }
+    #nlSearch{ -webkit-appearance:none; appearance:none; }
+    #nlSearch::-webkit-search-cancel-button{ -webkit-appearance:none; }
+    #nlSearch::-webkit-search-decoration{ -webkit-appearance:none; }
+
 
     #nlSearch::placeholder{color:rgba(0,0,0,0.42);}
     @media (max-width:860px){.search-wrap{padding:10px 14px 6px;}}
@@ -2611,27 +2615,6 @@ body { overflow-y: auto; }
   max-width: 175px !important; /* room for icon + gap */
 }
 
-
-
-/* === Index204: iOS caret fix ===
-   iOS Safari misplaces the text caret when an input is inside any transformed ancestor (even translateX).
-   We remove transform on the search pill wrapper for mobile and use margin instead (same visual position). */
-@media (max-width: 700px){
-  .head-search-box{
-    transform: none !important;
-    margin-left: 16px !important; /* matches prior translateX(16px) */
-  }
-}
-
-
-
-    /* iOS Safari caret/placeholder glitch fix: hide placeholder while focused so caret renders at true start */
-     (-webkit-touch-callout: none) {
-      #nlSearch:focus::placeholder {
-        color: transparent !important;
-      }
-    }
-
 </style>
 <style>
 /* Shift OTA value left slightly without affecting other columns */
@@ -2943,7 +2926,7 @@ body { overflow-y: auto; }
 <path d="M10 18a8 8 0 1 1 5.292-14.001A8 8 0 0 1 10 18Zm11.707 2.293-5.4-5.4a10 10 0 1 0-1.414 1.414l5.4 5.4a1 1 0 0 0 1.414-1.414Z"></path>
 </svg>
 </span>
-<input autocomplete="off" id="nlSearch" placeholder='Filter (e.g., "bost", "maine", "gym name")' spellcheck="false" type="text"/>
+<input autocomplete="off" id="nlSearch" placeholder='Filter (e.g., "boston", "maine", "gym name")' spellcheck="false" type="search" inputmode="search" enterkeyhint="search" autocapitalize="none" autocorrect="off"/>
 <button aria-label="Clear filter" class="head-search-clear" title="Clear" type="button">×</button>
 </div>
 <div aria-label="Filter by state" class="event-filter">
@@ -3540,81 +3523,32 @@ function applySearch(){
   if(searchInput){
     searchInput.addEventListener("input", applySearch);
   }
-function stashPlaceholder(el){
-  if(!el) return;
-  if(el.__phStored) return;
-  el.__phStored = true;
-  el.__phValue = el.getAttribute("placeholder") || "";
-}
 
-function removePlaceholderWhileFocused(el){
-  if(!__isIOS || !el) return;
-  stashPlaceholder(el);
-  // Only remove placeholder when empty; that is when iOS shows the buggy caret offset.
-  if((el.value || "").length === 0){
-    el.setAttribute("placeholder", "");
+  // Index203: Mobile cursor should start at the very beginning when tapping into an empty search.
+  // iOS Safari can sometimes place the caret after the first glyph of the placeholder; we force 0,0.
+  function forceCaretAtStartIfEmpty(el){
+    if(!el) return;
+    var v = (el.value || "");
+    if(v.length) return; // only intervene when empty (placeholder showing)
+
+    var set0 = function(){
+
+    };
+
+    // Run after focus settles (covers iOS + Android).
+    try{ requestAnimationFrame(set0); }catch(e){ setTimeout(set0, 0); }
+    setTimeout(set0, 0);
+    setTimeout(set0, 30);
   }
-}
 
-function restorePlaceholderIfEmpty(el){
-  if(!__isIOS || !el) return;
-  if(!el.__phStored) return;
-  if((el.value || "").length === 0){
-    el.setAttribute("placeholder", el.__phValue || "");
-  }else{
-    // keep placeholder empty while typed; normal browser behavior won't show it anyway
-    el.setAttribute("placeholder", el.__phValue || "");
+  if(searchInput){
+    // focus + touch/click cover desktop and mobile tap behaviors
+    searchInput.addEventListener('focus', function(){ forceCaretAtStartIfEmpty(searchInput); });
+    searchInput.addEventListener('click', function(){ forceCaretAtStartIfEmpty(searchInput); });
+    searchInput.addEventListener('touchstart', function(){ forceCaretAtStartIfEmpty(searchInput); }, {passive:true});
   }
-}
 
-// Keep the logical caret at 0 when empty (harmless everywhere), but iOS needs the placeholder removal above
-// for the caret to *render* at the true start.
-function forceCaretAtStartIfEmpty(el){
-  if(!el) return;
-  var v = (el.value || "");
-  if(v.length) return;
-
-  var set0 = function(){
-    try{ el.setSelectionRange(0, 0); }catch(e){}
-    try{ el.scrollLeft = 0; }catch(e){}
-  };
-
-  try{ requestAnimationFrame(set0); }catch(e){ setTimeout(set0, 0); }
-  setTimeout(set0, 0);
-  setTimeout(set0, 30);
-}
-
-if(searchInput){
-  // focus + touch/click cover desktop and mobile tap behaviors
-  searchInput.addEventListener('focus', function(){
-    removePlaceholderWhileFocused(searchInput);
-    forceCaretAtStartIfEmpty(searchInput);
-  });
-  searchInput.addEventListener('click', function(){
-    removePlaceholderWhileFocused(searchInput);
-    forceCaretAtStartIfEmpty(searchInput);
-  });
-  searchInput.addEventListener('touchstart', function(){
-    removePlaceholderWhileFocused(searchInput);
-    forceCaretAtStartIfEmpty(searchInput);
-  }, {passive:true});
-
-  searchInput.addEventListener('blur', function(){
-    // Restore placeholder once focus leaves (keeps helper text behavior identical to desktop).
-    restorePlaceholderIfEmpty(searchInput);
-  });
-
-  // If the field is programmatically cleared while focused on iOS, keep placeholder removed to avoid caret bug.
-  searchInput.addEventListener('input', function(){
-    if(__isIOS && document.activeElement === searchInput){
-      if((searchInput.value || "").length === 0){
-        searchInput.setAttribute("placeholder", "");
-      }
-    }
-  });
-}
-
-(async function init(){
+  (async function init(){
     try{
       var filename = "directory.csv";
       var paths = csvPathCandidates(filename);
@@ -3814,144 +3748,5 @@ if(searchInput){
 
 })();
 </script>
-
-<script>
-/* === Index222: iOS caret fix (robust) ===
-   iOS Safari misplaces the text caret when an input is inside a transformed/scaled ancestor.
-   We keep the exact layout, but when the user focuses the search input on iOS we temporarily
-   swap in a fixed-position overlay input (not affected by transforms) at the same screen position.
-*/
-(function () {
-  var isiOS = /iP(hone|od|ad)/.test(navigator.userAgent) || (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
-  if (!isiOS) return;
-
-  var real = document.getElementById("nlSearch");
-  if (!real) return;
-
-  var overlay = null;
-
-  function copyStyles(fromEl, toEl) {
-    var cs = window.getComputedStyle(fromEl);
-    // Size/box
-    toEl.style.boxSizing = "border-box";
-    toEl.style.border = cs.border;
-    toEl.style.borderRadius = cs.borderRadius;
-    toEl.style.boxShadow = cs.boxShadow;
-    toEl.style.backgroundColor = cs.backgroundColor;
-    toEl.style.color = cs.color;
-
-    // Typography
-    toEl.style.fontFamily = cs.fontFamily;
-    toEl.style.fontSize = cs.fontSize;
-    toEl.style.fontWeight = cs.fontWeight;
-    toEl.style.fontStyle = cs.fontStyle;
-    toEl.style.lineHeight = cs.lineHeight;
-    toEl.style.letterSpacing = cs.letterSpacing;
-    toEl.style.textTransform = cs.textTransform;
-    toEl.style.textIndent = cs.textIndent;
-
-    // Padding
-    toEl.style.paddingTop = cs.paddingTop;
-    toEl.style.paddingRight = cs.paddingRight;
-    toEl.style.paddingBottom = cs.paddingBottom;
-    toEl.style.paddingLeft = cs.paddingLeft;
-
-    // Remove iOS default styling
-    toEl.style.webkitAppearance = "none";
-    toEl.style.appearance = "none";
-    toEl.style.outline = "none";
-  }
-
-  function positionOverlay() {
-    if (!overlay) return;
-    var r = real.getBoundingClientRect();
-    overlay.style.left = r.left + "px";
-    overlay.style.top = r.top + "px";
-    overlay.style.width = r.width + "px";
-    overlay.style.height = r.height + "px";
-  }
-
-  function teardown() {
-    if (!overlay) return;
-    try { real.value = overlay.value; } catch (e) {}
-    // Trigger the same input pipeline your app already uses
-    try { real.dispatchEvent(new Event("input", { bubbles: true })); } catch (e) {}
-
-    overlay.remove();
-    overlay = null;
-    real.style.opacity = "";
-    real.style.pointerEvents = "";
-  }
-
-  function ensureOverlay() {
-    if (overlay) return overlay;
-
-    overlay = document.createElement("input");
-    overlay.type = "text";
-    overlay.autocomplete = "off";
-    overlay.spellcheck = false;
-    overlay.id = "nlSearchOverlay";
-
-    overlay.style.position = "fixed";
-    overlay.style.zIndex = "9999";
-    overlay.style.margin = "0";
-    overlay.style.backgroundClip = "padding-box";
-
-    copyStyles(real, overlay);
-
-    overlay.placeholder = real.getAttribute("placeholder") || "";
-    overlay.value = real.value || "";
-
-    // Keep your filtering logic working: mirror overlay -> real input
-    overlay.addEventListener("input", function () {
-      real.value = overlay.value;
-      real.dispatchEvent(new Event("input", { bubbles: true }));
-    });
-
-    overlay.addEventListener("keydown", function (e) {
-      if (e.key === "Enter") {
-        e.preventDefault();
-        overlay.blur();
-      }
-    });
-
-    overlay.addEventListener("blur", function () {
-      teardown();
-    });
-
-    document.body.appendChild(overlay);
-    return overlay;
-  }
-
-  function activate() {
-    ensureOverlay();
-    // Hide the real input but keep layout unchanged
-    real.style.opacity = "0";
-    real.style.pointerEvents = "none";
-
-    overlay.value = real.value || "";
-    overlay.placeholder = real.getAttribute("placeholder") || "";
-
-    positionOverlay();
-
-    // Focus overlay and force caret to start at position 0
-    overlay.focus({ preventScroll: true });
-    try { overlay.setSelectionRange(0, 0); } catch (e) {}
-  }
-
-  // When real input receives focus (tap), immediately swap to overlay.
-  real.addEventListener("focus", function () {
-    // Next tick so iOS has committed focus/keyboard
-    setTimeout(function () {
-      if (document.activeElement === real) activate();
-    }, 0);
-  }, true);
-
-  // Keep overlay aligned if user scrolls/rotates while focused
-  window.addEventListener("scroll", positionOverlay, true);
-  window.addEventListener("resize", positionOverlay);
-})();
-</script>
-
 </body>
 </html>
