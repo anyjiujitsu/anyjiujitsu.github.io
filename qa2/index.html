@@ -2911,18 +2911,6 @@ body { overflow-y: auto; }
   }
 </style>
 
-<style>
-@supports (-webkit-touch-callout: none) {
-  /* iOS: avoid caret offset bug from transformed ancestors by replacing transform-scaling with zoom-scaling. */
-  .head-search{
-    transform: none !important;
-    zoom: 2;
-    margin-left: -28px !important;
-    transform-origin: bottom left !important;
-  }
-}
-</style>
-
 </head>
 <body>
 <div class="header-freeze">
@@ -3768,5 +3756,156 @@ function applySearch(){
 
 })();
 </script>
+
+<script>
+/* iOS Safari caret rendering fix: temporarily "teleport" the real search input out of transformed ancestors while focused.
+   This preserves your exact styling by copying computed styles, but removes the iOS caret/typing offset bug. */
+(function () {
+  const ua = navigator.userAgent || "";
+  const isIOS = /iP(hone|od|ad)/.test(ua) || (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
+  const isMobile = window.matchMedia && window.matchMedia("(max-width: 820px)").matches;
+  if (!isIOS || !isMobile) return;
+
+  const input = document.getElementById("nlSearch");
+  if (!input) return;
+
+  let placeholder = null;
+  let original = null;
+  let originalParent = null;
+  let originalNext = null;
+
+  function copyStylesFromComputed(el, computed) {
+    // Copy only what affects text/caret geometry and visible shape
+    const props = [
+      "boxSizing","font","fontSize","fontFamily","fontWeight","fontStyle","lineHeight",
+      "letterSpacing","textTransform","textRendering",
+      "paddingTop","paddingRight","paddingBottom","paddingLeft",
+      "borderTopWidth","borderRightWidth","borderBottomWidth","borderLeftWidth",
+      "borderTopStyle","borderRightStyle","borderBottomStyle","borderLeftStyle",
+      "borderTopColor","borderRightColor","borderBottomColor","borderLeftColor",
+      "borderRadius","backgroundColor","color","caretColor","textAlign","textIndent"
+    ];
+    props.forEach(p => {
+      try { el.style[p] = computed[p]; } catch(e) {}
+    });
+    // Recompose border shorthand to avoid missing pieces on some WebKit builds
+    el.style.borderTop = computed.borderTop;
+    el.style.borderRight = computed.borderRight;
+    el.style.borderBottom = computed.borderBottom;
+    el.style.borderLeft = computed.borderLeft;
+  }
+
+  function updateFixedPosition() {
+    if (!original) return;
+    const r = placeholder.getBoundingClientRect();
+    input.style.left = r.left + "px";
+    input.style.top = r.top + "px";
+    input.style.width = r.width + "px";
+    input.style.height = r.height + "px";
+  }
+
+  function enterFixedMode() {
+    if (original) return;
+
+    const cs = window.getComputedStyle(input);
+    const r = input.getBoundingClientRect();
+
+    original = {
+      style: input.getAttribute("style") || ""
+    };
+    originalParent = input.parentNode;
+    originalNext = input.nextSibling;
+
+    // Placeholder keeps layout exactly the same
+    placeholder = document.createElement("div");
+    placeholder.setAttribute("data-ios-caret-placeholder", "1");
+    placeholder.style.width = r.width + "px";
+    placeholder.style.height = r.height + "px";
+    placeholder.style.display = cs.display === "inline" ? "inline-block" : "block";
+    // Preserve flex/grid sizing behavior
+    placeholder.style.flex = cs.flex;
+    placeholder.style.alignSelf = cs.alignSelf;
+
+    originalParent.insertBefore(placeholder, input);
+
+    // Move the REAL input to body to escape transformed ancestors
+    document.body.appendChild(input);
+
+    // Fix positioning + ensure it sits above everything while typing
+    input.style.position = "fixed";
+    input.style.left = r.left + "px";
+    input.style.top = r.top + "px";
+    input.style.width = r.width + "px";
+    input.style.height = r.height + "px";
+    input.style.zIndex = "9999";
+    input.style.margin = "0";
+    input.style.transform = "none";
+    input.style.webkitTransform = "none";
+    input.style.backfaceVisibility = "hidden";
+    input.style.webkitBackfaceVisibility = "hidden";
+
+    // Copy computed styles so visual appearance/typing size stays identical
+    copyStylesFromComputed(input, cs);
+
+    // Keep caret truly at start on empty focus
+    if (!input.value) {
+      try { input.setSelectionRange(0, 0); } catch(e) {}
+    }
+
+    // Track viewport changes (keyboard/scroll) and keep it aligned
+    window.addEventListener("scroll", updateFixedPosition, { passive: true });
+    window.addEventListener("resize", updateFixedPosition);
+    if (window.visualViewport) {
+      window.visualViewport.addEventListener("scroll", updateFixedPosition, { passive: true });
+      window.visualViewport.addEventListener("resize", updateFixedPosition);
+    }
+  }
+
+  function exitFixedMode() {
+    if (!original) return;
+
+    window.removeEventListener("scroll", updateFixedPosition);
+    window.removeEventListener("resize", updateFixedPosition);
+    if (window.visualViewport) {
+      window.visualViewport.removeEventListener("scroll", updateFixedPosition);
+      window.visualViewport.removeEventListener("resize", updateFixedPosition);
+    }
+
+    // Move back to original DOM location
+    if (originalNext && originalNext.parentNode === originalParent) {
+      originalParent.insertBefore(input, originalNext);
+    } else {
+      originalParent.appendChild(input);
+    }
+
+    // Remove placeholder
+    if (placeholder && placeholder.parentNode) placeholder.parentNode.removeChild(placeholder);
+    placeholder = null;
+
+    // Restore original inline styles exactly
+    input.setAttribute("style", original.style);
+    original = null;
+    originalParent = null;
+    originalNext = null;
+  }
+
+  // Use capture so we run before other focus handlers
+  input.addEventListener("focus", function () {
+    // Defer one frame to let iOS finish focus/scroll into view
+    requestAnimationFrame(() => {
+      enterFixedMode();
+      // Second tick helps after iOS scrolls the page to reveal the field
+      setTimeout(updateFixedPosition, 0);
+      setTimeout(updateFixedPosition, 50);
+    });
+  }, true);
+
+  input.addEventListener("blur", function () {
+    // Let blur finish, then restore
+    setTimeout(exitFixedMode, 0);
+  }, true);
+})();
+</script>
+
 </body>
 </html>
