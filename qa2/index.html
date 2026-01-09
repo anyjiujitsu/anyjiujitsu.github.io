@@ -3722,103 +3722,161 @@ function applySearch(){
 </script>
 
 <script>
-/* iOS caret debug overlay (only active when ?debugCaret=1) */
+/* === iOS caret fix (no visual/layout changes): use an overlay input that is NOT inside transformed ancestors === */
 (function(){
-  const params = new URLSearchParams(location.search);
-  if(params.get('debugCaret') !== '1') return;
+  const ua = navigator.userAgent || "";
+  const isIOS = /iP(hone|od|ad)/.test(ua) || (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
+  if(!isIOS) return;
 
-  const box = document.createElement('div');
-  box.id = 'caret-debug-box';
-  box.style.cssText = [
-    'position:fixed',
-    'left:8px','right:8px','bottom:8px',
-    'z-index:999999',
-    'background:rgba(0,0,0,0.78)',
-    'color:#fff',
-    'font:12px/1.35 -apple-system,BlinkMacSystemFont,system-ui,Segoe UI,Roboto,Arial,sans-serif',
-    'padding:10px 12px',
-    'border-radius:12px',
-    'max-height:38vh',
-    'overflow:auto',
-    'white-space:pre-wrap',
-    'box-shadow:0 8px 24px rgba(0,0,0,0.35)'
-  ].join(';');
-  document.documentElement.appendChild(box);
+  const real = document.getElementById('nlSearch');
+  if(!real) return;
 
-  const logLines = [];
-  const maxLines = 18;
+  const clearBtn = document.querySelector('.head-search-clear');
+  let overlay = null;
+  let active = false;
 
-  function fmtEl(el){
-    if(!el) return 'null';
-    let s = el.tagName.toLowerCase();
-    if(el.id) s += '#' + el.id;
-    if(el.className && typeof el.className === 'string') s += '.' + el.className.trim().split(/\s+/).slice(0,3).join('.');
-    return s;
-  }
+  function num(v){ const n = parseFloat(v); return isFinite(n) ? n : 0; }
 
-  function getTransformChain(el){
-    const chain = [];
-    let cur = el;
-    let hops = 0;
-    while(cur && hops < 12){
-      const cs = getComputedStyle(cur);
-      const t = cs.transform || 'none';
-      const z = cs.zoom || 'normal';
-      const pos = cs.position;
-      if(t !== 'none' || z !== 'normal'){
-        chain.push(`${fmtEl(cur)}  transform=${t}  zoom=${z}  pos=${pos}`);
+  function ensureOverlay(){
+    if(overlay) return overlay;
+    overlay = document.createElement('input');
+    overlay.type = real.type || 'text';
+    overlay.autocomplete = 'off';
+    overlay.spellcheck = false;
+    overlay.setAttribute('aria-label', real.getAttribute('aria-label') || 'Search');
+    overlay.id = 'nlSearch_overlay';
+    overlay.style.position = 'fixed';
+    overlay.style.zIndex = '99999';
+    overlay.style.display = 'none';
+    overlay.style.boxSizing = 'border-box';
+    overlay.style.webkitAppearance = 'none';
+    overlay.style.appearance = 'none';
+    overlay.style.backgroundClip = 'padding-box';
+
+    // Sync typing back to the real input (keeps existing filtering logic)
+    overlay.addEventListener('input', () => {
+      real.value = overlay.value;
+      real.dispatchEvent(new Event('input', { bubbles: true }));
+      real.dispatchEvent(new Event('keyup', { bubbles: true }));
+    });
+
+    overlay.addEventListener('keydown', (e) => {
+      // Escape clears
+      if(e.key === 'Escape'){
+        overlay.value = '';
+        real.value = '';
+        real.dispatchEvent(new Event('input', { bubbles: true }));
+        if(clearBtn) clearBtn.click();
       }
-      cur = cur.parentElement;
-      hops++;
-    }
-    return chain.length ? chain.join('\n') : '(no transform/zoom found in first 12 ancestors)';
+    });
+
+    overlay.addEventListener('blur', () => {
+      active = false;
+      overlay.style.display = 'none';
+      // keep real value in sync (already)
+    });
+
+    document.body.appendChild(overlay);
+    return overlay;
   }
 
-  function snapshot(reason){
-    const ae = document.activeElement;
-    const nl = document.getElementById('nlSearch');
-    const isActive = ae === nl;
-    const sel = (nl && typeof nl.selectionStart === 'number')
-      ? `sel=${nl.selectionStart}-${nl.selectionEnd}`
-      : 'sel=?';
-    const val = nl ? nl.value : '';
-    const ph = nl ? nl.getAttribute('placeholder') : '';
-    const rect = nl ? nl.getBoundingClientRect() : null;
-
-    const head = [];
-    head.push(`reason: ${reason}`);
-    head.push(`active: ${fmtEl(ae)}  (nlSearch active: ${isActive})`);
-    head.push(`nlSearch value="${val.replace(/\n/g,'\\n')}" (len=${val.length})  placeholder="${ph}"`);
-    head.push(sel);
-    if(rect){
-      head.push(`nlSearch rect: x=${rect.x.toFixed(1)} y=${rect.y.toFixed(1)} w=${rect.width.toFixed(1)} h=${rect.height.toFixed(1)}`);
-    }
-    head.push(`\ntransform/zoom chain from nlSearch:\n${nl ? getTransformChain(nl) : 'nlSearch not found'}`);
-    head.push(`\nrecent events:\n${logLines.join('\n')}`);
-    box.textContent = head.join('\n');
+  function computeScale(){
+    const rect = real.getBoundingClientRect();
+    const ow = real.offsetWidth || rect.width || 1;
+    return rect.width / ow;
   }
 
-  function log(evt){
-    const nl = document.getElementById('nlSearch');
-    const ae = document.activeElement;
-    const s = (nl && typeof nl.selectionStart === 'number') ? nl.selectionStart : '?';
-    const e = (nl && typeof nl.selectionEnd === 'number') ? nl.selectionEnd : '?';
-    const v = nl ? nl.value : '';
-    logLines.unshift(`${new Date().toLocaleTimeString()}  ${evt}  active=${fmtEl(ae)}  sel=${s}-${e}  vlen=${v.length}`);
-    if(logLines.length > maxLines) logLines.length = maxLines;
-    snapshot(evt);
+  function applyScaledStyles(scale){
+    const cs = window.getComputedStyle(real);
+
+    // Copy non-numeric styles directly
+    overlay.style.fontFamily = cs.fontFamily;
+    overlay.style.fontWeight = cs.fontWeight;
+    overlay.style.fontStyle = cs.fontStyle;
+    overlay.style.color = cs.color;
+    overlay.style.backgroundColor = cs.backgroundColor;
+    overlay.style.borderStyle = cs.borderStyle;
+    overlay.style.borderColor = cs.borderColor;
+    overlay.style.boxShadow = cs.boxShadow;
+    overlay.style.outline = cs.outline;
+    overlay.style.textAlign = cs.textAlign;
+    overlay.style.caretColor = cs.caretColor || 'auto';
+
+    // Numeric styles scaled (so the overlay looks identical to the transformed real input)
+    overlay.style.fontSize = (num(cs.fontSize) * scale) + 'px';
+    overlay.style.lineHeight = (num(cs.lineHeight) * scale) + 'px';
+    overlay.style.letterSpacing = (num(cs.letterSpacing) * scale) + 'px';
+
+    overlay.style.paddingLeft = (num(cs.paddingLeft) * scale) + 'px';
+    overlay.style.paddingRight = (num(cs.paddingRight) * scale) + 'px';
+    overlay.style.paddingTop = (num(cs.paddingTop) * scale) + 'px';
+    overlay.style.paddingBottom = (num(cs.paddingBottom) * scale) + 'px';
+
+    overlay.style.borderWidth = (num(cs.borderTopWidth) * scale) + 'px';
+    overlay.style.borderRadius = (num(cs.borderTopLeftRadius) * scale) + 'px';
+
+    // Ensure placeholder looks the same
+    overlay.placeholder = real.placeholder || '';
   }
 
-  ['focus','click','touchstart','input','keydown','keyup'].forEach(ev=>{
-    document.addEventListener(ev, (e)=>{
-      if(e.target && (e.target.id === 'nlSearch' || e.target.closest && e.target.closest('#nlSearch'))) log(ev);
+  function positionOverlay(){
+    const rect = real.getBoundingClientRect();
+    overlay.style.left = rect.left + 'px';
+    overlay.style.top = rect.top + 'px';
+    overlay.style.width = rect.width + 'px';
+    overlay.style.height = rect.height + 'px';
+  }
+
+  function openOverlay(){
+    ensureOverlay();
+    const scale = computeScale();
+
+    // keep the real input from ever focusing (prevents iOS caret bug entirely)
+    real.readOnly = true;
+
+    // mirror current value/placeholder and style
+    overlay.value = real.value || '';
+    applyScaledStyles(scale);
+    positionOverlay();
+
+    overlay.style.display = 'block';
+    active = true;
+
+    // Focus and force caret at true start
+    overlay.focus({ preventScroll: true });
+    try{
+      overlay.setSelectionRange(0, 0);
+    }catch(_){}
+  }
+
+  function intercept(e){
+    // only when tapping into the field (not when already typing)
+    if(active) return;
+    e.preventDefault();
+    e.stopPropagation();
+    openOverlay();
+  }
+
+  // Intercept touch/click on the REAL input so it never gets iOS caret rendering
+  real.addEventListener('touchstart', intercept, { passive: false, capture: true });
+  real.addEventListener('mousedown', intercept, { capture: true });
+  real.addEventListener('click', intercept, { capture: true });
+
+  // Keep overlay positioned if the viewport changes while typing
+  window.addEventListener('scroll', () => { if(active && overlay){ positionOverlay(); } }, { passive: true });
+  window.addEventListener('resize', () => { if(active && overlay){ positionOverlay(); } }, { passive: true });
+
+  // Ensure Clear button clears both
+  if(clearBtn){
+    clearBtn.addEventListener('click', () => {
+      if(overlay){
+        overlay.value = '';
+        overlay.dispatchEvent(new Event('input', { bubbles: true }));
+      }
+      real.value = '';
     }, true);
-  });
-  document.addEventListener('selectionchange', ()=>log('selectionchange'), true);
-
-  snapshot('debugCaret=1 loaded');
+  }
 })();
 </script>
-
 </body>
 </html>
