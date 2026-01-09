@@ -2623,6 +2623,16 @@ body { overflow-y: auto; }
   }
 }
 
+
+
+/* iOS caret fix: use a single-line textarea for #nlSearch on iOS */
+textarea#nlSearch{
+  -webkit-appearance:none;
+  appearance:none;
+  resize:none;
+  overflow:hidden;
+  white-space:nowrap;
+}
 </style>
 <style>
 /* Shift OTA value left slightly without affecting other columns */
@@ -2909,29 +2919,6 @@ body { overflow-y: auto; }
   .group-label{
     transform: translateX(30px) !important;
   }
-
-/* === Block 50 === */
-/* === v213: iOS caret rendering fix for search input inside transformed nav cluster ===
-   iOS Safari can render the caret one character to the right when an <input> sits under a transformed ancestor.
-   These properties force the input onto its own compositing layer without changing layout. */
-@supports (-webkit-touch-callout: none) {
-  #nlSearch{
-    -webkit-appearance: none;
-    appearance: none;
-    -webkit-transform: translate3d(0,0,0);
-    transform: translate3d(0,0,0);
-    -webkit-backface-visibility: hidden;
-    backface-visibility: hidden;
-    -webkit-font-smoothing: antialiased;
-    text-rendering: optimizeLegibility;
-  }
-  /* Keep placeholder and typed text aligned the same way */
-  #nlSearch::placeholder{
-    -webkit-transform: translate3d(0,0,0);
-    transform: translate3d(0,0,0);
-  }
-}
-
 </style>
 
 </head>
@@ -2957,7 +2944,7 @@ body { overflow-y: auto; }
 <path d="M10 18a8 8 0 1 1 5.292-14.001A8 8 0 0 1 10 18Zm11.707 2.293-5.4-5.4a10 10 0 1 0-1.414 1.414l5.4 5.4a1 1 0 0 0 1.414-1.414Z"></path>
 </svg>
 </span>
-<input autocomplete="off" id="nlSearch" placeholder='Filter (e.g., "sunday", "maine", "gym name")' spellcheck="false" type="text"/>
+<input autocomplete="off" id="nlSearch" placeholder='Filter (e.g., "boston", "maine", "gym name")' spellcheck="false" type="text"/>
 <button aria-label="Clear filter" class="head-search-clear" title="Clear" type="button">×</button>
 </div>
 <div aria-label="Filter by state" class="event-filter">
@@ -3005,6 +2992,35 @@ body { overflow-y: auto; }
 <div class="dir-empty" style="padding:18px;color:rgba(0,0,0,0.55);">Loading…</div>
 </div>
 </div>
+<script>
+(function(){
+  // iOS Safari caret render bug workaround:
+  // swap #nlSearch from <input> to a single-line <textarea> BEFORE other scripts bind listeners.
+  var ua = navigator.userAgent || '';
+  var isIOS = /iP(hone|od|ad)/.test(ua) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+  if(!isIOS) return;
+  var inp = document.getElementById('nlSearch');
+  if(!inp || inp.tagName.toLowerCase() !== 'input') return;
+
+  var ta = document.createElement('textarea');
+  ta.id = inp.id;
+  ta.className = inp.className;
+  ta.placeholder = inp.getAttribute('placeholder') || '';
+  ta.autocomplete = inp.getAttribute('autocomplete') || 'off';
+  ta.spellcheck = inp.spellcheck;
+  ta.rows = 1;
+  ta.wrap = 'off';
+  ta.value = inp.value || '';
+  if(inp.getAttribute('style')) ta.setAttribute('style', inp.getAttribute('style'));
+  if(inp.getAttribute('aria-label')) ta.setAttribute('aria-label', inp.getAttribute('aria-label'));
+
+  // Replace in-place (layout unchanged)
+  inp.parentNode.replaceChild(ta, inp);
+
+  // Keep single-line
+  ta.addEventListener('keydown', function(e){ if(e.key === 'Enter') e.preventDefault(); });
+})();
+</script>
 <script>
 (function(){
   // Use existing header search if present, otherwise fall back.
