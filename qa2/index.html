@@ -2909,6 +2909,29 @@ body { overflow-y: auto; }
   .group-label{
     transform: translateX(30px) !important;
   }
+
+/* === Block 50 === */
+/* === v213: iOS caret rendering fix for search input inside transformed nav cluster ===
+   iOS Safari can render the caret one character to the right when an <input> sits under a transformed ancestor.
+   These properties force the input onto its own compositing layer without changing layout. */
+@supports (-webkit-touch-callout: none) {
+  #nlSearch{
+    -webkit-appearance: none;
+    appearance: none;
+    -webkit-transform: translate3d(0,0,0);
+    transform: translate3d(0,0,0);
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+  /* Keep placeholder and typed text aligned the same way */
+  #nlSearch::placeholder{
+    -webkit-transform: translate3d(0,0,0);
+    transform: translate3d(0,0,0);
+  }
+}
+
 </style>
 
 </head>
@@ -2934,7 +2957,7 @@ body { overflow-y: auto; }
 <path d="M10 18a8 8 0 1 1 5.292-14.001A8 8 0 0 1 10 18Zm11.707 2.293-5.4-5.4a10 10 0 1 0-1.414 1.414l5.4 5.4a1 1 0 0 0 1.414-1.414Z"></path>
 </svg>
 </span>
-<input autocomplete="off" id="nlSearch" placeholder='Filter (e.g., "boston", "maine", "gym name")' spellcheck="false" type="text"/>
+<input autocomplete="off" id="nlSearch" placeholder='Filter (e.g., "sunday", "maine", "gym name")' spellcheck="false" type="text"/>
 <button aria-label="Clear filter" class="head-search-clear" title="Clear" type="button">×</button>
 </div>
 <div aria-label="Filter by state" class="event-filter">
@@ -2987,145 +3010,6 @@ body { overflow-y: auto; }
   // Use existing header search if present, otherwise fall back.
   var searchInput = document.getElementById('nlSearch') || document.getElementById('searchInput');
   var clearBtn = document.querySelector('.head-search-clear') || document.getElementById('clearBtn');
-
-  // === iOS Safari caret rendering fix (no layout changes) ===
-  // iOS sometimes draws the caret one character to the right when an input is inside a transformed ancestor.
-  // We avoid that by temporarily focusing a fixed-position overlay input (outside the transformed tree)
-  // and syncing its value back to the real input.
-  (function iosCaretOverlayFix(){
-    if(!searchInput) return;
-    var ua = navigator.userAgent || '';
-    var isIOS = /iPad|iPhone|iPod/.test(ua) || (ua.includes('Mac') && 'ontouchend' in document);
-    if(!isIOS) return;
-
-    var overlay = null;
-    var active = false;
-
-    function buildOverlay(){
-      overlay = document.createElement('input');
-      overlay.type = 'text';
-      overlay.autocomplete = 'off';
-      overlay.spellcheck = false;
-      overlay.autocapitalize = 'off';
-      overlay.autocorrect = 'off';
-      overlay.inputMode = searchInput.inputMode || '';
-      overlay.placeholder = searchInput.placeholder || '';
-      overlay.setAttribute('aria-label', searchInput.getAttribute('aria-label') || 'Search');
-
-      // Basic styling: match the inner text area of the existing input
-      var cs = window.getComputedStyle(searchInput);
-      overlay.style.position = 'fixed';
-      overlay.style.zIndex = '999999';
-      overlay.style.border = '0';
-      overlay.style.outline = 'none';
-      overlay.style.background = 'transparent';
-      overlay.style.color = cs.color;
-      overlay.style.fontFamily = cs.fontFamily;
-      overlay.style.fontSize = cs.fontSize;
-      overlay.style.fontWeight = cs.fontWeight;
-      overlay.style.letterSpacing = cs.letterSpacing;
-      overlay.style.lineHeight = cs.lineHeight;
-      overlay.style.padding = cs.padding;
-      overlay.style.margin = '0';
-      overlay.style.boxSizing = 'border-box';
-      overlay.style.caretColor = cs.caretColor || 'auto';
-      overlay.style.webkitTextFillColor = cs.webkitTextFillColor || cs.color;
-
-      overlay.addEventListener('input', function(){
-        // Sync to real input + trigger existing filtering logic
-        searchInput.value = overlay.value;
-        searchInput.dispatchEvent(new Event('input', { bubbles:true }));
-      });
-
-      overlay.addEventListener('keydown', function(e){
-        // Escape to close
-        if(e.key === 'Escape'){
-          overlay.blur();
-        }
-      });
-
-      overlay.addEventListener('blur', function(){
-        active = false;
-      });
-
-      document.body.appendChild(overlay);
-    }
-
-    function placeOverlay(){
-      if(!overlay) buildOverlay();
-      var r = searchInput.getBoundingClientRect();
-      overlay.style.left = r.left + 'px';
-      overlay.style.top = r.top + 'px';
-      overlay.style.width = r.width + 'px';
-      overlay.style.height = r.height + 'px';
-    }
-
-    function openOverlay(){
-      if(active) return;
-      active = true;
-      placeOverlay();
-      overlay.value = searchInput.value || '';
-
-      // Focus overlay on next frame so iOS uses it for caret/typing.
-      requestAnimationFrame(function(){
-        overlay.focus({ preventScroll:true });
-        // Put caret at start if empty, otherwise at end.
-        var pos = overlay.value ? overlay.value.length : 0;
-        try{ overlay.setSelectionRange(pos, pos); }catch(_){ }
-      });
-    }
-
-    function closeOverlay(){
-      if(!overlay) return;
-      // Sync back and remove/hide
-      searchInput.value = overlay.value || '';
-      searchInput.dispatchEvent(new Event('input', { bubbles:true }));
-      active = false;
-      // Keep element for reuse, just move offscreen
-      overlay.style.left = '-9999px';
-      overlay.style.top = '-9999px';
-    }
-
-    // Important: when the real input is focused, immediately switch to overlay.
-    // Use capturing so we win before other handlers.
-    searchInput.addEventListener('focus', function(){
-      openOverlay();
-    }, true);
-
-    searchInput.addEventListener('click', function(){
-      openOverlay();
-    }, true);
-
-    window.addEventListener('resize', function(){
-      if(active) placeOverlay();
-    });
-    window.addEventListener('scroll', function(){
-      if(active) placeOverlay();
-    }, true);
-
-    // If user taps outside / closes keyboard
-    document.addEventListener('focusin', function(e){
-      if(!active) return;
-      if(overlay && e.target !== overlay && e.target !== searchInput){
-        closeOverlay();
-      }
-    });
-
-    // Keep clear button synced
-    if(clearBtn){
-      clearBtn.addEventListener('click', function(){
-        if(overlay){ overlay.value = ''; }
-      }, true);
-    }
-
-    // Close overlay when it itself blurs
-    document.addEventListener('focusout', function(e){
-      if(!overlay) return;
-      if(e.target === overlay){
-        closeOverlay();
-      }
-    });
-  })();
 
   // Directory icons (placeholders for now) — sized/opacity/placement via CSS to match reference
   var DIR_ICONS = {
