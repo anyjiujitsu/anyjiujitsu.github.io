@@ -2611,18 +2611,6 @@ body { overflow-y: auto; }
   max-width: 175px !important; /* room for icon + gap */
 }
 
-
-
-/* === Index204: iOS caret fix ===
-   iOS Safari misplaces the text caret when an input is inside any transformed ancestor (even translateX).
-   We remove transform on the search pill wrapper for mobile and use margin instead (same visual position). */
-@media (max-width: 700px){
-  .head-search-box{
-    transform: none !important;
-    margin-left: 16px !important; /* matches prior translateX(16px) */
-  }
-}
-
 </style>
 <style>
 /* Shift OTA value left slightly without affecting other columns */
@@ -2911,31 +2899,6 @@ body { overflow-y: auto; }
   }
 </style>
 
-
-<style id="iosCaretFix_v2">
-/* iOS Safari caret offset fix: avoid caret rendering bug caused by transforms on input ancestors.
-   Keep layout identical by replacing translateX with equivalent left/margin offsets on iOS only. */
-@supports (-webkit-touch-callout: none) {
-  @media (max-width: 900px) {
-    /* Remove transforms affecting the search input rendering */
-    .head-search { 
-      transform: none !important;
-      /* replicate the existing translateX(28px) positioning while keeping table-start alignment */
-      left: calc(var(--table-start, 64px) + 28px) !important;
-      right: auto !important;
-    }
-    .head-search-box{
-      transform: none !important;   /* was translateX(16px) */
-      margin-left: 16px !important; /* preserves the tuned nudge */
-    }
-    /* Ensure the input itself isn't inheriting any transform */
-    #nlSearch{
-      -webkit-transform: none !important;
-      transform: none !important;
-    }
-  }
-}
-</style>
 </head>
 <body>
 <div class="header-freeze">
@@ -2959,7 +2922,7 @@ body { overflow-y: auto; }
 <path d="M10 18a8 8 0 1 1 5.292-14.001A8 8 0 0 1 10 18Zm11.707 2.293-5.4-5.4a10 10 0 1 0-1.414 1.414l5.4 5.4a1 1 0 0 0 1.414-1.414Z"></path>
 </svg>
 </span>
-<input autocomplete="off" id="nlSearch" placeholder='Filter (e.g., "boston", "maine", "gym name")' spellcheck="false" type="text"/>
+<input autocomplete="off" id="nlSearch" placeholder='Filter (e.g., "sunday", "maine", "gym name")' spellcheck="false" type="text"/>
 <button aria-label="Clear filter" class="head-search-clear" title="Clear" type="button">×</button>
 </div>
 <div aria-label="Filter by state" class="event-filter">
@@ -3557,30 +3520,6 @@ function applySearch(){
     searchInput.addEventListener("input", applySearch);
   }
 
-  // Index203: Mobile cursor should start at the very beginning when tapping into an empty search.
-  // iOS Safari can sometimes place the caret after the first glyph of the placeholder; we force 0,0.
-  function forceCaretAtStartIfEmpty(el){
-    if(!el) return;
-    var v = (el.value || "");
-    if(v.length) return; // only intervene when empty (placeholder showing)
-
-    var set0 = function(){
-      try{ el.setSelectionRange(0, 0); }catch(e){}
-    };
-
-    // Run after focus settles (covers iOS + Android).
-    try{ requestAnimationFrame(set0); }catch(e){ setTimeout(set0, 0); }
-    setTimeout(set0, 0);
-    setTimeout(set0, 30);
-  }
-
-  if(searchInput){
-    // focus + touch/click cover desktop and mobile tap behaviors
-    searchInput.addEventListener('focus', function(){ forceCaretAtStartIfEmpty(searchInput); });
-    searchInput.addEventListener('click', function(){ forceCaretAtStartIfEmpty(searchInput); });
-    searchInput.addEventListener('touchstart', function(){ forceCaretAtStartIfEmpty(searchInput); }, {passive:true});
-  }
-
   (async function init(){
     try{
       var filename = "directory.csv";
@@ -3779,6 +3718,108 @@ function applySearch(){
   // Also re-run after any filter re-render (custom event hook if present)
   document.addEventListener('any:rerender', function(){ setTimeout(ensureSpacer, 0); });
 
+})();
+</script>
+
+<script>
+(function(){
+  // iOS Safari sometimes renders the caret 1 character to the right when an <input>
+  // is inside/under transformed elements. We keep your existing layout intact by
+  // creating a fixed-position overlay input (NOT under transforms) and syncing its
+  // value back to the real input that drives filtering.
+  var isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) || (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
+  if(!isIOS) return;
+  if(!window.matchMedia || !window.matchMedia("(max-width: 700px)").matches) return;
+
+  var orig = document.getElementById("nlSearch");
+  if(!orig) return;
+  if(document.getElementById("nlSearchOverlay")) return;
+
+  var overlay = document.createElement("input");
+  overlay.type = "text";
+  overlay.id = "nlSearchOverlay";
+  overlay.autocomplete = "off";
+  overlay.spellcheck = false;
+  overlay.placeholder = orig.getAttribute("placeholder") || "";
+  overlay.value = orig.value || "";
+
+  function copyStyles(){
+    var cs = window.getComputedStyle(orig);
+    overlay.style.position = "fixed";
+    overlay.style.zIndex = "9999";
+    overlay.style.boxSizing = cs.boxSizing;
+    overlay.style.fontFamily = cs.fontFamily;
+    overlay.style.fontSize = cs.fontSize;
+    overlay.style.fontWeight = cs.fontWeight;
+    overlay.style.letterSpacing = cs.letterSpacing;
+    overlay.style.lineHeight = cs.lineHeight;
+    overlay.style.color = cs.color;
+    overlay.style.background = "transparent";
+    overlay.style.border = "none";
+    overlay.style.outline = "none";
+    overlay.style.padding = cs.padding;
+    overlay.style.margin = "0";
+    overlay.style.textAlign = cs.textAlign;
+    overlay.style.textTransform = cs.textTransform;
+    overlay.style.webkitTextFillColor = cs.webkitTextFillColor || cs.color;
+    overlay.style.caretColor = cs.caretColor || "#000";
+  }
+
+  function positionOverlay(){
+    var r = orig.getBoundingClientRect();
+    overlay.style.left = r.left + "px";
+    overlay.style.top = r.top + "px";
+    overlay.style.width = r.width + "px";
+    overlay.style.height = r.height + "px";
+    overlay.style.display = (r.width <= 1 || r.height <= 1) ? "none" : "block";
+  }
+
+  copyStyles();
+  positionOverlay();
+  document.body.appendChild(overlay);
+
+  // Hide the real input but keep it in the DOM so all existing handlers keep working
+  orig.style.opacity = "0";
+  orig.style.pointerEvents = "none";
+
+  // Clicking the original pill should focus the overlay
+  var wrap = orig.parentElement;
+  if(wrap){
+    wrap.addEventListener("click", function(){ overlay.focus(); }, true);
+    wrap.addEventListener("touchstart", function(){ overlay.focus(); }, {passive:true, capture:true});
+  }
+
+  function syncToOrig(){
+    if(orig.value !== overlay.value) orig.value = overlay.value;
+    orig.dispatchEvent(new Event("input", {bubbles:true}));
+    orig.dispatchEvent(new Event("change", {bubbles:true}));
+  }
+  overlay.addEventListener("input", syncToOrig);
+  overlay.addEventListener("change", syncToOrig);
+
+  // Keep selection at true start when focusing an empty field
+  overlay.addEventListener("focus", function(){
+    if(!overlay.value){
+      requestAnimationFrame(function(){ try{ overlay.setSelectionRange(0,0); }catch(e){} });
+    }
+  });
+
+  // If the clear "x" button exists, mirror it
+  var clearBtn = document.getElementById("searchClear");
+  if(clearBtn){
+    clearBtn.addEventListener("click", function(){
+      overlay.value = "";
+      syncToOrig();
+      requestAnimationFrame(function(){ try{ overlay.setSelectionRange(0,0); }catch(e){} });
+    }, true);
+  }
+
+  // Reposition as the page scrolls/resizes
+  window.addEventListener("scroll", function(){ positionOverlay(); }, true);
+  window.addEventListener("resize", function(){ copyStyles(); positionOverlay(); });
+  window.addEventListener("orientationchange", function(){ setTimeout(function(){ copyStyles(); positionOverlay(); }, 50); });
+  setTimeout(function(){ copyStyles(); positionOverlay(); }, 0);
+  setTimeout(function(){ copyStyles(); positionOverlay(); }, 250);
 })();
 </script>
 </body>
