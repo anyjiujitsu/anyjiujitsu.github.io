@@ -2899,6 +2899,86 @@ body { overflow-y: auto; }
   }
 </style>
 
+<script>
+  // Add an iOS flag for targeted CSS.
+  (function(){
+    var ua = navigator.userAgent || '';
+    var isIOS = /iP(hone|ad|od)/.test(ua);
+    if(isIOS) document.documentElement.classList.add('ios');
+  })();
+</script>
+
+<style>
+  /*
+    iOS caret bug fix (root cause verified via debugCaret overlay):
+    iOS Safari can draw the text caret 1 glyph to the right when an <input>
+    is inside a transformed ancestor (e.g., .head-search { transform: scale(2) ... }).
+    Solution: On iOS, remove the transform from .head-search and instead scale the
+    individual pills with explicit sizing (non-transform), so the visual layout remains
+    the same while the caret behaves normally.
+  */
+  html.ios .head-search{ transform: none !important; }
+
+  /* Restore the same 2x visual size without transforms */
+  html.ios .head-search-box{
+    height: 56px !important;              /* 28px * 2 */
+    padding: 0 20px !important;           /* 10px * 2 */
+    gap: 12px !important;                 /* 6px * 2 */
+    max-width: 572px !important;          /* 286px * 2 (matches your latest width tweaks) */
+    width: min(572px, 88vw) !important;
+    border-radius: 999px !important;
+  }
+  html.ios .head-search-icon{
+    width: 28px !important;
+    height: 28px !important;
+  }
+  html.ios .head-search-icon svg{
+    width: 28px !important;
+    height: 28px !important;
+  }
+  html.ios #nlSearch{
+    font-size: 24px !important;           /* 12px * 2 */
+    line-height: 1.1 !important;
+  }
+  html.ios .head-search-clear{
+    font-size: 32px !important;           /* 16px * 2 */
+  }
+
+  /* Pills */
+  html.ios .state-btn,
+  html.ios .event-btn,
+  html.ios .year-btn,
+  html.ios .guest-btn{
+    height: 56px !important;
+    padding: 0 24px !important;
+    font-size: 24px !important;
+  }
+
+  /* Dropdown menus scale to match */
+  html.ios .state-menu,
+  html.ios .event-menu,
+  html.ios .year-menu,
+  html.ios .guest-menu{
+    transform: none !important;
+    font-size: 24px !important;
+  }
+
+  /* Ensure the green bar has enough vertical room for the now truly 2x pills */
+  html.ios .sticky-head{
+    padding-top: 28px !important;
+    padding-bottom: 28px !important;
+  }
+
+  /* Keep the controls aligned vertically on iOS */
+  html.ios .head-search,
+  html.ios .state-filter,
+  html.ios .event-filter,
+  html.ios .year-filter,
+  html.ios .guest-filter{
+    bottom: 6px !important;
+  }
+</style>
+
 </head>
 <body>
 <div class="header-freeze">
@@ -2922,7 +3002,7 @@ body { overflow-y: auto; }
 <path d="M10 18a8 8 0 1 1 5.292-14.001A8 8 0 0 1 10 18Zm11.707 2.293-5.4-5.4a10 10 0 1 0-1.414 1.414l5.4 5.4a1 1 0 0 0 1.414-1.414Z"></path>
 </svg>
 </span>
-<input autocomplete="off" id="nlSearch" placeholder='Filter (e.g., "boston", "maine", "gym name")' spellcheck="false" type="text"/>
+<input autocomplete="off" id="nlSearch" placeholder='Filter (e.g., "bos", "maine", "gym name")' spellcheck="false" type="text"/>
 <button aria-label="Clear filter" class="head-search-clear" title="Clear" type="button">×</button>
 </div>
 <div aria-label="Filter by state" class="event-filter">
@@ -3718,164 +3798,6 @@ function applySearch(){
   // Also re-run after any filter re-render (custom event hook if present)
   document.addEventListener('any:rerender', function(){ setTimeout(ensureSpacer, 0); });
 
-})();
-</script>
-
-<script>
-/* === iOS caret fix (no visual/layout changes): use an overlay input that is NOT inside transformed ancestors === */
-(function(){
-  const ua = navigator.userAgent || "";
-  const isIOS = /iP(hone|od|ad)/.test(ua) || (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
-  if(!isIOS) return;
-
-  const real = document.getElementById('nlSearch');
-  if(!real) return;
-
-  const clearBtn = document.querySelector('.head-search-clear');
-  let overlay = null;
-  let active = false;
-
-  function num(v){ const n = parseFloat(v); return isFinite(n) ? n : 0; }
-
-  function ensureOverlay(){
-    if(overlay) return overlay;
-    overlay = document.createElement('input');
-    overlay.type = real.type || 'text';
-    overlay.autocomplete = 'off';
-    overlay.spellcheck = false;
-    overlay.setAttribute('aria-label', real.getAttribute('aria-label') || 'Search');
-    overlay.id = 'nlSearch_overlay';
-    overlay.style.position = 'fixed';
-    overlay.style.zIndex = '99999';
-    overlay.style.display = 'none';
-    overlay.style.boxSizing = 'border-box';
-    overlay.style.webkitAppearance = 'none';
-    overlay.style.appearance = 'none';
-    overlay.style.backgroundClip = 'padding-box';
-
-    // Sync typing back to the real input (keeps existing filtering logic)
-    overlay.addEventListener('input', () => {
-      real.value = overlay.value;
-      real.dispatchEvent(new Event('input', { bubbles: true }));
-      real.dispatchEvent(new Event('keyup', { bubbles: true }));
-    });
-
-    overlay.addEventListener('keydown', (e) => {
-      // Escape clears
-      if(e.key === 'Escape'){
-        overlay.value = '';
-        real.value = '';
-        real.dispatchEvent(new Event('input', { bubbles: true }));
-        if(clearBtn) clearBtn.click();
-      }
-    });
-
-    overlay.addEventListener('blur', () => {
-      active = false;
-      overlay.style.display = 'none';
-      // keep real value in sync (already)
-    });
-
-    document.body.appendChild(overlay);
-    return overlay;
-  }
-
-  function computeScale(){
-    const rect = real.getBoundingClientRect();
-    const ow = real.offsetWidth || rect.width || 1;
-    return rect.width / ow;
-  }
-
-  function applyScaledStyles(scale){
-    const cs = window.getComputedStyle(real);
-
-    // Copy non-numeric styles directly
-    overlay.style.fontFamily = cs.fontFamily;
-    overlay.style.fontWeight = cs.fontWeight;
-    overlay.style.fontStyle = cs.fontStyle;
-    overlay.style.color = cs.color;
-    overlay.style.backgroundColor = cs.backgroundColor;
-    overlay.style.borderStyle = cs.borderStyle;
-    overlay.style.borderColor = cs.borderColor;
-    overlay.style.boxShadow = cs.boxShadow;
-    overlay.style.outline = cs.outline;
-    overlay.style.textAlign = cs.textAlign;
-    overlay.style.caretColor = cs.caretColor || 'auto';
-
-    // Numeric styles scaled (so the overlay looks identical to the transformed real input)
-    overlay.style.fontSize = (num(cs.fontSize) * scale) + 'px';
-    overlay.style.lineHeight = (num(cs.lineHeight) * scale) + 'px';
-    overlay.style.letterSpacing = (num(cs.letterSpacing) * scale) + 'px';
-
-    overlay.style.paddingLeft = (num(cs.paddingLeft) * scale) + 'px';
-    overlay.style.paddingRight = (num(cs.paddingRight) * scale) + 'px';
-    overlay.style.paddingTop = (num(cs.paddingTop) * scale) + 'px';
-    overlay.style.paddingBottom = (num(cs.paddingBottom) * scale) + 'px';
-
-    overlay.style.borderWidth = (num(cs.borderTopWidth) * scale) + 'px';
-    overlay.style.borderRadius = (num(cs.borderTopLeftRadius) * scale) + 'px';
-
-    // Ensure placeholder looks the same
-    overlay.placeholder = real.placeholder || '';
-  }
-
-  function positionOverlay(){
-    const rect = real.getBoundingClientRect();
-    overlay.style.left = rect.left + 'px';
-    overlay.style.top = rect.top + 'px';
-    overlay.style.width = rect.width + 'px';
-    overlay.style.height = rect.height + 'px';
-  }
-
-  function openOverlay(){
-    ensureOverlay();
-    const scale = computeScale();
-
-    // keep the real input from ever focusing (prevents iOS caret bug entirely)
-    real.readOnly = true;
-
-    // mirror current value/placeholder and style
-    overlay.value = real.value || '';
-    applyScaledStyles(scale);
-    positionOverlay();
-
-    overlay.style.display = 'block';
-    active = true;
-
-    // Focus and force caret at true start
-    overlay.focus({ preventScroll: true });
-    try{
-      overlay.setSelectionRange(0, 0);
-    }catch(_){}
-  }
-
-  function intercept(e){
-    // only when tapping into the field (not when already typing)
-    if(active) return;
-    e.preventDefault();
-    e.stopPropagation();
-    openOverlay();
-  }
-
-  // Intercept touch/click on the REAL input so it never gets iOS caret rendering
-  real.addEventListener('touchstart', intercept, { passive: false, capture: true });
-  real.addEventListener('mousedown', intercept, { capture: true });
-  real.addEventListener('click', intercept, { capture: true });
-
-  // Keep overlay positioned if the viewport changes while typing
-  window.addEventListener('scroll', () => { if(active && overlay){ positionOverlay(); } }, { passive: true });
-  window.addEventListener('resize', () => { if(active && overlay){ positionOverlay(); } }, { passive: true });
-
-  // Ensure Clear button clears both
-  if(clearBtn){
-    clearBtn.addEventListener('click', () => {
-      if(overlay){
-        overlay.value = '';
-        overlay.dispatchEvent(new Event('input', { bubbles: true }));
-      }
-      real.value = '';
-    }, true);
-  }
 })();
 </script>
 </body>
