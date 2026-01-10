@@ -1115,6 +1115,8 @@ body {
   font-size: 11px !important;
   line-height: 28px !important;
   margin: 0 8px !important;
+  padding-left: 0.9ch !important;
+  box-sizing: border-box !important;
 }
 
 /* --- Narrow STATE pill width only --- */
@@ -2922,7 +2924,7 @@ body { overflow-y: auto; }
 <path d="M10 18a8 8 0 1 1 5.292-14.001A8 8 0 0 1 10 18Zm11.707 2.293-5.4-5.4a10 10 0 1 0-1.414 1.414l5.4 5.4a1 1 0 0 0 1.414-1.414Z"></path>
 </svg>
 </span>
-<input autocomplete="off" id="nlSearch" placeholder='Filter (e.g., "bos", "maine", "gym name")' spellcheck="false" type="text"/>
+<input autocomplete="off" id="nlSearch" placeholder='Filter (e.g., "boston", "maine", "gym name")' spellcheck="false" type="text"/>
 <button aria-label="Clear filter" class="head-search-clear" title="Clear" type="button">×</button>
 </div>
 <div aria-label="Filter by state" class="event-filter">
@@ -3720,17 +3722,5 @@ function applySearch(){
 
 })();
 </script>
-<style>
-/* index247: iOS-only shift typing start (workaround for caret/text mismatch under scaled header) */
-@supports (-webkit-touch-callout: none){
-  @media (max-width: 900px){
-    /* Override the FINAL #nlSearch padding:0 !important by setting an explicit left inset */
-    #nlSearch{
-      padding: 0 0 0 1.0ch !important;
-      -webkit-text-size-adjust: 100%;
-    }
-  }
-}
-</style>
 </body>
 </html>
