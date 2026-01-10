@@ -2611,58 +2611,6 @@ body { overflow-y: auto; }
   max-width: 175px !important; /* room for icon + gap */
 }
 
-
-/* =======================================================================
-   iOS caret fix: remove transform scaling on the SEARCH pill only.
-   The previous .head-search { transform: scale(2) ... } causes iOS Safari
-   to render the caret 1 glyph ahead. We keep the *same visual size* by
-   doubling the explicit dimensions instead of scaling.
-   ======================================================================= */
-@supports (-webkit-touch-callout: none) {
-  @media (max-width: 900px) {
-    /* Replace scale(2) translateX(-14px) with an equivalent translate only.
-       (scale(2) translateX(-14px) visually translates ~-28px) */
-    .head-search{
-      transform: translateX(-28px) !important;
-      transform-origin: bottom left !important;
-    }
-
-    /* Match the *scaled* visual size with real dimensions (2x) */
-    .head-search-box{
-      height: 56px !important;
-      min-height: 56px !important;
-      padding: 0 20px !important;
-      gap: 12px !important;
-      max-width: 580px !important;
-      width: min(580px, 88vw) !important;
-      box-sizing: border-box !important;
-    }
-
-    .head-search-icon{
-      width: 28px !important;
-      height: 28px !important;
-    }
-    .head-search-icon svg{
-      width: 28px !important;
-      height: 28px !important;
-    }
-
-    #nlSearch{
-      font-size: 22px !important;
-      line-height: 56px !important;
-      margin: 0 16px !important;
-      padding: 0 !important;
-      -webkit-appearance: none !important;
-      appearance: none !important;
-    }
-
-    .head-search-clear{
-      font-size: 32px !important;
-      line-height: 1 !important;
-    }
-  }
-}
-
 </style>
 <style>
 /* Shift OTA value left slightly without affecting other columns */
@@ -2951,6 +2899,78 @@ body { overflow-y: auto; }
   }
 </style>
 
+
+<style id="ios-caret-fix-no-transform">
+/* === Index253: iOS caret fix by removing ALL transforms from the SEARCH cluster (input cannot be inside transformed ancestors on iOS)
+   Keep the same *visual* size as the previous scale(2) design by doubling real dimensions instead of scaling.
+   This block is intentionally placed just before </head> so it wins the cascade.
+*/
+@supports (-webkit-touch-callout: none) {
+  @media (max-width: 900px) {
+
+    /* 1) Remove transform scaling/translation from the wrapper that contains the input */
+    .head-search{
+      transform: none !important;
+      transform-origin: bottom left !important;
+      /* Match the previous visual left shift of translateX(-14px) while using real sizing */
+      left: calc(var(--left-gutter, 28px) - 14px) !important;
+    }
+
+    /* Also ensure no transform is applied to the pill container itself */
+    .head-search-box{
+      transform: none !important;
+    }
+
+    /* 2) Recreate the old scale(2) *visual* sizing using real dimensions */
+    .head-search-box,
+    .event-btn,
+    .year-btn,
+    .state-btn{
+      height: 56px !important;        /* 28px * 2 */
+      min-height: 56px !important;
+      border-radius: 999px !important;
+      padding: 0 20px !important;     /* 10px * 2 */
+      font-size: 22px !important;     /* 11px * 2 */
+      line-height: 56px !important;
+      box-sizing: border-box !important;
+    }
+
+    /* Search internals */
+    .head-search-icon{
+      width: 28px !important;
+      height: 28px !important;
+    }
+    .head-search-icon svg{
+      width: 28px !important;
+      height: 28px !important;
+    }
+
+    #nlSearch{
+      height: 100% !important;
+      font-size: 22px !important;
+      line-height: 56px !important;
+      padding: 0 !important;
+      margin: 0 16px !important;      /* 8px * 2 */
+      box-sizing: border-box !important;
+      -webkit-appearance: none !important;
+      appearance: none !important;
+    }
+
+    .head-search-clear{
+      font-size: 32px !important;     /* 16px * 2 */
+      line-height: 1 !important;
+      padding: 0 4px !important;      /* 2px * 2 */
+    }
+
+    /* Keep the green bar vertical room consistent with the previous scale(2) layout */
+    .sticky-head{
+      padding-top: 28px !important;
+      padding-bottom: 28px !important;
+    }
+  }
+}
+</style>
+
 </head>
 <body>
 <div class="header-freeze">
@@ -2974,7 +2994,7 @@ body { overflow-y: auto; }
 <path d="M10 18a8 8 0 1 1 5.292-14.001A8 8 0 0 1 10 18Zm11.707 2.293-5.4-5.4a10 10 0 1 0-1.414 1.414l5.4 5.4a1 1 0 0 0 1.414-1.414Z"></path>
 </svg>
 </span>
-<input autocomplete="off" id="nlSearch" placeholder='Filter (e.g., "bos", "maine", "gym name")' spellcheck="false" type="text"/>
+<input autocomplete="off" id="nlSearch" placeholder='Filter (e.g., "boston", "maine", "gym name")' spellcheck="false" type="text"/>
 <button aria-label="Clear filter" class="head-search-clear" title="Clear" type="button">×</button>
 </div>
 <div aria-label="Filter by state" class="event-filter">
