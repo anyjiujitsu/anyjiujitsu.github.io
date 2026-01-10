@@ -1114,9 +1114,9 @@ body {
   height: 100% !important;
   font-size: 11px !important;
   line-height: 28px !important;
-  margin: 0 8px !important;
-  padding-left: 0.9ch !important;
-  box-sizing: border-box !important;
+  /* Move caret/text start visually LEFT by reducing the left inset inside the pill (mobile/iOS workaround) */
+  margin: 0 8px 0 calc(8px - 0.9ch) !important;
+  padding-left: 0 !important;
 }
 
 /* --- Narrow STATE pill width only --- */
