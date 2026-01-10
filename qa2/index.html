@@ -1117,16 +1117,6 @@ body {
   margin: 0 8px !important;
 }
 
-
-/* iOS mobile caret/typing alignment: shift the input itself slightly left without changing pill layout */
-@supports (-webkit-touch-callout: none) {
-  @media (max-width: 900px) {
-    #nlSearch{
-      position: relative !important;
-      left: -0.9ch !important;
-    }
-  }
-}
 /* --- Narrow STATE pill width only --- */
 .state-btn{
   min-width: 90px !important;
@@ -2907,6 +2897,77 @@ body { overflow-y: auto; }
   .group-label{
     transform: translateX(30px) !important;
   }
+
+
+/* === Block 251 ===
+   iOS Safari caret fix: remove transform scaling from .head-search (caret rendering breaks inside transformed ancestors),
+   while preserving the *same* visual size/placement of the pills.
+   - We keep the overall header/pill layout unchanged.
+   - On iOS + mobile only:
+       • .head-search wrapper is no longer transformed
+       • SEARCH pill is made truly 2x via sizing (no transforms on any ancestor of the input)
+       • EVENTS/YEARS/STATES pills are scaled 2x individually (safe: no text input inside)
+*/
+@media (max-width: 900px){
+  @supports (-webkit-touch-callout: none){
+
+    /* 1) Remove the conflicting transform from the wrapper (this is what breaks caret rendering) */
+    .head-search{
+      transform: none !important;
+      transform-origin: bottom left !important;
+    }
+
+    /* 2) Make SEARCH pill truly 2x sized (no transforms; keeps input in a non-transformed coordinate space) */
+    .head-search-box{
+      height: 56px !important;        /* 28px * 2 */
+      min-height: 56px !important;
+      border-radius: 999px !important;
+      padding: 0 16px !important;     /* 8px * 2 */
+      gap: 12px !important;           /* 6px * 2 */
+      max-width: 504px !important;    /* 252px * 2 (current tuned width) */
+      width: min(504px, 88vw) !important; /* 44vw * 2 */
+      box-sizing: border-box !important;
+    }
+    .head-search-icon{
+      width: 28px !important;
+      height: 28px !important;
+    }
+    .head-search-icon svg{
+      width: 28px !important;
+      height: 28px !important;
+    }
+    #nlSearch{
+      height: 100% !important;
+      font-size: 22px !important;     /* 11px * 2 */
+      line-height: 56px !important;   /* 28px * 2 */
+      margin: 0 16px !important;      /* 8px * 2 */
+      padding: 0 !important;          /* keep your original intent */
+      background: transparent !important;
+      -webkit-appearance: none !important;
+      appearance: none !important;
+    }
+    .head-search-clear{
+      font-size: 32px !important;     /* 16px * 2 */
+      line-height: 1 !important;
+      padding: 0 4px !important;      /* 2px * 2 */
+    }
+
+    /* 3) Preserve the visual 2x size & placement of the other pills by scaling them individually.
+          (Translate values remain the same; because scale is applied first, the translate is effectively doubled.) */
+    .event-filter{
+      transform: scale(2) translateX(70px) translateY(6px) !important;
+      transform-origin: bottom left !important;
+    }
+    .year-filter{
+      transform: scale(2) translateX(-76px) translateY(6px) !important;
+      transform-origin: bottom left !important;
+    }
+    .state-filter{
+      transform: scale(2) translateX(-50px) translateY(6px) !important;
+      transform-origin: bottom left !important;
+    }
+  }
+}
 </style>
 
 </head>
@@ -2932,7 +2993,7 @@ body { overflow-y: auto; }
 <path d="M10 18a8 8 0 1 1 5.292-14.001A8 8 0 0 1 10 18Zm11.707 2.293-5.4-5.4a10 10 0 1 0-1.414 1.414l5.4 5.4a1 1 0 0 0 1.414-1.414Z"></path>
 </svg>
 </span>
-<input autocomplete="off" id="nlSearch" placeholder='Filter (e.g., "bost", "maine", "gym name")' spellcheck="false" type="text"/>
+<input autocomplete="off" id="nlSearch" placeholder='Filter (e.g., "boston", "maine", "gym name")' spellcheck="false" type="text"/>
 <button aria-label="Clear filter" class="head-search-clear" title="Clear" type="button">×</button>
 </div>
 <div aria-label="Filter by state" class="event-filter">
