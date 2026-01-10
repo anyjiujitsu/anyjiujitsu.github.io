@@ -584,6 +584,8 @@ display:flex;
       z-index:60;
       pointer-events:auto;
     }
+      transform: none;
+    }
 
     .head-search-box{
       display:flex;
@@ -661,14 +663,14 @@ display:flex;
       transform: none !important;
     }
 
-    /* Override: move ONLY the search bar right 5x; undo table-alignment for search */
+    /* Override: move ONLY the search bar right (no transforms — iOS caret bug workaround) */
     .head-search{
-      left: auto !important;
+      left: calc(var(--table-start) + 28px) !important;
       right: auto !important;
-      transform: translateX(28px) !important;
+      transform: none !important;
     }
 
-    /* --- State multi-select dropdown (separate from search) --- */
+/* --- State multi-select dropdown (separate from search) --- */
     .state-filter{
       position:absolute;
       bottom:6px; /* match search bar vertical position */
@@ -1490,7 +1492,7 @@ body{
 /* === v102: Actually scale the entire nav pill cluster (SEARCH / EVENTS / YEARS / STATES) 2x === */
 /* These four controls all live inside .head-search, so scaling this wrapper scales them equally. */
 .head-search{
-  transform: none !important;
+  transform: scale(2) !important;
   transform-origin: bottom left !important; /* keep the cluster anchored to the green bar */
 }
 
@@ -1517,7 +1519,7 @@ body{
 
 /* Shift EVENTS / YEARS / STATES group slightly left */
 .head-search {
-  transform: none !important;
+  transform: scale(2) translateX(-12px) !important;
   transform-origin: bottom left;
 }
 
@@ -1532,7 +1534,7 @@ body{
 
 /* Shift EVENTS / YEARS / STATES group 2px further left */
 .head-search {
-  transform: none !important; /* was -12px */
+  transform: scale(2) translateX(-14px) !important; /* was -12px */
   transform-origin: bottom left;
 }
 
@@ -2922,7 +2924,7 @@ body { overflow-y: auto; }
 <path d="M10 18a8 8 0 1 1 5.292-14.001A8 8 0 0 1 10 18Zm11.707 2.293-5.4-5.4a10 10 0 1 0-1.414 1.414l5.4 5.4a1 1 0 0 0 1.414-1.414Z"></path>
 </svg>
 </span>
-<input autocomplete="off" id="nlSearch" placeholder='Filter (e.g., "bos", "maine", "gym name")' spellcheck="false" type="text"/>
+<input autocomplete="off" id="nlSearch" placeholder='Filter (e.g., "boston", "maine", "gym name")' spellcheck="false" type="text"/>
 <button aria-label="Clear filter" class="head-search-clear" title="Clear" type="button">×</button>
 </div>
 <div aria-label="Filter by state" class="event-filter">
