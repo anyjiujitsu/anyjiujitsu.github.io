@@ -1,2 +1,2 @@
 # anyjiujitsu.github.io
-ANY N.E. JiuJitsu
+ANY N.E. GRAPPLING
