@@ -24,7 +24,8 @@ export const state = {
 };
 
 export function setView(v){
-  state.view = (v === "index") ? "index" : "events";
+  // View lock: Events only (Index view under development)
+  state.view = "events";
 }
 
 export function setIndexQuery(q){ state.index.q = String(q ?? ""); }
