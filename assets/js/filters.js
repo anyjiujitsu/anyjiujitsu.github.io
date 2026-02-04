@@ -28,6 +28,87 @@ function includesAllWords(hay, needle){
   return words.every(w => h.includes(w));
 }
 
+// --- EVENTS: special search token helpers ---
+// The UI shows *NEW based on the CREATED field being within the last 4 days (see render.js).
+// We mirror that exact condition here for search token "new events".
+function parseEventDate(str){
+  const s = String(str ?? "").trim();
+  if(!s) return null;
+
+  // MM/DD/YYYY or M/D/YYYY
+  let m = s.match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})$/);
+  if(m){
+    const mm = Number(m[1]);
+    const dd = Number(m[2]);
+    const yy = Number(m[3]);
+    const d = new Date(yy, mm-1, dd);
+    return isNaN(d) ? null : d;
+  }
+
+  // MM/DD/YY or M/D/YY (assume 20YY)
+  m = s.match(/^(\d{1,2})\/(\d{1,2})\/(\d{2})$/);
+  if(m){
+    const mm = Number(m[1]);
+    const dd = Number(m[2]);
+    const yy = 2000 + Number(m[3]);
+    const d = new Date(yy, mm-1, dd);
+    return isNaN(d) ? null : d;
+  }
+
+  // ISO YYYY-MM-DD
+  m = s.match(/^(\d{4})-(\d{2})-(\d{2})$/);
+  if(m){
+    const yy = Number(m[1]);
+    const mm = Number(m[2]);
+    const dd = Number(m[3]);
+    const d = new Date(yy, mm-1, dd);
+    return isNaN(d) ? null : d;
+  }
+
+  const d = new Date(s);
+  return isNaN(d) ? null : d;
+}
+
+function createdDateFromRow(row){
+  const createdRaw = String(row?.CREATED ?? "").trim();
+  if(!createdRaw) return null;
+
+  // Try native parsing first (handles ISO and many formats)
+  const ms = Date.parse(createdRaw);
+  if(!Number.isNaN(ms)) return new Date(ms);
+
+  // Fallback: date-only formats
+  try{ return parseEventDate(createdRaw); }catch(e){ return null; }
+}
+
+function isRowNew(row){
+  const d = createdDateFromRow(row);
+  if(!d) return false;
+
+  const now = new Date();
+  // local midnight cutoff to match render.js behavior
+  const mid = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+  mid.setDate(mid.getDate() - 4);
+  return d >= mid;
+}
+
+function extractNewEventsToken(q){
+  // Detect the phrase "new events" (any case). If present, remove it from the remaining query
+  // so normal text matching doesn't require the word "events" to exist in the row text.
+  const raw = String(q ?? "");
+  const n = norm(raw);
+  const wantsNew = n.includes("new events");
+  if(!wantsNew) return { wantsNew:false, remaining: raw };
+
+  const remainingNorm = n
+    .replace(/\bnew\s+events\b/g, " ")
+    .replace(/\s+/g, " ")
+    .trim();
+
+  return { wantsNew:true, remaining: remainingNorm };
+}
+
+
 function monthYearLabel(dateStr){
   const str = String(dateStr ?? "").trim();
   if(!str) return "";
@@ -135,10 +216,17 @@ export function filterEvents(rows, state){
   }
 
   // Search query
-  const cs = clauses(state.events.q);
-  if(!cs.length) return out;
+  const token = extractNewEventsToken(state.events.q);
+  const cs = clauses(token.remaining);
+  const wantsNew = token.wantsNew;
+
+  if(!cs.length && !wantsNew) return out;
 
   return out.filter(r=>{
+    if(wantsNew && !isRowNew(r)) return false;
+
+    if(!cs.length) return true;
+
     const group = monthYearLabel(r.DATE);
     const base = r.searchText ?? `${r.YEAR} ${r.STATE} ${r.CITY} ${r.GYM} ${r.TYPE} ${r.DATE}`;
     const hay = `${base} ${group}`;
