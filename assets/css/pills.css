@@ -1,3 +1,5 @@
+/* pills.css (split from components.css v28; order-preserving) */
+
 /* FILTER PILLS */
 .pillSelect{ position: relative; }
 
@@ -18,6 +20,7 @@
 
 .pill__icon{ font-size: 14px; opacity: 0.7; }
 
+/* keep 16px so iOS doesn't auto-zoom on focus */
 .pill__input{
   border: 0;
   outline: none;
@@ -66,7 +69,7 @@ line-height: 1;
   box-shadow: 0 0 0 2px rgba(209,108,78,0.45);
 }
 
-/* MENUS */
+/* MENUS (JS positions using viewport coords) */
 .menu{
   position: fixed;
   z-index: 1000;
