@@ -628,9 +628,13 @@ input, select, textarea, button {
       const csv = b64DecodeUnicode(data.content || "");
       const sha = data.sha;
 
-      let updated = csv;
+      /* let updated = csv;
       if (!updated.endsWith("\n")) updated += "\n";
-      updated += newRow + "\n";
+      updated += newRow + "\n"; */ //commented out for update
+
+      let updated = csv;
+      if (!updated.endsWith("\n")) updated += "\n"; // Ensure that the CSV ends with exactly one newline
+      updated += newRow; // Only add the new row without an additional newline
 
       const putUrl = "https://api.github.com/repos/" + encodeURIComponent(OWNER) + "/" + encodeURIComponent(REPO) +
         "/contents/" + CSV_PATH;
