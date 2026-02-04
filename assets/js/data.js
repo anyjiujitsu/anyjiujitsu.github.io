@@ -1,3 +1,5 @@
+// data102.js — CSV loading + normalization for BOTH views
+
 export async function loadCSV(url){
   const res = await fetch(url, { cache: "no-store" });
   if(!res.ok) throw new Error(`Failed to load CSV: ${res.status}`);
@@ -42,13 +44,14 @@ export function normalizeDirectoryRow(r){
   const IG    = (r.IG || "").trim();
   const SAT   = (r.SAT || "").trim();
   const SUN   = (r.SUN || "").trim();
-  const OTA   = (r.OTA || "").trim().toUpperCase();
+  const OTA   = (r.OTA || "").trim().toUpperCase(); // Y/N/blank
 
   const row = { STATE, CITY, NAME, IG, SAT, SUN, OTA };
   return { ...row, searchText: buildSearchText(row) };
 }
 
 export function normalizeEventRow(r){
+  // Flexible: accept common columns; fall back to any present keys.
   const YEAR  = (r.YEAR || r.Year || "").trim();
   const STATE = (r.STATE || r.State || "").trim().toUpperCase();
   const CITY  = (r.CITY || r.City || "").trim();
@@ -58,5 +61,6 @@ export function normalizeEventRow(r){
   const CREATED = (r.CREATED || r.Created || "").trim();
 
   const row = { YEAR, STATE, CITY, GYM, TYPE, DATE, CREATED };
+  // keep all originals too (so render can show additional fields later)
   return { ...r, ...row, searchText: buildSearchText({ ...r, ...row }) };
 }
