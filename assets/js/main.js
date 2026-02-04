@@ -1,7 +1,7 @@
-import { loadCSV, normalizeDirectoryRow, normalizeEventRow } from "./data.js?v=20260202-321";
-import { state, setView, setIndexQuery, setEventsQuery } from "./state.js?v=20260202-321";
-import { filterDirectory, filterEvents } from "./filters.js?v=20260202-321";
-import { renderDirectoryGroups, renderEventsGroups } from "./render.js?v=20260202-321";
+import { loadCSV, normalizeDirectoryRow, normalizeEventRow } from "./data.js?v=20260202-301";
+import { state, setView, setIndexQuery, setEventsQuery } from "./state.js?v=20260202-301";
+import { filterDirectory, filterEvents } from "./filters.js?v=20260202-301";
+import { renderDirectoryGroups, renderEventsGroups } from "./render.js?v=20260202-301";
 
 let directoryRows = [];
 let eventRows = [];
@@ -383,7 +383,7 @@ function setViewUI(view){
   if(evStatus) evStatus.hidden = (view !== "events");
   if(idxStatus) idxStatus.hidden = (view !== "index");
 
-  document.title = (view === "events") ? "ANY N.E. GRAPPLING" : "ANY N.E. GRAPPLING";
+  document.title = (view === "events") ? "ANY N.E. â€“ EVENTS" : "ANY N.E. â€“ GYM INDEX";
 
   setTransition(260);
   applyProgress(view === "index" ? 1 : 0);
@@ -722,26 +722,4 @@ init().catch((err)=>{
   console.error(err);
   $("status").textContent = "Failed to load data";
   $("eventsStatus").textContent = "Failed to load data";
-});
-
-// Custom filter for 'CUSTOM' input to filter the first Saturday after today
-document.querySelector('#searchBar').addEventListener('input', function(event) {
-    const searchValue = event.target.value.trim().toLowerCase();
-    
-    if (searchValue === 'custom') {
-        // Get today's date
-        const today = new Date();
-        const firstSaturday = new Date(today);
-        firstSaturday.setDate(today.getDate() + (6 - today.getDay() + 7) % 7); // First Saturday after today
-        
-        const formattedSaturday = firstSaturday.toLocaleDateString(); // Format the date
-
-        const filteredEvents = eventRows.filter(event => {
-            const eventDate = new Date(event.DATE).toLocaleDateString();
-            return eventDate === formattedSaturday;
-        });
-
-        // Call the render function to display the filtered events
-        renderEventsGroups(filteredEvents);
-    }
 });
