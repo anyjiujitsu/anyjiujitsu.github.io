@@ -716,7 +716,7 @@ nav.filters, .filters__inner, .pillRow{
 
 #viewEvents .row.row--events .cell--forwhere .cell__top{
   letter-spacing: -0.02em;
-  font-stretch: condensed;
+  font-stretch: ; /* TESTFONT */
 }
 
 #viewEvents .row.row--events .cell__sub{
