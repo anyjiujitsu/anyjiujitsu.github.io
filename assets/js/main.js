@@ -383,7 +383,7 @@ function setViewUI(view){
   if(evStatus) evStatus.hidden = (view !== "events");
   if(idxStatus) idxStatus.hidden = (view !== "index");
 
-  document.title = (view === "events") ? "ANY N.E. â€“ EVENTS" : "ANY N.E. â€“ GYM INDEX";
+  document.title = (view === "events") ? "ANY N.E. GRAPPLING" : "ANY N.E. GRAPPLING";
 
   setTransition(260);
   applyProgress(view === "index" ? 1 : 0);
@@ -694,8 +694,8 @@ async function init(){
   state.view = "events";
   setViewUI("events");
 
-  $("status").textContent = "Loadingâ€¦";
-  $("eventsStatus").textContent = "Loadingâ€¦";
+  $("status").textContent = "Loading...";
+  $("eventsStatus").textContent = "Loading...";
 
   const [dirRaw, evRaw] = await Promise.all([
     loadCSV("data/directory.csv"),
