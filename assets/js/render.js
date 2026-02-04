@@ -1,3 +1,6 @@
+// render104.js — Restore original DOM/CSS contract + Events grouped by Month-Year
+// Exports MUST match main.js imports: renderDirectoryGroups, renderEventsGroups
+
 export function renderStateMenu(stateListEl, allStates, selectedSet){
   if(!stateListEl) return;
   stateListEl.innerHTML = "";
@@ -285,15 +288,4 @@ function escapeHtml(s){
     .replaceAll(">","&gt;")
     .replaceAll('"',"&quot;")
     .replaceAll("'","&#039;");
-}
-
-// Function to render filtered events
-export function renderFilteredEvents(filteredEvents) {
-    if (!filteredEvents || filteredEvents.length === 0) {
-        console.log("No events found for today's date.");
-        return;
-    }
-    const root = document.getElementById("eventsRoot"); // Assuming an ID to append the events
-    root.innerHTML = ""; // Clear current content
-    filteredEvents.forEach(event => renderEventRow(event)); // Use existing renderEventRow logic
 }
