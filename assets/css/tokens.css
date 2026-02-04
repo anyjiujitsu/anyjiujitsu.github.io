@@ -38,7 +38,7 @@
 /* Permanent compact mobile density */
 @media (max-width: 430px){
   :root{
-    /* Permanent compact mobile density (iter120) ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â stronger */
+    /* Permanent compact mobile density (iter120) ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â stronger */
     --pagePad: 3px;
 
     /* Header */
