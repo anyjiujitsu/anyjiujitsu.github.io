@@ -1,10 +1,13 @@
-import { loadCSV, normalizeDirectoryRow, normalizeEventRow } from "./data.js?v=20260123-016";
-import { state, setView, setIndexQuery, setEventsQuery } from "./state.js?v=20260123-016";
-import { filterDirectory, filterEvents } from "./filters.js?v=20260123-016";
-import { renderDirectoryGroups, renderEventsGroups } from "./render.js?v=20260123-016";
+import { loadCSV, normalizeDirectoryRow, normalizeEventRow } from "./data.js?v=20260202-321";
+import { state, setView, setIndexQuery, setEventsQuery } from "./state.js?v=20260202-321";
+import { filterDirectory, filterEvents } from "./filters.js?v=20260202-321";
+import { renderDirectoryGroups, renderEventsGroups } from "./render.js?v=20260202-321";
 
 let directoryRows = [];
 let eventRows = [];
+
+// TEMP: lock app to Events while Index view is being rebuilt
+const VIEW_LOCKED = true;
 
 function $(id){ return document.getElementById(id); }
 
@@ -392,6 +395,23 @@ function wireViewToggle(){
   const viewToggle = $("viewToggle");
   const viewShell  = $("viewShell");
 
+  // View lock: disable toggle + swipe and force Events
+  if(VIEW_LOCKED){
+    setView("events");
+    setViewUI("events");
+
+    if(viewToggle){
+      viewToggle.classList.add("viewToggle--locked");
+      viewToggle.setAttribute("aria-disabled", "true");
+    }
+    // keep focus from landing on disabled control
+    tabEvents?.setAttribute("tabindex", "-1");
+    tabIndex?.setAttribute("tabindex", "-1");
+    tabEvents?.setAttribute("aria-disabled", "true");
+    tabIndex?.setAttribute("aria-disabled", "true");
+    return;
+  }
+
   tabEvents?.addEventListener("click", () => setViewUI("events"));
   tabIndex?.addEventListener("click", () => setViewUI("index"));
 
@@ -670,7 +690,9 @@ async function init(){
   wireSearch();
 
   if(!state.view) state.view = "events";
-  setViewUI(state.view);
+  setView("events");
+  state.view = "events";
+  setViewUI("events");
 
   $("status").textContent = "Loadingâ€¦";
   $("eventsStatus").textContent = "Loadingâ€¦";
