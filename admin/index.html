@@ -600,7 +600,8 @@ input, select, textarea, button {
   }
 
   function b64DecodeUnicode(str){
-    str = (str || "").replace(/\n/g,"");
+    str = (str || "").replace(/[
+]/g,"");
     const bin = atob(str);
     const bytes = Uint8Array.from(bin, c => c.charCodeAt(0));
     return new TextDecoder("utf-8").decode(bytes);
@@ -628,40 +629,31 @@ input, select, textarea, button {
       const csv = b64DecodeUnicode(data.content || "");
       const sha = data.sha;
 
-      /* previous append logic kept for reference
-      let updated = csv;
-      if (!updated.endsWith("
-")) updated += "
-";
-      updated += newRow + "
-";
-      */
-
-      // Normalize line endings and prevent blank lines being inserted.
-      // Root cause: existing CSV often ends with multiple 
- characters; appending after that
-      // creates visual "blank rows" between the last real row and the new one.
-      const normalized = String(csv || "").replace(/
+      /* let updated = csv
+        .replace(/
 /g, "
-").replace(/
+")
+        .replace(/
 /g, "
 ");
-      const trimmed = normalized.replace(/
-+$/g, ""); // remove ALL trailing newlines
-      const row = String(newRow || "")
-        .replace(/
-/g, "
-")
-        .replace(/
-/g, "
-")
-        .replace(/
-+$/g, ""); // ensure the row itself has no trailing newline(s)
 
-      // Rebuild with exactly ONE newline between rows and ONE newline at EOF.
-      const updated = (trimmed ? (trimmed + "
-") : "") + row + "
+      // Remove ALL trailing blank lines (even if they contain spaces/tabs)
+      updated = updated.replace(/[ 	]*
++$/g, "");
+
+      // Force the new row to be a single physical CSV line (no embedded newlines)
+      const safeRow = String(newRow).replace(/[
+]+/g, "").trim();
+
+      // Append with exactly ONE newline between rows, and one newline at EOF
+      updated = updated + "
+" + safeRow + "
 ";
+*/ //commented out for update
+
+      let updated = csv;
+      if (!updated.endsWith("\n")) updated += "\n"; // Ensure that the CSV ends with exactly one newline
+      updated += newRow; // Only add the new row without an additional newline
 
       const putUrl = "https://api.github.com/repos/" + encodeURIComponent(OWNER) + "/" + encodeURIComponent(REPO) +
         "/contents/" + CSV_PATH;
