@@ -108,6 +108,53 @@ function extractNewEventsToken(q){
   return { wantsNew:true, remaining: remainingNorm };
 }
 
+// TESTING START
+function startOfWeekMonday(d){
+  // Week = Monday..Sunday (so “this weekend” means Sat/Sun of the current Mon–Sun week)
+  const x = new Date(d.getFullYear(), d.getMonth(), d.getDate());
+  const dow = x.getDay(); // 0=Sun..6=Sat
+  const offset = (dow + 6) % 7; // Mon=0, Tue=1, ... Sun=6
+  x.setDate(x.getDate() - offset);
+  return x;
+}
+
+function sameYMD(a, b){
+  return a && b
+    && a.getFullYear() === b.getFullYear()
+    && a.getMonth() === b.getMonth()
+    && a.getDate() === b.getDate();
+}
+
+function weekendDatesForCurrentWeek(){
+  const now = new Date();
+  const mon = startOfWeekMonday(now);
+  const sat = new Date(mon); sat.setDate(mon.getDate() + 5);
+  const sun = new Date(mon); sun.setDate(mon.getDate() + 6);
+  return { sat, sun };
+}
+
+function isRowThisWeekend(row){
+  const d = parseEventDate(row?.DATE);
+  if(!d) return false;
+  const { sat, sun } = weekendDatesForCurrentWeek();
+  return sameYMD(d, sat) || sameYMD(d, sun);
+}
+
+function extractThisWeekendToken(q){
+  // Detect phrase "this weekend" (any case), remove from remaining query.
+  const raw = String(q ?? "");
+  const n = norm(raw);
+  const wantsWeekend = n.includes("this weekend");
+  if(!wantsWeekend) return { wantsWeekend:false, remaining: raw };
+
+  const remainingNorm = n
+    .replace(/\bthis\s+weekend\b/g, " ")
+    .replace(/\s+/g, " ")
+    .trim();
+
+  return { wantsWeekend:true, remaining: remainingNorm };
+}
+//TESTING FINISH
 
 function monthYearLabel(dateStr){
   const str = String(dateStr ?? "").trim();
@@ -214,22 +261,49 @@ export function filterEvents(rows, state){
   if(typesSel && typesSel.size){
     out = out.filter(r => typesSel.has(String(r.TYPE ?? "").trim()));
   }
+//START TESTING
+  // // Search query
+  // const token = extractNewEventsToken(state.events.q);
+  // const cs = clauses(token.remaining);
+  // const wantsNew = token.wantsNew;
 
+  // if(!cs.length && !wantsNew) return out;
+
+  // return out.filter(r=>{
+  //   if(wantsNew && !isRowNew(r)) return false;
+
+  //   if(!cs.length) return true;
+
+  //   const group = monthYearLabel(r.DATE);
+  //   const base = r.searchText ?? `${r.YEAR} ${r.STATE} ${r.CITY} ${r.GYM} ${r.TYPE} ${r.DATE}`;
+  //   const hay = `${base} ${group}`;
+  //   return cs.every(c => includesAllWords(hay, c));
+  // }); 
+  //FINISH TESTING
+
+  //START TEST NEW
   // Search query
-  const token = extractNewEventsToken(state.events.q);
-  const cs = clauses(token.remaining);
-  const wantsNew = token.wantsNew;
+const tokenNew = extractNewEventsToken(state.events.q);
+const tokenWeekend = extractThisWeekendToken(tokenNew.remaining);
 
-  if(!cs.length && !wantsNew) return out;
+const cs = clauses(tokenWeekend.remaining);
+const wantsNew = tokenNew.wantsNew;
+const wantsWeekend = tokenWeekend.wantsWeekend;
 
-  return out.filter(r=>{
-    if(wantsNew && !isRowNew(r)) return false;
+if(!cs.length && !wantsNew && !wantsWeekend) return out;
 
-    if(!cs.length) return true;
+return out.filter(r=>{
+  if(wantsNew && !isRowNew(r)) return false;
+  if(wantsWeekend && !isRowThisWeekend(r)) return false;
 
-    const group = monthYearLabel(r.DATE);
-    const base = r.searchText ?? `${r.YEAR} ${r.STATE} ${r.CITY} ${r.GYM} ${r.TYPE} ${r.DATE}`;
-    const hay = `${base} ${group}`;
-    return cs.every(c => includesAllWords(hay, c));
-  });
+  if(!cs.length) return true;
+
+  const group = monthYearLabel(r.DATE);
+  const base = r.searchText ?? `${r.YEAR} ${r.STATE} ${r.CITY} ${r.GYM} ${r.TYPE} ${r.DATE}`;
+  const hay = `${base} ${group}`;
+  return cs.every(c => includesAllWords(hay, c));
+}); 
+
+  //END NEW TEST
+
 }
