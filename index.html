@@ -35,15 +35,34 @@
           <span id="status" class="status header__count" hidden></span>
         </div>
 
+ <!-- START ICON ENHANCEMENT TESTING -->
+        <div class="headerSocial" aria-label="Header social links">
+          <a class="headerSocial__link" href="https://www.instagram.com/any.jiujitsu/" target="_blank" rel="noopener" aria-label="Instagram profile">
+            <!-- Instagram (Feather-style) -->
+            <svg class="headerSocial__icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+              <rect x="2.5" y="2.5" width="19" height="19" rx="5" ry="5"></rect>
+              <path d="M16 11.37a4 4 0 1 1-1.1-2.75A4 4 0 0 1 16 11.37z"></path>
+              <circle cx="17.5" cy="6.5" r="0.5"></circle>
+            </svg>
+          </a>
 
-        <!-- Toggle: LEFT = EVENTS, RIGHT = INDEX -->
+          <a class="headerSocial__link" href="https://ig.me/m/any.jiujitsu" target="_blank" rel="noopener" aria-label="Instagram DM">
+            <!-- DM (paper plane / send) -->
+            <svg class="headerSocial__icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+              <line x1="22" y1="2" x2="11" y2="13"></line>
+              <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+            </svg>
+          </a>
+        </div>
+        <!-- END ICON ENHANCEMENT TESTING -->
+
+        <!-- Toggle: LEFT = EVENTS, RIGHT = INDEX [TESTING HOLD] -->
         <div class="viewToggle" id="viewToggle" role="tablist" aria-label="View toggle">
           <button class="viewToggle__tab" id="tabEvents" role="tab" aria-selected="true" type="button">Events</button>
           <button class="viewToggle__tab" id="tabIndex" role="tab" aria-selected="false" type="button">Index</button>
           <div class="viewToggle__thumb" aria-hidden="true"></div>
         </div>
       </div>
-    
 
     <!-- Sticky Filter Bars (locked with header) -->
     <div class="stickyFilters" id="stickyFilters">
