@@ -1,353 +1,93 @@
-import { loadCSV, normalizeDirectoryRow, normalizeEventRow } from "./data.js?v=20260202-321";
-import { state, setView, setIndexQuery, setEventsQuery } from "./state.js?v=20260202-321";
-import { filterDirectory, filterEvents } from "./filters.js?v=20260202-321";
-import { renderDirectoryGroups, renderEventsGroups } from "./render.js?v=20260202-321";
+// main.js
+// purpose: app bootstrap + data loading + view wiring + render orchestration
+
+import { loadCSV, normalizeDirectoryRow, normalizeEventRow } from "./data.js?v=20260210-911";
+import { state, setView, setIndexQuery, setEventsQuery, setIndexEventsQuery } from "./state.js?v=20260210-911";
+import { filterEvents } from "./filters.js?v=20260210-911";
+import { renderEventsGroups, renderIndexEventsGroups } from "./render.js?v=20260210-911";
+
+import { $ } from "./utils/dom.js?v=20260210-911";
+import {
+  initEventsPills,
+  initIndexPills,
+  refreshEventsPillDots,
+} from "./ui/pills.js?v=20260210-911";
+import { wireSearch, wireSearchSuggestions } from "./ui/search.js?v=20260210-911";
 
 let directoryRows = [];
 let eventRows = [];
 
-// TEMP: lock app to Events while Index view is being rebuilt
-const VIEW_LOCKED = true;
+let didRender = false;
+// View lock removed: enable slider + Index view
+const VIEW_LOCKED = false;
 
-function $(id){ return document.getElementById(id); }
-
-/* ------------------ PILL MENUS (Events: YEAR) ------------------ */
-function parseYearFromEventRow(r){
-  const y = String(r?.YEAR ?? "").trim();
-  if(y) return y;
-  const d = String(r?.DATE ?? "").trim();
-  const m = d.match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})$/);
-  if(m) return m[3];
-  const tmp = new Date(d);
-  if(!isNaN(tmp)) return String(tmp.getFullYear());
-  return "";
-}
-
-function uniqYearsFromEvents(rows){
-  const set = new Set();
-  rows.forEach(r=>{
-    const y = parseYearFromEventRow(r);
-    if(y) set.add(y);
-  });
-  return Array.from(set).sort((a,b)=>Number(b)-Number(a));
-}
-
-function uniqStatesFromEvents(rows){
-  const set = new Set();
-  rows.forEach(r=>{
-    const s = String(r.STATE ?? "").trim();
-    if(s) set.add(s);
-  });
-  return Array.from(set).sort((a,b)=>a.localeCompare(b));
-}
-
-function uniqTypesFromEvents(rows){
-  const set = new Set();
-  rows.forEach(r=>{
-    const t = String(r.TYPE ?? "").trim();
-    if(t) set.add(t);
-  });
-  return Array.from(set).sort((a,b)=>a.localeCompare(b));
-}
-
-
-
-
-function uniqStatesFromDirectory(rows){
-  const set = new Set();
-  rows.forEach(r=>{
-    const s = String(r.STATE ?? "").trim();
-    if(s) set.add(s);
-  });
-  return Array.from(set).sort((a,b)=>a.localeCompare(b));
-}
-
-function buildMenuListIn(listEl, items, selectedSet, onChange){
-  if(!listEl) return;
-  listEl.innerHTML = "";
-  items.forEach(val=>{
-    const row = document.createElement('label');
-    row.className = 'menu__item menu__item--check';
-
-    const cb = document.createElement('input');
-    cb.type = 'checkbox';
-    cb.className = 'menu__checkbox';
-    cb.checked = selectedSet.has(val);
-    cb.value = val;
-
-    const text = document.createElement('span');
-    text.className = 'menu__itemText';
-    text.textContent = val;
-
-    cb.addEventListener('change', (ev)=>{
-      ev.stopPropagation();
-      if(cb.checked) selectedSet.add(val);
-      else selectedSet.delete(val);
-      onChange();
-    });
-
-    row.appendChild(cb);
-    row.appendChild(text);
-    listEl.appendChild(row);
-  });
-}
-
-
-
-
-
-
-function closeAllMenus(){
-  document.querySelectorAll('.menu[data-pill-panel]').forEach(panel=>{
-    panel.hidden = true;
-    panel.style.left = '';
-    panel.style.top  = '';
-  });
-  document.querySelectorAll('.pill.filter-pill[aria-expanded="true"]').forEach(btn=>{
-    btn.setAttribute('aria-expanded','false');
-  });
-}
-
-function positionMenu(btnEl, panelEl){
-  const vv = window.visualViewport;
-  if(!btnEl || !panelEl) return;
-  const r = btnEl.getBoundingClientRect();
-  const pad = 8;
-  const vw = vv ? vv.width : window.innerWidth;
-  const vh = vv ? vv.height : window.innerHeight;
-  const vx = vv ? vv.offsetLeft : 0;
-  const vy = vv ? vv.offsetTop : 0;
-
-  panelEl.hidden = false; // show to measure
-
-  let left = r.left + vx;
-  let top  = r.bottom + pad + vy;
-
-  const pr = panelEl.getBoundingClientRect();
-  const w = pr.width;
-  const h = pr.height;
-
-  if(left + w + pad > vw) left = Math.max(pad, vw - w - pad);
-  if(left < pad) left = pad;
-
-  if(top + h + pad > vh){
-    const above = r.top - h - pad;
-    if(above >= pad) top = above;
-    else top = Math.max(pad, vh - h - pad);
-  }
-
-  panelEl.style.left = Math.round(left) + "px";
-  panelEl.style.top  = Math.round(top) + "px";
-}
-
-function setPillHasSelection(btnEl, has){
-  if(!btnEl) return;
-  btnEl.setAttribute('data-has-selection', has ? 'true' : 'false');
-}
-
-function wireMenuDismiss(){
-  if(wireMenuDismiss._did) return;
-  wireMenuDismiss._did = true;
-
-  document.addEventListener('click', (e)=>{
-    const t = e.target;
-    if(t && (t.closest('.pillSelect') || t.closest('.menu') || t.closest('.pill.filter-pill'))) return;
-    closeAllMenus();
-  });
-
-  document.addEventListener('keydown', (e)=>{
-    if(e.key === 'Escape') closeAllMenus();
-  });
-
-  window.addEventListener('resize', ()=>closeAllMenus());
-}
-
-function buildMenuList(panelEl, items, selectedSet, onToggle){
-  panelEl.querySelectorAll('.menu__empty').forEach(n=>n.remove());
-  panelEl.querySelectorAll('.menu__list').forEach(n=>n.remove());
-
-  const list = document.createElement('div');
-  list.className = 'menu__list';
-
-  items.forEach(val=>{
-    const row = document.createElement('label');
-    row.className = 'menu__item menu__item--check';
-
-    const cb = document.createElement('input');
-    cb.type = 'checkbox';
-    cb.className = 'menu__checkbox';
-    cb.checked = selectedSet.has(val);
-    cb.value = val;
-
-    const text = document.createElement('span');
-    text.className = 'menu__itemText';
-    text.textContent = val;
-
-    cb.addEventListener('change', (ev)=>{
-      ev.stopPropagation();
-      // keep Set in sync with checkbox state
-      if(cb.checked) selectedSet.add(val);
-      else selectedSet.delete(val);
-      onToggle(val, cb.checked);
-    });
-
-    row.appendChild(cb);
-    row.appendChild(text);
-    list.appendChild(row);
-  });
-
-  panelEl.appendChild(list);
-}
-
-function wireEventsYearPill(getEventRows, onChange){
-  wireMenuDismiss();
-
-  const btn = $('eventsPill1Btn');
-  const panel = $('eventsPill1Menu');
-  const clearBtn = $('eventsPill1Clear');
-
-  if(!btn || !panel) return;
-
-  const years = uniqYearsFromEvents(getEventRows());
-  buildMenuList(panel, years, state.events.year, ()=>{
-    setPillHasSelection(btn, state.events.year.size>0);
-    onChange();
-  });
-
-  setPillHasSelection(btn, state.events.year.size>0);
-
-  const toggleYearMenu = (e)=>{
-    if(e.type === 'touchend') e.preventDefault();
-    e.stopPropagation();
-
-    const expanded = btn.getAttribute('aria-expanded') === 'true';
-    closeAllMenus();
-
-    if(!expanded){
-      btn.setAttribute('aria-expanded','true');
-      positionMenu(btn, panel);
-    } else {
-      btn.setAttribute('aria-expanded','false');
-      panel.hidden = true;
-    }
+/* ------------------ INDEX REMAP (directory.csv -> events-style rows) ------------------ */
+function dirToIndexEventRow(r){
+  return {
+    EVENT: "Drop Ins:",
+    FOR: r.NAME || "",
+    WHERE: r.IG || "",
+    CITY: r.CITY || "",
+    STATE: r.STATE || "",
+    DAY: r.SAT || "",
+    DATE: r.SUN || "",
+    OTA: (r.OTA || "").toUpperCase(),
+    CREATED: ""
   };
-
-  // Desktop: click. Mobile: touchend fallback.
-  btn.addEventListener('click', toggleYearMenu);
-  btn.addEventListener('touchend', toggleYearMenu, {passive:false});
-
-  clearBtn?.addEventListener('click', (e)=>{
-    if(e.type === 'touchend') e.preventDefault();
-    e.stopPropagation();
-
-    state.events.year.clear();
-    setPillHasSelection(btn, false);
-    panel.querySelectorAll('input.menu__checkbox').forEach(cb=>{ cb.checked = false; });
-    onChange();
-    closeAllMenus();
-  });
 }
 
+function filterIndexDirectoryAsEvents(rows, idxState){
+  const q = String(idxState?.q ?? "").trim().toLowerCase();
+  const stateSet = idxState?.state instanceof Set ? idxState.state : new Set();
+  const typeSet  = idxState?.type  instanceof Set ? idxState.type  : new Set();
+  const yearSet  = idxState?.year  instanceof Set ? idxState.year  : new Set();
 
-function wireEventsStatePill(getEventRows, onChange){
-  wireMenuDismiss();
-
-  const btn = $('eventsPill2Btn');
-  const panel = $('eventsPill2Menu');
-  const clearBtn = $('eventsPill2Clear');
-
-  if(!btn || !panel) return;
-
-  const states = uniqStatesFromEvents(getEventRows());
-  buildMenuList(panel, states, state.events.state, ()=>{
-    setPillHasSelection(btn, state.events.state.size>0);
-    onChange();
-  });
-
-  setPillHasSelection(btn, state.events.state.size>0);
-
-  const toggleStateMenu = (e)=>{
-    if(e.type === 'touchend') e.preventDefault();
-    e.stopPropagation();
-
-    const expanded = btn.getAttribute('aria-expanded') === 'true';
-    closeAllMenus();
-
-    if(!expanded){
-      btn.setAttribute('aria-expanded','true');
-      positionMenu(btn, panel);
-    } else {
-      btn.setAttribute('aria-expanded','false');
-      panel.hidden = true;
+  return rows.filter(r=>{
+    if(q){
+      const hay = `${r.EVENT} ${r.FOR} ${r.WHERE} ${r.CITY} ${r.STATE} ${r.DAY} ${r.DATE} ${r.OTA}`.toLowerCase();
+      if(!hay.includes(q)) return false;
     }
-  };
-
-  btn.addEventListener('click', toggleStateMenu);
-  btn.addEventListener('touchend', toggleStateMenu, {passive:false});
-
-  clearBtn?.addEventListener('click', (e)=>{
-    if(e.type === 'touchend') e.preventDefault();
-    e.stopPropagation();
-
-    state.events.state.clear();
-    setPillHasSelection(btn, false);
-    panel.querySelectorAll('input.menu__checkbox').forEach(cb=>{ cb.checked = false; });
-    onChange();
-    closeAllMenus();
-  });
-}
-
-
-function wireEventsTypePill(getEventRows, onChange){
-  wireMenuDismiss();
-
-  const btn = $('eventsPill3Btn');
-  const panel = $('eventsPill3Menu');
-  const clearBtn = $('eventsPill3Clear');
-
-  if(!btn || !panel) return;
-
-  const types = uniqTypesFromEvents(getEventRows());
-  buildMenuList(panel, types, state.events.type, ()=>{
-    setPillHasSelection(btn, state.events.type.size>0);
-    onChange();
-  });
-
-  setPillHasSelection(btn, state.events.type.size>0);
-
-  const toggleTypeMenu = (e)=>{
-    if(e.type === 'touchend') e.preventDefault();
-    e.stopPropagation();
-
-    const expanded = btn.getAttribute('aria-expanded') === 'true';
-    closeAllMenus();
-
-    if(!expanded){
-      btn.setAttribute('aria-expanded','true');
-      positionMenu(btn, panel);
-    } else {
-      btn.setAttribute('aria-expanded','false');
-      panel.hidden = true;
+    if(stateSet.size){
+      const s = String(r.STATE || "").trim().toUpperCase();
+      if(!stateSet.has(s)) return false;
     }
-  };
+    // OPENS pill (Index view repurposed from YEAR): filter by SAT/SUN availability
+    if(yearSet.size){
+      const hasSat = String(r.DAY || "").trim() !== "";
+      const hasSun = String(r.DATE || "").trim() !== "";
+      const wantSat  = yearSet.has("SATURDAY");
+      const wantSun  = yearSet.has("SUNDAY");
+      const wantBoth = yearSet.has("BOTH") || (wantSat && wantSun);
 
-  btn.addEventListener('click', toggleTypeMenu);
-  btn.addEventListener('touchend', toggleTypeMenu, {passive:false});
-
-  clearBtn?.addEventListener('click', (e)=>{
-    if(e.type === 'touchend') e.preventDefault();
-    e.stopPropagation();
-
-    state.events.type.clear();
-    setPillHasSelection(btn, false);
-    panel.querySelectorAll('input.menu__checkbox').forEach(cb=>{ cb.checked = false; });
-    onChange();
-    closeAllMenus();
+      if(wantBoth){
+        if(!(hasSat && hasSun)) return false;
+      } else {
+        // Treat selections as OR when BOTH is not selected
+        let ok = false;
+        if(wantSat && hasSat) ok = true;
+        if(wantSun && hasSun) ok = true;
+        if(!ok) return false;
+      }
+    }
+    // EVENT pill (Index view repurposed): any selection => OTA === "Y"
+    if(typeSet.size){
+      const ota = String(r.OTA || "").trim().toUpperCase();
+      if(ota !== "Y") return false;
+    }
+    return true;
   });
 }
 
+function activeEventsState(){
+  return (state.view === "index") ? state.indexEvents : state.events;
+}
 
+function setActiveEventsQuery(val){
+  if(state.view === "index") setIndexEventsQuery(val);
+  else setEventsQuery(val);
+}
 
+/* ------------------ VIEW TOGGLE ------------------ */
 function setTransition(ms){
   document.body.style.setProperty("--viewTransition", ms + "ms");
 }
@@ -357,7 +97,7 @@ function applyProgress(p){
   document.body.style.setProperty("--viewProgress", String(clamped));
   const viewTitle = $("viewTitle");
   if(viewTitle){
-    viewTitle.textContent = (clamped >= 0.5) ? "INDEX" : "EVENTS";
+    viewTitle.textContent = (clamped >= 0.5) ? "FIND TRAINING" : "EVENTS";
   }
   return clamped;
 }
@@ -371,21 +111,80 @@ function setViewUI(view){
   // Sticky filter bars (now outside the slider)
   const evFilters = document.getElementById("eventsFilters");
   const idxFilters = document.getElementById("filters");
-  if(evFilters) evFilters.hidden = (view !== "events");
-  if(idxFilters) idxFilters.hidden = (view !== "index");
+  if(evFilters) evFilters.hidden = false;
+  if(idxFilters) idxFilters.hidden = true;
+  // Phase 1: Index uses Events filter bar for a 1:1 UI match
 
   const title = $("viewTitle");
-  if(title) title.textContent = (view === "events") ? "EVENTS" : "INDEX";
+  if(title) title.textContent = (view === "events") ? "EVENTS (DEV)" : "INDEX";
 
-  // Header counts: show the relevant total next to the header title
+
+  // Events filter bar is shared across views (Phase 1).
+  // Update Pill 1 copy depending on view: Events = YEAR, Index = OPENS.
+  (function(){
+    const pill1Btn = document.getElementById("eventsPill1Btn");
+    const pill1Menu = document.getElementById("eventsPill1Menu");
+    const btnLabel = pill1Btn?.querySelector('[data-pill-title]');
+    const menuTitle = pill1Menu?.querySelector('.menu__title');
+    const isIndex = view === "index";
+    if(btnLabel) btnLabel.textContent = isIndex ? "OPENS" : "YEAR";
+    if(menuTitle) menuTitle.textContent = isIndex ? "OPENS" : "YEAR";
+    if(pill1Menu) pill1Menu.setAttribute("aria-label", isIndex ? "Opens menu" : "Year menu");
+  })();
+
+  // Index view wants pill order: STATE first, OPENS second.
+  // Events view keeps: YEAR first, STATE second.
+  (function(){
+    const wrapYear  = document.querySelector('.pillSelect[data-filter="eventsYear"]');
+    const wrapState = document.querySelector('.pillSelect[data-filter="eventsState"]');
+    const parent = wrapYear?.parentElement;
+    if(!wrapYear || !wrapState || !parent) return;
+    const isIndex = view === "index";
+
+    // Ensure desired order by re-inserting nodes.
+    // (DOM insertion moves the node; no clones.)
+    if(isIndex){
+      // STATE before OPENS
+      if(wrapState.nextElementSibling !== wrapYear){
+        parent.insertBefore(wrapState, wrapYear);
+      }
+    } else {
+      // YEAR before STATE
+      if(wrapYear.nextElementSibling !== wrapState){
+        parent.insertBefore(wrapYear, wrapState);
+      }
+    }
+  })();
+
+  // Update Pill 3 copy depending on view: Events = EVENT, Index = DROP IN (option label = ALLOWED).
+  (function(){
+    const pill3Btn = document.getElementById("eventsPill3Btn");
+    const pill3Menu = document.getElementById("eventsPill3Menu");
+    const btnLabel = pill3Btn?.querySelector('[data-pill-title]');
+    const menuTitle = pill3Menu?.querySelector('.menu__title');
+    const isIndex = view === "index";
+    if(btnLabel) btnLabel.textContent = isIndex ? "DROP IN" : "EVENT";
+    if(menuTitle) menuTitle.textContent = isIndex ? "DROP IN" : "EVENT";
+    if(pill3Menu) pill3Menu.setAttribute("aria-label", isIndex ? "Drop In menu" : "Event menu");
+  })();
+
+  const evIn = $("eventsSearchInput");
+  if(evIn) evIn.value = String(activeEventsState().q || "");
+
+  // Quick Search suggestions should be disabled on INDEX view
+  const suggestPanel = $("eventsSearchSuggest");
+  if(suggestPanel && view === "index") suggestPanel.setAttribute("hidden", "");
+
+  // Header counts
   const evStatus = $("eventsStatus");
   const idxStatus = $("status");
   if(evStatus) evStatus.hidden = (view !== "events");
   if(idxStatus) idxStatus.hidden = (view !== "index");
 
-  document.title = (view === "events") ? "ANY N.E. GRAPPLING" : "ANY N.E. GRAPPLING";
+  document.title = "ANY N.E. GRAPPLING (DEV)";
 
   setTransition(260);
+  refreshEventsPillDots({ $, activeEventsState });
   applyProgress(view === "index" ? 1 : 0);
 }
 
@@ -399,12 +198,10 @@ function wireViewToggle(){
   if(VIEW_LOCKED){
     setView("events");
     setViewUI("events");
-
     if(viewToggle){
       viewToggle.classList.add("viewToggle--locked");
       viewToggle.setAttribute("aria-disabled", "true");
     }
-    // keep focus from landing on disabled control
     tabEvents?.setAttribute("tabindex", "-1");
     tabIndex?.setAttribute("tabindex", "-1");
     tabEvents?.setAttribute("aria-disabled", "true");
@@ -438,7 +235,6 @@ function wireViewToggle(){
 
     viewToggle.addEventListener("pointermove", (e) => {
       if(!dragging || e.pointerId !== pointerId) return;
-
       const rect = viewToggle.getBoundingClientRect();
       const padding = 4;
       const trackW = rect.width - padding * 2;
@@ -453,10 +249,8 @@ function wireViewToggle(){
     const endDrag = (e) => {
       if(!dragging) return;
       if(e && pointerId != null && e.pointerId !== pointerId) return;
-
       dragging = false;
       pointerId = null;
-
       setTransition(260);
       const p = Number(getComputedStyle(document.body).getPropertyValue("--viewProgress")) || 0;
       setViewUI(p >= 0.5 ? "index" : "events");
@@ -469,12 +263,21 @@ function wireViewToggle(){
 
   if(viewShell){
     let startX = 0, startY = 0, startP = 0;
-
+    let lastX = 0, lastT = 0, vx = 0;
+    let lockedAxis = ""; // "", "x", "y"
+    let rafId = 0;
+    let pendingP = null;
     viewShell.addEventListener("touchstart", (e) => {
       if(e.touches.length !== 1) return;
       startX = e.touches[0].clientX;
       startY = e.touches[0].clientY;
       startP = Number(getComputedStyle(document.body).getPropertyValue("--viewProgress")) || 0;
+
+      lastX = startX;
+      lastT = performance.now();
+      vx = 0;
+      lockedAxis = "";
+
       setTransition(0);
     }, { passive: true });
 
@@ -486,213 +289,108 @@ function wireViewToggle(){
       const dx = x - startX;
       const dy = y - startY;
 
-      if(Math.abs(dy) > Math.abs(dx)) return;
+      // Deadzone + axis lock to avoid jitter from tiny diagonal movement
+      if(!lockedAxis){
+        if(Math.abs(dx) < 8 && Math.abs(dy) < 8) return;
+        lockedAxis = (Math.abs(dx) >= Math.abs(dy)) ? "x" : "y";
+      }
+      if(lockedAxis === "y") return;
+
+      // Prevent the page from trying to scroll while we are swiping horizontally
+      e.preventDefault();
+
+      // Velocity (px/ms) for "quick flick" commits
+      const now = performance.now();
+      const dt = Math.max(1, now - lastT);
+      vx = (x - lastX) / dt;
+      lastX = x;
+      lastT = now;
 
       const delta = -dx / window.innerWidth;
-      applyProgress(startP + delta);
-    }, { passive: true });
+      const nextP = startP + delta;
+      pendingP = nextP;
+      if(!rafId){
+        rafId = requestAnimationFrame(() => {
+          rafId = 0;
+          if(pendingP !== null){
+            applyProgress(pendingP);
+            pendingP = null;
+          }
+        });
+      }
+    }, { passive: false });
 
     viewShell.addEventListener("touchend", () => {
-      setTransition(260);
+      setTransition(220);
+
+      // Flush any pending rAF progress update before we decide which view to commit
+      if(rafId){
+        cancelAnimationFrame(rafId);
+        rafId = 0;
+      }
+      if(pendingP !== null){
+        applyProgress(pendingP);
+        pendingP = null;
+      }
+
       const p = Number(getComputedStyle(document.body).getPropertyValue("--viewProgress")) || 0;
-      setViewUI(p >= 0.5 ? "index" : "events");
+
+      // More sensitive commit: shorter swipe distance + quick flick support
+      const FLICK_V = 0.45; // px/ms
+      const EDGE_T  = 0.35; // distance from edge to switch
+
+      // Quick flick wins (left = index, right = events)
+      if(Math.abs(vx) > FLICK_V){
+        setViewUI(vx < 0 ? "index" : "events");
+        return;
+      }
+
+      // Otherwise: commit based on how far you pulled from the *starting* view edge
+      if(startP >= 0.5){
+        // started on index (p ~ 1) -> switch earlier when p drops below 1-EDGE_T
+        setViewUI(p <= (1 - EDGE_T) ? "events" : "index");
+      }else{
+        // started on events (p ~ 0) -> switch earlier when p rises above EDGE_T
+        setViewUI(p >= EDGE_T ? "index" : "events");
+      }
     }, { passive: true });
   }
 }
 
-
-
-function wireIndexOpensPill(getDirectoryRows, onChange){
-  wireMenuDismiss();
-
-  const btn = $('openMatBtn');
-  const panel = $('openMatMenu');
-  const clearBtn = $('openMatClear');
-  const listEl = $('openMatList') || panel?.querySelector('.menu__list');
-
-  if(!btn || !panel) return;
-
-  const items = ["ALL","SATURDAY","SUNDAY"];
-  buildMenuListIn(listEl, items, state.index.opens, ()=>{
-    setPillHasSelection(btn, state.index.opens.size>0);
-    onChange();
-  });
-
-  setPillHasSelection(btn, state.index.opens.size>0);
-
-  btn.addEventListener('click', (e)=>{
-    e.preventDefault();
-    e.stopPropagation();
-
-    const expanded = btn.getAttribute('aria-expanded') === 'true';
-    closeAllMenus();
-
-    if(!expanded){
-      btn.setAttribute('aria-expanded','true');
-      positionMenu(btn, panel);
-    } else {
-      btn.setAttribute('aria-expanded','false');
-      panel.hidden = true;
-    }
-  });
-
-  clearBtn?.addEventListener('click', (e)=>{
-    e.preventDefault();
-    e.stopPropagation();
-
-    state.index.opens.clear();
-    setPillHasSelection(btn, false);
-    panel.querySelectorAll('input.menu__checkbox').forEach(cb=>{ cb.checked = false; });
-    onChange();
-    closeAllMenus();
-  });
-}
-
-
-
-
-function wireIndexGuestsPill(getDirectoryRows, onChange){
-  wireMenuDismiss();
-
-  const btn = $('guestsBtn');
-  const panel = $('guestsMenu');
-  const clearBtn = $('guestsClear');
-  const listEl = $('guestsList') || panel?.querySelector('.menu__list');
-
-  if(!btn || !panel) return;
-
-  const items = ["GUESTS WELCOME"];
-  buildMenuListIn(listEl, items, state.index.guests, ()=>{
-    setPillHasSelection(btn, state.index.guests.size>0);
-    onChange();
-  });
-
-  setPillHasSelection(btn, state.index.guests.size>0);
-
-  btn.addEventListener('click', (e)=>{
-    e.preventDefault();
-    e.stopPropagation();
-
-    const expanded = btn.getAttribute('aria-expanded') === 'true';
-    closeAllMenus();
-
-    if(!expanded){
-      btn.setAttribute('aria-expanded','true');
-      positionMenu(btn, panel);
-    } else {
-      btn.setAttribute('aria-expanded','false');
-      panel.hidden = true;
-    }
-  });
-
-  clearBtn?.addEventListener('click', (e)=>{
-    e.preventDefault();
-    e.stopPropagation();
-
-    state.index.guests.clear();
-    setPillHasSelection(btn, false);
-    panel.querySelectorAll('input.menu__checkbox').forEach(cb=>{ cb.checked = false; });
-    onChange();
-    closeAllMenus();
-  });
-}
-
-
-function wireIndexStatePill(getDirectoryRows, onChange){
-  wireMenuDismiss();
-
-  const btn = $('stateBtn');
-  const panel = $('stateMenu');
-  const clearBtn = $('stateClear');
-  const listEl = $('stateList') || panel?.querySelector('.menu__list');
-
-  if(!btn || !panel) return;
-
-  const states = uniqStatesFromDirectory(getDirectoryRows());
-  buildMenuListIn(listEl, states, state.index.states, ()=>{
-    setPillHasSelection(btn, state.index.states.size>0);
-    onChange();
-  });
-
-  setPillHasSelection(btn, state.index.states.size>0);
-
-  btn.addEventListener('click', (e)=>{
-    e.preventDefault();
-    e.stopPropagation();
-
-    const expanded = btn.getAttribute('aria-expanded') === 'true';
-    closeAllMenus();
-
-    if(!expanded){
-      btn.setAttribute('aria-expanded','true');
-      positionMenu(btn, panel);
-    } else {
-      btn.setAttribute('aria-expanded','false');
-      panel.hidden = true;
-    }
-  });
-
-  clearBtn?.addEventListener('click', (e)=>{
-    e.preventDefault();
-    e.stopPropagation();
-
-    state.index.states.clear();
-    setPillHasSelection(btn, false);
-    panel.querySelectorAll('input.menu__checkbox').forEach(cb=>{ cb.checked = false; });
-    onChange();
-    closeAllMenus();
-  });
-}
-
-function wireSearch(){
-  const idxIn = $("searchInput");
-  const evIn  = $("eventsSearchInput");
-
-  idxIn?.addEventListener("input",(e)=>{
-    setIndexQuery(e.target.value);
-    render();
-  });
-  evIn?.addEventListener("input",(e)=>{
-    setEventsQuery(e.target.value);
-    render();
-  });
-
-  $("searchClear")?.addEventListener("click", ()=>{
-    setIndexQuery("");
-    if(idxIn) idxIn.value = "";
-    render();
-  });
-
-  $("eventsSearchClear")?.addEventListener("click", ()=>{
-    setEventsQuery("");
-    if(evIn) evIn.value = "";
-    render();
-  });
-}
-
+/* ------------------ RENDER ------------------ */
 function render(){
+  didRender = true;
+
+  // Events view
   const evFiltered = filterEvents(eventRows, state);
   renderEventsGroups($("eventsRoot"), evFiltered);
   $("eventsStatus").textContent = `${evFiltered.length} events`;
 
-  let idxFiltered = filterDirectory(directoryRows, state);
-  // Redundant safeguard: ensure Index STATE selection is applied even if filterDirectory is stale/cached.
-  const idxStatesSel = state?.index?.states;
-  if(idxStatesSel && idxStatesSel.size){
-    idxFiltered = idxFiltered.filter(r => idxStatesSel.has(String(r.STATE ?? "").trim()));
-  }
-  renderDirectoryGroups($("groupsRoot"), idxFiltered);
+  // Index view (Phase 2): render Directory rows using Events-style cards
+  const idxRows = directoryRows.map(dirToIndexEventRow);
+  const idxFiltered = filterIndexDirectoryAsEvents(idxRows, state.indexEvents);
+  renderIndexEventsGroups($("indexEventsRoot"), idxFiltered);
   $("status").textContent = `${idxFiltered.length} gyms`;
 }
 
+/* ------------------ INIT ------------------ */
 async function init(){
   wireViewToggle();
-  wireSearch();
 
-  if(!state.view) state.view = "events";
-  setView("events");
-  state.view = "events";
-  setViewUI("events");
+  wireSearch({
+    $,
+    setIndexQuery,
+    setIndexEventsQuery,
+    setActiveEventsQuery,
+    render,
+  });
+  wireSearchSuggestions({
+    $,
+    setActiveEventsQuery,
+    isEventsView: () => state.view === "events"
+  });
+if(!state.view) state.view = "events";
+  setViewUI(state.view);
 
   $("status").textContent = "Loading...";
   $("eventsStatus").textContent = "Loading...";
@@ -705,21 +403,33 @@ async function init(){
   directoryRows = dirRaw.map(normalizeDirectoryRow);
   eventRows = evRaw.map(normalizeEventRow);
 
-  // Wire YEAR + STATE + EVENT filter pills (Events view)
-  wireEventsYearPill(()=>eventRows, render);
-  wireEventsStatePill(()=>eventRows, render);
-  wireEventsTypePill(()=>eventRows, render);
+  // Events pills
+  initEventsPills({
+    $,
+    getEventRows: ()=>eventRows,
+    activeEventsState,
+    isIndexView: ()=> state.view === "index",
+    onChange: render,
+  });
 
-  // Wire STATE + OPENS + GUESTS filter pills (Index view)
-  wireIndexStatePill(()=>directoryRows, render);
-  wireIndexOpensPill(()=>directoryRows, render);
-  wireIndexGuestsPill(()=>directoryRows, render);
+  // Index pills (kept defensive)
+  try{
+    initIndexPills({
+      $,
+      state,
+      getDirectoryRows: ()=>directoryRows,
+      onChange: render,
+    });
+  }catch(err){
+    console.warn("Index pill wiring skipped:", err);
+  }
 
   render();
 }
 
 init().catch((err)=>{
   console.error(err);
+  if(didRender) return;
   $("status").textContent = "Failed to load data";
   $("eventsStatus").textContent = "Failed to load data";
 });
