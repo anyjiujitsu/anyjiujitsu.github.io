@@ -116,7 +116,7 @@ function setViewUI(view){
   // Phase 1: Index uses Events filter bar for a 1:1 UI match
 
   const title = $("viewTitle");
-  if(title) title.textContent = (view === "events") ? "EVENTS (DEV)" : "INDEX";
+  if(title) title.textContent = (view === "events") ? "EVENTS" : "INDEX";
 
 
   // Events filter bar is shared across views (Phase 1).
@@ -181,7 +181,7 @@ function setViewUI(view){
   if(evStatus) evStatus.hidden = (view !== "events");
   if(idxStatus) idxStatus.hidden = (view !== "index");
 
-  document.title = "ANY N.E. GRAPPLING (DEV)";
+  document.title = "ANY N.E. GRAPPLING";
 
   setTransition(260);
   refreshEventsPillDots({ $, activeEventsState });
