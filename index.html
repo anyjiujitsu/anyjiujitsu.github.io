@@ -9,10 +9,10 @@
   <link rel="stylesheet" href="assets/css/base.css" />
   <link rel="stylesheet" href="assets/css/layout.css" />
   <link rel="stylesheet" href="assets/css/pills.css?v=20260129-302">
-  <link rel="stylesheet" href="assets/css/components.css" />
+  <link rel="stylesheet" href="assets/css/components.css?v=20260212-902" />
   <link rel="stylesheet" href="assets/css/directory.css?v=20260210-809" />
 <!-- IMPORTANT: repo references main.js (no sequence) -->
-  <script type="module" src="assets/js/main.js?v=20260210-900"></script>
+  <script type="module" src="assets/js/main.js?v=20260212-903"></script>
 </head>
 
 <body>
@@ -29,7 +29,7 @@
     </div>
 
       <div class="header__inner" style="padding-top:0px;">
-        <h1 class="header__title" id="viewTitle" aria-label="Current view">EVENTS (DEV)</h1>
+        <h1 class="header__title" id="viewTitle" aria-label="Current view">EVENTS</h1>
 
         <div class="header__countWrap" id="headerCounts" aria-live="polite">
           <span id="eventsStatus" class="status header__count">Loading</span>
@@ -80,14 +80,47 @@
                 <button id="eventsSearchClear" class="pill__clear" type="button" aria-label="Clear">×</button>
               </div>
               <div id="eventsSearchSuggest" class="suggest" hidden>
-  <div class="menu__header menu__header--static">
-    <span class="menu__title">Quick Searches</span>
-  </div>
-  <div class="menu__divider"></div>
 
-                <button type="button" class="suggest__item" data-value="THIS WEEKEND">THIS WEEKEND</button>
-                <button type="button" class="suggest__item" data-value="2026, COMP">2026, COMP</button>
-                <button type="button" class="suggest__item" data-value="NEW EVENTS">NEW EVENTS</button>
+                <!-- EVENTS mode: Quick Searches -->
+                <div id="eventsSearchSuggestQuick">
+                  <div class="menu__header menu__header--static">
+                    <span class="menu__title">Quick Searches</span>
+                  </div>
+                  <div class="menu__divider"></div>
+                  <button type="button" class="suggest__item" data-value="THIS WEEKEND">THIS WEEKEND</button>
+                  <button type="button" class="suggest__item" data-value="2026, COMP">2026, COMP</button>
+                  <button type="button" class="suggest__item" data-value="NEW EVENTS">NEW EVENTS</button>
+                </div>
+
+                <!-- INDEX mode: Training Near -->
+                <div id="eventsSearchSuggestDistance" hidden>
+                  <div class="menu__header menu__header--static">
+                    <span class="menu__title">TRAINING NEAR</span>
+                  </div>
+                  <div class="menu__divider"></div>
+
+                  <div class="distance__section" aria-label="Training near ZIP">
+                    <div class="distance__row">
+                      <input id="distanceOriginInput" class="distance__input" type="text"
+                             inputmode="numeric" autocomplete="off" autocapitalize="none" spellcheck="false"
+                             placeholder="Enter ZIP" maxlength="5" aria-label="Enter ZIP" />
+                      <button id="distanceApplyBtn" class="distance__apply" type="button" aria-label="Apply ZIP">
+                        ➜
+                      </button>
+                    </div>
+                    
+                    <div id="distanceHint" class="distance__hint distance__hint--toggle" aria-label="Distance filter">
+                      <span class="distance__hintText">Distance(mi.)</span>
+                      <div class="iosSeg" data-selected="15" role="group" aria-label="Distance (miles)">
+                        <button type="button" class="iosSeg__btn is-active" data-miles="15" aria-pressed="true">15</button>
+                        <button type="button" class="iosSeg__btn" data-miles="30" aria-pressed="false">30</button>
+                      </div>
+                      <span class="distance__hintText"></span>
+                    </div>
+                  </div>
+                </div>
+
+
               </div>
               </div>
 
