@@ -123,7 +123,7 @@ Vermont,Winooski,Combat Fitness MMA,combatfitnessmmavt,12:00PM,,y,,44.495587,-73
 Connecticut,Berlin,Gracie Jiujitsu,gracie_jiujitsu_ct,,,,,41.605451,-72.778497
 Massachusetts,Woburn,617 BJJ Woburn,gc.jiujitsuacademy,12:00PM,,,,42.488703,-71.154383
 Connecticut,Milford,Renzo Gracie,renzograciemilford,,,,,41.225086,-73.06111
-Massachusetts,Hyannis,Sardinha BJJ,sardinhabjjcapecod,,,,,41.661478,-70.356951
+Massachusetts,Hyannis,Sardinha BJJ,sardinhabjjcapecod,,,y,,41.661478,-70.356951
 Massachusetts,Stoughton,Boston BJJ,bostonbjjstoughton,,,,,42.119006,-71.10365
 Connecticut,Fairfield,Radius Martial Arts 10P,radiusmartialarts,,,,,41.17594,-73.272046
 Massachusetts,Norwood,Luiz Paulo Brazilian Jiu Jitsu,luizpaulojiujitsu,,,,,42.187364,-71.195971
@@ -147,7 +147,7 @@ Vermont,Hardwick,Kingdom Jiu-Jitsu,kingdom.jiu.jitsu,9:45AM,4:00PM,,,44.519932,-
 Connecticut,North Franklin,Rogers Academy,rogersmartialarts,,,,,41.621212,-72.142609
 Maine,Farmington,Foundry BJJ,foundryfarmington,,,,,44.676935,-70.141491
 Massachusetts,Tewksbury,Fenix BJJ,fenixbjjtewksbury,,10:00AM,,,42.612088,-71.227845
-Connecticut,Monroe,Cruvinel Brothers,cruvinelbrothers,,,,,41.339236,-73.222828
+Connecticut,Monroe,Cruvinel Brothers,cruvinelbrothers,,,y,,41.339236,-73.222828
 Connecticut,Tolland,Secret Pages BJJ,secret_pages_bjj,9:00AM,,y,,41.883019,-72.358869
 Massachusetts,Hanover,Thurston Academy,thurston_academy,,10:00AM,,,42.122956,-70.85631
 Massachusetts,Natick,Versus Jiu-Jitsu Academy,versusjiujitsuma,12:00PM,,,,42.284822,-71.348811
@@ -270,7 +270,7 @@ New Hampshire,Windham,Renzo Gracie,renzogracienh,11:00AM,9:00AM,,,42.811092,-71.
 Rhode Island,Coventry,Coventry BJJ,coventryribjj,,11:00AM,,,41.698325,-71.662734
 Massachusetts,Leominster,Cesario Team,bjjleominster,,,,,42.520876,-71.770611
 Massachusetts,Dorchester,Empower BJJ,empowerbjjusa,11:00AM,,,,42.269728,-72.934495
-Connecticut,Stratford,Cruvinel Brothers,cruvinelbros,,,,,41.205688,-73.127986
+Connecticut,Stratford,Cruvinel Brothers,cruvinelbros,,,y,,41.205688,-73.127986
 New Hampshire,Littleton,Resiliency Martial Arts,adam_laclair,,,,,44.343351,-71.795118
 Connecticut,West Haven,Dandelion Jiujitsu & Wrestling,dandelionbjj,,9:00AM,,,41.272121,-72.967497
 Connecticut,Newtown,Rapadura BJJ,rapadura_bjj,,,,,41.399503,-73.293982
@@ -386,3 +386,4 @@ Maine,Standish,Ebb and Flow Jiujitsu,ebb_and_flow_jiujiutsu,10:00AM,,,,43.775497
 Massachusetts,Chelmsford,Resolve Martial Arts,resolve_bjj_ma,12:30PM,11:30AM,,,42.597055,-71.3697
 Rhode Island,Warwick,Braman Jiu Jitsu,bramanjiujitsu,,,,,41.703085,-71.42031
 Massachusetts,Middleborough,Michael DeLuca Brazillian Jiu Jitsu,mikedelucabjj,,,,,41.878004,-70.869267
+
