@@ -143,7 +143,7 @@
 .viewSlider{
   display:flex;
   width: 200%;
-  transform: translateX(calc(var(--viewProgress, 0) * -50%));
+  transform: translate3d(var(--viewOffsetPx, 0px), 0, 0);
   transition: transform var(--viewTransition, 240ms) ease;
   will-change: transform;
 }
@@ -228,6 +228,7 @@ line-height: 1;
   font-weight: 600;
   color: rgba(0,0,0,0.55);
   white-space: nowrap;
+    color: #7a7a7a; /* softer grey */
 }
 
 .pill__caret{ font-size: 10px; opacity: 0.55; margin-left: var(--evIconLeft); }
@@ -375,7 +376,7 @@ input[type="search"]{ font-size:16px; }
   .pill__icon{ font-size: 11px; margin-left: var(--evIconLeft); }
   .pill__clear{ font-size: 17px; padding: 0 2px; }
   .pill__caret{ font-size: 8px; }
-  .pill__dot{ margin-left: 3px; }
+  .pill__dot{ margin-left: 1px; }
 
   /* Search input: prevent iOS zoom while visually smaller */
   .pill__input{
@@ -449,6 +450,7 @@ input[type="search"]{ font-size:16px; }
     font-size: 8.3px;
     letter-spacing: 0.05em;
     white-space: nowrap;
+    color: #7a7a7a; /* softer grey */
     overflow: hidden;
     text-overflow: ellipsis;
     max-width: 100%;
@@ -481,10 +483,7 @@ input[type="search"]{ font-size:16px; }
     padding-bottom: 0 !important;
   }
 }
-\n
 
-
-}
 
 /* Ensure header row is a predictable flex layout */
 .header__inner{
@@ -1204,7 +1203,8 @@ nav.filters, .filters__inner, .pillRow{
   letter-spacing: .06em;
   text-transform: uppercase;
   color: #6f6f6f;
-  white-space: nowrap; /* prevent wrapping on small screens */
+  white-space: nowrap;
+    color: #7a7a7a; /* softer grey */ /* prevent wrapping on small screens */
 }
 
 /* Quick Searches dropdown (search suggestions) */
@@ -1299,3 +1299,231 @@ nav.filters, .filters__inner, .pillRow{
     background: transparent !important;
   }
 }
+
+
+/* =========================================================
+   section: Training Near dropdown (Index view)
+   purpose: styled controls inside the shared search suggestion panel
+   ========================================================= */
+
+#eventsSearchSuggestDistance .distance__section{
+  padding: 10px 12px;
+}
+
+#eventsSearchSuggestDistance .distance__label{
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  opacity: 0.75;
+  margin-bottom: 8px;
+}
+
+#eventsSearchSuggestDistance .distance__chips{
+  display: flex;
+  gap: 8px;
+}
+
+#eventsSearchSuggestDistance .distance__chip{
+  border: 1px solid rgba(0,0,0,0.15);
+  background: rgba(255,255,255,0.6);
+  border-radius: 10px;
+  padding: 7px 10px;
+  font: inherit;
+  font-size: 13px;
+  min-width: 44px;
+}
+
+#eventsSearchSuggestDistance .distance__chip[aria-pressed="true"]{
+  border-color: rgba(0,0,0,0.35);
+  background: rgba(0,0,0,0.06);
+}
+
+#eventsSearchSuggestDistance .distance__select,
+#eventsSearchSuggestDistance .distance__input{
+  width: 100%;
+  border: 1px solid rgba(0,0,0,0.15);
+  background: rgba(255,255,255,0.7);
+  border-radius: 10px;
+  padding: 10px;
+  font: inherit;
+  font-size: 14px;
+}
+
+/* ZIP row: narrower input + apply arrow button */
+#eventsSearchSuggestDistance .distance__row{
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+#eventsSearchSuggestDistance .distance__input{
+  flex: 0 0 150px;
+  width: 150px;
+  max-width: 150px;
+}
+
+#eventsSearchSuggestDistance .distance__apply{
+  flex: 0 0 auto;
+  border: 1px solid rgba(0,0,0,0.15);
+  background: rgba(0,0,0,0.06);
+  border-radius: 10px;
+  padding: 10px 12px;
+  font: inherit;
+  font-size: 16px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+#eventsSearchSuggestDistance .distance__apply:active{
+  transform: translateY(1px);
+}
+
+#eventsSearchSuggestDistance .distance__hint{
+    margin-left: -14px;
+margin-top: 8px;
+  font-size: 12px;
+  opacity: 0.7;
+}
+
+/* Mobile-only: tighten the ZIP row so the input + apply button fit on one line,
+   without resizing the dropdown container, divider, or title text. */
+@media (max-width: 520px){
+  /* Reduce top padding for this section only (brings ZIP row + hint up) */
+  #eventsSearchSuggestDistance .distance__section{
+    padding-top: 6px;
+    padding-bottom: 8px;
+  }
+
+  /* Shift the ZIP row + its hint slightly left to reclaim space */
+  #eventsSearchSuggestDistance .distance__row{
+    margin-left: -17px; /* final micro left push */
+  }
+
+  /* Reduce gap a touch so the apply button stays visible */
+  #eventsSearchSuggestDistance .distance__row{
+    gap: 6px;
+    margin-top: 0;
+  }
+
+  /* ZIP field only needs 5 digits */
+  #eventsSearchSuggestDistance .distance__input{
+    flex: 0 0 96px;
+    width: 96px;
+    max-width: 96px;
+  
+
+    font-size: 16px; /* prevent iOS zoom on focus */
+  }
+
+  /* Bring the hint closer + smaller + avoid wrapping */
+  #eventsSearchSuggestDistance .distance__hint{
+      margin-left: -14px;
+margin-top: 4px;
+    font-size: 9.5px;
+    white-space: nowrap;
+    color: #7a7a7a; /* softer grey */
+  }
+}
+/* Reduce gap a touch so the apply button stays visible */
+  #eventsSearchSuggestDistance .distance__row{
+    gap: 6px;
+  }
+
+  /* ZIP field only needs 5 digits */
+  #eventsSearchSuggestDistance .distance__input{
+    flex: 0 0 104px;
+    width: 104px;
+    max-width: 104px;
+  }
+
+  /* Make the â€œwithin X milesâ€ line smaller and avoid wrapping */
+  #eventsSearchSuggestDistance .distance__hint{
+      margin-left: -14px;
+font-size: 10px;
+    white-space: nowrap;
+    color: #7a7a7a; /* softer grey */
+  }
+
+
+/* Index: iOS-style segmented control for Distance (Training Near) */
+#eventsSearchSuggestDistance #distanceHint.distance__hint--toggle{
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  opacity: 1;
+  transform: translateX(18px) !important;
+}
+
+#eventsSearchSuggestDistance .distance__hintText{
+  color: #7a7a7a;
+}
+
+#eventsSearchSuggestDistance .iosSeg{
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  background: rgba(0,0,0,0.10);
+  border-radius: 10px;
+  padding: 2px;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+#eventsSearchSuggestDistance .iosSeg::before{
+  content: "";
+  position: absolute;
+  top: 2px;
+  bottom: 2px;
+  left: 2px;
+  width: calc(50% - 2px);
+  border-radius: 8px;
+  background: #fff;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.18);
+  transform: translateX(0%);
+  transition: transform 160ms ease;
+}
+
+#eventsSearchSuggestDistance .iosSeg[data-selected="30"]::before{
+  transform: translateX(100%);
+}
+
+#eventsSearchSuggestDistance .iosSeg__btn{
+  position: relative;
+  z-index: 1;
+  appearance: none;
+  border: 0;
+  background: transparent;
+  padding: 4px 12px;
+  font-size: 12px;
+  line-height: 1;
+  color: rgba(0,0,0,0.70);
+  cursor: pointer;
+}
+
+#eventsSearchSuggestDistance .iosSeg__btn.is-active{
+  color: rgba(0,0,0,0.95);
+}
+
+/* Mobile-only: give the Distance (iOS segmented) line a touch more breathing room and nudge right */
+@media (max-width: 520px){
+  #eventsSearchSuggestDistance #distanceHint.distance__hint--toggle{
+    margin-top: 8px;
+    transform: translateX(-1px) !important; /* mobile left */
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
