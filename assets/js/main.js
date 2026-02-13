@@ -2,17 +2,18 @@
 // purpose: app bootstrap + data loading + view wiring + render orchestration
 
 import { loadCSV, normalizeDirectoryRow, normalizeEventRow } from "./data.js?v=20260210-911";
-import { state, setView, setIndexQuery, setEventsQuery, setIndexEventsQuery } from "./state.js?v=20260210-911";
+import { state, setView, setIndexQuery, setEventsQuery, setIndexEventsQuery, setIndexDistanceMiles, setIndexDistanceFrom } from "./state.js?v=20260212-902";
 import { filterEvents } from "./filters.js?v=20260210-911";
 import { renderEventsGroups, renderIndexEventsGroups } from "./render.js?v=20260210-911";
 
 import { $ } from "./utils/dom.js?v=20260210-911";
+import { applyDistanceFilter } from "./utils/geo.js?v=20260212-902";
 import {
   initEventsPills,
   initIndexPills,
   refreshEventsPillDots,
 } from "./ui/pills.js?v=20260210-911";
-import { wireSearch, wireSearchSuggestions } from "./ui/search.js?v=20260210-911";
+import { wireSearch, wireSearchSuggestions } from "./ui/search.js?v=20260212-902";
 
 let directoryRows = [];
 let eventRows = [];
@@ -20,6 +21,32 @@ let eventRows = [];
 let didRender = false;
 // View lock removed: enable slider + Index view
 const VIEW_LOCKED = false;
+
+/* ------------------ INDEX DISTANCE UI (Training Near ZIP) ------------------ */
+function ensureDistanceOriginOptions(){
+  // legacy stub (kept to avoid breaking callers)
+  // Index now uses a 5-digit ZIP entry instead of a city datalist.
+}
+
+function syncDistanceUIFromState(){
+  const distWrap = $("eventsSearchSuggestDistance");
+  if(!distWrap) return;
+  const input = $("distanceOriginInput");
+  if(input) input.value = String(state.indexEvents.distFrom || "");
+
+  const seg = distWrap.querySelector(".iosSeg");
+  const btns = distWrap.querySelectorAll(".iosSeg__btn");
+  if(seg && btns && btns.length){
+    const miles = Number(state.indexEvents.distMiles || 15);
+    seg.dataset.selected = String(miles);
+    btns.forEach((b)=>{
+      const m = Number(b.dataset.miles);
+      const on = (m === miles);
+      b.classList.toggle("is-active", on);
+      b.setAttribute("aria-pressed", on ? "true" : "false");
+    });
+  }
+}
 
 /* ------------------ INDEX REMAP (directory.csv -> events-style rows) ------------------ */
 function dirToIndexEventRow(r){
@@ -37,7 +64,12 @@ function dirToIndexEventRow(r){
 }
 
 function filterIndexDirectoryAsEvents(rows, idxState){
-  const q = String(idxState?.q ?? "").trim().toLowerCase();
+  const qRaw = String(idxState?.q ?? "").trim();
+  // When a ZIP is applied, we mirror it into the search bar for clarity.
+  // Do NOT treat that ZIP as a text-search token.
+  const q = (/^\d{5}$/.test(qRaw) && String(idxState?.distFrom || "").trim() === qRaw)
+    ? ""
+    : qRaw.toLowerCase();
   const stateSet = idxState?.state instanceof Set ? idxState.state : new Set();
   const typeSet  = idxState?.type  instanceof Set ? idxState.type  : new Set();
   const yearSet  = idxState?.year  instanceof Set ? idxState.year  : new Set();
@@ -92,15 +124,43 @@ function setTransition(ms){
   document.body.style.setProperty("--viewTransition", ms + "ms");
 }
 
-function applyProgress(p){
+let __viewShellW = 0;
+function __setViewShellW(w){ __viewShellW = Math.max(1, Number(w)||0); }
+function __getViewShellW(){ return (__viewShellW || ($("viewShell")?.clientWidth) || window.innerWidth || 1); }
+
+let __lastViewTitleMode = null; // null | "events" | "index"
+let __currentP = 0;              // source of truth for current progress (avoids getComputedStyle reads)
+
+function applyProgressVars(p){
   const clamped = Math.max(0, Math.min(1, p));
+  __currentP = clamped;
+
+  // Fast path: only update CSS variables.
   document.body.style.setProperty("--viewProgress", String(clamped));
-  const viewTitle = $("viewTitle");
-  if(viewTitle){
-    viewTitle.textContent = (clamped >= 0.5) ? "FIND TRAINING" : "EVENTS";
+
+  const w = __getViewShellW();
+  const offsetPx = (-w * clamped);
+
+  // Avoid toFixed() during swipe frames (it allocates + can be expensive on iOS).
+  document.body.style.setProperty("--viewOffsetPx", offsetPx + "px");
+  return clamped;
+}
+
+function applyProgress(p){
+  const clamped = applyProgressVars(p);
+
+  // Update title only when crossing the mid-point (prevents per-frame DOM churn).
+  const mode = (clamped >= 0.5) ? "index" : "events";
+  if(mode !== __lastViewTitleMode){
+    __lastViewTitleMode = mode;
+    const viewTitle = $("viewTitle");
+    if(viewTitle){
+      viewTitle.textContent = (mode === "index") ? "FIND TRAINING" : "EVENTS";
+    }
   }
   return clamped;
 }
+
 
 function setViewUI(view){
   setView(view);
@@ -171,9 +231,15 @@ function setViewUI(view){
   const evIn = $("eventsSearchInput");
   if(evIn) evIn.value = String(activeEventsState().q || "");
 
-  // Quick Search suggestions should be disabled on INDEX view
-  const suggestPanel = $("eventsSearchSuggest");
-  if(suggestPanel && view === "index") suggestPanel.setAttribute("hidden", "");
+  // Per-view helper text for the shared search bar
+  if(evIn) evIn.setAttribute("placeholder", view === "index" ? "Search index" : "Search events");
+
+  // Search suggestion panel: Events uses Quick Searches; Index uses Distance From
+  // (panel is opened on focus/click when input is empty)
+  if(view === "index"){
+    ensureDistanceOriginOptions();
+    syncDistanceUIFromState();
+  }
 
   // Header counts
   const evStatus = $("eventsStatus");
@@ -215,26 +281,28 @@ function wireViewToggle(){
   if(viewToggle){
     let dragging = false;
     let pointerId = null;
+    let downX = 0;
+    let moved = false;
 
     viewToggle.addEventListener("pointerdown", (e) => {
+      // Treat pointerdown as a potential "tap". We only enter drag-mode after a small move.
       dragging = true;
+      moved = false;
+      downX = e.clientX;
       pointerId = e.pointerId;
       viewToggle.setPointerCapture(pointerId);
-      setTransition(0);
-
-      const rect = viewToggle.getBoundingClientRect();
-      const padding = 4;
-      const trackW = rect.width - padding * 2;
-      const thumbW = trackW / 2;
-      const travel = trackW - thumbW;
-
-      const x = e.clientX - rect.left - padding;
-      const p = (x - thumbW / 2) / travel;
-      applyProgress(p);
     });
 
     viewToggle.addEventListener("pointermove", (e) => {
       if(!dragging || e.pointerId !== pointerId) return;
+
+      // Only start dragging after a tiny movement threshold.
+      if(!moved){
+        if(Math.abs(e.clientX - downX) < 6) return;
+        moved = true;
+        setTransition(0);
+      }
+
       const rect = viewToggle.getBoundingClientRect();
       const padding = 4;
       const trackW = rect.width - padding * 2;
@@ -249,10 +317,24 @@ function wireViewToggle(){
     const endDrag = (e) => {
       if(!dragging) return;
       if(e && pointerId != null && e.pointerId !== pointerId) return;
+
       dragging = false;
+      const wasMoved = moved;
+      moved = false;
       pointerId = null;
+
+      // If the user didn't drag, treat this as a tap/click and animate the view change.
+      if(!wasMoved){
+        const rect = viewToggle.getBoundingClientRect();
+        const x = e && typeof e.clientX === "number" ? e.clientX : (rect.left + rect.width / 2);
+        const isRightHalf = x >= (rect.left + rect.width / 2);
+        setTransition(260);
+        setViewUI(isRightHalf ? "index" : "events");
+        return;
+      }
+
       setTransition(260);
-      const p = Number(getComputedStyle(document.body).getPropertyValue("--viewProgress")) || 0;
+      const p = __currentP || 0;
       setViewUI(p >= 0.5 ? "index" : "events");
     };
 
@@ -263,22 +345,57 @@ function wireViewToggle(){
 
   if(viewShell){
     let startX = 0, startY = 0, startP = 0;
+    let shellW = 0;
     let lastX = 0, lastT = 0, vx = 0;
     let lockedAxis = ""; // "", "x", "y"
-    let rafId = 0;
-    let pendingP = null;
+    let swipeActive = false;
+    let rafLoop = 0;
+    let targetP = null;
+
+    function startSwipeLoop(){
+      if(rafLoop) return;
+
+      // Tiny blend factor smooths micro-jitter from uneven touchmove cadence on iOS.
+      // Closer to 1 = tighter finger tracking; lower = smoother (but more lag).
+      const SWIPE_BLEND = 0.88;
+
+      let p = __currentP || startP || 0;
+
+      const tick = () => {
+        rafLoop = requestAnimationFrame(tick);
+        if(targetP === null) return;
+
+        // Smooth toward the latest target.
+        p = p + (targetP - p) * SWIPE_BLEND;
+
+        applyProgressVars(p);
+      };
+
+      rafLoop = requestAnimationFrame(tick);
+    }
+
+function stopSwipeLoop(){
+
+      if(rafLoop){
+        cancelAnimationFrame(rafLoop);
+        rafLoop = 0;
+      }
+    }
     viewShell.addEventListener("touchstart", (e) => {
       if(e.touches.length !== 1) return;
       startX = e.touches[0].clientX;
       startY = e.touches[0].clientY;
-      startP = Number(getComputedStyle(document.body).getPropertyValue("--viewProgress")) || 0;
+      startP = __currentP || 0;
+      shellW = Math.max(1, viewShell.clientWidth || 1);
+      __setViewShellW(shellW);
 
       lastX = startX;
       lastT = performance.now();
       vx = 0;
       lockedAxis = "";
-
-      setTransition(0);
+      swipeActive = false;
+      stopSwipeLoop();
+      targetP = null;
     }, { passive: true });
 
     viewShell.addEventListener("touchmove", (e) => {
@@ -296,6 +413,14 @@ function wireViewToggle(){
       }
       if(lockedAxis === "y") return;
 
+      // We're committing to a horizontal swipe; disable transition for buttery tracking.
+      if(!swipeActive){
+        swipeActive = true;
+        setTransition(0);
+        targetP = startP;
+        startSwipeLoop();
+      }
+
       // Prevent the page from trying to scroll while we are swiping horizontally
       e.preventDefault();
 
@@ -306,34 +431,24 @@ function wireViewToggle(){
       lastX = x;
       lastT = now;
 
-      const delta = -dx / window.innerWidth;
+      const denom = shellW || 1;
+      const delta = -dx / denom;
       const nextP = startP + delta;
-      pendingP = nextP;
-      if(!rafId){
-        rafId = requestAnimationFrame(() => {
-          rafId = 0;
-          if(pendingP !== null){
-            applyProgress(pendingP);
-            pendingP = null;
-          }
-        });
-      }
+
+      // Set the target progress; a dedicated rAF loop will keep frames smooth even if touchmove events arrive unevenly.
+      targetP = nextP;
     }, { passive: false });
 
     viewShell.addEventListener("touchend", () => {
       setTransition(220);
 
-      // Flush any pending rAF progress update before we decide which view to commit
-      if(rafId){
-        cancelAnimationFrame(rafId);
-        rafId = 0;
-      }
-      if(pendingP !== null){
-        applyProgress(pendingP);
-        pendingP = null;
+      // Stop the continuous swipe loop and sync the last target before we decide which view to commit.
+      stopSwipeLoop();
+      if(targetP !== null){
+        applyProgress(targetP);
       }
 
-      const p = Number(getComputedStyle(document.body).getPropertyValue("--viewProgress")) || 0;
+      const p = __currentP || 0;
 
       // More sensitive commit: shorter swipe distance + quick flick support
       const FLICK_V = 0.45; // px/ms
@@ -366,11 +481,36 @@ function render(){
   renderEventsGroups($("eventsRoot"), evFiltered);
   $("eventsStatus").textContent = `${evFiltered.length} events`;
 
-  // Index view (Phase 2): render Directory rows using Events-style cards
-  const idxRows = directoryRows.map(dirToIndexEventRow);
+  // Index view: render Directory rows using Events-style cards
+  // Optional distance filter (Distance From dropdown)
+  // Source of truth for miles: the visible iOS segmented control (prevents state/module mismatch issues)
+  const seg = document.querySelector("#eventsSearchSuggestDistance .iosSeg");
+  const uiMiles = Number(seg?.dataset?.selected);
+  const miles = Number.isFinite(uiMiles) ? uiMiles : (Number(state.indexEvents.distMiles) || 15);
+  state.indexEvents.distMiles = miles;
+
+  const distRes = applyDistanceFilter(
+    directoryRows,
+    miles,
+    state.indexEvents.distFrom,
+    () => {
+      // re-render as geocoding results arrive
+      if(state.view === "index") render();
+    }
+  );
+const idxRows = distRes.rows.map(dirToIndexEventRow);
   const idxFiltered = filterIndexDirectoryAsEvents(idxRows, state.indexEvents);
   renderIndexEventsGroups($("indexEventsRoot"), idxFiltered);
-  $("status").textContent = `${idxFiltered.length} gyms`;
+
+  // status copy: show pending geocodes if distance filter is active
+  if(distRes.active){
+    const pending = Number(distRes.pending) || 0;
+    $("status").textContent = pending > 0
+      ? `${idxFiltered.length} gyms (locating ${pending}…)`
+      : `${idxFiltered.length} gyms`;
+  } else {
+    $("status").textContent = `${idxFiltered.length} gyms`;
+  }
 }
 
 /* ------------------ INIT ------------------ */
@@ -378,16 +518,32 @@ async function init(){
   wireViewToggle();
 
   wireSearch({
+    setIndexDistanceMiles,
     $,
     setIndexQuery,
     setIndexEventsQuery,
     setActiveEventsQuery,
+    isIndexView: () => state.view === "index",
+    clearIndexDistance: () => {
+      setIndexDistanceFrom("");
+      const inZip = $("distanceOriginInput");
+      if(inZip) inZip.value = "";
+    },
     render,
   });
   wireSearchSuggestions({
     $,
     setActiveEventsQuery,
-    isEventsView: () => state.view === "events"
+    isEventsView: () => state.view === "events",
+    isIndexView: () => state.view === "index",
+    onIndexViewOpen: () => {
+      ensureDistanceOriginOptions();
+      syncDistanceUIFromState();
+    },
+    onIndexDistanceSelectOrigin: (label) => {
+      setIndexDistanceFrom(label);
+      render();
+    },
   });
 if(!state.view) state.view = "events";
   setViewUI(state.view);
