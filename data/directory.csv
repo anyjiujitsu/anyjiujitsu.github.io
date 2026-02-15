@@ -147,7 +147,7 @@ Vermont,Hardwick,Kingdom Jiu-Jitsu,kingdom.jiu.jitsu,9:45AM,4:00PM,,,44.519932,-
 Connecticut,North Franklin,Rogers Academy,rogersmartialarts,,,,,41.621212,-72.142609
 Maine,Farmington,Foundry BJJ,foundryfarmington,,,,,44.676935,-70.141491
 Massachusetts,Tewksbury,Fenix BJJ,fenixbjjtewksbury,,10:00AM,,,42.612088,-71.227845
-Connecticut,Monroe,Cruvinel Brothers,cruvinelbrothers,,,y,,41.339236,-73.222828
+Connecticut,Monroe,Cruvinel Brothers,cruvinelbrothers,,10:00AM,y,,41.339236,-73.222828
 Connecticut,Tolland,Secret Pages BJJ,secret_pages_bjj,9:00AM,,y,,41.883019,-72.358869
 Massachusetts,Hanover,Thurston Academy,thurston_academy,,10:00AM,,,42.122956,-70.85631
 Massachusetts,Natick,Versus Jiu-Jitsu Academy,versusjiujitsuma,12:00PM,,,,42.284822,-71.348811
@@ -387,6 +387,7 @@ Massachusetts,Chelmsford,Resolve Martial Arts,resolve_bjj_ma,12:30PM,11:30AM,,,4
 Rhode Island,Warwick,Braman Jiu Jitsu,bramanjiujitsu,,,,,41.703085,-71.42031
 Massachusetts,Middleborough,Michael DeLuca Brazillian Jiu Jitsu,mikedelucabjj,,,,,41.878004,-70.869267
 Connecticut,Vernon,Wolf Den Martial Arts,wolf_den_martial_arts,,,,,41.8187,-72.5037
+
 
 
 
