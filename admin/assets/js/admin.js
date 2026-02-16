@@ -84,7 +84,7 @@
     tabs.forEach(btn => btn.setAttribute('aria-selected', String(btn.dataset.view === view)));
     toggle.style.setProperty('--viewProgress', isIndex ? 1 : 0);
 
-    titleEl.textContent = isIndex ? 'INDEX – ADD NEW (DEV)' : 'EVENTS – ADD NEW (DEV)';
+    titleEl.textContent = isIndex ? 'INDEX – ADD NEW' : 'EVENTS – ADD NEW';
   }
 
   function scrollToView(view){
@@ -622,7 +622,7 @@ if(idxState) idxState.addEventListener('change', scheduleGeocode);
 
   // --- GitHub CSV append/commit (matches QA admin logic) ---
   const OWNER  = 'anyjiujitsu';
-  const REPO   = 'anyjiujitsudev.github.io';
+  const REPO   = 'anyjiujitsu.github.io';
   const BRANCH = 'main';
 
   // Paths inside the repo (must exist)
