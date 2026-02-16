@@ -192,7 +192,7 @@ Massachusetts,Framingham,Dragon Lair MMA,dragon_lair_mma,,,,,42.307905,-71.43619
 Maine,Brewer,Titan Athletics,titan.athletics,,,,,44.784461,-68.734559
 Massachusetts,Randolph,Energy Fitness,energyfitnessma,,,,,42.178993,-71.052654
 Massachusetts,Woburn,Boston BJJ,bostonbjjwoburn,11:30AM,,,,42.488703,-71.154383
-Massachusetts,Canton,Lauzon MMA,lauzonmmacanton,,,,,42.175737,-71.125385
+Massachusetts,Canton,Lauzon MMA,lauzonmmacanton,,,y,,42.175737,-71.125385
 Connecticut,Bridgeport,Iron Lion,iron_lion_team_,,9:00AM,,,41.187393,-73.195757
 Massachusetts,Marblehead,First Colony BJJ,firstcolonybjj,9:00AM,,,,42.495629,-70.83582
 Massachusetts,Woburn,Fenix BJJ,fenixbjjwoburn,11:00AM,,,,42.488703,-71.154383
@@ -387,6 +387,7 @@ Massachusetts,Chelmsford,Resolve Martial Arts,resolve_bjj_ma,12:30PM,11:30AM,,,4
 Rhode Island,Warwick,Braman Jiu Jitsu,bramanjiujitsu,,,,,41.703085,-71.42031
 Massachusetts,Middleborough,Michael DeLuca Brazillian Jiu Jitsu,mikedelucabjj,,,,,41.878004,-70.869267
 Connecticut,Vernon,Wolf Den Martial Arts,wolf_den_martial_arts,,,,,41.8187,-72.5037
+
 
 
 
