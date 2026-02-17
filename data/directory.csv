@@ -313,7 +313,7 @@ Massachusetts,Hyannis,Cristyan BJJ,cristyanbjj,1:00PM,,,,41.661478,-70.356951
 Massachusetts,Quincy,Trifecta MMA,trifectamma,,,,,42.261006,-71.008988
 Rhode Island,Exeter,Elevate Dojo,elevatedojo,,,,,41.569431,-71.627921
 Vermont,Rutland,Rutland AJJ,rutland_ajj,10:30AM,,,,43.60967,-72.977788
-Massachusetts,Southbridge,Combate Real School,crjjschool,,,,,42.059737,-72.033908
+Massachusetts,Southbridge,Combate Real School,crjjschool,,9:00AM,,,42.059737,-72.033908
 Massachusetts,Somerville,Brazilian Martial Arts Center,bmacboston,,11:00AM,,,42.390445,-71.101033
 Massachusetts,Boston,Brazilian Top Team Back Bay,bttbackbay,,10:00AM,,,42.338551,-71.018253
 New Hampshire,Bedford,Aqueous Brazilian Jiu-Jitsu,aqueousbjj,8:00AM,8:00AM,,,42.935584,-71.536871
@@ -388,3 +388,4 @@ Rhode Island,Warwick,Braman Jiu Jitsu,bramanjiujitsu,,,,,41.703085,-71.42031
 Massachusetts,Middleborough,Michael DeLuca Brazillian Jiu Jitsu,mikedelucabjj,,,,,41.878004,-70.869267
 
 Connecticut,Vernon,Wolf Den Martial Arts,wolf_den_martial_arts,,,,,41.8187,-72.5037
+
