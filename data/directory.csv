@@ -235,7 +235,7 @@ Rhode Island,Jamestown,Ocean State BJJ,oceanstatebjj,,,,,41.51973,-71.371076
 Connecticut,Manchester,Manchester BJJ,manchesterbjj,,,,,41.77524,-72.524434
 Connecticut,Waterford,Crossroads BJJ,crossroadsbjj,,,,,41.351686,-72.146834
 Massachusetts,Peabody,Gentle Art Dojo,gadnorthshore,,10:00AM,,,42.53431,-70.969443
-Connecticut,Prospect,Technique Brazilian Jiu-Jitsu,technique_bjj,12:00AM,,y,,41.499247,-72.975634
+Connecticut,Prospect,Technique Brazilian Jiu-Jitsu,technique_bjj,12:00AM,6:00PM,y,,41.499247,-72.975634
 Massachusetts,Worcester,Worcester MMA,worcester_mma,,10:00AM,,,42.269478,-71.807783
 Massachusetts,Chelmsford,Gentle Art Dojo,gadchelmsford,,,,,42.597055,-71.3697
 Connecticut,West Hartford,Underdog MMA,underdogmmact,,11:00AM,,,41.766568,-72.754944
@@ -395,3 +395,4 @@ Massachusetts,Medford,Roshankish Martial Arts,roshankish.kravmaga,,,,02/18/2026,
 Connecticut,Middletown,360 Defense,360defensemiddletown,,,,02/20/2026,41.5623178,-72.6509061
 Connecticut,Norwich,360 Defense,360defense_norwich,,,,02/20/2026,41.5243631,-72.0759134
 Connecticut,Groton,Team Dexter Vale Tudo,teamdextervaletudo,10:00AM,,Y,02/26/2026,41.3454024,-72.0462196
+
