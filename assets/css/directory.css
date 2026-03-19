@@ -51,7 +51,7 @@
 
 #viewEvents .table .row.row--events,
 #viewIndex .table .row.row--events{
-  border-top: 0;
+  border-top: 0 !important;
   position: relative;
   isolation: isolate;
 }
@@ -62,7 +62,7 @@
   position: absolute;
   left: 0;
   right: 0;
-  top: 0;
+  top: 0 !important;
   height: 1px;
   background: rgba(0,0,0,0.06);
   z-index: 30;
@@ -281,6 +281,323 @@
   position: relative;
   z-index: 1;
 }
+
+
+
+
+
+/* EVENTS price trigger (info icon + clickable cell when NONMEMBER exists) */
+#viewEvents .row.row--events .cell--event > .cell__priceHit,
+#viewIndex .row.row--events .cell--event > .cell__priceHit,
+#viewEvents .row.row--events .cell--forwhere > .cell__priceHit,
+#viewIndex .row.row--events .cell--forwhere > .cell__priceHit{
+  position: absolute;
+  inset: calc(-1 * var(--evRowBleedY)) 0 calc(-1 * var(--evRowBleedY)) calc(-1 * var(--evRowBleedX));
+  z-index: 2;
+  border: 0;
+  padding: 0;
+  margin: 0;
+  background: transparent;
+  cursor: pointer;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+#viewEvents .row.row--events .cell__priceHit:focus-visible,
+#viewIndex .row.row--events .cell__priceHit:focus-visible{
+  outline: 2px solid rgba(35,76,49,0.20);
+  outline-offset: -2px;
+  border-radius: 8px;
+}
+
+#viewEvents .row.row--events .cell--event > .cell__cornerEar--desktop,
+#viewIndex .row.row--events .cell--event > .cell__cornerEar--desktop{
+  position: absolute;
+  right: 0;
+  top: -6px;
+  z-index: 3;
+  width: 0;
+  height: 0;
+  border-top: 6px solid #D16C4E;
+  border-left: 6px solid transparent;
+  pointer-events: none;
+}
+
+#viewEvents .row.row--events .cell__priceHit--mobile,
+#viewEvents .row.row--events .cell__cornerEar--mobile,
+#viewIndex .row.row--events .cell__priceHit--mobile,
+#viewIndex .row.row--events .cell__cornerEar--mobile{
+  display: none !important;
+}
+
+@media (max-width: 520px){
+  #viewEvents .row.row--events .cell__priceHit--desktop,
+  #viewEvents .row.row--events .cell__cornerEar--desktop,
+  #viewIndex .row.row--events .cell__priceHit--desktop,
+  #viewIndex .row.row--events .cell__cornerEar--desktop{
+    display: none !important;
+  }
+
+  #viewEvents .row.row--events .cell--forwhere > .cell__priceHit--mobile,
+  #viewIndex .row.row--events .cell--forwhere > .cell__priceHit--mobile{
+    display: block !important;
+    inset: calc(-1 * var(--evRowBleedY)) 0 calc(-1 * var(--evRowBleedY)) calc(-1 * var(--evRowBleedX));
+  }
+
+  #viewEvents .row.row--events .cell--forwhere > .cell__cornerEar--mobile,
+  #viewIndex .row.row--events .cell--forwhere > .cell__cornerEar--mobile{
+    display: block !important;
+    position: absolute;
+    right: 0;
+    top: -4px;
+    z-index: 3;
+    width: 0;
+    height: 0;
+    border-top: 5px solid #D16C4E;
+    border-left: 5px solid transparent;
+    pointer-events: none;
+  }
+}
+
+/* Pricing popup */
+
+
+body.pricingPopupOpen{
+  overflow: hidden;
+}
+
+.pricingOverlay{
+  position: fixed;
+  inset: 0;
+  z-index: 1200;
+  background: rgba(0,0,0,0.03);
+}
+
+.pricingOverlay[hidden]{
+  display: none;
+}
+
+.pricingPopup{
+  position: fixed;
+  width: min(400px, calc(100vw - 20px));
+  background: #f7f7f7;
+  border-radius: 20px;
+  box-shadow: 0 16px 40px rgba(0,0,0,0.18);
+  color: #111;
+  overflow: visible;
+}
+
+.pricingPopup__close{
+  position: absolute;
+  left: -20px;
+  top: -20px;
+  width: 48px;
+  height: 56px;
+  border: 0 !important;
+  border-radius: 999px;
+  background: #f1f1f1;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.18);
+  color: #8f8f8f;
+  font: inherit;
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.pricingPopup__title{
+  padding: 12px 16px 5px;
+  text-align: center;
+  font-size: 15px;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  color: #9b9b9b;
+}
+
+.pricingPopup__rule{
+  height: 2px;
+  margin: 0 18px;
+  background: rgba(0,0,0,0.22);
+}
+
+.pricingPopup__label{
+  padding: 5px 18px 0;
+  text-align: center;
+  font-size: 11px;
+  line-height: 1.1;
+  font-weight: 800;
+  color: #9b9b9b;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.pricingPopup__grid{
+  display: grid;
+  grid-template-columns: 1fr 1px 1fr;
+  align-items: stretch;
+  column-gap: 0;
+  padding: 12px 16px 5px;
+}
+
+.pricingPopup__priceBlock{
+  text-align: center;
+  min-width: 0;
+}
+
+.pricingPopup__price{
+  font-size: 26px;
+  line-height: 1;
+  font-weight: 900;
+  letter-spacing: -0.04em;
+}
+
+.pricingPopup__priceLabel{
+  margin-top: 5px;
+  font-size: 11px;
+  line-height: 1.1;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  color: #9b9b9b;
+  text-transform: uppercase;
+}
+
+.pricingPopup__divider{
+  width: 1px;
+  background: rgba(0,0,0,0.12);
+  margin: 4px 0;
+}
+
+.pricingPopup__presaleRow{
+  display: flex;
+  justify-content: center;
+  align-items: baseline;
+  gap: 10px;
+  padding: 5px 16px 12px;
+  text-align: center;
+}
+
+.pricingPopup__presaleLabel{
+  font-size: 11px;
+  line-height: 1.1;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  color: #9b9b9b;
+  text-transform: uppercase;
+}
+
+.pricingPopup__presaleValue{
+  font-size: 18px;
+  line-height: 1;
+  font-weight: 900;
+  letter-spacing: -0.04em;
+}
+
+.pricingPopup__payments{
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+  align-items: start;
+  justify-items: center;
+  padding: 10px 16px 8px;
+  background: #e7e7e7;
+  min-height: 74px;
+  border-bottom-left-radius: 24px;
+  border-bottom-right-radius: 24px;
+}
+
+.pricingPopup__payments--single{
+  grid-template-columns: 1fr;
+}
+
+.pricingPopup__payments--double{
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.pricingPopup__payments:has(.pricingPopup__payItem:nth-child(2):last-child){
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.pricingPopup__payments--empty{
+  min-height: 24px;
+  border-bottom-left-radius: 24px;
+  border-bottom-right-radius: 24px;
+}
+
+.pricingPopup__payItem{
+  display: grid;
+  justify-items: center;
+  gap: 6px;
+}
+
+.pricingPopup__payIcon{
+  width: 52px;
+  height: 36px;
+  color: #111;
+}
+
+.pricingPopup__payIcon svg{
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.pricingPopup__payLabel{
+  font-size: 11px;
+  line-height: 1.1;
+  font-weight: 800;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
+
+@media (max-width: 640px){
+  .pricingOverlay{
+    padding: 12px;
+    background: rgba(0,0,0,0.08);
+  }
+
+  .pricingPopup{
+    position: fixed;
+    left: 12px !important;
+    right: 12px !important;
+    top: 50% !important;
+    width: auto;
+    transform: translateY(-50%);
+    max-height: calc(100vh - 24px);
+    overflow: visible;
+    border-radius: 22px;
+  }
+
+  .pricingPopup__close{
+    left: 12px;
+    top: -18px;
+    width: 48px;
+    height: 48px;
+    font-size: 18px;
+  }
+
+  .pricingPopup__title{
+    padding-top: 16px;
+    font-size: 15px;
+  }
+
+  .pricingPopup__price{
+    font-size: 24px;
+  }
+
+  .pricingPopup__presaleValue{
+    font-size: 18px;
+  }
+
+  .pricingPopup__payments{
+    min-height: 70px;
+  }
+
+  .pricingPopup__payIcon{
+    width: 48px;
+    height: 34px;
+  }
+}
+
 
 
 @media (max-width: 520px){
@@ -567,8 +884,8 @@
   width: 100%;
   display: block;
   text-align: left;
-  border: 0;
-  background: transparent;
+  border: 0 !important;
+  background: none !important;
   padding: 12px 12px;
   border-radius: 12px;
   font: inherit;
@@ -627,8 +944,8 @@
   width: 100%;
   text-align: left;
   padding: 10px 14px 10px 32px; /* room for bullet */
-  background: transparent;
-  border: 0;
+  background: none !important;
+  border: 0 !important;
   color: inherit;
   font: inherit;
   -webkit-appearance: none;
@@ -822,7 +1139,7 @@
 }
 
 #viewIndex .table .row.row--events{
-  border-top: 0;
+  border-top: 0 !important;
   position: relative;
   isolation: isolate;
 }
@@ -832,7 +1149,7 @@
   position: absolute;
   left: 0;
   right: 0;
-  top: 0;
+  top: 0 !important;
   height: 1px;
   background: rgba(0,0,0,0.06);
   z-index: 30;
@@ -1353,5 +1670,13 @@
   /* Ensure values are not shifted independently (prevents crowding) */
   #viewIndex .row.row--events .cell--daydate .dayValue{
     transform: none;
+  }
+}
+
+
+@media (max-width: 640px){
+  .pricingPopup__payments{
+    border-bottom-left-radius: 22px;
+    border-bottom-right-radius: 22px;
   }
 }
