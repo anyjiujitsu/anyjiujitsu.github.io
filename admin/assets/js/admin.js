@@ -622,7 +622,7 @@ if(idxState) idxState.addEventListener('change', scheduleGeocode);
 
   // --- GitHub CSV append/commit (matches QA admin logic) ---
   const OWNER  = 'anyjiujitsu';
-  const REPO   = 'anyjiujitsu.github.io';
+  const REPO   = 'anyjiujitsudev.github.io';
   const BRANCH = 'main';
 
   // Paths inside the repo (must exist)
@@ -693,6 +693,13 @@ if(idxState) idxState.addEventListener('change', scheduleGeocode);
     const fd = new FormData(form);
     const map = {};
     for(const [k,v] of fd.entries()) map[k] = (v ?? '').toString().trim();
+
+    if(form && form.id === 'eventForm'){
+      ['CASH','VENMO','SIGN UP'].forEach((name) => {
+        const el = form.querySelector(`[name="${name}"]`);
+        map[name] = (el && el.checked) ? 'Y' : '';
+      });
+    }
 
     // Normalize event date (native date picker returns yyyy-mm-dd)
     if(form && form.id === 'eventForm' && map.DATE){
