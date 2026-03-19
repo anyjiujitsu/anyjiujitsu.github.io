@@ -161,7 +161,7 @@ function openPricingPopup(trigger){
     const items = [];
     if(isAffirmative(ds.cash)) items.push(buildPaymentOption("CASH", getCashIconMarkup()));
     if(isAffirmative(ds.venmo)) items.push(buildPaymentOption("VENMO", getVenmoIconMarkup()));
-    if(isAffirmative(ds.signup)) items.push(buildPaymentOption("SIGN UP", getSignupIconMarkup()));
+    if(isAffirmative(ds.signup)) items.push(buildPaymentOption("SIGNUPS", getSignupIconMarkup()));
     paymentsEl.innerHTML = items.join("");
     paymentsEl.classList.toggle("pricingPopup__payments--single", items.length === 1);
     paymentsEl.classList.toggle("pricingPopup__payments--double", items.length === 2);
