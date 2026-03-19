@@ -305,10 +305,34 @@ function renderEventRow(r){
     : (rawDate || "—");
 
   const showNew = shouldShowNew(r.CREATED);
+  const priceTriggerDesktop = buildPriceTrigger({
+    member: r.MEMBER,
+    nonMember: r.NONMEMBER,
+    presale: r.PRESALE,
+    cash: r.CASH,
+    venmo: r.VENMO,
+    signup: (r["SIGN UP"] ?? r.SIGNUP ?? r.SIGN_UP ?? ""),
+    label: r.FOR || r.GYM || "—",
+    mode: "desktop"
+  });
+  const priceTriggerMobile = buildPriceTrigger({
+    member: r.MEMBER,
+    nonMember: r.NONMEMBER,
+    presale: r.PRESALE,
+    cash: r.CASH,
+    venmo: r.VENMO,
+    signup: (r["SIGN UP"] ?? r.SIGNUP ?? r.SIGN_UP ?? ""),
+    label: r.FOR || r.GYM || "—",
+    mode: "mobile"
+  });
+  const priceInfoDesktop = buildPriceInfoIcon(r.NONMEMBER, "desktop");
+  const priceInfoMobile = buildPriceInfoIcon(r.NONMEMBER, "mobile");
 
   const c1 = document.createElement("div");
   c1.className = "cell cell--event";
   c1.innerHTML = `
+    ${priceTriggerDesktop}
+    ${priceInfoDesktop}
     <div class="cell__top cell__event">${escapeHtml(r.EVENT || r.TYPE || "—")}</div>
     ${showNew ? `<div class="cell__sub cell__new">*NEW</div>` : `<div class="cell__sub cell__new">&nbsp;</div>`}
   `;
@@ -316,6 +340,8 @@ function renderEventRow(r){
   const c2 = document.createElement("div");
   c2.className = "cell cell--forwhere";
   c2.innerHTML = `
+    ${priceTriggerMobile}
+    ${priceInfoMobile}
     <div class="cell__eventInlineWrap">
       <span class="cell__eventInline">${escapeHtml(r.EVENT || "—")}</span>
       ${showNew ? `<span class="cell__newInline">*NEW</span>` : `<span class="cell__newInline">&nbsp;</span>`}
@@ -343,6 +369,34 @@ function renderEventRow(r){
   row.appendChild(c3);
   row.appendChild(c4);
   return row;
+}
+
+
+
+function hasPriceInfo(nonMemberRaw){
+  return !!String(nonMemberRaw ?? "").trim();
+}
+
+function buildPriceTrigger({ member, nonMember, presale, cash, venmo, signup, label, mode = "desktop" }){
+  if(!hasPriceInfo(nonMember)) return "";
+
+  return `<button
+    type="button"
+    class="cell__priceHit cell__priceHit--${escapeHtml(mode)} js-priceTrigger"
+    aria-label="Open event pricing"
+    data-member="${escapeHtml(member ?? "")}"
+    data-nonmember="${escapeHtml(nonMember ?? "")}"
+    data-presale="${escapeHtml(presale ?? "")}"
+    data-cash="${escapeHtml(cash ?? "")}"
+    data-venmo="${escapeHtml(venmo ?? "")}"
+    data-signup="${escapeHtml(signup ?? "")}"
+    data-label="${escapeHtml(label ?? "")}"
+  ></button>`;
+}
+
+function buildPriceInfoIcon(nonMemberRaw, mode = "desktop"){
+  if(!hasPriceInfo(nonMemberRaw)) return "";
+  return `<span class="cell__cornerEar cell__cornerEar--${escapeHtml(mode)}" aria-hidden="true"></span>`;
 }
 
 function getWhereText(r){
