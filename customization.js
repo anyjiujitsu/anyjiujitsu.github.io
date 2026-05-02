@@ -21,7 +21,7 @@ export const CUSTOMIZATION = Object.freeze({
   adminGitHubOwner: "anyjiujitsu",
 
   // ADMIN GITHUB REPO: GitHub repository that receives admin CSV commits
-  adminGitHubRepo: "anyjiujitsudev.github.io",
+  adminGitHubRepo: "anyjiujitsu.github.io",
 
   // ADMIN GITHUB BRANCH: branch that receives admin CSV commits
   adminGitHubBranch: "main",
