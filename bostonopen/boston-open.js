@@ -95,7 +95,7 @@ function updateAcademies() {
   const allowed = new Set(available.map(a=>a[0]));
   for (const name of chosenAcademies) if (!allowed.has(name)) chosenAcademies.delete(name);
   academyLabel.textContent = chosenAcademies.size ? `ACADEMIES · ${chosenAcademies.size} SELECTED` :
-    (!chosen.size ? 'ACADEMIES · SELECT COMPETITIONS' : available.length ? 'ACADEMIES · SELECT' : 'ACADEMIES · NO ROSTER');
+    (!chosen.size ? 'ACADEMIES · SELECT' : available.length ? 'ACADEMIES · SELECT' : 'ACADEMIES · NO ROSTER');
   academyToggle.classList.toggle('has-selection', chosenAcademies.size > 0);
   academyOptions.replaceChildren();
   if (!available.length) {
