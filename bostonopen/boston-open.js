@@ -125,6 +125,39 @@ async function getJson(path) {
   return response.json();
 }
 function appendCell(parent, text, cls = '') { const span = document.createElement('span'); span.className = cls; span.textContent = text || '—'; parent.append(span); }
+// Display IBJJF divisions with a muted belt-color bar spanning age, gender, and weight.
+function appendBracketCell(parent, bracketText) {
+  const text = String(bracketText || '').trim();
+  const parts = text.split(/\s*\/\s*/).map(part => part.trim());
+  const colors = { white: '#e5e3de', blue: '#647e9a', purple: '#877790', brown: '#886f60', black: '#3e403f', gray: '#8d908e', grey: '#8d908e', yellow: '#c0ae7c', orange: '#b68a68', green: '#6f8878' };
+  const color = (parts[0] || '').toLowerCase();
+  const cell = document.createElement('span');
+  cell.className = 'boston-bracket';
+  if (parts.length < 3 || !Object.prototype.hasOwnProperty.call(colors, color)) {
+    cell.textContent = text || '—';
+    parent.append(cell);
+    return;
+  }
+  const bar = document.createElement('span');
+  bar.className = 'boston-belt-bar';
+  bar.style.backgroundColor = colors[color];
+  bar.title = `${parts[0]} belt`;
+  bar.setAttribute('aria-label', `${parts[0]} belt`);
+  const lines = document.createElement('span');
+  lines.className = 'boston-bracket-text';
+  const age = document.createElement('span');
+  age.className = 'boston-bracket-line';
+  age.textContent = parts[1] || '—';
+  const gender = document.createElement('span');
+  gender.className = 'boston-bracket-line';
+  gender.textContent = parts[2] || '—';
+  const weight = document.createElement('span');
+  weight.className = 'boston-bracket-line';
+  weight.textContent = (parts.slice(3).join(' / ').replace(/\s*\(\s*[\d.,]+\s*(?:lb|lbs|kg)?\s*\)/gi, '').trim()) || '—';
+  lines.append(age, gender, weight);
+  cell.append(bar, lines);
+  parent.append(cell);
+}
 function renderAthletes(items) {
   rows.replaceChildren();
   if (!items.length) { const blank = document.createElement('div'); blank.className = 'boston-empty'; blank.textContent = 'No athletes matched your search in the available rosters.'; rows.append(blank); return; }
@@ -135,7 +168,7 @@ function renderAthletes(items) {
     a.target = '_blank'; a.rel = 'noopener noreferrer'; a.textContent = athlete.name; primary.append(a);
     const secondary = document.createElement('small'); secondary.textContent = `${athlete.team || 'Team unavailable'} · ${athlete.competition_name || ''}`; primary.append(secondary);
     row.append(primary);
-    appendCell(row, athlete.bracket || athlete.division || '—');
+    appendBracketCell(row, athlete.bracket || athlete.division || '—');
     appendCell(row, athlete.time || '—'); appendCell(row, athlete.mat || '—'); appendCell(row, athlete.day || '—');
     rows.append(row);
   }
