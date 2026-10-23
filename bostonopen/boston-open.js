@@ -154,7 +154,7 @@ async function initialize() {
     updateAcademies();
     const loadedCount = (roster.loaded_competition_ids || []).filter(id => competitions.some(c => c.id === String(id))).length;
     const errorSummary = Object.values(roster.errors || {}).filter(Boolean).slice(0, 2).join(' / ');
-    if (!status.textContent.includes('unavailable')) setStatus(`${competitions.length} Boston competition${competitions.length === 1 ? '' : 's'} after July 1, 2026. ${loadedCount} athlete roster${loadedCount === 1 ? '' : 's'} synced.${loadedCount ? ' Select competitions and academies, then search.' : ` Run the GitHub Actions roster refresh to enable athlete results.${errorSummary ? ' Refresh issue: ' + errorSummary : ''}`}`);
+    if (!status.textContent.includes('unavailable')) setStatus('Select competitions and academies, then GO');
     searchButton.disabled = false;
   } catch (error) {
     label.textContent = 'COMPETITIONS · UNAVAILABLE'; options.textContent = 'Failed to load IBJJF competitions.';
