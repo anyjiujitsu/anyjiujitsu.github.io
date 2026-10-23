@@ -53,6 +53,8 @@
     .boston-clear { background:transparent; color:#fff; border:1px solid #ffffffa8; white-space:nowrap; }
     .boston-clear:hover { background:#ffffff20; }
     @media (max-width:680px) {
+      /* Let the academy menu grow toward the left instead of offscreen to the right. */
+      .boston-gym-menu { left:auto; right:0; width:min(480px, calc(100vw - 24px)); box-sizing:border-box; }
       .boston-controls { flex-wrap:nowrap; gap:5px; }
       .boston-picker { min-width:0; max-width:none; flex:1 1 42%; }
       .boston-search-form { min-width:0; flex:1 1 58%; gap:5px; }
@@ -115,7 +117,7 @@
               </div>
               <form class="boston-search-form" id="athleteSearchForm">
                 <div class="boston-picker boston-gym-picker" id="academyPicker">
-                  <button class="boston-pill" id="academyToggle" type="button" aria-expanded="false" aria-controls="academyMenu"><span class="boston-pill-label" id="academyLabel">ACADEMIES · SELECT</span><span class="boston-dot" aria-hidden="true"></span><span aria-hidden="true">▾</span></button>
+                  <button class="boston-pill" id="academyToggle" type="button" aria-expanded="false" aria-controls="academyMenu"><span class="boston-pill-label" id="academyLabel">ACADEMIES · SELECT COMPETITIONS</span><span class="boston-dot" aria-hidden="true"></span><span aria-hidden="true">▾</span></button>
                   <div class="boston-menu boston-gym-menu" id="academyMenu" hidden>
                     <div class="boston-menu-actions"><strong>ACADEMIES IN SELECTED COMPETITIONS</strong><button type="button" id="clearAcademies">Clear</button></div>
                     <div id="academyOptions">Select a competition first.</div>
@@ -134,7 +136,7 @@
         <p class="boston-status" id="bostonStatus" role="status" aria-live="polite">Loading IBJJF Boston competitions…</p>
         <section class="boston-results" id="bostonResults" aria-label="Athlete results">
           <div class="boston-results-head"><span>NAME</span><span>BRACKET</span><span>TIME</span><span>MAT</span><span>DAY</span></div>
-          <div id="athleteRows"><div class="boston-empty"></div></div>
+          <div id="athleteRows"><div class="boston-empty">Choose competitions and search to see athletes.</div></div>
         </section>
       </div>
     </main>
