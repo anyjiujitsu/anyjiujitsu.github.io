@@ -196,7 +196,7 @@ async function initialize() {
     updateAcademies();
     const loadedCount = (roster.loaded_competition_ids || []).filter(id => competitions.some(c => c.id === String(id))).length;
     const errorSummary = Object.values(roster.errors || {}).filter(Boolean).slice(0, 2).join(' / ');
-    if (!status.textContent.includes('unavailable')) setStatus('Select competitions and academies, then GO');
+    if (!status.textContent.includes('unavailable')) setStatus('Select competitions and academies, then GO.');
     searchButton.disabled = false;
     restoreSearch();
   } catch (error) {
