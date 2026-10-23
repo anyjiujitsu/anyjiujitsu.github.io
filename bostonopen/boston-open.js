@@ -160,7 +160,7 @@ $('clearAllButton').addEventListener('click', () => {
   updateLabel(); showOptions(); updateAcademies();
   rows.replaceChildren();
   const empty = document.createElement('div');
-  empty.className = 'boston-empty'; empty.textContent = 'Choose competitions and academies, then select GO.';
+  empty.className = 'boston-empty'; empty.textContent = ' ';
   rows.append(empty);
   setStatus('Selections cleared. Choose competitions and academies to search.');
   setMenu(false); setAcademyMenu(false);
