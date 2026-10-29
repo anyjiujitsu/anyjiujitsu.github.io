@@ -378,12 +378,45 @@ input[type="search"]{ font-size:16px; }
   .pill__caret{ font-size: 8px; }
   .pill__dot{ margin-left: 1px; }
 
-  /* Search input: prevent iOS zoom while visually smaller */
-  .pill__input{
-    font-size: 16px;
+  /* Search: preserve the compact glyph size while allocating the full
+     visible text track. Grid prevents flexbox shrinking the transformed input
+     based on its unscaled width (the original premature clipping bug). */
+  .pill--search{
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    align-items: center;
+  }
+  /* Center every search control in the same grid track. Keep the
+     compensated 76%-scaled input width so long searches stay visible. */
+  .pill--search .pill__icon,
+  .pill--search .pill__clear{
+    position: static;
+    top: auto;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    align-self: center;
+    height: 100%;
+    margin-top: 0;
+    margin-bottom: 0;
+    line-height: 1;
+  }
+  .pill--search .pill__input{
+    font-size: 16px; /* retain iOS focus-zoom protection */
+    min-width: 0;
+    width: calc(100% / 0.76);
+    max-width: none;
+    height: 100%;
+    min-height: 0;
+    margin: 0;
+    padding: 0;
+    line-height: normal;
+    box-sizing: border-box;
+    position: static;
+    top: auto;
+    align-self: center;
     transform: scale(0.76);
     transform-origin: left center;
-    width: 132%;
   }
 
   /* Counter + groups */

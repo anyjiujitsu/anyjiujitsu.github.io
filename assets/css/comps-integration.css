@@ -1,0 +1,60 @@
+/* Three-way navigation only: OPENS layout remains in opens/embedded.css. */
+.viewSlider { width:300%; }
+.viewPanel { width:33.333333333%; min-width:33.333333333%; }
+.viewToggle__thumb { width:calc(33.333333333% - 6px); transform:translateX(calc(var(--viewProgress,0) * 100%)); }
+@media(max-width:680px) { .viewToggle__thumb { width:calc(33.333333333% - 3px); } }
+@media(max-width:430px) { .viewToggle__thumb { width:calc(33.333333333% - 2px); } }
+#compsFilters[hidden] { display:none !important; }
+#compsFilters .filters__inner { overflow:visible; }
+#viewComps { min-width:0; }
+#viewComps .content { min-width:0; }
+#viewComps .boston-results { min-width:0; }
+
+/* Desktop: dock the three header links above the wider COMPS slider.
+   Do not change the established mobile placement or the slider itself. */
+@media (min-width: 641px) {
+  .header__inner.siteHeaderInner--title > .headerSocial {
+    position: absolute;
+    top: -11px;
+    right: var(--pagePad);
+    transform: none;
+    gap: 11px;
+    z-index: 6;
+  }
+}
+
+/* Each view scrolls independently. The header/filter shell never moves. */
+html, body { height:100%; overflow:hidden; }
+#app.app { height:100dvh; min-height:0; display:flex; flex-direction:column; overflow:hidden; }
+#app > .header { flex:0 0 auto; }
+#viewShell.viewShell { flex:1 1 auto; min-height:0; height:auto; overflow:hidden; }
+#viewShell .viewSlider { height:100%; }
+#viewShell .viewPanel {
+  height:100%; min-height:0; overflow-x:hidden; overflow-y:auto;
+  -webkit-overflow-scrolling:touch;
+  overscroll-behavior-y:contain;
+  overflow-anchor:none;
+}
+
+/* DEV experiment: native horizontal touch scrolling with page snapping. */
+#viewShell.viewShell {
+  overflow-x:auto;
+  overflow-y:hidden;
+  scroll-snap-type:x mandatory;
+  overscroll-behavior-x:contain;
+  touch-action:pan-x pan-y;
+  -webkit-overflow-scrolling:touch;
+  scrollbar-width:none;
+}
+#viewShell.viewShell::-webkit-scrollbar { display:none; }
+#viewShell .viewSlider {
+  transform:none !important;
+  transition:none !important;
+  will-change:auto;
+}
+#viewShell .viewPanel {
+  scroll-snap-align:start;
+  scroll-snap-stop:always;
+  flex:0 0 33.333333333%;
+  touch-action:pan-x pan-y;
+}
