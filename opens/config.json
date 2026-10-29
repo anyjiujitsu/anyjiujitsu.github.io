@@ -1,0 +1,19 @@
+{
+  "enabled": false,
+  "refresh_minutes": 15,
+  "competitions": [
+    {
+      "id": "3312",
+      "name": "Rome International Open IBJJF Jiu-Jitsu Championship 2026",
+      "url": "https://ibjjf.com/events/3312/athletes-list-by-academy-teams",
+      "date": ""
+    },
+    {
+      "id": "3313",
+      "name": "European IBJJF Jiu-Jitsu No-Gi Championship 2026",
+      "url": "https://ibjjf.com/events/3313/athletes-list-by-academy-teams",
+      "date": ""
+    }
+  ],
+  "updated_at": "2026-10-29T14:19:21.548867+00:00"
+}
