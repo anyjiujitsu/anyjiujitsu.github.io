@@ -8,11 +8,13 @@ import { refreshEventsPillDots } from "./pills.js?v=20260210-911";
 const VIEW_LOCKED = false;
 
 let viewShellW = 0;
-let lastViewTitleMode = null; // null | "events" | "index"
+let lastViewTitleMode = null; // null | "events" | "index" | "comps"
 let currentP = 0;             // source of truth for current progress
 
+
 function setTransition(ms){
-  document.body.style.setProperty("--viewTransition", ms + "ms");
+  // Keep transition invalidation inside the navigation control.
+  document.getElementById("viewToggle")?.style.setProperty("--viewTransition", ms + "ms");
 }
 
 function setViewShellW(w){
@@ -24,22 +26,25 @@ function getViewShellW($){
 }
 
 function applyProgressVars($, p){
-  const clamped = Math.max(0, Math.min(1, p));
+  const clamped = Math.max(0, Math.min(2, p));
   currentP = clamped;
 
-  document.body.style.setProperty("--viewProgress", String(clamped));
-  document.body.style.setProperty("--viewOffsetPx", (-getViewShellW($) * clamped) + "px");
+  // Changing this on body invalidates styles across every match row.
+  // The thumb is the only consumer, so scope it to the tiny nav subtree.
+  const toggle = $("viewToggle");
+  if(toggle) toggle.style.setProperty("--viewProgress", String(clamped));
+  // Native scroll-snap owns the panel position; only the tab thumb follows progress.
   return clamped;
 }
 
 function applyProgress($, p){
   const clamped = applyProgressVars($, p);
 
-  const mode = (clamped >= 0.5) ? "index" : "events";
+  const mode = clamped >= 1.5 ? "comps" : (clamped >= 0.5 ? "index" : "events");
   if(mode !== lastViewTitleMode){
     lastViewTitleMode = mode;
     const viewTitle = $("viewTitle");
-    if(viewTitle) viewTitle.textContent = (mode === "index") ? "FIND TRAINING" : "EVENTS";
+    if(viewTitle) viewTitle.textContent = (mode === "comps") ? "COMPS" : (mode === "index" ? "FIND TRAINING" : "EVENTS");
   }
   return clamped;
 }
@@ -84,21 +89,52 @@ export function setActiveEventsQuery(val, setters){
   else setters.setEventsQuery(val);
 }
 
-export function setViewUI(view, { $, onIndexViewOpen } = {}){
+export function setViewUI(view, { $, onIndexViewOpen, fromNativeScroll = false } = {}){
+  const previousView = state.view;
   setView(view);
+  if(view === "comps" && !window.__compsModuleStarted){
+    window.__compsModuleStarted = true;
+    const academyToggle = document.getElementById("academyToggle");
+    const academyMenu = document.getElementById("academyMenu");
+    if(academyToggle && academyMenu && !academyToggle.dataset.embeddedPositionWired){
+      academyToggle.dataset.embeddedPositionWired = "true";
+      const position = () => {
+        if(window.innerWidth > 680 || academyMenu.hidden) return;
+        const vp = window.visualViewport;
+        academyMenu.style.left = `${(vp?.offsetLeft || 0) + 8}px`;
+        academyMenu.style.right = "auto";
+        academyMenu.style.width = `${Math.max(200, (vp?.width || window.innerWidth) - 16)}px`;
+        academyMenu.style.top = `${academyToggle.getBoundingClientRect().bottom + 7}px`;
+      };
+      academyToggle.addEventListener("click", () => requestAnimationFrame(position));
+      window.addEventListener("resize", position);
+      window.addEventListener("scroll", position, {passive:true});
+      window.visualViewport?.addEventListener("resize", position);
+      window.visualViewport?.addEventListener("scroll", position);
+    }
+    import("../../../opens/opens.js").catch(error => {
+      window.__compsModuleStarted = false;
+      const status = document.getElementById("bostonStatus");
+      if(status) status.textContent = `Could not load COMPS: ${error.message}`;
+      console.error(error);
+    });
+  }
 
+  $("tabComps")?.setAttribute("aria-selected", view === "comps" ? "true" : "false");
   $("tabEvents")?.setAttribute("aria-selected", view === "events" ? "true" : "false");
   $("tabIndex")?.setAttribute("aria-selected", view === "index" ? "true" : "false");
 
   const evFilters = document.getElementById("eventsFilters");
   const idxFilters = document.getElementById("filters");
-  if(evFilters) evFilters.hidden = false;
+  if(evFilters) evFilters.hidden = view === "comps";
+  const compsFilters = document.getElementById("compsFilters");
+  if(compsFilters) compsFilters.hidden = view !== "comps";
   if(idxFilters) idxFilters.hidden = true;
 
   const title = $("viewTitle");
-  if(title) title.textContent = (view === "events") ? "EVENTS" : "FIND TRAINING";
+  if(title) title.textContent = (view === "events") ? "EVENTS" : (view === "comps" ? "COMPS" : "FIND TRAINING");
 
-  setSharedPillLabels(view);
+  if(view !== "comps") setSharedPillLabels(view);
 
   const evIn = $("eventsSearchInput");
   if(evIn){
@@ -112,17 +148,40 @@ export function setViewUI(view, { $, onIndexViewOpen } = {}){
   const idxStatus = $("status");
   if(evStatus) evStatus.hidden = (view !== "events");
   if(idxStatus) idxStatus.hidden = (view !== "index");
+  const compsStatus = $("compsActiveStatus");
+  if(compsStatus) compsStatus.hidden = (view !== "comps");
 
   document.title = CUSTOMIZATION.siteHeaderName || "UNDEFINED";
 
-  setTransition(260);
-  refreshEventsPillDots({ $, activeEventsState });
-  applyProgress($, view === "index" ? 1 : 0);
+  setTransition(0); // Native scroll progress moves the thumb; never animate it independently.
+  if(view !== "comps") refreshEventsPillDots({ $, activeEventsState });
+  const destination = view === "comps" ? 2 : (view === "index" ? 1 : 0);
+  // Progress always follows viewShell.scrollLeft; do not jump the thumb ahead.
+  if(!fromNativeScroll){
+    const shell = $("viewShell");
+    if(shell){
+      const target = destination * shell.clientWidth;
+      if(Math.abs(shell.scrollLeft - target) > 1){
+        // The browser animates button-triggered navigation; touch swipes remain native.
+        shell.scrollTo({ left: target, behavior: "smooth" });
+      }
+    }
+  }
+
+  // Reset only the destination list. Keep the fixed header and filter bar
+  // completely outside scrolling, so switching cannot repaint the page shell.
+  if(previousView !== state.view){
+    const panelId = view === "comps" ? "viewComps" : (view === "index" ? "viewIndex" : "viewEvents");
+    const panel = $(panelId);
+    if(panel) panel.scrollTop = 0;
+  }
+
 }
 
 export function wireViewToggle({ $, onIndexViewOpen } = {}){
   const tabEvents = $("tabEvents");
   const tabIndex  = $("tabIndex");
+  const tabComps = $("tabComps");
   const viewToggle = $("viewToggle");
   const viewShell  = $("viewShell");
 
@@ -140,162 +199,111 @@ export function wireViewToggle({ $, onIndexViewOpen } = {}){
     return;
   }
 
-  tabEvents?.addEventListener("click", () => setViewUI("events", { $, onIndexViewOpen }));
-  tabIndex?.addEventListener("click", () => setViewUI("index", { $, onIndexViewOpen }));
+  // A single route for tab clicks. The thumb only follows the physical scroll.
+  const views = ["events", "index", "comps"];
+  const tabs = [tabEvents, tabIndex, tabComps];
+  let suppressClick = false;
+  let suppressTimer = 0;
+  function goTo(index){
+    index = Math.max(0, Math.min(2, index));
+    if(viewShell){
+      const target = index * viewShell.clientWidth;
+      if(Math.abs(viewShell.scrollLeft - target) > 1){
+        viewShell.scrollTo({left:target, behavior:"smooth"});
+      }else if(state.view !== views[index]){
+        setViewUI(views[index], { $, onIndexViewOpen, fromNativeScroll:true });
+      }
+    } else {
+      setViewUI(views[index], { $, onIndexViewOpen });
+    }
+  }
+  for(const [index, tab] of tabs.entries()){
+    tab?.addEventListener("click", e => {
+      if(suppressClick){ e.preventDefault(); return; }
+      goTo(index);
+    });
+  }
 
-  if(viewToggle){
-    let dragging = false;
-    let pointerId = null;
-    let downX = 0;
-    let moved = false;
-
-    viewToggle.addEventListener("pointerdown", (e) => {
-      dragging = true;
-      moved = false;
-      downX = e.clientX;
+  // Dragging the top selector also moves the *real native scroller*.
+  // Do not move a simulated thumb separately from the pages.
+  if(viewToggle && viewShell){
+    let downX = 0, pointerId = null, dragging = false, startScrollLeft = 0;
+    let previousSnap = "";
+    viewToggle.addEventListener("pointerdown", e => {
+      if(e.button !== 0) return;
       pointerId = e.pointerId;
-      viewToggle.setPointerCapture(pointerId);
-    });
-
-    viewToggle.addEventListener("pointermove", (e) => {
-      if(!dragging || e.pointerId !== pointerId) return;
-      if(!moved){
-        if(Math.abs(e.clientX - downX) < 6) return;
-        moved = true;
-        setTransition(0);
-      }
-
-      const rect = viewToggle.getBoundingClientRect();
-      const padding = 4;
-      const trackW = rect.width - padding * 2;
-      const thumbW = trackW / 2;
-      const travel = trackW - thumbW;
-      const x = e.clientX - rect.left - padding;
-      applyProgress($, (x - thumbW / 2) / travel);
-    });
-
-    const endDrag = (e) => {
-      if(!dragging) return;
-      if(e && pointerId != null && e.pointerId !== pointerId) return;
-
+      downX = e.clientX;
+      startScrollLeft = viewShell.scrollLeft;
       dragging = false;
-      const wasMoved = moved;
-      moved = false;
-      pointerId = null;
-
-      if(!wasMoved){
-        const rect = viewToggle.getBoundingClientRect();
-        const x = e && typeof e.clientX === "number" ? e.clientX : (rect.left + rect.width / 2);
-        const isRightHalf = x >= (rect.left + rect.width / 2);
-        setTransition(260);
-        setViewUI(isRightHalf ? "index" : "events", { $, onIndexViewOpen });
-        return;
+    });
+    viewToggle.addEventListener("pointermove", e => {
+      if(e.pointerId !== pointerId) return;
+      const dx = e.clientX - downX;
+      if(!dragging){
+        if(Math.abs(dx) < 7) return;
+        dragging = true;
+        previousSnap = viewShell.style.scrollSnapType;
+        viewShell.style.scrollSnapType = "none";
+        try { viewToggle.setPointerCapture(pointerId); } catch(_) {}
       }
-
-      setTransition(260);
-      setViewUI((currentP || 0) >= 0.5 ? "index" : "events", { $, onIndexViewOpen });
+      const thumbRange = Math.max(1, viewToggle.getBoundingClientRect().width * (2/3));
+      const progressDx = (dx / thumbRange) * 2;
+      viewShell.scrollLeft = Math.max(0, Math.min(2 * viewShell.clientWidth,
+        startScrollLeft + progressDx * viewShell.clientWidth));
+    });
+    const finishDrag = e => {
+      if(e?.pointerId !== pointerId) return;
+      pointerId = null;
+      if(!dragging) return;
+      dragging = false;
+      viewShell.style.scrollSnapType = previousSnap;
+      // Synthetic click from releasing a drag must not launch a second navigation.
+      suppressClick = true;
+      clearTimeout(suppressTimer);
+      suppressTimer = setTimeout(() => { suppressClick = false; }, 100);
+      const index = Math.max(0, Math.min(2, Math.round(viewShell.scrollLeft / Math.max(1,viewShell.clientWidth))));
+      goTo(index);
     };
-
-    viewToggle.addEventListener("pointerup", endDrag);
-    viewToggle.addEventListener("pointercancel", endDrag);
-    viewToggle.addEventListener("lostpointercapture", endDrag);
+    viewToggle.addEventListener("pointerup", finishDrag);
+    viewToggle.addEventListener("pointercancel", finishDrag);
+    viewToggle.addEventListener("lostpointercapture", finishDrag);
   }
 
   if(viewShell){
-    let startX = 0, startY = 0, startP = 0;
-    let shellW = 0;
-    let lastX = 0, lastT = 0, vx = 0;
-    let lockedAxis = "";
-    let swipeActive = false;
-    let rafLoop = 0;
-    let targetP = null;
-
-    function startSwipeLoop(){
-      if(rafLoop) return;
-      const SWIPE_BLEND = 0.88;
-      let p = currentP || startP || 0;
-      const tick = () => {
-        rafLoop = requestAnimationFrame(tick);
-        if(targetP === null) return;
-        p = p + (targetP - p) * SWIPE_BLEND;
-        applyProgressVars($, p);
-      };
-      rafLoop = requestAnimationFrame(tick);
-    }
-
-    function stopSwipeLoop(){
-      if(rafLoop){
-        cancelAnimationFrame(rafLoop);
-        rafLoop = 0;
+    let settleTimer = 0;
+    let framePending = false;
+    let lastCommittedView = state.view;
+    const progress = () => Math.max(0, Math.min(2,
+      viewShell.scrollLeft / Math.max(1, viewShell.clientWidth)));
+    function sync(){
+      framePending = false;
+      const p = progress();
+      applyProgressVars($, p);
+      const index = Math.max(0, Math.min(2, Math.round(p)));
+      if(lastCommittedView !== views[index] || state.view !== views[index]){
+        lastCommittedView = views[index];
+        setViewUI(views[index], { $, onIndexViewOpen, fromNativeScroll:true });
       }
     }
-
-    viewShell.addEventListener("touchstart", (e) => {
-      if(e.touches.length !== 1) return;
-      startX = e.touches[0].clientX;
-      startY = e.touches[0].clientY;
-      startP = currentP || 0;
-      shellW = Math.max(1, viewShell.clientWidth || 1);
-      setViewShellW(shellW);
-      lastX = startX;
-      lastT = performance.now();
-      vx = 0;
-      lockedAxis = "";
-      swipeActive = false;
-      stopSwipeLoop();
-      targetP = null;
-    }, { passive: true });
-
-    viewShell.addEventListener("touchmove", (e) => {
-      if(e.touches.length !== 1) return;
-      const x = e.touches[0].clientX;
-      const y = e.touches[0].clientY;
-      const dx = x - startX;
-      const dy = y - startY;
-
-      if(!lockedAxis){
-        if(Math.abs(dx) < 8 && Math.abs(dy) < 8) return;
-        lockedAxis = (Math.abs(dx) >= Math.abs(dy)) ? "x" : "y";
-      }
-      if(lockedAxis === "y") return;
-
-      if(!swipeActive){
-        swipeActive = true;
-        setTransition(0);
-        targetP = startP;
-        startSwipeLoop();
-      }
-
-      e.preventDefault();
-
-      const now = performance.now();
-      const dt = Math.max(1, now - lastT);
-      vx = (x - lastX) / dt;
-      lastX = x;
-      lastT = now;
-
-      targetP = startP + (-dx / (shellW || 1));
-    }, { passive: false });
-
-    viewShell.addEventListener("touchend", () => {
-      setTransition(220);
-      stopSwipeLoop();
-      if(targetP !== null) applyProgress($, targetP);
-
-      const p = currentP || 0;
-      const FLICK_V = 0.45;
-      const EDGE_T  = 0.35;
-
-      if(Math.abs(vx) > FLICK_V){
-        setViewUI(vx < 0 ? "index" : "events", { $, onIndexViewOpen });
-        return;
-      }
-
-      if(startP >= 0.5){
-        setViewUI(p <= (1 - EDGE_T) ? "events" : "index", { $, onIndexViewOpen });
-      } else {
-        setViewUI(p >= EDGE_T ? "index" : "events", { $, onIndexViewOpen });
-      }
-    }, { passive: true });
+    const scheduleSync = () => {
+      if(!framePending){ framePending = true; requestAnimationFrame(sync); }
+    };
+    const finishScroll = () => {
+      clearTimeout(settleTimer);
+      scheduleSync();
+    };
+    viewShell.addEventListener("scroll", () => {
+      scheduleSync();
+      clearTimeout(settleTimer);
+      settleTimer = setTimeout(finishScroll, 150);
+    }, {passive:true});
+    if("onscrollend" in viewShell) viewShell.addEventListener("scrollend", finishScroll, {passive:true});
+    window.addEventListener("resize", () => {
+      const index = Math.max(0, views.indexOf(state.view));
+      viewShell.scrollTo({left:index * viewShell.clientWidth, behavior:"instant"});
+      scheduleSync();
+    }, {passive:true});
+    setTransition(0);
+    scheduleSync();
   }
 }

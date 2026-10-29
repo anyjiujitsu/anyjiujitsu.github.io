@@ -12,7 +12,7 @@ export function wireSearch({ $, state, setIndexQuery, setIndexEventsQuery, setAc
   });
 
   evIn?.addEventListener("input", (e)=>{
-    setActiveEventsQuery(e.target.value);
+    setActiveEventsQuery(e.target.value.trim().toUpperCase() === "UPCOMING COMPS" ? "2026, COMP" : e.target.value);
     render();
   });
 
@@ -116,7 +116,7 @@ export function wireSearchSuggestions({
 
     const val = btn.getAttribute("data-value") || "";
     input.value = val;
-    setActiveEventsQuery(val);
+    setActiveEventsQuery(val === "UPCOMING COMPS" ? "2026, COMP" : val);
     input.dispatchEvent(new Event("input", { bubbles: true }));
     close();
     input.blur();
@@ -147,6 +147,16 @@ export function wireSearchSuggestions({
       if(dispatch) input.dispatchEvent(new Event("input", { bubbles: true }));
     }
 
+    function resultsScroller(){
+      return document.getElementById(activeMode === "index" ? "viewIndex" : "viewEvents");
+    }
+    function scrollResultsAnchor(target, gap=14){
+      const scroller = resultsScroller();
+      if(!target || !scroller) return;
+      const y = Math.max(0, scroller.scrollTop + target.getBoundingClientRect().top - scroller.getBoundingClientRect().top - gap);
+      if(Math.abs(scroller.scrollTop-y)>1) scroller.scrollTop=y;
+    }
+
     function prePositionResultsBeforeRender(){
       const rootId = activeMode === "index" ? "indexEventsRoot" : "eventsRoot";
       const root = $(rootId);
@@ -158,14 +168,7 @@ export function wireSearchSuggestions({
       // header before the post-render alignment runs. Put the viewport at the
       // same final anchor synchronously before the render so there is no
       // visible intermediate position.
-      const rect = root.getBoundingClientRect();
-      const header = document.querySelector(".header");
-      const headerH = header ? Math.ceil(header.getBoundingClientRect().height) : 0;
-      const gap = 14;
-      const y = Math.max(0, window.scrollY + rect.top - headerH - gap);
-      if(Math.abs(window.scrollY - y) > 1){
-        window.scrollTo({ top: y, left: 0, behavior: "auto" });
-      }
+      scrollResultsAnchor(root);
     }
 
     function scrollFilteredResultsToStart(){
@@ -183,12 +186,7 @@ export function wireSearchSuggestions({
           const firstGroup = root.querySelector(".group");
           const firstResult = root.querySelector(".row--events, .row");
           const target = firstGroupLabel || firstGroup || firstResult || root;
-          const rect = target.getBoundingClientRect();
-          const header = document.querySelector(".header");
-          const headerH = header ? Math.ceil(header.getBoundingClientRect().height) : 0;
-          const gap = 14;
-          const y = Math.max(0, window.scrollY + rect.top - headerH - gap);
-          window.scrollTo({ top: y, left: 0, behavior: "auto" });
+          scrollResultsAnchor(target);
         });
       });
     }
@@ -210,14 +208,7 @@ export function wireSearchSuggestions({
       // submit happens, which is why its filter transition feels smooth. Bring
       // the page to the same helper-open anchor before the arrow submit, without
       // submitting the ZIP, changing the search input, or closing the helper.
-      const rect = root.getBoundingClientRect();
-      const header = document.querySelector(".header");
-      const headerH = header ? Math.ceil(header.getBoundingClientRect().height) : 0;
-      const gap = 14;
-      const y = Math.max(0, window.scrollY + rect.top - headerH - gap);
-      if(Math.abs(window.scrollY - y) > 2){
-        window.scrollTo({ top: y, left: 0, behavior: "auto" });
-      }
+      scrollResultsAnchor(root);
     }
 
     let stabilizeZipScrollTimer = 0;
