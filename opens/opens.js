@@ -229,7 +229,7 @@ function renderAthletes(items) {
 // Calendar day first, then actual clock time; missing assignments sort last.
 function dayRank(value) {
   const d = normalized(value);
-  const days = ['sat','sun','mon','tue','wed','thu','fri'];
+  const days = ['mon','tue','wed','thu','fri','sat','sun'];
   const match = days.findIndex(x => d.startsWith(x));
   if (match >= 0) return match;
   const date = d.match(/(?:^|\s)(\d{1,2})\/(\d{1,2})(?:\/\d{2,4})?/);
