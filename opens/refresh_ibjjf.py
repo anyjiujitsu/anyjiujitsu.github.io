@@ -392,72 +392,118 @@ def _competitor_identity(block, competitor):
 
 
 def infer_advancement_from_bracket_positions(records):
-    """Apply only verified 15-card layout edges and stable competitor IDs.
+    """Verified 15-card inference with general, bounded diagnostic counters.
 
-    records: (fight, original HTML match block) pairs, including unscheduled
-    evidence cards. No network requests, no name/fight-number heuristics.
+    No additional fetches; diagnostics never assign or alter results themselves.
     """
     groups = defaultdict(dict)
     ambiguous = set()
+    audit = defaultdict(int)
+    examples = []
+
+    def sample(reason, source=None, target=None, group_size=None):
+        if len(examples) < 5:
+            examples.append(f'{reason} source_position={source} target_position={target} cards={group_size}')
+
+    audit['parsed_cards'] = len(records)
     for fight, block in records:
         container = _bracket_container(block)
-        if container is None or 'tournament-category__bracket-15' not in container.get('class', []):
+        if container is None:
+            audit['missing_bracket_container'] += 1
             continue
+        classes = container.get('class', [])
+        if 'tournament-category__bracket-15' not in classes:
+            audit['other_layout_cards'] += 1
+            continue
+        audit['layout_15_cards'] += 1
         position = _bracket_match_position(block)
         if position is None:
+            audit['missing_match_position'] += 1
+            sample('missing_match_position')
             continue
+        audit['positioned_cards'] += 1
         group = id(container)
         if position in groups[group]:
             ambiguous.add((group, position))
+            audit['duplicate_positions'] += 1
         groups[group][position] = (fight, block)
 
-    inferred = 0
+    audit['layout_15_groups'] = len(groups)
     for group, positions in groups.items():
         for source_pos, target_pos in BRACKET_15_EDGES.items():
+            audit['mapped_edges'] += 1
             if (group, source_pos) in ambiguous or (group, target_pos) in ambiguous:
+                audit['ambiguous_position_edges'] += 1
                 continue
             if source_pos not in positions or target_pos not in positions:
+                audit['missing_edge_cards'] += 1
+                sample('missing_edge_cards', source_pos, target_pos, len(positions))
                 continue
+            audit['present_edges'] += 1
             upstream, source_block = positions[source_pos]
             downstream, target_block = positions[target_pos]
             if upstream['result_map']:
-                continue  # Never change explicit WIN/LOSS/BYE.
+                audit['already_resolved'] += 1
+                continue
+            audit['unresolved_edge_candidates'] += 1
             contenders = [c for c in upstream['competitors']
                           if not c.get('placeholder') and not c.get('bye') and key(c.get('name'))]
             if not (1 <= len(contenders) <= 2):
+                audit['invalid_contender_count'] += 1
                 continue
             if any(c.get('loser') for c in contenders):
+                audit['greyed_contender'] += 1
                 continue
             source_ids = [_competitor_identity(source_block, c) for c in contenders]
-            if any(x is None for x in source_ids) or len(source_ids) != len(set(source_ids)):
+            if any(x is None for x in source_ids):
+                audit['missing_source_competitor_id'] += 1
+                sample('missing_source_id', source_pos, target_pos, len(positions))
                 continue
-            # Only real named downstream entrants count; empty/placeholder slots
-            # can never confirm an advancement.
+            if len(source_ids) != len(set(source_ids)):
+                audit['duplicate_source_competitor_id'] += 1
+                continue
+            audit['source_ids_valid'] += 1
             target_ids = set()
+            downstream_named = 0
             for c in downstream['competitors']:
                 if c.get('placeholder') or c.get('bye'):
                     continue
+                downstream_named += 1
                 identity = _competitor_identity(target_block, c)
                 if identity:
                     target_ids.add(identity)
+            if downstream_named and not target_ids:
+                audit['missing_target_competitor_ids'] += 1
+                sample('missing_target_ids', source_pos, target_pos, len(positions))
+                continue
+            if not downstream_named:
+                audit['empty_downstream'] += 1
+                continue
             advanced = [i for i, identity in enumerate(source_ids) if identity in target_ids]
             if len(advanced) != 1:
+                audit['not_exactly_one_advancer'] += 1
+                sample('no_unique_identity_in_target', source_pos, target_pos, len(positions))
                 continue
             winner = key(contenders[advanced[0]]['name'])
             if len(contenders) == 2:
                 loser = key(contenders[1 - advanced[0]]['name'])
                 if loser == winner:
+                    audit['duplicate_names'] += 1
                     continue
                 upstream['result_map'] = {winner: 'WIN', loser: 'LOSS'}
             else:
-                # Must have a second actual slot (possibly a placeholder).
                 if len(upstream['competitors']) != 2:
+                    audit['single_competitor_no_second_slot'] += 1
                     continue
                 upstream['result_map'] = {winner: 'WIN'}
             upstream['result_source'] = f'verified-bracket-15-position-{source_pos}-to-{target_pos}'
-            inferred += 1
-    if inferred:
-        print(f'    Bracket-position advancement: inferred {inferred} fights with verified edges and competitor IDs', flush=True)
+            audit['inferred_fights'] += 1
+
+    if audit['layout_15_cards'] or audit['missing_bracket_container']:
+        ordered = ' '.join(f'{k}={v}' for k, v in sorted(audit.items()))
+        print(f'    BRACKET POSITION AUDIT {ordered}', flush=True)
+        for example in examples:
+            print(f'    BRACKET POSITION SAMPLE {example}', flush=True)
     return records
 
 
