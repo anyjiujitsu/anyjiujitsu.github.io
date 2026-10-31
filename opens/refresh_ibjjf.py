@@ -427,47 +427,6 @@ def _explicit_source_fight(comp):
                 return int(value)
     return None
 
-# Temporary read-only capture: runs only during a manually forced diagnostic.
-# Brackets are collected based on unresolved progression evidence, never names.
-_edge_capture_bytes = 0
-_edge_capture_files = 0
-
-
-def capture_bracket_evidence(soup, fights, url):
-    """Save actual, already-downloaded bracket HTML for offline edge analysis.
-
-    No new HTTP requests, no inferred results, and no publication changes.
-    Per-run compressed GitHub artifact can be inspected before designing edges.
-    """
-    global _edge_capture_bytes, _edge_capture_files
-    if os.environ.get('OPENS_EDGE_CAPTURE', '').lower() != 'true':
-        return
-    if _edge_capture_bytes >= 150_000_000:
-        return
-    if not re.search(r'/tournaments/\d+/categories/\d+', url):
-        return
-    # Capture the *unresolved input* regardless of whether the existing
-    # inference/audit recognizes a downstream appearance. Otherwise a failed
-    # inference can also suppress the diagnostic artifact needed to debug it.
-    unresolved = [f for f in fights if not f.get('result_map') and
-                  any(c.get('name') and not c.get('placeholder') and not c.get('bye')
-                      for c in f.get('competitors', []))]
-    if not unresolved:
-        return
-    category_id = re.search(r'/categories/(\d+)', url).group(1)
-    payload = str(soup).encode('utf-8')
-    if len(payload) > 4_000_000:
-        print(f'    EDGE CAPTURE skip oversized category {category_id}', flush=True)
-        return
-    folder = ROOT / '.edge-evidence'
-    folder.mkdir(exist_ok=True)
-    (folder / f'category-{category_id}.html').write_bytes(payload)
-    _edge_capture_bytes += len(payload)
-    _edge_capture_files += 1
-    print(f'    EDGE CAPTURE saved category={category_id} bytes={len(payload)} '
-          f'total_files={_edge_capture_files}', flush=True)
-
-
 def audit_advancement_markup(soup, fights, url):
     """Read-only, bracket-wide audit of possible advancement evidence.
 
@@ -792,7 +751,6 @@ def fill_assignments(athletes, bracket_entries, previous_by_identity):
         try:
             bracket_soup = get_soup(info['url'])
             fights = parse_fights(bracket_soup)
-            capture_bracket_evidence(bracket_soup, fights, info['url'])
             audit_advancement_markup(bracket_soup, fights, info['url'])
             # A sole-entrant FINAL against BYE may have no FIGHT/Mat/Time
             # heading; recognize it from the bracket card itself.
@@ -908,7 +866,6 @@ def roster_from_brackets(comp):
                 raise fetched
             soup = fetched
             fights = parse_fights(soup)
-            capture_bracket_evidence(soup, fights, url)
             audit_advancement_markup(soup, fights, url)
             checked += 1
         except (requests.RequestException, ValueError) as exc:
