@@ -395,12 +395,21 @@ def parse_fights(soup):
         actual = [c for c in named if not c['bye'] and not c['placeholder']]
         if len(actual) == 1 and has_bye_text and len(named) <= 2:
             result_map[key(actual[0]['name'])] = 'BYE'
+        elif len(named) == 1 and len(actual) == 1 and actual[0]['loser']:
+            # The source explicitly greys this sole named competitor using its
+            # loser class. Do not infer outcomes for single non-greyed entrants.
+            result_map[key(actual[0]['name'])] = 'LOSS'
         elif len(named) == 2:
             a, b = named
             if a['bye'] and not b['bye'] and not b['placeholder']:
                 result_map[key(b['name'])] = 'BYE'
             elif b['bye'] and not a['bye'] and not a['placeholder']:
                 result_map[key(a['name'])] = 'BYE'
+            elif a['loser'] and b['loser'] and not a['placeholder'] and not b['placeholder']:
+                # A double-greyed match is an explicit double loss, never a
+                # WIN for either athlete. Require two real named competitors.
+                result_map[key(a['name'])] = 'LOSS'
+                result_map[key(b['name'])] = 'LOSS'
             elif a['loser'] ^ b['loser']:
                 loser = a if a['loser'] else b
                 winner = b if a['loser'] else a
