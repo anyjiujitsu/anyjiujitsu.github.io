@@ -43,8 +43,20 @@ jobs:
       - name: Refresh OPENS if due
         env:
           OPENS_FORCE: ${{ github.event.inputs.force || 'false' }}
+          OPENS_EDGE_CAPTURE: ${{ github.event_name == 'workflow_dispatch' && inputs.force == true && 'true' || 'false' }}
           OPENS_CANDIDATE_B64: ${{ inputs.candidate || '' }}
         run: python opens/run_if_due.py
+
+      # Evidence is retained as a run artifact, NOT committed to the website.
+      # Only a manually forced workflow captures HTML; Cloudflare dispatches do not.
+      - name: Upload bracket edge evidence (forced diagnostics only)
+        if: ${{ github.event_name == 'workflow_dispatch' && inputs.force == true }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: bracket-edge-evidence
+          path: opens/.edge-evidence/*.html
+          if-no-files-found: warn
+          retention-days: 2
 
       - name: Publish validated data
         run: |
