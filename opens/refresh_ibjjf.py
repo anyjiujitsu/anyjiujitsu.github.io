@@ -346,92 +346,86 @@ def normalize_competitor_name(name):
     return clean(re.sub(r'^\s*\d{1,3}\s+', '', name or ''))
 
 
-def infer_advancement_from_completed_fights(fights):
-    """Conservative, bracket-local recovery of omitted earlier fight results.
+def _fight_source_reference(value):
+    """A bracket slot explicitly referring to the winner of another fight."""
+    match = re.search(r'\bWINNER\s+OF\s+FIGHT\s*#?\s*(\d+)\b', clean(value), re.I)
+    return int(match.group(1)) if match else None
 
-    A later card is evidence only when it has TWO named competitors and a
-    decisive, *explicit* WIN/LOSS result on that later card. This intentionally
-    rejects empty downstream placeholders and merely scheduled future bouts.
-    Neither athlete names nor fight/category IDs are hardcoded.
+
+def infer_advancement_from_connected_fights(fights):
+    """Recover a missing result ONLY with a uniquely established feeder edge.
+
+    The downstream fight must contain the named entrant, and its markup must
+    identify the earlier fight as the source of that *same* entrant's slot.
+    Chronological proximity, later participation, a winning later result, and
+    a blank placeholder in the other slot are NOT sufficient evidence.
     """
     numbered = defaultdict(list)
     for fight in fights:
         try:
-            number = int(fight.get('number', ''))
-        except (ValueError, TypeError):
-            continue
-        numbered[number].append(fight)
-
-    # Duplicate fight numbers cannot be used to establish an ordering.
-    unique = {n: cards[0] for n, cards in numbered.items() if len(cards) == 1}
-    chronological = sorted(unique.items())
-    # Collect only downstream matches that have actually been decided.
-    decided = defaultdict(list)
-    for number, fight in chronological:
-        contenders = [c for c in fight.get('competitors', [])
-                      if not c.get('placeholder') and not c.get('bye') and key(c.get('name'))]
-        if len(contenders) != 2:
-            continue
-        names = [key(c['name']) for c in contenders]
-        outcomes = fight.get('result_map', {})
-        if (len(set(names)) != 2 or
-                sorted(outcomes.get(name, '') for name in names) != ['LOSS', 'WIN']):
-            continue
-        for name in names:
-            decided[name].append(number)
-
+            numbered[int(fight['number'])].append(fight)
+        except (KeyError, TypeError, ValueError):
+            pass
+    unique = {n: rows[0] for n, rows in numbered.items() if len(rows) == 1}
     counts = defaultdict(int)
-    for number, fight in chronological:
-        if fight.get('result_map'):
-            continue
-        contenders = [c for c in fight.get('competitors', [])
+    for downstream_number, downstream in unique.items():
+        for slot in downstream.get('competitors', []):
+            if slot.get('placeholder') or slot.get('bye') or not key(slot.get('name')):
+                continue
+            upstream_number = slot.get('source_fight')
+            if upstream_number is None or upstream_number not in unique or upstream_number >= downstream_number:
+                continue
+            upstream = unique[upstream_number]
+            if upstream.get('result_map'):
+                continue
+            source_key = key(slot['name'])
+            actual = [c for c in upstream.get('competitors', [])
                       if not c.get('placeholder') and not c.get('bye') and key(c.get('name'))]
-        if not 1 <= len(contenders) <= 2 or any(c.get('loser') for c in contenders):
-            continue
-        names = [key(c['name']) for c in contenders]
-        if len(set(names)) != len(names):
-            continue
-        later = {name: [n for n in decided.get(name, []) if n > number] for name in names}
-        advancing = [name for name in names if later[name]]
-        if len(advancing) != 1:
-            counts['not_unique_confirmed_advancer'] += 1
-            continue
-        winner = advancing[0]
-        downstream = min(later[winner])
-        # Avoid jumping across an intermediate named appearance: the next
-        # visible match involving this athlete must be the decided downstream.
-        intermediate = any(number < n < downstream and any(
-            key(c.get('name')) == winner and not c.get('placeholder')
-            for c in card.get('competitors', []))
-            for n, card in chronological)
-        if intermediate:
-            counts['intermediate_appearance'] += 1
-            continue
-        # Another opponent in this initial match could independently be shown
-        # participating in other later fights; do not infer a loss then.
-        if len(names) == 2:
-            loser = next(name for name in names if name != winner)
-            other_later = any(n > number and any(
-                key(c.get('name')) == loser and not c.get('placeholder')
-                for c in card.get('competitors', []))
-                for n, card in chronological)
-            if other_later:
-                counts['other_contender_later'] += 1
+            if not 1 <= len(actual) <= 2 or source_key not in [key(c['name']) for c in actual]:
+                counts['mismatched_or_ambiguous_feeder'] += 1
                 continue
-            fight['result_map'] = {winner: 'WIN', loser: 'LOSS'}
-        else:
-            # One known athlete and no known loser: require actual second slot,
-            # otherwise this may be an incomplete single-entrant card.
-            if len(fight.get('competitors', [])) < 2:
-                counts['missing_opponent_slot'] += 1
+            # An athlete assigned to two possible downstream paths is ambiguous.
+            competing_edges = [(f, c) for f, record in unique.items() for c in record.get('competitors', [])
+                               if c.get('source_fight') == upstream_number and
+                               not c.get('placeholder') and not c.get('bye')]
+            if len(competing_edges) != 1:
+                counts['nonunique_edge'] += 1
                 continue
-            fight['result_map'] = {winner: 'WIN'}
-        counts['inferred'] += 1
+            if len(actual) == 2:
+                opponent = next(c for c in actual if key(c['name']) != source_key)
+                if key(opponent['name']) == source_key:
+                    continue
+                upstream['result_map'] = {source_key: 'WIN', key(opponent['name']): 'LOSS'}
+            else:
+                # A second slot needs to be present; lone competitor not sufficient.
+                if len(upstream.get('competitors', [])) < 2:
+                    continue
+                upstream['result_map'] = {source_key: 'WIN'}
+            counts['inferred_from_explicit_edges'] += 1
     if counts:
-        print('    Completed-downstream advancement audit: ' +
+        print('    Verified-bracket-edge inference: ' +
               ', '.join(f'{k}={v}' for k, v in sorted(counts.items())), flush=True)
     return fights
 
+
+def _explicit_source_fight(comp):
+    """Read only an actual per-slot feeder reference; never guess from order.
+
+    Providers may expose this as a data attribute or a link to a feeder fight.
+    The reference has to belong to this particular competitor slot, not to
+    another competitor or to an unrelated matchup elsewhere in the bracket.
+    """
+    for field in ('data-source-fight', 'data-source-fight-id', 'data-from-fight',
+                  'data-winner-of-fight', 'data-feeder-fight'):
+        value = comp.get(field)
+        if value and str(value).isdigit():
+            return int(value)
+    for node in comp.select('[data-source-fight], [data-from-fight], [data-winner-of-fight]'):
+        for field in ('data-source-fight', 'data-from-fight', 'data-winner-of-fight'):
+            value = node.get(field)
+            if value and str(value).isdigit():
+                return int(value)
+    return None
 
 def parse_fights(soup):
     fights = []
@@ -467,7 +461,8 @@ def parse_fights(soup):
                 'team': clean((comp.select_one('.match-card__club-name') or comp.select_one('.match-card__competitor-club-name')).get_text(' ', strip=True)) if (comp.select_one('.match-card__club-name') or comp.select_one('.match-card__competitor-club-name')) else '',
                 'loser': 'match-competitor--loser' in classes,
                 'bye': key(name) == 'bye',
-                'placeholder': is_placeholder_name(name)
+                'placeholder': is_placeholder_name(name),
+                'source_fight': _explicit_source_fight(comp)
             })
 
         if not competitors:
@@ -511,7 +506,11 @@ def parse_fights(soup):
             fights.append({**fields, 'competitors': competitors, 'result_map': result_map})
 
     if fights:
-        return infer_advancement_from_completed_fights(fights)
+        edge_slots = sum(c.get('source_fight') is not None for f in fights for c in f['competitors'])
+        if not edge_slots:
+            print('    Verified-bracket-edge inference: no per-competitor feeder references in HTML; '
+                  'leaving unverified results unresolved', flush=True)
+        return infer_advancement_from_connected_fights(fights)
 
     container = soup.select_one('main') or soup.body or soup
     lines = [clean(v) for v in container.get_text('\n', strip=True).splitlines()]
