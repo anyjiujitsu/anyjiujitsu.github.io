@@ -346,6 +346,67 @@ def normalize_competitor_name(name):
     return clean(re.sub(r'^\s*\d{1,3}\s+', '', name or ''))
 
 
+def infer_advancement_results(fights):
+    """Infer unresolved results from later participation in *this* category only.
+
+    No network calls. The later named appearance is evidence of progression;
+    inference is conservative when competitor identities/round order conflict.
+    Explicit WIN/LOSS/BYE markers always take priority.
+    """
+    numbered = {}
+    for fight in fights:
+        try:
+            number = int(fight.get('number', ''))
+        except (ValueError, TypeError):
+            continue
+        if number in numbered:  # non-unique fight numbering cannot be used safely
+            return fights
+        numbered[number] = fight
+    ordered = sorted(numbered.items())
+    appearances = defaultdict(list)
+    for number, fight in ordered:
+        for comp in fight.get('competitors', []):
+            name = key(comp.get('name', ''))
+            if name and not comp.get('placeholder') and not comp.get('bye'):
+                appearances[name].append(number)
+
+    count = 0
+    for number, fight in ordered:
+        if fight.get('result_map'):
+            continue  # never override explicit bracket results or BYEs
+        contenders = [c for c in fight.get('competitors', [])
+                      if not c.get('placeholder') and not c.get('bye') and key(c.get('name', ''))]
+        if len(contenders) != 2 or any(c.get('loser') for c in contenders):
+            continue
+        a, b = (key(c['name']) for c in contenders)
+        if a == b:
+            continue
+        # Identify the first later appearance of either competitor. Exactly one
+        # must reappear there. Both appearing later leaves the source ambiguous.
+        later_a = [n for n in appearances[a] if n > number]
+        later_b = [n for n in appearances[b] if n > number]
+        if bool(later_a) == bool(later_b):
+            continue
+        winner, loser = (a, b) if later_a else (b, a)
+        next_number = (later_a or later_b)[0]
+        next_fight = numbered[next_number]
+        next_names = {key(c.get('name', '')) for c in next_fight.get('competitors', [])
+                      if not c.get('placeholder') and not c.get('bye')}
+        if winner not in next_names or loser in next_names:
+            continue
+        # Do not assign an earlier bout as the source if the advancing athlete
+        # appeared in another fight between these two cards.
+        if appearances[winner][appearances[winner].index(number) + 1] != next_number:
+            continue
+        # Preserve any explicit result; annotate only a previously blank card.
+        fight['result_map'] = {winner: 'WIN', loser: 'LOSS'}
+        fight['result_source'] = f'inferred-advancement-to-fight-{next_number}'
+        count += 1
+    if count:
+        print(f'    Inferred {count} unresolved fight results from later appearances (no additional requests)', flush=True)
+    return fights
+
+
 def parse_fights(soup):
     fights = []
 
@@ -424,7 +485,7 @@ def parse_fights(soup):
             fights.append({**fields, 'competitors': competitors, 'result_map': result_map})
 
     if fights:
-        return fights
+        return infer_advancement_results(fights)
 
     container = soup.select_one('main') or soup.body or soup
     lines = [clean(v) for v in container.get_text('\n', strip=True).splitlines()]
