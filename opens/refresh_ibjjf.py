@@ -339,112 +339,11 @@ def parse_header_fields(text):
 
 def is_placeholder_name(name):
     n = key(name)
-    return (not n or n == '-' or bool(re.match(r'^(?:winner|loser|defeated|victor)\s+of\s+(?:fight|match)\b', n))
-            or bool(re.match(r'^(?:winner|loser)\s+(?:fight|match)\b', n))
-            or n.startswith('fight ') or n.startswith('match '))
+    return not n or n == '-' or n.startswith('winner of fight') or n.startswith('loser of fight') or n.startswith('fight ')
 
 
 def normalize_competitor_name(name):
     return clean(re.sub(r'^\s*\d{1,3}\s+', '', name or ''))
-
-
-def infer_advancement_results(fights):
-    """Resolve unresolved bouts using confirmed same-category advancement.
-
-    Include unscheduled bracket cards as *evidence*, not as output matches.
-    No extra requests, athlete-specific conditions, or inferred missing opponents.
-    """
-    numbered = defaultdict(list)
-    for fight in fights:
-        try:
-            numbered[int(fight.get('number', ''))].append(fight)
-        except (ValueError, TypeError):
-            pass
-    unique = {n: group[0] for n, group in numbered.items() if len(group) == 1}
-    counters = defaultdict(int)
-
-    # The same division may contain undated final/round cards. Even these can
-    # establish progression, but must never become published scheduled rows.
-    occurrences = defaultdict(list)
-    for fight in fights:
-        for comp in fight.get('competitors', []):
-            if not comp.get('placeholder') and not comp.get('bye') and key(comp.get('name')):
-                occurrences[key(comp['name'])].append(fight)
-
-    def numbered_ref(placeholder):
-        m = re.search(r'\b(?:winner|victor|defeated|loser)\s+(?:of\s+)?(?:fight|match)\s*#?\s*(\d+)\b',
-                      key(placeholder))
-        return int(m.group(1)) if m else None
-
-    # A later card explicitly referring to "winner of fight N" is evidence
-    # of the bracket edge, even if the referenced bout has no result marker.
-    source_links = defaultdict(list)
-    for later in fights:
-        for comp in later.get('competitors', []):
-            if not comp.get('placeholder'):
-                continue
-            source = numbered_ref(comp.get('name', ''))
-            if source is not None and re.search(r'\b(?:winner|victor)\b', key(comp.get('name', ''))):
-                source_links[source].append(later)
-
-    for number, fight in sorted(unique.items()):
-        if fight.get('result_map'):
-            counters['explicit'] += 1
-            continue
-        all_comps = fight.get('competitors', [])
-        real = [c for c in all_comps if not c.get('placeholder') and not c.get('bye') and key(c.get('name'))]
-        names = [key(c['name']) for c in real]
-        if not names or len(names) > 2 or len(names) != len(set(names)) or any(c.get('loser') for c in real):
-            counters['invalid'] += 1
-            continue
-
-        # An appearance in a later, uniquely numbered scheduled match, or in
-        # an unscheduled *final/round* card after this bout in document order,
-        # corroborates an advancement. For undated cards use DOM order ONLY
-        # when the card follows the earlier one and has no duplicate identity.
-        order = {id(f): i for i, f in enumerate(fights)}
-        appearances = {}
-        for name in names:
-            later = []
-            for candidate in occurrences[name]:
-                if candidate is fight:
-                    continue
-                try:
-                    next_num = int(candidate.get('number', ''))
-                except (ValueError, TypeError):
-                    next_num = None
-                if next_num is not None:
-                    if next_num <= number or next_num not in unique:
-                        continue
-                elif order[id(candidate)] <= order[id(fight)]:
-                    continue
-                later.append(candidate)
-            appearances[name] = later
-
-        advanced = [name for name in names if appearances[name]]
-        if len(advanced) != 1:
-            counters['no_unique_advancer'] += 1
-            continue
-        winner = advanced[0]
-        downstream = appearances[winner]
-        # A downstream winner-of-fight placeholder alone isn't proof of which
-        # named competitor advanced; a named actual participant must appear.
-        if len(names) == 1:
-            if not (any(c.get('placeholder') for c in all_comps)
-                    or source_links.get(number) or fight.get('slot_count', 0) >= 2):
-                counters['single_unconfirmed'] += 1
-                continue
-            inferred = {winner: 'WIN'}
-        else:
-            loser = next(n for n in names if n != winner)
-            inferred = {winner: 'WIN', loser: 'LOSS'}
-        fight['result_map'] = inferred
-        fight['result_source'] = 'inferred-bracket-advancement'
-        counters['inferred'] += 1
-
-    print('    Advancement audit (all brackets, no additional requests): '
-          + ', '.join(f'{k}={v}' for k, v in sorted(counters.items())), flush=True)
-    return fights
 
 
 def parse_fights(soup):
@@ -521,15 +420,11 @@ def parse_fights(soup):
 
         # Retain a card only if scheduled or it proves a completed result.
         # Otherwise an undated placeholder must not become a new match.
-        # Retain unscheduled cards for the local advancement pass. They can
-        # provide evidence of progression but are not published as matches.
-        fights.append({**fields, 'competitors': competitors, 'result_map': result_map,
-                       'slot_count': len(block.select('.match-card__competitor')),
-                       'publishable': bool((fields['mat'] and fields['time'] and fields['day']) or result_map)})
+        if (fields['mat'] and fields['time'] and fields['day']) or result_map:
+            fights.append({**fields, 'competitors': competitors, 'result_map': result_map})
 
     if fights:
-        inferred = infer_advancement_results(fights)
-        return [f for f in inferred if f.get('publishable')]
+        return fights
 
     container = soup.select_one('main') or soup.body or soup
     lines = [clean(v) for v in container.get_text('\n', strip=True).splitlines()]
