@@ -339,29 +339,21 @@ def parse_header_fields(text):
 
 def is_placeholder_name(name):
     n = key(name)
-    return not n or n == '-' or n.startswith('winner of fight') or n.startswith('loser of fight') or n.startswith('fight ')
+    return (not n or n == '-' or bool(re.match(r'^(?:winner|loser|defeated|victor)\s+of\s+(?:fight|match)\b', n))
+            or bool(re.match(r'^(?:winner|loser)\s+(?:fight|match)\b', n))
+            or n.startswith('fight ') or n.startswith('match '))
 
 
 def normalize_competitor_name(name):
     return clean(re.sub(r'^\s*\d{1,3}\s+', '', name or ''))
 
 
-# Temporary, low-overhead diagnostics for the two bracket regression examples.
-# These can be disabled with OPENS_INFERENCE_DEBUG=0 (no extra network calls).
-_INFERENCE_TARGETS = {
-    34: ('joao ricardo bordignon miyao', 'joão ricardo bordignon miyao'),
-    53: ('richard joseph mccann',),
-}
-
-
 def infer_advancement_results(fights):
-    """Infer missing results only from named advancement within one category.
+    """Resolve missing results using advancement within the same bracket.
 
-    Preserve explicit results. Report why the two known regression cases cannot
-    be inferred using the *actual* parsed bracket data, not simulated records.
-    No additional bracket requests are performed.
+    This is generic across competitors, matches and tournaments. It makes no
+    network requests and never replaces results supplied by the source.
     """
-    debug = os.environ.get('OPENS_INFERENCE_DEBUG', '1') != '0'
     numbered = {}
     duplicate_numbers = set()
     for fight in fights:
@@ -373,103 +365,67 @@ def infer_advancement_results(fights):
             duplicate_numbers.add(number)
         else:
             numbered[number] = fight
-    if duplicate_numbers:
-        if debug and any(n in numbered for n in _INFERENCE_TARGETS):
-            print(f'    INFERENCE CHECK: duplicate fight IDs {sorted(duplicate_numbers)}; '
-                  'skipping inference for this bracket', flush=True)
-        return fights
+    for number in duplicate_numbers:
+        numbered.pop(number, None)
 
-    ordered = sorted(numbered.items())
-    appearances = defaultdict(list)
-    for number, fight in ordered:
+    appearances = defaultdict(set)
+    for number, fight in numbered.items():
         for comp in fight.get('competitors', []):
             name = key(comp.get('name', ''))
             if name and not comp.get('placeholder') and not comp.get('bye'):
-                appearances[name].append(number)
+                appearances[name].add(number)
 
-    def explain(number, fight, status):
-        if not debug or number not in _INFERENCE_TARGETS:
-            return
-        names = [key(c.get('name', '')) for c in fight.get('competitors', [])
-                 if not c.get('placeholder') and not c.get('bye')]
-        if not any(any(t in n for t in _INFERENCE_TARGETS[number]) for n in names):
-            return
-        players = [(c.get('name', ''), bool(c.get('placeholder')), bool(c.get('loser')))
-                   for c in fight.get('competitors', [])]
-        next_matches = {n: [m for m in appearances.get(n, []) if m > number] for n in names}
-        print(f'    INFERENCE CHECK fight #{number}: {status}; '
-              f'competitors(name,placeholder,greyed)={players}; '
-              f'later appearances={next_matches}; '
-              f'explicit_results={fight.get("result_map", {})}; '
-              f'parsed fight IDs={[n for n, _ in ordered]}', flush=True)
+    counters = defaultdict(int)
+    for number, fight in sorted(numbered.items()):
+        existing = fight.get('result_map', {})
+        competitors = fight.get('competitors', [])
+        actual = [c for c in competitors if c.get('name') and not c.get('placeholder') and not c.get('bye')]
+        names = [key(c['name']) for c in actual]
+        if existing:
+            counters['explicit'] += 1
+            continue
+        if any(c.get('loser') for c in actual) or len(names) not in (1, 2) or len(set(names)) != len(names):
+            counters['invalid_or_ambiguous'] += 1
+            continue
 
-    count = 0
-    for number, fight in ordered:
-        if fight.get('result_map'):
-            explain(number, fight, 'kept explicit result')
+        # The next occurrence of each competitor must be in a strictly later
+        # numbered fight. A further occurrence in the same category is not
+        # enough when both contenders advance or identities are ambiguous.
+        successors = {name: min((n for n in appearances[name] if n > number), default=None)
+                      for name in names}
+        advanced = [name for name, next_number in successors.items() if next_number is not None]
+        if len(advanced) != 1:
+            counters['no_unique_advancer'] += 1
             continue
-        contenders = [c for c in fight.get('competitors', [])
-                      if not c.get('placeholder') and not c.get('bye') and key(c.get('name', ''))]
-        if any(c.get('loser') for c in contenders):
-            explain(number, fight, 'greyed competitor without explicit result; not overriding')
+        winner = advanced[0]
+        next_number = successors[winner]
+        later_fight = numbered[next_number]
+        later_names = {key(c.get('name', '')) for c in later_fight.get('competitors', [])
+                       if not c.get('placeholder') and not c.get('bye')}
+        if winner not in later_names:
+            counters['invalid_successor'] += 1
             continue
-        if len(contenders) == 1:
-            athlete = key(contenders[0]['name'])
-            if not any(c.get('placeholder') for c in fight.get('competitors', [])):
-                explain(number, fight, 'one athlete but no identifiable placeholder')
+
+        if len(names) == 1:
+            # Only a documented bracket placeholder is eligible for a
+            # one-person inferred WIN; an ordinary one-person card isn't.
+            if not any(c.get('placeholder') for c in competitors):
+                counters['one_named_no_placeholder'] += 1
                 continue
-            later = [n for n in appearances[athlete] if n > number]
-            if not later:
-                explain(number, fight, 'no later appearance of named athlete')
+            inferred = {winner: 'WIN'}
+        else:
+            loser = next(name for name in names if name != winner)
+            if loser in later_names:
+                counters['ambiguous_successor'] += 1
                 continue
-            next_number = later[0]
-            if athlete not in {key(c.get('name', '')) for c in numbered[next_number].get('competitors', [])
-                               if not c.get('placeholder')}:
-                explain(number, fight, 'later fight does not contain exact same athlete name')
-                continue
-            fight['result_map'] = {athlete: 'WIN'}
-            fight['result_source'] = f'inferred-placeholder-advancement-to-fight-{next_number}'
-            count += 1
-            explain(number, fight, f'inferred WIN from fight #{next_number}')
-            continue
-        if len(contenders) != 2:
-            explain(number, fight, f'expected 2 named competitors, found {len(contenders)}')
-            continue
-        a, b = (key(c['name']) for c in contenders)
-        if a == b:
-            explain(number, fight, 'both competitors resolve to same identity')
-            continue
-        later_a = [n for n in appearances[a] if n > number]
-        later_b = [n for n in appearances[b] if n > number]
-        if bool(later_a) == bool(later_b):
-            explain(number, fight, 'both or neither competitor appear in later numbered fights')
-            continue
-        winner, loser = (a, b) if later_a else (b, a)
-        next_number = (later_a or later_b)[0]
-        next_fight = numbered[next_number]
-        next_names = {key(c.get('name', '')) for c in next_fight.get('competitors', [])
-                      if not c.get('placeholder') and not c.get('bye')}
-        if winner not in next_names or loser in next_names:
-            explain(number, fight, 'later fight participants do not establish unique advancement')
-            continue
-        if appearances[winner][appearances[winner].index(number) + 1] != next_number:
-            explain(number, fight, 'not the immediate next appearance of winner')
-            continue
-        fight['result_map'] = {winner: 'WIN', loser: 'LOSS'}
+            inferred = {winner: 'WIN', loser: 'LOSS'}
+
+        fight['result_map'] = inferred
         fight['result_source'] = f'inferred-advancement-to-fight-{next_number}'
-        count += 1
-        explain(number, fight, f'inferred WIN/LOSS from fight #{next_number}')
-    if debug:
-        for number, targets in _INFERENCE_TARGETS.items():
-            if number in numbered:
-                continue
-            # Only report absence when this bracket actually has one of the
-            # target athletes; avoid noise from hundreds of unrelated brackets.
-            if any(any(t in name for t in targets) for name in appearances):
-                print(f'    INFERENCE CHECK fight #{number}: not retained by parse_fights; '
-                      f'parsed fight IDs={[n for n, _ in ordered]}', flush=True)
-    if count:
-        print(f'    Inferred {count} unresolved fight results from later appearances (no additional requests)', flush=True)
+        counters['inferred'] += 1
+
+    print('    Advancement audit (all brackets, no additional requests): '
+          + ', '.join(f'{k}={v}' for k, v in sorted(counters.items())), flush=True)
     return fights
 
 
