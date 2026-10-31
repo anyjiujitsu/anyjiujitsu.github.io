@@ -376,7 +376,26 @@ def infer_advancement_results(fights):
             continue  # never override explicit bracket results or BYEs
         contenders = [c for c in fight.get('competitors', [])
                       if not c.get('placeholder') and not c.get('bye') and key(c.get('name', ''))]
-        if len(contenders) != 2 or any(c.get('loser') for c in contenders):
+        if any(c.get('loser') for c in contenders):
+            continue
+        # A named athlete opposite a bracket placeholder may advance into a
+        # later numbered fight. Only infer that athlete's WIN when a later
+        # appearance confirms progression; never invent an opponent LOSS.
+        if len(contenders) == 1:
+            athlete = key(contenders[0]['name'])
+            if not any(c.get('placeholder') for c in fight.get('competitors', [])):
+                continue
+            later = [n for n in appearances[athlete] if n > number]
+            if not later:
+                continue
+            next_number = later[0]
+            if athlete not in {key(c.get('name', '')) for c in numbered[next_number].get('competitors', []) if not c.get('placeholder')}:
+                continue
+            fight['result_map'] = {athlete: 'WIN'}
+            fight['result_source'] = f'inferred-placeholder-advancement-to-fight-{next_number}'
+            count += 1
+            continue
+        if len(contenders) != 2:
             continue
         a, b = (key(c['name']) for c in contenders)
         if a == b:
