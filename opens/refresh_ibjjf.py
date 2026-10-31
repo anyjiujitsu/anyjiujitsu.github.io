@@ -352,60 +352,113 @@ def _fight_source_reference(value):
     return int(match.group(1)) if match else None
 
 
-def infer_advancement_from_connected_fights(fights):
-    """Recover a missing result ONLY with a uniquely established feeder edge.
+# Actual 15-card desktop bracket connections from BJJ Competition System's
+# category_show.js / BracketPlumbing (match positions, NOT fight numbers).
+# Other layouts are deliberately left untouched until their maps are verified.
+BRACKET_15_EDGES = {
+    1: 9, 2: 9, 3: 10, 4: 10, 5: 11, 6: 11, 7: 12, 8: 12,
+    9: 13, 10: 14, 11: 13, 12: 14, 13: 15, 14: 15,
+}
 
-    The downstream fight must contain the named entrant, and its markup must
-    identify the earlier fight as the source of that *same* entrant's slot.
-    Chronological proximity, later participation, a winning later result, and
-    a blank placeholder in the other slot are NOT sufficient evidence.
+
+def _bracket_match_position(block):
+    """Identify the actual card position without mistaking it for fight #."""
+    card = block.select_one('.match-card')
+    if card is None:
+        return None
+    for cls in card.get('class', []):
+        match = re.fullmatch(r'match-(\d+)', cls)
+        if match:
+            return int(match.group(1))
+    return None
+
+
+def _bracket_container(block):
+    return block.find_parent(class_=re.compile(r'^tournament-category__bracket(?:-\d+)?$'))
+
+
+def _competitor_identity(block, competitor):
+    """Use the source's persistent competitor ID, not the visible seed number."""
+    target = key(competitor.get('name'))
+    for node in block.select('.match-card__competitor[id]'):
+        ident = node.get('id', '')
+        m = re.fullmatch(r'competitor-(\d+)', ident)
+        if not m:
+            continue
+        name_node = node.select_one('.match-card__competitor-name')
+        if name_node and key(normalize_competitor_name(name_node.get_text(' ', strip=True))) == target:
+            return m.group(1)
+    return None
+
+
+def infer_advancement_from_bracket_positions(records):
+    """Apply only verified 15-card layout edges and stable competitor IDs.
+
+    records: (fight, original HTML match block) pairs, including unscheduled
+    evidence cards. No network requests, no name/fight-number heuristics.
     """
-    numbered = defaultdict(list)
-    for fight in fights:
-        try:
-            numbered[int(fight['number'])].append(fight)
-        except (KeyError, TypeError, ValueError):
-            pass
-    unique = {n: rows[0] for n, rows in numbered.items() if len(rows) == 1}
-    counts = defaultdict(int)
-    for downstream_number, downstream in unique.items():
-        for slot in downstream.get('competitors', []):
-            if slot.get('placeholder') or slot.get('bye') or not key(slot.get('name')):
+    groups = defaultdict(dict)
+    ambiguous = set()
+    for fight, block in records:
+        container = _bracket_container(block)
+        if container is None or 'tournament-category__bracket-15' not in container.get('class', []):
+            continue
+        position = _bracket_match_position(block)
+        if position is None:
+            continue
+        group = id(container)
+        if position in groups[group]:
+            ambiguous.add((group, position))
+        groups[group][position] = (fight, block)
+
+    inferred = 0
+    for group, positions in groups.items():
+        for source_pos, target_pos in BRACKET_15_EDGES.items():
+            if (group, source_pos) in ambiguous or (group, target_pos) in ambiguous:
                 continue
-            upstream_number = slot.get('source_fight')
-            if upstream_number is None or upstream_number not in unique or upstream_number >= downstream_number:
+            if source_pos not in positions or target_pos not in positions:
                 continue
-            upstream = unique[upstream_number]
-            if upstream.get('result_map'):
+            upstream, source_block = positions[source_pos]
+            downstream, target_block = positions[target_pos]
+            if upstream['result_map']:
+                continue  # Never change explicit WIN/LOSS/BYE.
+            contenders = [c for c in upstream['competitors']
+                          if not c.get('placeholder') and not c.get('bye') and key(c.get('name'))]
+            if not (1 <= len(contenders) <= 2):
                 continue
-            source_key = key(slot['name'])
-            actual = [c for c in upstream.get('competitors', [])
-                      if not c.get('placeholder') and not c.get('bye') and key(c.get('name'))]
-            if not 1 <= len(actual) <= 2 or source_key not in [key(c['name']) for c in actual]:
-                counts['mismatched_or_ambiguous_feeder'] += 1
+            if any(c.get('loser') for c in contenders):
                 continue
-            # An athlete assigned to two possible downstream paths is ambiguous.
-            competing_edges = [(f, c) for f, record in unique.items() for c in record.get('competitors', [])
-                               if c.get('source_fight') == upstream_number and
-                               not c.get('placeholder') and not c.get('bye')]
-            if len(competing_edges) != 1:
-                counts['nonunique_edge'] += 1
+            source_ids = [_competitor_identity(source_block, c) for c in contenders]
+            if any(x is None for x in source_ids) or len(source_ids) != len(set(source_ids)):
                 continue
-            if len(actual) == 2:
-                opponent = next(c for c in actual if key(c['name']) != source_key)
-                if key(opponent['name']) == source_key:
+            # Only real named downstream entrants count; empty/placeholder slots
+            # can never confirm an advancement.
+            target_ids = set()
+            for c in downstream['competitors']:
+                if c.get('placeholder') or c.get('bye'):
                     continue
-                upstream['result_map'] = {source_key: 'WIN', key(opponent['name']): 'LOSS'}
+                identity = _competitor_identity(target_block, c)
+                if identity:
+                    target_ids.add(identity)
+            advanced = [i for i, identity in enumerate(source_ids) if identity in target_ids]
+            if len(advanced) != 1:
+                continue
+            winner = key(contenders[advanced[0]]['name'])
+            if len(contenders) == 2:
+                loser = key(contenders[1 - advanced[0]]['name'])
+                if loser == winner:
+                    continue
+                upstream['result_map'] = {winner: 'WIN', loser: 'LOSS'}
             else:
-                # A second slot needs to be present; lone competitor not sufficient.
-                if len(upstream.get('competitors', [])) < 2:
+                # Must have a second actual slot (possibly a placeholder).
+                if len(upstream['competitors']) != 2:
                     continue
-                upstream['result_map'] = {source_key: 'WIN'}
-            counts['inferred_from_explicit_edges'] += 1
-    if counts:
-        print('    Verified-bracket-edge inference: ' +
-              ', '.join(f'{k}={v}' for k, v in sorted(counts.items())), flush=True)
-    return fights
+                upstream['result_map'] = {winner: 'WIN'}
+            upstream['result_source'] = f'verified-bracket-15-position-{source_pos}-to-{target_pos}'
+            inferred += 1
+    if inferred:
+        print(f'    Bracket-position advancement: inferred {inferred} fights with verified edges and competitor IDs', flush=True)
+    return records
 
 
 def _explicit_source_fight(comp):
@@ -495,6 +548,7 @@ def audit_advancement_markup(soup, fights, url):
 
 def parse_fights(soup):
     fights = []
+    evidence_records = []
 
     blocks = soup.select('.tournament-category__match, .tournament-category_match')
     for block in blocks:
@@ -568,15 +622,15 @@ def parse_fights(soup):
 
         # Retain a card only if scheduled or it proves a completed result.
         # Otherwise an undated placeholder must not become a new match.
-        if (fields['mat'] and fields['time'] and fields['day']) or result_map:
-            fights.append({**fields, 'competitors': competitors, 'result_map': result_map})
+        fight = {**fields, 'competitors': competitors, 'result_map': result_map}
+        # Save the initial publication decision BEFORE inferring a result. A
+        # non-scheduled card may provide evidence but must not create a new row.
+        publish = bool((fields['mat'] and fields['time'] and fields['day']) or result_map)
+        evidence_records.append((fight, block, publish))
 
-    if fights:
-        edge_slots = sum(c.get('source_fight') is not None for f in fights for c in f['competitors'])
-        if not edge_slots:
-            print('    Verified-bracket-edge inference: no per-competitor feeder references in HTML; '
-                  'leaving unverified results unresolved', flush=True)
-        return infer_advancement_from_connected_fights(fights)
+    if evidence_records:
+        infer_advancement_from_bracket_positions([(f, b) for f, b, _ in evidence_records])
+        return [f for f, _, publish in evidence_records if publish]
 
     container = soup.select_one('main') or soup.body or soup
     lines = [clean(v) for v in container.get_text('\n', strip=True).splitlines()]
@@ -751,7 +805,6 @@ def fill_assignments(athletes, bracket_entries, previous_by_identity):
         try:
             bracket_soup = get_soup(info['url'])
             fights = parse_fights(bracket_soup)
-            audit_advancement_markup(bracket_soup, fights, info['url'])
             # A sole-entrant FINAL against BYE may have no FIGHT/Mat/Time
             # heading; recognize it from the bracket card itself.
             bye_fight = single_entrant_bye_fight(bracket_soup, [a['name'] for a in group])
@@ -866,7 +919,6 @@ def roster_from_brackets(comp):
                 raise fetched
             soup = fetched
             fights = parse_fights(soup)
-            audit_advancement_markup(soup, fights, url)
             checked += 1
         except (requests.RequestException, ValueError) as exc:
             print(f'  Category unavailable {url}: {exc}', flush=True)
