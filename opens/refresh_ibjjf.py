@@ -442,37 +442,21 @@ def capture_bracket_evidence(soup, fights, url):
     global _edge_capture_bytes, _edge_capture_files
     if os.environ.get('OPENS_EDGE_CAPTURE', '').lower() != 'true':
         return
-    if _edge_capture_bytes >= 55_000_000:
+    if _edge_capture_bytes >= 150_000_000:
         return
     if not re.search(r'/tournaments/\d+/categories/\d+', url):
         return
-    by_name = defaultdict(set)
-    for f in fights:
-        try:
-            n = int(f.get('number', ''))
-        except (ValueError, TypeError):
-            continue
-        for c in f.get('competitors', []):
-            if not c.get('placeholder') and not c.get('bye'):
-                by_name[key(c.get('name'))].add(n)
-    candidate = False
-    for f in fights:
-        if f.get('result_map'):
-            continue
-        try:
-            n = int(f.get('number', ''))
-        except (ValueError, TypeError):
-            continue
-        if any(any(x > n for x in by_name[key(c.get('name'))])
-               for c in f.get('competitors', [])
-               if not c.get('placeholder') and not c.get('bye')):
-            candidate = True
-            break
-    if not candidate:
+    # Capture the *unresolved input* regardless of whether the existing
+    # inference/audit recognizes a downstream appearance. Otherwise a failed
+    # inference can also suppress the diagnostic artifact needed to debug it.
+    unresolved = [f for f in fights if not f.get('result_map') and
+                  any(c.get('name') and not c.get('placeholder') and not c.get('bye')
+                      for c in f.get('competitors', []))]
+    if not unresolved:
         return
     category_id = re.search(r'/categories/(\d+)', url).group(1)
     payload = str(soup).encode('utf-8')
-    if len(payload) > 1_500_000:
+    if len(payload) > 4_000_000:
         print(f'    EDGE CAPTURE skip oversized category {category_id}', flush=True)
         return
     folder = ROOT / '.edge-evidence'
