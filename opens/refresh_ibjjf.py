@@ -427,6 +427,72 @@ def _explicit_source_fight(comp):
                 return int(value)
     return None
 
+def audit_advancement_markup(soup, fights, url):
+    """Read-only, bracket-wide audit of possible advancement evidence.
+
+    Runs on HTML already fetched by the regular scrape. Never updates results,
+    requests pages, or assigns outcomes. Log output is bounded per category.
+    """
+    from collections import defaultdict
+    by_name = defaultdict(list)
+    for fight in fights:
+        try:
+            number = int(fight.get('number') or '')
+        except (ValueError, TypeError):
+            continue
+        for person in fight.get('competitors', []):
+            if not person.get('placeholder') and not person.get('bye'):
+                by_name[key(person.get('name'))].append(number)
+    missing = [f for f in fights if not f.get('result_map') and f.get('number')]
+    candidates = []
+    for fight in missing:
+        try:
+            num = int(fight['number'])
+        except (ValueError, TypeError):
+            continue
+        actual = [c for c in fight.get('competitors', []) if not c.get('placeholder') and not c.get('bye')]
+        later = {c['name']: sorted({n for n in by_name[key(c['name'])] if n > num})[:4] for c in actual}
+        if any(later.values()):
+            candidates.append((fight, later))
+    if not candidates:
+        return
+    print(f'    EDGE AUDIT {url}: unresolved={len(missing)} later-named-candidates={len(candidates)}', flush=True)
+    blocks = soup.select('.tournament-category__match, .tournament-category_match')
+    by_number = defaultdict(list)
+    for b in blocks:
+        header = b.select_one('.tournament-category__match-header, .tournament-category_match-header')
+        num = parse_header_fields(clean(header.get_text(' ', strip=True) if header else '')).get('number')
+        if num:
+            by_number[num].append(b)
+    for fight, later in candidates[:8]:
+        num = fight['number']
+        print(f'    EDGE AUDIT fight={num} competitors={[(c.get("name"), c.get("placeholder"), c.get("loser"), c.get("source_fight")) for c in fight.get("competitors", [])]} later={later}', flush=True)
+        for b in by_number.get(str(num), [])[:1]:
+            # Inspect only the node's own ancestry and slot attributes, not the
+            # entire page HTML. This keeps the GitHub Actions log manageable.
+            ancestry=[]
+            node=b
+            for _ in range(4):
+                if node is None or getattr(node,'name',None) is None:break
+                ancestry.append((node.name, node.get('class', []), {k:v for k,v in node.attrs.items() if k.startswith('data-') or k in ('id','role')}))
+                node=node.parent
+            print(f'    EDGE AUDIT DOM fight={num} ancestors={str(ancestry)[:900]}', flush=True)
+            for c in b.select('.match-card__competitor')[:3]:
+                name_node=c.select_one('.match-card__competitor-name')
+                name=clean(name_node.get_text(' ', strip=True)) if name_node else clean(c.get_text(' ', strip=True))[:80]
+                attrs={k:v for k,v in c.attrs.items() if k!='style'}
+                print(f'    EDGE AUDIT SLOT fight={num} name={name!r} attrs={str(attrs)[:500]}', flush=True)
+        # Log the next specifically named fight as evidence, including slot data.
+        for name, nums in later.items():
+            for downstream in nums[:1]:
+                for b in by_number.get(str(downstream), [])[:1]:
+                    for c in b.select('.match-card__competitor')[:3]:
+                        nm=c.select_one('.match-card__competitor-name')
+                        nm=clean(nm.get_text(' ', strip=True)) if nm else clean(c.get_text(' ', strip=True))[:60]
+                        attrs={k:v for k,v in c.attrs.items() if k!='style'}
+                        print(f'    EDGE AUDIT NEXT from={num} to={downstream} person={nm!r} attrs={str(attrs)[:500]}', flush=True)
+
+
 def parse_fights(soup):
     fights = []
 
@@ -685,6 +751,7 @@ def fill_assignments(athletes, bracket_entries, previous_by_identity):
         try:
             bracket_soup = get_soup(info['url'])
             fights = parse_fights(bracket_soup)
+            audit_advancement_markup(bracket_soup, fights, info['url'])
             # A sole-entrant FINAL against BYE may have no FIGHT/Mat/Time
             # heading; recognize it from the bracket card itself.
             bye_fight = single_entrant_bye_fight(bracket_soup, [a['name'] for a in group])
@@ -799,6 +866,7 @@ def roster_from_brackets(comp):
                 raise fetched
             soup = fetched
             fights = parse_fights(soup)
+            audit_advancement_markup(soup, fights, url)
             checked += 1
         except (requests.RequestException, ValueError) as exc:
             print(f'  Category unavailable {url}: {exc}', flush=True)
