@@ -1,13 +1,19 @@
-name: OPENS bracket diagnostic (read-only)
+name: OPENS bracket evidence v3 (read-only)
 
 on:
   workflow_dispatch:
+    inputs:
+      athlete_query:
+        description: 'Name fragment to prioritize; other unresolved brackets are captured too'
+        required: false
+        default: 'Miyao'
+        type: string
 
 permissions:
   contents: read
 
 concurrency:
-  group: opens-bracket-diagnostic
+  group: opens-bracket-evidence-v3
   cancel-in-progress: false
 
 jobs:
@@ -18,17 +24,158 @@ jobs:
       - uses: actions/setup-python@v6
         with:
           python-version: '3.12'
-      - name: Install scraper dependencies
+      - name: Install diagnostic dependencies
         run: python -m pip install requests beautifulsoup4
-      - name: Inspect current published brackets without publishing any changes
+      - name: Capture actual published bracket HTML and parser output (no publishing)
         env:
-          OPENS_EDGE_CAPTURE: 'true'
-        run: python opens/refresh_ibjjf.py
-      - name: Upload actual unresolved-bracket HTML for debugging
+          DEBUG_ATHLETE: ${{ inputs.athlete_query }}
+        run: |
+          python - <<'PY'
+          import collections
+          import importlib.util
+          import json
+          import os
+          import re
+          import time
+          from datetime import datetime, timezone
+          from pathlib import Path
+          from urllib.parse import urlsplit
+
+          import requests
+          from bs4 import BeautifulSoup
+
+          root = Path('opens/.edge-evidence')
+          root.mkdir(parents=True, exist_ok=True)
+          report = {
+              'diagnostic': 'read-only actual-bracket HTML capture v3',
+              'captured_at_utc': datetime.now(timezone.utc).isoformat(),
+              'athlete_query': os.getenv('DEBUG_ATHLETE', 'Miyao'),
+              'pages': [], 'warnings': [],
+          }
+
+          def safe_category_url(raw):
+              try:
+                  value = str(raw or '').split('#', 1)[0].split('?', 1)[0]
+                  parsed = urlsplit(value)
+                  if (parsed.scheme != 'https' or parsed.netloc not in
+                      ('www.bjjcompsystem.com', 'bjjcompsystem.com')):
+                      return ''
+                  if not re.fullmatch(r'/tournaments/\d+/categories/\d+/?', parsed.path):
+                      return ''
+                  return value.rstrip('/')
+              except Exception:
+                  return ''
+
+          try:
+              snapshot = Path('opens/athletes.json')
+              if not snapshot.exists():
+                  report['warnings'].append('opens/athletes.json missing from checked-out commit')
+                  rows = []
+              else:
+                  payload = json.loads(snapshot.read_text(encoding='utf-8'))
+                  rows = payload.get('athletes', []) if isinstance(payload, dict) else []
+                  if not isinstance(rows, list):
+                      rows = []
+                      report['warnings'].append('athletes is not an array in published JSON')
+              report['snapshot_rows'] = len(rows)
+              group = collections.defaultdict(list)
+              for row in rows:
+                  if not isinstance(row, dict):
+                      continue
+                  url = safe_category_url(row.get('bracket_url'))
+                  if url:
+                      group[url].append(row)
+              report['bracket_urls_in_snapshot'] = len(group)
+              q = report['athlete_query'].casefold().strip()
+              target = lambda r: bool(q and q in str(r.get('name', '')).casefold())
+              report['target_rows_in_snapshot'] = sum(target(r) for r in rows if isinstance(r, dict))
+              # Prioritize requested athlete, then *generic* unresolved rows with a
+              # resolved later entry in the same category, then other unresolved cards.
+              def priority(item):
+                  url, athletes = item
+                  unresolved = [r for r in athletes if not str(r.get('result', '')).strip()]
+                  names_with_result = {str(r.get('name', '')).casefold() for r in athletes
+                                       if str(r.get('result', '')).upper() in ('WIN', 'LOSS', 'BYE')}
+                  repeated_unresolved = any(str(r.get('name','')).casefold() in names_with_result
+                                            for r in unresolved)
+                  hits = sum(target(r) for r in athletes)
+                  return (-int(bool(hits)), -int(repeated_unresolved), -len(unresolved), url)
+              ordered = sorted(group.items(), key=priority)
+              # Keep target brackets plus representative unresolved cases. 10 total.
+              chosen = ordered[:10]
+              report['selected_bracket_count'] = len(chosen)
+              if not chosen:
+                  report['warnings'].append('No valid BJJCompSystem bracket URLs in published athlete snapshot')
+              scraper = None
+              try:
+                  spec = importlib.util.spec_from_file_location('opens_scraper_for_read_only_diagnostic', 'opens/refresh_ibjjf.py')
+                  scraper = importlib.util.module_from_spec(spec)
+                  spec.loader.exec_module(scraper)
+              except Exception as exc:
+                  report['warnings'].append('Current scraper parser could not be imported: ' + repr(exc))
+              session = requests.Session()
+              session.headers.update({'User-Agent': 'Mozilla/5.0 (compatible; AnyNE-BracketDiagnostic/1.0)',
+                                      'Accept': 'text/html'})
+              for i, (url, athlete_rows) in enumerate(chosen, 1):
+                  ids = re.search(r'/tournaments/(\d+)/categories/(\d+)', url)
+                  stem = f'bracket-{ids.group(1)}-{ids.group(2)}'
+                  case = {
+                      'source_url': url,
+                      'html_file': stem + '.html',
+                      'row_count': len(athlete_rows),
+                      'snapshot_rows': [
+                          {k: r.get(k, '') for k in ('name','team','bracket','fight_number','time','mat','day','result')}
+                          for r in athlete_rows if not str(r.get('result', '')).strip() or target(r)
+                      ][:40],
+                  }
+                  report['pages'].append(case)
+                  try:
+                      response = session.get(url, timeout=35)
+                      case['http_status'] = response.status_code
+                      case['html_bytes'] = len(response.content)
+                      # Preserve the actual response, including provider errors if any.
+                      (root / case['html_file']).write_text(response.text[:5_000_000], encoding='utf-8')
+                      if response.status_code != 200:
+                          case['warning'] = f'HTTP {response.status_code} returned by BJJCompSystem'
+                      else:
+                          soup = BeautifulSoup(response.text, 'html.parser')
+                          case['match_cards_in_html'] = len(soup.select(
+                              '.tournament-category__match, .tournament-category_match'))
+                          case['athlete_names_in_html'] = len(soup.select('.match-card__competitor-name'))
+                          if scraper is not None:
+                              try:
+                                  fights = scraper.parse_fights(soup)
+                                  case['parsed_fights'] = [
+                                      {'number': f.get('number'), 'time': f.get('time'),
+                                       'mat': f.get('mat'), 'result_map': f.get('result_map'),
+                                       'result_source': f.get('result_source'),
+                                       'competitors': [
+                                           {k: c.get(k) for k in ('name','team','placeholder','loser','bye')}
+                                           for c in f.get('competitors', [])]}
+                                      for f in fights
+                                  ]
+                              except Exception as exc:
+                                  case['parser_error'] = repr(exc)
+                      print(f'DIAGNOSTIC {i}/{len(chosen)} {url} status={case["http_status"]} '
+                            f'bytes={case["html_bytes"]} file={case["html_file"]}', flush=True)
+                  except Exception as exc:
+                      case['request_error'] = repr(exc)
+                      print('DIAGNOSTIC FETCH FAILED ' + url + ': ' + repr(exc), flush=True)
+                  time.sleep(0.3)
+          except Exception as exc:
+              report['fatal_diagnostic_error'] = repr(exc)
+              print('DIAGNOSTIC INTERNAL ERROR: ' + repr(exc), flush=True)
+          finally:
+              (root / 'diagnostic-report.json').write_text(
+                  json.dumps(report, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
+              print(f'DIAGNOSTIC REPORT SAVED pages={len(report["pages"])} '
+                    f'warnings={len(report["warnings"])}', flush=True)
+          PY
+      - name: Upload diagnostic evidence and report
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: unresolved-bracket-html
-          path: opens/.edge-evidence/*.html
-          if-no-files-found: warn
+          name: bracket-evidence-v3
+          path: opens/.edge-evidence/
+          if-no-files-found: error
           retention-days: 2
