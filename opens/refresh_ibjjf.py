@@ -363,7 +363,9 @@ BRACKET_15_EDGES = {
 
 def _bracket_match_position(block):
     """Identify the actual card position without mistaking it for fight #."""
-    card = block.select_one('.match-card')
+    # BJJCompSystem places match-N on .tournament-category__match-card,
+    # not on the nested competitor/card detail elements.
+    card = block.select_one('.tournament-category__match-card')
     if card is None:
         return None
     for cls in card.get('class', []):
