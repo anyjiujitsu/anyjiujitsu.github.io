@@ -8,7 +8,7 @@
       "date": ""
     }
   ],
-  "updated_at": "2026-11-01T17:01:51.948519+00:00",
+  "updated_at": "2026-11-01T17:21:49.567686+00:00",
   "athletes": [
     {
       "competition_id": "3313",
@@ -29272,8 +29272,23 @@
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3313/categories/2933859",
       "time_type": "listed fight",
-      "result": "",
+      "result": "WIN",
       "fight_number": "81"
+    },
+    {
+      "competition_id": "3313",
+      "competition_name": "European IBJJF Jiu-Jitsu No-Gi Championship 2026",
+      "date": "",
+      "name": "Andrej Ondrisek",
+      "team": "A-Force Brazilian Jiu-Jitsu International",
+      "bracket": "Blue / Juvenile 2 / Male / Open Class Heavy",
+      "time": "06:30 PM",
+      "mat": "9",
+      "day": "Sun",
+      "bracket_url": "https://www.bjjcompsystem.com/tournaments/3313/categories/2933859",
+      "time_type": "listed fight",
+      "result": "",
+      "fight_number": "87"
     },
     {
       "competition_id": "3313",
@@ -29377,7 +29392,7 @@
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3313/categories/2933859",
       "time_type": "listed fight",
-      "result": "",
+      "result": "LOSS",
       "fight_number": "81"
     },
     {
@@ -29422,8 +29437,23 @@
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3313/categories/2933859",
       "time_type": "listed fight",
-      "result": "",
+      "result": "WIN",
       "fight_number": "83"
+    },
+    {
+      "competition_id": "3313",
+      "competition_name": "European IBJJF Jiu-Jitsu No-Gi Championship 2026",
+      "date": "",
+      "name": "João Matheus Félix Oliveira dos Santos",
+      "team": "GF Team",
+      "bracket": "Blue / Juvenile 2 / Male / Open Class Heavy",
+      "time": "06:23 PM",
+      "mat": "9",
+      "day": "Sun",
+      "bracket_url": "https://www.bjjcompsystem.com/tournaments/3313/categories/2933859",
+      "time_type": "listed fight",
+      "result": "",
+      "fight_number": "86"
     },
     {
       "competition_id": "3313",
@@ -29529,6 +29559,21 @@
       "time_type": "listed fight",
       "result": "WIN",
       "fight_number": "80"
+    },
+    {
+      "competition_id": "3313",
+      "competition_name": "European IBJJF Jiu-Jitsu No-Gi Championship 2026",
+      "date": "",
+      "name": "Gorm Skullerud Vedeler",
+      "team": "Team Carvalho Norway",
+      "bracket": "Blue / Juvenile 2 / Male / Open Class Heavy",
+      "time": "06:02 PM",
+      "mat": "9",
+      "day": "Sun",
+      "bracket_url": "https://www.bjjcompsystem.com/tournaments/3313/categories/2933859",
+      "time_type": "listed fight",
+      "result": "LOSS",
+      "fight_number": "83"
     },
     {
       "competition_id": "3313",
@@ -36427,7 +36472,7 @@
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3313/categories/2933855",
       "time_type": "listed fight",
-      "result": "",
+      "result": "LOSS",
       "fight_number": "82"
     },
     {
@@ -36547,7 +36592,7 @@
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3313/categories/2933855",
       "time_type": "listed fight",
-      "result": "",
+      "result": "WIN",
       "fight_number": "82"
     },
     {
@@ -41987,12 +42032,12 @@
       "name": "Emma Rosini",
       "team": "Academia Gorila",
       "bracket": "Purple / Adult / Female / Open Class",
-      "time": "05:59 PM",
+      "time": "05:58 PM",
       "mat": "7",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3313/categories/2933831",
       "time_type": "listed fight",
-      "result": "",
+      "result": "WIN",
       "fight_number": "78"
     },
     {
@@ -42362,12 +42407,12 @@
       "name": "Fernanda Ribeiro",
       "team": "Sampa BJJ International",
       "bracket": "Purple / Adult / Female / Open Class",
-      "time": "05:59 PM",
+      "time": "05:58 PM",
       "mat": "7",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3313/categories/2933831",
       "time_type": "listed fight",
-      "result": "",
+      "result": "LOSS",
       "fight_number": "78"
     },
     {
@@ -59432,12 +59477,12 @@
       "name": "Dara Teodor Panayotova",
       "team": "Brasa CTA",
       "bracket": "Blue / Juvenile 2 / Female / Open Class Heavy",
-      "time": "06:01 PM",
+      "time": "05:44 PM",
       "mat": "2",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3313/categories/2933867",
       "time_type": "listed fight",
-      "result": "",
+      "result": "LOSS",
       "fight_number": "82"
     },
     {
@@ -59522,12 +59567,12 @@
       "name": "Sofiia Shomko",
       "team": "Fight Sports International",
       "bracket": "Blue / Juvenile 2 / Female / Open Class Heavy",
-      "time": "06:01 PM",
+      "time": "05:44 PM",
       "mat": "2",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3313/categories/2933867",
       "time_type": "listed fight",
-      "result": "",
+      "result": "WIN",
       "fight_number": "82"
     },
     {
@@ -80252,7 +80297,7 @@
       "name": "Thomas Robert Georges Lequeux",
       "team": "D.O.A. Jiu-Jitsu",
       "bracket": "Black / Master 5 / Male / Open Class",
-      "time": "05:54 PM",
+      "time": "05:38 PM",
       "mat": "2",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3313/categories/2933796",
@@ -80432,12 +80477,12 @@
       "name": "Fábio Kroeff Cardoso",
       "team": "Scorpyon Jiu-Jitsu",
       "bracket": "Black / Master 5 / Male / Open Class",
-      "time": "06:08 PM",
+      "time": "05:55 PM",
       "mat": "2",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3313/categories/2933796",
       "time_type": "listed fight",
-      "result": "",
+      "result": "LOSS",
       "fight_number": "83"
     },
     {
@@ -80477,7 +80522,7 @@
       "name": "Wayne Paul Fagan",
       "team": "Éire Beyond Jiu-Jitsu",
       "bracket": "Black / Master 5 / Male / Open Class",
-      "time": "05:54 PM",
+      "time": "05:38 PM",
       "mat": "2",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3313/categories/2933796",
@@ -80492,12 +80537,27 @@
       "name": "Wayne Paul Fagan",
       "team": "Éire Beyond Jiu-Jitsu",
       "bracket": "Black / Master 5 / Male / Open Class",
-      "time": "06:08 PM",
-      "mat": "2",
+      "time": "05:55 PM",
+      "mat": "1",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3313/categories/2933796",
       "time_type": "listed fight",
       "result": "",
+      "fight_number": "80"
+    },
+    {
+      "competition_id": "3313",
+      "competition_name": "European IBJJF Jiu-Jitsu No-Gi Championship 2026",
+      "date": "",
+      "name": "Wayne Paul Fagan",
+      "team": "Éire Beyond Jiu-Jitsu",
+      "bracket": "Black / Master 5 / Male / Open Class",
+      "time": "05:55 PM",
+      "mat": "2",
+      "day": "Sun",
+      "bracket_url": "https://www.bjjcompsystem.com/tournaments/3313/categories/2933796",
+      "time_type": "listed fight",
+      "result": "WIN",
       "fight_number": "83"
     },
     {
@@ -88942,7 +89002,7 @@
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3313/categories/2933866",
       "time_type": "listed fight",
-      "result": "",
+      "result": "LOSS",
       "fight_number": "76"
     },
     {
@@ -88987,7 +89047,7 @@
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3313/categories/2933866",
       "time_type": "listed fight",
-      "result": "",
+      "result": "WIN",
       "fight_number": "76"
     },
     {
@@ -95069,6 +95129,21 @@
       "competition_id": "3313",
       "competition_name": "European IBJJF Jiu-Jitsu No-Gi Championship 2026",
       "date": "",
+      "name": "Rodrigo Viscaino Gorgolini",
+      "team": "Gracie Barra",
+      "bracket": "Black / Master 4 / Male / Open Class",
+      "time": "06:16 PM",
+      "mat": "9",
+      "day": "Sun",
+      "bracket_url": "https://www.bjjcompsystem.com/tournaments/3313/categories/2933795",
+      "time_type": "listed fight",
+      "result": "",
+      "fight_number": "85"
+    },
+    {
+      "competition_id": "3313",
+      "competition_name": "European IBJJF Jiu-Jitsu No-Gi Championship 2026",
+      "date": "",
       "name": "Luke Robert Harris",
       "team": "Hayabusa Jiu-Jitsu",
       "bracket": "Black / Master 4 / Male / Open Class",
@@ -95137,7 +95212,7 @@
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3313/categories/2933795",
       "time_type": "listed fight",
-      "result": "",
+      "result": "LOSS",
       "fight_number": "81"
     },
     {
@@ -95242,8 +95317,23 @@
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3313/categories/2933795",
       "time_type": "listed fight",
-      "result": "",
+      "result": "WIN",
       "fight_number": "81"
+    },
+    {
+      "competition_id": "3313",
+      "competition_name": "European IBJJF Jiu-Jitsu No-Gi Championship 2026",
+      "date": "",
+      "name": "Krzysztof Tomasz Lukaszewicz",
+      "team": "ZR Team Association",
+      "bracket": "Black / Master 4 / Male / Open Class",
+      "time": "06:16 PM",
+      "mat": "9",
+      "day": "Sun",
+      "bracket_url": "https://www.bjjcompsystem.com/tournaments/3313/categories/2933795",
+      "time_type": "listed fight",
+      "result": "",
+      "fight_number": "85"
     },
     {
       "competition_id": "3313",
@@ -96527,12 +96617,12 @@
       "name": "Amos Keshet",
       "team": "Brigadeiro BJJ - UK",
       "bracket": "Black / Master 7 / Male / Open Class",
-      "time": "05:50 PM",
+      "time": "05:51 PM",
       "mat": "7",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3313/categories/2933798",
       "time_type": "listed fight",
-      "result": "",
+      "result": "LOSS",
       "fight_number": "77"
     },
     {
@@ -96562,7 +96652,7 @@
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3313/categories/2933798",
       "time_type": "listed fight",
-      "result": "",
+      "result": "WIN",
       "fight_number": "76"
     },
     {
@@ -96572,12 +96662,12 @@
       "name": "Frank Michael Burczynski",
       "team": "Hilti BJJ Berlin",
       "bracket": "Black / Master 7 / Male / Open Class",
-      "time": "05:50 PM",
+      "time": "05:51 PM",
       "mat": "7",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3313/categories/2933798",
       "time_type": "listed fight",
-      "result": "",
+      "result": "WIN",
       "fight_number": "77"
     },
     {
@@ -96592,7 +96682,7 @@
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3313/categories/2933798",
       "time_type": "listed fight",
-      "result": "",
+      "result": "LOSS",
       "fight_number": "76"
     },
     {
@@ -109262,13 +109352,28 @@
       "name": "Plamen Penev Petrov",
       "team": "GF Team",
       "bracket": "Black / Master 6 / Male / Open Class",
-      "time": "05:50 PM",
+      "time": "05:52 PM",
       "mat": "3",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3313/categories/2933797",
       "time_type": "listed fight",
-      "result": "",
+      "result": "WIN",
       "fight_number": "82"
+    },
+    {
+      "competition_id": "3313",
+      "competition_name": "European IBJJF Jiu-Jitsu No-Gi Championship 2026",
+      "date": "",
+      "name": "Plamen Penev Petrov",
+      "team": "GF Team",
+      "bracket": "Black / Master 6 / Male / Open Class",
+      "time": "06:04 PM",
+      "mat": "3",
+      "day": "Sun",
+      "bracket_url": "https://www.bjjcompsystem.com/tournaments/3313/categories/2933797",
+      "time_type": "listed fight",
+      "result": "WIN",
+      "fight_number": "83"
     },
     {
       "competition_id": "3313",
@@ -109307,12 +109412,12 @@
       "name": "Lech Witold Szczesniak",
       "team": "Renato Tavares Association Poland",
       "bracket": "Black / Master 6 / Male / Open Class",
-      "time": "05:50 PM",
+      "time": "05:52 PM",
       "mat": "3",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3313/categories/2933797",
       "time_type": "listed fight",
-      "result": "",
+      "result": "LOSS",
       "fight_number": "82"
     },
     {
@@ -109327,7 +109432,7 @@
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3313/categories/2933797",
       "time_type": "listed fight",
-      "result": "",
+      "result": "LOSS",
       "fight_number": "80"
     },
     {
@@ -109357,8 +109462,23 @@
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3313/categories/2933797",
       "time_type": "listed fight",
-      "result": "",
+      "result": "WIN",
       "fight_number": "80"
+    },
+    {
+      "competition_id": "3313",
+      "competition_name": "European IBJJF Jiu-Jitsu No-Gi Championship 2026",
+      "date": "",
+      "name": "Guillermo Balcazar Crespi",
+      "team": "The Brothers BJJ Spain",
+      "bracket": "Black / Master 6 / Male / Open Class",
+      "time": "06:04 PM",
+      "mat": "3",
+      "day": "Sun",
+      "bracket_url": "https://www.bjjcompsystem.com/tournaments/3313/categories/2933797",
+      "time_type": "listed fight",
+      "result": "LOSS",
+      "fight_number": "83"
     },
     {
       "competition_id": "3313",
