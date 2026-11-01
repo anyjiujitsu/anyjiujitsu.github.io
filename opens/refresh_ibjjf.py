@@ -474,6 +474,9 @@ def infer_advancement_from_bracket_positions(records):
             if (group, source_pos) in ambiguous or (group, target_pos) in ambiguous:
                 audit['ambiguous_position_edges'] += 1
                 continue
+            # A drawn/expected edge is not enough: both actual match cards
+            # must exist in this *same* category bracket. A scheduled bout
+            # with no published downstream card remains unresolved.
             if source_pos not in positions or target_pos not in positions:
                 audit['missing_edge_cards'] += 1
                 sample('missing_edge_cards', source_pos, target_pos, len(positions))
@@ -483,6 +486,23 @@ def infer_advancement_from_bracket_positions(records):
             downstream, target_block = positions[target_pos]
             if upstream['result_map']:
                 audit['already_resolved'] += 1
+                continue
+            # A visible next-round card can be pre-populated before the
+            # feeder match is decided. An explicit "Winner of Fight #X"
+            # placeholder for THIS source match is positive evidence that
+            # its advancing competitor has not been resolved; another named
+            # entrant on that target card is NOT proof of progression.
+            try:
+                source_fight_number = int(upstream.get('number') or '')
+            except (ValueError, TypeError):
+                source_fight_number = None
+            if source_fight_number is not None and any(
+                person.get('placeholder') and (
+                    _fight_source_reference(person.get('name')) == source_fight_number
+                    or person.get('source_fight') == source_fight_number
+                ) for person in downstream.get('competitors', [])
+            ):
+                audit['unresolved_feeder_placeholder'] += 1
                 continue
             audit['unresolved_edge_candidates'] += 1
             contenders = [c for c in upstream['competitors']
@@ -700,10 +720,13 @@ def parse_fights(soup):
             elif a['loser'] ^ b['loser']:
                 loser = a if a['loser'] else b
                 winner = b if a['loser'] else a
-                if not loser['placeholder']:
+                # Grey styling on a *placeholder* is not evidence that any
+                # real opponent lost. Without an actual greyed athlete, a WIN
+                # must be proven by direct downstream advancement instead.
+                if not loser['placeholder'] and not loser['bye']:
                     result_map[key(loser['name'])] = 'LOSS'
-                if not winner['placeholder']:
-                    result_map[key(winner['name'])] = 'WIN'
+                    if not winner['placeholder'] and not winner['bye']:
+                        result_map[key(winner['name'])] = 'WIN'
 
         # Retain a card only if scheduled or it proves a completed result.
         # Otherwise an undated placeholder must not become a new match.
