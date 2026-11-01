@@ -352,9 +352,11 @@ def _fight_source_reference(value):
     return int(match.group(1)) if match else None
 
 
-# Actual 15-card desktop bracket connections from BJJ Competition System's
-# category_show.js / BracketPlumbing (match positions, NOT fight numbers).
-# Other layouts are deliberately left untouched until their maps are verified.
+# Desktop connection map from BJJ Competition System's category_show.js.
+# BracketPlumbing uses the SAME map for every desktop bracket and draws an
+# edge only when both source/target match elements are visible. Smaller (3/7)
+# layouts therefore use a subset of these 15 match-position edges.
+# These are match POSITION identifiers, not scheduled fight numbers.
 BRACKET_15_EDGES = {
     1: 9, 2: 9, 3: 10, 4: 10, 5: 11, 6: 11, 7: 12, 8: 12,
     9: 13, 10: 14, 11: 13, 12: 14, 13: 15, 14: 15,
@@ -393,10 +395,40 @@ def _competitor_identity(block, competitor):
     return None
 
 
-def infer_advancement_from_bracket_positions(records):
-    """Verified 15-card inference with general, bounded diagnostic counters.
+def _verified_advancement_identity(source_block, source, target_block, target):
+    """Return evidence for matching one entrant across a *connected* match edge.
 
-    No additional fetches; diagnostics never assign or alter results themselves.
+    Bracket competitor IDs are preferred and must never contradict each other.
+    A missing/unusable ID may be compensated for by the exact full name AND
+    academy printed on both cards. Never infer from name alone, seed numbers,
+    fight-number order, or an athlete appearing in an unrelated match.
+    """
+    source_name = key(source.get('name'))
+    target_name = key(target.get('name'))
+    if not source_name or not target_name or source.get('placeholder') or target.get('placeholder'):
+        return None
+    if source.get('bye') or target.get('bye'):
+        return None
+    source_id = _competitor_identity(source_block, source)
+    target_id = _competitor_identity(target_block, target)
+    if source_id and target_id:
+        # Both IDs present: contradictory IDs are dispositive even if names
+        # happen to match. Never fall back to name to override this conflict.
+        return 'competitor-id' if source_id == target_id else None
+    source_team = key(source.get('team'))
+    target_team = key(target.get('team'))
+    if (source_name == target_name and source_team and source_team == target_team):
+        return 'name-and-academy'
+    return None
+
+
+def infer_advancement_from_bracket_positions(records):
+    """Infer results ONLY across the provider's directly connected match slots.
+
+    Desktop bracket positions, rather than scheduled FIGHT numbers, define the
+    verified connection. Handles a single identified athlete regardless of
+    whether the feeder/second slot has a parseable name or exists in the DOM.
+    Any explicit result (especially BYE or greyed LOSS) is authoritative.
     """
     groups = defaultdict(dict)
     ambiguous = set()
@@ -414,10 +446,15 @@ def infer_advancement_from_bracket_positions(records):
             audit['missing_bracket_container'] += 1
             continue
         classes = container.get('class', [])
-        if 'tournament-category__bracket-15' not in classes:
+        # BracketPlumbing uses the same documented desktop connection map
+        # for the visible cards of 3-, 7-, and 15-position layouts.
+        layout = next((int(m.group(1)) for name in classes
+                       if (m := re.fullmatch(r'tournament-category__bracket-(\d+)', name))), None)
+        if layout not in (3, 7, 15):
             audit['other_layout_cards'] += 1
             continue
-        audit['layout_15_cards'] += 1
+        audit['supported_layout_cards'] += 1
+        audit[f'layout_{layout}_cards'] += 1
         position = _bracket_match_position(block)
         if position is None:
             audit['missing_match_position'] += 1
@@ -430,7 +467,7 @@ def infer_advancement_from_bracket_positions(records):
             audit['duplicate_positions'] += 1
         groups[group][position] = (fight, block)
 
-    audit['layout_15_groups'] = len(groups)
+    audit['supported_layout_groups'] = len(groups)
     for group, positions in groups.items():
         for source_pos, target_pos in BRACKET_15_EDGES.items():
             audit['mapped_edges'] += 1
@@ -456,52 +493,52 @@ def infer_advancement_from_bracket_positions(records):
             if any(c.get('loser') for c in contenders):
                 audit['greyed_contender'] += 1
                 continue
-            source_ids = [_competitor_identity(source_block, c) for c in contenders]
-            if any(x is None for x in source_ids):
-                audit['missing_source_competitor_id'] += 1
-                sample('missing_source_id', source_pos, target_pos, len(positions))
-                continue
-            if len(source_ids) != len(set(source_ids)):
-                audit['duplicate_source_competitor_id'] += 1
-                continue
-            audit['source_ids_valid'] += 1
-            target_ids = set()
-            downstream_named = 0
-            for c in downstream['competitors']:
-                if c.get('placeholder') or c.get('bye'):
-                    continue
-                downstream_named += 1
-                identity = _competitor_identity(target_block, c)
-                if identity:
-                    target_ids.add(identity)
-            if downstream_named and not target_ids:
-                audit['missing_target_competitor_ids'] += 1
-                sample('missing_target_ids', source_pos, target_pos, len(positions))
-                continue
-            if not downstream_named:
+            downstream_contenders = [c for c in downstream['competitors']
+                                     if not c.get('placeholder') and not c.get('bye') and key(c.get('name'))]
+            if not downstream_contenders:
                 audit['empty_downstream'] += 1
                 continue
-            advanced = [i for i, identity in enumerate(source_ids) if identity in target_ids]
-            if len(advanced) != 1:
+
+            # An identity must match exactly one target entrant. Two source
+            # athletes reaching this card, or the same entrant occupying two
+            # target slots, makes progression ambiguous; leave it unresolved.
+            matches = []
+            for source in contenders:
+                evidence = [_verified_advancement_identity(source_block, source, target_block, target)
+                            for target in downstream_contenders]
+                matches.append([(j, match) for j, match in enumerate(evidence) if match])
+            advanced = [i for i, target_matches in enumerate(matches) if target_matches]
+            if len(advanced) != 1 or len(matches[advanced[0]]) != 1:
                 audit['not_exactly_one_advancer'] += 1
                 sample('no_unique_identity_in_target', source_pos, target_pos, len(positions))
                 continue
+
             winner = key(contenders[advanced[0]]['name'])
+            evidence_type = matches[advanced[0]][0][1]
             if len(contenders) == 2:
                 loser = key(contenders[1 - advanced[0]]['name'])
                 if loser == winner:
                     audit['duplicate_names'] += 1
                     continue
+                # If the alleged loser is still named in the target card,
+                # contradictory/missing IDs cannot establish a LOSS safely.
+                if any(key(c.get('name')) == loser for c in downstream_contenders):
+                    audit['alleged_loser_in_target'] += 1
+                    continue
                 upstream['result_map'] = {winner: 'WIN', loser: 'LOSS'}
             else:
-                if len(upstream['competitors']) != 2:
-                    audit['single_competitor_no_second_slot'] += 1
-                    continue
+                # Crucial: require neither a parsed placeholder NOR a second
+                # physical competitor slot. The *direct connection* and verified
+                # identity are the evidence. Do not fabricate an opponent LOSS.
                 upstream['result_map'] = {winner: 'WIN'}
-            upstream['result_source'] = f'verified-bracket-15-position-{source_pos}-to-{target_pos}'
+                audit['single_named_athlete_wins'] += 1
+            upstream['result_source'] = (
+                f'verified-bracket-position-{source_pos}-to-{target_pos}-{evidence_type}'
+            )
             audit['inferred_fights'] += 1
+            audit[f'inferred_by_{evidence_type.replace("-", "_")}'] += 1
 
-    if audit['layout_15_cards'] or audit['missing_bracket_container']:
+    if audit['supported_layout_cards'] or audit['missing_bracket_container']:
         ordered = ' '.join(f'{k}={v}' for k, v in sorted(audit.items()))
         print(f'    BRACKET POSITION AUDIT {ordered}', flush=True)
         for example in examples:
