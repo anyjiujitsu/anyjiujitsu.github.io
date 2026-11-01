@@ -8,7 +8,7 @@
       "date": ""
     }
   ],
-  "updated_at": "2026-11-01T15:21:42.304973+00:00",
+  "updated_at": "2026-11-01T15:41:54.684241+00:00",
   "athletes": [
     {
       "competition_id": "3313",
@@ -1162,7 +1162,7 @@
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3313/categories/2933261",
       "time_type": "listed fight",
-      "result": "",
+      "result": "LOSS",
       "fight_number": "37"
     },
     {
@@ -1657,7 +1657,7 @@
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3313/categories/2933261",
       "time_type": "listed fight",
-      "result": "",
+      "result": "WIN",
       "fight_number": "37"
     },
     {
@@ -22127,7 +22127,7 @@
       "name": "Darlan Vinicius da Silva Casaca",
       "team": "Atos Jiu-Jitsu Rio",
       "bracket": "Black / Adult / Male / Middle (79.50kg)",
-      "time": "04:22 PM",
+      "time": "04:24 PM",
       "mat": "4",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3313/categories/2933265",
@@ -22742,7 +22742,7 @@
       "name": "Tarik Hopstock",
       "team": "Frontline Academy",
       "bracket": "Black / Adult / Male / Middle (79.50kg)",
-      "time": "04:22 PM",
+      "time": "04:24 PM",
       "mat": "4",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3313/categories/2933265",
@@ -26492,12 +26492,12 @@
       "name": "Antoan Ivo Dobrev",
       "team": "Brasa CTA",
       "bracket": "Blue / Juvenile 2 / Male / Middle (71.50kg)",
-      "time": "04:23 PM",
+      "time": "04:26 PM",
       "mat": "2",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3313/categories/2933220",
       "time_type": "listed fight",
-      "result": "",
+      "result": "LOSS",
       "fight_number": "65"
     },
     {
@@ -26747,12 +26747,12 @@
       "name": "Liad Filberg",
       "team": "Soul Fighter's Israel",
       "bracket": "Blue / Juvenile 2 / Male / Middle (71.50kg)",
-      "time": "04:23 PM",
+      "time": "04:26 PM",
       "mat": "2",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3313/categories/2933220",
       "time_type": "listed fight",
-      "result": "",
+      "result": "WIN",
       "fight_number": "65"
     },
     {
@@ -32432,7 +32432,7 @@
       "name": "Linus Esper Von Schrenk",
       "team": "Nick Brooks BJJ",
       "bracket": "Black / Adult / Male / Heavy (91.50kg)",
-      "time": "04:34 PM",
+      "time": "04:37 PM",
       "mat": "4",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3313/categories/2933273",
@@ -32537,7 +32537,7 @@
       "name": "Karol Zbigniew Kania",
       "team": "Rio Grappling Club",
       "bracket": "Black / Adult / Male / Heavy (91.50kg)",
-      "time": "04:34 PM",
+      "time": "04:37 PM",
       "mat": "4",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3313/categories/2933273",
@@ -33632,7 +33632,7 @@
       "name": "Aleksandre Tevzadze",
       "team": "Inglorious Grapplers",
       "bracket": "Black / Adult / Male / Ultra Heavy",
-      "time": "04:58 PM",
+      "time": "05:01 PM",
       "mat": "4",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3313/categories/2933281",
@@ -33767,7 +33767,7 @@
       "name": "Mahir Zuka",
       "team": "Untamed Tribe",
       "bracket": "Black / Adult / Male / Ultra Heavy",
-      "time": "04:58 PM",
+      "time": "05:01 PM",
       "mat": "4",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3313/categories/2933281",
@@ -36047,13 +36047,13 @@
       "name": "Konrad Andrzej Krajweski",
       "team": "Academia Gorila",
       "bracket": "Blue / Juvenile 1 / Male / Open Class Heavy",
-      "time": "04:37 PM",
+      "time": "04:56 PM",
       "mat": "1",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3313/categories/2933855",
       "time_type": "listed fight",
       "result": "",
-      "fight_number": "68"
+      "fight_number": "70"
     },
     {
       "competition_id": "3313",
@@ -36062,7 +36062,7 @@
       "name": "Pietro Raphael Vela",
       "team": "Academia OCS BJJ",
       "bracket": "Blue / Juvenile 1 / Male / Open Class Heavy",
-      "time": "04:44 PM",
+      "time": "04:35 PM",
       "mat": "9",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3313/categories/2933855",
@@ -36077,7 +36077,7 @@
       "name": "Lorenzo D'Onofrio",
       "team": "Batatinha Team",
       "bracket": "Blue / Juvenile 1 / Male / Open Class Heavy",
-      "time": "04:58 PM",
+      "time": "05:03 PM",
       "mat": "1",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3313/categories/2933855",
@@ -36092,13 +36092,28 @@
       "name": "Gadjimourad Akhmedov",
       "team": "De La Riva Nantes",
       "bracket": "Blue / Juvenile 1 / Male / Open Class Heavy",
-      "time": "04:37 PM",
+      "time": "04:29 PM",
+      "mat": "9",
+      "day": "Sun",
+      "bracket_url": "https://www.bjjcompsystem.com/tournaments/3313/categories/2933855",
+      "time_type": "listed fight",
+      "result": "WIN",
+      "fight_number": "68"
+    },
+    {
+      "competition_id": "3313",
+      "competition_name": "European IBJJF Jiu-Jitsu No-Gi Championship 2026",
+      "date": "",
+      "name": "Gadjimourad Akhmedov",
+      "team": "De La Riva Nantes",
+      "bracket": "Blue / Juvenile 1 / Male / Open Class Heavy",
+      "time": "04:56 PM",
       "mat": "9",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3313/categories/2933855",
       "time_type": "listed fight",
       "result": "",
-      "fight_number": "69"
+      "fight_number": "73"
     },
     {
       "competition_id": "3313",
@@ -36107,13 +36122,13 @@
       "name": "Laighton Philip Lawes",
       "team": "Icon Jiu-Jitsu Team",
       "bracket": "Blue / Juvenile 1 / Male / Open Class Heavy",
-      "time": "04:37 PM",
+      "time": "04:56 PM",
       "mat": "1",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3313/categories/2933855",
       "time_type": "listed fight",
       "result": "",
-      "fight_number": "68"
+      "fight_number": "70"
     },
     {
       "competition_id": "3313",
@@ -36122,7 +36137,7 @@
       "name": "Lio Klonowski",
       "team": "Industry Academy",
       "bracket": "Blue / Juvenile 1 / Male / Open Class Heavy",
-      "time": "05:05 PM",
+      "time": "05:10 PM",
       "mat": "1",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3313/categories/2933855",
@@ -36137,13 +36152,13 @@
       "name": "Oskar Michal Balinski",
       "team": "John Kelly Brazilian Jiu-Jitsu Ireland",
       "bracket": "Blue / Juvenile 1 / Male / Open Class Heavy",
-      "time": "04:37 PM",
+      "time": "04:29 PM",
       "mat": "9",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3313/categories/2933855",
       "time_type": "listed fight",
-      "result": "",
-      "fight_number": "69"
+      "result": "LOSS",
+      "fight_number": "68"
     },
     {
       "competition_id": "3313",
@@ -36152,7 +36167,7 @@
       "name": "Matej Kelar",
       "team": "Jungle BJJ",
       "bracket": "Blue / Juvenile 1 / Male / Open Class Heavy",
-      "time": "04:58 PM",
+      "time": "05:03 PM",
       "mat": "1",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3313/categories/2933855",
@@ -36167,13 +36182,13 @@
       "name": "Gabriel Olivier Roger Prentout",
       "team": "Kabuto Fight Club",
       "bracket": "Blue / Juvenile 1 / Male / Open Class Heavy",
-      "time": "04:44 PM",
+      "time": "04:33 PM",
       "mat": "1",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3313/categories/2933855",
       "time_type": "listed fight",
       "result": "",
-      "fight_number": "69"
+      "fight_number": "67"
     },
     {
       "competition_id": "3313",
@@ -36182,7 +36197,7 @@
       "name": "Iair David Kemeny",
       "team": "Nxtgen Jiu-Jitsu",
       "bracket": "Blue / Juvenile 1 / Male / Open Class Heavy",
-      "time": "05:05 PM",
+      "time": "05:10 PM",
       "mat": "1",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3313/categories/2933855",
@@ -36197,7 +36212,7 @@
       "name": "Yonatan Yakov Sade",
       "team": "Nxtgen Jiu-Jitsu",
       "bracket": "Blue / Juvenile 1 / Male / Open Class Heavy",
-      "time": "04:51 PM",
+      "time": "04:42 PM",
       "mat": "9",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3313/categories/2933855",
@@ -36212,7 +36227,7 @@
       "name": "Ziv Shoua",
       "team": "Soul Fighter's Israel",
       "bracket": "Blue / Juvenile 1 / Male / Open Class Heavy",
-      "time": "04:44 PM",
+      "time": "04:35 PM",
       "mat": "9",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3313/categories/2933855",
@@ -36227,7 +36242,7 @@
       "name": "Oliver Daniel Duse",
       "team": "Viva Zapata Jiu-Jitsu",
       "bracket": "Blue / Juvenile 1 / Male / Open Class Heavy",
-      "time": "04:51 PM",
+      "time": "04:42 PM",
       "mat": "9",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3313/categories/2933855",
@@ -36242,13 +36257,13 @@
       "name": "Finn Brandhofer Lee",
       "team": "ZR Team Association",
       "bracket": "Blue / Juvenile 1 / Male / Open Class Heavy",
-      "time": "04:44 PM",
+      "time": "04:33 PM",
       "mat": "1",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3313/categories/2933855",
       "time_type": "listed fight",
       "result": "",
-      "fight_number": "69"
+      "fight_number": "67"
     },
     {
       "competition_id": "3313",
@@ -36257,7 +36272,7 @@
       "name": "Mathieu Giacomelli De Oliveira Rodrigues",
       "team": "ZR Team Association",
       "bracket": "Blue / Juvenile 1 / Male / Open Class Heavy",
-      "time": "05:12 PM",
+      "time": "05:03 PM",
       "mat": "9",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3313/categories/2933855",
@@ -41432,13 +41447,13 @@
       "name": "Emma Rosini",
       "team": "Academia Gorila",
       "bracket": "Purple / Adult / Female / Open Class",
-      "time": "04:42 PM",
+      "time": "05:00 PM",
       "mat": "6",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3313/categories/2933831",
       "time_type": "listed fight",
       "result": "",
-      "fight_number": "70"
+      "fight_number": "72"
     },
     {
       "competition_id": "3313",
@@ -41462,13 +41477,13 @@
       "name": "Ilorrany Prado Batista",
       "team": "Alliance",
       "bracket": "Purple / Adult / Female / Open Class",
-      "time": "04:28 PM",
+      "time": "04:51 PM",
       "mat": "7",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3313/categories/2933831",
       "time_type": "listed fight",
       "result": "",
-      "fight_number": "66"
+      "fight_number": "67"
     },
     {
       "competition_id": "3313",
@@ -41492,13 +41507,13 @@
       "name": "Mia Montesinos Perdomo",
       "team": "Atos JJ International",
       "bracket": "Purple / Adult / Female / Open Class",
-      "time": "04:24 PM",
+      "time": "04:35 PM",
       "mat": "6",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3313/categories/2933831",
       "time_type": "listed fight",
       "result": "",
-      "fight_number": "68"
+      "fight_number": "69"
     },
     {
       "competition_id": "3313",
@@ -41522,13 +41537,13 @@
       "name": "Katrin Schenk",
       "team": "BJJ Team Basel",
       "bracket": "Purple / Adult / Female / Open Class",
-      "time": "04:19 PM",
+      "time": "04:42 PM",
       "mat": "7",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3313/categories/2933831",
       "time_type": "listed fight",
       "result": "",
-      "fight_number": "65"
+      "fight_number": "66"
     },
     {
       "competition_id": "3313",
@@ -41537,13 +41552,13 @@
       "name": "Megan Jane Cook",
       "team": "CheckMat",
       "bracket": "Purple / Adult / Female / Open Class",
-      "time": "04:33 PM",
+      "time": "04:44 PM",
       "mat": "6",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3313/categories/2933831",
       "time_type": "listed fight",
       "result": "",
-      "fight_number": "69"
+      "fight_number": "70"
     },
     {
       "competition_id": "3313",
@@ -41567,13 +41582,13 @@
       "name": "Zelda-Rose S. J. F. Barbé",
       "team": "Le Cube BJJ",
       "bracket": "Purple / Adult / Female / Open Class",
-      "time": "04:19 PM",
+      "time": "04:42 PM",
       "mat": "7",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3313/categories/2933831",
       "time_type": "listed fight",
       "result": "",
-      "fight_number": "65"
+      "fight_number": "66"
     },
     {
       "competition_id": "3313",
@@ -41582,13 +41597,28 @@
       "name": "Isabella Machado da Silva",
       "team": "Lotus Club",
       "bracket": "Purple / Adult / Female / Open Class",
-      "time": "04:15 PM",
+      "time": "04:16 PM",
+      "mat": "6",
+      "day": "Sun",
+      "bracket_url": "https://www.bjjcompsystem.com/tournaments/3313/categories/2933831",
+      "time_type": "listed fight",
+      "result": "WIN",
+      "fight_number": "67"
+    },
+    {
+      "competition_id": "3313",
+      "competition_name": "European IBJJF Jiu-Jitsu No-Gi Championship 2026",
+      "date": "",
+      "name": "Isabella Machado da Silva",
+      "team": "Lotus Club",
+      "bracket": "Purple / Adult / Female / Open Class",
+      "time": "05:16 PM",
       "mat": "6",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3313/categories/2933831",
       "time_type": "listed fight",
       "result": "",
-      "fight_number": "67"
+      "fight_number": "74"
     },
     {
       "competition_id": "3313",
@@ -41657,7 +41687,7 @@
       "name": "Francesca Recchi",
       "team": "Milano Jiu-Jitsu - L'Accademia",
       "bracket": "Purple / Adult / Female / Open Class",
-      "time": "05:09 PM",
+      "time": "05:25 PM",
       "mat": "7",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3313/categories/2933831",
@@ -41717,13 +41747,13 @@
       "name": "Fernanda Ribeiro",
       "team": "Sampa BJJ International",
       "bracket": "Purple / Adult / Female / Open Class",
-      "time": "04:37 PM",
+      "time": "05:00 PM",
       "mat": "7",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3313/categories/2933831",
       "time_type": "listed fight",
       "result": "",
-      "fight_number": "67"
+      "fight_number": "68"
     },
     {
       "competition_id": "3313",
@@ -41747,12 +41777,12 @@
       "name": "Reetta Susanna Knuuttila",
       "team": "Sigma Jiu-Jitsu",
       "bracket": "Purple / Adult / Female / Open Class",
-      "time": "04:15 PM",
+      "time": "04:16 PM",
       "mat": "6",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3313/categories/2933831",
       "time_type": "listed fight",
-      "result": "",
+      "result": "LOSS",
       "fight_number": "67"
     },
     {
@@ -41777,13 +41807,28 @@
       "name": "Venla Katariina Tuominen",
       "team": "Sigma Jiu-Jitsu",
       "bracket": "Purple / Adult / Female / Open Class",
-      "time": "04:10 PM",
+      "time": "04:27 PM",
+      "mat": "7",
+      "day": "Sun",
+      "bracket_url": "https://www.bjjcompsystem.com/tournaments/3313/categories/2933831",
+      "time_type": "listed fight",
+      "result": "WIN",
+      "fight_number": "64"
+    },
+    {
+      "competition_id": "3313",
+      "competition_name": "European IBJJF Jiu-Jitsu No-Gi Championship 2026",
+      "date": "",
+      "name": "Venla Katariina Tuominen",
+      "team": "Sigma Jiu-Jitsu",
+      "bracket": "Purple / Adult / Female / Open Class",
+      "time": "05:25 PM",
       "mat": "7",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3313/categories/2933831",
       "time_type": "listed fight",
       "result": "",
-      "fight_number": "64"
+      "fight_number": "71"
     },
     {
       "competition_id": "3313",
@@ -41807,13 +41852,13 @@
       "name": "Martina Omeila F. Zellino",
       "team": "Stance",
       "bracket": "Purple / Adult / Female / Open Class",
-      "time": "04:28 PM",
+      "time": "04:51 PM",
       "mat": "7",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3313/categories/2933831",
       "time_type": "listed fight",
       "result": "",
-      "fight_number": "66"
+      "fight_number": "67"
     },
     {
       "competition_id": "3313",
@@ -41882,13 +41927,13 @@
       "name": "Holly Emily Jackson",
       "team": "Stealth BJJ",
       "bracket": "Purple / Adult / Female / Open Class",
-      "time": "04:24 PM",
+      "time": "04:35 PM",
       "mat": "6",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3313/categories/2933831",
       "time_type": "listed fight",
       "result": "",
-      "fight_number": "68"
+      "fight_number": "69"
     },
     {
       "competition_id": "3313",
@@ -41897,12 +41942,12 @@
       "name": "Grazielly Carla da Silva",
       "team": "The Brothers BJJ Brasil",
       "bracket": "Purple / Adult / Female / Open Class",
-      "time": "04:10 PM",
+      "time": "04:27 PM",
       "mat": "7",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3313/categories/2933831",
       "time_type": "listed fight",
-      "result": "",
+      "result": "LOSS",
       "fight_number": "64"
     },
     {
@@ -41942,13 +41987,13 @@
       "name": "Rael Kalda",
       "team": "Zurich BJJ Lab",
       "bracket": "Purple / Adult / Female / Open Class",
-      "time": "04:33 PM",
+      "time": "04:44 PM",
       "mat": "6",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3313/categories/2933831",
       "time_type": "listed fight",
       "result": "",
-      "fight_number": "69"
+      "fight_number": "70"
     },
     {
       "competition_id": "3313",
@@ -47417,7 +47462,7 @@
       "name": "Pawel Kacper Jaworski",
       "team": "Academia Gorila",
       "bracket": "Black / Adult / Male / Open Class",
-      "time": "05:22 PM",
+      "time": "05:25 PM",
       "mat": "4",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3313/categories/2933790",
@@ -47642,7 +47687,7 @@
       "name": "Marcelo Fausto de Abreu Montanagna",
       "team": "CheckMat",
       "bracket": "Black / Adult / Male / Open Class",
-      "time": "05:22 PM",
+      "time": "05:25 PM",
       "mat": "4",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3313/categories/2933790",
@@ -49082,7 +49127,7 @@
       "name": "Andrzej Iwat",
       "team": "Academia Gorila",
       "bracket": "Black / Adult / Male / Super Heavy (97.50kg)",
-      "time": "04:46 PM",
+      "time": "04:49 PM",
       "mat": "4",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3313/categories/2933277",
@@ -49127,7 +49172,7 @@
       "name": "Jean Luca Maltese",
       "team": "Alliance",
       "bracket": "Black / Adult / Male / Super Heavy (97.50kg)",
-      "time": "04:46 PM",
+      "time": "04:49 PM",
       "mat": "4",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3313/categories/2933277",
@@ -49487,7 +49532,7 @@
       "name": "Martyna Kapuscinska",
       "team": "Academia Gorila",
       "bracket": "Black / Adult / Female / Open Class",
-      "time": "05:10 PM",
+      "time": "05:13 PM",
       "mat": "4",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3313/categories/2933791",
@@ -49892,7 +49937,7 @@
       "name": "Injana Greta Goodman",
       "team": "Grapple Collective",
       "bracket": "Black / Adult / Female / Open Class",
-      "time": "05:10 PM",
+      "time": "05:13 PM",
       "mat": "4",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3313/categories/2933791",
@@ -58367,13 +58412,13 @@
       "name": "Panagiota Vikatou",
       "team": "Adamas Jiu-Jitsu",
       "bracket": "Blue / Juvenile 1 / Female / Open Class Light",
-      "time": "04:29 PM",
+      "time": "04:49 PM",
       "mat": "8",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3313/categories/2933862",
       "time_type": "listed fight",
       "result": "",
-      "fight_number": "68"
+      "fight_number": "71"
     },
     {
       "competition_id": "3313",
@@ -58382,13 +58427,13 @@
       "name": "Denise Zanin",
       "team": "Batatinha Team Italia",
       "bracket": "Blue / Juvenile 1 / Female / Open Class Light",
-      "time": "04:29 PM",
+      "time": "04:49 PM",
       "mat": "8",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3313/categories/2933862",
       "time_type": "listed fight",
       "result": "",
-      "fight_number": "68"
+      "fight_number": "71"
     },
     {
       "competition_id": "3313",
@@ -58397,13 +58442,13 @@
       "name": "Ella Jane Dorkin",
       "team": "CFS BJJ",
       "bracket": "Blue / Juvenile 1 / Female / Open Class Light",
-      "time": "04:36 PM",
+      "time": "04:27 PM",
       "mat": "8",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3313/categories/2933862",
       "time_type": "listed fight",
-      "result": "",
-      "fight_number": "69"
+      "result": "LOSS",
+      "fight_number": "68"
     },
     {
       "competition_id": "3313",
@@ -58412,13 +58457,13 @@
       "name": "Madison Ann Butler",
       "team": "CFS BJJ",
       "bracket": "Blue / Juvenile 1 / Female / Open Class Light",
-      "time": "04:43 PM",
+      "time": "04:56 PM",
       "mat": "8",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3313/categories/2933862",
       "time_type": "listed fight",
       "result": "",
-      "fight_number": "70"
+      "fight_number": "72"
     },
     {
       "competition_id": "3313",
@@ -58427,13 +58472,28 @@
       "name": "Maelinn Baptiste V M Guhel",
       "team": "De La Riva Nantes",
       "bracket": "Blue / Juvenile 1 / Female / Open Class Light",
-      "time": "04:36 PM",
+      "time": "04:27 PM",
+      "mat": "8",
+      "day": "Sun",
+      "bracket_url": "https://www.bjjcompsystem.com/tournaments/3313/categories/2933862",
+      "time_type": "listed fight",
+      "result": "WIN",
+      "fight_number": "68"
+    },
+    {
+      "competition_id": "3313",
+      "competition_name": "European IBJJF Jiu-Jitsu No-Gi Championship 2026",
+      "date": "",
+      "name": "Maelinn Baptiste V M Guhel",
+      "team": "De La Riva Nantes",
+      "bracket": "Blue / Juvenile 1 / Female / Open Class Light",
+      "time": "05:03 PM",
       "mat": "8",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3313/categories/2933862",
       "time_type": "listed fight",
       "result": "",
-      "fight_number": "69"
+      "fight_number": "73"
     },
     {
       "competition_id": "3313",
@@ -58442,13 +58502,13 @@
       "name": "Bianca dos Santos Ribeiro",
       "team": "Gracie Barra",
       "bracket": "Blue / Juvenile 1 / Female / Open Class Light",
-      "time": "04:43 PM",
+      "time": "04:56 PM",
       "mat": "8",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3313/categories/2933862",
       "time_type": "listed fight",
       "result": "",
-      "fight_number": "70"
+      "fight_number": "72"
     },
     {
       "competition_id": "3313",
@@ -58457,7 +58517,7 @@
       "name": "Daniela Cañellas Bausan",
       "team": "Vila Seca BL Jiu-Jitsu",
       "bracket": "Blue / Juvenile 1 / Female / Open Class Light",
-      "time": "05:11 PM",
+      "time": "05:10 PM",
       "mat": "8",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3313/categories/2933862",
@@ -63407,12 +63467,12 @@
       "name": "Andzelika Magdalena Glapiak",
       "team": "De Souza Dojo",
       "bracket": "Black / Master 4 / Female / Open Class",
-      "time": "04:16 PM",
+      "time": "04:19 PM",
       "mat": "2",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3313/categories/2933802",
       "time_type": "listed fight",
-      "result": "",
+      "result": "LOSS",
       "fight_number": "64"
     },
     {
@@ -63437,13 +63497,13 @@
       "name": "Andrea Francisca Bermejo",
       "team": "Legacy Jiu-Jitsu - Team Alberto Crane",
       "bracket": "Black / Master 4 / Female / Open Class",
-      "time": "04:30 PM",
+      "time": "04:42 PM",
       "mat": "2",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3313/categories/2933802",
       "time_type": "listed fight",
       "result": "",
-      "fight_number": "66"
+      "fight_number": "67"
     },
     {
       "competition_id": "3313",
@@ -63452,13 +63512,28 @@
       "name": "Piia Tellervo Iivonen",
       "team": "SJJA Jiu-Jitsu Academy",
       "bracket": "Black / Master 4 / Female / Open Class",
-      "time": "04:16 PM",
+      "time": "04:19 PM",
+      "mat": "2",
+      "day": "Sun",
+      "bracket_url": "https://www.bjjcompsystem.com/tournaments/3313/categories/2933802",
+      "time_type": "listed fight",
+      "result": "WIN",
+      "fight_number": "64"
+    },
+    {
+      "competition_id": "3313",
+      "competition_name": "European IBJJF Jiu-Jitsu No-Gi Championship 2026",
+      "date": "",
+      "name": "Piia Tellervo Iivonen",
+      "team": "SJJA Jiu-Jitsu Academy",
+      "bracket": "Black / Master 4 / Female / Open Class",
+      "time": "04:42 PM",
       "mat": "2",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3313/categories/2933802",
       "time_type": "listed fight",
       "result": "",
-      "fight_number": "64"
+      "fight_number": "67"
     },
     {
       "competition_id": "3313",
@@ -65237,12 +65312,12 @@
       "name": "John William Kelly",
       "team": "John Kelly Brazilian Jiu-Jitsu Ireland",
       "bracket": "Black / Master 6 / Male / Middle (79.50kg)",
-      "time": "04:23 PM",
+      "time": "04:26 PM",
       "mat": "1",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3313/categories/2933673",
       "time_type": "listed fight",
-      "result": "",
+      "result": "LOSS",
       "fight_number": "66"
     },
     {
@@ -65342,12 +65417,12 @@
       "name": "Mark Douglas Rogers",
       "team": "Rodrigo Vaghi BJJ",
       "bracket": "Black / Master 6 / Male / Middle (79.50kg)",
-      "time": "04:23 PM",
+      "time": "04:26 PM",
       "mat": "1",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3313/categories/2933673",
       "time_type": "listed fight",
-      "result": "",
+      "result": "WIN",
       "fight_number": "66"
     },
     {
@@ -75092,12 +75167,12 @@
       "name": "Yehuda Ben Shoshan",
       "team": "Alliance",
       "bracket": "Black / Master 7 / Male / Light (73.50kg)",
-      "time": "04:16 PM",
+      "time": "04:17 PM",
       "mat": "1",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3313/categories/2933737",
       "time_type": "listed fight",
-      "result": "",
+      "result": "LOSS",
       "fight_number": "65"
     },
     {
@@ -75122,13 +75197,28 @@
       "name": "Luigi Mazzetti di Pietralata",
       "team": "CheckMat",
       "bracket": "Black / Master 7 / Male / Light (73.50kg)",
-      "time": "04:16 PM",
+      "time": "04:17 PM",
+      "mat": "1",
+      "day": "Sun",
+      "bracket_url": "https://www.bjjcompsystem.com/tournaments/3313/categories/2933737",
+      "time_type": "listed fight",
+      "result": "WIN",
+      "fight_number": "65"
+    },
+    {
+      "competition_id": "3313",
+      "competition_name": "European IBJJF Jiu-Jitsu No-Gi Championship 2026",
+      "date": "",
+      "name": "Luigi Mazzetti di Pietralata",
+      "team": "CheckMat",
+      "bracket": "Black / Master 7 / Male / Light (73.50kg)",
+      "time": "04:39 PM",
       "mat": "1",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3313/categories/2933737",
       "time_type": "listed fight",
       "result": "",
-      "fight_number": "65"
+      "fight_number": "68"
     },
     {
       "competition_id": "3313",
@@ -75152,13 +75242,13 @@
       "name": "Richard Jan Byrne",
       "team": "Unity Jiu-jitsu",
       "bracket": "Black / Master 7 / Male / Light (73.50kg)",
-      "time": "04:30 PM",
+      "time": "04:39 PM",
       "mat": "1",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3313/categories/2933737",
       "time_type": "listed fight",
       "result": "",
-      "fight_number": "67"
+      "fight_number": "68"
     },
     {
       "competition_id": "3313",
@@ -83417,13 +83507,13 @@
       "name": "Gabriel Riccioppo Asenjo",
       "team": "Asenjo Brazilian Jiu-Jitsu",
       "bracket": "Blue / Juvenile 1 / Male / Open Class Light",
-      "time": "04:50 PM",
+      "time": "04:33 PM",
       "mat": "8",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3313/categories/2933854",
       "time_type": "listed fight",
       "result": "",
-      "fight_number": "71"
+      "fight_number": "69"
     },
     {
       "competition_id": "3313",
@@ -83447,13 +83537,28 @@
       "name": "Matheus Klem Ramos Rosa",
       "team": "Forged Jiu-Jitsu",
       "bracket": "Blue / Juvenile 1 / Male / Open Class Light",
-      "time": "04:22 PM",
+      "time": "04:21 PM",
+      "mat": "8",
+      "day": "Sun",
+      "bracket_url": "https://www.bjjcompsystem.com/tournaments/3313/categories/2933854",
+      "time_type": "listed fight",
+      "result": "WIN",
+      "fight_number": "67"
+    },
+    {
+      "competition_id": "3313",
+      "competition_name": "European IBJJF Jiu-Jitsu No-Gi Championship 2026",
+      "date": "",
+      "name": "Matheus Klem Ramos Rosa",
+      "team": "Forged Jiu-Jitsu",
+      "bracket": "Blue / Juvenile 1 / Male / Open Class Light",
+      "time": "04:33 PM",
       "mat": "8",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3313/categories/2933854",
       "time_type": "listed fight",
       "result": "",
-      "fight_number": "67"
+      "fight_number": "69"
     },
     {
       "competition_id": "3313",
@@ -83462,13 +83567,13 @@
       "name": "Ismael Zarab",
       "team": "Sentinel Jiu-Jitsu",
       "bracket": "Blue / Juvenile 1 / Male / Open Class Light",
-      "time": "04:57 PM",
+      "time": "04:42 PM",
       "mat": "8",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3313/categories/2933854",
       "time_type": "listed fight",
       "result": "",
-      "fight_number": "72"
+      "fight_number": "70"
     },
     {
       "competition_id": "3313",
@@ -83492,12 +83597,12 @@
       "name": "Hamilton Tom Fabregat",
       "team": "UNIK",
       "bracket": "Blue / Juvenile 1 / Male / Open Class Light",
-      "time": "04:22 PM",
+      "time": "04:21 PM",
       "mat": "8",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3313/categories/2933854",
       "time_type": "listed fight",
-      "result": "",
+      "result": "LOSS",
       "fight_number": "67"
     },
     {
@@ -83507,13 +83612,13 @@
       "name": "Jamie Michael Byrne",
       "team": "Éire Beyond Jiu-Jitsu",
       "bracket": "Blue / Juvenile 1 / Male / Open Class Light",
-      "time": "04:57 PM",
+      "time": "04:42 PM",
       "mat": "8",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3313/categories/2933854",
       "time_type": "listed fight",
       "result": "",
-      "fight_number": "72"
+      "fight_number": "70"
     },
     {
       "competition_id": "3313",
@@ -85427,13 +85532,13 @@
       "name": "Samuel Corey M Phelps",
       "team": "BETA Academy",
       "bracket": "Black / Master 3 / Male / Open Class",
-      "time": "04:30 PM",
+      "time": "04:23 PM",
       "mat": "3",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3313/categories/2933794",
       "time_type": "listed fight",
-      "result": "",
-      "fight_number": "67"
+      "result": "LOSS",
+      "fight_number": "66"
     },
     {
       "competition_id": "3313",
@@ -85457,13 +85562,28 @@
       "name": "Jakub Jerzy Witkowski",
       "team": "Brasa CTA",
       "bracket": "Black / Master 3 / Male / Open Class",
-      "time": "04:30 PM",
+      "time": "04:23 PM",
+      "mat": "3",
+      "day": "Sun",
+      "bracket_url": "https://www.bjjcompsystem.com/tournaments/3313/categories/2933794",
+      "time_type": "listed fight",
+      "result": "WIN",
+      "fight_number": "66"
+    },
+    {
+      "competition_id": "3313",
+      "competition_name": "European IBJJF Jiu-Jitsu No-Gi Championship 2026",
+      "date": "",
+      "name": "Jakub Jerzy Witkowski",
+      "team": "Brasa CTA",
+      "bracket": "Black / Master 3 / Male / Open Class",
+      "time": "05:05 PM",
       "mat": "3",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3313/categories/2933794",
       "time_type": "listed fight",
       "result": "",
-      "fight_number": "67"
+      "fight_number": "72"
     },
     {
       "competition_id": "3313",
@@ -85487,13 +85607,13 @@
       "name": "Jose Alberto Ramos Ferreira Filho",
       "team": "De La Riva Nantes",
       "bracket": "Black / Master 3 / Male / Open Class",
-      "time": "04:37 PM",
+      "time": "04:44 PM",
       "mat": "3",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3313/categories/2933794",
       "time_type": "listed fight",
       "result": "",
-      "fight_number": "68"
+      "fight_number": "69"
     },
     {
       "competition_id": "3313",
@@ -85517,13 +85637,13 @@
       "name": "Samuel Claude J. Petite",
       "team": "District Training Zone",
       "bracket": "Black / Master 3 / Male / Open Class",
-      "time": "04:23 PM",
+      "time": "04:37 PM",
       "mat": "3",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3313/categories/2933794",
       "time_type": "listed fight",
       "result": "",
-      "fight_number": "66"
+      "fight_number": "68"
     },
     {
       "competition_id": "3313",
@@ -85547,13 +85667,13 @@
       "name": "Tiago Rodrigues Coelho",
       "team": "GF Team",
       "bracket": "Black / Master 3 / Male / Open Class",
-      "time": "04:51 PM",
+      "time": "04:30 PM",
       "mat": "3",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3313/categories/2933794",
       "time_type": "listed fight",
       "result": "",
-      "fight_number": "70"
+      "fight_number": "67"
     },
     {
       "competition_id": "3313",
@@ -85562,13 +85682,13 @@
       "name": "Marcin Piotr Klonowski",
       "team": "Industry Academy",
       "bracket": "Black / Master 3 / Male / Open Class",
-      "time": "04:23 PM",
+      "time": "04:37 PM",
       "mat": "3",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3313/categories/2933794",
       "time_type": "listed fight",
       "result": "",
-      "fight_number": "66"
+      "fight_number": "68"
     },
     {
       "competition_id": "3313",
@@ -85577,13 +85697,13 @@
       "name": "Daniel Nakamura Silva",
       "team": "Jiu-Jitsu Methods",
       "bracket": "Black / Master 3 / Male / Open Class",
-      "time": "04:37 PM",
+      "time": "04:44 PM",
       "mat": "3",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3313/categories/2933794",
       "time_type": "listed fight",
       "result": "",
-      "fight_number": "68"
+      "fight_number": "69"
     },
     {
       "competition_id": "3313",
@@ -85607,13 +85727,13 @@
       "name": "Yury Pashkovich",
       "team": "Mathias Ribeiro Team",
       "bracket": "Black / Master 3 / Male / Open Class",
-      "time": "04:44 PM",
+      "time": "04:51 PM",
       "mat": "3",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3313/categories/2933794",
       "time_type": "listed fight",
       "result": "",
-      "fight_number": "69"
+      "fight_number": "70"
     },
     {
       "competition_id": "3313",
@@ -85637,13 +85757,13 @@
       "name": "Frederic John Greenall",
       "team": "Scramble Academy Leeds",
       "bracket": "Black / Master 3 / Male / Open Class",
-      "time": "04:51 PM",
+      "time": "04:30 PM",
       "mat": "3",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3313/categories/2933794",
       "time_type": "listed fight",
       "result": "",
-      "fight_number": "70"
+      "fight_number": "67"
     },
     {
       "competition_id": "3313",
@@ -87219,6 +87339,51 @@
       "time_type": "listed fight",
       "result": "LOSS",
       "fight_number": "53"
+    },
+    {
+      "competition_id": "3313",
+      "competition_name": "European IBJJF Jiu-Jitsu No-Gi Championship 2026",
+      "date": "",
+      "name": "Marianna Siquenique Cravinho",
+      "team": "Blvckout Grappling HQ",
+      "bracket": "Blue / Juvenile 2 / Female / Open Class Light",
+      "time": "04:53 PM",
+      "mat": "6",
+      "day": "Sun",
+      "bracket_url": "https://www.bjjcompsystem.com/tournaments/3313/categories/2933866",
+      "time_type": "listed fight",
+      "result": "",
+      "fight_number": "71"
+    },
+    {
+      "competition_id": "3313",
+      "competition_name": "European IBJJF Jiu-Jitsu No-Gi Championship 2026",
+      "date": "",
+      "name": "Jessica Ria Nelson",
+      "team": "CheckMat",
+      "bracket": "Blue / Juvenile 2 / Female / Open Class Light",
+      "time": "04:53 PM",
+      "mat": "6",
+      "day": "Sun",
+      "bracket_url": "https://www.bjjcompsystem.com/tournaments/3313/categories/2933866",
+      "time_type": "listed fight",
+      "result": "",
+      "fight_number": "71"
+    },
+    {
+      "competition_id": "3313",
+      "competition_name": "European IBJJF Jiu-Jitsu No-Gi Championship 2026",
+      "date": "",
+      "name": "Alice Pereira Nielsen",
+      "team": "Marcos Romario Academy",
+      "bracket": "Blue / Juvenile 2 / Female / Open Class Light",
+      "time": "05:09 PM",
+      "mat": "6",
+      "day": "Sun",
+      "bracket_url": "https://www.bjjcompsystem.com/tournaments/3313/categories/2933866",
+      "time_type": "listed fight",
+      "result": "",
+      "fight_number": "73"
     },
     {
       "competition_id": "3313",
@@ -89372,13 +89537,28 @@
       "name": "Nikol Todorova Korcheva",
       "team": "Brasa CTA",
       "bracket": "Blue / Juvenile 1 / Female / Open Class Heavy",
-      "time": "04:37 PM",
+      "time": "04:28 PM",
       "mat": "6",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3313/categories/2933863",
       "time_type": "listed fight",
+      "result": "WIN",
+      "fight_number": "68"
+    },
+    {
+      "competition_id": "3313",
+      "competition_name": "European IBJJF Jiu-Jitsu No-Gi Championship 2026",
+      "date": "",
+      "name": "Nikol Todorova Korcheva",
+      "team": "Brasa CTA",
+      "bracket": "Blue / Juvenile 1 / Female / Open Class Heavy",
+      "time": "05:50 PM",
+      "mat": "7",
+      "day": "Sun",
+      "bracket_url": "https://www.bjjcompsystem.com/tournaments/3313/categories/2933863",
+      "time_type": "listed fight",
       "result": "",
-      "fight_number": "70"
+      "fight_number": "74"
     },
     {
       "competition_id": "3313",
@@ -89387,7 +89567,7 @@
       "name": "Adrianna Marie Sciacca",
       "team": "Brazilian Top Team",
       "bracket": "Blue / Juvenile 1 / Female / Open Class Heavy",
-      "time": "04:53 PM",
+      "time": "05:09 PM",
       "mat": "7",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3313/categories/2933863",
@@ -89402,13 +89582,13 @@
       "name": "Neve Celeste Marshall",
       "team": "Cavalo Team Canada",
       "bracket": "Blue / Juvenile 1 / Female / Open Class Heavy",
-      "time": "04:46 PM",
+      "time": "04:34 PM",
       "mat": "7",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3313/categories/2933863",
       "time_type": "listed fight",
       "result": "",
-      "fight_number": "68"
+      "fight_number": "65"
     },
     {
       "competition_id": "3313",
@@ -89417,13 +89597,13 @@
       "name": "Rebecca St Croix Grady",
       "team": "Dillon Parabellum Jiu-Jitsu MMA Academy",
       "bracket": "Blue / Juvenile 1 / Female / Open Class Heavy",
-      "time": "04:37 PM",
+      "time": "04:28 PM",
       "mat": "6",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3313/categories/2933863",
       "time_type": "listed fight",
-      "result": "",
-      "fight_number": "70"
+      "result": "LOSS",
+      "fight_number": "68"
     },
     {
       "competition_id": "3313",
@@ -89447,7 +89627,7 @@
       "name": "Adolie Christelle Alice Ludet",
       "team": "Fight Team Toulon",
       "bracket": "Blue / Juvenile 1 / Female / Open Class Heavy",
-      "time": "04:53 PM",
+      "time": "05:09 PM",
       "mat": "7",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3313/categories/2933863",
@@ -89477,13 +89657,13 @@
       "name": "Ruby Clark",
       "team": "Icon Jiu-Jitsu Team",
       "bracket": "Blue / Juvenile 1 / Female / Open Class Heavy",
-      "time": "04:46 PM",
+      "time": "04:34 PM",
       "mat": "7",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3313/categories/2933863",
       "time_type": "listed fight",
       "result": "",
-      "fight_number": "68"
+      "fight_number": "65"
     },
     {
       "competition_id": "3313",
@@ -89657,7 +89837,7 @@
       "name": "Jack Gerald Carpenter",
       "team": "Brasa CTA",
       "bracket": "Blue / Juvenile 2 / Male / Open Class Light",
-      "time": "04:44 PM",
+      "time": "04:49 PM",
       "mat": "2",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3313/categories/2933858",
@@ -89672,7 +89852,7 @@
       "name": "Guy Torres",
       "team": "CheckMat",
       "bracket": "Blue / Juvenile 2 / Male / Open Class Light",
-      "time": "04:58 PM",
+      "time": "05:03 PM",
       "mat": "2",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3313/categories/2933858",
@@ -89687,7 +89867,7 @@
       "name": "Mathew Brunza",
       "team": "CheckMat BJJ",
       "bracket": "Blue / Juvenile 2 / Male / Open Class Light",
-      "time": "04:51 PM",
+      "time": "04:56 PM",
       "mat": "2",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3313/categories/2933858",
@@ -89702,7 +89882,7 @@
       "name": "Kauan Victor Menezes Lima",
       "team": "GF Team",
       "bracket": "Blue / Juvenile 2 / Male / Open Class Light",
-      "time": "04:44 PM",
+      "time": "04:49 PM",
       "mat": "2",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3313/categories/2933858",
@@ -89717,7 +89897,7 @@
       "name": "Tobias Robin Xavier",
       "team": "London Grapple - Ross Nicholls",
       "bracket": "Blue / Juvenile 2 / Male / Open Class Light",
-      "time": "04:51 PM",
+      "time": "04:56 PM",
       "mat": "2",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3313/categories/2933858",
@@ -89732,13 +89912,13 @@
       "name": "Tymur Tebidze",
       "team": "Munich MMA",
       "bracket": "Blue / Juvenile 2 / Male / Open Class Light",
-      "time": "04:37 PM",
+      "time": "04:34 PM",
       "mat": "2",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3313/categories/2933858",
       "time_type": "listed fight",
       "result": "",
-      "fight_number": "67"
+      "fight_number": "66"
     },
     {
       "competition_id": "3313",
@@ -89747,7 +89927,7 @@
       "name": "Dillan James Berrie",
       "team": "Stealth BJJ",
       "bracket": "Blue / Juvenile 2 / Male / Open Class Light",
-      "time": "04:58 PM",
+      "time": "05:03 PM",
       "mat": "2",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3313/categories/2933858",
@@ -89762,13 +89942,13 @@
       "name": "Souheil Tayach",
       "team": "UNIK",
       "bracket": "Blue / Juvenile 2 / Male / Open Class Light",
-      "time": "04:37 PM",
+      "time": "04:34 PM",
       "mat": "2",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3313/categories/2933858",
       "time_type": "listed fight",
       "result": "",
-      "fight_number": "67"
+      "fight_number": "66"
     },
     {
       "competition_id": "3313",
@@ -92987,7 +93167,7 @@
       "name": "Keith Darmanin",
       "team": "Brazilian Jiu-Jitsu Team Malta",
       "bracket": "Black / Master 4 / Male / Open Class",
-      "time": "05:19 PM",
+      "time": "05:10 PM",
       "mat": "9",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3313/categories/2933795",
@@ -93017,7 +93197,7 @@
       "name": "Vasile-Mircea Cublesan",
       "team": "Brazilian Power Team International",
       "bracket": "Black / Master 4 / Male / Open Class",
-      "time": "05:53 PM",
+      "time": "05:52 PM",
       "mat": "8",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3313/categories/2933795",
@@ -93047,7 +93227,7 @@
       "name": "Kornel Piotr Zapadka",
       "team": "De La Riva International",
       "bracket": "Black / Master 4 / Male / Open Class",
-      "time": "05:25 PM",
+      "time": "05:24 PM",
       "mat": "8",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3313/categories/2933795",
@@ -93062,7 +93242,7 @@
       "name": "Marcio Celio Lima de Oliveira",
       "team": "Gracie Barra",
       "bracket": "Black / Master 4 / Male / Open Class",
-      "time": "05:46 PM",
+      "time": "05:45 PM",
       "mat": "8",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3313/categories/2933795",
@@ -93092,13 +93272,28 @@
       "name": "Rodrigo Viscaino Gorgolini",
       "team": "Gracie Barra",
       "bracket": "Black / Master 4 / Male / Open Class",
-      "time": "04:58 PM",
+      "time": "04:32 PM",
+      "mat": "9",
+      "day": "Sun",
+      "bracket_url": "https://www.bjjcompsystem.com/tournaments/3313/categories/2933795",
+      "time_type": "listed fight",
+      "result": "WIN",
+      "fight_number": "69"
+    },
+    {
+      "competition_id": "3313",
+      "competition_name": "European IBJJF Jiu-Jitsu No-Gi Championship 2026",
+      "date": "",
+      "name": "Rodrigo Viscaino Gorgolini",
+      "team": "Gracie Barra",
+      "bracket": "Black / Master 4 / Male / Open Class",
+      "time": "05:17 PM",
       "mat": "9",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3313/categories/2933795",
       "time_type": "listed fight",
       "result": "",
-      "fight_number": "72"
+      "fight_number": "76"
     },
     {
       "competition_id": "3313",
@@ -93107,7 +93302,7 @@
       "name": "Luke Robert Harris",
       "team": "Hayabusa Jiu-Jitsu",
       "bracket": "Black / Master 4 / Male / Open Class",
-      "time": "05:26 PM",
+      "time": "05:17 PM",
       "mat": "9",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3313/categories/2933795",
@@ -93137,7 +93332,7 @@
       "name": "Dierley de Almeida Rodrigues",
       "team": "Nova União",
       "bracket": "Black / Master 4 / Male / Open Class",
-      "time": "05:25 PM",
+      "time": "05:24 PM",
       "mat": "8",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3313/categories/2933795",
@@ -93152,7 +93347,7 @@
       "name": "Garath Gerard Vaughan",
       "team": "SBG Ireland",
       "bracket": "Black / Master 4 / Male / Open Class",
-      "time": "05:18 PM",
+      "time": "05:17 PM",
       "mat": "8",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3313/categories/2933795",
@@ -93167,7 +93362,7 @@
       "name": "Yavuz Bozkurt Ögüt",
       "team": "VFL Wolfsburg e.V. BJJ",
       "bracket": "Black / Master 4 / Male / Open Class",
-      "time": "05:19 PM",
+      "time": "05:10 PM",
       "mat": "9",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3313/categories/2933795",
@@ -93197,7 +93392,7 @@
       "name": "Krzysztof Tomasz Lukaszewicz",
       "team": "ZR Team Association",
       "bracket": "Black / Master 4 / Male / Open Class",
-      "time": "05:18 PM",
+      "time": "05:17 PM",
       "mat": "8",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3313/categories/2933795",
@@ -93212,13 +93407,13 @@
       "name": "Carlos Eduardo de Azevedo",
       "team": "Âmbar Peposo Team/Espanha",
       "bracket": "Black / Master 4 / Male / Open Class",
-      "time": "04:58 PM",
+      "time": "04:32 PM",
       "mat": "9",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3313/categories/2933795",
       "time_type": "listed fight",
-      "result": "",
-      "fight_number": "72"
+      "result": "LOSS",
+      "fight_number": "69"
     },
     {
       "competition_id": "3313",
@@ -93857,12 +94052,12 @@
       "name": "Maria Dolores Asensi Gonzalez",
       "team": "Climent club",
       "bracket": "Black / Master 3 / Female / Open Class",
-      "time": "04:16 PM",
+      "time": "04:17 PM",
       "mat": "3",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3313/categories/2933801",
       "time_type": "listed fight",
-      "result": "",
+      "result": "LOSS",
       "fight_number": "65"
     },
     {
@@ -93887,12 +94082,12 @@
       "name": "Rita Tana",
       "team": "Rensen Shaka - Matside Jiu-Jitsu",
       "bracket": "Black / Master 3 / Female / Open Class",
-      "time": "04:16 PM",
+      "time": "04:17 PM",
       "mat": "3",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3313/categories/2933801",
       "time_type": "listed fight",
-      "result": "",
+      "result": "WIN",
       "fight_number": "65"
     },
     {
@@ -94472,12 +94667,12 @@
       "name": "Amos Keshet",
       "team": "Brigadeiro BJJ - UK",
       "bracket": "Black / Master 7 / Male / Ultra Heavy",
-      "time": "04:16 PM",
+      "time": "04:17 PM",
       "mat": "9",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3313/categories/2933757",
       "time_type": "listed fight",
-      "result": "",
+      "result": "LOSS",
       "fight_number": "66"
     },
     {
@@ -94487,12 +94682,12 @@
       "name": "James Patrick McSherry",
       "team": "R1NG BJJ",
       "bracket": "Black / Master 7 / Male / Ultra Heavy",
-      "time": "04:16 PM",
+      "time": "04:17 PM",
       "mat": "9",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3313/categories/2933757",
       "time_type": "listed fight",
-      "result": "",
+      "result": "WIN",
       "fight_number": "66"
     },
     {
@@ -95107,7 +95302,7 @@
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3313/categories/2933677",
       "time_type": "listed fight",
-      "result": "",
+      "result": "WIN",
       "fight_number": "66"
     },
     {
@@ -95167,7 +95362,7 @@
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3313/categories/2933677",
       "time_type": "listed fight",
-      "result": "",
+      "result": "LOSS",
       "fight_number": "66"
     },
     {
@@ -97667,12 +97862,12 @@
       "name": "Simon Barry Kenny",
       "team": "Straight Blast Gym UK",
       "bracket": "Black / Master 6 / Male / Light (73.50kg)",
-      "time": "04:27 PM",
+      "time": "04:28 PM",
       "mat": "9",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3313/categories/2933669",
       "time_type": "listed fight",
-      "result": "",
+      "result": "WIN",
       "fight_number": "67"
     },
     {
@@ -97697,12 +97892,12 @@
       "name": "Baurzhan Urosaev",
       "team": "ZR Team Association",
       "bracket": "Black / Master 6 / Male / Light (73.50kg)",
-      "time": "04:27 PM",
+      "time": "04:28 PM",
       "mat": "9",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3313/categories/2933669",
       "time_type": "listed fight",
-      "result": "",
+      "result": "LOSS",
       "fight_number": "67"
     },
     {
@@ -107372,13 +107567,13 @@
       "name": "Theos Mixalis McEvatt",
       "team": "Gracie Barra",
       "bracket": "Purple / Juvenile 2 / Male / Open Class Light",
-      "time": "04:51 PM",
+      "time": "04:49 PM",
       "mat": "1",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3313/categories/2933860",
       "time_type": "listed fight",
       "result": "",
-      "fight_number": "70"
+      "fight_number": "69"
     },
     {
       "competition_id": "3313",
@@ -107387,13 +107582,13 @@
       "name": "Wellington Maycon B. L. da Silva",
       "team": "South Zone Team - SZT",
       "bracket": "Purple / Juvenile 2 / Male / Open Class Light",
-      "time": "04:51 PM",
+      "time": "04:49 PM",
       "mat": "1",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3313/categories/2933860",
       "time_type": "listed fight",
       "result": "",
-      "fight_number": "70"
+      "fight_number": "69"
     },
     {
       "competition_id": "3313",
@@ -107432,13 +107627,13 @@
       "name": "Thelmo Jose Calmon Naranjo",
       "team": "Gracie Barra",
       "bracket": "Black / Master 6 / Male / Feather (67.50kg)",
-      "time": "04:34 PM",
+      "time": "04:54 PM",
       "mat": "9",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3313/categories/2933665",
       "time_type": "listed fight",
       "result": "",
-      "fight_number": "68"
+      "fight_number": "73"
     },
     {
       "competition_id": "3313",
@@ -107447,13 +107642,13 @@
       "name": "Pavel Junior Rojo Saavedra",
       "team": "Team Gil Catarino",
       "bracket": "Black / Master 6 / Male / Feather (67.50kg)",
-      "time": "04:34 PM",
+      "time": "04:54 PM",
       "mat": "9",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3313/categories/2933665",
       "time_type": "listed fight",
       "result": "",
-      "fight_number": "68"
+      "fight_number": "73"
     },
     {
       "competition_id": "3313",
