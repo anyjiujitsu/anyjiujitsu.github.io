@@ -364,14 +364,21 @@ BRACKET_15_EDGES = {
 
 
 def _bracket_match_position(block):
-    """Identify the actual card position without mistaking it for fight #."""
-    # BJJCompSystem places match-N on .tournament-category__match-card,
-    # not on the nested competitor/card detail elements.
-    card = block.select_one('.tournament-category__match-card')
-    if card is None:
-        return None
-    for cls in card.get('class', []):
-        match = re.fullmatch(r'match-(\d+)', cls)
+    """Read a provider position when it really exists, never a FIGHT number.
+
+    BJJCompSystem has served at least two match-card structures: the
+    tournament-category__match wrapper can itself carry match-N, or a child
+    can carry it. Older pages have only match-card and no position class at
+    all; those must not be silently mistaken for positioned cards.
+    """
+    candidates = [block]
+    candidates.extend(block.select('.tournament-category__match-card, .match-card'))
+    for node in candidates:
+        for cls in node.get('class', []):
+            match = re.fullmatch(r'match-(\d+)', cls)
+            if match:
+                return int(match.group(1))
+        match = re.fullmatch(r'match-(\d+)', node.get('id', ''))
         if match:
             return int(match.group(1))
     return None
@@ -566,6 +573,128 @@ def infer_advancement_from_bracket_positions(records):
     return records
 
 
+def _is_terminal_final_card(fight, block):
+    """Identify an actual published final, never simply a high fight number."""
+    if fight.get('number') or fight.get('time') or fight.get('mat'):
+        return False
+    header = block.select_one(
+        '.tournament-category__match-header, .tournament-category_match-header, '
+        '.bracket-match-header, .bracket-title')
+    heading = clean(header.get_text(' ', strip=True)) if header else ''
+    if re.search(r'\bFINAL\b', heading, re.I):
+        return True
+    # A dedicated finals container may title its entire group, rather than
+    # printing a header on each of its cards.
+    node = block
+    for _ in range(3):
+        node = getattr(node, 'parent', None)
+        if node is None or not hasattr(node, 'attrs'):
+            break
+        if any(re.search(r'(?:^|[-_])finals?(?:$|[-_])', cls, re.I)
+               for cls in node.get('class', [])):
+            return True
+        prev = node.find_previous_sibling()
+        if prev and re.fullmatch(r'\s*FINALS?\s*', prev.get_text(' ', strip=True), re.I):
+            return True
+    return False
+
+
+def infer_terminal_final_advancement(records):
+    """Recover verified semifinal->FINAL progress when position classes are absent.
+
+    The final must really be published AND contain a named athlete. To avoid
+    treating an earlier round as a semifinal, only that athlete's latest
+    numbered/scheduled match on this page can qualify. The position-map
+    inference remains authoritative whenever it yields a result. This
+    fallback works across bracket containers but NEVER guesses a result from
+    another event, a ranking, a time estimate, or a fight number alone.
+    """
+    finals = [(fight, block) for fight, block in records
+              if _is_terminal_final_card(fight, block)]
+    if not finals:
+        return records
+    scheduled = []
+    for fight, block in records:
+        try:
+            number = int(fight.get('number') or '')
+        except (ValueError, TypeError):
+            continue
+        # Only scheduled matches, never unscheduled BYE/placeholder cards.
+        if fight.get('mat') and fight.get('time') and fight.get('day'):
+            scheduled.append((number, fight, block))
+    if not scheduled:
+        return records
+    latest_for_athlete = {}
+    for number, fight, block in scheduled:
+        for person in fight['competitors']:
+            athlete = key(person.get('name'))
+            if person.get('placeholder') or person.get('bye') or not athlete:
+                continue
+            if athlete not in latest_for_athlete:
+                latest_for_athlete[athlete] = number
+            elif latest_for_athlete[athlete] is None:
+                continue  # duplicate numbering already made this ambiguous
+            elif number > latest_for_athlete[athlete]:
+                latest_for_athlete[athlete] = number
+            elif number == latest_for_athlete[athlete]:
+                # Repeated fight numbers cannot prove the latest appearance.
+                latest_for_athlete[athlete] = None
+
+    inferred = 0
+    for number, fight, block in scheduled:
+        if fight.get('result_map'):
+            continue
+        # Only repair missing provider position markup. A valid position
+        # belongs to the authoritative connection map; never bypass that
+        # map because a finalist happens to share a name.
+        if _bracket_match_position(block) is not None:
+            continue
+        source_container = _bracket_container(block)
+        if source_container is None or not any(
+            cls in {'tournament-category__bracket-3',
+                    'tournament-category__bracket-7',
+                    'tournament-category__bracket-15'}
+            for cls in source_container.get('class', [])):
+            continue
+        people = [c for c in fight['competitors'] if not c.get('placeholder')
+                  and not c.get('bye') and key(c.get('name'))]
+        if not 1 <= len(people) <= 2 or any(c.get('loser') for c in people):
+            continue
+        candidates = []
+        for terminal, final_block in finals:
+            # If the final still has a feeder placeholder for this match, it
+            # hasn't recorded the winner. Another named finalist is irrelevant.
+            if any(c.get('placeholder') and
+                   (_fight_source_reference(c.get('name')) == number
+                    or c.get('source_fight') == number)
+                   for c in terminal['competitors']):
+                continue
+            target_people = [c for c in terminal['competitors']
+                             if not c.get('placeholder') and not c.get('bye')]
+            matches = [(source, target) for source in people for target in target_people
+                       if latest_for_athlete.get(key(source.get('name'))) == number
+                       and _verified_advancement_identity(block, source, final_block, target)]
+            if len(matches) == 1 and sum(1 for source in people for target in target_people
+                                          if key(source['name']) == key(target['name'])) == 1:
+                candidates.append((matches[0][0], terminal))
+        if len(candidates) != 1:
+            continue
+        source, final = candidates[0]
+        winner = key(source['name'])
+        if len(people) == 2:
+            loser = next(key(p['name']) for p in people if p is not source)
+            if loser == winner or any(key(c.get('name')) == loser for c in final['competitors']):
+                continue
+            fight['result_map'] = {winner:'WIN', loser:'LOSS'}
+        else:
+            fight['result_map'] = {winner:'WIN'}
+        fight['result_source'] = 'verified-terminal-final-advancement'
+        inferred += 1
+    if inferred:
+        print(f'    VERIFIED FINAL ADVANCEMENT recovered={inferred} (no extra requests)', flush=True)
+    return records
+
+
 def _explicit_source_fight(comp):
     """Read only an actual per-slot feeder reference; never guess from order.
 
@@ -657,7 +786,7 @@ def parse_fights(soup):
 
     blocks = soup.select('.tournament-category__match, .tournament-category_match')
     for block in blocks:
-        header_node = block.select_one('.tournament-category__match-header, .tournament-category_match-header')
+        header_node = block.select_one('.tournament-category__match-header, .tournament-category_match-header, .bracket-match-header')
         header_text = clean(header_node.get_text(' ', strip=True) if header_node else '')
         fields = parse_header_fields(header_text)
         # FINAL and BYE cards may have no FIGHT/Mat/Time header. Inspect
@@ -737,7 +866,9 @@ def parse_fights(soup):
         evidence_records.append((fight, block, publish))
 
     if evidence_records:
-        infer_advancement_from_bracket_positions([(f, b) for f, b, _ in evidence_records])
+        pairs = [(f, b) for f, b, _ in evidence_records]
+        infer_advancement_from_bracket_positions(pairs)
+        infer_terminal_final_advancement(pairs)
         return [f for f, _, publish in evidence_records if publish]
 
     container = soup.select_one('main') or soup.body or soup
