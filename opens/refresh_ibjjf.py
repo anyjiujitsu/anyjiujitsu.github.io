@@ -714,6 +714,52 @@ def _explicit_source_fight(comp):
                 return int(value)
     return None
 
+
+def capture_unresolved_bracket_evidence(soup, fights, url):
+    """Capture *actual* provider HTML for unresolved progression in forced diagnostics.
+
+    Read-only: zero additional HTTP requests, result changes, or site payload
+    changes. The action artifact retains the HTML briefly; it is not committed.
+    Supports all event/category IDs without athlete- or fight-specific rules.
+    """
+    if os.environ.get('OPENS_EDGE_CAPTURE', '').lower() not in ('true', '1', 'yes'):
+        return
+    from collections import Counter
+    occurrences = Counter(
+        key(normalize_competitor_name(n.get_text(' ', strip=True)))
+        for n in soup.select('.match-card__competitor-name')
+        if not is_placeholder_name(normalize_competitor_name(n.get_text(' ', strip=True)))
+    )
+    unresolved = []
+    for fight in fights:
+        if fight.get('result_map') or not (fight.get('number') and fight.get('time')):
+            continue
+        people = [c for c in fight.get('competitors', [])
+                  if not c.get('placeholder') and not c.get('bye') and key(c.get('name'))]
+        if not (1 <= len(people) <= 2):
+            continue
+        repeats = [p for p in people if occurrences[key(p['name'])] >= 2]
+        if repeats:
+            unresolved.append({'fight': fight['number'],
+                               'athletes': [p['name'] for p in repeats]})
+    if not unresolved:
+        return
+    path_parts = re.search(r'/tournaments/(\d+)/categories/(\d+)', url)
+    if not path_parts:
+        return
+    filename = f'{path_parts.group(1)}-{path_parts.group(2)}.html'
+    directory = ROOT / '.edge-evidence'
+    directory.mkdir(exist_ok=True)
+    # Use the original downloaded HTML, preserving the provider's classes,
+    # IDs, sibling headings and round containers exactly as received.
+    with _cache_lock:
+        original_html = _cache.get(url)
+    (directory / filename).write_text(original_html or str(soup), encoding='utf-8')
+    print(f'    BRACKET EDGE CAPTURE {filename}: '
+          f'unresolved-with-repeat={unresolved[:12]!r} '
+          f'html-bytes={len(original_html or str(soup))}', flush=True)
+
+
 def audit_advancement_markup(soup, fights, url):
     """Read-only, bracket-wide audit of possible advancement evidence.
 
@@ -1044,6 +1090,7 @@ def fill_assignments(athletes, bracket_entries, previous_by_identity):
         try:
             bracket_soup = get_soup(info['url'])
             fights = parse_fights(bracket_soup)
+            capture_unresolved_bracket_evidence(bracket_soup, fights, info['url'])
             # A sole-entrant FINAL against BYE may have no FIGHT/Mat/Time
             # heading; recognize it from the bracket card itself.
             bye_fight = single_entrant_bye_fight(bracket_soup, [a['name'] for a in group])
@@ -1158,6 +1205,7 @@ def roster_from_brackets(comp):
                 raise fetched
             soup = fetched
             fights = parse_fights(soup)
+            capture_unresolved_bracket_evidence(soup, fights, url)
             checked += 1
         except (requests.RequestException, ValueError) as exc:
             print(f'  Category unavailable {url}: {exc}', flush=True)
