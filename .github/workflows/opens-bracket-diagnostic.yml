@@ -44,7 +44,7 @@ jobs:
           import requests
           from bs4 import BeautifulSoup
 
-          root = Path('opens/.edge-evidence')
+          root = Path('opens/bracket-evidence')
           root.mkdir(parents=True, exist_ok=True)
           report = {
               'diagnostic': 'read-only actual-bracket HTML capture v3',
@@ -171,11 +171,21 @@ jobs:
               print(f'DIAGNOSTIC REPORT SAVED pages={len(report["pages"])} '
                     f'warnings={len(report["warnings"])}', flush=True)
           PY
+      - name: Check diagnostic report is present
+        if: always()
+        run: |
+          if [ -s opens/bracket-evidence/diagnostic-report.json ]; then
+            echo 'Diagnostic report exists:'
+            ls -lah opens/bracket-evidence/
+          else
+            echo 'ERROR: diagnostic-report.json was not created' >&2
+            exit 1
+          fi
       - name: Upload diagnostic evidence and report
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: bracket-evidence-v3
-          path: opens/.edge-evidence/
+          path: opens/bracket-evidence/
           if-no-files-found: error
           retention-days: 2
