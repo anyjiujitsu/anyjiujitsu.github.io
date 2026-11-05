@@ -14,7 +14,7 @@
       "date": ""
     }
   ],
-  "updated_at": "2026-11-05T16:50:17.552596+00:00",
+  "updated_at": "2026-11-05T17:05:46.389220+00:00",
   "athletes": [
     {
       "competition_id": "3267",
@@ -4482,6 +4482,21 @@
       "mat": "",
       "day": "",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3267/categories/2911410",
+      "time_type": "completed result without published time",
+      "result": "BYE",
+      "fight_number": ""
+    },
+    {
+      "competition_id": "3267",
+      "competition_name": "Kansas City International Open IBJJF Jiu-Jitsu Championship 2026",
+      "date": "",
+      "name": "Joshua Steven Littleton",
+      "team": "Renato Tavares Association",
+      "bracket": "Black / Master 3 / Male / Feather (154.60lb)",
+      "time": "",
+      "mat": "",
+      "day": "",
+      "bracket_url": "https://www.bjjcompsystem.com/tournaments/3267/categories/2911020",
       "time_type": "completed result without published time",
       "result": "BYE",
       "fight_number": ""
