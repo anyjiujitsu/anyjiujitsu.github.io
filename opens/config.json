@@ -3,12 +3,6 @@
   "refresh_minutes": 10,
   "competitions": [
     {
-      "id": "3313",
-      "name": "European IBJJF Jiu-Jitsu No-Gi Championship 2026",
-      "url": "https://ibjjf.com/events/3313/athletes-list-by-academy-teams",
-      "date": ""
-    },
-    {
       "id": "3267",
       "name": "Kansas City International Open IBJJF Jiu-Jitsu Championship 2026",
       "url": "https://ibjjf.com/events/3267/athletes-list-by-academy-teams",
@@ -21,5 +15,5 @@
       "date": ""
     }
   ],
-  "updated_at": "2026-11-05T14:13:15.793935+00:00"
+  "updated_at": "2026-11-05T16:50:17.597833+00:00"
 }
