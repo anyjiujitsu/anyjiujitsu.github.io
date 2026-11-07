@@ -14,7 +14,7 @@
       "date": ""
     }
   ],
-  "updated_at": "2026-11-07T21:31:04.898763+00:00",
+  "updated_at": "2026-11-07T21:45:56.096661+00:00",
   "athletes": [
     {
       "competition_id": "3267",
@@ -1198,7 +1198,7 @@
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3267/categories/2911474",
       "time_type": "listed fight",
-      "result": "",
+      "result": "LOSS",
       "fight_number": "43"
     },
     {
@@ -1243,7 +1243,7 @@
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3267/categories/2911474",
       "time_type": "listed fight",
-      "result": "",
+      "result": "WIN",
       "fight_number": "43"
     },
     {
@@ -1988,12 +1988,12 @@
       "name": "Brandon Ashley Ebert",
       "team": "Cavalo Team",
       "bracket": "Brown / Master 3 / Male / Open Class",
-      "time": "03:05 PM",
+      "time": "03:16 PM",
       "mat": "4",
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3267/categories/2911475",
       "time_type": "listed fight",
-      "result": "",
+      "result": "LOSS",
       "fight_number": "51"
     },
     {
@@ -2018,12 +2018,12 @@
       "name": "Charles Matthias Myers",
       "team": "The Match Champ USA",
       "bracket": "Brown / Master 3 / Male / Open Class",
-      "time": "03:05 PM",
+      "time": "03:16 PM",
       "mat": "4",
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3267/categories/2911475",
       "time_type": "listed fight",
-      "result": "",
+      "result": "WIN",
       "fight_number": "51"
     },
     {
@@ -3188,12 +3188,12 @@
       "name": "Adrese James Atkins",
       "team": "TAC Team BJJ",
       "bracket": "Blue / Adult / Male / Open Class",
-      "time": "03:12 PM",
+      "time": "03:09 PM",
       "mat": "1",
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3267/categories/2911464",
       "time_type": "listed fight",
-      "result": "",
+      "result": "WIN",
       "fight_number": "44"
     },
     {
@@ -3218,12 +3218,12 @@
       "name": "Blake Alan Tiemann",
       "team": "TAC Team BJJ",
       "bracket": "Blue / Adult / Male / Open Class",
-      "time": "03:12 PM",
+      "time": "03:09 PM",
       "mat": "1",
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3267/categories/2911464",
       "time_type": "listed fight",
-      "result": "",
+      "result": "LOSS",
       "fight_number": "44"
     },
     {
@@ -3713,12 +3713,12 @@
       "name": "Lance Corbett Fister",
       "team": "Fathom Brazilian Jiu-Jitsu",
       "bracket": "Brown / Master 2 / Male / Open Class",
-      "time": "03:00 PM",
+      "time": "03:08 PM",
       "mat": "3",
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3267/categories/2911472",
       "time_type": "listed fight",
-      "result": "",
+      "result": "WIN",
       "fight_number": "47"
     },
     {
@@ -3743,12 +3743,12 @@
       "name": "Chad Gordon Stenson",
       "team": "Minnesota School Of Martial Arts",
       "bracket": "Brown / Master 2 / Male / Open Class",
-      "time": "03:00 PM",
+      "time": "03:08 PM",
       "mat": "3",
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3267/categories/2911472",
       "time_type": "listed fight",
-      "result": "",
+      "result": "LOSS",
       "fight_number": "47"
     },
     {
@@ -3818,12 +3818,12 @@
       "name": "Midhat Selimovic",
       "team": "Fortuna BJJ",
       "bracket": "Purple / Master 1 / Male / Open Class",
-      "time": "03:13 PM",
+      "time": "03:10 PM",
       "mat": "2",
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3267/categories/2911468",
       "time_type": "listed fight",
-      "result": "",
+      "result": "WIN",
       "fight_number": "54"
     },
     {
@@ -3878,12 +3878,12 @@
       "name": "Eli Edison Thompson",
       "team": "The Match Champ USA",
       "bracket": "Purple / Master 1 / Male / Open Class",
-      "time": "03:13 PM",
+      "time": "03:10 PM",
       "mat": "2",
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3267/categories/2911468",
       "time_type": "listed fight",
-      "result": "",
+      "result": "LOSS",
       "fight_number": "54"
     },
     {
@@ -5308,7 +5308,7 @@
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3267/categories/2911492",
       "time_type": "listed fight",
-      "result": "",
+      "result": "LOSS",
       "fight_number": "53"
     },
     {
@@ -5338,7 +5338,7 @@
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3267/categories/2911492",
       "time_type": "listed fight",
-      "result": "",
+      "result": "WIN",
       "fight_number": "53"
     },
     {
