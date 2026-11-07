@@ -14,7 +14,7 @@
       "date": ""
     }
   ],
-  "updated_at": "2026-11-07T20:16:45.465720+00:00",
+  "updated_at": "2026-11-07T20:31:03.188632+00:00",
   "athletes": [
     {
       "competition_id": "3267",
@@ -1193,7 +1193,7 @@
       "name": "Kenneth Michael Hawley",
       "team": "Ares BJJ",
       "bracket": "Purple / Master 3 / Male / Open Class",
-      "time": "03:03 PM",
+      "time": "03:06 PM",
       "mat": "1",
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3267/categories/2911474",
@@ -1223,7 +1223,7 @@
       "name": "Kenneth C Ross",
       "team": "Gracie Humaita Columbia",
       "bracket": "Purple / Master 3 / Male / Open Class",
-      "time": "02:48 PM",
+      "time": "02:51 PM",
       "mat": "1",
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3267/categories/2911474",
@@ -1253,13 +1253,13 @@
       "name": "Nathaniel Tucker Shire",
       "team": "Kronos BJJ",
       "bracket": "Purple / Master 3 / Male / Open Class",
-      "time": "02:41 PM",
+      "time": "02:32 PM",
       "mat": "1",
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3267/categories/2911474",
       "time_type": "listed fight",
       "result": "",
-      "fight_number": "39"
+      "fight_number": "38"
     },
     {
       "competition_id": "3267",
@@ -1268,13 +1268,13 @@
       "name": "Shawn M. Foster",
       "team": "TAC Team BJJ",
       "bracket": "Purple / Master 3 / Male / Open Class",
-      "time": "02:41 PM",
+      "time": "02:32 PM",
       "mat": "1",
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3267/categories/2911474",
       "time_type": "listed fight",
       "result": "",
-      "fight_number": "39"
+      "fight_number": "38"
     },
     {
       "competition_id": "3267",
@@ -1448,7 +1448,7 @@
       "name": "Shawn Michael Lawrence",
       "team": "CDA Jiu-Jitsu",
       "bracket": "Black / Master 6 / Male / Open Class",
-      "time": "02:22 PM",
+      "time": "02:25 PM",
       "mat": "1",
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3267/categories/2911455",
@@ -1493,7 +1493,7 @@
       "name": "Sean Douglas Starn",
       "team": "Grappling Unlimited",
       "bracket": "Black / Master 6 / Male / Open Class",
-      "time": "02:22 PM",
+      "time": "02:25 PM",
       "mat": "1",
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3267/categories/2911455",
@@ -1613,13 +1613,13 @@
       "name": "Michael Gene Priesner",
       "team": "Bruno Bastos BJJ Midland",
       "bracket": "Blue / Master 4 / Male / Open Class",
-      "time": "02:31 PM",
+      "time": "02:39 PM",
       "mat": "3",
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3267/categories/2911476",
       "time_type": "listed fight",
       "result": "",
-      "fight_number": "43"
+      "fight_number": "44"
     },
     {
       "competition_id": "3267",
@@ -1628,7 +1628,7 @@
       "name": "Andrew Philip Muri",
       "team": "Renato Tavares Association",
       "bracket": "Blue / Master 4 / Male / Open Class",
-      "time": "02:32 PM",
+      "time": "02:35 PM",
       "mat": "4",
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3267/categories/2911476",
@@ -1643,7 +1643,7 @@
       "name": "Joseph Albert Lauenroth",
       "team": "Rodrigo Vaghi BJJ",
       "bracket": "Blue / Master 4 / Male / Open Class",
-      "time": "02:32 PM",
+      "time": "02:35 PM",
       "mat": "4",
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3267/categories/2911476",
@@ -1658,13 +1658,13 @@
       "name": "Owen Patrick Gregg",
       "team": "Rodrigo Vaghi BJJ",
       "bracket": "Blue / Master 4 / Male / Open Class",
-      "time": "02:31 PM",
+      "time": "02:39 PM",
       "mat": "3",
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3267/categories/2911476",
       "time_type": "listed fight",
       "result": "",
-      "fight_number": "43"
+      "fight_number": "44"
     },
     {
       "competition_id": "3267",
@@ -1898,7 +1898,7 @@
       "name": "Brandon Ashley Ebert",
       "team": "Cavalo Team",
       "bracket": "Brown / Master 3 / Male / Open Class",
-      "time": "02:39 PM",
+      "time": "02:42 PM",
       "mat": "4",
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3267/categories/2911475",
@@ -1913,7 +1913,7 @@
       "name": "Charles Matthias Myers",
       "team": "The Match Champ USA",
       "bracket": "Brown / Master 3 / Male / Open Class",
-      "time": "02:39 PM",
+      "time": "02:42 PM",
       "mat": "4",
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3267/categories/2911475",
@@ -1928,7 +1928,7 @@
       "name": "Tiago J. May Buogo",
       "team": "The Match Champ USA",
       "bracket": "Brown / Master 3 / Male / Open Class",
-      "time": "02:53 PM",
+      "time": "02:56 PM",
       "mat": "4",
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3267/categories/2911475",
@@ -2788,7 +2788,7 @@
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3267/categories/2911448",
       "time_type": "listed fight",
-      "result": "",
+      "result": "LOSS",
       "fight_number": "36"
     },
     {
@@ -2828,13 +2828,13 @@
       "name": "Bruno Cordeiro Sena",
       "team": "The Match Champ USA",
       "bracket": "Black / Adult / Male / Open Class",
-      "time": "02:29 PM",
+      "time": "02:39 PM",
       "mat": "1",
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3267/categories/2911448",
       "time_type": "listed fight",
       "result": "",
-      "fight_number": "38"
+      "fight_number": "39"
     },
     {
       "competition_id": "3267",
@@ -2863,8 +2863,23 @@
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3267/categories/2911448",
       "time_type": "listed fight",
-      "result": "",
+      "result": "WIN",
       "fight_number": "36"
+    },
+    {
+      "competition_id": "3267",
+      "competition_name": "Kansas City International Open IBJJF Jiu-Jitsu Championship 2026",
+      "date": "",
+      "name": "Gabriel Kaspary Barbosa",
+      "team": "The Match Champ USA",
+      "bracket": "Black / Adult / Male / Open Class",
+      "time": "02:39 PM",
+      "mat": "1",
+      "day": "Sat",
+      "bracket_url": "https://www.bjjcompsystem.com/tournaments/3267/categories/2911448",
+      "time_type": "listed fight",
+      "result": "",
+      "fight_number": "39"
     },
     {
       "competition_id": "3267",
@@ -2948,7 +2963,7 @@
       "name": "Connor Jaden Tait",
       "team": "Easton BJJ",
       "bracket": "Blue / Adult / Male / Open Class",
-      "time": "02:55 PM",
+      "time": "02:58 PM",
       "mat": "1",
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3267/categories/2911464",
@@ -2963,7 +2978,7 @@
       "name": "Abdullahi Jamal Arab",
       "team": "GF Team",
       "bracket": "Blue / Adult / Male / Open Class",
-      "time": "02:55 PM",
+      "time": "02:58 PM",
       "mat": "1",
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3267/categories/2911464",
@@ -2978,13 +2993,13 @@
       "name": "Tyler Robert Vogel",
       "team": "Gracie Humaita Kansas City",
       "bracket": "Blue / Adult / Male / Open Class",
-      "time": "02:31 PM",
+      "time": "02:25 PM",
       "mat": "6",
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3267/categories/2911464",
       "time_type": "listed fight",
       "result": "",
-      "fight_number": "47"
+      "fight_number": "46"
     },
     {
       "competition_id": "3267",
@@ -2993,7 +3008,7 @@
       "name": "Dalton James Crum",
       "team": "Kronos BJJ",
       "bracket": "Blue / Adult / Male / Open Class",
-      "time": "03:06 PM",
+      "time": "03:00 PM",
       "mat": "5",
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3267/categories/2911464",
@@ -3008,13 +3023,13 @@
       "name": "Adrese James Atkins",
       "team": "TAC Team BJJ",
       "bracket": "Blue / Adult / Male / Open Class",
-      "time": "02:31 PM",
+      "time": "02:25 PM",
       "mat": "6",
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3267/categories/2911464",
       "time_type": "listed fight",
       "result": "",
-      "fight_number": "47"
+      "fight_number": "46"
     },
     {
       "competition_id": "3267",
@@ -3023,7 +3038,7 @@
       "name": "Blake Alan Tiemann",
       "team": "TAC Team BJJ",
       "bracket": "Blue / Adult / Male / Open Class",
-      "time": "03:10 PM",
+      "time": "03:13 PM",
       "mat": "1",
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3267/categories/2911464",
@@ -3053,7 +3068,7 @@
       "name": "Daylen Von Sirithasack",
       "team": "The Match Champ USA",
       "bracket": "Blue / Adult / Male / Open Class",
-      "time": "03:06 PM",
+      "time": "03:00 PM",
       "mat": "5",
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3267/categories/2911464",
@@ -3503,13 +3518,13 @@
       "name": "Lance Corbett Fister",
       "team": "Fathom Brazilian Jiu-Jitsu",
       "bracket": "Brown / Master 2 / Male / Open Class",
-      "time": "02:48 PM",
+      "time": "02:56 PM",
       "mat": "2",
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3267/categories/2911472",
       "time_type": "listed fight",
       "result": "",
-      "fight_number": "50"
+      "fight_number": "51"
     },
     {
       "competition_id": "3267",
@@ -3518,7 +3533,7 @@
       "name": "Chad Gordon Stenson",
       "team": "Minnesota School Of Martial Arts",
       "bracket": "Brown / Master 2 / Male / Open Class",
-      "time": "02:45 PM",
+      "time": "02:46 PM",
       "mat": "3",
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3267/categories/2911472",
@@ -3533,7 +3548,7 @@
       "name": "Nathan Kawai Ng",
       "team": "TAC Team BJJ",
       "bracket": "Brown / Master 2 / Male / Open Class",
-      "time": "02:45 PM",
+      "time": "02:46 PM",
       "mat": "3",
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3267/categories/2911472",
@@ -3548,13 +3563,13 @@
       "name": "Walid El Khoumssi",
       "team": "The Match Champ USA",
       "bracket": "Brown / Master 2 / Male / Open Class",
-      "time": "02:48 PM",
+      "time": "02:56 PM",
       "mat": "2",
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3267/categories/2911472",
       "time_type": "listed fight",
       "result": "",
-      "fight_number": "50"
+      "fight_number": "51"
     },
     {
       "competition_id": "3267",
@@ -3578,7 +3593,7 @@
       "name": "Midhat Selimovic",
       "team": "Fortuna BJJ",
       "bracket": "Purple / Master 1 / Male / Open Class",
-      "time": "02:52 PM",
+      "time": "02:53 PM",
       "mat": "3",
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3267/categories/2911468",
@@ -3593,13 +3608,13 @@
       "name": "Nicholas Kirby Smith",
       "team": "Minnesota School Of Martial Arts",
       "bracket": "Purple / Master 1 / Male / Open Class",
-      "time": "02:55 PM",
+      "time": "03:03 PM",
       "mat": "2",
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3267/categories/2911468",
       "time_type": "listed fight",
       "result": "",
-      "fight_number": "51"
+      "fight_number": "52"
     },
     {
       "competition_id": "3267",
@@ -3608,7 +3623,7 @@
       "name": "Dalton Scott Clevenger",
       "team": "Renato Tavares Association",
       "bracket": "Purple / Master 1 / Male / Open Class",
-      "time": "02:52 PM",
+      "time": "02:53 PM",
       "mat": "3",
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3267/categories/2911468",
@@ -3623,13 +3638,13 @@
       "name": "Eli Edison Thompson",
       "team": "The Match Champ USA",
       "bracket": "Purple / Master 1 / Male / Open Class",
-      "time": "02:55 PM",
+      "time": "03:03 PM",
       "mat": "2",
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3267/categories/2911468",
       "time_type": "listed fight",
       "result": "",
-      "fight_number": "51"
+      "fight_number": "52"
     },
     {
       "competition_id": "3267",
@@ -3883,8 +3898,23 @@
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3267/categories/2911512",
       "time_type": "listed fight",
-      "result": "",
+      "result": "WIN",
       "fight_number": "45"
+    },
+    {
+      "competition_id": "3267",
+      "competition_name": "Kansas City International Open IBJJF Jiu-Jitsu Championship 2026",
+      "date": "",
+      "name": "Titus Krixus Ortiz",
+      "team": "Pablo Silva BJJ",
+      "bracket": "Blue / Juvenile / Male / Open Class Light",
+      "time": "02:33 PM",
+      "mat": "2",
+      "day": "Sat",
+      "bracket_url": "https://www.bjjcompsystem.com/tournaments/3267/categories/2911512",
+      "time_type": "listed fight",
+      "result": "",
+      "fight_number": "48"
     },
     {
       "competition_id": "3267",
@@ -3913,7 +3943,7 @@
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3267/categories/2911512",
       "time_type": "listed fight",
-      "result": "",
+      "result": "LOSS",
       "fight_number": "45"
     },
     {
@@ -3998,13 +4028,13 @@
       "name": "Nicholas Pablo Gonzalez",
       "team": "GF Team",
       "bracket": "Blue / Master 3 / Male / Open Class",
-      "time": "02:59 PM",
-      "mat": "5",
+      "time": "02:33 PM",
+      "mat": "6",
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3267/categories/2911473",
       "time_type": "listed fight",
       "result": "",
-      "fight_number": "48"
+      "fight_number": "47"
     },
     {
       "competition_id": "3267",
@@ -4013,13 +4043,13 @@
       "name": "David T Robinson Sr.",
       "team": "Omaha's Academy Of Brazilian Jiu-Jitsu",
       "bracket": "Blue / Master 3 / Male / Open Class",
-      "time": "02:24 PM",
+      "time": "02:40 PM",
       "mat": "6",
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3267/categories/2911473",
       "time_type": "listed fight",
       "result": "",
-      "fight_number": "46"
+      "fight_number": "48"
     },
     {
       "competition_id": "3267",
@@ -4048,7 +4078,7 @@
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3267/categories/2911473",
       "time_type": "listed fight",
-      "result": "",
+      "result": "LOSS",
       "fight_number": "45"
     },
     {
@@ -4078,8 +4108,23 @@
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3267/categories/2911473",
       "time_type": "listed fight",
-      "result": "",
+      "result": "WIN",
       "fight_number": "45"
+    },
+    {
+      "competition_id": "3267",
+      "competition_name": "Kansas City International Open IBJJF Jiu-Jitsu Championship 2026",
+      "date": "",
+      "name": "Gareth John Roberts",
+      "team": "Rodrigo Vaghi BJJ",
+      "bracket": "Blue / Master 3 / Male / Open Class",
+      "time": "02:47 PM",
+      "mat": "6",
+      "day": "Sat",
+      "bracket_url": "https://www.bjjcompsystem.com/tournaments/3267/categories/2911473",
+      "time_type": "listed fight",
+      "result": "",
+      "fight_number": "49"
     },
     {
       "competition_id": "3267",
@@ -4103,13 +4148,13 @@
       "name": "Vinicius Tomich Demagalhães",
       "team": "The Match Champ USA",
       "bracket": "Blue / Master 3 / Male / Open Class",
-      "time": "02:59 PM",
-      "mat": "5",
+      "time": "02:33 PM",
+      "mat": "6",
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3267/categories/2911473",
       "time_type": "listed fight",
       "result": "",
-      "fight_number": "48"
+      "fight_number": "47"
     },
     {
       "competition_id": "3267",
@@ -4453,8 +4498,23 @@
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3267/categories/2911471",
       "time_type": "listed fight",
-      "result": "",
+      "result": "WIN",
       "fight_number": "42"
+    },
+    {
+      "competition_id": "3267",
+      "competition_name": "Kansas City International Open IBJJF Jiu-Jitsu Championship 2026",
+      "date": "",
+      "name": "Austin Mackenzie Villa",
+      "team": "GF Team",
+      "bracket": "Purple / Master 2 / Male / Open Class",
+      "time": "03:08 PM",
+      "mat": "5",
+      "day": "Sat",
+      "bracket_url": "https://www.bjjcompsystem.com/tournaments/3267/categories/2911471",
+      "time_type": "listed fight",
+      "result": "",
+      "fight_number": "50"
     },
     {
       "competition_id": "3267",
@@ -4463,7 +4523,7 @@
       "name": "James Allen Donahue Jr.",
       "team": "Rodrigo Vaghi BJJ",
       "bracket": "Purple / Master 2 / Male / Open Class",
-      "time": "02:52 PM",
+      "time": "02:53 PM",
       "mat": "5",
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3267/categories/2911471",
@@ -4483,8 +4543,23 @@
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3267/categories/2911471",
       "time_type": "listed fight",
-      "result": "",
+      "result": "LOSS",
       "fight_number": "42"
+    },
+    {
+      "competition_id": "3267",
+      "competition_name": "Kansas City International Open IBJJF Jiu-Jitsu Championship 2026",
+      "date": "",
+      "name": "Jordan A Schroeder",
+      "team": "Rodrigo Vaghi BJJ",
+      "bracket": "Purple / Master 2 / Male / Open Class",
+      "time": "02:53 PM",
+      "mat": "5",
+      "day": "Sat",
+      "bracket_url": "https://www.bjjcompsystem.com/tournaments/3267/categories/2911471",
+      "time_type": "listed fight",
+      "result": "",
+      "fight_number": "47"
     },
     {
       "competition_id": "3267",
@@ -4538,13 +4613,13 @@
       "name": "Tavion Jordan Buchanan",
       "team": "GF Team",
       "bracket": "Brown / Master 1 / Male / Open Class",
-      "time": "02:24 PM",
+      "time": "02:20 PM",
       "mat": "4",
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3267/categories/2911469",
       "time_type": "listed fight",
       "result": "",
-      "fight_number": "46"
+      "fight_number": "45"
     },
     {
       "competition_id": "3267",
@@ -4553,13 +4628,13 @@
       "name": "Devin T Scala",
       "team": "TAC Team BJJ",
       "bracket": "Brown / Master 1 / Male / Open Class",
-      "time": "02:24 PM",
+      "time": "02:20 PM",
       "mat": "4",
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3267/categories/2911469",
       "time_type": "listed fight",
       "result": "",
-      "fight_number": "46"
+      "fight_number": "45"
     },
     {
       "competition_id": "3267",
@@ -4708,8 +4783,23 @@
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3267/categories/2911478",
       "time_type": "listed fight",
-      "result": "",
+      "result": "WIN",
       "fight_number": "41"
+    },
+    {
+      "competition_id": "3267",
+      "competition_name": "Kansas City International Open IBJJF Jiu-Jitsu Championship 2026",
+      "date": "",
+      "name": "Andrew Joseph Anderson",
+      "team": "GF Team",
+      "bracket": "Brown / Master 4 / Male / Open Class",
+      "time": "02:46 PM",
+      "mat": "5",
+      "day": "Sat",
+      "bracket_url": "https://www.bjjcompsystem.com/tournaments/3267/categories/2911478",
+      "time_type": "listed fight",
+      "result": "",
+      "fight_number": "46"
     },
     {
       "competition_id": "3267",
@@ -4733,7 +4823,7 @@
       "name": "Aaron Harold Stroman",
       "team": "Marathon MMA",
       "bracket": "Brown / Master 4 / Male / Open Class",
-      "time": "02:45 PM",
+      "time": "02:46 PM",
       "mat": "5",
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3267/categories/2911478",
@@ -4753,7 +4843,7 @@
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3267/categories/2911478",
       "time_type": "listed fight",
-      "result": "",
+      "result": "LOSS",
       "fight_number": "41"
     },
     {
@@ -4898,13 +4988,13 @@
       "name": "R A Williams",
       "team": "Gracie Barra",
       "bracket": "Purple / Master 1 / Female / Open Class",
-      "time": "02:40 PM",
+      "time": "02:23 PM",
       "mat": "2",
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3267/categories/2911492",
       "time_type": "listed fight",
       "result": "",
-      "fight_number": "49"
+      "fight_number": "47"
     },
     {
       "competition_id": "3267",
@@ -4913,13 +5003,13 @@
       "name": "Blu Koizumi Mays",
       "team": "Molinaro Jiu-Jitsu",
       "bracket": "Purple / Master 1 / Female / Open Class",
-      "time": "02:25 PM",
+      "time": "02:48 PM",
       "mat": "2",
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3267/categories/2911492",
       "time_type": "listed fight",
       "result": "",
-      "fight_number": "47"
+      "fight_number": "50"
     },
     {
       "competition_id": "3267",
@@ -4928,13 +5018,13 @@
       "name": "Emily Rose Garnant Zimmon",
       "team": "TAC Team BJJ",
       "bracket": "Purple / Master 1 / Female / Open Class",
-      "time": "02:25 PM",
+      "time": "02:48 PM",
       "mat": "2",
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3267/categories/2911492",
       "time_type": "listed fight",
       "result": "",
-      "fight_number": "47"
+      "fight_number": "50"
     },
     {
       "competition_id": "3267",
@@ -4943,13 +5033,13 @@
       "name": "Hanna A Schiffhauer",
       "team": "TAC Team BJJ",
       "bracket": "Purple / Master 1 / Female / Open Class",
-      "time": "02:40 PM",
+      "time": "02:23 PM",
       "mat": "2",
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3267/categories/2911492",
       "time_type": "listed fight",
       "result": "",
-      "fight_number": "49"
+      "fight_number": "47"
     },
     {
       "competition_id": "3267",
@@ -5083,8 +5173,23 @@
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3267/categories/2911453",
       "time_type": "listed fight",
-      "result": "",
+      "result": "WIN",
       "fight_number": "38"
+    },
+    {
+      "competition_id": "3267",
+      "competition_name": "Kansas City International Open IBJJF Jiu-Jitsu Championship 2026",
+      "date": "",
+      "name": "Fábio Luis Costa Lima",
+      "team": "Gracie Barra",
+      "bracket": "Black / Master 4 / Male / Open Class",
+      "time": "02:32 PM",
+      "mat": "3",
+      "day": "Sat",
+      "bracket_url": "https://www.bjjcompsystem.com/tournaments/3267/categories/2911453",
+      "time_type": "listed fight",
+      "result": "",
+      "fight_number": "41"
     },
     {
       "competition_id": "3267",
@@ -5113,7 +5218,7 @@
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3267/categories/2911453",
       "time_type": "listed fight",
-      "result": "",
+      "result": "LOSS",
       "fight_number": "38"
     },
     {
@@ -5138,13 +5243,13 @@
       "name": "Kazuma Terada",
       "team": "The Match Champ USA",
       "bracket": "Black / Master 4 / Male / Open Class",
-      "time": "02:24 PM",
+      "time": "02:32 PM",
       "mat": "3",
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3267/categories/2911453",
       "time_type": "listed fight",
       "result": "",
-      "fight_number": "40"
+      "fight_number": "41"
     },
     {
       "competition_id": "3267",
@@ -5873,7 +5978,7 @@
       "name": "Jeremiah T. Martin",
       "team": "Haven Jiu-Jitsu",
       "bracket": "Brown / Master 6 / Male / Open Class",
-      "time": "02:24 PM",
+      "time": "02:25 PM",
       "mat": "5",
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3267/categories/2911484",
@@ -5888,7 +5993,7 @@
       "name": "Bart Allen Bosler",
       "team": "Kronos BJJ",
       "bracket": "Brown / Master 6 / Male / Open Class",
-      "time": "02:31 PM",
+      "time": "02:32 PM",
       "mat": "5",
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3267/categories/2911484",
@@ -5903,7 +6008,7 @@
       "name": "Paul Dean Garton",
       "team": "Renato Tavares Association",
       "bracket": "Brown / Master 6 / Male / Open Class",
-      "time": "02:24 PM",
+      "time": "02:25 PM",
       "mat": "5",
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3267/categories/2911484",
@@ -6218,13 +6323,13 @@
       "name": "Brenden Michael Pagliai",
       "team": "Pedigo Submission Fighting",
       "bracket": "Blue / Master 1 / Male / Open Class",
-      "time": "02:17 PM",
+      "time": "02:28 PM",
       "mat": "4",
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3267/categories/2911467",
       "time_type": "listed fight",
       "result": "",
-      "fight_number": "45"
+      "fight_number": "46"
     },
     {
       "competition_id": "3267",
@@ -6263,13 +6368,13 @@
       "name": "Robert Cisar",
       "team": "Rodrigo Vaghi BJJ",
       "bracket": "Blue / Master 1 / Male / Open Class",
-      "time": "02:17 PM",
+      "time": "02:28 PM",
       "mat": "4",
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3267/categories/2911467",
       "time_type": "listed fight",
       "result": "",
-      "fight_number": "45"
+      "fight_number": "46"
     },
     {
       "competition_id": "3267",
@@ -6863,13 +6968,28 @@
       "name": "Grady Phillip Cason",
       "team": "Kronos BJJ",
       "bracket": "Blue / Master 5 / Male / Open Class",
-      "time": "02:17 PM",
+      "time": "02:14 PM",
+      "mat": "3",
+      "day": "Sat",
+      "bracket_url": "https://www.bjjcompsystem.com/tournaments/3267/categories/2911479",
+      "time_type": "listed fight",
+      "result": "WIN",
+      "fight_number": "39"
+    },
+    {
+      "competition_id": "3267",
+      "competition_name": "Kansas City International Open IBJJF Jiu-Jitsu Championship 2026",
+      "date": "",
+      "name": "Grady Phillip Cason",
+      "team": "Kronos BJJ",
+      "bracket": "Blue / Master 5 / Male / Open Class",
+      "time": "02:25 PM",
       "mat": "3",
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3267/categories/2911479",
       "time_type": "listed fight",
       "result": "",
-      "fight_number": "39"
+      "fight_number": "40"
     },
     {
       "competition_id": "3267",
@@ -6884,7 +7004,7 @@
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3267/categories/2911479",
       "time_type": "listed fight",
       "result": "LOSS",
-      "fight_number": "42"
+      "fight_number": "43"
     },
     {
       "competition_id": "3267",
@@ -6893,12 +7013,12 @@
       "name": "James Robert Gilmore",
       "team": "Renato Tavares Association",
       "bracket": "Blue / Master 5 / Male / Open Class",
-      "time": "02:17 PM",
+      "time": "02:14 PM",
       "mat": "3",
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3267/categories/2911479",
       "time_type": "listed fight",
-      "result": "",
+      "result": "LOSS",
       "fight_number": "39"
     },
     {
@@ -6914,7 +7034,7 @@
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3267/categories/2911479",
       "time_type": "listed fight",
       "result": "WIN",
-      "fight_number": "42"
+      "fight_number": "43"
     },
     {
       "competition_id": "3267",
@@ -6923,13 +7043,13 @@
       "name": "Michael M McColgan",
       "team": "Rodrigo Vaghi BJJ",
       "bracket": "Blue / Master 5 / Male / Open Class",
-      "time": "02:38 PM",
+      "time": "02:25 PM",
       "mat": "3",
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3267/categories/2911479",
       "time_type": "listed fight",
       "result": "",
-      "fight_number": "44"
+      "fight_number": "40"
     },
     {
       "competition_id": "3267",
@@ -8758,7 +8878,7 @@
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3267/categories/2911497",
       "time_type": "listed fight",
-      "result": "",
+      "result": "WIN",
       "fight_number": "44"
     },
     {
@@ -8818,7 +8938,7 @@
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3267/categories/2911497",
       "time_type": "listed fight",
-      "result": "",
+      "result": "LOSS",
       "fight_number": "44"
     },
     {
@@ -9338,13 +9458,13 @@
       "name": "Allison Paige Shadrach",
       "team": "TAC Team BJJ",
       "bracket": "Blue / Adult / Female / Open Class",
-      "time": "03:03 PM",
+      "time": "02:40 PM",
       "mat": "2",
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3267/categories/2911488",
       "time_type": "listed fight",
       "result": "",
-      "fight_number": "52"
+      "fight_number": "49"
     },
     {
       "competition_id": "3267",
@@ -9353,12 +9473,12 @@
       "name": "Brittany Rose Kelly",
       "team": "TAC Team BJJ",
       "bracket": "Blue / Adult / Female / Open Class",
-      "time": "02:17 PM",
+      "time": "02:19 PM",
       "mat": "2",
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3267/categories/2911488",
       "time_type": "listed fight",
-      "result": "",
+      "result": "LOSS",
       "fight_number": "46"
     },
     {
@@ -9383,13 +9503,28 @@
       "name": "Zoey Elaine Tracy",
       "team": "The Match Champ USA",
       "bracket": "Blue / Adult / Female / Open Class",
-      "time": "02:17 PM",
+      "time": "02:19 PM",
+      "mat": "2",
+      "day": "Sat",
+      "bracket_url": "https://www.bjjcompsystem.com/tournaments/3267/categories/2911488",
+      "time_type": "listed fight",
+      "result": "WIN",
+      "fight_number": "46"
+    },
+    {
+      "competition_id": "3267",
+      "competition_name": "Kansas City International Open IBJJF Jiu-Jitsu Championship 2026",
+      "date": "",
+      "name": "Zoey Elaine Tracy",
+      "team": "The Match Champ USA",
+      "bracket": "Blue / Adult / Female / Open Class",
+      "time": "02:40 PM",
       "mat": "2",
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3267/categories/2911488",
       "time_type": "listed fight",
       "result": "",
-      "fight_number": "46"
+      "fight_number": "49"
     },
     {
       "competition_id": "3267",
@@ -9458,12 +9593,12 @@
       "name": "Andrew Ray Harvey",
       "team": "TAC Team BJJ",
       "bracket": "Blue / Master 2 / Male / Open Class",
-      "time": "02:10 PM",
+      "time": "02:11 PM",
       "mat": "6",
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3267/categories/2911470",
       "time_type": "listed fight",
-      "result": "",
+      "result": "WIN",
       "fight_number": "44"
     },
     {
@@ -9488,12 +9623,12 @@
       "name": "Stuart A Bury",
       "team": "TAC Team BJJ",
       "bracket": "Blue / Master 2 / Male / Open Class",
-      "time": "02:10 PM",
+      "time": "02:11 PM",
       "mat": "6",
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3267/categories/2911470",
       "time_type": "listed fight",
-      "result": "",
+      "result": "LOSS",
       "fight_number": "44"
     },
     {
@@ -9659,7 +9794,7 @@
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3267/categories/2911452",
       "time_type": "listed fight",
       "result": "LOSS",
-      "fight_number": "41"
+      "fight_number": "42"
     },
     {
       "competition_id": "3267",
@@ -9674,7 +9809,7 @@
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3267/categories/2911452",
       "time_type": "listed fight",
       "result": "WIN",
-      "fight_number": "41"
+      "fight_number": "42"
     },
     {
       "competition_id": "3267",
