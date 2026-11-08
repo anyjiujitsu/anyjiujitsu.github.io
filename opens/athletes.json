@@ -14,7 +14,7 @@
       "date": ""
     }
   ],
-  "updated_at": "2026-11-08T00:01:17.716794+00:00",
+  "updated_at": "2026-11-08T00:16:10.305470+00:00",
   "athletes": [
     {
       "competition_id": "3267",
@@ -12263,13 +12263,28 @@
       "name": "Max R. Hryhorczuk",
       "team": "Molinaro Jiu-Jitsu",
       "bracket": "Purple / Adult / Male / Open Class",
-      "time": "05:55 PM",
+      "time": "06:01 PM",
       "mat": "4",
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3268/categories/2912115",
       "time_type": "listed fight",
-      "result": "",
+      "result": "WIN",
       "fight_number": "20"
+    },
+    {
+      "competition_id": "3268",
+      "competition_name": "Kansas City International Open IBJJF Jiu-Jitsu No-Gi Championship 2026",
+      "date": "",
+      "name": "Max R. Hryhorczuk",
+      "team": "Molinaro Jiu-Jitsu",
+      "bracket": "Purple / Adult / Male / Open Class",
+      "time": "06:10 PM",
+      "mat": "2",
+      "day": "Sat",
+      "bracket_url": "https://www.bjjcompsystem.com/tournaments/3268/categories/2912115",
+      "time_type": "listed fight",
+      "result": "",
+      "fight_number": "25"
     },
     {
       "competition_id": "3268",
@@ -12293,7 +12308,7 @@
       "name": "Dane Allen Cooper",
       "team": "Pedigo Submission Fighting",
       "bracket": "Purple / Adult / Male / Open Class",
-      "time": "05:55 PM",
+      "time": "06:10 PM",
       "mat": "2",
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3268/categories/2912115",
@@ -12323,12 +12338,12 @@
       "name": "Jackson Douglas Bert",
       "team": "Rodrigo Vaghi BJJ",
       "bracket": "Purple / Adult / Male / Open Class",
-      "time": "05:55 PM",
+      "time": "06:01 PM",
       "mat": "4",
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3268/categories/2912115",
       "time_type": "listed fight",
-      "result": "",
+      "result": "LOSS",
       "fight_number": "20"
     },
     {
