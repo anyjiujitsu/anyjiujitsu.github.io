@@ -14,7 +14,7 @@
       "date": ""
     }
   ],
-  "updated_at": "2026-11-08T00:16:10.305470+00:00",
+  "updated_at": "2026-11-08T00:31:03.118654+00:00",
   "athletes": [
     {
       "competition_id": "3267",
@@ -12278,12 +12278,12 @@
       "name": "Max R. Hryhorczuk",
       "team": "Molinaro Jiu-Jitsu",
       "bracket": "Purple / Adult / Male / Open Class",
-      "time": "06:10 PM",
+      "time": "06:13 PM",
       "mat": "2",
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3268/categories/2912115",
       "time_type": "listed fight",
-      "result": "",
+      "result": "LOSS",
       "fight_number": "25"
     },
     {
@@ -12308,12 +12308,12 @@
       "name": "Dane Allen Cooper",
       "team": "Pedigo Submission Fighting",
       "bracket": "Purple / Adult / Male / Open Class",
-      "time": "06:10 PM",
+      "time": "06:13 PM",
       "mat": "2",
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3268/categories/2912115",
       "time_type": "listed fight",
-      "result": "",
+      "result": "WIN",
       "fight_number": "25"
     },
     {
