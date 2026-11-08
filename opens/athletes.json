@@ -14,7 +14,7 @@
       "date": ""
     }
   ],
-  "updated_at": "2026-11-07T23:46:04.433354+00:00",
+  "updated_at": "2026-11-08T00:01:17.716794+00:00",
   "athletes": [
     {
       "competition_id": "3267",
@@ -12223,7 +12223,7 @@
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3268/categories/2912115",
       "time_type": "listed fight",
-      "result": "",
+      "result": "LOSS",
       "fight_number": "23"
     },
     {
@@ -12248,13 +12248,28 @@
       "name": "Max R. Hryhorczuk",
       "team": "Molinaro Jiu-Jitsu",
       "bracket": "Purple / Adult / Male / Open Class",
-      "time": "05:45 PM",
+      "time": "05:46 PM",
+      "mat": "4",
+      "day": "Sat",
+      "bracket_url": "https://www.bjjcompsystem.com/tournaments/3268/categories/2912115",
+      "time_type": "listed fight",
+      "result": "WIN",
+      "fight_number": "18"
+    },
+    {
+      "competition_id": "3268",
+      "competition_name": "Kansas City International Open IBJJF Jiu-Jitsu No-Gi Championship 2026",
+      "date": "",
+      "name": "Max R. Hryhorczuk",
+      "team": "Molinaro Jiu-Jitsu",
+      "bracket": "Purple / Adult / Male / Open Class",
+      "time": "05:55 PM",
       "mat": "4",
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3268/categories/2912115",
       "time_type": "listed fight",
       "result": "",
-      "fight_number": "18"
+      "fight_number": "20"
     },
     {
       "competition_id": "3268",
@@ -12268,8 +12283,23 @@
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3268/categories/2912115",
       "time_type": "listed fight",
-      "result": "",
+      "result": "WIN",
       "fight_number": "23"
+    },
+    {
+      "competition_id": "3268",
+      "competition_name": "Kansas City International Open IBJJF Jiu-Jitsu No-Gi Championship 2026",
+      "date": "",
+      "name": "Dane Allen Cooper",
+      "team": "Pedigo Submission Fighting",
+      "bracket": "Purple / Adult / Male / Open Class",
+      "time": "05:55 PM",
+      "mat": "2",
+      "day": "Sat",
+      "bracket_url": "https://www.bjjcompsystem.com/tournaments/3268/categories/2912115",
+      "time_type": "listed fight",
+      "result": "",
+      "fight_number": "25"
     },
     {
       "competition_id": "3268",
@@ -12293,7 +12323,7 @@
       "name": "Jackson Douglas Bert",
       "team": "Rodrigo Vaghi BJJ",
       "bracket": "Purple / Adult / Male / Open Class",
-      "time": "06:01 PM",
+      "time": "05:55 PM",
       "mat": "4",
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3268/categories/2912115",
@@ -12323,12 +12353,12 @@
       "name": "Adam Blain Smith",
       "team": "TAC Team BJJ",
       "bracket": "Purple / Adult / Male / Open Class",
-      "time": "05:45 PM",
+      "time": "05:46 PM",
       "mat": "4",
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3268/categories/2912115",
       "time_type": "listed fight",
-      "result": "",
+      "result": "LOSS",
       "fight_number": "18"
     },
     {
@@ -13163,12 +13193,12 @@
       "name": "Nicolas Alan Taylor",
       "team": "Laselva MMA",
       "bracket": "Brown / Master 3 / Male / Open Class",
-      "time": "05:54 PM",
+      "time": "05:50 PM",
       "mat": "4",
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3268/categories/2912125",
       "time_type": "listed fight",
-      "result": "",
+      "result": "WIN",
       "fight_number": "19"
     },
     {
@@ -13178,12 +13208,12 @@
       "name": "Charles Matthias Myers",
       "team": "The Match Champ USA",
       "bracket": "Brown / Master 3 / Male / Open Class",
-      "time": "05:54 PM",
+      "time": "05:50 PM",
       "mat": "4",
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3268/categories/2912125",
       "time_type": "listed fight",
-      "result": "",
+      "result": "LOSS",
       "fight_number": "19"
     },
     {
@@ -13763,12 +13793,12 @@
       "name": "Emanuele Agosta",
       "team": "Pedigo Submission Fighting",
       "bracket": "Brown / Master 1 / Male / Open Class",
-      "time": "05:30 PM",
+      "time": "05:40 PM",
       "mat": "5",
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3268/categories/2912119",
       "time_type": "listed fight",
-      "result": "",
+      "result": "LOSS",
       "fight_number": "21"
     },
     {
@@ -13778,12 +13808,12 @@
       "name": "Devin T Scala",
       "team": "TAC Team BJJ",
       "bracket": "Brown / Master 1 / Male / Open Class",
-      "time": "05:30 PM",
+      "time": "05:40 PM",
       "mat": "5",
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3268/categories/2912119",
       "time_type": "listed fight",
-      "result": "",
+      "result": "WIN",
       "fight_number": "21"
     },
     {
