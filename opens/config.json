@@ -1,19 +1,25 @@
 {
-  "enabled": false,
+  "enabled": true,
   "refresh_minutes": 10,
   "competitions": [
     {
-      "id": "3267",
-      "name": "Kansas City International Open IBJJF Jiu-Jitsu Championship 2026",
-      "url": "https://ibjjf.com/events/3267/athletes-list-by-academy-teams",
+      "id": "3366",
+      "name": "Atlanta Fall Kids International Open IBJJF Jiu-Jitsu Championship 2026",
+      "url": "https://ibjjf.com/events/3366/athletes-list-by-academy-teams",
       "date": ""
     },
     {
-      "id": "3268",
-      "name": "Kansas City International Open IBJJF Jiu-Jitsu No-Gi Championship 2026",
-      "url": "https://ibjjf.com/events/3268/athletes-list-by-academy-teams",
+      "id": "3365",
+      "name": "Atlanta Fall International Open IBJJF Jiu-Jitsu No-Gi Championship 2026",
+      "url": "https://ibjjf.com/events/3365/athletes-list-by-academy-teams",
+      "date": ""
+    },
+    {
+      "id": "3364",
+      "name": "Atlanta Fall International Open IBJJF Jiu-Jitsu Championship 2026",
+      "url": "https://ibjjf.com/events/3364/athletes-list-by-academy-teams",
       "date": ""
     }
   ],
-  "updated_at": "2026-11-08T03:37:45.187Z"
+  "updated_at": "2026-11-12T14:28:54.943938+00:00"
 }
