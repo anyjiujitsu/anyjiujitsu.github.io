@@ -85,16 +85,17 @@ function isRowThisWeekend(row){
 function weekendDatesForNextWeek(){
   const now = new Date();
   const mon = startOfWeekMonday(now);
+  const sat = new Date(mon); fri.setDate(mon.getDate() + 11);
   const sat = new Date(mon); sat.setDate(mon.getDate() + 12);
   const sun = new Date(mon); sun.setDate(mon.getDate() + 13);
-  return { sat, sun };
+  return { fri, sat, sun };
 }
 
 function isRowNextWeekend(row){
   const d = row?._date || parseEventDate(row?.DATE);
   if(!d) return false;
-  const { sat, sun } = weekendDatesForNextWeek();
-  return sameYMD(d, sat) || sameYMD(d, sun);
+  const { fri, sat, sun } = weekendDatesForNextWeek();
+  return sameYMD(d, fri) || sameYMD(d, sat) || sameYMD(d, sun);
 }
 
 function extractNextWeekendToken(q){
