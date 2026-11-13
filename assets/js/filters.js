@@ -85,7 +85,7 @@ function isRowThisWeekend(row){
 function weekendDatesForNextWeek(){
   const now = new Date();
   const mon = startOfWeekMonday(now);
-  const sat = new Date(mon); fri.setDate(mon.getDate() + 11);
+  const fri = new Date(mon); fri.setDate(mon.getDate() + 11);
   const sat = new Date(mon); sat.setDate(mon.getDate() + 12);
   const sun = new Date(mon); sun.setDate(mon.getDate() + 13);
   return { fri, sat, sun };
