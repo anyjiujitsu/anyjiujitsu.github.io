@@ -20,7 +20,7 @@
       "date": ""
     }
   ],
-  "updated_at": "2026-11-15T16:07:02.726898+00:00",
+  "updated_at": "2026-11-15T16:22:02.290613+00:00",
   "athletes": [
     {
       "competition_id": "3366",
@@ -524,12 +524,12 @@
       "name": "Sawyer James Macallan Dillinger",
       "team": "Alliance",
       "bracket": "Yellow / Junior 1 / Male / Feather (73.60lb)",
-      "time": "11:00 AM",
+      "time": "11:04 AM",
       "mat": "4",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3366/categories/2960213",
       "time_type": "listed fight",
-      "result": "",
+      "result": "WIN",
       "fight_number": "15"
     },
     {
@@ -614,12 +614,12 @@
       "name": "Mason Alexander Kim",
       "team": "Pablo Silva BJJ",
       "bracket": "Yellow / Junior 1 / Male / Feather (73.60lb)",
-      "time": "11:00 AM",
+      "time": "11:04 AM",
       "mat": "4",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3366/categories/2960213",
       "time_type": "listed fight",
-      "result": "",
+      "result": "LOSS",
       "fight_number": "15"
     },
     {
