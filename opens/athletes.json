@@ -20,7 +20,7 @@
       "date": ""
     }
   ],
-  "updated_at": "2026-11-15T20:51:59.165875+00:00",
+  "updated_at": "2026-11-15T21:07:07.093017+00:00",
   "athletes": [
     {
       "competition_id": "3366",
@@ -2630,7 +2630,7 @@
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3365/categories/2959754",
       "time_type": "listed fight",
       "result": "WIN",
-      "fight_number": "25"
+      "fight_number": "22"
     },
     {
       "competition_id": "3365",
@@ -2639,13 +2639,13 @@
       "name": "Carl M Watts",
       "team": "Movimento",
       "bracket": "Blue / Master 5 / Male / Medium Heavy (188.60lb)",
-      "time": "04:26 PM",
+      "time": "03:48 PM",
       "mat": "4",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3365/categories/2959754",
       "time_type": "listed fight",
-      "result": "",
-      "fight_number": "28"
+      "result": "WIN",
+      "fight_number": "23"
     },
     {
       "competition_id": "3365",
@@ -2669,13 +2669,13 @@
       "name": "Javier Alejandro Sayago",
       "team": "Team FNDN X",
       "bracket": "Blue / Master 5 / Male / Medium Heavy (188.60lb)",
-      "time": "04:26 PM",
+      "time": "03:48 PM",
       "mat": "4",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3365/categories/2959754",
       "time_type": "listed fight",
-      "result": "",
-      "fight_number": "28"
+      "result": "LOSS",
+      "fight_number": "23"
     },
     {
       "competition_id": "3365",
@@ -2729,13 +2729,13 @@
       "name": "Nathanael Isaiah Schwartz",
       "team": "Queen City Grappling Club",
       "bracket": "Brown / Adult / Male / Medium Heavy (188.60lb)",
-      "time": "03:45 PM",
+      "time": "03:50 PM",
       "mat": "4",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3365/categories/2959416",
       "time_type": "listed fight",
-      "result": "",
-      "fight_number": "22"
+      "result": "WIN",
+      "fight_number": "24"
     },
     {
       "competition_id": "3365",
@@ -2759,13 +2759,13 @@
       "name": "Tyler James Blasko",
       "team": "The Nexus Collective",
       "bracket": "Brown / Adult / Male / Medium Heavy (188.60lb)",
-      "time": "03:45 PM",
+      "time": "03:50 PM",
       "mat": "4",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3365/categories/2959416",
       "time_type": "listed fight",
-      "result": "",
-      "fight_number": "22"
+      "result": "LOSS",
+      "fight_number": "24"
     },
     {
       "competition_id": "3365",
@@ -3299,13 +3299,28 @@
       "name": "Connor Andrew Osburn",
       "team": "American Top Team Atlanta",
       "bracket": "Blue / Master 1 / Male / Heavy (202.00lb)",
-      "time": "03:52 PM",
+      "time": "03:53 PM",
+      "mat": "3",
+      "day": "Sun",
+      "bracket_url": "https://www.bjjcompsystem.com/tournaments/3365/categories/2959486",
+      "time_type": "listed fight",
+      "result": "WIN",
+      "fight_number": "24"
+    },
+    {
+      "competition_id": "3365",
+      "competition_name": "Atlanta Fall International Open IBJJF Jiu-Jitsu No-Gi Championship 2026",
+      "date": "",
+      "name": "Connor Andrew Osburn",
+      "team": "American Top Team Atlanta",
+      "bracket": "Blue / Master 1 / Male / Heavy (202.00lb)",
+      "time": "04:00 PM",
       "mat": "3",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3365/categories/2959486",
       "time_type": "listed fight",
       "result": "",
-      "fight_number": "24"
+      "fight_number": "25"
     },
     {
       "competition_id": "3365",
@@ -3334,8 +3349,23 @@
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3365/categories/2959486",
       "time_type": "listed fight",
-      "result": "",
+      "result": "WIN",
       "fight_number": "22"
+    },
+    {
+      "competition_id": "3365",
+      "competition_name": "Atlanta Fall International Open IBJJF Jiu-Jitsu No-Gi Championship 2026",
+      "date": "",
+      "name": "Kruiz Taylor Cathersides",
+      "team": "GF Team",
+      "bracket": "Blue / Master 1 / Male / Heavy (202.00lb)",
+      "time": "04:00 PM",
+      "mat": "3",
+      "day": "Sun",
+      "bracket_url": "https://www.bjjcompsystem.com/tournaments/3365/categories/2959486",
+      "time_type": "listed fight",
+      "result": "",
+      "fight_number": "25"
     },
     {
       "competition_id": "3365",
@@ -3359,12 +3389,12 @@
       "name": "Anthony John Brown Jr",
       "team": "Team FNDN X",
       "bracket": "Blue / Master 1 / Male / Heavy (202.00lb)",
-      "time": "03:52 PM",
+      "time": "03:53 PM",
       "mat": "3",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3365/categories/2959486",
       "time_type": "listed fight",
-      "result": "",
+      "result": "LOSS",
       "fight_number": "24"
     },
     {
@@ -3409,7 +3439,7 @@
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3365/categories/2959486",
       "time_type": "listed fight",
-      "result": "",
+      "result": "LOSS",
       "fight_number": "22"
     },
     {
@@ -3419,13 +3449,13 @@
       "name": "Kayla Louise Constance Meisner",
       "team": "Alliance",
       "bracket": "Blue / Master 1 / Female / Middle (147.00lb)",
-      "time": "03:54 PM",
+      "time": "04:05 PM",
       "mat": "2",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3365/categories/2959514",
       "time_type": "listed fight",
       "result": "",
-      "fight_number": "24"
+      "fight_number": "26"
     },
     {
       "competition_id": "3365",
@@ -3434,13 +3464,13 @@
       "name": "Crystal Jennifer Reich",
       "team": "Gracie Elite Team",
       "bracket": "Blue / Master 1 / Female / Middle (147.00lb)",
-      "time": "03:54 PM",
+      "time": "04:05 PM",
       "mat": "2",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3365/categories/2959514",
       "time_type": "listed fight",
       "result": "",
-      "fight_number": "24"
+      "fight_number": "26"
     },
     {
       "competition_id": "3365",
@@ -3484,7 +3514,7 @@
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3365/categories/2959622",
       "time_type": "listed fight",
-      "result": "",
+      "result": "LOSS",
       "fight_number": "21"
     },
     {
@@ -3499,8 +3529,23 @@
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3365/categories/2959622",
       "time_type": "listed fight",
-      "result": "",
+      "result": "WIN",
       "fight_number": "21"
+    },
+    {
+      "competition_id": "3365",
+      "competition_name": "Atlanta Fall International Open IBJJF Jiu-Jitsu No-Gi Championship 2026",
+      "date": "",
+      "name": "Jesse Nathaniel Reed",
+      "team": "Double Dragon POJ",
+      "bracket": "Blue / Master 3 / Male / Heavy (202.00lb)",
+      "time": "04:00 PM",
+      "mat": "6",
+      "day": "Sun",
+      "bracket_url": "https://www.bjjcompsystem.com/tournaments/3365/categories/2959622",
+      "time_type": "listed fight",
+      "result": "",
+      "fight_number": "24"
     },
     {
       "competition_id": "3365",
@@ -3524,7 +3569,7 @@
       "name": "Thomas Patrick Brown",
       "team": "Snow Jiu-Jitsu",
       "bracket": "Blue / Master 3 / Male / Heavy (202.00lb)",
-      "time": "04:06 PM",
+      "time": "04:00 PM",
       "mat": "6",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3365/categories/2959622",
@@ -3539,13 +3584,13 @@
       "name": "Joseph Samuel Smith",
       "team": "Alliance",
       "bracket": "Blue / Master 3 / Male / Ultra Heavy",
-      "time": "04:11 PM",
+      "time": "04:12 PM",
       "mat": "2",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3365/categories/2959630",
       "time_type": "listed fight",
       "result": "",
-      "fight_number": "26"
+      "fight_number": "27"
     },
     {
       "competition_id": "3365",
@@ -3554,13 +3599,13 @@
       "name": "Nathaniel Hollis ll",
       "team": "Team FNDN X",
       "bracket": "Blue / Master 3 / Male / Ultra Heavy",
-      "time": "04:11 PM",
+      "time": "04:12 PM",
       "mat": "2",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3365/categories/2959630",
       "time_type": "listed fight",
       "result": "",
-      "fight_number": "26"
+      "fight_number": "27"
     },
     {
       "competition_id": "3365",
@@ -3664,7 +3709,7 @@
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3365/categories/2959411",
       "time_type": "listed fight",
-      "result": "",
+      "result": "LOSS",
       "fight_number": "22"
     },
     {
@@ -3709,7 +3754,7 @@
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3365/categories/2959411",
       "time_type": "listed fight",
-      "result": "",
+      "result": "WIN",
       "fight_number": "22"
     },
     {
@@ -3734,7 +3779,7 @@
       "name": "Adrienne Nadine Saunders",
       "team": "Alliance",
       "bracket": "Purple / Master 1 / Female / Light (136.00lb)",
-      "time": "04:30 PM",
+      "time": "04:19 PM",
       "mat": "2",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3365/categories/2959511",
@@ -3749,7 +3794,7 @@
       "name": "Joanna Pruszynski",
       "team": "Kronos BJJ HQ",
       "bracket": "Purple / Master 1 / Female / Light (136.00lb)",
-      "time": "04:30 PM",
+      "time": "04:19 PM",
       "mat": "2",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3365/categories/2959511",
@@ -3764,7 +3809,7 @@
       "name": "Thomas Keith Keller",
       "team": "Alliance",
       "bracket": "Purple / Master 4 / Male / Light (162.60lb)",
-      "time": "04:06 PM",
+      "time": "04:07 PM",
       "mat": "3",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3365/categories/2959679",
@@ -3779,7 +3824,7 @@
       "name": "Sean Alvin Cumberbatch",
       "team": "Asenjo Brazilian Jiu-Jitsu",
       "bracket": "Purple / Master 4 / Male / Light (162.60lb)",
-      "time": "04:20 PM",
+      "time": "04:21 PM",
       "mat": "3",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3365/categories/2959679",
@@ -3794,7 +3839,7 @@
       "name": "Matthew Bowman Hershey",
       "team": "Hideaway Brazilian Jiu-Jitsu",
       "bracket": "Purple / Master 4 / Male / Light (162.60lb)",
-      "time": "04:06 PM",
+      "time": "04:07 PM",
       "mat": "3",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3365/categories/2959679",
@@ -3899,7 +3944,7 @@
       "name": "Alexander Quinton Maclin",
       "team": "Alliance",
       "bracket": "Brown / Master 2 / Male / Middle (175.60lb)",
-      "time": "03:59 PM",
+      "time": "04:01 PM",
       "mat": "1",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3365/categories/2959548",
@@ -3914,7 +3959,7 @@
       "name": "Christopher Chong Stanley",
       "team": "Team FNDN X",
       "bracket": "Brown / Master 2 / Male / Middle (175.60lb)",
-      "time": "03:59 PM",
+      "time": "04:01 PM",
       "mat": "1",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3365/categories/2959548",
@@ -3929,13 +3974,13 @@
       "name": "Emmanuel Camacho",
       "team": "Team FNDN X",
       "bracket": "Brown / Master 2 / Male / Middle (175.60lb)",
-      "time": "03:52 PM",
+      "time": "04:31 PM",
       "mat": "1",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3365/categories/2959548",
       "time_type": "listed fight",
       "result": "",
-      "fight_number": "22"
+      "fight_number": "26"
     },
     {
       "competition_id": "3365",
@@ -3944,13 +3989,13 @@
       "name": "Ezra L. Firestone",
       "team": "The Nexus Collective",
       "bracket": "Brown / Master 2 / Male / Middle (175.60lb)",
-      "time": "03:52 PM",
+      "time": "04:31 PM",
       "mat": "1",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3365/categories/2959548",
       "time_type": "listed fight",
       "result": "",
-      "fight_number": "22"
+      "fight_number": "26"
     },
     {
       "competition_id": "3365",
@@ -4124,7 +4169,7 @@
       "name": "Tristan James Parker",
       "team": "Alliance",
       "bracket": "Black / Master 1 / Male / Open Class",
-      "time": "04:50 PM",
+      "time": "04:49 PM",
       "mat": "6",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3365/categories/2959974",
@@ -4154,7 +4199,7 @@
       "name": "Tamerlan Eslemesov",
       "team": "Fight Nation",
       "bracket": "Black / Master 1 / Male / Open Class",
-      "time": "04:42 PM",
+      "time": "04:41 PM",
       "mat": "6",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3365/categories/2959974",
@@ -4184,7 +4229,7 @@
       "name": "Davidson Cesar Toledo",
       "team": "Gracie Barra",
       "bracket": "Black / Master 1 / Male / Open Class",
-      "time": "04:42 PM",
+      "time": "04:41 PM",
       "mat": "6",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3365/categories/2959974",
@@ -4214,13 +4259,13 @@
       "name": "Irland Vitor Nascimento B. Santos",
       "team": "Gracie Barra",
       "bracket": "Black / Master 1 / Male / Open Class",
-      "time": "04:27 PM",
+      "time": "04:33 PM",
       "mat": "6",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3365/categories/2959974",
       "time_type": "listed fight",
       "result": "",
-      "fight_number": "27"
+      "fight_number": "28"
     },
     {
       "competition_id": "3365",
@@ -4229,13 +4274,13 @@
       "name": "Filipe Pimentel Pinheiro",
       "team": "Vision",
       "bracket": "Black / Master 1 / Male / Open Class",
-      "time": "04:27 PM",
+      "time": "04:33 PM",
       "mat": "6",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3365/categories/2959974",
       "time_type": "listed fight",
       "result": "",
-      "fight_number": "27"
+      "fight_number": "28"
     },
     {
       "competition_id": "3365",
@@ -4334,7 +4379,7 @@
       "name": "Frederico Augusto Alves Silva",
       "team": "Alliance",
       "bracket": "Black / Master 2 / Male / Open Class",
-      "time": "04:16 PM",
+      "time": "04:12 PM",
       "mat": "5",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3365/categories/2959975",
@@ -4349,7 +4394,7 @@
       "name": "Lance Kyle Bednorski",
       "team": "CheckMat",
       "bracket": "Black / Master 2 / Male / Open Class",
-      "time": "04:31 PM",
+      "time": "04:27 PM",
       "mat": "5",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3365/categories/2959975",
@@ -4379,7 +4424,7 @@
       "name": "Fabio dos Santos Gaudio",
       "team": "G13 BJJ",
       "bracket": "Black / Master 2 / Male / Open Class",
-      "time": "04:16 PM",
+      "time": "04:12 PM",
       "mat": "5",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3365/categories/2959975",
@@ -4394,7 +4439,7 @@
       "name": "Chairo Olimpio Ivo C. Albuquerque de Vargas",
       "team": "GF Team",
       "bracket": "Black / Master 2 / Male / Open Class",
-      "time": "04:31 PM",
+      "time": "04:27 PM",
       "mat": "5",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3365/categories/2959975",
@@ -4424,7 +4469,7 @@
       "name": "Chaise Olimpio Ivo C. Albuquerque",
       "team": "GF Team",
       "bracket": "Black / Master 2 / Male / Open Class",
-      "time": "04:38 PM",
+      "time": "04:34 PM",
       "mat": "5",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3365/categories/2959975",
@@ -5144,13 +5189,13 @@
       "name": "Albert David Camma",
       "team": "Ares BJJ",
       "bracket": "Blue / Master 4 / Male / Medium Heavy (188.60lb)",
-      "time": "03:54 PM",
+      "time": "04:05 PM",
       "mat": "5",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3365/categories/2959686",
       "time_type": "listed fight",
       "result": "",
-      "fight_number": "25"
+      "fight_number": "27"
     },
     {
       "competition_id": "3365",
@@ -5159,13 +5204,13 @@
       "name": "Michael Justin Moro",
       "team": "Team FNDN X",
       "bracket": "Blue / Master 4 / Male / Medium Heavy (188.60lb)",
-      "time": "03:54 PM",
+      "time": "04:05 PM",
       "mat": "5",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3365/categories/2959686",
       "time_type": "listed fight",
       "result": "",
-      "fight_number": "25"
+      "fight_number": "27"
     },
     {
       "competition_id": "3365",
@@ -5204,13 +5249,13 @@
       "name": "Sarah Kathryn Lyle",
       "team": "Carlson Gracie Team",
       "bracket": "Purple / Adult / Female / Heavy (169.00lb)",
-      "time": "03:55 PM",
+      "time": "03:53 PM",
       "mat": "4",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3365/categories/2959455",
       "time_type": "listed fight",
-      "result": "",
-      "fight_number": "23"
+      "result": "WIN",
+      "fight_number": "25"
     },
     {
       "competition_id": "3365",
@@ -5234,13 +5279,13 @@
       "name": "Ainslie Kathryn Armstrong",
       "team": "Telari",
       "bracket": "Purple / Adult / Female / Heavy (169.00lb)",
-      "time": "03:55 PM",
+      "time": "03:53 PM",
       "mat": "4",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3365/categories/2959455",
       "time_type": "listed fight",
-      "result": "",
-      "fight_number": "23"
+      "result": "LOSS",
+      "fight_number": "25"
     },
     {
       "competition_id": "3365",
@@ -5324,13 +5369,28 @@
       "name": "Donald R. Hale",
       "team": "Ares BJJ",
       "bracket": "Black / Master 6 / Male / Open Class",
-      "time": "03:52 PM",
+      "time": "03:47 PM",
+      "mat": "6",
+      "day": "Sun",
+      "bracket_url": "https://www.bjjcompsystem.com/tournaments/3365/categories/2959979",
+      "time_type": "listed fight",
+      "result": "LOSS",
+      "fight_number": "22"
+    },
+    {
+      "competition_id": "3365",
+      "competition_name": "Atlanta Fall International Open IBJJF Jiu-Jitsu No-Gi Championship 2026",
+      "date": "",
+      "name": "Donald R. Hale",
+      "team": "Ares BJJ",
+      "bracket": "Black / Master 6 / Male / Open Class",
+      "time": "04:19 PM",
       "mat": "6",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3365/categories/2959979",
       "time_type": "listed fight",
       "result": "",
-      "fight_number": "22"
+      "fight_number": "26"
     },
     {
       "competition_id": "3365",
@@ -5339,13 +5399,13 @@
       "name": "Shawn Michael Lawrence",
       "team": "CDA Jiu-Jitsu",
       "bracket": "Black / Master 6 / Male / Open Class",
-      "time": "04:35 PM",
+      "time": "04:19 PM",
       "mat": "6",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3365/categories/2959979",
       "time_type": "listed fight",
       "result": "",
-      "fight_number": "28"
+      "fight_number": "26"
     },
     {
       "competition_id": "3365",
@@ -5354,13 +5414,28 @@
       "name": "James Whyte IV",
       "team": "Inicio Jiu-Jitsu",
       "bracket": "Black / Master 6 / Male / Open Class",
-      "time": "03:52 PM",
+      "time": "03:47 PM",
+      "mat": "6",
+      "day": "Sun",
+      "bracket_url": "https://www.bjjcompsystem.com/tournaments/3365/categories/2959979",
+      "time_type": "listed fight",
+      "result": "WIN",
+      "fight_number": "22"
+    },
+    {
+      "competition_id": "3365",
+      "competition_name": "Atlanta Fall International Open IBJJF Jiu-Jitsu No-Gi Championship 2026",
+      "date": "",
+      "name": "James Whyte IV",
+      "team": "Inicio Jiu-Jitsu",
+      "bracket": "Black / Master 6 / Male / Open Class",
+      "time": "04:57 PM",
       "mat": "6",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3365/categories/2959979",
       "time_type": "listed fight",
       "result": "",
-      "fight_number": "22"
+      "fight_number": "31"
     },
     {
       "competition_id": "3365",
@@ -5599,7 +5674,7 @@
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3365/categories/2959510",
       "time_type": "listed fight",
-      "result": "",
+      "result": "LOSS",
       "fight_number": "24"
     },
     {
@@ -5629,7 +5704,7 @@
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3365/categories/2959510",
       "time_type": "listed fight",
-      "result": "",
+      "result": "WIN",
       "fight_number": "24"
     },
     {
@@ -5749,8 +5824,23 @@
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3365/categories/2959496",
       "time_type": "listed fight",
-      "result": "",
+      "result": "WIN",
       "fight_number": "26"
+    },
+    {
+      "competition_id": "3365",
+      "competition_name": "Atlanta Fall International Open IBJJF Jiu-Jitsu No-Gi Championship 2026",
+      "date": "",
+      "name": "Jonathan Kyle Stephens",
+      "team": "Baynes Martial Arts Fitness",
+      "bracket": "Brown / Master 1 / Male / Ultra Heavy",
+      "time": "04:41 PM",
+      "mat": "5",
+      "day": "Sun",
+      "bracket_url": "https://www.bjjcompsystem.com/tournaments/3365/categories/2959496",
+      "time_type": "listed fight",
+      "result": "",
+      "fight_number": "32"
     },
     {
       "competition_id": "3365",
@@ -5764,7 +5854,7 @@
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3365/categories/2959496",
       "time_type": "listed fight",
-      "result": "",
+      "result": "LOSS",
       "fight_number": "26"
     },
     {
@@ -5774,7 +5864,7 @@
       "name": "Daniel Howard Kwantes",
       "team": "Telari",
       "bracket": "Brown / Master 1 / Male / Ultra Heavy",
-      "time": "04:18 PM",
+      "time": "04:19 PM",
       "mat": "5",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3365/categories/2959496",
@@ -6044,13 +6134,13 @@
       "name": "Deacon James Smith",
       "team": "BlackSmith Jiu-Jitsu",
       "bracket": "Brown / Adult / Male / Heavy (202.00lb)",
-      "time": "04:07 PM",
+      "time": "03:57 PM",
       "mat": "2",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3365/categories/2959420",
       "time_type": "listed fight",
       "result": "",
-      "fight_number": "25"
+      "fight_number": "26"
     },
     {
       "competition_id": "3365",
@@ -6059,12 +6149,12 @@
       "name": "Alexander Michael Park",
       "team": "Fight Sports",
       "bracket": "Brown / Adult / Male / Heavy (202.00lb)",
-      "time": "03:50 PM",
+      "time": "03:57 PM",
       "mat": "2",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3365/categories/2959420",
       "time_type": "listed fight",
-      "result": "",
+      "result": "LOSS",
       "fight_number": "23"
     },
     {
@@ -6344,13 +6434,13 @@
       "name": "Wallisson Oliveira Souza",
       "team": "Campeão United Jiu-Jitsu",
       "bracket": "Black / Adult / Male / Open Class",
-      "time": "04:06 PM",
+      "time": "04:24 PM",
       "mat": "1",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3365/categories/2959972",
       "time_type": "listed fight",
       "result": "",
-      "fight_number": "24"
+      "fight_number": "25"
     },
     {
       "competition_id": "3365",
@@ -6359,22 +6449,7 @@
       "name": "Bernardo Delibero",
       "team": "Fight Sports",
       "bracket": "Black / Adult / Male / Open Class",
-      "time": "04:18 PM",
-      "mat": "1",
-      "day": "Sun",
-      "bracket_url": "https://www.bjjcompsystem.com/tournaments/3365/categories/2959972",
-      "time_type": "listed fight",
-      "result": "",
-      "fight_number": "25"
-    },
-    {
-      "competition_id": "3365",
-      "competition_name": "Atlanta Fall International Open IBJJF Jiu-Jitsu No-Gi Championship 2026",
-      "date": "",
-      "name": "Owen Anthony Jones",
-      "team": "FPK Apex Jiu-Jitsu",
-      "bracket": "Black / Adult / Male / Open Class",
-      "time": "04:06 PM",
+      "time": "04:12 PM",
       "mat": "1",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3365/categories/2959972",
@@ -6386,16 +6461,31 @@
       "competition_id": "3365",
       "competition_name": "Atlanta Fall International Open IBJJF Jiu-Jitsu No-Gi Championship 2026",
       "date": "",
-      "name": "Dylan Jonathan J. Melton",
-      "team": "Gracie Barra",
+      "name": "Owen Anthony Jones",
+      "team": "FPK Apex Jiu-Jitsu",
       "bracket": "Black / Adult / Male / Open Class",
-      "time": "04:18 PM",
+      "time": "04:24 PM",
       "mat": "1",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3365/categories/2959972",
       "time_type": "listed fight",
       "result": "",
       "fight_number": "25"
+    },
+    {
+      "competition_id": "3365",
+      "competition_name": "Atlanta Fall International Open IBJJF Jiu-Jitsu No-Gi Championship 2026",
+      "date": "",
+      "name": "Dylan Jonathan J. Melton",
+      "team": "Gracie Barra",
+      "bracket": "Black / Adult / Male / Open Class",
+      "time": "04:12 PM",
+      "mat": "1",
+      "day": "Sun",
+      "bracket_url": "https://www.bjjcompsystem.com/tournaments/3365/categories/2959972",
+      "time_type": "listed fight",
+      "result": "",
+      "fight_number": "24"
     },
     {
       "competition_id": "3365",
@@ -6614,13 +6704,13 @@
       "name": "Edward Downs Stahl",
       "team": "Charlotte Jiu-Jitsu Academy",
       "bracket": "Black / Master 3 / Male / Open Class",
-      "time": "04:20 PM",
+      "time": "04:12 PM",
       "mat": "6",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3365/categories/2959976",
       "time_type": "listed fight",
       "result": "",
-      "fight_number": "26"
+      "fight_number": "25"
     },
     {
       "competition_id": "3365",
@@ -6629,13 +6719,13 @@
       "name": "Adam Thomas Harper",
       "team": "SBG International (SBGI)",
       "bracket": "Black / Master 3 / Male / Open Class",
-      "time": "04:20 PM",
+      "time": "04:12 PM",
       "mat": "6",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3365/categories/2959976",
       "time_type": "listed fight",
       "result": "",
-      "fight_number": "26"
+      "fight_number": "25"
     },
     {
       "competition_id": "3365",
@@ -6764,13 +6854,13 @@
       "name": "Lesley Smallwood Walsh",
       "team": "CheckMat",
       "bracket": "Blue / Master 2 / Female / Heavy (169.00lb)",
-      "time": "04:04 PM",
+      "time": "04:14 PM",
       "mat": "3",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3365/categories/2959590",
       "time_type": "listed fight",
       "result": "",
-      "fight_number": "26"
+      "fight_number": "27"
     },
     {
       "competition_id": "3365",
@@ -6779,13 +6869,13 @@
       "name": "Eva Marie Bill",
       "team": "ZR Team California",
       "bracket": "Blue / Master 2 / Female / Heavy (169.00lb)",
-      "time": "04:04 PM",
+      "time": "04:14 PM",
       "mat": "3",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3365/categories/2959590",
       "time_type": "listed fight",
       "result": "",
-      "fight_number": "26"
+      "fight_number": "27"
     },
     {
       "competition_id": "3365",
@@ -6794,13 +6884,13 @@
       "name": "Elizabeth Ashley Bednorski",
       "team": "CheckMat",
       "bracket": "Purple / Master 1 / Female / Rooster (103.00lb)",
-      "time": "04:04 PM",
+      "time": "04:00 PM",
       "mat": "4",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3365/categories/2959499",
       "time_type": "listed fight",
       "result": "",
-      "fight_number": "24"
+      "fight_number": "26"
     },
     {
       "competition_id": "3365",
@@ -6809,13 +6899,13 @@
       "name": "Yadetsie Nichole Zaragoza-Rivera",
       "team": "Team FNDN X",
       "bracket": "Purple / Master 1 / Female / Rooster (103.00lb)",
-      "time": "04:04 PM",
+      "time": "04:00 PM",
       "mat": "4",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3365/categories/2959499",
       "time_type": "listed fight",
       "result": "",
-      "fight_number": "24"
+      "fight_number": "26"
     },
     {
       "competition_id": "3365",
@@ -6974,13 +7064,13 @@
       "name": "Francisco Ramos Mendes Neto",
       "team": "CheckMat",
       "bracket": "Black / Master 4 / Male / Open Class",
-      "time": "04:13 PM",
+      "time": "04:26 PM",
       "mat": "6",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3365/categories/2959977",
       "time_type": "listed fight",
       "result": "",
-      "fight_number": "25"
+      "fight_number": "27"
     },
     {
       "competition_id": "3365",
@@ -6989,13 +7079,13 @@
       "name": "Christoph Civello",
       "team": "ODSY ATL",
       "bracket": "Black / Master 4 / Male / Open Class",
-      "time": "04:13 PM",
+      "time": "04:26 PM",
       "mat": "6",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3365/categories/2959977",
       "time_type": "listed fight",
       "result": "",
-      "fight_number": "25"
+      "fight_number": "27"
     },
     {
       "competition_id": "3365",
@@ -7079,13 +7169,28 @@
       "name": "Gabriele da Silva Schuck",
       "team": "Double Five Highland Village",
       "bracket": "Black / Adult / Female / Open Class",
-      "time": "04:18 PM",
+      "time": "04:01 PM",
+      "mat": "2",
+      "day": "Sun",
+      "bracket_url": "https://www.bjjcompsystem.com/tournaments/3365/categories/2959973",
+      "time_type": "listed fight",
+      "result": "WIN",
+      "fight_number": "24"
+    },
+    {
+      "competition_id": "3365",
+      "competition_name": "Atlanta Fall International Open IBJJF Jiu-Jitsu No-Gi Championship 2026",
+      "date": "",
+      "name": "Gabriele da Silva Schuck",
+      "team": "Double Five Highland Village",
+      "bracket": "Black / Adult / Female / Open Class",
+      "time": "04:46 PM",
       "mat": "2",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3365/categories/2959973",
       "time_type": "listed fight",
       "result": "",
-      "fight_number": "27"
+      "fight_number": "31"
     },
     {
       "competition_id": "3365",
@@ -7094,13 +7199,28 @@
       "name": "Wendy Jean Anundson",
       "team": "Liborio BJJ",
       "bracket": "Black / Adult / Female / Open Class",
-      "time": "04:18 PM",
+      "time": "04:01 PM",
+      "mat": "2",
+      "day": "Sun",
+      "bracket_url": "https://www.bjjcompsystem.com/tournaments/3365/categories/2959973",
+      "time_type": "listed fight",
+      "result": "LOSS",
+      "fight_number": "24"
+    },
+    {
+      "competition_id": "3365",
+      "competition_name": "Atlanta Fall International Open IBJJF Jiu-Jitsu No-Gi Championship 2026",
+      "date": "",
+      "name": "Wendy Jean Anundson",
+      "team": "Liborio BJJ",
+      "bracket": "Black / Adult / Female / Open Class",
+      "time": "04:34 PM",
       "mat": "2",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3365/categories/2959973",
       "time_type": "listed fight",
       "result": "",
-      "fight_number": "27"
+      "fight_number": "30"
     },
     {
       "competition_id": "3365",
@@ -7109,7 +7229,7 @@
       "name": "Alexandria Luz V Enriquez",
       "team": "Telari",
       "bracket": "Black / Adult / Female / Open Class",
-      "time": "04:45 PM",
+      "time": "04:34 PM",
       "mat": "2",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3365/categories/2959973",
@@ -7634,7 +7754,7 @@
       "name": "Michael Bambic",
       "team": "Gracie Barra",
       "bracket": "Brown / Master 6 / Male / Ultra Heavy",
-      "time": "04:24 PM",
+      "time": "04:15 PM",
       "mat": "4",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3365/categories/2959836",
@@ -7649,7 +7769,7 @@
       "name": "Peter B Long Jr",
       "team": "Team FNDN X",
       "bracket": "Brown / Master 6 / Male / Ultra Heavy",
-      "time": "04:24 PM",
+      "time": "04:15 PM",
       "mat": "4",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3365/categories/2959836",
@@ -7919,7 +8039,7 @@
       "name": "Marc Anthony Jones",
       "team": "Lighthouse Jiu-Jitsu",
       "bracket": "Purple / Master 5 / Male / Super Heavy (215.00lb)",
-      "time": "04:44 PM",
+      "time": "04:27 PM",
       "mat": "2",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3365/categories/2959763",
@@ -7934,7 +8054,7 @@
       "name": "Joseph Samuel Somers",
       "team": "Team FNDN X",
       "bracket": "Purple / Master 5 / Male / Super Heavy (215.00lb)",
-      "time": "04:44 PM",
+      "time": "04:27 PM",
       "mat": "2",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3365/categories/2959763",
@@ -8099,12 +8219,12 @@
       "name": "Vasile Ciuclea Jr",
       "team": "Pedigo Submission Fighting",
       "bracket": "Brown / Master 3 / Male / Medium Heavy (188.60lb)",
-      "time": "03:57 PM",
+      "time": "03:53 PM",
       "mat": "6",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3365/categories/2959620",
       "time_type": "listed fight",
-      "result": "",
+      "result": "LOSS",
       "fight_number": "23"
     },
     {
@@ -8114,12 +8234,12 @@
       "name": "Andres Felipe Cifuentes",
       "team": "Tiburones BJJ Puerto Rico",
       "bracket": "Brown / Master 3 / Male / Medium Heavy (188.60lb)",
-      "time": "03:57 PM",
+      "time": "03:53 PM",
       "mat": "6",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3365/categories/2959620",
       "time_type": "listed fight",
-      "result": "",
+      "result": "WIN",
       "fight_number": "23"
     },
     {
@@ -8159,12 +8279,12 @@
       "name": "Paul Ryan Pavik",
       "team": "Reaction MMA/SAS",
       "bracket": "Purple / Master 2 / Male / Super Heavy (215.00lb)",
-      "time": "03:45 PM",
+      "time": "03:56 PM",
       "mat": "1",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3365/categories/2959559",
       "time_type": "listed fight",
-      "result": "",
+      "result": "WIN",
       "fight_number": "21"
     },
     {
@@ -8174,12 +8294,12 @@
       "name": "David Harrell Lewallen",
       "team": "Team FNDN X",
       "bracket": "Purple / Master 2 / Male / Super Heavy (215.00lb)",
-      "time": "03:45 PM",
+      "time": "03:56 PM",
       "mat": "1",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3365/categories/2959559",
       "time_type": "listed fight",
-      "result": "",
+      "result": "LOSS",
       "fight_number": "21"
     },
     {
@@ -8189,13 +8309,13 @@
       "name": "Fiyin Sokoya",
       "team": "Renzo Gracie",
       "bracket": "Purple / Master 2 / Male / Medium Heavy (188.60lb)",
-      "time": "04:04 PM",
+      "time": "03:55 PM",
       "mat": "5",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3365/categories/2959551",
       "time_type": "listed fight",
-      "result": "",
-      "fight_number": "27"
+      "result": "WIN",
+      "fight_number": "25"
     },
     {
       "competition_id": "3365",
@@ -8204,13 +8324,13 @@
       "name": "Danny Morris Burkett",
       "team": "Team FNDN X",
       "bracket": "Purple / Master 2 / Male / Medium Heavy (188.60lb)",
-      "time": "04:04 PM",
+      "time": "03:55 PM",
       "mat": "5",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3365/categories/2959551",
       "time_type": "listed fight",
-      "result": "",
-      "fight_number": "27"
+      "result": "LOSS",
+      "fight_number": "25"
     },
     {
       "competition_id": "3365",
@@ -8279,7 +8399,7 @@
       "name": "Christian Stefan Balabanoff Acosta",
       "team": "SBG Alabama",
       "bracket": "Purple / Master 3 / Male / Middle (175.60lb)",
-      "time": "04:17 PM",
+      "time": "04:08 PM",
       "mat": "4",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3365/categories/2959615",
@@ -8294,7 +8414,7 @@
       "name": "Toney Allen Mauzy",
       "team": "Team FNDN X",
       "bracket": "Purple / Master 3 / Male / Middle (175.60lb)",
-      "time": "04:17 PM",
+      "time": "04:08 PM",
       "mat": "4",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3365/categories/2959615",
