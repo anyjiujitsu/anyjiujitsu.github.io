@@ -20,7 +20,7 @@
       "date": ""
     }
   ],
-  "updated_at": "2026-11-15T18:06:58.063581+00:00",
+  "updated_at": "2026-11-15T18:21:56.537995+00:00",
   "athletes": [
     {
       "competition_id": "3366",
@@ -7259,12 +7259,12 @@
       "name": "Samuel Gray Collins",
       "team": "Alliance",
       "bracket": "White / Adult / Male / Feather (154.60lb)",
-      "time": "01:00 PM",
+      "time": "01:03 PM",
       "mat": "2",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3364/categories/2958635",
       "time_type": "listed fight",
-      "result": "",
+      "result": "LOSS",
       "fight_number": "15"
     },
     {
@@ -7424,12 +7424,12 @@
       "name": "Amishai Weismark",
       "team": "American Top Team BJJ",
       "bracket": "White / Adult / Male / Feather (154.60lb)",
-      "time": "01:00 PM",
+      "time": "01:03 PM",
       "mat": "2",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3364/categories/2958635",
       "time_type": "listed fight",
-      "result": "",
+      "result": "WIN",
       "fight_number": "15"
     },
     {
@@ -8429,12 +8429,12 @@
       "name": "Justin Michael Alwine",
       "team": "Alliance",
       "bracket": "White / Master 2 / Male / Light (168.00lb)",
-      "time": "01:07 PM",
+      "time": "01:06 PM",
       "mat": "4",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3364/categories/2958810",
       "time_type": "listed fight",
-      "result": "",
+      "result": "LOSS",
       "fight_number": "16"
     },
     {
@@ -8489,12 +8489,12 @@
       "name": "Glenn Anthony Jones Jr",
       "team": "Carlson Gracie Team",
       "bracket": "White / Master 2 / Male / Light (168.00lb)",
-      "time": "01:07 PM",
+      "time": "01:06 PM",
       "mat": "4",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3364/categories/2958810",
       "time_type": "listed fight",
-      "result": "",
+      "result": "WIN",
       "fight_number": "16"
     },
     {
@@ -19234,7 +19234,7 @@
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3364/categories/2958910",
       "time_type": "listed fight",
-      "result": "",
+      "result": "WIN",
       "fight_number": "15"
     },
     {
@@ -19264,7 +19264,7 @@
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3364/categories/2958910",
       "time_type": "listed fight",
-      "result": "",
+      "result": "LOSS",
       "fight_number": "15"
     },
     {
@@ -23849,12 +23849,12 @@
       "name": "Gordon Scott Jones",
       "team": "Gracie Barra",
       "bracket": "White / Master 4 / Male / Medium Heavy (195.00lb)",
-      "time": "01:07 PM",
+      "time": "01:09 PM",
       "mat": "2",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3364/categories/2958990",
       "time_type": "listed fight",
-      "result": "",
+      "result": "WIN",
       "fight_number": "16"
     },
     {
@@ -23894,12 +23894,12 @@
       "name": "Jeremiah Agwu Odeh-Adimah",
       "team": "Team FNDN X",
       "bracket": "White / Master 4 / Male / Medium Heavy (195.00lb)",
-      "time": "01:07 PM",
+      "time": "01:09 PM",
       "mat": "2",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3364/categories/2958990",
       "time_type": "listed fight",
-      "result": "",
+      "result": "LOSS",
       "fight_number": "16"
     },
     {
