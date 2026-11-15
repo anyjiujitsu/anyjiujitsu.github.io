@@ -20,7 +20,7 @@
       "date": ""
     }
   ],
-  "updated_at": "2026-11-15T15:36:57.700942+00:00",
+  "updated_at": "2026-11-15T15:52:01.764605+00:00",
   "athletes": [
     {
       "competition_id": "3366",
@@ -359,12 +359,12 @@
       "name": "Liam Leonel Lumsden Montes",
       "team": "Alliance",
       "bracket": "Grey / Junior 1 / Male / Feather (73.60lb)",
-      "time": "10:42 AM",
+      "time": "10:31 AM",
       "mat": "3",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3366/categories/2960212",
       "time_type": "listed fight",
-      "result": "",
+      "result": "WIN",
       "fight_number": "15"
     },
     {
@@ -374,12 +374,12 @@
       "name": "Egor Alekseevich Dmitriev",
       "team": "Atlanta Tribe BJJ",
       "bracket": "Grey / Junior 1 / Male / Feather (73.60lb)",
-      "time": "10:42 AM",
+      "time": "10:31 AM",
       "mat": "3",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3366/categories/2960212",
       "time_type": "listed fight",
-      "result": "",
+      "result": "LOSS",
       "fight_number": "15"
     },
     {
@@ -409,7 +409,7 @@
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3366/categories/2960269",
       "time_type": "listed fight",
-      "result": "",
+      "result": "WIN",
       "fight_number": "13"
     },
     {
@@ -439,7 +439,7 @@
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3366/categories/2960269",
       "time_type": "listed fight",
-      "result": "",
+      "result": "LOSS",
       "fight_number": "13"
     },
     {
@@ -509,7 +509,7 @@
       "name": "Sawyer James Macallan Dillinger",
       "team": "Alliance",
       "bracket": "Yellow / Junior 1 / Male / Feather (73.60lb)",
-      "time": "10:36 AM",
+      "time": "10:35 AM",
       "mat": "4",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3366/categories/2960213",
@@ -599,7 +599,7 @@
       "name": "Mason Alexander Kim",
       "team": "Pablo Silva BJJ",
       "bracket": "Yellow / Junior 1 / Male / Feather (73.60lb)",
-      "time": "10:42 AM",
+      "time": "10:41 AM",
       "mat": "4",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3366/categories/2960213",
@@ -629,7 +629,7 @@
       "name": "Benjamin Yom-Tov Kohen",
       "team": "Valko BJJ",
       "bracket": "Yellow / Junior 1 / Male / Feather (73.60lb)",
-      "time": "10:36 AM",
+      "time": "10:35 AM",
       "mat": "4",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3366/categories/2960213",
@@ -659,12 +659,12 @@
       "name": "Skyler Mcqueen Rohloff",
       "team": "Alliance",
       "bracket": "Yellow / Junior 3 / Female / Middle (106.60lb)",
-      "time": "10:42 AM",
+      "time": "10:41 AM",
       "mat": "5",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3366/categories/2960354",
       "time_type": "listed fight",
-      "result": "",
+      "result": "LOSS",
       "fight_number": "15"
     },
     {
@@ -674,12 +674,12 @@
       "name": "Kaci Elizabeth Yearwood",
       "team": "SubSynd",
       "bracket": "Yellow / Junior 3 / Female / Middle (106.60lb)",
-      "time": "10:42 AM",
+      "time": "10:41 AM",
       "mat": "5",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3366/categories/2960354",
       "time_type": "listed fight",
-      "result": "",
+      "result": "WIN",
       "fight_number": "15"
     },
     {
@@ -839,12 +839,12 @@
       "name": "Katrina Rose Sabin",
       "team": "Athlas Training Team",
       "bracket": "Yellow / Junior 3 / Female / Light (98.00lb)",
-      "time": "10:36 AM",
+      "time": "10:33 AM",
       "mat": "1",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3366/categories/2960351",
       "time_type": "listed fight",
-      "result": "",
+      "result": "LOSS",
       "fight_number": "16"
     },
     {
@@ -854,12 +854,12 @@
       "name": "Manuela Frazatto",
       "team": "Telari",
       "bracket": "Yellow / Junior 3 / Female / Light (98.00lb)",
-      "time": "10:36 AM",
+      "time": "10:33 AM",
       "mat": "1",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3366/categories/2960351",
       "time_type": "listed fight",
-      "result": "",
+      "result": "WIN",
       "fight_number": "16"
     },
     {
@@ -1609,7 +1609,7 @@
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3366/categories/2960323",
       "time_type": "listed fight",
-      "result": "",
+      "result": "WIN",
       "fight_number": "12"
     },
     {
@@ -1624,7 +1624,7 @@
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3366/categories/2960323",
       "time_type": "listed fight",
-      "result": "",
+      "result": "LOSS",
       "fight_number": "12"
     },
     {
@@ -1924,7 +1924,7 @@
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3366/categories/2960236",
       "time_type": "listed fight",
-      "result": "",
+      "result": "LOSS",
       "fight_number": "15"
     },
     {
@@ -1954,7 +1954,7 @@
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3366/categories/2960236",
       "time_type": "listed fight",
-      "result": "",
+      "result": "WIN",
       "fight_number": "15"
     },
     {
@@ -2084,12 +2084,12 @@
       "name": "Sawyer Jack Higdon",
       "team": "Ground Strike War Dogs",
       "bracket": "Grey / Junior 3 / Male / Middle (106.60lb)",
-      "time": "10:30 AM",
+      "time": "10:31 AM",
       "mat": "4",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3366/categories/2960326",
       "time_type": "listed fight",
-      "result": "",
+      "result": "WIN",
       "fight_number": "13"
     },
     {
@@ -2099,12 +2099,12 @@
       "name": "Dmitrii Belyi",
       "team": "Union Team BJJ",
       "bracket": "Grey / Junior 3 / Male / Middle (106.60lb)",
-      "time": "10:30 AM",
+      "time": "10:31 AM",
       "mat": "4",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3366/categories/2960326",
       "time_type": "listed fight",
-      "result": "",
+      "result": "LOSS",
       "fight_number": "13"
     },
     {
@@ -2339,7 +2339,7 @@
       "name": "Ayla Rosa Villa",
       "team": "Pete Snider BJJ",
       "bracket": "Grey / Junior 3 / Female / Middle (106.60lb)",
-      "time": "10:48 AM",
+      "time": "10:45 AM",
       "mat": "5",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3366/categories/2960353",
@@ -2374,7 +2374,7 @@
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3366/categories/2960353",
       "time_type": "listed fight",
-      "result": "",
+      "result": "LOSS",
       "fight_number": "14"
     },
     {
@@ -2389,8 +2389,23 @@
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3366/categories/2960353",
       "time_type": "listed fight",
-      "result": "",
+      "result": "WIN",
       "fight_number": "14"
+    },
+    {
+      "competition_id": "3366",
+      "competition_name": "Atlanta Fall Kids International Open IBJJF Jiu-Jitsu Championship 2026",
+      "date": "",
+      "name": "Lara Candido Santos",
+      "team": "Telari",
+      "bracket": "Grey / Junior 3 / Female / Middle (106.60lb)",
+      "time": "10:45 AM",
+      "mat": "5",
+      "day": "Sun",
+      "bracket_url": "https://www.bjjcompsystem.com/tournaments/3366/categories/2960353",
+      "time_type": "listed fight",
+      "result": "",
+      "fight_number": "16"
     },
     {
       "competition_id": "3366",
@@ -2459,12 +2474,12 @@
       "name": "Aiden Ariel Pineda",
       "team": "Rubicon Jiu-Jitsu",
       "bracket": "Yellow / Junior 2 / Male / Middle (93.60lb)",
-      "time": "10:42 AM",
+      "time": "10:32 AM",
       "mat": "3",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3366/categories/2960273",
       "time_type": "listed fight",
-      "result": "",
+      "result": "LOSS",
       "fight_number": "14"
     },
     {
@@ -2489,12 +2504,12 @@
       "name": "John Bedford Blackburn IV",
       "team": "Telari",
       "bracket": "Yellow / Junior 2 / Male / Middle (93.60lb)",
-      "time": "10:42 AM",
+      "time": "10:32 AM",
       "mat": "3",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3366/categories/2960273",
       "time_type": "listed fight",
-      "result": "",
+      "result": "WIN",
       "fight_number": "14"
     },
     {
