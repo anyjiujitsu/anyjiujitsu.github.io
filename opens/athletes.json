@@ -20,7 +20,7 @@
       "date": ""
     }
   ],
-  "updated_at": "2026-11-15T01:22:04.658195+00:00",
+  "updated_at": "2026-11-15T01:37:06.311718+00:00",
   "athletes": [
     {
       "competition_id": "3366",
@@ -12374,12 +12374,12 @@
       "name": "Jorge Juan Quinones Andino",
       "team": "Alliance",
       "bracket": "Brown / Master 2 / Male / Open Class",
-      "time": "08:15 PM",
+      "time": "08:23 PM",
       "mat": "5",
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3364/categories/2959346",
       "time_type": "listed fight",
-      "result": "",
+      "result": "WIN",
       "fight_number": "94"
     },
     {
@@ -12419,12 +12419,12 @@
       "name": "Aric Alexander Bottoms",
       "team": "Outsiders Jiu-Jitsu",
       "bracket": "Brown / Master 2 / Male / Open Class",
-      "time": "08:15 PM",
+      "time": "08:23 PM",
       "mat": "5",
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3364/categories/2959346",
       "time_type": "listed fight",
-      "result": "",
+      "result": "LOSS",
       "fight_number": "94"
     },
     {
@@ -15374,12 +15374,12 @@
       "name": "Brandon Kelly Thrower",
       "team": "Team FNDN X",
       "bracket": "Brown / Master 3 / Male / Open Class",
-      "time": "08:20 PM",
+      "time": "08:23 PM",
       "mat": "3",
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3364/categories/2959349",
       "time_type": "listed fight",
-      "result": "",
+      "result": "LOSS",
       "fight_number": "94"
     },
     {
@@ -15449,12 +15449,12 @@
       "name": "Andres Felipe Cifuentes",
       "team": "Tiburones BJJ Puerto Rico",
       "bracket": "Brown / Master 3 / Male / Open Class",
-      "time": "08:20 PM",
+      "time": "08:23 PM",
       "mat": "3",
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3364/categories/2959349",
       "time_type": "listed fight",
-      "result": "",
+      "result": "WIN",
       "fight_number": "94"
     },
     {
