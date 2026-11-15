@@ -20,7 +20,7 @@
       "date": ""
     }
   ],
-  "updated_at": "2026-11-15T01:07:01.786483+00:00",
+  "updated_at": "2026-11-15T01:22:04.658195+00:00",
   "athletes": [
     {
       "competition_id": "3366",
@@ -9694,7 +9694,7 @@
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3364/categories/2959365",
       "time_type": "listed fight",
-      "result": "",
+      "result": "LOSS",
       "fight_number": "88"
     },
     {
@@ -9829,7 +9829,7 @@
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3364/categories/2959365",
       "time_type": "listed fight",
-      "result": "",
+      "result": "WIN",
       "fight_number": "88"
     },
     {
@@ -10834,7 +10834,7 @@
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3364/categories/2959342",
       "time_type": "listed fight",
-      "result": "",
+      "result": "LOSS",
       "fight_number": "91"
     },
     {
@@ -10939,7 +10939,7 @@
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3364/categories/2959342",
       "time_type": "listed fight",
-      "result": "",
+      "result": "WIN",
       "fight_number": "91"
     },
     {
@@ -12364,8 +12364,23 @@
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3364/categories/2959346",
       "time_type": "listed fight",
-      "result": "",
+      "result": "WIN",
       "fight_number": "92"
+    },
+    {
+      "competition_id": "3364",
+      "competition_name": "Atlanta Fall International Open IBJJF Jiu-Jitsu Championship 2026",
+      "date": "",
+      "name": "Jorge Juan Quinones Andino",
+      "team": "Alliance",
+      "bracket": "Brown / Master 2 / Male / Open Class",
+      "time": "08:15 PM",
+      "mat": "5",
+      "day": "Sat",
+      "bracket_url": "https://www.bjjcompsystem.com/tournaments/3364/categories/2959346",
+      "time_type": "listed fight",
+      "result": "",
+      "fight_number": "94"
     },
     {
       "competition_id": "3364",
@@ -12389,13 +12404,28 @@
       "name": "Aric Alexander Bottoms",
       "team": "Outsiders Jiu-Jitsu",
       "bracket": "Brown / Master 2 / Male / Open Class",
-      "time": "08:07 PM",
+      "time": "08:05 PM",
+      "mat": "5",
+      "day": "Sat",
+      "bracket_url": "https://www.bjjcompsystem.com/tournaments/3364/categories/2959346",
+      "time_type": "listed fight",
+      "result": "WIN",
+      "fight_number": "93"
+    },
+    {
+      "competition_id": "3364",
+      "competition_name": "Atlanta Fall International Open IBJJF Jiu-Jitsu Championship 2026",
+      "date": "",
+      "name": "Aric Alexander Bottoms",
+      "team": "Outsiders Jiu-Jitsu",
+      "bracket": "Brown / Master 2 / Male / Open Class",
+      "time": "08:15 PM",
       "mat": "5",
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3364/categories/2959346",
       "time_type": "listed fight",
       "result": "",
-      "fight_number": "93"
+      "fight_number": "94"
     },
     {
       "competition_id": "3364",
@@ -12434,12 +12464,12 @@
       "name": "Cameron Dion Redick",
       "team": "Renzo Gracie Spring Hill",
       "bracket": "Brown / Master 2 / Male / Open Class",
-      "time": "08:07 PM",
+      "time": "08:05 PM",
       "mat": "5",
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3364/categories/2959346",
       "time_type": "listed fight",
-      "result": "",
+      "result": "LOSS",
       "fight_number": "93"
     },
     {
@@ -12454,7 +12484,7 @@
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3364/categories/2959346",
       "time_type": "listed fight",
-      "result": "",
+      "result": "LOSS",
       "fight_number": "92"
     },
     {
@@ -15284,12 +15314,12 @@
       "name": "Joseph Roger Stamm",
       "team": "Creighton Mixed Martial Arts Academy",
       "bracket": "Brown / Master 3 / Male / Open Class",
-      "time": "08:14 PM",
+      "time": "08:10 PM",
       "mat": "3",
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3364/categories/2959349",
       "time_type": "listed fight",
-      "result": "",
+      "result": "LOSS",
       "fight_number": "93"
     },
     {
@@ -15319,8 +15349,38 @@
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3364/categories/2959349",
       "time_type": "listed fight",
-      "result": "",
+      "result": "WIN",
       "fight_number": "91"
+    },
+    {
+      "competition_id": "3364",
+      "competition_name": "Atlanta Fall International Open IBJJF Jiu-Jitsu Championship 2026",
+      "date": "",
+      "name": "Brandon Kelly Thrower",
+      "team": "Team FNDN X",
+      "bracket": "Brown / Master 3 / Male / Open Class",
+      "time": "08:10 PM",
+      "mat": "3",
+      "day": "Sat",
+      "bracket_url": "https://www.bjjcompsystem.com/tournaments/3364/categories/2959349",
+      "time_type": "listed fight",
+      "result": "WIN",
+      "fight_number": "93"
+    },
+    {
+      "competition_id": "3364",
+      "competition_name": "Atlanta Fall International Open IBJJF Jiu-Jitsu Championship 2026",
+      "date": "",
+      "name": "Brandon Kelly Thrower",
+      "team": "Team FNDN X",
+      "bracket": "Brown / Master 3 / Male / Open Class",
+      "time": "08:20 PM",
+      "mat": "3",
+      "day": "Sat",
+      "bracket_url": "https://www.bjjcompsystem.com/tournaments/3364/categories/2959349",
+      "time_type": "listed fight",
+      "result": "",
+      "fight_number": "94"
     },
     {
       "competition_id": "3364",
@@ -15344,12 +15404,12 @@
       "name": "Marc Andre Howe",
       "team": "Team FNDN X",
       "bracket": "Brown / Master 3 / Male / Open Class",
-      "time": "08:07 PM",
+      "time": "08:03 PM",
       "mat": "3",
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3364/categories/2959349",
       "time_type": "listed fight",
-      "result": "",
+      "result": "LOSS",
       "fight_number": "92"
     },
     {
@@ -15364,7 +15424,7 @@
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3364/categories/2959349",
       "time_type": "listed fight",
-      "result": "",
+      "result": "LOSS",
       "fight_number": "91"
     },
     {
@@ -15374,13 +15434,28 @@
       "name": "Andres Felipe Cifuentes",
       "team": "Tiburones BJJ Puerto Rico",
       "bracket": "Brown / Master 3 / Male / Open Class",
-      "time": "08:07 PM",
+      "time": "08:03 PM",
+      "mat": "3",
+      "day": "Sat",
+      "bracket_url": "https://www.bjjcompsystem.com/tournaments/3364/categories/2959349",
+      "time_type": "listed fight",
+      "result": "WIN",
+      "fight_number": "92"
+    },
+    {
+      "competition_id": "3364",
+      "competition_name": "Atlanta Fall International Open IBJJF Jiu-Jitsu Championship 2026",
+      "date": "",
+      "name": "Andres Felipe Cifuentes",
+      "team": "Tiburones BJJ Puerto Rico",
+      "bracket": "Brown / Master 3 / Male / Open Class",
+      "time": "08:20 PM",
       "mat": "3",
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3364/categories/2959349",
       "time_type": "listed fight",
       "result": "",
-      "fight_number": "92"
+      "fight_number": "94"
     },
     {
       "competition_id": "3364",
@@ -21779,12 +21854,12 @@
       "name": "Cleverson Lemos Brando",
       "team": "GF Team",
       "bracket": "Brown / Master 4 / Male / Open Class",
-      "time": "08:07 PM",
+      "time": "08:01 PM",
       "mat": "6",
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3364/categories/2959352",
       "time_type": "listed fight",
-      "result": "",
+      "result": "WIN",
       "fight_number": "98"
     },
     {
@@ -21799,7 +21874,7 @@
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3364/categories/2959352",
       "time_type": "listed fight",
-      "result": "",
+      "result": "LOSS",
       "fight_number": "97"
     },
     {
@@ -21814,8 +21889,23 @@
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3364/categories/2959352",
       "time_type": "listed fight",
-      "result": "",
+      "result": "WIN",
       "fight_number": "97"
+    },
+    {
+      "competition_id": "3364",
+      "competition_name": "Atlanta Fall International Open IBJJF Jiu-Jitsu Championship 2026",
+      "date": "",
+      "name": "Duane Cirone Rudder",
+      "team": "Schell Shock BJJ",
+      "bracket": "Brown / Master 4 / Male / Open Class",
+      "time": "08:01 PM",
+      "mat": "6",
+      "day": "Sat",
+      "bracket_url": "https://www.bjjcompsystem.com/tournaments/3364/categories/2959352",
+      "time_type": "listed fight",
+      "result": "LOSS",
+      "fight_number": "98"
     },
     {
       "competition_id": "3364",
@@ -23674,7 +23764,7 @@
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3364/categories/2959343",
       "time_type": "listed fight",
-      "result": "",
+      "result": "LOSS",
       "fight_number": "78"
     },
     {
@@ -23719,7 +23809,7 @@
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3364/categories/2959343",
       "time_type": "listed fight",
-      "result": "",
+      "result": "WIN",
       "fight_number": "78"
     },
     {
@@ -24779,12 +24869,12 @@
       "name": "Mathew Brian Sieg",
       "team": "R1NG BJJ",
       "bracket": "Purple / Master 2 / Male / Open Class",
-      "time": "08:07 PM",
+      "time": "08:05 PM",
       "mat": "4",
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3364/categories/2959345",
       "time_type": "listed fight",
-      "result": "",
+      "result": "LOSS",
       "fight_number": "89"
     },
     {
@@ -24839,12 +24929,12 @@
       "name": "Johnny Morillo",
       "team": "Telari",
       "bracket": "Purple / Master 2 / Male / Open Class",
-      "time": "08:07 PM",
+      "time": "08:05 PM",
       "mat": "4",
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3364/categories/2959345",
       "time_type": "listed fight",
-      "result": "",
+      "result": "WIN",
       "fight_number": "89"
     },
     {
