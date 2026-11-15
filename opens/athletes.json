@@ -20,7 +20,7 @@
       "date": ""
     }
   ],
-  "updated_at": "2026-11-15T15:06:57.843337+00:00",
+  "updated_at": "2026-11-15T15:21:59.025544+00:00",
   "athletes": [
     {
       "competition_id": "3366",
@@ -199,8 +199,23 @@
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3366/categories/2960138",
       "time_type": "listed fight",
-      "result": "",
+      "result": "WIN",
       "fight_number": "9"
+    },
+    {
+      "competition_id": "3366",
+      "competition_name": "Atlanta Fall Kids International Open IBJJF Jiu-Jitsu Championship 2026",
+      "date": "",
+      "name": "Jaxian Reign Fewell",
+      "team": "De La Riva Jiu-Jitsu USA",
+      "bracket": "Grey / Pee-Wee 2 / Male / Feather (60.00lb)",
+      "time": "10:21 AM",
+      "mat": "5",
+      "day": "Sun",
+      "bracket_url": "https://www.bjjcompsystem.com/tournaments/3366/categories/2960138",
+      "time_type": "listed fight",
+      "result": "",
+      "fight_number": "11"
     },
     {
       "competition_id": "3366",
@@ -244,7 +259,7 @@
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3366/categories/2960138",
       "time_type": "listed fight",
-      "result": "",
+      "result": "LOSS",
       "fight_number": "8"
     },
     {
@@ -289,7 +304,7 @@
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3366/categories/2960138",
       "time_type": "listed fight",
-      "result": "",
+      "result": "LOSS",
       "fight_number": "9"
     },
     {
@@ -319,8 +334,23 @@
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3366/categories/2960138",
       "time_type": "listed fight",
-      "result": "",
+      "result": "WIN",
       "fight_number": "8"
+    },
+    {
+      "competition_id": "3366",
+      "competition_name": "Atlanta Fall Kids International Open IBJJF Jiu-Jitsu Championship 2026",
+      "date": "",
+      "name": "Cody Haru Truong",
+      "team": "Telari",
+      "bracket": "Grey / Pee-Wee 2 / Male / Feather (60.00lb)",
+      "time": "10:21 AM",
+      "mat": "5",
+      "day": "Sun",
+      "bracket_url": "https://www.bjjcompsystem.com/tournaments/3366/categories/2960138",
+      "time_type": "listed fight",
+      "result": "",
+      "fight_number": "11"
     },
     {
       "competition_id": "3366",
@@ -329,7 +359,7 @@
       "name": "Liam Leonel Lumsden Montes",
       "team": "Alliance",
       "bracket": "Grey / Junior 1 / Male / Feather (73.60lb)",
-      "time": "10:16 AM",
+      "time": "10:20 AM",
       "mat": "3",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3366/categories/2960212",
@@ -344,7 +374,7 @@
       "name": "Egor Alekseevich Dmitriev",
       "team": "Atlanta Tribe BJJ",
       "bracket": "Grey / Junior 1 / Male / Feather (73.60lb)",
-      "time": "10:16 AM",
+      "time": "10:20 AM",
       "mat": "3",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3366/categories/2960212",
@@ -379,8 +409,23 @@
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3366/categories/2960269",
       "time_type": "listed fight",
-      "result": "",
+      "result": "WIN",
       "fight_number": "7"
+    },
+    {
+      "competition_id": "3366",
+      "competition_name": "Atlanta Fall Kids International Open IBJJF Jiu-Jitsu Championship 2026",
+      "date": "",
+      "name": "Jackson James Miller",
+      "team": "Black Tie Brazilian Jiu-Jitsu",
+      "bracket": "Grey / Junior 2 / Male / Light (87.00lb)",
+      "time": "10:32 AM",
+      "mat": "5",
+      "day": "Sun",
+      "bracket_url": "https://www.bjjcompsystem.com/tournaments/3366/categories/2960269",
+      "time_type": "listed fight",
+      "result": "",
+      "fight_number": "13"
     },
     {
       "competition_id": "3366",
@@ -394,8 +439,23 @@
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3366/categories/2960269",
       "time_type": "listed fight",
-      "result": "",
+      "result": "LOSS",
       "fight_number": "7"
+    },
+    {
+      "competition_id": "3366",
+      "competition_name": "Atlanta Fall Kids International Open IBJJF Jiu-Jitsu Championship 2026",
+      "date": "",
+      "name": "Dominick J Perrin",
+      "team": "Union Team BJJ",
+      "bracket": "Grey / Junior 2 / Male / Light (87.00lb)",
+      "time": "10:11 AM",
+      "mat": "5",
+      "day": "Sun",
+      "bracket_url": "https://www.bjjcompsystem.com/tournaments/3366/categories/2960269",
+      "time_type": "listed fight",
+      "result": "",
+      "fight_number": "10"
     },
     {
       "competition_id": "3366",
@@ -404,7 +464,7 @@
       "name": "Otto William Charles Meisner",
       "team": "Alliance",
       "bracket": "Grey / Junior 3 / Male / Light Feather (80.00lb)",
-      "time": "10:40 AM",
+      "time": "10:33 AM",
       "mat": "4",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3366/categories/2960317",
@@ -419,7 +479,7 @@
       "name": "Maddox Michael Day",
       "team": "Surfight Jiu-Jitsu",
       "bracket": "Grey / Junior 3 / Male / Light Feather (80.00lb)",
-      "time": "10:40 AM",
+      "time": "10:33 AM",
       "mat": "4",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3366/categories/2960317",
@@ -434,13 +494,13 @@
       "name": "Sawyer James Macallan Dillinger",
       "team": "Alliance",
       "bracket": "Yellow / Junior 1 / Male / Feather (73.60lb)",
-      "time": "10:28 AM",
+      "time": "10:27 AM",
       "mat": "4",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3366/categories/2960213",
       "time_type": "listed fight",
       "result": "",
-      "fight_number": "11"
+      "fight_number": "12"
     },
     {
       "competition_id": "3366",
@@ -464,13 +524,28 @@
       "name": "Gabriel Luccas U. Rodrigues Rial",
       "team": "CheckMat",
       "bracket": "Yellow / Junior 1 / Male / Feather (73.60lb)",
-      "time": "10:17 AM",
+      "time": "10:08 AM",
+      "mat": "4",
+      "day": "Sun",
+      "bracket_url": "https://www.bjjcompsystem.com/tournaments/3366/categories/2960213",
+      "time_type": "listed fight",
+      "result": "WIN",
+      "fight_number": "8"
+    },
+    {
+      "competition_id": "3366",
+      "competition_name": "Atlanta Fall Kids International Open IBJJF Jiu-Jitsu Championship 2026",
+      "date": "",
+      "name": "Gabriel Luccas U. Rodrigues Rial",
+      "team": "CheckMat",
+      "bracket": "Yellow / Junior 1 / Male / Feather (73.60lb)",
+      "time": "10:21 AM",
       "mat": "4",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3366/categories/2960213",
       "time_type": "listed fight",
       "result": "",
-      "fight_number": "9"
+      "fight_number": "11"
     },
     {
       "competition_id": "3366",
@@ -479,13 +554,13 @@
       "name": "Apollo Helios Amores",
       "team": "Ground Control MMA",
       "bracket": "Yellow / Junior 1 / Male / Feather (73.60lb)",
-      "time": "10:17 AM",
+      "time": "10:08 AM",
       "mat": "4",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3366/categories/2960213",
       "time_type": "listed fight",
-      "result": "",
-      "fight_number": "9"
+      "result": "LOSS",
+      "fight_number": "8"
     },
     {
       "competition_id": "3366",
@@ -494,13 +569,13 @@
       "name": "Mason Alexander Kim",
       "team": "Pablo Silva BJJ",
       "bracket": "Yellow / Junior 1 / Male / Feather (73.60lb)",
-      "time": "10:34 AM",
+      "time": "10:21 AM",
       "mat": "4",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3366/categories/2960213",
       "time_type": "listed fight",
       "result": "",
-      "fight_number": "12"
+      "fight_number": "11"
     },
     {
       "competition_id": "3366",
@@ -524,13 +599,13 @@
       "name": "Benjamin Yom-Tov Kohen",
       "team": "Valko BJJ",
       "bracket": "Yellow / Junior 1 / Male / Feather (73.60lb)",
-      "time": "10:28 AM",
+      "time": "10:27 AM",
       "mat": "4",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3366/categories/2960213",
       "time_type": "listed fight",
       "result": "",
-      "fight_number": "11"
+      "fight_number": "12"
     },
     {
       "competition_id": "3366",
@@ -554,7 +629,7 @@
       "name": "Skyler Mcqueen Rohloff",
       "team": "Alliance",
       "bracket": "Yellow / Junior 3 / Female / Middle (106.60lb)",
-      "time": "10:40 AM",
+      "time": "10:44 AM",
       "mat": "5",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3366/categories/2960354",
@@ -569,7 +644,7 @@
       "name": "Kaci Elizabeth Yearwood",
       "team": "SubSynd",
       "bracket": "Yellow / Junior 3 / Female / Middle (106.60lb)",
-      "time": "10:40 AM",
+      "time": "10:44 AM",
       "mat": "5",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3366/categories/2960354",
@@ -709,7 +784,7 @@
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3366/categories/2960120",
       "time_type": "listed fight",
-      "result": "",
+      "result": "LOSS",
       "fight_number": "6"
     },
     {
@@ -724,7 +799,7 @@
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3366/categories/2960120",
       "time_type": "listed fight",
-      "result": "",
+      "result": "WIN",
       "fight_number": "6"
     },
     {
@@ -734,13 +809,13 @@
       "name": "Katrina Rose Sabin",
       "team": "Athlas Training Team",
       "bracket": "Yellow / Junior 3 / Female / Light (98.00lb)",
-      "time": "10:29 AM",
+      "time": "10:27 AM",
       "mat": "1",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3366/categories/2960351",
       "time_type": "listed fight",
       "result": "",
-      "fight_number": "14"
+      "fight_number": "15"
     },
     {
       "competition_id": "3366",
@@ -749,13 +824,13 @@
       "name": "Manuela Frazatto",
       "team": "Telari",
       "bracket": "Yellow / Junior 3 / Female / Light (98.00lb)",
-      "time": "10:29 AM",
+      "time": "10:27 AM",
       "mat": "1",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3366/categories/2960351",
       "time_type": "listed fight",
       "result": "",
-      "fight_number": "14"
+      "fight_number": "15"
     },
     {
       "competition_id": "3366",
@@ -769,7 +844,7 @@
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3366/categories/2960196",
       "time_type": "listed fight",
-      "result": "",
+      "result": "LOSS",
       "fight_number": "9"
     },
     {
@@ -784,7 +859,7 @@
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3366/categories/2960196",
       "time_type": "listed fight",
-      "result": "",
+      "result": "WIN",
       "fight_number": "9"
     },
     {
@@ -929,12 +1004,12 @@
       "name": "Adam Carl Smilanich II",
       "team": "Campeão United Jiu-Jitsu",
       "bracket": "Grey / Pee-Wee 3 / Male / Feather (67.00lb)",
-      "time": "10:05 AM",
+      "time": "10:00 AM",
       "mat": "1",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3366/categories/2960174",
       "time_type": "listed fight",
-      "result": "",
+      "result": "WIN",
       "fight_number": "10"
     },
     {
@@ -989,12 +1064,12 @@
       "name": "Rydan Lee Cury",
       "team": "Telari",
       "bracket": "Grey / Pee-Wee 3 / Male / Feather (67.00lb)",
-      "time": "10:05 AM",
+      "time": "10:00 AM",
       "mat": "1",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3366/categories/2960174",
       "time_type": "listed fight",
-      "result": "",
+      "result": "LOSS",
       "fight_number": "10"
     },
     {
@@ -1274,13 +1349,13 @@
       "name": "Zeb River Pace",
       "team": "CheckMat",
       "bracket": "Grey / Junior 1 / Male / Light Feather (67.00lb)",
-      "time": "10:18 AM",
+      "time": "10:21 AM",
       "mat": "2",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3366/categories/2960209",
       "time_type": "listed fight",
       "result": "",
-      "fight_number": "12"
+      "fight_number": "13"
     },
     {
       "competition_id": "3366",
@@ -1289,13 +1364,13 @@
       "name": "Ibrahim Bekzodovich Kasimov",
       "team": "De La Riva Jiu-Jitsu USA",
       "bracket": "Grey / Junior 1 / Male / Light Feather (67.00lb)",
-      "time": "10:18 AM",
+      "time": "10:21 AM",
       "mat": "2",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3366/categories/2960209",
       "time_type": "listed fight",
       "result": "",
-      "fight_number": "12"
+      "fight_number": "13"
     },
     {
       "competition_id": "3366",
@@ -1304,13 +1379,28 @@
       "name": "Ian Patrick Walsh",
       "team": "CheckMat",
       "bracket": "Grey / Junior 2 / Male / Middle (93.60lb)",
-      "time": "10:06 AM",
+      "time": "10:05 AM",
+      "mat": "2",
+      "day": "Sun",
+      "bracket_url": "https://www.bjjcompsystem.com/tournaments/3366/categories/2960272",
+      "time_type": "listed fight",
+      "result": "WIN",
+      "fight_number": "10"
+    },
+    {
+      "competition_id": "3366",
+      "competition_name": "Atlanta Fall Kids International Open IBJJF Jiu-Jitsu Championship 2026",
+      "date": "",
+      "name": "Ian Patrick Walsh",
+      "team": "CheckMat",
+      "bracket": "Grey / Junior 2 / Male / Middle (93.60lb)",
+      "time": "10:15 AM",
       "mat": "2",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3366/categories/2960272",
       "time_type": "listed fight",
       "result": "",
-      "fight_number": "10"
+      "fight_number": "12"
     },
     {
       "competition_id": "3366",
@@ -1319,13 +1409,28 @@
       "name": "Parker Wayne Willis",
       "team": "Pablo Silva BJJ",
       "bracket": "Grey / Junior 2 / Male / Middle (93.60lb)",
-      "time": "10:12 AM",
+      "time": "10:07 AM",
+      "mat": "2",
+      "day": "Sun",
+      "bracket_url": "https://www.bjjcompsystem.com/tournaments/3366/categories/2960272",
+      "time_type": "listed fight",
+      "result": "WIN",
+      "fight_number": "11"
+    },
+    {
+      "competition_id": "3366",
+      "competition_name": "Atlanta Fall Kids International Open IBJJF Jiu-Jitsu Championship 2026",
+      "date": "",
+      "name": "Parker Wayne Willis",
+      "team": "Pablo Silva BJJ",
+      "bracket": "Grey / Junior 2 / Male / Middle (93.60lb)",
+      "time": "10:15 AM",
       "mat": "2",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3366/categories/2960272",
       "time_type": "listed fight",
       "result": "",
-      "fight_number": "11"
+      "fight_number": "12"
     },
     {
       "competition_id": "3366",
@@ -1334,12 +1439,12 @@
       "name": "Cayden Michael Williams",
       "team": "Team FNDN X",
       "bracket": "Grey / Junior 2 / Male / Middle (93.60lb)",
-      "time": "10:12 AM",
+      "time": "10:07 AM",
       "mat": "2",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3366/categories/2960272",
       "time_type": "listed fight",
-      "result": "",
+      "result": "LOSS",
       "fight_number": "11"
     },
     {
@@ -1349,12 +1454,12 @@
       "name": "Peter Ennis Kepshire",
       "team": "Team FNDN X",
       "bracket": "Grey / Junior 2 / Male / Middle (93.60lb)",
-      "time": "10:06 AM",
+      "time": "10:05 AM",
       "mat": "2",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3366/categories/2960272",
       "time_type": "listed fight",
-      "result": "",
+      "result": "LOSS",
       "fight_number": "10"
     },
     {
@@ -1379,13 +1484,28 @@
       "name": "Alessandra Mia Roque",
       "team": "CheckMat",
       "bracket": "Grey / Junior 2 / Female / Heavy (106.60lb)",
-      "time": "10:17 AM",
+      "time": "10:05 AM",
+      "mat": "1",
+      "day": "Sun",
+      "bracket_url": "https://www.bjjcompsystem.com/tournaments/3366/categories/2960305",
+      "time_type": "listed fight",
+      "result": "WIN",
+      "fight_number": "11"
+    },
+    {
+      "competition_id": "3366",
+      "competition_name": "Atlanta Fall Kids International Open IBJJF Jiu-Jitsu Championship 2026",
+      "date": "",
+      "name": "Alessandra Mia Roque",
+      "team": "CheckMat",
+      "bracket": "Grey / Junior 2 / Female / Heavy (106.60lb)",
+      "time": "10:15 AM",
       "mat": "1",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3366/categories/2960305",
       "time_type": "listed fight",
       "result": "",
-      "fight_number": "12"
+      "fight_number": "13"
     },
     {
       "competition_id": "3366",
@@ -1399,7 +1519,7 @@
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3366/categories/2960305",
       "time_type": "listed fight",
-      "result": "",
+      "result": "LOSS",
       "fight_number": "9"
     },
     {
@@ -1409,13 +1529,13 @@
       "name": "Edith Ayn Villa",
       "team": "Pete Snider BJJ",
       "bracket": "Grey / Junior 2 / Female / Heavy (106.60lb)",
-      "time": "10:17 AM",
+      "time": "10:05 AM",
       "mat": "1",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3366/categories/2960305",
       "time_type": "listed fight",
-      "result": "",
-      "fight_number": "12"
+      "result": "LOSS",
+      "fight_number": "11"
     },
     {
       "competition_id": "3366",
@@ -1429,8 +1549,23 @@
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3366/categories/2960305",
       "time_type": "listed fight",
-      "result": "",
+      "result": "WIN",
       "fight_number": "9"
+    },
+    {
+      "competition_id": "3366",
+      "competition_name": "Atlanta Fall Kids International Open IBJJF Jiu-Jitsu Championship 2026",
+      "date": "",
+      "name": "Emma Haley Adibmand",
+      "team": "ZR Team California",
+      "bracket": "Grey / Junior 2 / Female / Heavy (106.60lb)",
+      "time": "10:15 AM",
+      "mat": "1",
+      "day": "Sun",
+      "bracket_url": "https://www.bjjcompsystem.com/tournaments/3366/categories/2960305",
+      "time_type": "listed fight",
+      "result": "",
+      "fight_number": "13"
     },
     {
       "competition_id": "3366",
@@ -1439,7 +1574,7 @@
       "name": "Timothy Graham Faulkner",
       "team": "CheckMat",
       "bracket": "Grey / Junior 3 / Male / Light (98.00lb)",
-      "time": "10:34 AM",
+      "time": "10:38 AM",
       "mat": "3",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3366/categories/2960323",
@@ -1454,7 +1589,7 @@
       "name": "August Monroe Hammett",
       "team": "Telari",
       "bracket": "Grey / Junior 3 / Male / Light (98.00lb)",
-      "time": "10:34 AM",
+      "time": "10:38 AM",
       "mat": "3",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3366/categories/2960323",
@@ -1489,7 +1624,7 @@
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3366/categories/2960400",
       "time_type": "listed fight",
-      "result": "",
+      "result": "WIN",
       "fight_number": "8"
     },
     {
@@ -1549,7 +1684,7 @@
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3366/categories/2960400",
       "time_type": "listed fight",
-      "result": "",
+      "result": "LOSS",
       "fight_number": "8"
     },
     {
@@ -1559,7 +1694,7 @@
       "name": "Steven-Michael Sawyer Silveria-Snow",
       "team": "CheckMat",
       "bracket": "Yellow / Junior 3 / Male / Feather (89.00lb)",
-      "time": "10:36 AM",
+      "time": "10:33 AM",
       "mat": "2",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3366/categories/2960321",
@@ -1574,7 +1709,7 @@
       "name": "Holt Daniel K Norris",
       "team": "Telari",
       "bracket": "Yellow / Junior 3 / Male / Feather (89.00lb)",
-      "time": "10:36 AM",
+      "time": "10:33 AM",
       "mat": "2",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3366/categories/2960321",
@@ -1619,12 +1754,12 @@
       "name": "Christian Ryker Fewell",
       "team": "De La Riva Jiu-Jitsu USA",
       "bracket": "Grey / Pee-Wee 3 / Male / Light Feather (60.00lb)",
-      "time": "10:06 AM",
+      "time": "10:01 AM",
       "mat": "4",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3366/categories/2960172",
       "time_type": "listed fight",
-      "result": "",
+      "result": "WIN",
       "fight_number": "7"
     },
     {
@@ -1649,12 +1784,12 @@
       "name": "Everett Luke Sparrow",
       "team": "Gracie Barra",
       "bracket": "Grey / Pee-Wee 3 / Male / Light Feather (60.00lb)",
-      "time": "10:06 AM",
+      "time": "10:01 AM",
       "mat": "4",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3366/categories/2960172",
       "time_type": "listed fight",
-      "result": "",
+      "result": "LOSS",
       "fight_number": "7"
     },
     {
@@ -1709,13 +1844,13 @@
       "name": "Myah Jauregui",
       "team": "GFTeam Minnesota",
       "bracket": "Grey / Junior 1 / Female / Light (80.00lb)",
-      "time": "10:24 AM",
+      "time": "10:27 AM",
       "mat": "2",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3366/categories/2960242",
       "time_type": "listed fight",
       "result": "",
-      "fight_number": "13"
+      "fight_number": "14"
     },
     {
       "competition_id": "3366",
@@ -1724,13 +1859,13 @@
       "name": "Raelynn Frances Gage",
       "team": "SubSynd",
       "bracket": "Grey / Junior 1 / Female / Light (80.00lb)",
-      "time": "10:24 AM",
+      "time": "10:27 AM",
       "mat": "2",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3366/categories/2960242",
       "time_type": "listed fight",
       "result": "",
-      "fight_number": "13"
+      "fight_number": "14"
     },
     {
       "competition_id": "3366",
@@ -1739,13 +1874,28 @@
       "name": "Paisley Elise Knowles",
       "team": "Gracie Barra",
       "bracket": "Grey / Junior 1 / Female / Light Feather (67.00lb)",
-      "time": "10:11 AM",
+      "time": "10:10 AM",
+      "mat": "1",
+      "day": "Sun",
+      "bracket_url": "https://www.bjjcompsystem.com/tournaments/3366/categories/2960236",
+      "time_type": "listed fight",
+      "result": "WIN",
+      "fight_number": "12"
+    },
+    {
+      "competition_id": "3366",
+      "competition_name": "Atlanta Fall Kids International Open IBJJF Jiu-Jitsu Championship 2026",
+      "date": "",
+      "name": "Paisley Elise Knowles",
+      "team": "Gracie Barra",
+      "bracket": "Grey / Junior 1 / Female / Light Feather (67.00lb)",
+      "time": "10:33 AM",
       "mat": "1",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3366/categories/2960236",
       "time_type": "listed fight",
       "result": "",
-      "fight_number": "11"
+      "fight_number": "16"
     },
     {
       "competition_id": "3366",
@@ -1754,13 +1904,13 @@
       "name": "Celine Gracie Bernardino",
       "team": "Gracie Humaita Las Vegas",
       "bracket": "Grey / Junior 1 / Female / Light Feather (67.00lb)",
-      "time": "10:23 AM",
+      "time": "10:21 AM",
       "mat": "1",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3366/categories/2960236",
       "time_type": "listed fight",
       "result": "",
-      "fight_number": "13"
+      "fight_number": "14"
     },
     {
       "competition_id": "3366",
@@ -1769,13 +1919,28 @@
       "name": "Bella Renee Cook",
       "team": "Outsiders Jiu-Jitsu",
       "bracket": "Grey / Junior 1 / Female / Light Feather (67.00lb)",
-      "time": "10:11 AM",
+      "time": "10:10 AM",
+      "mat": "1",
+      "day": "Sun",
+      "bracket_url": "https://www.bjjcompsystem.com/tournaments/3366/categories/2960236",
+      "time_type": "listed fight",
+      "result": "LOSS",
+      "fight_number": "12"
+    },
+    {
+      "competition_id": "3366",
+      "competition_name": "Atlanta Fall Kids International Open IBJJF Jiu-Jitsu Championship 2026",
+      "date": "",
+      "name": "Bella Renee Cook",
+      "team": "Outsiders Jiu-Jitsu",
+      "bracket": "Grey / Junior 1 / Female / Light Feather (67.00lb)",
+      "time": "10:21 AM",
       "mat": "1",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3366/categories/2960236",
       "time_type": "listed fight",
       "result": "",
-      "fight_number": "11"
+      "fight_number": "14"
     },
     {
       "competition_id": "3366",
@@ -1834,8 +1999,8 @@
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3366/categories/2960524",
       "time_type": "listed fight",
-      "result": "",
-      "fight_number": "8"
+      "result": "LOSS",
+      "fight_number": "9"
     },
     {
       "competition_id": "3366",
@@ -1849,8 +2014,8 @@
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3366/categories/2960524",
       "time_type": "listed fight",
-      "result": "",
-      "fight_number": "8"
+      "result": "WIN",
+      "fight_number": "9"
     },
     {
       "competition_id": "3366",
@@ -1874,7 +2039,7 @@
       "name": "Sawyer Jack Higdon",
       "team": "Ground Strike War Dogs",
       "bracket": "Grey / Junior 3 / Male / Middle (106.60lb)",
-      "time": "10:46 AM",
+      "time": "10:39 AM",
       "mat": "4",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3366/categories/2960326",
@@ -1889,7 +2054,7 @@
       "name": "Dmitrii Belyi",
       "team": "Union Team BJJ",
       "bracket": "Grey / Junior 3 / Male / Middle (106.60lb)",
-      "time": "10:46 AM",
+      "time": "10:39 AM",
       "mat": "4",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3366/categories/2960326",
@@ -1904,7 +2069,7 @@
       "name": "Ramsey Sebastian Rodgers",
       "team": "HSVAL Maverick Training Center",
       "bracket": "Grey / Junior 1 / Male / Light (80.00lb)",
-      "time": "10:23 AM",
+      "time": "10:13 AM",
       "mat": "4",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3366/categories/2960215",
@@ -1919,7 +2084,7 @@
       "name": "Everett Paul Brash",
       "team": "Rubicon Jiu-Jitsu",
       "bracket": "Grey / Junior 1 / Male / Light (80.00lb)",
-      "time": "10:23 AM",
+      "time": "10:13 AM",
       "mat": "4",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3366/categories/2960215",
@@ -2084,13 +2249,13 @@
       "name": "Jocelyn Marcelle Perez",
       "team": "Pablo Silva BJJ",
       "bracket": "Grey / Pee-Wee 2 / Female / Light (67.00lb)",
-      "time": "10:00 AM",
+      "time": "10:15 AM",
       "mat": "3",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3366/categories/2960158",
       "time_type": "listed fight",
       "result": "",
-      "fight_number": "8"
+      "fight_number": "10"
     },
     {
       "competition_id": "3366",
@@ -2099,13 +2264,13 @@
       "name": "Clara Jane Blackburn",
       "team": "Telari",
       "bracket": "Grey / Pee-Wee 2 / Female / Light (67.00lb)",
-      "time": "10:00 AM",
+      "time": "10:15 AM",
       "mat": "3",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3366/categories/2960158",
       "time_type": "listed fight",
       "result": "",
-      "fight_number": "8"
+      "fight_number": "10"
     },
     {
       "competition_id": "3366",
@@ -2114,13 +2279,13 @@
       "name": "Ayla Rosa Villa",
       "team": "Pete Snider BJJ",
       "bracket": "Grey / Junior 3 / Female / Middle (106.60lb)",
-      "time": "10:17 AM",
+      "time": "10:27 AM",
       "mat": "5",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3366/categories/2960353",
       "time_type": "listed fight",
       "result": "",
-      "fight_number": "11"
+      "fight_number": "12"
     },
     {
       "competition_id": "3366",
@@ -2129,13 +2294,13 @@
       "name": "Josie Grace Hatcher",
       "team": "Team FNDN X",
       "bracket": "Grey / Junior 3 / Female / Middle (106.60lb)",
-      "time": "10:17 AM",
+      "time": "10:27 AM",
       "mat": "5",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3366/categories/2960353",
       "time_type": "listed fight",
       "result": "",
-      "fight_number": "11"
+      "fight_number": "12"
     },
     {
       "competition_id": "3366",
@@ -2144,7 +2309,7 @@
       "name": "Lara Candido Santos",
       "team": "Telari",
       "bracket": "Grey / Junior 3 / Female / Middle (106.60lb)",
-      "time": "10:34 AM",
+      "time": "10:38 AM",
       "mat": "5",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3366/categories/2960353",
@@ -2159,7 +2324,7 @@
       "name": "Cameron Hunter Telmo",
       "team": "Ronaldo Jacaré BJJ Academy",
       "bracket": "Grey / Junior 2 / Male / Light Feather (73.60lb)",
-      "time": "10:22 AM",
+      "time": "10:26 AM",
       "mat": "3",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3366/categories/2960263",
@@ -2174,7 +2339,7 @@
       "name": "Harvey Kenichi Truong",
       "team": "Telari",
       "bracket": "Grey / Junior 2 / Male / Light Feather (73.60lb)",
-      "time": "10:22 AM",
+      "time": "10:26 AM",
       "mat": "3",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3366/categories/2960263",
@@ -2189,13 +2354,28 @@
       "name": "Aiden Ariel Pineda",
       "team": "Rubicon Jiu-Jitsu",
       "bracket": "Yellow / Junior 2 / Male / Middle (93.60lb)",
-      "time": "10:10 AM",
+      "time": "10:09 AM",
+      "mat": "3",
+      "day": "Sun",
+      "bracket_url": "https://www.bjjcompsystem.com/tournaments/3366/categories/2960273",
+      "time_type": "listed fight",
+      "result": "LOSS",
+      "fight_number": "8"
+    },
+    {
+      "competition_id": "3366",
+      "competition_name": "Atlanta Fall Kids International Open IBJJF Jiu-Jitsu Championship 2026",
+      "date": "",
+      "name": "Aiden Ariel Pineda",
+      "team": "Rubicon Jiu-Jitsu",
+      "bracket": "Yellow / Junior 2 / Male / Middle (93.60lb)",
+      "time": "10:32 AM",
       "mat": "3",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3366/categories/2960273",
       "time_type": "listed fight",
       "result": "",
-      "fight_number": "10"
+      "fight_number": "13"
     },
     {
       "competition_id": "3366",
@@ -2204,13 +2384,28 @@
       "name": "John Bedford Blackburn IV",
       "team": "Telari",
       "bracket": "Yellow / Junior 2 / Male / Middle (93.60lb)",
-      "time": "10:10 AM",
+      "time": "10:09 AM",
+      "mat": "3",
+      "day": "Sun",
+      "bracket_url": "https://www.bjjcompsystem.com/tournaments/3366/categories/2960273",
+      "time_type": "listed fight",
+      "result": "WIN",
+      "fight_number": "8"
+    },
+    {
+      "competition_id": "3366",
+      "competition_name": "Atlanta Fall Kids International Open IBJJF Jiu-Jitsu Championship 2026",
+      "date": "",
+      "name": "John Bedford Blackburn IV",
+      "team": "Telari",
+      "bracket": "Yellow / Junior 2 / Male / Middle (93.60lb)",
+      "time": "10:44 AM",
       "mat": "3",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3366/categories/2960273",
       "time_type": "listed fight",
       "result": "",
-      "fight_number": "10"
+      "fight_number": "15"
     },
     {
       "competition_id": "3366",
@@ -2219,7 +2414,7 @@
       "name": "Jordan Anthony Gallow",
       "team": "Union Team BJJ",
       "bracket": "Yellow / Junior 2 / Male / Middle (93.60lb)",
-      "time": "10:28 AM",
+      "time": "10:32 AM",
       "mat": "3",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3366/categories/2960273",
