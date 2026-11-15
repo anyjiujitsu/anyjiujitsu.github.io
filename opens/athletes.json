@@ -20,7 +20,7 @@
       "date": ""
     }
   ],
-  "updated_at": "2026-11-15T23:07:20.566123+00:00",
+  "updated_at": "2026-11-15T23:22:13.244265+00:00",
   "athletes": [
     {
       "competition_id": "3366",
@@ -4304,12 +4304,12 @@
       "name": "Tibou Bangoura Jr",
       "team": "American Top Team Atlanta",
       "bracket": "Purple / Adult / Male / Open Class",
-      "time": "05:55 PM",
+      "time": "06:03 PM",
       "mat": "2",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3365/categories/2959989",
       "time_type": "listed fight",
-      "result": "",
+      "result": "LOSS",
       "fight_number": "38"
     },
     {
@@ -4349,12 +4349,12 @@
       "name": "Nikolas Ratomir Perovic",
       "team": "GF Team",
       "bracket": "Purple / Adult / Male / Open Class",
-      "time": "05:55 PM",
+      "time": "06:03 PM",
       "mat": "2",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3365/categories/2959989",
       "time_type": "listed fight",
-      "result": "",
+      "result": "WIN",
       "fight_number": "38"
     },
     {
@@ -4844,12 +4844,12 @@
       "name": "Dylan Ross Sikking",
       "team": "Alliance",
       "bracket": "Brown / Master 2 / Male / Open Class",
-      "time": "06:00 PM",
+      "time": "06:01 PM",
       "mat": "1",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3365/categories/2959996",
       "time_type": "listed fight",
-      "result": "",
+      "result": "LOSS",
       "fight_number": "37"
     },
     {
@@ -4859,12 +4859,12 @@
       "name": "Louis Arthur Ciolino",
       "team": "City Of Palms BJJ",
       "bracket": "Brown / Master 2 / Male / Open Class",
-      "time": "06:00 PM",
+      "time": "06:01 PM",
       "mat": "1",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3365/categories/2959996",
       "time_type": "listed fight",
-      "result": "",
+      "result": "WIN",
       "fight_number": "37"
     },
     {
@@ -4925,6 +4925,21 @@
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3365/categories/2959548",
       "time_type": "listed fight",
       "result": "",
+      "fight_number": "28"
+    },
+    {
+      "competition_id": "3365",
+      "competition_name": "Atlanta Fall International Open IBJJF Jiu-Jitsu No-Gi Championship 2026",
+      "date": "",
+      "name": "Alexander Quinton Maclin",
+      "team": "Alliance",
+      "bracket": "Brown / Master 2 / Male / Middle (175.60lb)",
+      "time": "06:05 PM",
+      "mat": "1",
+      "day": "Sun",
+      "bracket_url": "https://www.bjjcompsystem.com/tournaments/3365/categories/2959548",
+      "time_type": "listed fight",
+      "result": "WIN",
       "fight_number": "23"
     },
     {
@@ -4939,7 +4954,7 @@
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3365/categories/2959548",
       "time_type": "listed fight",
-      "result": "",
+      "result": "LOSS",
       "fight_number": "23"
     },
     {
@@ -4949,12 +4964,12 @@
       "name": "Emmanuel Camacho",
       "team": "Team FNDN X",
       "bracket": "Brown / Master 2 / Male / Middle (175.60lb)",
-      "time": "06:12 PM",
+      "time": "06:05 PM",
       "mat": "1",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3365/categories/2959548",
       "time_type": "listed fight",
-      "result": "",
+      "result": "LOSS",
       "fight_number": "27"
     },
     {
@@ -4964,12 +4979,12 @@
       "name": "Ezra L. Firestone",
       "team": "The Nexus Collective",
       "bracket": "Brown / Master 2 / Male / Middle (175.60lb)",
-      "time": "06:12 PM",
+      "time": "06:05 PM",
       "mat": "1",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3365/categories/2959548",
       "time_type": "listed fight",
-      "result": "",
+      "result": "LOSS",
       "fight_number": "27"
     },
     {
