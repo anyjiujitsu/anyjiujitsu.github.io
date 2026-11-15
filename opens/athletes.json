@@ -20,7 +20,7 @@
       "date": ""
     }
   ],
-  "updated_at": "2026-11-15T22:37:11.277438+00:00",
+  "updated_at": "2026-11-15T22:52:06.822760+00:00",
   "athletes": [
     {
       "competition_id": "3366",
@@ -4264,7 +4264,7 @@
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3365/categories/2959989",
       "time_type": "listed fight",
-      "result": "",
+      "result": "LOSS",
       "fight_number": "37"
     },
     {
@@ -4274,13 +4274,28 @@
       "name": "Tibou Bangoura Jr",
       "team": "American Top Team Atlanta",
       "bracket": "Purple / Adult / Male / Open Class",
-      "time": "05:30 PM",
+      "time": "05:31 PM",
+      "mat": "1",
+      "day": "Sun",
+      "bracket_url": "https://www.bjjcompsystem.com/tournaments/3365/categories/2959989",
+      "time_type": "listed fight",
+      "result": "WIN",
+      "fight_number": "33"
+    },
+    {
+      "competition_id": "3365",
+      "competition_name": "Atlanta Fall International Open IBJJF Jiu-Jitsu No-Gi Championship 2026",
+      "date": "",
+      "name": "Tibou Bangoura Jr",
+      "team": "American Top Team Atlanta",
+      "bracket": "Purple / Adult / Male / Open Class",
+      "time": "05:45 PM",
       "mat": "1",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3365/categories/2959989",
       "time_type": "listed fight",
       "result": "",
-      "fight_number": "33"
+      "fight_number": "35"
     },
     {
       "competition_id": "3365",
@@ -4309,8 +4324,23 @@
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3365/categories/2959989",
       "time_type": "listed fight",
-      "result": "",
+      "result": "WIN",
       "fight_number": "37"
+    },
+    {
+      "competition_id": "3365",
+      "competition_name": "Atlanta Fall International Open IBJJF Jiu-Jitsu No-Gi Championship 2026",
+      "date": "",
+      "name": "Nikolas Ratomir Perovic",
+      "team": "GF Team",
+      "bracket": "Purple / Adult / Male / Open Class",
+      "time": "05:40 PM",
+      "mat": "2",
+      "day": "Sun",
+      "bracket_url": "https://www.bjjcompsystem.com/tournaments/3365/categories/2959989",
+      "time_type": "listed fight",
+      "result": "",
+      "fight_number": "38"
     },
     {
       "competition_id": "3365",
@@ -4364,13 +4394,13 @@
       "name": "Justin Zacharia Howell",
       "team": "Telari",
       "bracket": "Purple / Adult / Male / Open Class",
-      "time": "05:39 PM",
+      "time": "05:45 PM",
       "mat": "1",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3365/categories/2959989",
       "time_type": "listed fight",
       "result": "",
-      "fight_number": "34"
+      "fight_number": "35"
     },
     {
       "competition_id": "3365",
@@ -4379,12 +4409,12 @@
       "name": "Josiah Michael Coryell",
       "team": "TOJJ Atlanta",
       "bracket": "Purple / Adult / Male / Open Class",
-      "time": "05:30 PM",
+      "time": "05:31 PM",
       "mat": "1",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3365/categories/2959989",
       "time_type": "listed fight",
-      "result": "",
+      "result": "LOSS",
       "fight_number": "33"
     },
     {
@@ -4784,13 +4814,13 @@
       "name": "Dylan Ross Sikking",
       "team": "Alliance",
       "bracket": "Brown / Master 2 / Male / Open Class",
-      "time": "05:30 PM",
-      "mat": "3",
+      "time": "05:35 PM",
+      "mat": "1",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3365/categories/2959996",
       "time_type": "listed fight",
-      "result": "",
-      "fight_number": "36"
+      "result": "LOSS",
+      "fight_number": "34"
     },
     {
       "competition_id": "3365",
@@ -4799,12 +4829,12 @@
       "name": "Louis Arthur Ciolino",
       "team": "City Of Palms BJJ",
       "bracket": "Brown / Master 2 / Male / Open Class",
-      "time": "05:30 PM",
+      "time": "05:35 PM",
       "mat": "3",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3365/categories/2959996",
       "time_type": "listed fight",
-      "result": "",
+      "result": "LOSS",
       "fight_number": "36"
     },
     {
@@ -4814,13 +4844,58 @@
       "name": "Christopher Chong Stanley",
       "team": "Team FNDN X",
       "bracket": "Brown / Master 2 / Male / Open Class",
-      "time": "05:37 PM",
+      "time": "05:35 PM",
       "mat": "3",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3365/categories/2959996",
       "time_type": "listed fight",
+      "result": "WIN",
+      "fight_number": "36"
+    },
+    {
+      "competition_id": "3365",
+      "competition_name": "Atlanta Fall International Open IBJJF Jiu-Jitsu No-Gi Championship 2026",
+      "date": "",
+      "name": "Christopher Chong Stanley",
+      "team": "Team FNDN X",
+      "bracket": "Brown / Master 2 / Male / Open Class",
+      "time": "05:54 PM",
+      "mat": "1",
+      "day": "Sun",
+      "bracket_url": "https://www.bjjcompsystem.com/tournaments/3365/categories/2959996",
+      "time_type": "listed fight",
       "result": "",
-      "fight_number": "37"
+      "fight_number": "36"
+    },
+    {
+      "competition_id": "3365",
+      "competition_name": "Atlanta Fall International Open IBJJF Jiu-Jitsu No-Gi Championship 2026",
+      "date": "",
+      "name": "Emmanuel Camacho",
+      "team": "Team FNDN X",
+      "bracket": "Brown / Master 2 / Male / Open Class",
+      "time": "05:35 PM",
+      "mat": "1",
+      "day": "Sun",
+      "bracket_url": "https://www.bjjcompsystem.com/tournaments/3365/categories/2959996",
+      "time_type": "listed fight",
+      "result": "WIN",
+      "fight_number": "34"
+    },
+    {
+      "competition_id": "3365",
+      "competition_name": "Atlanta Fall International Open IBJJF Jiu-Jitsu No-Gi Championship 2026",
+      "date": "",
+      "name": "Emmanuel Camacho",
+      "team": "Team FNDN X",
+      "bracket": "Brown / Master 2 / Male / Open Class",
+      "time": "05:54 PM",
+      "mat": "1",
+      "day": "Sun",
+      "bracket_url": "https://www.bjjcompsystem.com/tournaments/3365/categories/2959996",
+      "time_type": "listed fight",
+      "result": "",
+      "fight_number": "36"
     },
     {
       "competition_id": "3365",
@@ -9599,12 +9674,12 @@
       "name": "Toney Allen Mauzy",
       "team": "Team FNDN X",
       "bracket": "Purple / Master 3 / Male / Open Class",
-      "time": "05:30 PM",
+      "time": "05:35 PM",
       "mat": "4",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3365/categories/2959998",
       "time_type": "listed fight",
-      "result": "",
+      "result": "LOSS",
       "fight_number": "38"
     },
     {
@@ -9629,12 +9704,12 @@
       "name": "Benjamin Davidson Pierce",
       "team": "Telari",
       "bracket": "Purple / Master 3 / Male / Open Class",
-      "time": "05:30 PM",
+      "time": "05:35 PM",
       "mat": "4",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3365/categories/2959998",
       "time_type": "listed fight",
-      "result": "",
+      "result": "WIN",
       "fight_number": "38"
     },
     {
