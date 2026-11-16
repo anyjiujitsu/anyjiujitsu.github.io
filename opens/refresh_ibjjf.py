@@ -726,6 +726,52 @@ def audit_advancement_markup(soup, fights, url):
                         print(f'    EDGE AUDIT NEXT from={num} to={downstream} person={nm!r} attrs={str(attrs)[:500]}', flush=True)
 
 
+def infer_final_walkovers(evidence_records):
+    """Resolve scheduled finals whose explicitly linked feeder had two no-shows."""
+    fights_by_number = defaultdict(list)
+    for fight, block, _ in evidence_records:
+        if fight['number']:
+            fights_by_number[int(fight['number'])].append((fight, block))
+
+    for final, final_block, publish in evidence_records:
+        if not publish or final['result_map'] or not final_block.select_one(
+            '.tournament-category__final-label, .tournament-category_final-label'
+        ):
+            continue
+        entrants = final['competitors']
+        if len(entrants) != 2:
+            continue
+        finalists = [c for c in entrants if not c['placeholder'] and not c['bye']]
+        if len(finalists) != 1 or finalists[0]['loser']:
+            continue
+        finalist = finalists[0]
+        opponent = next(c for c in entrants if c is not finalist)
+        if not opponent['placeholder']:
+            continue
+        feeder_number = _fight_source_reference(opponent['name'])
+        feeder_mat = parse_header_fields(opponent['name'])['mat']
+        feeders = fights_by_number.get(feeder_number, [])
+        if feeder_mat:
+            feeders = [(fight, block) for fight, block in feeders if fight['mat'] == feeder_mat]
+        if len(feeders) != 1:
+            continue
+
+        feeder, feeder_block = feeders[0]
+        losses = feeder['result_map']
+        if len(losses) != 2 or any(result != 'LOSS' for result in losses.values()):
+            continue
+        # Check the explicit no-show marker on each actual feeder slot.
+        slots = feeder_block.select('.match-card__competitor')
+        if len(slots) != 2 or not all(
+            slot.select_one('.match-card__competitor-name')
+            and slot.select_one('.match-card__disqualification.no-show')
+            for slot in slots
+        ):
+            continue
+        final['result_map'][key(finalist['name'])] = 'WIN'
+        final['result_source'] = 'double-no-show-feeder'
+
+
 def parse_fights(soup):
     fights = []
     evidence_records = []
@@ -818,8 +864,9 @@ def parse_fights(soup):
 
     if evidence_records:
         pairs = [(f, b) for f, b, _ in evidence_records]
-        infer_advancement_from_bracket_positions(pairs)
         # Advancement requires a mapped direct edge, not just a later final.
+        infer_advancement_from_bracket_positions(pairs)
+        infer_final_walkovers(evidence_records)
         return [f for f, _, publish in evidence_records if publish]
 
     container = soup.select_one('main') or soup.body or soup
