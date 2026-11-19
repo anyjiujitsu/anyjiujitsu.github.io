@@ -1,25 +1,40 @@
 {
-  "enabled": false,
+  "enabled": true,
   "refresh_minutes": 10,
   "competitions": [
     {
-      "id": "3366",
-      "name": "Atlanta Fall Kids International Open IBJJF Jiu-Jitsu Championship 2026",
-      "url": "https://ibjjf.com/events/3366/athletes-list-by-academy-teams",
-      "date": ""
+      "id": "3256",
+      "name": "New Jersey Fall International Open IBJJF Jiu-Jitsu Championship 2026",
+      "url": "https://ibjjf.com/events/3256/athletes-list-by-academy-teams",
+      "date": "",
+      "event_start_date": "2026-11-21",
+      "event_end_date": "2026-11-22",
+      "venue": "Meadowlands Exposition Center",
+      "venue_city": "Secaucus",
+      "venue_timezone": "America/New_York"
     },
     {
-      "id": "3365",
-      "name": "Atlanta Fall International Open IBJJF Jiu-Jitsu No-Gi Championship 2026",
-      "url": "https://ibjjf.com/events/3365/athletes-list-by-academy-teams",
-      "date": ""
+      "id": "3257",
+      "name": "New Jersey Fall International Open IBJJF Jiu-Jitsu No-Gi Championship 2026",
+      "url": "https://ibjjf.com/events/3257/athletes-list-by-academy-teams",
+      "date": "",
+      "event_start_date": "2026-11-22",
+      "event_end_date": "2026-11-22",
+      "venue": "Meadowlands Exposition Center",
+      "venue_city": "Secaucus",
+      "venue_timezone": "America/New_York"
     },
     {
-      "id": "3364",
-      "name": "Atlanta Fall International Open IBJJF Jiu-Jitsu Championship 2026",
-      "url": "https://ibjjf.com/events/3364/athletes-list-by-academy-teams",
-      "date": ""
+      "id": "3258",
+      "name": "New Jersey Fall Kids International Open IBJJF Jiu-Jitsu Championship 2026",
+      "url": "https://ibjjf.com/events/3258/athletes-list-by-academy-teams",
+      "date": "",
+      "event_start_date": "2026-11-22",
+      "event_end_date": "2026-11-22",
+      "venue": "Meadowlands Exposition Center",
+      "venue_city": "Secaucus",
+      "venue_timezone": "America/New_York"
     }
   ],
-  "updated_at": "2026-11-16T01:16:51.477Z"
+  "updated_at": "2026-11-19T13:35:38.417694+00:00"
 }
