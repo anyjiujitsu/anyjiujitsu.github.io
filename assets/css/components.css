@@ -231,7 +231,18 @@ line-height: 1;
     color: #7a7a7a; /* softer grey */
 }
 
-.pill__caret{ font-size: 10px; opacity: 0.55; margin-left: var(--evIconLeft); }
+.pill__caret{
+  font-size: 10px;
+  margin-left: var(--evIconLeft);
+  /* Match the COMPS arrow text styling exactly (not cumulative opacity). */
+  color: rgba(0, 0, 0, 0.55);
+  opacity: 1;
+  font-family: 'Fixture', system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  font-synthesis: none;
+  font-stretch: normal;
+  font-variation-settings: 'wdth' 100, 'wght' 500;
+  font-weight: 600;
+}
 
 .pill__dot{
   width: var(--dotSize);
@@ -243,8 +254,8 @@ line-height: 1;
 }
 
 .filter-pill[data-has-selection="true"] .pill__dot{
-  background: #D16C4E;
-  box-shadow: 0 0 0 2px rgba(209,108,78,0.45);
+  background: var(--green);
+  box-shadow: none;
 }
 
 /* section: menus | purpose: dropdown / checklist menus */
@@ -489,7 +500,14 @@ input[type="search"]{ font-size:16px; }
     max-width: 100%;
   }
   .pill{ gap: 2px; }
-  .pill__caret{ font-size: 6.6px; margin-left: 1px; }
+  /* Match COMPS arrow sizing and spacing without resizing the filters. */
+  .pill.filter-pill{ justify-content: space-between; }
+  .pill.filter-pill .pill__caret{
+    font-size: 10px;
+    margin-left: 0;
+    flex: 0 0 auto;
+    line-height: 1;
+  }
 }
 
 /* FINAL MOBILE TUNING: make the view toggle match desktop proportions (without scaling, so it stays crisp) */
@@ -640,7 +658,7 @@ nav.filters, .filters__inner, .pillRow{
   /* keep caret aligned with label */
   .pill__caret{
     position: relative;
-    top: 1px;
+    top: 0;
   }
 }
 
