@@ -35,7 +35,7 @@
       "venue_timezone": "America/New_York"
     }
   ],
-  "updated_at": "2026-11-21T13:07:19.621869+00:00",
+  "updated_at": "2026-11-21T13:22:22.786585+00:00",
   "athletes": [
     {
       "competition_id": "3256",
@@ -25640,14 +25640,14 @@
       "name": "Zoe Tran Zwanetz",
       "team": "Crazy 88",
       "bracket": "Yellow / Junior 2 / Female / Rooster (67.00lb)",
-      "time": "11:37 AM",
+      "time": "11:43 AM",
       "mat": "2",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3258/categories/2905118",
       "time_type": "listed fight",
       "result": "",
-      "fight_number": "24",
-      "scheduled_at": "2026-11-22T16:37:00Z"
+      "fight_number": "25",
+      "scheduled_at": "2026-11-22T16:43:00Z"
     },
     {
       "competition_id": "3258",
@@ -25656,14 +25656,14 @@
       "name": "Madison Ana Khoder",
       "team": "Essential Jiu-Jitsu",
       "bracket": "Yellow / Junior 2 / Female / Rooster (67.00lb)",
-      "time": "11:37 AM",
+      "time": "11:43 AM",
       "mat": "2",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3258/categories/2905118",
       "time_type": "listed fight",
       "result": "",
-      "fight_number": "24",
-      "scheduled_at": "2026-11-22T16:37:00Z"
+      "fight_number": "25",
+      "scheduled_at": "2026-11-22T16:43:00Z"
     },
     {
       "competition_id": "3258",
@@ -26024,14 +26024,14 @@
       "name": "Arian Lajqi",
       "team": "Essential Jiu-Jitsu",
       "bracket": "Yellow / Junior 3 / Male / Light (98.00lb)",
-      "time": "11:43 AM",
+      "time": "11:49 AM",
       "mat": "2",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3258/categories/2905154",
       "time_type": "listed fight",
       "result": "",
-      "fight_number": "25",
-      "scheduled_at": "2026-11-22T16:43:00Z"
+      "fight_number": "26",
+      "scheduled_at": "2026-11-22T16:49:00Z"
     },
     {
       "competition_id": "3258",
@@ -26040,14 +26040,14 @@
       "name": "Ezekiel Austin Thompson",
       "team": "Gregor Gracie Jiu-Jitsu",
       "bracket": "Yellow / Junior 3 / Male / Light (98.00lb)",
-      "time": "11:43 AM",
+      "time": "11:49 AM",
       "mat": "2",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3258/categories/2905154",
       "time_type": "listed fight",
       "result": "",
-      "fight_number": "25",
-      "scheduled_at": "2026-11-22T16:43:00Z"
+      "fight_number": "26",
+      "scheduled_at": "2026-11-22T16:49:00Z"
     },
     {
       "competition_id": "3258",
@@ -27180,14 +27180,14 @@
       "name": "Lucas Gabriel Rodriguez",
       "team": "Roninova Jiu-Jitsu",
       "bracket": "Grey / Junior 1 / Male / Medium Heavy (93.60lb)",
-      "time": "11:09 AM",
+      "time": "11:15 AM",
       "mat": "7",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3258/categories/2905051",
       "time_type": "listed fight",
       "result": "",
-      "fight_number": "19",
-      "scheduled_at": "2026-11-22T16:09:00Z"
+      "fight_number": "20",
+      "scheduled_at": "2026-11-22T16:15:00Z"
     },
     {
       "competition_id": "3258",
@@ -27196,14 +27196,14 @@
       "name": "Zane Patrick Emery",
       "team": "Stafford MMA",
       "bracket": "Grey / Junior 1 / Male / Medium Heavy (93.60lb)",
-      "time": "11:09 AM",
+      "time": "11:15 AM",
       "mat": "7",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3258/categories/2905051",
       "time_type": "listed fight",
       "result": "",
-      "fight_number": "19",
-      "scheduled_at": "2026-11-22T16:09:00Z"
+      "fight_number": "20",
+      "scheduled_at": "2026-11-22T16:15:00Z"
     },
     {
       "competition_id": "3258",
