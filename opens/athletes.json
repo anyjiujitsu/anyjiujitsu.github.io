@@ -35,7 +35,7 @@
       "event_end_date": "2026-11-22"
     }
   ],
-  "updated_at": "2026-11-21T23:43:31.669728+00:00",
+  "updated_at": "2026-11-21T23:52:46.225278+00:00",
   "athletes": [
     {
       "competition_id": "3256",
@@ -8779,14 +8779,14 @@
       "name": "William Joseph Altman",
       "team": "Gregor Gracie Jiu-Jitsu",
       "bracket": "Brown / Master 2 / Male / Open Class",
-      "time": "06:42 PM",
+      "time": "06:45 PM",
       "mat": "5",
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3256/categories/2904176",
       "time_type": "listed fight",
       "result": "",
       "fight_number": "70",
-      "scheduled_at": "2026-11-21T23:42:00Z"
+      "scheduled_at": "2026-11-21T23:45:00Z"
     },
     {
       "competition_id": "3256",
@@ -8843,14 +8843,14 @@
       "name": "Michael A Mendonca",
       "team": "Playground Jiu-Jitsu",
       "bracket": "Brown / Master 2 / Male / Open Class",
-      "time": "06:35 PM",
+      "time": "06:36 PM",
       "mat": "5",
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3256/categories/2904176",
       "time_type": "listed fight",
-      "result": "",
+      "result": "LOSS",
       "fight_number": "69",
-      "scheduled_at": "2026-11-21T23:35:00Z"
+      "scheduled_at": "2026-11-21T23:36:00Z"
     },
     {
       "competition_id": "3256",
@@ -8875,14 +8875,30 @@
       "name": "James P. Peters",
       "team": "Strategic Academy",
       "bracket": "Brown / Master 2 / Male / Open Class",
-      "time": "06:35 PM",
+      "time": "06:36 PM",
+      "mat": "5",
+      "day": "Sat",
+      "bracket_url": "https://www.bjjcompsystem.com/tournaments/3256/categories/2904176",
+      "time_type": "listed fight",
+      "result": "WIN",
+      "fight_number": "69",
+      "scheduled_at": "2026-11-21T23:36:00Z"
+    },
+    {
+      "competition_id": "3256",
+      "competition_name": "New Jersey Fall International Open IBJJF Jiu-Jitsu Championship 2026",
+      "date": "",
+      "name": "James P. Peters",
+      "team": "Strategic Academy",
+      "bracket": "Brown / Master 2 / Male / Open Class",
+      "time": "06:45 PM",
       "mat": "5",
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3256/categories/2904176",
       "time_type": "listed fight",
       "result": "",
-      "fight_number": "69",
-      "scheduled_at": "2026-11-21T23:35:00Z"
+      "fight_number": "70",
+      "scheduled_at": "2026-11-21T23:45:00Z"
     },
     {
       "competition_id": "3256",
