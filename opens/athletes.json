@@ -35,7 +35,7 @@
       "venue_timezone": "America/New_York"
     }
   ],
-  "updated_at": "2026-11-21T11:37:15.510408+00:00",
+  "updated_at": "2026-11-21T11:52:49.925569+00:00",
   "athletes": [
     {
       "competition_id": "3256",
@@ -23610,37 +23610,6 @@
       "result": "",
       "fight_number": "18",
       "scheduled_at": "2026-11-22T16:03:00Z"
-    },
-    {
-      "competition_id": "3258",
-      "competition_name": "New Jersey Fall Kids International Open IBJJF Jiu-Jitsu Championship 2026",
-      "date": "",
-      "name": "Eleanor Anne Shepherd",
-      "team": "SAS Team Syracuse",
-      "bracket": "Grey / Junior 1 / Female / Feather (73.60lb)",
-      "time": "11:20 AM",
-      "mat": "7",
-      "day": "Sun",
-      "bracket_url": "https://www.bjjcompsystem.com/tournaments/3258/categories/2905069",
-      "time_type": "listed fight",
-      "result": "",
-      "fight_number": "21",
-      "scheduled_at": "2026-11-22T16:20:00Z"
-    },
-    {
-      "competition_id": "3258",
-      "competition_name": "New Jersey Fall Kids International Open IBJJF Jiu-Jitsu Championship 2026",
-      "date": "",
-      "name": "Eleanor Anne Shepherd",
-      "team": "SAS Team Syracuse",
-      "bracket": "Grey / Junior 1 / Female / Feather (73.60lb)",
-      "time": "",
-      "mat": "",
-      "day": "",
-      "bracket_url": "https://www.bjjcompsystem.com/tournaments/3258/categories/2905069",
-      "time_type": "completed result without published time",
-      "result": "BYE",
-      "fight_number": ""
     },
     {
       "competition_id": "3258",
