@@ -1,40 +1,40 @@
 {
   "enabled": true,
-  "refresh_minutes": 10,
+  "refresh_minutes": 5,
   "competitions": [
     {
       "id": "3256",
       "name": "New Jersey Fall International Open IBJJF Jiu-Jitsu Championship 2026",
       "url": "https://ibjjf.com/events/3256/athletes-list-by-academy-teams",
       "date": "",
-      "event_start_date": "2026-11-21",
-      "event_end_date": "2026-11-22",
+      "venue_timezone": "America/New_York",
       "venue": "Meadowlands Exposition Center",
       "venue_city": "Secaucus",
-      "venue_timezone": "America/New_York"
+      "event_start_date": "2026-11-21",
+      "event_end_date": "2026-11-22"
     },
     {
       "id": "3257",
       "name": "New Jersey Fall International Open IBJJF Jiu-Jitsu No-Gi Championship 2026",
       "url": "https://ibjjf.com/events/3257/athletes-list-by-academy-teams",
       "date": "",
-      "event_start_date": "2026-11-22",
-      "event_end_date": "2026-11-22",
+      "venue_timezone": "America/New_York",
       "venue": "Meadowlands Exposition Center",
       "venue_city": "Secaucus",
-      "venue_timezone": "America/New_York"
+      "event_start_date": "2026-11-22",
+      "event_end_date": "2026-11-22"
     },
     {
       "id": "3258",
       "name": "New Jersey Fall Kids International Open IBJJF Jiu-Jitsu Championship 2026",
       "url": "https://ibjjf.com/events/3258/athletes-list-by-academy-teams",
       "date": "",
-      "event_start_date": "2026-11-22",
-      "event_end_date": "2026-11-22",
+      "venue_timezone": "America/New_York",
       "venue": "Meadowlands Exposition Center",
       "venue_city": "Secaucus",
-      "venue_timezone": "America/New_York"
+      "event_start_date": "2026-11-22",
+      "event_end_date": "2026-11-22"
     }
   ],
-  "updated_at": "2026-11-19T13:35:38.417694+00:00"
+  "updated_at": "2026-11-21T17:10:28.181825+00:00"
 }
