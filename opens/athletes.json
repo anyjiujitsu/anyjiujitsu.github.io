@@ -35,7 +35,7 @@
       "event_end_date": "2026-11-22"
     }
   ],
-  "updated_at": "2026-11-21T23:22:48.542021+00:00",
+  "updated_at": "2026-11-21T23:32:47.149726+00:00",
   "athletes": [
     {
       "competition_id": "3256",
@@ -7849,8 +7849,9 @@
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3256/categories/2904204",
       "time_type": "listed fight",
-      "result": "",
+      "result": "WIN",
       "fight_number": "73",
+      "placement": 1,
       "scheduled_at": "2026-11-21T23:10:00Z"
     },
     {
@@ -7897,8 +7898,9 @@
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3256/categories/2904204",
       "time_type": "listed fight",
-      "result": "",
+      "result": "LOSS",
       "fight_number": "73",
+      "placement": 2,
       "scheduled_at": "2026-11-21T23:10:00Z"
     },
     {
@@ -8703,7 +8705,7 @@
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3256/categories/2904176",
       "time_type": "listed fight",
-      "result": "",
+      "result": "LOSS",
       "fight_number": "67",
       "scheduled_at": "2026-11-21T23:14:00Z"
     },
@@ -8766,9 +8768,25 @@
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3256/categories/2904176",
       "time_type": "listed fight",
-      "result": "",
+      "result": "WIN",
       "fight_number": "67",
       "scheduled_at": "2026-11-21T23:14:00Z"
+    },
+    {
+      "competition_id": "3256",
+      "competition_name": "New Jersey Fall International Open IBJJF Jiu-Jitsu Championship 2026",
+      "date": "",
+      "name": "William Joseph Altman",
+      "team": "Gregor Gracie Jiu-Jitsu",
+      "bracket": "Brown / Master 2 / Male / Open Class",
+      "time": "06:39 PM",
+      "mat": "5",
+      "day": "Sat",
+      "bracket_url": "https://www.bjjcompsystem.com/tournaments/3256/categories/2904176",
+      "time_type": "listed fight",
+      "result": "",
+      "fight_number": "70",
+      "scheduled_at": "2026-11-21T23:39:00Z"
     },
     {
       "competition_id": "3256",
@@ -8793,14 +8811,14 @@
       "name": "Christopher George Kortbaoui",
       "team": "Nova União",
       "bracket": "Brown / Master 2 / Male / Open Class",
-      "time": "06:22 PM",
+      "time": "06:24 PM",
       "mat": "5",
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3256/categories/2904176",
       "time_type": "listed fight",
       "result": "",
       "fight_number": "68",
-      "scheduled_at": "2026-11-21T23:22:00Z"
+      "scheduled_at": "2026-11-21T23:24:00Z"
     },
     {
       "competition_id": "3256",
@@ -8809,14 +8827,14 @@
       "name": "Michael A Mendonca",
       "team": "Playground Jiu-Jitsu",
       "bracket": "Brown / Master 2 / Male / Open Class",
-      "time": "06:22 PM",
+      "time": "06:24 PM",
       "mat": "5",
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3256/categories/2904176",
       "time_type": "listed fight",
       "result": "",
       "fight_number": "68",
-      "scheduled_at": "2026-11-21T23:22:00Z"
+      "scheduled_at": "2026-11-21T23:24:00Z"
     },
     {
       "competition_id": "3256",
@@ -8841,14 +8859,14 @@
       "name": "James P. Peters",
       "team": "Strategic Academy",
       "bracket": "Brown / Master 2 / Male / Open Class",
-      "time": "06:29 PM",
+      "time": "06:32 PM",
       "mat": "5",
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3256/categories/2904176",
       "time_type": "listed fight",
       "result": "",
       "fight_number": "69",
-      "scheduled_at": "2026-11-21T23:29:00Z"
+      "scheduled_at": "2026-11-21T23:32:00Z"
     },
     {
       "competition_id": "3256",
@@ -10649,6 +10667,7 @@
       "time_type": "listed fight",
       "result": "LOSS",
       "fight_number": "66",
+      "placement": 3,
       "scheduled_at": "2026-11-21T22:35:00Z"
     },
     {
@@ -10767,14 +10786,15 @@
       "name": "Alexandre Papa Manara",
       "team": "Lotus Club USA",
       "bracket": "Black / Adult / Male / Open Class",
-      "time": "06:10 PM",
+      "time": "06:14 PM",
       "mat": "1",
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3256/categories/2904152",
       "time_type": "listed fight",
-      "result": "",
+      "result": "WIN",
       "fight_number": "70",
-      "scheduled_at": "2026-11-21T23:10:00Z"
+      "placement": 1,
+      "scheduled_at": "2026-11-21T23:14:00Z"
     },
     {
       "competition_id": "3256",
@@ -10830,14 +10850,15 @@
       "name": "Felipe Ribeiro Lacerda",
       "team": "Nova União",
       "bracket": "Black / Adult / Male / Open Class",
-      "time": "06:10 PM",
+      "time": "06:14 PM",
       "mat": "1",
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3256/categories/2904152",
       "time_type": "listed fight",
-      "result": "",
+      "result": "LOSS",
       "fight_number": "70",
-      "scheduled_at": "2026-11-21T23:10:00Z"
+      "placement": 2,
+      "scheduled_at": "2026-11-21T23:14:00Z"
     },
     {
       "competition_id": "3256",
@@ -10963,6 +10984,7 @@
       "time_type": "listed fight",
       "result": "LOSS",
       "fight_number": "69",
+      "placement": 3,
       "scheduled_at": "2026-11-21T23:01:00Z"
     },
     {
@@ -15600,14 +15622,30 @@
       "name": "Malcolm Ashton Teruel",
       "team": "Crazy 88",
       "bracket": "Brown / Adult / Male / Open Class",
-      "time": "06:25 PM",
+      "time": "06:20 PM",
+      "mat": "2",
+      "day": "Sat",
+      "bracket_url": "https://www.bjjcompsystem.com/tournaments/3256/categories/2904170",
+      "time_type": "listed fight",
+      "result": "WIN",
+      "fight_number": "70",
+      "scheduled_at": "2026-11-21T23:20:00Z"
+    },
+    {
+      "competition_id": "3256",
+      "competition_name": "New Jersey Fall International Open IBJJF Jiu-Jitsu Championship 2026",
+      "date": "",
+      "name": "Malcolm Ashton Teruel",
+      "team": "Crazy 88",
+      "bracket": "Brown / Adult / Male / Open Class",
+      "time": "06:22 PM",
       "mat": "2",
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3256/categories/2904170",
       "time_type": "listed fight",
       "result": "",
-      "fight_number": "70",
-      "scheduled_at": "2026-11-21T23:25:00Z"
+      "fight_number": "71",
+      "scheduled_at": "2026-11-21T23:22:00Z"
     },
     {
       "competition_id": "3256",
@@ -15632,14 +15670,14 @@
       "name": "Ezra Thomas Paul",
       "team": "Foundry BJJ",
       "bracket": "Brown / Adult / Male / Open Class",
-      "time": "06:15 PM",
+      "time": "06:20 PM",
       "mat": "2",
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3256/categories/2904170",
       "time_type": "listed fight",
-      "result": "",
+      "result": "LOSS",
       "fight_number": "69",
-      "scheduled_at": "2026-11-21T23:15:00Z"
+      "scheduled_at": "2026-11-21T23:20:00Z"
     },
     {
       "competition_id": "3256",
@@ -15680,14 +15718,14 @@
       "name": "Enzo Marasciulo L. Silva",
       "team": "Gregor Gracie Jiu-Jitsu",
       "bracket": "Brown / Adult / Male / Open Class",
-      "time": "06:35 PM",
+      "time": "06:22 PM",
       "mat": "2",
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3256/categories/2904170",
       "time_type": "listed fight",
       "result": "",
       "fight_number": "71",
-      "scheduled_at": "2026-11-21T23:35:00Z"
+      "scheduled_at": "2026-11-21T23:22:00Z"
     },
     {
       "competition_id": "3256",
@@ -15696,14 +15734,14 @@
       "name": "Roman Kartofelnikovs",
       "team": "Jiu-Jitsu For Life Team",
       "bracket": "Brown / Adult / Male / Open Class",
-      "time": "06:15 PM",
+      "time": "06:20 PM",
       "mat": "2",
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3256/categories/2904170",
       "time_type": "listed fight",
-      "result": "",
+      "result": "LOSS",
       "fight_number": "69",
-      "scheduled_at": "2026-11-21T23:15:00Z"
+      "scheduled_at": "2026-11-21T23:20:00Z"
     },
     {
       "competition_id": "3256",
@@ -17167,13 +17205,29 @@
       "name": "Matthew Diaz",
       "team": "Gregor Gracie Jiu-Jitsu",
       "bracket": "Purple / Master 1 / Male / Open Class",
+      "time": "06:20 PM",
+      "mat": "8",
+      "day": "Sat",
+      "bracket_url": "https://www.bjjcompsystem.com/tournaments/3256/categories/2904172",
+      "time_type": "listed fight",
+      "result": "WIN",
+      "fight_number": "75",
+      "scheduled_at": "2026-11-21T23:20:00Z"
+    },
+    {
+      "competition_id": "3256",
+      "competition_name": "New Jersey Fall International Open IBJJF Jiu-Jitsu Championship 2026",
+      "date": "",
+      "name": "Matthew Diaz",
+      "team": "Gregor Gracie Jiu-Jitsu",
+      "bracket": "Purple / Master 1 / Male / Open Class",
       "time": "06:25 PM",
       "mat": "8",
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3256/categories/2904172",
       "time_type": "listed fight",
       "result": "",
-      "fight_number": "75",
+      "fight_number": "76",
       "scheduled_at": "2026-11-21T23:25:00Z"
     },
     {
@@ -17199,14 +17253,14 @@
       "name": "Paul Gregory Lozbin",
       "team": "Gregor Gracie Jiu-Jitsu",
       "bracket": "Purple / Master 1 / Male / Open Class",
-      "time": "06:17 PM",
+      "time": "06:16 PM",
       "mat": "8",
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3256/categories/2904172",
       "time_type": "listed fight",
-      "result": "",
+      "result": "LOSS",
       "fight_number": "74",
-      "scheduled_at": "2026-11-21T23:17:00Z"
+      "scheduled_at": "2026-11-21T23:16:00Z"
     },
     {
       "competition_id": "3256",
@@ -17215,14 +17269,14 @@
       "name": "Takehito Ikezaki",
       "team": "Marlon Colorado BJJ",
       "bracket": "Purple / Master 1 / Male / Open Class",
-      "time": "06:25 PM",
+      "time": "06:20 PM",
       "mat": "8",
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3256/categories/2904172",
       "time_type": "listed fight",
-      "result": "",
+      "result": "LOSS",
       "fight_number": "75",
-      "scheduled_at": "2026-11-21T23:25:00Z"
+      "scheduled_at": "2026-11-21T23:20:00Z"
     },
     {
       "competition_id": "3256",
@@ -17246,14 +17300,30 @@
       "name": "Steven Francisco Reyes-Santos",
       "team": "Subforce BJJ / Jiu-Jitsu For The People",
       "bracket": "Purple / Master 1 / Male / Open Class",
-      "time": "06:17 PM",
+      "time": "06:16 PM",
+      "mat": "8",
+      "day": "Sat",
+      "bracket_url": "https://www.bjjcompsystem.com/tournaments/3256/categories/2904172",
+      "time_type": "listed fight",
+      "result": "WIN",
+      "fight_number": "74",
+      "scheduled_at": "2026-11-21T23:16:00Z"
+    },
+    {
+      "competition_id": "3256",
+      "competition_name": "New Jersey Fall International Open IBJJF Jiu-Jitsu Championship 2026",
+      "date": "",
+      "name": "Steven Francisco Reyes-Santos",
+      "team": "Subforce BJJ / Jiu-Jitsu For The People",
+      "bracket": "Purple / Master 1 / Male / Open Class",
+      "time": "06:25 PM",
       "mat": "8",
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3256/categories/2904172",
       "time_type": "listed fight",
       "result": "",
-      "fight_number": "74",
-      "scheduled_at": "2026-11-21T23:17:00Z"
+      "fight_number": "76",
+      "scheduled_at": "2026-11-21T23:25:00Z"
     },
     {
       "competition_id": "3256",
@@ -22011,7 +22081,7 @@
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3256/categories/2904173",
       "time_type": "listed fight",
-      "result": "",
+      "result": "LOSS",
       "fight_number": "75",
       "scheduled_at": "2026-11-21T23:15:00Z"
     },
@@ -22054,14 +22124,14 @@
       "name": "Corey Brett Meikrantz",
       "team": "Inverted Gear Academy",
       "bracket": "Brown / Master 1 / Male / Open Class",
-      "time": "06:23 PM",
+      "time": "06:20 PM",
       "mat": "9",
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3256/categories/2904173",
       "time_type": "listed fight",
       "result": "",
       "fight_number": "76",
-      "scheduled_at": "2026-11-21T23:23:00Z"
+      "scheduled_at": "2026-11-21T23:20:00Z"
     },
     {
       "competition_id": "3256",
@@ -22075,9 +22145,25 @@
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3256/categories/2904173",
       "time_type": "listed fight",
-      "result": "",
+      "result": "WIN",
       "fight_number": "75",
       "scheduled_at": "2026-11-21T23:15:00Z"
+    },
+    {
+      "competition_id": "3256",
+      "competition_name": "New Jersey Fall International Open IBJJF Jiu-Jitsu Championship 2026",
+      "date": "",
+      "name": "Richard James Barton",
+      "team": "Nova União",
+      "bracket": "Brown / Master 1 / Male / Open Class",
+      "time": "06:20 PM",
+      "mat": "9",
+      "day": "Sat",
+      "bracket_url": "https://www.bjjcompsystem.com/tournaments/3256/categories/2904173",
+      "time_type": "listed fight",
+      "result": "",
+      "fight_number": "76",
+      "scheduled_at": "2026-11-21T23:20:00Z"
     },
     {
       "competition_id": "3256",
@@ -22394,14 +22480,14 @@
       "name": "James Keith Hintze",
       "team": "Inverted Gear Academy",
       "bracket": "Purple / Master 3 / Male / Open Class",
-      "time": "06:22 PM",
+      "time": "06:20 PM",
       "mat": "6",
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3256/categories/2904178",
       "time_type": "listed fight",
       "result": "",
       "fight_number": "78",
-      "scheduled_at": "2026-11-21T23:22:00Z"
+      "scheduled_at": "2026-11-21T23:20:00Z"
     },
     {
       "competition_id": "3256",
@@ -22446,9 +22532,25 @@
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3256/categories/2904178",
       "time_type": "listed fight",
-      "result": "",
+      "result": "WIN",
       "fight_number": "76",
       "scheduled_at": "2026-11-21T23:08:00Z"
+    },
+    {
+      "competition_id": "3256",
+      "competition_name": "New Jersey Fall International Open IBJJF Jiu-Jitsu Championship 2026",
+      "date": "",
+      "name": "Genna Gelfand",
+      "team": "Jiu-Jitsu For Life Team",
+      "bracket": "Purple / Master 3 / Male / Open Class",
+      "time": "06:20 PM",
+      "mat": "6",
+      "day": "Sat",
+      "bracket_url": "https://www.bjjcompsystem.com/tournaments/3256/categories/2904178",
+      "time_type": "listed fight",
+      "result": "",
+      "fight_number": "78",
+      "scheduled_at": "2026-11-21T23:20:00Z"
     },
     {
       "competition_id": "3256",
@@ -22478,7 +22580,7 @@
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3256/categories/2904178",
       "time_type": "listed fight",
-      "result": "",
+      "result": "LOSS",
       "fight_number": "76",
       "scheduled_at": "2026-11-21T23:08:00Z"
     },
