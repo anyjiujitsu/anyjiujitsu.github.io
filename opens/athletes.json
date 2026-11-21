@@ -35,7 +35,7 @@
       "venue_timezone": "America/New_York"
     }
   ],
-  "updated_at": "2026-11-21T13:22:22.786585+00:00",
+  "updated_at": "2026-11-21T13:37:18.252891+00:00",
   "athletes": [
     {
       "competition_id": "3256",
@@ -23524,29 +23524,14 @@
       "name": "Milah Shakhnazarov",
       "team": "API - Ascension Athletics",
       "bracket": "Grey / Junior 1 / Female / Feather (73.60lb)",
-      "time": "11:20 AM",
+      "time": "11:09 AM",
       "mat": "7",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3258/categories/2905069",
       "time_type": "listed fight",
       "result": "",
-      "fight_number": "21",
-      "scheduled_at": "2026-11-22T16:20:00Z"
-    },
-    {
-      "competition_id": "3258",
-      "competition_name": "New Jersey Fall Kids International Open IBJJF Jiu-Jitsu Championship 2026",
-      "date": "",
-      "name": "Milah Shakhnazarov",
-      "team": "API - Ascension Athletics",
-      "bracket": "Grey / Junior 1 / Female / Feather (73.60lb)",
-      "time": "",
-      "mat": "",
-      "day": "",
-      "bracket_url": "https://www.bjjcompsystem.com/tournaments/3258/categories/2905069",
-      "time_type": "completed result without published time",
-      "result": "BYE",
-      "fight_number": ""
+      "fight_number": "19",
+      "scheduled_at": "2026-11-22T16:09:00Z"
     },
     {
       "competition_id": "3258",
@@ -23555,29 +23540,14 @@
       "name": "Mariana Diaz Leon",
       "team": "Burns BJJ USA",
       "bracket": "Grey / Junior 1 / Female / Feather (73.60lb)",
-      "time": "11:26 AM",
+      "time": "11:03 AM",
       "mat": "7",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3258/categories/2905069",
       "time_type": "listed fight",
       "result": "",
-      "fight_number": "22",
-      "scheduled_at": "2026-11-22T16:26:00Z"
-    },
-    {
-      "competition_id": "3258",
-      "competition_name": "New Jersey Fall Kids International Open IBJJF Jiu-Jitsu Championship 2026",
-      "date": "",
-      "name": "Mariana Diaz Leon",
-      "team": "Burns BJJ USA",
-      "bracket": "Grey / Junior 1 / Female / Feather (73.60lb)",
-      "time": "",
-      "mat": "",
-      "day": "",
-      "bracket_url": "https://www.bjjcompsystem.com/tournaments/3258/categories/2905069",
-      "time_type": "completed result without published time",
-      "result": "BYE",
-      "fight_number": ""
+      "fight_number": "18",
+      "scheduled_at": "2026-11-22T16:03:00Z"
     },
     {
       "competition_id": "3258",
@@ -23602,14 +23572,14 @@
       "name": "Valeria Gjoka",
       "team": "Renzo Gracie Academy",
       "bracket": "Grey / Junior 1 / Female / Feather (73.60lb)",
-      "time": "11:03 AM",
+      "time": "11:09 AM",
       "mat": "7",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3258/categories/2905069",
       "time_type": "listed fight",
       "result": "",
-      "fight_number": "18",
-      "scheduled_at": "2026-11-22T16:03:00Z"
+      "fight_number": "19",
+      "scheduled_at": "2026-11-22T16:09:00Z"
     },
     {
       "competition_id": "3258",
@@ -26742,6 +26712,22 @@
       "name": "Emanuellie Vitoria de Oliveira",
       "team": "IFTEAM- MSMA",
       "bracket": "Grey / Junior 1 / Female / Light (80.00lb)",
+      "time": "11:37 AM",
+      "mat": "2",
+      "day": "Sun",
+      "bracket_url": "https://www.bjjcompsystem.com/tournaments/3258/categories/2905072",
+      "time_type": "listed fight",
+      "result": "",
+      "fight_number": "24",
+      "scheduled_at": "2026-11-22T16:37:00Z"
+    },
+    {
+      "competition_id": "3258",
+      "competition_name": "New Jersey Fall Kids International Open IBJJF Jiu-Jitsu Championship 2026",
+      "date": "",
+      "name": "Lucia Eve Hernandez",
+      "team": "Nova União",
+      "bracket": "Grey / Junior 1 / Female / Light (80.00lb)",
       "time": "11:19 AM",
       "mat": "2",
       "day": "Sun",
@@ -26755,8 +26741,8 @@
       "competition_id": "3258",
       "competition_name": "New Jersey Fall Kids International Open IBJJF Jiu-Jitsu Championship 2026",
       "date": "",
-      "name": "Lucia Eve Hernandez",
-      "team": "Nova União",
+      "name": "Eleanor Anne Shepherd",
+      "team": "SAS Team Syracuse",
       "bracket": "Grey / Junior 1 / Female / Light (80.00lb)",
       "time": "11:19 AM",
       "mat": "2",
