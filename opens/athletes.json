@@ -35,7 +35,7 @@
       "event_end_date": "2026-11-22"
     }
   ],
-  "updated_at": "2026-11-21T23:32:47.149726+00:00",
+  "updated_at": "2026-11-21T23:43:31.669728+00:00",
   "athletes": [
     {
       "competition_id": "3256",
@@ -8779,14 +8779,14 @@
       "name": "William Joseph Altman",
       "team": "Gregor Gracie Jiu-Jitsu",
       "bracket": "Brown / Master 2 / Male / Open Class",
-      "time": "06:39 PM",
+      "time": "06:42 PM",
       "mat": "5",
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3256/categories/2904176",
       "time_type": "listed fight",
       "result": "",
       "fight_number": "70",
-      "scheduled_at": "2026-11-21T23:39:00Z"
+      "scheduled_at": "2026-11-21T23:42:00Z"
     },
     {
       "competition_id": "3256",
@@ -8816,7 +8816,7 @@
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3256/categories/2904176",
       "time_type": "listed fight",
-      "result": "",
+      "result": "LOSS",
       "fight_number": "68",
       "scheduled_at": "2026-11-21T23:24:00Z"
     },
@@ -8832,9 +8832,25 @@
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3256/categories/2904176",
       "time_type": "listed fight",
-      "result": "",
+      "result": "WIN",
       "fight_number": "68",
       "scheduled_at": "2026-11-21T23:24:00Z"
+    },
+    {
+      "competition_id": "3256",
+      "competition_name": "New Jersey Fall International Open IBJJF Jiu-Jitsu Championship 2026",
+      "date": "",
+      "name": "Michael A Mendonca",
+      "team": "Playground Jiu-Jitsu",
+      "bracket": "Brown / Master 2 / Male / Open Class",
+      "time": "06:35 PM",
+      "mat": "5",
+      "day": "Sat",
+      "bracket_url": "https://www.bjjcompsystem.com/tournaments/3256/categories/2904176",
+      "time_type": "listed fight",
+      "result": "",
+      "fight_number": "69",
+      "scheduled_at": "2026-11-21T23:35:00Z"
     },
     {
       "competition_id": "3256",
@@ -8859,14 +8875,14 @@
       "name": "James P. Peters",
       "team": "Strategic Academy",
       "bracket": "Brown / Master 2 / Male / Open Class",
-      "time": "06:32 PM",
+      "time": "06:35 PM",
       "mat": "5",
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3256/categories/2904176",
       "time_type": "listed fight",
       "result": "",
       "fight_number": "69",
-      "scheduled_at": "2026-11-21T23:32:00Z"
+      "scheduled_at": "2026-11-21T23:35:00Z"
     },
     {
       "competition_id": "3256",
@@ -10114,14 +10130,15 @@
       "name": "Frank E. Salvatore",
       "team": "Altus Jiu-Jitsu USA",
       "bracket": "Blue / Master 7 / Male / Open Class",
-      "time": "06:15 PM",
+      "time": "06:21 PM",
       "mat": "4",
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3256/categories/2904189",
       "time_type": "listed fight",
-      "result": "",
+      "result": "WIN",
       "fight_number": "66",
-      "scheduled_at": "2026-11-21T23:15:00Z"
+      "placement": 1,
+      "scheduled_at": "2026-11-21T23:21:00Z"
     },
     {
       "competition_id": "3256",
@@ -10178,14 +10195,15 @@
       "name": "Wayne Lloyd Shannon",
       "team": "Fight Sports",
       "bracket": "Blue / Master 7 / Male / Open Class",
-      "time": "06:15 PM",
+      "time": "06:21 PM",
       "mat": "4",
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3256/categories/2904189",
       "time_type": "listed fight",
-      "result": "",
+      "result": "LOSS",
       "fight_number": "66",
-      "scheduled_at": "2026-11-21T23:15:00Z"
+      "placement": 2,
+      "scheduled_at": "2026-11-21T23:21:00Z"
     },
     {
       "competition_id": "3256",
@@ -15643,8 +15661,9 @@
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3256/categories/2904170",
       "time_type": "listed fight",
-      "result": "",
+      "result": "LOSS",
       "fight_number": "71",
+      "placement": 2,
       "scheduled_at": "2026-11-21T23:22:00Z"
     },
     {
@@ -15723,8 +15742,9 @@
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3256/categories/2904170",
       "time_type": "listed fight",
-      "result": "",
+      "result": "WIN",
       "fight_number": "71",
+      "placement": 1,
       "scheduled_at": "2026-11-21T23:22:00Z"
     },
     {
@@ -17226,8 +17246,9 @@
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3256/categories/2904172",
       "time_type": "listed fight",
-      "result": "",
+      "result": "LOSS",
       "fight_number": "76",
+      "placement": 2,
       "scheduled_at": "2026-11-21T23:25:00Z"
     },
     {
@@ -17260,6 +17281,7 @@
       "time_type": "listed fight",
       "result": "LOSS",
       "fight_number": "74",
+      "placement": 3,
       "scheduled_at": "2026-11-21T23:16:00Z"
     },
     {
@@ -17276,6 +17298,7 @@
       "time_type": "listed fight",
       "result": "LOSS",
       "fight_number": "75",
+      "placement": 3,
       "scheduled_at": "2026-11-21T23:20:00Z"
     },
     {
@@ -17321,8 +17344,9 @@
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3256/categories/2904172",
       "time_type": "listed fight",
-      "result": "",
+      "result": "WIN",
       "fight_number": "76",
+      "placement": 1,
       "scheduled_at": "2026-11-21T23:25:00Z"
     },
     {
@@ -22083,6 +22107,7 @@
       "time_type": "listed fight",
       "result": "LOSS",
       "fight_number": "75",
+      "placement": 3,
       "scheduled_at": "2026-11-21T23:15:00Z"
     },
     {
@@ -22124,14 +22149,15 @@
       "name": "Corey Brett Meikrantz",
       "team": "Inverted Gear Academy",
       "bracket": "Brown / Master 1 / Male / Open Class",
-      "time": "06:20 PM",
+      "time": "06:27 PM",
       "mat": "9",
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3256/categories/2904173",
       "time_type": "listed fight",
-      "result": "",
+      "result": "LOSS",
       "fight_number": "76",
-      "scheduled_at": "2026-11-21T23:20:00Z"
+      "placement": 2,
+      "scheduled_at": "2026-11-21T23:27:00Z"
     },
     {
       "competition_id": "3256",
@@ -22156,14 +22182,15 @@
       "name": "Richard James Barton",
       "team": "Nova União",
       "bracket": "Brown / Master 1 / Male / Open Class",
-      "time": "06:20 PM",
+      "time": "06:27 PM",
       "mat": "9",
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3256/categories/2904173",
       "time_type": "listed fight",
-      "result": "",
+      "result": "WIN",
       "fight_number": "76",
-      "scheduled_at": "2026-11-21T23:20:00Z"
+      "placement": 1,
+      "scheduled_at": "2026-11-21T23:27:00Z"
     },
     {
       "competition_id": "3256",
@@ -22194,6 +22221,7 @@
       "time_type": "listed fight",
       "result": "LOSS",
       "fight_number": "74",
+      "placement": 3,
       "scheduled_at": "2026-11-21T23:07:00Z"
     },
     {
@@ -22480,14 +22508,15 @@
       "name": "James Keith Hintze",
       "team": "Inverted Gear Academy",
       "bracket": "Purple / Master 3 / Male / Open Class",
-      "time": "06:20 PM",
+      "time": "06:28 PM",
       "mat": "6",
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3256/categories/2904178",
       "time_type": "listed fight",
-      "result": "",
+      "result": "WIN",
       "fight_number": "78",
-      "scheduled_at": "2026-11-21T23:20:00Z"
+      "placement": 1,
+      "scheduled_at": "2026-11-21T23:28:00Z"
     },
     {
       "competition_id": "3256",
@@ -22543,14 +22572,15 @@
       "name": "Genna Gelfand",
       "team": "Jiu-Jitsu For Life Team",
       "bracket": "Purple / Master 3 / Male / Open Class",
-      "time": "06:20 PM",
+      "time": "06:28 PM",
       "mat": "6",
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3256/categories/2904178",
       "time_type": "listed fight",
-      "result": "",
+      "result": "LOSS",
       "fight_number": "78",
-      "scheduled_at": "2026-11-21T23:20:00Z"
+      "placement": 2,
+      "scheduled_at": "2026-11-21T23:28:00Z"
     },
     {
       "competition_id": "3256",
@@ -22582,6 +22612,7 @@
       "time_type": "listed fight",
       "result": "LOSS",
       "fight_number": "76",
+      "placement": 3,
       "scheduled_at": "2026-11-21T23:08:00Z"
     },
     {
@@ -22613,6 +22644,7 @@
       "time_type": "listed fight",
       "result": "LOSS",
       "fight_number": "75",
+      "placement": 3,
       "scheduled_at": "2026-11-21T23:01:00Z"
     },
     {
