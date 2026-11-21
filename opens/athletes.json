@@ -35,7 +35,7 @@
       "event_end_date": "2026-11-22"
     }
   ],
-  "updated_at": "2026-11-21T20:27:27.419370+00:00",
+  "updated_at": "2026-11-21T20:37:19.815914+00:00",
   "athletes": [
     {
       "competition_id": "3256",
@@ -374,8 +374,9 @@
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3256/categories/2903556",
       "time_type": "listed fight",
-      "result": "",
+      "result": "WIN",
       "fight_number": "46",
+      "placement": 1,
       "scheduled_at": "2026-11-21T20:18:00Z"
     },
     {
@@ -453,8 +454,9 @@
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3256/categories/2903556",
       "time_type": "listed fight",
-      "result": "",
+      "result": "LOSS",
       "fight_number": "46",
+      "placement": 2,
       "scheduled_at": "2026-11-21T20:18:00Z"
     },
     {
@@ -534,6 +536,7 @@
       "time_type": "listed fight",
       "result": "LOSS",
       "fight_number": "44",
+      "placement": 3,
       "scheduled_at": "2026-11-21T20:08:00Z"
     },
     {
@@ -628,6 +631,7 @@
       "time_type": "listed fight",
       "result": "LOSS",
       "fight_number": "42",
+      "placement": 3,
       "scheduled_at": "2026-11-21T19:55:00Z"
     },
     {
@@ -736,8 +740,9 @@
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3256/categories/2903566",
       "time_type": "listed fight",
-      "result": "",
+      "result": "LOSS",
       "fight_number": "48",
+      "placement": 2,
       "scheduled_at": "2026-11-21T20:16:00Z"
     },
     {
@@ -801,6 +806,7 @@
       "time_type": "listed fight",
       "result": "LOSS",
       "fight_number": "46",
+      "placement": 3,
       "scheduled_at": "2026-11-21T20:08:00Z"
     },
     {
@@ -833,6 +839,7 @@
       "time_type": "listed fight",
       "result": "LOSS",
       "fight_number": "43",
+      "placement": 3,
       "scheduled_at": "2026-11-21T19:52:00Z"
     },
     {
@@ -956,8 +963,9 @@
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3256/categories/2903566",
       "time_type": "listed fight",
-      "result": "",
+      "result": "WIN",
       "fight_number": "48",
+      "placement": 1,
       "scheduled_at": "2026-11-21T20:16:00Z"
     },
     {
@@ -1206,14 +1214,14 @@
       "name": "Natalia Marques de Camargo",
       "team": "A-Force Brazilian Jiu-Jitsu",
       "bracket": "Purple / Master 1 / Female / Light (141.60lb)",
-      "time": "03:50 PM",
+      "time": "03:52 PM",
       "mat": "5",
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3256/categories/2903602",
       "time_type": "listed fight",
       "result": "",
       "fight_number": "44",
-      "scheduled_at": "2026-11-21T20:50:00Z"
+      "scheduled_at": "2026-11-21T20:52:00Z"
     },
     {
       "competition_id": "3256",
@@ -1238,14 +1246,14 @@
       "name": "Hotjensa Dalipaj",
       "team": "Mavs",
       "bracket": "Purple / Master 1 / Female / Light (141.60lb)",
-      "time": "03:28 PM",
+      "time": "03:25 PM",
       "mat": "5",
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3256/categories/2903602",
       "time_type": "listed fight",
       "result": "",
       "fight_number": "41",
-      "scheduled_at": "2026-11-21T20:28:00Z"
+      "scheduled_at": "2026-11-21T20:25:00Z"
     },
     {
       "competition_id": "3256",
@@ -1254,14 +1262,14 @@
       "name": "Vanna Quach Chau",
       "team": "R1NG BJJ",
       "bracket": "Purple / Master 1 / Female / Light (141.60lb)",
-      "time": "03:28 PM",
+      "time": "03:25 PM",
       "mat": "5",
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3256/categories/2903602",
       "time_type": "listed fight",
       "result": "",
       "fight_number": "41",
-      "scheduled_at": "2026-11-21T20:28:00Z"
+      "scheduled_at": "2026-11-21T20:25:00Z"
     },
     {
       "competition_id": "3256",
@@ -1270,14 +1278,14 @@
       "name": "Michael Janiak",
       "team": "A-Force Brazilian Jiu-Jitsu",
       "bracket": "Purple / Master 4 / Male / Middle (181.60lb)",
-      "time": "03:27 PM",
+      "time": "03:30 PM",
       "mat": "1",
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3256/categories/2903817",
       "time_type": "listed fight",
       "result": "",
       "fight_number": "54",
-      "scheduled_at": "2026-11-21T20:27:00Z"
+      "scheduled_at": "2026-11-21T20:30:00Z"
     },
     {
       "competition_id": "3256",
@@ -1302,14 +1310,14 @@
       "name": "Thomas G. Murchio",
       "team": "Alliance",
       "bracket": "Purple / Master 4 / Male / Middle (181.60lb)",
-      "time": "03:27 PM",
+      "time": "03:30 PM",
       "mat": "1",
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3256/categories/2903817",
       "time_type": "listed fight",
       "result": "",
       "fight_number": "54",
-      "scheduled_at": "2026-11-21T20:27:00Z"
+      "scheduled_at": "2026-11-21T20:30:00Z"
     },
     {
       "competition_id": "3256",
@@ -1334,14 +1342,14 @@
       "name": "Jose Giovanni Gomez",
       "team": "Renzo Gracie Garwood",
       "bracket": "Purple / Master 4 / Male / Middle (181.60lb)",
-      "time": "03:48 PM",
+      "time": "03:51 PM",
       "mat": "1",
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3256/categories/2903817",
       "time_type": "listed fight",
       "result": "",
       "fight_number": "57",
-      "scheduled_at": "2026-11-21T20:48:00Z"
+      "scheduled_at": "2026-11-21T20:51:00Z"
     },
     {
       "competition_id": "3256",
@@ -6469,14 +6477,15 @@
       "name": "Lerone John Bleasdille",
       "team": "Cicero Costha Internacional",
       "bracket": "Blue / Master 2 / Male / Ultra Heavy",
-      "time": "03:20 PM",
+      "time": "03:21 PM",
       "mat": "1",
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3256/categories/2903666",
       "time_type": "listed fight",
-      "result": "",
+      "result": "WIN",
       "fight_number": "53",
-      "scheduled_at": "2026-11-21T20:20:00Z"
+      "placement": 1,
+      "scheduled_at": "2026-11-21T20:21:00Z"
     },
     {
       "competition_id": "3256",
@@ -6501,14 +6510,15 @@
       "name": "Jeffrey M. Foote",
       "team": "Kore BJJ & MMA",
       "bracket": "Blue / Master 2 / Male / Ultra Heavy",
-      "time": "03:20 PM",
+      "time": "03:21 PM",
       "mat": "1",
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3256/categories/2903666",
       "time_type": "listed fight",
-      "result": "",
+      "result": "LOSS",
       "fight_number": "53",
-      "scheduled_at": "2026-11-21T20:20:00Z"
+      "placement": 2,
+      "scheduled_at": "2026-11-21T20:21:00Z"
     },
     {
       "competition_id": "3256",
@@ -7267,14 +7277,14 @@
       "name": "Reza Syed Assar",
       "team": "Alliance",
       "bracket": "Brown / Master 2 / Male / Middle (181.60lb)",
-      "time": "04:16 PM",
+      "time": "04:19 PM",
       "mat": "4",
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3256/categories/2903648",
       "time_type": "listed fight",
       "result": "",
       "fight_number": "48",
-      "scheduled_at": "2026-11-21T21:16:00Z"
+      "scheduled_at": "2026-11-21T21:19:00Z"
     },
     {
       "competition_id": "3256",
@@ -7283,14 +7293,14 @@
       "name": "Ricardo Andres Romero Drouet",
       "team": "Jiu-Jitsu For Life Team",
       "bracket": "Brown / Master 2 / Male / Middle (181.60lb)",
-      "time": "03:55 PM",
+      "time": "03:58 PM",
       "mat": "4",
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3256/categories/2903648",
       "time_type": "listed fight",
       "result": "",
       "fight_number": "45",
-      "scheduled_at": "2026-11-21T20:55:00Z"
+      "scheduled_at": "2026-11-21T20:58:00Z"
     },
     {
       "competition_id": "3256",
@@ -7299,14 +7309,14 @@
       "name": "James P. Peters",
       "team": "Strategic Academy",
       "bracket": "Brown / Master 2 / Male / Middle (181.60lb)",
-      "time": "03:55 PM",
+      "time": "03:58 PM",
       "mat": "4",
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3256/categories/2903648",
       "time_type": "listed fight",
       "result": "",
       "fight_number": "45",
-      "scheduled_at": "2026-11-21T20:55:00Z"
+      "scheduled_at": "2026-11-21T20:58:00Z"
     },
     {
       "competition_id": "3256",
@@ -8096,8 +8106,9 @@
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3256/categories/2904112",
       "time_type": "listed fight",
-      "result": "",
+      "result": "WIN",
       "fight_number": "50",
+      "placement": 1,
       "scheduled_at": "2026-11-21T20:11:00Z"
     },
     {
@@ -8112,8 +8123,9 @@
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3256/categories/2904112",
       "time_type": "listed fight",
-      "result": "",
+      "result": "LOSS",
       "fight_number": "50",
+      "placement": 2,
       "scheduled_at": "2026-11-21T20:11:00Z"
     },
     {
@@ -8832,14 +8844,14 @@
       "name": "Andrew Lawrence Strosser",
       "team": "Ares BJJ",
       "bracket": "Brown / Master 1 / Male / Middle (181.60lb)",
-      "time": "04:05 PM",
+      "time": "04:00 PM",
       "mat": "3",
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3256/categories/2903563",
       "time_type": "listed fight",
       "result": "",
       "fight_number": "53",
-      "scheduled_at": "2026-11-21T21:05:00Z"
+      "scheduled_at": "2026-11-21T21:00:00Z"
     },
     {
       "competition_id": "3256",
@@ -8848,14 +8860,14 @@
       "name": "Nicholas Corrado Hunt",
       "team": "Enlisted Nine Fight Company",
       "bracket": "Brown / Master 1 / Male / Middle (181.60lb)",
-      "time": "04:13 PM",
+      "time": "04:08 PM",
       "mat": "3",
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3256/categories/2903563",
       "time_type": "listed fight",
       "result": "",
       "fight_number": "54",
-      "scheduled_at": "2026-11-21T21:13:00Z"
+      "scheduled_at": "2026-11-21T21:08:00Z"
     },
     {
       "competition_id": "3256",
@@ -8864,14 +8876,14 @@
       "name": "Chris-Anthony D. Thompson",
       "team": "GF Team",
       "bracket": "Brown / Master 1 / Male / Middle (181.60lb)",
-      "time": "04:05 PM",
+      "time": "04:00 PM",
       "mat": "3",
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3256/categories/2903563",
       "time_type": "listed fight",
       "result": "",
       "fight_number": "53",
-      "scheduled_at": "2026-11-21T21:05:00Z"
+      "scheduled_at": "2026-11-21T21:00:00Z"
     },
     {
       "competition_id": "3256",
@@ -8880,14 +8892,14 @@
       "name": "Kevin Charles Rupinski",
       "team": "Notorious Mixed Martial Arts",
       "bracket": "Brown / Master 1 / Male / Middle (181.60lb)",
-      "time": "04:13 PM",
+      "time": "04:08 PM",
       "mat": "3",
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3256/categories/2903563",
       "time_type": "listed fight",
       "result": "",
       "fight_number": "54",
-      "scheduled_at": "2026-11-21T21:13:00Z"
+      "scheduled_at": "2026-11-21T21:08:00Z"
     },
     {
       "competition_id": "3256",
@@ -9664,14 +9676,14 @@
       "name": "Andrew C Carpenter",
       "team": "Balance",
       "bracket": "Purple / Master 1 / Male / Middle (181.60lb)",
-      "time": "03:57 PM",
+      "time": "03:53 PM",
       "mat": "8",
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3256/categories/2903562",
       "time_type": "listed fight",
       "result": "",
       "fight_number": "53",
-      "scheduled_at": "2026-11-21T20:57:00Z"
+      "scheduled_at": "2026-11-21T20:53:00Z"
     },
     {
       "competition_id": "3256",
@@ -9695,14 +9707,14 @@
       "name": "Nicholas William Princiotta",
       "team": "CheckMat",
       "bracket": "Purple / Master 1 / Male / Middle (181.60lb)",
-      "time": "03:49 PM",
+      "time": "03:45 PM",
       "mat": "8",
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3256/categories/2903562",
       "time_type": "listed fight",
       "result": "",
       "fight_number": "52",
-      "scheduled_at": "2026-11-21T20:49:00Z"
+      "scheduled_at": "2026-11-21T20:45:00Z"
     },
     {
       "competition_id": "3256",
@@ -9726,14 +9738,14 @@
       "name": "Thomas Christian Gambino",
       "team": "Cicero Costha Internacional",
       "bracket": "Purple / Master 1 / Male / Middle (181.60lb)",
-      "time": "03:41 PM",
+      "time": "03:37 PM",
       "mat": "8",
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3256/categories/2903562",
       "time_type": "listed fight",
       "result": "",
       "fight_number": "51",
-      "scheduled_at": "2026-11-21T20:41:00Z"
+      "scheduled_at": "2026-11-21T20:37:00Z"
     },
     {
       "competition_id": "3256",
@@ -9742,14 +9754,14 @@
       "name": "German Andres Garcia",
       "team": "East Coast United BJJ",
       "bracket": "Purple / Master 1 / Male / Middle (181.60lb)",
-      "time": "03:49 PM",
+      "time": "03:45 PM",
       "mat": "8",
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3256/categories/2903562",
       "time_type": "listed fight",
       "result": "",
       "fight_number": "52",
-      "scheduled_at": "2026-11-21T20:49:00Z"
+      "scheduled_at": "2026-11-21T20:45:00Z"
     },
     {
       "competition_id": "3256",
@@ -9773,14 +9785,14 @@
       "name": "Amr Hamdy Abdelrazek Elsayed A. Maged",
       "team": "GF Team",
       "bracket": "Purple / Master 1 / Male / Middle (181.60lb)",
-      "time": "03:41 PM",
+      "time": "03:37 PM",
       "mat": "8",
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3256/categories/2903562",
       "time_type": "listed fight",
       "result": "",
       "fight_number": "51",
-      "scheduled_at": "2026-11-21T20:41:00Z"
+      "scheduled_at": "2026-11-21T20:37:00Z"
     },
     {
       "competition_id": "3256",
@@ -9821,14 +9833,14 @@
       "name": "Kevin Ong",
       "team": "Vaughan Jiu-Jitsu Academy",
       "bracket": "Purple / Master 4 / Male / Light (168.00lb)",
-      "time": "03:46 PM",
+      "time": "03:51 PM",
       "mat": "9",
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3256/categories/2903812",
       "time_type": "listed fight",
       "result": "",
       "fight_number": "55",
-      "scheduled_at": "2026-11-21T20:46:00Z"
+      "scheduled_at": "2026-11-21T20:51:00Z"
     },
     {
       "competition_id": "3256",
@@ -10014,14 +10026,14 @@
       "name": "Daniel C Pierce",
       "team": "Bayshore BJJ",
       "bracket": "Purple / Master 4 / Male / Ultra Heavy",
-      "time": "03:43 PM",
+      "time": "03:38 PM",
       "mat": "5",
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3256/categories/2903837",
       "time_type": "listed fight",
       "result": "",
-      "fight_number": "43",
-      "scheduled_at": "2026-11-21T20:43:00Z"
+      "fight_number": "42",
+      "scheduled_at": "2026-11-21T20:38:00Z"
     },
     {
       "competition_id": "3256",
@@ -10030,14 +10042,14 @@
       "name": "Dameon C Kellogg",
       "team": "Jiu Jikan Essência Academy",
       "bracket": "Purple / Master 4 / Male / Ultra Heavy",
-      "time": "03:43 PM",
+      "time": "03:38 PM",
       "mat": "5",
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3256/categories/2903837",
       "time_type": "listed fight",
       "result": "",
-      "fight_number": "43",
-      "scheduled_at": "2026-11-21T20:43:00Z"
+      "fight_number": "42",
+      "scheduled_at": "2026-11-21T20:38:00Z"
     },
     {
       "competition_id": "3256",
@@ -10274,14 +10286,14 @@
       "name": "Daniel M. Alexander",
       "team": "Bill Scott BJJ Shore Academy",
       "bracket": "Brown / Master 4 / Male / Super Heavy (222.00lb)",
-      "time": "04:06 PM",
+      "time": "04:08 PM",
       "mat": "5",
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3256/categories/2903833",
       "time_type": "listed fight",
       "result": "",
       "fight_number": "46",
-      "scheduled_at": "2026-11-21T21:06:00Z"
+      "scheduled_at": "2026-11-21T21:08:00Z"
     },
     {
       "competition_id": "3256",
@@ -10290,14 +10302,14 @@
       "name": "John Richard Bartram",
       "team": "Carlson Gracie Team",
       "bracket": "Brown / Master 4 / Male / Super Heavy (222.00lb)",
-      "time": "04:28 PM",
+      "time": "04:30 PM",
       "mat": "5",
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3256/categories/2903833",
       "time_type": "listed fight",
       "result": "",
       "fight_number": "49",
-      "scheduled_at": "2026-11-21T21:28:00Z"
+      "scheduled_at": "2026-11-21T21:30:00Z"
     },
     {
       "competition_id": "3256",
@@ -10306,14 +10318,14 @@
       "name": "Alonzo F D Wilson lll",
       "team": "Renzo Gracie Academy",
       "bracket": "Brown / Master 4 / Male / Super Heavy (222.00lb)",
-      "time": "04:06 PM",
+      "time": "04:08 PM",
       "mat": "5",
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3256/categories/2903833",
       "time_type": "listed fight",
       "result": "",
       "fight_number": "46",
-      "scheduled_at": "2026-11-21T21:06:00Z"
+      "scheduled_at": "2026-11-21T21:08:00Z"
     },
     {
       "competition_id": "3256",
@@ -10704,14 +10716,14 @@
       "name": "Josue Adelio Escobar",
       "team": "BJJ Revolution Team",
       "bracket": "Brown / Master 1 / Male / Medium Heavy (195.00lb)",
-      "time": "04:39 PM",
+      "time": "04:37 PM",
       "mat": "8",
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3256/categories/2903568",
       "time_type": "listed fight",
       "result": "",
       "fight_number": "59",
-      "scheduled_at": "2026-11-21T21:39:00Z"
+      "scheduled_at": "2026-11-21T21:37:00Z"
     },
     {
       "competition_id": "3256",
@@ -10720,14 +10732,14 @@
       "name": "Fernando Gabriel de Oliveira Apolinario",
       "team": "Renzo Gracie Academy",
       "bracket": "Brown / Master 1 / Male / Medium Heavy (195.00lb)",
-      "time": "04:39 PM",
+      "time": "04:37 PM",
       "mat": "8",
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3256/categories/2903568",
       "time_type": "listed fight",
       "result": "",
       "fight_number": "59",
-      "scheduled_at": "2026-11-21T21:39:00Z"
+      "scheduled_at": "2026-11-21T21:37:00Z"
     },
     {
       "competition_id": "3256",
@@ -10741,9 +10753,25 @@
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3256/categories/2903603",
       "time_type": "listed fight",
-      "result": "",
+      "result": "WIN",
       "fight_number": "51",
       "scheduled_at": "2026-11-21T20:24:00Z"
+    },
+    {
+      "competition_id": "3256",
+      "competition_name": "New Jersey Fall International Open IBJJF Jiu-Jitsu Championship 2026",
+      "date": "",
+      "name": "Leda Guadalupe Garcia",
+      "team": "BJJ Revolution Team",
+      "bracket": "Brown / Master 1 / Female / Light (141.60lb)",
+      "time": "03:54 PM",
+      "mat": "7",
+      "day": "Sat",
+      "bracket_url": "https://www.bjjcompsystem.com/tournaments/3256/categories/2903603",
+      "time_type": "listed fight",
+      "result": "",
+      "fight_number": "55",
+      "scheduled_at": "2026-11-21T20:54:00Z"
     },
     {
       "competition_id": "3256",
@@ -10752,14 +10780,14 @@
       "name": "Yameme Faiçal Ibrahim",
       "team": "Cicero Costha Internacional",
       "bracket": "Brown / Master 1 / Female / Light (141.60lb)",
-      "time": "03:49 PM",
+      "time": "03:46 PM",
       "mat": "7",
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3256/categories/2903603",
       "time_type": "listed fight",
       "result": "",
       "fight_number": "54",
-      "scheduled_at": "2026-11-21T20:49:00Z"
+      "scheduled_at": "2026-11-21T20:46:00Z"
     },
     {
       "competition_id": "3256",
@@ -10783,14 +10811,14 @@
       "name": "Aline Gonçalves Costa",
       "team": "MXT Academy BJJ",
       "bracket": "Brown / Master 1 / Female / Light (141.60lb)",
-      "time": "03:41 PM",
+      "time": "03:38 PM",
       "mat": "7",
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3256/categories/2903603",
       "time_type": "listed fight",
       "result": "",
       "fight_number": "53",
-      "scheduled_at": "2026-11-21T20:41:00Z"
+      "scheduled_at": "2026-11-21T20:38:00Z"
     },
     {
       "competition_id": "3256",
@@ -10799,14 +10827,14 @@
       "name": "Claire Elizabeth Meyer",
       "team": "RABJJ Academy",
       "bracket": "Brown / Master 1 / Female / Light (141.60lb)",
-      "time": "03:57 PM",
+      "time": "03:54 PM",
       "mat": "7",
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3256/categories/2903603",
       "time_type": "listed fight",
       "result": "",
       "fight_number": "55",
-      "scheduled_at": "2026-11-21T20:57:00Z"
+      "scheduled_at": "2026-11-21T20:54:00Z"
     },
     {
       "competition_id": "3256",
@@ -10835,7 +10863,7 @@
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3256/categories/2903603",
       "time_type": "listed fight",
-      "result": "",
+      "result": "LOSS",
       "fight_number": "51",
       "scheduled_at": "2026-11-21T20:24:00Z"
     },
@@ -10846,14 +10874,14 @@
       "name": "Mary-Kate Champagne",
       "team": "South Boston Bjj",
       "bracket": "Brown / Master 1 / Female / Light (141.60lb)",
-      "time": "03:41 PM",
+      "time": "03:38 PM",
       "mat": "7",
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3256/categories/2903603",
       "time_type": "listed fight",
       "result": "",
       "fight_number": "53",
-      "scheduled_at": "2026-11-21T20:41:00Z"
+      "scheduled_at": "2026-11-21T20:38:00Z"
     },
     {
       "competition_id": "3256",
@@ -12887,14 +12915,14 @@
       "name": "Hazim Ibrahim Qudah",
       "team": "LEAD BJJ",
       "bracket": "Blue / Master 1 / Male / Middle (181.60lb)",
-      "time": "03:32 PM",
+      "time": "03:44 PM",
       "mat": "9",
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3256/categories/2903561",
       "time_type": "listed fight",
       "result": "",
-      "fight_number": "53",
-      "scheduled_at": "2026-11-21T20:32:00Z"
+      "fight_number": "54",
+      "scheduled_at": "2026-11-21T20:44:00Z"
     },
     {
       "competition_id": "3256",
@@ -12966,14 +12994,14 @@
       "name": "Robert Alexander Franklin",
       "team": "North South Jiu-Jitsu",
       "bracket": "Blue / Master 1 / Male / Middle (181.60lb)",
-      "time": "03:32 PM",
+      "time": "03:44 PM",
       "mat": "9",
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3256/categories/2903561",
       "time_type": "listed fight",
       "result": "",
-      "fight_number": "53",
-      "scheduled_at": "2026-11-21T20:32:00Z"
+      "fight_number": "54",
+      "scheduled_at": "2026-11-21T20:44:00Z"
     },
     {
       "competition_id": "3256",
@@ -13186,14 +13214,14 @@
       "name": "Paul Gregory Lozbin",
       "team": "Gregor Gracie Jiu-Jitsu",
       "bracket": "Purple / Master 1 / Male / Medium Heavy (195.00lb)",
-      "time": "03:20 PM",
+      "time": "03:22 PM",
       "mat": "3",
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3256/categories/2903567",
       "time_type": "listed fight",
-      "result": "",
+      "result": "LOSS",
       "fight_number": "47",
-      "scheduled_at": "2026-11-21T20:20:00Z"
+      "scheduled_at": "2026-11-21T20:22:00Z"
     },
     {
       "competition_id": "3256",
@@ -13218,14 +13246,14 @@
       "name": "Gabriel Antonio Carrera",
       "team": "Jiu-Jitsu For Life Team",
       "bracket": "Purple / Master 1 / Male / Medium Heavy (195.00lb)",
-      "time": "03:57 PM",
+      "time": "03:45 PM",
       "mat": "3",
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3256/categories/2903567",
       "time_type": "listed fight",
       "result": "",
-      "fight_number": "52",
-      "scheduled_at": "2026-11-21T20:57:00Z"
+      "fight_number": "51",
+      "scheduled_at": "2026-11-21T20:45:00Z"
     },
     {
       "competition_id": "3256",
@@ -13234,14 +13262,30 @@
       "name": "Steven Francisco Reyes-Santos",
       "team": "Subforce BJJ / Jiu-Jitsu For The People",
       "bracket": "Purple / Master 1 / Male / Medium Heavy (195.00lb)",
-      "time": "03:20 PM",
+      "time": "03:22 PM",
+      "mat": "3",
+      "day": "Sat",
+      "bracket_url": "https://www.bjjcompsystem.com/tournaments/3256/categories/2903567",
+      "time_type": "listed fight",
+      "result": "WIN",
+      "fight_number": "47",
+      "scheduled_at": "2026-11-21T20:22:00Z"
+    },
+    {
+      "competition_id": "3256",
+      "competition_name": "New Jersey Fall International Open IBJJF Jiu-Jitsu Championship 2026",
+      "date": "",
+      "name": "Steven Francisco Reyes-Santos",
+      "team": "Subforce BJJ / Jiu-Jitsu For The People",
+      "bracket": "Purple / Master 1 / Male / Medium Heavy (195.00lb)",
+      "time": "03:45 PM",
       "mat": "3",
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3256/categories/2903567",
       "time_type": "listed fight",
       "result": "",
-      "fight_number": "47",
-      "scheduled_at": "2026-11-21T20:20:00Z"
+      "fight_number": "51",
+      "scheduled_at": "2026-11-21T20:45:00Z"
     },
     {
       "competition_id": "3256",
@@ -13250,14 +13294,14 @@
       "name": "Felipe Schaun Machado",
       "team": "Cicero Costha Internacional",
       "bracket": "Purple / Master 3 / Male / Middle (181.60lb)",
-      "time": "03:27 PM",
+      "time": "03:37 PM",
       "mat": "4",
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3256/categories/2903732",
       "time_type": "listed fight",
       "result": "",
-      "fight_number": "41",
-      "scheduled_at": "2026-11-21T20:27:00Z"
+      "fight_number": "42",
+      "scheduled_at": "2026-11-21T20:37:00Z"
     },
     {
       "competition_id": "3256",
@@ -13266,14 +13310,14 @@
       "name": "Genna Gelfand",
       "team": "Jiu-Jitsu For Life Team",
       "bracket": "Purple / Master 3 / Male / Middle (181.60lb)",
-      "time": "03:34 PM",
+      "time": "03:30 PM",
       "mat": "4",
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3256/categories/2903732",
       "time_type": "listed fight",
       "result": "",
-      "fight_number": "42",
-      "scheduled_at": "2026-11-21T20:34:00Z"
+      "fight_number": "41",
+      "scheduled_at": "2026-11-21T20:30:00Z"
     },
     {
       "competition_id": "3256",
@@ -13297,14 +13341,14 @@
       "name": "Leonardo Lucas da Silva",
       "team": "Renzo Gracie Academy",
       "bracket": "Purple / Master 3 / Male / Middle (181.60lb)",
-      "time": "03:27 PM",
+      "time": "03:37 PM",
       "mat": "4",
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3256/categories/2903732",
       "time_type": "listed fight",
       "result": "",
-      "fight_number": "41",
-      "scheduled_at": "2026-11-21T20:27:00Z"
+      "fight_number": "42",
+      "scheduled_at": "2026-11-21T20:37:00Z"
     },
     {
       "competition_id": "3256",
@@ -13313,14 +13357,14 @@
       "name": "Adrian E. Giwa",
       "team": "Rolles Gracie Academy",
       "bracket": "Purple / Master 3 / Male / Middle (181.60lb)",
-      "time": "03:41 PM",
+      "time": "03:44 PM",
       "mat": "4",
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3256/categories/2903732",
       "time_type": "listed fight",
       "result": "",
       "fight_number": "43",
-      "scheduled_at": "2026-11-21T20:41:00Z"
+      "scheduled_at": "2026-11-21T20:44:00Z"
     },
     {
       "competition_id": "3256",
@@ -13344,14 +13388,14 @@
       "name": "Minh-Michael Huy Nguyen",
       "team": "The Jiu-Jitsu Mill",
       "bracket": "Purple / Master 3 / Male / Middle (181.60lb)",
-      "time": "03:34 PM",
+      "time": "03:30 PM",
       "mat": "4",
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3256/categories/2903732",
       "time_type": "listed fight",
       "result": "",
-      "fight_number": "42",
-      "scheduled_at": "2026-11-21T20:34:00Z"
+      "fight_number": "41",
+      "scheduled_at": "2026-11-21T20:30:00Z"
     },
     {
       "competition_id": "3256",
@@ -13509,14 +13553,14 @@
       "name": "Shaun Conover",
       "team": "Cicero Costha Internacional",
       "bracket": "Brown / Master 3 / Male / Feather (154.60lb)",
-      "time": "04:00 PM",
+      "time": "04:05 PM",
       "mat": "9",
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3256/categories/2903723",
       "time_type": "listed fight",
       "result": "",
       "fight_number": "57",
-      "scheduled_at": "2026-11-21T21:00:00Z"
+      "scheduled_at": "2026-11-21T21:05:00Z"
     },
     {
       "competition_id": "3256",
@@ -13530,7 +13574,7 @@
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3256/categories/2903723",
       "time_type": "listed fight",
-      "result": "",
+      "result": "LOSS",
       "fight_number": "51",
       "scheduled_at": "2026-11-21T20:22:00Z"
     },
@@ -13541,14 +13585,14 @@
       "name": "Julio Cesar S Nacipucha",
       "team": "Marlon Colorado BJJ",
       "bracket": "Brown / Master 3 / Male / Feather (154.60lb)",
-      "time": "04:00 PM",
+      "time": "04:05 PM",
       "mat": "9",
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3256/categories/2903723",
       "time_type": "listed fight",
       "result": "",
       "fight_number": "57",
-      "scheduled_at": "2026-11-21T21:00:00Z"
+      "scheduled_at": "2026-11-21T21:05:00Z"
     },
     {
       "competition_id": "3256",
@@ -13562,9 +13606,25 @@
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3256/categories/2903723",
       "time_type": "listed fight",
-      "result": "",
+      "result": "WIN",
       "fight_number": "51",
       "scheduled_at": "2026-11-21T20:22:00Z"
+    },
+    {
+      "competition_id": "3256",
+      "competition_name": "New Jersey Fall International Open IBJJF Jiu-Jitsu Championship 2026",
+      "date": "",
+      "name": "Sulaiman Isa Abdul-Hakeem",
+      "team": "TAC Team BJJ",
+      "bracket": "Brown / Master 3 / Male / Feather (154.60lb)",
+      "time": "04:26 PM",
+      "mat": "9",
+      "day": "Sat",
+      "bracket_url": "https://www.bjjcompsystem.com/tournaments/3256/categories/2903723",
+      "time_type": "listed fight",
+      "result": "",
+      "fight_number": "60",
+      "scheduled_at": "2026-11-21T21:26:00Z"
     },
     {
       "competition_id": "3256",
@@ -14939,14 +14999,14 @@
       "name": "Samuel Scott Linton",
       "team": "Clockwork Jiu-Jitsu",
       "bracket": "Brown / Master 2 / Male / Medium Heavy (195.00lb)",
-      "time": "04:03 PM",
+      "time": "04:01 PM",
       "mat": "8",
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3256/categories/2903653",
       "time_type": "listed fight",
       "result": "",
       "fight_number": "54",
-      "scheduled_at": "2026-11-21T21:03:00Z"
+      "scheduled_at": "2026-11-21T21:01:00Z"
     },
     {
       "competition_id": "3256",
@@ -14955,14 +15015,14 @@
       "name": "John Joseph Westbay",
       "team": "Gregor Gracie Jiu-Jitsu",
       "bracket": "Brown / Master 2 / Male / Medium Heavy (195.00lb)",
-      "time": "04:25 PM",
+      "time": "04:23 PM",
       "mat": "8",
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3256/categories/2903653",
       "time_type": "listed fight",
       "result": "",
       "fight_number": "57",
-      "scheduled_at": "2026-11-21T21:25:00Z"
+      "scheduled_at": "2026-11-21T21:23:00Z"
     },
     {
       "competition_id": "3256",
@@ -14986,14 +15046,14 @@
       "name": "William Joseph Altman",
       "team": "Gregor Gracie Jiu-Jitsu",
       "bracket": "Brown / Master 2 / Male / Medium Heavy (195.00lb)",
-      "time": "04:32 PM",
+      "time": "04:30 PM",
       "mat": "8",
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3256/categories/2903653",
       "time_type": "listed fight",
       "result": "",
       "fight_number": "58",
-      "scheduled_at": "2026-11-21T21:32:00Z"
+      "scheduled_at": "2026-11-21T21:30:00Z"
     },
     {
       "competition_id": "3256",
@@ -15017,14 +15077,14 @@
       "name": "Christopher George Kortbaoui",
       "team": "Nova União",
       "bracket": "Brown / Master 2 / Male / Medium Heavy (195.00lb)",
-      "time": "04:03 PM",
+      "time": "04:01 PM",
       "mat": "8",
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3256/categories/2903653",
       "time_type": "listed fight",
       "result": "",
       "fight_number": "54",
-      "scheduled_at": "2026-11-21T21:03:00Z"
+      "scheduled_at": "2026-11-21T21:01:00Z"
     },
     {
       "competition_id": "3256",
@@ -15033,14 +15093,14 @@
       "name": "Michael A Mendonca",
       "team": "Playground Jiu-Jitsu",
       "bracket": "Brown / Master 2 / Male / Medium Heavy (195.00lb)",
-      "time": "04:10 PM",
+      "time": "04:08 PM",
       "mat": "8",
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3256/categories/2903653",
       "time_type": "listed fight",
       "result": "",
       "fight_number": "55",
-      "scheduled_at": "2026-11-21T21:10:00Z"
+      "scheduled_at": "2026-11-21T21:08:00Z"
     },
     {
       "competition_id": "3256",
@@ -15049,14 +15109,14 @@
       "name": "Ryan N Green",
       "team": "The A-Team",
       "bracket": "Brown / Master 2 / Male / Medium Heavy (195.00lb)",
-      "time": "04:10 PM",
+      "time": "04:08 PM",
       "mat": "8",
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3256/categories/2903653",
       "time_type": "listed fight",
       "result": "",
       "fight_number": "55",
-      "scheduled_at": "2026-11-21T21:10:00Z"
+      "scheduled_at": "2026-11-21T21:08:00Z"
     },
     {
       "competition_id": "3256",
@@ -15065,14 +15125,14 @@
       "name": "James Edward O'Brien Jr.",
       "team": "Clockwork Jiu-Jitsu",
       "bracket": "Brown / Master 5 / Male / Medium Heavy (195.00lb)",
-      "time": "04:47 PM",
+      "time": "04:43 PM",
       "mat": "8",
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3256/categories/2903908",
       "time_type": "listed fight",
       "result": "",
       "fight_number": "60",
-      "scheduled_at": "2026-11-21T21:47:00Z"
+      "scheduled_at": "2026-11-21T21:43:00Z"
     },
     {
       "competition_id": "3256",
@@ -15081,14 +15141,14 @@
       "name": "Arturo Perono Tajanlangit",
       "team": "South Jersey Brazilian Jiu-Jitsu",
       "bracket": "Brown / Master 5 / Male / Medium Heavy (195.00lb)",
-      "time": "04:47 PM",
+      "time": "04:43 PM",
       "mat": "8",
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3256/categories/2903908",
       "time_type": "listed fight",
       "result": "",
       "fight_number": "60",
-      "scheduled_at": "2026-11-21T21:47:00Z"
+      "scheduled_at": "2026-11-21T21:43:00Z"
     },
     {
       "competition_id": "3256",
@@ -15533,14 +15593,14 @@
       "name": "Stefan Faville",
       "team": "Day 1 Jiu-Jitsu",
       "bracket": "Purple / Master 2 / Male / Middle (181.60lb)",
-      "time": "03:48 PM",
+      "time": "03:56 PM",
       "mat": "2",
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3256/categories/2903647",
       "time_type": "listed fight",
       "result": "",
-      "fight_number": "50",
-      "scheduled_at": "2026-11-21T20:48:00Z"
+      "fight_number": "51",
+      "scheduled_at": "2026-11-21T20:56:00Z"
     },
     {
       "competition_id": "3256",
@@ -15564,14 +15624,14 @@
       "name": "Kenneth Franklin Furbee Jr.",
       "team": "GF Team",
       "bracket": "Purple / Master 2 / Male / Middle (181.60lb)",
-      "time": "03:55 PM",
+      "time": "04:03 PM",
       "mat": "2",
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3256/categories/2903647",
       "time_type": "listed fight",
       "result": "",
-      "fight_number": "51",
-      "scheduled_at": "2026-11-21T20:55:00Z"
+      "fight_number": "52",
+      "scheduled_at": "2026-11-21T21:03:00Z"
     },
     {
       "competition_id": "3256",
@@ -15595,14 +15655,14 @@
       "name": "Andrew Welsh Vaughan",
       "team": "Indio Dojo",
       "bracket": "Purple / Master 2 / Male / Middle (181.60lb)",
-      "time": "04:02 PM",
+      "time": "03:35 PM",
       "mat": "2",
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3256/categories/2903647",
       "time_type": "listed fight",
       "result": "",
-      "fight_number": "52",
-      "scheduled_at": "2026-11-21T21:02:00Z"
+      "fight_number": "48",
+      "scheduled_at": "2026-11-21T20:35:00Z"
     },
     {
       "competition_id": "3256",
@@ -15626,14 +15686,14 @@
       "name": "Edgar Joel Ferreras",
       "team": "Jiu Jikan Essência Academy",
       "bracket": "Purple / Master 2 / Male / Middle (181.60lb)",
-      "time": "03:55 PM",
+      "time": "04:03 PM",
       "mat": "2",
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3256/categories/2903647",
       "time_type": "listed fight",
       "result": "",
-      "fight_number": "51",
-      "scheduled_at": "2026-11-21T20:55:00Z"
+      "fight_number": "52",
+      "scheduled_at": "2026-11-21T21:03:00Z"
     },
     {
       "competition_id": "3256",
@@ -15657,14 +15717,14 @@
       "name": "Stephen Kyle Bart",
       "team": "Logic",
       "bracket": "Purple / Master 2 / Male / Middle (181.60lb)",
-      "time": "03:34 PM",
+      "time": "03:42 PM",
       "mat": "2",
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3256/categories/2903647",
       "time_type": "listed fight",
       "result": "",
-      "fight_number": "48",
-      "scheduled_at": "2026-11-21T20:34:00Z"
+      "fight_number": "49",
+      "scheduled_at": "2026-11-21T20:42:00Z"
     },
     {
       "competition_id": "3256",
@@ -15673,14 +15733,14 @@
       "name": "Alexander Afanasyev",
       "team": "Nova União",
       "bracket": "Purple / Master 2 / Male / Middle (181.60lb)",
-      "time": "03:34 PM",
+      "time": "03:42 PM",
       "mat": "2",
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3256/categories/2903647",
       "time_type": "listed fight",
       "result": "",
-      "fight_number": "48",
-      "scheduled_at": "2026-11-21T20:34:00Z"
+      "fight_number": "49",
+      "scheduled_at": "2026-11-21T20:42:00Z"
     },
     {
       "competition_id": "3256",
@@ -15689,14 +15749,14 @@
       "name": "Ryan William Gerrity",
       "team": "Nova União",
       "bracket": "Purple / Master 2 / Male / Middle (181.60lb)",
-      "time": "03:27 PM",
+      "time": "03:26 PM",
       "mat": "2",
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3256/categories/2903647",
       "time_type": "listed fight",
-      "result": "",
+      "result": "LOSS",
       "fight_number": "47",
-      "scheduled_at": "2026-11-21T20:27:00Z"
+      "scheduled_at": "2026-11-21T20:26:00Z"
     },
     {
       "competition_id": "3256",
@@ -15705,14 +15765,14 @@
       "name": "Rocky Fuoco",
       "team": "Renzo Gracie Academy",
       "bracket": "Purple / Master 2 / Male / Middle (181.60lb)",
-      "time": "04:09 PM",
+      "time": "04:10 PM",
       "mat": "2",
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3256/categories/2903647",
       "time_type": "listed fight",
       "result": "",
       "fight_number": "53",
-      "scheduled_at": "2026-11-21T21:09:00Z"
+      "scheduled_at": "2026-11-21T21:10:00Z"
     },
     {
       "competition_id": "3256",
@@ -15736,14 +15796,30 @@
       "name": "Reginald Corey Smith",
       "team": "RMNU Team",
       "bracket": "Purple / Master 2 / Male / Middle (181.60lb)",
-      "time": "03:27 PM",
+      "time": "03:26 PM",
+      "mat": "2",
+      "day": "Sat",
+      "bracket_url": "https://www.bjjcompsystem.com/tournaments/3256/categories/2903647",
+      "time_type": "listed fight",
+      "result": "WIN",
+      "fight_number": "47",
+      "scheduled_at": "2026-11-21T20:26:00Z"
+    },
+    {
+      "competition_id": "3256",
+      "competition_name": "New Jersey Fall International Open IBJJF Jiu-Jitsu Championship 2026",
+      "date": "",
+      "name": "Reginald Corey Smith",
+      "team": "RMNU Team",
+      "bracket": "Purple / Master 2 / Male / Middle (181.60lb)",
+      "time": "03:35 PM",
       "mat": "2",
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3256/categories/2903647",
       "time_type": "listed fight",
       "result": "",
-      "fight_number": "47",
-      "scheduled_at": "2026-11-21T20:27:00Z"
+      "fight_number": "48",
+      "scheduled_at": "2026-11-21T20:35:00Z"
     },
     {
       "competition_id": "3256",
@@ -15752,14 +15828,14 @@
       "name": "Eric Darius Kim",
       "team": "Unity Jiu-jitsu",
       "bracket": "Purple / Master 2 / Male / Middle (181.60lb)",
-      "time": "03:48 PM",
+      "time": "03:56 PM",
       "mat": "2",
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3256/categories/2903647",
       "time_type": "listed fight",
       "result": "",
-      "fight_number": "50",
-      "scheduled_at": "2026-11-21T20:48:00Z"
+      "fight_number": "51",
+      "scheduled_at": "2026-11-21T20:56:00Z"
     },
     {
       "competition_id": "3256",
@@ -16673,14 +16749,15 @@
       "name": "David Christopher Kelly",
       "team": "Essential Jiu-Jitsu",
       "bracket": "Purple / Master 3 / Male / Light (168.00lb)",
-      "time": "03:32 PM",
+      "time": "03:30 PM",
       "mat": "8",
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3256/categories/2903727",
       "time_type": "listed fight",
-      "result": "",
+      "result": "WIN",
       "fight_number": "50",
-      "scheduled_at": "2026-11-21T20:32:00Z"
+      "placement": 1,
+      "scheduled_at": "2026-11-21T20:30:00Z"
     },
     {
       "competition_id": "3256",
@@ -16689,14 +16766,15 @@
       "name": "Steven Camilo",
       "team": "Rising Sun BJJ",
       "bracket": "Purple / Master 3 / Male / Light (168.00lb)",
-      "time": "03:32 PM",
+      "time": "03:30 PM",
       "mat": "8",
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3256/categories/2903727",
       "time_type": "listed fight",
-      "result": "",
+      "result": "LOSS",
       "fight_number": "50",
-      "scheduled_at": "2026-11-21T20:32:00Z"
+      "placement": 2,
+      "scheduled_at": "2026-11-21T20:30:00Z"
     },
     {
       "competition_id": "3256",
@@ -17003,14 +17081,14 @@
       "name": "Antoine Pindrys",
       "team": "Fairfield Fit Club BJJ",
       "bracket": "Brown / Master 1 / Male / Heavy (208.00lb)",
-      "time": "03:55 PM",
+      "time": "04:00 PM",
       "mat": "5",
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3256/categories/2903573",
       "time_type": "listed fight",
       "result": "",
       "fight_number": "45",
-      "scheduled_at": "2026-11-21T20:55:00Z"
+      "scheduled_at": "2026-11-21T21:00:00Z"
     },
     {
       "competition_id": "3256",
@@ -17019,14 +17097,14 @@
       "name": "Corey Brett Meikrantz",
       "team": "Inverted Gear Academy",
       "bracket": "Brown / Master 1 / Male / Heavy (208.00lb)",
-      "time": "04:17 PM",
+      "time": "04:22 PM",
       "mat": "5",
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3256/categories/2903573",
       "time_type": "listed fight",
       "result": "",
       "fight_number": "48",
-      "scheduled_at": "2026-11-21T21:17:00Z"
+      "scheduled_at": "2026-11-21T21:22:00Z"
     },
     {
       "competition_id": "3256",
@@ -17035,14 +17113,14 @@
       "name": "Luis Adrián Baez Lindao",
       "team": "Team Predador Internacional",
       "bracket": "Brown / Master 1 / Male / Heavy (208.00lb)",
-      "time": "03:55 PM",
+      "time": "04:00 PM",
       "mat": "5",
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3256/categories/2903573",
       "time_type": "listed fight",
       "result": "",
       "fight_number": "45",
-      "scheduled_at": "2026-11-21T20:55:00Z"
+      "scheduled_at": "2026-11-21T21:00:00Z"
     },
     {
       "competition_id": "3256",
@@ -17167,14 +17245,14 @@
       "name": "Ashish Sharma",
       "team": "Foundry BJJ",
       "bracket": "Brown / Master 1 / Male / Super Heavy (222.00lb)",
-      "time": "04:48 PM",
+      "time": "04:51 PM",
       "mat": "9",
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3256/categories/2903578",
       "time_type": "listed fight",
       "result": "",
       "fight_number": "63",
-      "scheduled_at": "2026-11-21T21:48:00Z"
+      "scheduled_at": "2026-11-21T21:51:00Z"
     },
     {
       "competition_id": "3256",
@@ -17183,14 +17261,14 @@
       "name": "Fedor Menshchikov",
       "team": "TRA Jiu-Jitsu",
       "bracket": "Brown / Master 1 / Male / Super Heavy (222.00lb)",
-      "time": "04:48 PM",
+      "time": "04:51 PM",
       "mat": "9",
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3256/categories/2903578",
       "time_type": "listed fight",
       "result": "",
       "fight_number": "63",
-      "scheduled_at": "2026-11-21T21:48:00Z"
+      "scheduled_at": "2026-11-21T21:51:00Z"
     },
     {
       "competition_id": "3256",
@@ -17204,8 +17282,9 @@
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3256/categories/2903637",
       "time_type": "listed fight",
-      "result": "",
+      "result": "WIN",
       "fight_number": "40",
+      "placement": 1,
       "scheduled_at": "2026-11-21T20:20:00Z"
     },
     {
@@ -17220,8 +17299,9 @@
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3256/categories/2903637",
       "time_type": "listed fight",
-      "result": "",
+      "result": "LOSS",
       "fight_number": "40",
+      "placement": 2,
       "scheduled_at": "2026-11-21T20:20:00Z"
     },
     {
@@ -17231,14 +17311,14 @@
       "name": "Jonathan Paul Ray",
       "team": "G13 BJJ USA",
       "bracket": "Brown / Master 3 / Male / Medium Heavy (195.00lb)",
-      "time": "03:41 PM",
+      "time": "03:44 PM",
       "mat": "2",
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3256/categories/2903738",
       "time_type": "listed fight",
       "result": "",
       "fight_number": "49",
-      "scheduled_at": "2026-11-21T20:41:00Z"
+      "scheduled_at": "2026-11-21T20:44:00Z"
     },
     {
       "competition_id": "3256",
@@ -17247,14 +17327,14 @@
       "name": "Luis G Rivera-Correa",
       "team": "North South Jiu-Jitsu",
       "bracket": "Brown / Master 3 / Male / Medium Heavy (195.00lb)",
-      "time": "04:16 PM",
+      "time": "04:19 PM",
       "mat": "2",
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3256/categories/2903738",
       "time_type": "listed fight",
       "result": "",
       "fight_number": "54",
-      "scheduled_at": "2026-11-21T21:16:00Z"
+      "scheduled_at": "2026-11-21T21:19:00Z"
     },
     {
       "competition_id": "3256",
@@ -17263,14 +17343,14 @@
       "name": "Edward Verdel",
       "team": "Nova União",
       "bracket": "Brown / Master 3 / Male / Medium Heavy (195.00lb)",
-      "time": "04:16 PM",
+      "time": "04:19 PM",
       "mat": "2",
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3256/categories/2903738",
       "time_type": "listed fight",
       "result": "",
       "fight_number": "54",
-      "scheduled_at": "2026-11-21T21:16:00Z"
+      "scheduled_at": "2026-11-21T21:19:00Z"
     },
     {
       "competition_id": "3256",
@@ -17279,14 +17359,14 @@
       "name": "Douglas Michael Cantor",
       "team": "Origem Ascend Jiu-Jitsu Academy",
       "bracket": "Brown / Master 3 / Male / Medium Heavy (195.00lb)",
-      "time": "03:41 PM",
+      "time": "03:44 PM",
       "mat": "2",
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3256/categories/2903738",
       "time_type": "listed fight",
       "result": "",
       "fight_number": "49",
-      "scheduled_at": "2026-11-21T20:41:00Z"
+      "scheduled_at": "2026-11-21T20:44:00Z"
     },
     {
       "competition_id": "3256",
@@ -17591,14 +17671,14 @@
       "name": "Chelsea K. Martinez",
       "team": "GMAC",
       "bracket": "Brown / Master 2 / Female / Heavy (175.00lb)",
-      "time": "04:02 PM",
+      "time": "04:05 PM",
       "mat": "1",
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3256/categories/2903703",
       "time_type": "listed fight",
       "result": "",
       "fight_number": "59",
-      "scheduled_at": "2026-11-21T21:02:00Z"
+      "scheduled_at": "2026-11-21T21:05:00Z"
     },
     {
       "competition_id": "3256",
@@ -17607,14 +17687,14 @@
       "name": "Christine A Winter",
       "team": "Renzo Gracie Rockland Ny",
       "bracket": "Brown / Master 2 / Female / Heavy (175.00lb)",
-      "time": "04:02 PM",
+      "time": "04:05 PM",
       "mat": "1",
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3256/categories/2903703",
       "time_type": "listed fight",
       "result": "",
       "fight_number": "59",
-      "scheduled_at": "2026-11-21T21:02:00Z"
+      "scheduled_at": "2026-11-21T21:05:00Z"
     },
     {
       "competition_id": "3256",
@@ -17673,14 +17753,14 @@
       "name": "Dilor Mendes Pacheco",
       "team": "Gracie Barra",
       "bracket": "Brown / Master 4 / Male / Medium Heavy (195.00lb)",
-      "time": "04:28 PM",
+      "time": "04:31 PM",
       "mat": "1",
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3256/categories/2903823",
       "time_type": "listed fight",
       "result": "",
       "fight_number": "62",
-      "scheduled_at": "2026-11-21T21:28:00Z"
+      "scheduled_at": "2026-11-21T21:31:00Z"
     },
     {
       "competition_id": "3256",
@@ -17704,14 +17784,14 @@
       "name": "Matthew Francis Dolfi",
       "team": "Indio Dojo",
       "bracket": "Brown / Master 4 / Male / Medium Heavy (195.00lb)",
-      "time": "03:55 PM",
+      "time": "03:58 PM",
       "mat": "1",
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3256/categories/2903823",
       "time_type": "listed fight",
       "result": "",
       "fight_number": "58",
-      "scheduled_at": "2026-11-21T20:55:00Z"
+      "scheduled_at": "2026-11-21T20:58:00Z"
     },
     {
       "competition_id": "3256",
@@ -17720,14 +17800,14 @@
       "name": "Ruben Belliard",
       "team": "Renzo Gracie Jiu-Jitsu - Upper West Side",
       "bracket": "Brown / Master 4 / Male / Medium Heavy (195.00lb)",
-      "time": "04:21 PM",
+      "time": "04:24 PM",
       "mat": "1",
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3256/categories/2903823",
       "time_type": "listed fight",
       "result": "",
       "fight_number": "61",
-      "scheduled_at": "2026-11-21T21:21:00Z"
+      "scheduled_at": "2026-11-21T21:24:00Z"
     },
     {
       "competition_id": "3256",
@@ -17751,14 +17831,14 @@
       "name": "Javier Mercado",
       "team": "Subforce BJJ / Jiu-Jitsu For The People",
       "bracket": "Brown / Master 4 / Male / Medium Heavy (195.00lb)",
-      "time": "03:41 PM",
+      "time": "03:44 PM",
       "mat": "1",
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3256/categories/2903823",
       "time_type": "listed fight",
       "result": "",
       "fight_number": "56",
-      "scheduled_at": "2026-11-21T20:41:00Z"
+      "scheduled_at": "2026-11-21T20:44:00Z"
     },
     {
       "competition_id": "3256",
@@ -17767,14 +17847,14 @@
       "name": "Sibanengi Masuku",
       "team": "TAC Team BJJ",
       "bracket": "Brown / Master 4 / Male / Medium Heavy (195.00lb)",
-      "time": "03:41 PM",
+      "time": "03:44 PM",
       "mat": "1",
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3256/categories/2903823",
       "time_type": "listed fight",
       "result": "",
       "fight_number": "56",
-      "scheduled_at": "2026-11-21T20:41:00Z"
+      "scheduled_at": "2026-11-21T20:44:00Z"
     },
     {
       "competition_id": "3256",
@@ -17783,14 +17863,14 @@
       "name": "Philip Darovic",
       "team": "Unity Jiu-jitsu",
       "bracket": "Brown / Master 4 / Male / Medium Heavy (195.00lb)",
-      "time": "03:55 PM",
+      "time": "03:58 PM",
       "mat": "1",
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3256/categories/2903823",
       "time_type": "listed fight",
       "result": "",
       "fight_number": "58",
-      "scheduled_at": "2026-11-21T20:55:00Z"
+      "scheduled_at": "2026-11-21T20:58:00Z"
     },
     {
       "competition_id": "3256",
@@ -17947,14 +18027,14 @@
       "name": "Dena Marie Padalino",
       "team": "Gracie Humaita Ashburn",
       "bracket": "Blue / Master 4 / Female / Middle (152.60lb)",
-      "time": "03:41 PM",
+      "time": "03:38 PM",
       "mat": "3",
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3256/categories/2903861",
       "time_type": "listed fight",
       "result": "",
       "fight_number": "50",
-      "scheduled_at": "2026-11-21T20:41:00Z"
+      "scheduled_at": "2026-11-21T20:38:00Z"
     },
     {
       "competition_id": "3256",
@@ -17979,14 +18059,14 @@
       "name": "Sônia Maria da Silva",
       "team": "Gregor Gracie Jiu-Jitsu",
       "bracket": "Blue / Master 4 / Female / Middle (152.60lb)",
-      "time": "03:41 PM",
+      "time": "03:38 PM",
       "mat": "3",
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3256/categories/2903861",
       "time_type": "listed fight",
       "result": "",
       "fight_number": "50",
-      "scheduled_at": "2026-11-21T20:41:00Z"
+      "scheduled_at": "2026-11-21T20:38:00Z"
     },
     {
       "competition_id": "3256",
@@ -18526,14 +18606,14 @@
       "name": "Benigno de Jesus Campiz Castillo",
       "team": "Gregor Gracie Jiu-Jitsu",
       "bracket": "Blue / Master 3 / Male / Ultra Heavy",
-      "time": "03:50 PM",
+      "time": "03:48 PM",
       "mat": "6",
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3256/categories/2903751",
       "time_type": "listed fight",
       "result": "",
       "fight_number": "51",
-      "scheduled_at": "2026-11-21T20:50:00Z"
+      "scheduled_at": "2026-11-21T20:48:00Z"
     },
     {
       "competition_id": "3256",
@@ -18542,14 +18622,14 @@
       "name": "Alessandro Giordano",
       "team": "Nova União",
       "bracket": "Blue / Master 3 / Male / Ultra Heavy",
-      "time": "03:50 PM",
+      "time": "03:48 PM",
       "mat": "6",
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3256/categories/2903751",
       "time_type": "listed fight",
       "result": "",
       "fight_number": "51",
-      "scheduled_at": "2026-11-21T20:50:00Z"
+      "scheduled_at": "2026-11-21T20:48:00Z"
     },
     {
       "competition_id": "3256",
@@ -18563,8 +18643,9 @@
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3256/categories/2903821",
       "time_type": "listed fight",
-      "result": "",
+      "result": "WIN",
       "fight_number": "49",
+      "placement": 1,
       "scheduled_at": "2026-11-21T20:23:00Z"
     },
     {
@@ -18579,8 +18660,9 @@
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3256/categories/2903821",
       "time_type": "listed fight",
-      "result": "",
+      "result": "LOSS",
       "fight_number": "49",
+      "placement": 2,
       "scheduled_at": "2026-11-21T20:23:00Z"
     },
     {
@@ -18720,14 +18802,14 @@
       "name": "Eric Cabrera Alvarez",
       "team": "Gregor Gracie Jiu-Jitsu",
       "bracket": "Purple / Master 1 / Male / Light (168.00lb)",
-      "time": "03:33 PM",
+      "time": "03:35 PM",
       "mat": "7",
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3256/categories/2903557",
       "time_type": "listed fight",
       "result": "",
       "fight_number": "52",
-      "scheduled_at": "2026-11-21T20:33:00Z"
+      "scheduled_at": "2026-11-21T20:35:00Z"
     },
     {
       "competition_id": "3256",
@@ -18783,14 +18865,14 @@
       "name": "Ki Bum Park",
       "team": "Lotus Club USA",
       "bracket": "Purple / Master 1 / Male / Light (168.00lb)",
-      "time": "03:33 PM",
+      "time": "03:35 PM",
       "mat": "7",
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3256/categories/2903557",
       "time_type": "listed fight",
       "result": "",
       "fight_number": "52",
-      "scheduled_at": "2026-11-21T20:33:00Z"
+      "scheduled_at": "2026-11-21T20:35:00Z"
     },
     {
       "competition_id": "3256",
@@ -18877,14 +18959,14 @@
       "name": "Matthew Diaz",
       "team": "Gregor Gracie Jiu-Jitsu",
       "bracket": "Purple / Master 1 / Male / Heavy (208.00lb)",
-      "time": "03:33 PM",
+      "time": "03:28 PM",
       "mat": "3",
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3256/categories/2903572",
       "time_type": "listed fight",
       "result": "",
       "fight_number": "48",
-      "scheduled_at": "2026-11-21T20:33:00Z"
+      "scheduled_at": "2026-11-21T20:28:00Z"
     },
     {
       "competition_id": "3256",
@@ -18893,14 +18975,14 @@
       "name": "Ian Matthew Bilofsky",
       "team": "Logic",
       "bracket": "Purple / Master 1 / Male / Heavy (208.00lb)",
-      "time": "03:33 PM",
+      "time": "03:28 PM",
       "mat": "3",
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3256/categories/2903572",
       "time_type": "listed fight",
       "result": "",
       "fight_number": "48",
-      "scheduled_at": "2026-11-21T20:33:00Z"
+      "scheduled_at": "2026-11-21T20:28:00Z"
     },
     {
       "competition_id": "3256",
@@ -18909,14 +18991,14 @@
       "name": "Gregory Paoli",
       "team": "Gregor Gracie Jiu-Jitsu",
       "bracket": "Purple / Master 4 / Male / Super Heavy (222.00lb)",
-      "time": "03:48 PM",
+      "time": "03:53 PM",
       "mat": "3",
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3256/categories/2903832",
       "time_type": "listed fight",
       "result": "",
-      "fight_number": "51",
-      "scheduled_at": "2026-11-21T20:48:00Z"
+      "fight_number": "52",
+      "scheduled_at": "2026-11-21T20:53:00Z"
     },
     {
       "competition_id": "3256",
@@ -18925,14 +19007,14 @@
       "name": "Jason P Pessemier",
       "team": "One Way Martial Arts",
       "bracket": "Purple / Master 4 / Male / Super Heavy (222.00lb)",
-      "time": "03:48 PM",
+      "time": "03:53 PM",
       "mat": "3",
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3256/categories/2903832",
       "time_type": "listed fight",
       "result": "",
-      "fight_number": "51",
-      "scheduled_at": "2026-11-21T20:48:00Z"
+      "fight_number": "52",
+      "scheduled_at": "2026-11-21T20:53:00Z"
     },
     {
       "competition_id": "3256",
@@ -18941,14 +19023,14 @@
       "name": "Edward Ha",
       "team": "Gregor Gracie Jiu-Jitsu",
       "bracket": "Purple / Master 6 / Male / Middle (181.60lb)",
-      "time": "03:53 PM",
+      "time": "03:56 PM",
       "mat": "9",
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3256/categories/2903982",
       "time_type": "listed fight",
       "result": "",
       "fight_number": "56",
-      "scheduled_at": "2026-11-21T20:53:00Z"
+      "scheduled_at": "2026-11-21T20:56:00Z"
     },
     {
       "competition_id": "3256",
@@ -18957,14 +19039,14 @@
       "name": "Paul A Niemann Jr.",
       "team": "Jiu-Jitsu Ingenito",
       "bracket": "Purple / Master 6 / Male / Middle (181.60lb)",
-      "time": "03:39 PM",
+      "time": "03:35 PM",
       "mat": "9",
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3256/categories/2903982",
       "time_type": "listed fight",
       "result": "",
-      "fight_number": "54",
-      "scheduled_at": "2026-11-21T20:39:00Z"
+      "fight_number": "53",
+      "scheduled_at": "2026-11-21T20:35:00Z"
     },
     {
       "competition_id": "3256",
@@ -18973,14 +19055,14 @@
       "name": "Patrick Ashby Bock",
       "team": "SAS Team",
       "bracket": "Purple / Master 6 / Male / Middle (181.60lb)",
-      "time": "03:39 PM",
+      "time": "03:35 PM",
       "mat": "9",
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3256/categories/2903982",
       "time_type": "listed fight",
       "result": "",
-      "fight_number": "54",
-      "scheduled_at": "2026-11-21T20:39:00Z"
+      "fight_number": "53",
+      "scheduled_at": "2026-11-21T20:35:00Z"
     },
     {
       "competition_id": "3256",
@@ -18989,14 +19071,14 @@
       "name": "Joseph Zito",
       "team": "Gregor Gracie Jiu-Jitsu",
       "bracket": "Brown / Master 4 / Male / Heavy (208.00lb)",
-      "time": "04:05 PM",
+      "time": "04:07 PM",
       "mat": "7",
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3256/categories/2903828",
       "time_type": "listed fight",
       "result": "",
       "fight_number": "56",
-      "scheduled_at": "2026-11-21T21:05:00Z"
+      "scheduled_at": "2026-11-21T21:07:00Z"
     },
     {
       "competition_id": "3256",
@@ -19005,14 +19087,14 @@
       "name": "Antonio Figueroa",
       "team": "Nova União",
       "bracket": "Brown / Master 4 / Male / Heavy (208.00lb)",
-      "time": "04:05 PM",
+      "time": "04:07 PM",
       "mat": "7",
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3256/categories/2903828",
       "time_type": "listed fight",
       "result": "",
       "fight_number": "56",
-      "scheduled_at": "2026-11-21T21:05:00Z"
+      "scheduled_at": "2026-11-21T21:07:00Z"
     },
     {
       "competition_id": "3256",
@@ -19572,14 +19654,14 @@
       "name": "Arsenio E. Rodrigues",
       "team": "Iron Guard BJJ",
       "bracket": "Brown / Master 2 / Male / Heavy (208.00lb)",
-      "time": "03:57 PM",
+      "time": "03:55 PM",
       "mat": "6",
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3256/categories/2903658",
       "time_type": "listed fight",
       "result": "",
       "fight_number": "52",
-      "scheduled_at": "2026-11-21T20:57:00Z"
+      "scheduled_at": "2026-11-21T20:55:00Z"
     },
     {
       "competition_id": "3256",
@@ -19588,14 +19670,14 @@
       "name": "Nathan Daniel Hoffmann Rollo",
       "team": "Relson Gracie",
       "bracket": "Brown / Master 2 / Male / Heavy (208.00lb)",
-      "time": "03:57 PM",
+      "time": "03:55 PM",
       "mat": "6",
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3256/categories/2903658",
       "time_type": "listed fight",
       "result": "",
       "fight_number": "52",
-      "scheduled_at": "2026-11-21T20:57:00Z"
+      "scheduled_at": "2026-11-21T20:55:00Z"
     },
     {
       "competition_id": "3256",
@@ -19604,14 +19686,14 @@
       "name": "Jan M Banks",
       "team": "Renzo Gracie Newark",
       "bracket": "Brown / Master 2 / Male / Heavy (208.00lb)",
-      "time": "04:19 PM",
+      "time": "04:17 PM",
       "mat": "6",
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3256/categories/2903658",
       "time_type": "listed fight",
       "result": "",
       "fight_number": "55",
-      "scheduled_at": "2026-11-21T21:19:00Z"
+      "scheduled_at": "2026-11-21T21:17:00Z"
     },
     {
       "competition_id": "3256",
@@ -19620,14 +19702,14 @@
       "name": "S Daniel Bomysoad",
       "team": "Ithaca BJJ School",
       "bracket": "Brown / Master 3 / Male / Heavy (208.00lb)",
-      "time": "04:14 PM",
+      "time": "04:12 PM",
       "mat": "4",
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3256/categories/2903743",
       "time_type": "listed fight",
       "result": "",
       "fight_number": "47",
-      "scheduled_at": "2026-11-21T21:14:00Z"
+      "scheduled_at": "2026-11-21T21:12:00Z"
     },
     {
       "competition_id": "3256",
@@ -19636,14 +19718,14 @@
       "name": "Justin T. Klepper",
       "team": "TAC Team BJJ",
       "bracket": "Brown / Master 3 / Male / Heavy (208.00lb)",
-      "time": "04:14 PM",
+      "time": "04:12 PM",
       "mat": "4",
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3256/categories/2903743",
       "time_type": "listed fight",
       "result": "",
       "fight_number": "47",
-      "scheduled_at": "2026-11-21T21:14:00Z"
+      "scheduled_at": "2026-11-21T21:12:00Z"
     },
     {
       "competition_id": "3256",
@@ -19652,14 +19734,14 @@
       "name": "Tiago J. May Buogo",
       "team": "The Match Champ USA",
       "bracket": "Brown / Master 3 / Male / Heavy (208.00lb)",
-      "time": "04:35 PM",
+      "time": "04:33 PM",
       "mat": "4",
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3256/categories/2903743",
       "time_type": "listed fight",
       "result": "",
       "fight_number": "50",
-      "scheduled_at": "2026-11-21T21:35:00Z"
+      "scheduled_at": "2026-11-21T21:33:00Z"
     },
     {
       "competition_id": "3256",
@@ -19750,14 +19832,14 @@
       "name": "John Taylor Pell",
       "team": "Jiu-Jitsu For The People - Sheridan BJJ",
       "bracket": "Brown / Master 4 / Male / Middle (181.60lb)",
-      "time": "04:19 PM",
+      "time": "04:16 PM",
       "mat": "3",
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3256/categories/2903818",
       "time_type": "listed fight",
       "result": "",
       "fight_number": "55",
-      "scheduled_at": "2026-11-21T21:19:00Z"
+      "scheduled_at": "2026-11-21T21:16:00Z"
     },
     {
       "competition_id": "3256",
@@ -19766,14 +19848,14 @@
       "name": "Phil Simon Goldenberg",
       "team": "Masterskya",
       "bracket": "Brown / Master 4 / Male / Middle (181.60lb)",
-      "time": "04:26 PM",
+      "time": "04:23 PM",
       "mat": "3",
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3256/categories/2903818",
       "time_type": "listed fight",
       "result": "",
       "fight_number": "56",
-      "scheduled_at": "2026-11-21T21:26:00Z"
+      "scheduled_at": "2026-11-21T21:23:00Z"
     },
     {
       "competition_id": "3256",
@@ -19782,14 +19864,14 @@
       "name": "John Andrew Kirley",
       "team": "Renzo Gracie Academy",
       "bracket": "Brown / Master 4 / Male / Middle (181.60lb)",
-      "time": "04:19 PM",
+      "time": "04:16 PM",
       "mat": "3",
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3256/categories/2903818",
       "time_type": "listed fight",
       "result": "",
       "fight_number": "55",
-      "scheduled_at": "2026-11-21T21:19:00Z"
+      "scheduled_at": "2026-11-21T21:16:00Z"
     },
     {
       "competition_id": "3256",
@@ -19798,14 +19880,14 @@
       "name": "Felipe Arizabaleta Balcazar",
       "team": "Rodolfo Pertuz Satori Jiu-Jitsu",
       "bracket": "Brown / Master 4 / Male / Middle (181.60lb)",
-      "time": "04:26 PM",
+      "time": "04:23 PM",
       "mat": "3",
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3256/categories/2903818",
       "time_type": "listed fight",
       "result": "",
       "fight_number": "56",
-      "scheduled_at": "2026-11-21T21:26:00Z"
+      "scheduled_at": "2026-11-21T21:23:00Z"
     },
     {
       "competition_id": "3256",
@@ -20251,14 +20333,14 @@
       "name": "Joshua Samuel Sohn",
       "team": "Masterskya",
       "bracket": "Purple / Master 5 / Male / Heavy (208.00lb)",
-      "time": "03:53 PM",
+      "time": "03:51 PM",
       "mat": "4",
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3256/categories/2903912",
       "time_type": "listed fight",
       "result": "",
       "fight_number": "44",
-      "scheduled_at": "2026-11-21T20:53:00Z"
+      "scheduled_at": "2026-11-21T20:51:00Z"
     },
     {
       "competition_id": "3256",
@@ -20267,14 +20349,14 @@
       "name": "Christoph Edward Umscheid",
       "team": "Nova União",
       "bracket": "Purple / Master 5 / Male / Heavy (208.00lb)",
-      "time": "03:53 PM",
+      "time": "03:51 PM",
       "mat": "4",
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3256/categories/2903912",
       "time_type": "listed fight",
       "result": "",
       "fight_number": "44",
-      "scheduled_at": "2026-11-21T20:53:00Z"
+      "scheduled_at": "2026-11-21T20:51:00Z"
     },
     {
       "competition_id": "3256",
@@ -20745,14 +20827,14 @@
       "name": "Thiago Costa Sajo",
       "team": "Nova União",
       "bracket": "Purple / Master 3 / Male / Heavy (208.00lb)",
-      "time": "03:34 PM",
+      "time": "03:37 PM",
       "mat": "1",
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3256/categories/2903742",
       "time_type": "listed fight",
       "result": "",
       "fight_number": "55",
-      "scheduled_at": "2026-11-21T20:34:00Z"
+      "scheduled_at": "2026-11-21T20:37:00Z"
     },
     {
       "competition_id": "3256",
@@ -20761,14 +20843,14 @@
       "name": "Denill Grimaud",
       "team": "Silver Fox BJJ",
       "bracket": "Purple / Master 3 / Male / Heavy (208.00lb)",
-      "time": "03:34 PM",
+      "time": "03:37 PM",
       "mat": "1",
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3256/categories/2903742",
       "time_type": "listed fight",
       "result": "",
       "fight_number": "55",
-      "scheduled_at": "2026-11-21T20:34:00Z"
+      "scheduled_at": "2026-11-21T20:37:00Z"
     },
     {
       "competition_id": "3256",
@@ -21009,14 +21091,14 @@
       "name": "Jonas J EInstein",
       "team": "Renzo Gracie Academy",
       "bracket": "Blue / Master 5 / Male / Super Heavy (222.00lb)",
-      "time": "03:33 PM",
+      "time": "03:31 PM",
       "mat": "5",
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3256/categories/2903916",
       "time_type": "listed fight",
-      "result": "",
-      "fight_number": "42",
-      "scheduled_at": "2026-11-21T20:33:00Z"
+      "result": "WIN",
+      "fight_number": "43",
+      "scheduled_at": "2026-11-21T20:31:00Z"
     },
     {
       "competition_id": "3256",
@@ -21025,14 +21107,14 @@
       "name": "Kenneth Allen Horwitz",
       "team": "TAC Team BJJ",
       "bracket": "Blue / Master 5 / Male / Super Heavy (222.00lb)",
-      "time": "03:33 PM",
+      "time": "03:31 PM",
       "mat": "5",
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3256/categories/2903916",
       "time_type": "listed fight",
-      "result": "",
-      "fight_number": "42",
-      "scheduled_at": "2026-11-21T20:33:00Z"
+      "result": "LOSS",
+      "fight_number": "43",
+      "scheduled_at": "2026-11-21T20:31:00Z"
     },
     {
       "competition_id": "3256",
@@ -21299,14 +21381,14 @@
       "name": "Eduardo Westphalen",
       "team": "Submit Your Friend Academy",
       "bracket": "Brown / Master 1 / Male / Light (168.00lb)",
-      "time": "04:40 PM",
+      "time": "04:45 PM",
       "mat": "9",
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3256/categories/2903558",
       "time_type": "listed fight",
       "result": "",
       "fight_number": "62",
-      "scheduled_at": "2026-11-21T21:40:00Z"
+      "scheduled_at": "2026-11-21T21:45:00Z"
     },
     {
       "competition_id": "3256",
@@ -21315,14 +21397,14 @@
       "name": "Piero Alessi",
       "team": "The A-Team",
       "bracket": "Brown / Master 1 / Male / Light (168.00lb)",
-      "time": "04:40 PM",
+      "time": "04:45 PM",
       "mat": "9",
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3256/categories/2903558",
       "time_type": "listed fight",
       "result": "",
       "fight_number": "62",
-      "scheduled_at": "2026-11-21T21:40:00Z"
+      "scheduled_at": "2026-11-21T21:45:00Z"
     },
     {
       "competition_id": "3256",
@@ -21397,14 +21479,14 @@
       "name": "William Duayne Watts",
       "team": "TRUJITSU/Excelsior",
       "bracket": "Brown / Master 7 / Male / Light (168.00lb)",
-      "time": "04:44 PM",
+      "time": "04:45 PM",
       "mat": "2",
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3256/categories/2904098",
       "time_type": "listed fight",
       "result": "",
       "fight_number": "58",
-      "scheduled_at": "2026-11-21T21:44:00Z"
+      "scheduled_at": "2026-11-21T21:45:00Z"
     },
     {
       "competition_id": "3256",
@@ -21413,14 +21495,14 @@
       "name": "John F. Palladino",
       "team": "Yamasaki Academy",
       "bracket": "Brown / Master 7 / Male / Light (168.00lb)",
-      "time": "04:44 PM",
+      "time": "04:45 PM",
       "mat": "2",
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3256/categories/2904098",
       "time_type": "listed fight",
       "result": "",
       "fight_number": "58",
-      "scheduled_at": "2026-11-21T21:44:00Z"
+      "scheduled_at": "2026-11-21T21:45:00Z"
     },
     {
       "competition_id": "3256",
