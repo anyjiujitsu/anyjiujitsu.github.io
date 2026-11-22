@@ -35,7 +35,7 @@
       "event_end_date": "2026-11-22"
     }
   ],
-  "updated_at": "2026-11-22T23:22:47.768473+00:00",
+  "updated_at": "2026-11-22T23:32:47.481222+00:00",
   "athletes": [
     {
       "competition_id": "3256",
@@ -21405,15 +21405,14 @@
       "name": "Madeleine Lenore Avila",
       "team": "Crazy 88",
       "bracket": "Purple / Adult / Female / Medium Heavy (163.60lb)",
-      "time": "01:27 PM",
-      "mat": "8",
-      "day": "Sat",
+      "time": "",
+      "mat": "",
+      "day": "",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3256/categories/2903527",
-      "time_type": "listed fight",
+      "time_type": "completed result without published time",
       "result": "WIN",
-      "fight_number": "32",
-      "placement": 1,
-      "scheduled_at": "2026-11-21T18:27:00Z"
+      "fight_number": "",
+      "placement": 1
     },
     {
       "competition_id": "3256",
@@ -21422,15 +21421,14 @@
       "name": "Hannah Grace Maple",
       "team": "Indio Dojo",
       "bracket": "Purple / Adult / Female / Medium Heavy (163.60lb)",
-      "time": "01:27 PM",
-      "mat": "8",
-      "day": "Sat",
+      "time": "",
+      "mat": "",
+      "day": "",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3256/categories/2903527",
-      "time_type": "listed fight",
+      "time_type": "completed result without published time",
       "result": "LOSS",
-      "fight_number": "32",
-      "placement": 2,
-      "scheduled_at": "2026-11-21T18:27:00Z"
+      "fight_number": "",
+      "placement": 2
     },
     {
       "competition_id": "3256",
@@ -24105,14 +24103,14 @@
       "name": "Alexis Antonio Parrilla",
       "team": "GF Team",
       "bracket": "Black / Adult / Male / Feather (154.60lb)",
-      "time": "10:18 AM",
-      "mat": "5",
-      "day": "Sat",
+      "time": "",
+      "mat": "",
+      "day": "",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3256/categories/2903469",
-      "time_type": "listed fight",
-      "result": "WIN",
-      "fight_number": "6",
-      "scheduled_at": "2026-11-21T15:18:00Z"
+      "time_type": "completed result without published time",
+      "result": "LOSS",
+      "fight_number": "",
+      "placement": 2
     },
     {
       "competition_id": "3256",
@@ -24121,15 +24119,13 @@
       "name": "Alexis Antonio Parrilla",
       "team": "GF Team",
       "bracket": "Black / Adult / Male / Feather (154.60lb)",
-      "time": "10:50 AM",
-      "mat": "5",
-      "day": "Sat",
+      "time": "",
+      "mat": "",
+      "day": "",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3256/categories/2903469",
-      "time_type": "listed fight",
-      "result": "LOSS",
-      "fight_number": "10",
-      "placement": 2,
-      "scheduled_at": "2026-11-21T15:50:00Z"
+      "time_type": "completed result without published time",
+      "result": "WIN",
+      "fight_number": ""
     },
     {
       "competition_id": "3256",
@@ -24138,15 +24134,14 @@
       "name": "Dennis A Pressey Jr",
       "team": "Logic",
       "bracket": "Black / Adult / Male / Feather (154.60lb)",
-      "time": "10:18 AM",
-      "mat": "5",
-      "day": "Sat",
+      "time": "",
+      "mat": "",
+      "day": "",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3256/categories/2903469",
-      "time_type": "listed fight",
+      "time_type": "completed result without published time",
       "result": "LOSS",
-      "fight_number": "6",
-      "placement": 3,
-      "scheduled_at": "2026-11-21T15:18:00Z"
+      "fight_number": "",
+      "placement": 3
     },
     {
       "competition_id": "3256",
@@ -24155,14 +24150,14 @@
       "name": "Otávio Vinícius da Silva",
       "team": "Morselli Jiu-Jitsu Academy",
       "bracket": "Black / Adult / Male / Feather (154.60lb)",
-      "time": "09:33 AM",
-      "mat": "5",
-      "day": "Sat",
+      "time": "",
+      "mat": "",
+      "day": "",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3256/categories/2903469",
-      "time_type": "listed fight",
+      "time_type": "completed result without published time",
       "result": "WIN",
-      "fight_number": "2",
-      "scheduled_at": "2026-11-21T14:33:00Z"
+      "fight_number": "",
+      "placement": 1
     },
     {
       "competition_id": "3256",
@@ -24171,15 +24166,13 @@
       "name": "Otávio Vinícius da Silva",
       "team": "Morselli Jiu-Jitsu Academy",
       "bracket": "Black / Adult / Male / Feather (154.60lb)",
-      "time": "10:50 AM",
-      "mat": "5",
-      "day": "Sat",
+      "time": "",
+      "mat": "",
+      "day": "",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3256/categories/2903469",
-      "time_type": "listed fight",
+      "time_type": "completed result without published time",
       "result": "WIN",
-      "fight_number": "10",
-      "placement": 1,
-      "scheduled_at": "2026-11-21T15:50:00Z"
+      "fight_number": ""
     },
     {
       "competition_id": "3256",
@@ -24188,15 +24181,14 @@
       "name": "Richard Marcus Cordova",
       "team": "Outer Heaven",
       "bracket": "Black / Adult / Male / Feather (154.60lb)",
-      "time": "09:33 AM",
-      "mat": "5",
-      "day": "Sat",
+      "time": "",
+      "mat": "",
+      "day": "",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3256/categories/2903469",
-      "time_type": "listed fight",
+      "time_type": "completed result without published time",
       "result": "LOSS",
-      "fight_number": "2",
-      "placement": 3,
-      "scheduled_at": "2026-11-21T14:33:00Z"
+      "fight_number": "",
+      "placement": 3
     },
     {
       "competition_id": "3256",
@@ -35265,14 +35257,30 @@
       "name": "Guy C Radcliffe",
       "team": "Balance",
       "bracket": "Blue / Master 7 / Male / Open Class",
-      "time": "06:10 PM",
+      "time": "06:11 PM",
+      "mat": "5",
+      "day": "Sun",
+      "bracket_url": "https://www.bjjcompsystem.com/tournaments/3257/categories/2904839",
+      "time_type": "listed fight",
+      "result": "WIN",
+      "fight_number": "33",
+      "scheduled_at": "2026-11-22T23:11:00Z"
+    },
+    {
+      "competition_id": "3257",
+      "competition_name": "New Jersey Fall International Open IBJJF Jiu-Jitsu No-Gi Championship 2026",
+      "date": "",
+      "name": "Guy C Radcliffe",
+      "team": "Balance",
+      "bracket": "Blue / Master 7 / Male / Open Class",
+      "time": "06:20 PM",
       "mat": "5",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3257/categories/2904839",
       "time_type": "listed fight",
       "result": "",
-      "fight_number": "33",
-      "scheduled_at": "2026-11-22T23:10:00Z"
+      "fight_number": "34",
+      "scheduled_at": "2026-11-22T23:20:00Z"
     },
     {
       "competition_id": "3257",
@@ -35297,14 +35305,14 @@
       "name": "Wayne Lloyd Shannon",
       "team": "Fight Sports",
       "bracket": "Blue / Master 7 / Male / Open Class",
-      "time": "06:10 PM",
+      "time": "06:11 PM",
       "mat": "5",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3257/categories/2904839",
       "time_type": "listed fight",
-      "result": "",
+      "result": "LOSS",
       "fight_number": "33",
-      "scheduled_at": "2026-11-22T23:10:00Z"
+      "scheduled_at": "2026-11-22T23:11:00Z"
     },
     {
       "competition_id": "3257",
@@ -35329,14 +35337,14 @@
       "name": "Kevin Wayne Jones",
       "team": "Gracie Sports USA",
       "bracket": "Blue / Master 7 / Male / Open Class",
-      "time": "06:17 PM",
+      "time": "06:20 PM",
       "mat": "5",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3257/categories/2904839",
       "time_type": "listed fight",
       "result": "",
       "fight_number": "34",
-      "scheduled_at": "2026-11-22T23:17:00Z"
+      "scheduled_at": "2026-11-22T23:20:00Z"
     },
     {
       "competition_id": "3257",
