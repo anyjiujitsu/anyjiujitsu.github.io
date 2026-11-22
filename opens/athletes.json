@@ -35,7 +35,7 @@
       "event_end_date": "2026-11-22"
     }
   ],
-  "updated_at": "2026-11-22T16:52:55.798506+00:00",
+  "updated_at": "2026-11-22T17:02:47.076004+00:00",
   "athletes": [
     {
       "competition_id": "3256",
@@ -37699,6 +37699,7 @@
       "time_type": "listed fight",
       "result": "LOSS",
       "fight_number": "22",
+      "placement": 3,
       "scheduled_at": "2026-11-22T16:32:00Z"
     },
     {
@@ -37729,8 +37730,9 @@
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3258/categories/2905181",
       "time_type": "listed fight",
-      "result": "",
+      "result": "WIN",
       "fight_number": "26",
+      "placement": 1,
       "scheduled_at": "2026-11-22T16:49:00Z"
     },
     {
@@ -37747,6 +37749,7 @@
       "time_type": "listed fight",
       "result": "LOSS",
       "fight_number": "23",
+      "placement": 3,
       "scheduled_at": "2026-11-22T16:36:00Z"
     },
     {
@@ -37777,8 +37780,9 @@
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3258/categories/2905181",
       "time_type": "listed fight",
-      "result": "",
+      "result": "LOSS",
       "fight_number": "26",
+      "placement": 2,
       "scheduled_at": "2026-11-22T16:49:00Z"
     },
     {
