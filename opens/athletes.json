@@ -35,7 +35,7 @@
       "event_end_date": "2026-11-22"
     }
   ],
-  "updated_at": "2026-11-22T23:42:43.344109+00:00",
+  "updated_at": "2026-11-22T23:52:43.545020+00:00",
   "athletes": [
     {
       "competition_id": "3256",
@@ -17620,15 +17620,14 @@
       "name": "Cesário Carneiro de Souza",
       "team": "Cesario Brazilian Jiu Jitsu Team",
       "bracket": "Black / Master 5 / Male / Light (168.00lb)",
-      "time": "01:17 PM",
-      "mat": "8",
-      "day": "Sat",
+      "time": "",
+      "mat": "",
+      "day": "",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3256/categories/2903899",
-      "time_type": "listed fight",
+      "time_type": "completed result without published time",
       "result": "LOSS",
-      "fight_number": "30",
-      "placement": 2,
-      "scheduled_at": "2026-11-21T18:17:00Z"
+      "fight_number": "",
+      "placement": 2
     },
     {
       "competition_id": "3256",
@@ -17637,15 +17636,14 @@
       "name": "Ryan S Saboe",
       "team": "Kioto BJJ",
       "bracket": "Black / Master 5 / Male / Light (168.00lb)",
-      "time": "01:17 PM",
-      "mat": "8",
-      "day": "Sat",
+      "time": "",
+      "mat": "",
+      "day": "",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3256/categories/2903899",
-      "time_type": "listed fight",
+      "time_type": "completed result without published time",
       "result": "WIN",
-      "fight_number": "30",
-      "placement": 1,
-      "scheduled_at": "2026-11-21T18:17:00Z"
+      "fight_number": "",
+      "placement": 1
     },
     {
       "competition_id": "3256",
@@ -26249,15 +26247,14 @@
       "name": "Jeffrey Paul Reisner",
       "team": "Haven Jiu-Jitsu",
       "bracket": "Blue / Master 4 / Male / Ultra Heavy",
-      "time": "03:04 PM",
-      "mat": "3",
-      "day": "Sat",
+      "time": "",
+      "mat": "",
+      "day": "",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3256/categories/2903836",
-      "time_type": "listed fight",
+      "time_type": "completed result without published time",
       "result": "LOSS",
-      "fight_number": "46",
-      "placement": 2,
-      "scheduled_at": "2026-11-21T20:04:00Z"
+      "fight_number": "",
+      "placement": 2
     },
     {
       "competition_id": "3256",
@@ -26266,15 +26263,14 @@
       "name": "Ra Donyhea Torian Brave",
       "team": "Noel Smith Brazilian Jiu-Jitsu",
       "bracket": "Blue / Master 4 / Male / Ultra Heavy",
-      "time": "03:04 PM",
-      "mat": "3",
-      "day": "Sat",
+      "time": "",
+      "mat": "",
+      "day": "",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3256/categories/2903836",
-      "time_type": "listed fight",
+      "time_type": "completed result without published time",
       "result": "WIN",
-      "fight_number": "46",
-      "placement": 1,
-      "scheduled_at": "2026-11-21T20:04:00Z"
+      "fight_number": "",
+      "placement": 1
     },
     {
       "competition_id": "3256",
@@ -28115,14 +28111,13 @@
       "name": "Jackson Craig Platsky",
       "team": "Notorious Mixed Martial Arts",
       "bracket": "Blue / Master 4 / Male / Middle (181.60lb)",
-      "time": "02:10 PM",
-      "mat": "8",
-      "day": "Sat",
+      "time": "",
+      "mat": "",
+      "day": "",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3256/categories/2903816",
-      "time_type": "listed fight",
+      "time_type": "completed result without published time",
       "result": "LOSS",
-      "fight_number": "37",
-      "scheduled_at": "2026-11-21T19:10:00Z"
+      "fight_number": ""
     },
     {
       "competition_id": "3256",
@@ -28131,14 +28126,13 @@
       "name": "Jackson Craig Platsky",
       "team": "Notorious Mixed Martial Arts",
       "bracket": "Blue / Master 4 / Male / Middle (181.60lb)",
-      "time": "02:43 PM",
-      "mat": "8",
-      "day": "Sat",
+      "time": "",
+      "mat": "",
+      "day": "",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3256/categories/2903816",
-      "time_type": "listed fight",
+      "time_type": "completed result without published time",
       "result": "LOSS",
-      "fight_number": "42",
-      "scheduled_at": "2026-11-21T19:43:00Z"
+      "fight_number": ""
     },
     {
       "competition_id": "3256",
@@ -28147,14 +28141,14 @@
       "name": "Ronald Tae Sok Kim",
       "team": "Renzo Gracie Academy",
       "bracket": "Blue / Master 4 / Male / Middle (181.60lb)",
-      "time": "02:43 PM",
-      "mat": "8",
-      "day": "Sat",
+      "time": "",
+      "mat": "",
+      "day": "",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3256/categories/2903816",
-      "time_type": "listed fight",
-      "result": "WIN",
-      "fight_number": "42",
-      "scheduled_at": "2026-11-21T19:43:00Z"
+      "time_type": "completed result without published time",
+      "result": "LOSS",
+      "fight_number": "",
+      "placement": 2
     },
     {
       "competition_id": "3256",
@@ -28163,15 +28157,13 @@
       "name": "Ronald Tae Sok Kim",
       "team": "Renzo Gracie Academy",
       "bracket": "Blue / Master 4 / Male / Middle (181.60lb)",
-      "time": "03:02 PM",
-      "mat": "8",
-      "day": "Sat",
+      "time": "",
+      "mat": "",
+      "day": "",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3256/categories/2903816",
-      "time_type": "listed fight",
-      "result": "LOSS",
-      "fight_number": "44",
-      "placement": 2,
-      "scheduled_at": "2026-11-21T20:02:00Z"
+      "time_type": "completed result without published time",
+      "result": "WIN",
+      "fight_number": ""
     },
     {
       "competition_id": "3256",
@@ -28180,14 +28172,14 @@
       "name": "Mark Jeffrey Robinson",
       "team": "TRA Jiu-Jitsu",
       "bracket": "Blue / Master 4 / Male / Middle (181.60lb)",
-      "time": "02:10 PM",
-      "mat": "8",
-      "day": "Sat",
+      "time": "",
+      "mat": "",
+      "day": "",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3256/categories/2903816",
-      "time_type": "listed fight",
+      "time_type": "completed result without published time",
       "result": "WIN",
-      "fight_number": "37",
-      "scheduled_at": "2026-11-21T19:10:00Z"
+      "fight_number": "",
+      "placement": 1
     },
     {
       "competition_id": "3256",
@@ -28196,15 +28188,13 @@
       "name": "Mark Jeffrey Robinson",
       "team": "TRA Jiu-Jitsu",
       "bracket": "Blue / Master 4 / Male / Middle (181.60lb)",
-      "time": "03:02 PM",
-      "mat": "8",
-      "day": "Sat",
+      "time": "",
+      "mat": "",
+      "day": "",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3256/categories/2903816",
-      "time_type": "listed fight",
+      "time_type": "completed result without published time",
       "result": "WIN",
-      "fight_number": "44",
-      "placement": 1,
-      "scheduled_at": "2026-11-21T20:02:00Z"
+      "fight_number": ""
     },
     {
       "competition_id": "3256",
@@ -28689,15 +28679,14 @@
       "name": "Steven Franco Lung Hu",
       "team": "Renzo Gracie Brooklyn",
       "bracket": "White / Master 2 / Male / Feather (154.60lb)",
-      "time": "01:17 PM",
-      "mat": "3",
-      "day": "Sun",
+      "time": "",
+      "mat": "",
+      "day": "",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3256/categories/2903635",
-      "time_type": "listed fight",
+      "time_type": "completed result without published time",
       "result": "WIN",
-      "fight_number": "12",
-      "placement": 1,
-      "scheduled_at": "2026-11-22T18:17:00Z"
+      "fight_number": "",
+      "placement": 1
     },
     {
       "competition_id": "3256",
@@ -28706,15 +28695,14 @@
       "name": "David Anthony Almeida",
       "team": "Workshop",
       "bracket": "White / Master 2 / Male / Feather (154.60lb)",
-      "time": "01:17 PM",
-      "mat": "3",
-      "day": "Sun",
+      "time": "",
+      "mat": "",
+      "day": "",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3256/categories/2903635",
-      "time_type": "listed fight",
+      "time_type": "completed result without published time",
       "result": "LOSS",
-      "fight_number": "12",
-      "placement": 2,
-      "scheduled_at": "2026-11-22T18:17:00Z"
+      "fight_number": "",
+      "placement": 2
     },
     {
       "competition_id": "3256",
