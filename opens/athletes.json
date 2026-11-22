@@ -35,7 +35,7 @@
       "event_end_date": "2026-11-22"
     }
   ],
-  "updated_at": "2026-11-22T15:22:33.851670+00:00",
+  "updated_at": "2026-11-22T15:32:53.272519+00:00",
   "athletes": [
     {
       "competition_id": "3256",
@@ -34064,14 +34064,14 @@
       "name": "Aryan Kadaboina",
       "team": "Alliance",
       "bracket": "Grey / Mighty-mite 3 / Male / Light (55.60lb)",
-      "time": "10:24 AM",
+      "time": "10:28 AM",
       "mat": "8",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3258/categories/2904913",
       "time_type": "listed fight",
       "result": "",
-      "fight_number": "11",
-      "scheduled_at": "2026-11-22T15:24:00Z"
+      "fight_number": "12",
+      "scheduled_at": "2026-11-22T15:28:00Z"
     },
     {
       "competition_id": "3258",
@@ -34111,14 +34111,14 @@
       "name": "Lenox Michael Lipp",
       "team": "Cicero Costha Internacional",
       "bracket": "Grey / Mighty-mite 3 / Male / Light (55.60lb)",
-      "time": "10:38 AM",
+      "time": "10:42 AM",
       "mat": "8",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3258/categories/2904913",
       "time_type": "listed fight",
       "result": "",
-      "fight_number": "14",
-      "scheduled_at": "2026-11-22T15:38:00Z"
+      "fight_number": "15",
+      "scheduled_at": "2026-11-22T15:42:00Z"
     },
     {
       "competition_id": "3258",
@@ -34189,14 +34189,14 @@
       "name": "Leo Memphis Jihoon Lee",
       "team": "Versus Brazilian Jiu-Jitsu Academy",
       "bracket": "Grey / Mighty-mite 3 / Male / Light (55.60lb)",
-      "time": "10:24 AM",
+      "time": "10:28 AM",
       "mat": "8",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3258/categories/2904913",
       "time_type": "listed fight",
       "result": "",
-      "fight_number": "11",
-      "scheduled_at": "2026-11-22T15:24:00Z"
+      "fight_number": "12",
+      "scheduled_at": "2026-11-22T15:28:00Z"
     },
     {
       "competition_id": "3258",
@@ -34205,14 +34205,14 @@
       "name": "Benjamin Louis DeMaio",
       "team": "340 Kairos",
       "bracket": "Grey / Mighty-mite 3 / Male / Middle (62.00lb)",
-      "time": "10:46 AM",
+      "time": "10:38 AM",
       "mat": "8",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3258/categories/2904914",
       "time_type": "listed fight",
       "result": "",
-      "fight_number": "16",
-      "scheduled_at": "2026-11-22T15:46:00Z"
+      "fight_number": "14",
+      "scheduled_at": "2026-11-22T15:38:00Z"
     },
     {
       "competition_id": "3258",
@@ -34221,14 +34221,30 @@
       "name": "Liam Adam Martin",
       "team": "Gracie Humaita Ashburn",
       "bracket": "Grey / Mighty-mite 3 / Male / Middle (62.00lb)",
-      "time": "10:20 AM",
+      "time": "10:21 AM",
+      "mat": "8",
+      "day": "Sun",
+      "bracket_url": "https://www.bjjcompsystem.com/tournaments/3258/categories/2904914",
+      "time_type": "listed fight",
+      "result": "LOSS",
+      "fight_number": "10",
+      "scheduled_at": "2026-11-22T15:21:00Z"
+    },
+    {
+      "competition_id": "3258",
+      "competition_name": "New Jersey Fall Kids International Open IBJJF Jiu-Jitsu Championship 2026",
+      "date": "",
+      "name": "Liam Adam Martin",
+      "team": "Gracie Humaita Ashburn",
+      "bracket": "Grey / Mighty-mite 3 / Male / Middle (62.00lb)",
+      "time": "10:38 AM",
       "mat": "8",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3258/categories/2904914",
       "time_type": "listed fight",
       "result": "",
-      "fight_number": "10",
-      "scheduled_at": "2026-11-22T15:20:00Z"
+      "fight_number": "14",
+      "scheduled_at": "2026-11-22T15:38:00Z"
     },
     {
       "competition_id": "3258",
@@ -34237,14 +34253,30 @@
       "name": "Samuel Oliveira Souza",
       "team": "Rodolfo Rocha Martial Academy",
       "bracket": "Grey / Mighty-mite 3 / Male / Middle (62.00lb)",
-      "time": "10:20 AM",
+      "time": "10:21 AM",
+      "mat": "8",
+      "day": "Sun",
+      "bracket_url": "https://www.bjjcompsystem.com/tournaments/3258/categories/2904914",
+      "time_type": "listed fight",
+      "result": "WIN",
+      "fight_number": "10",
+      "scheduled_at": "2026-11-22T15:21:00Z"
+    },
+    {
+      "competition_id": "3258",
+      "competition_name": "New Jersey Fall Kids International Open IBJJF Jiu-Jitsu Championship 2026",
+      "date": "",
+      "name": "Samuel Oliveira Souza",
+      "team": "Rodolfo Rocha Martial Academy",
+      "bracket": "Grey / Mighty-mite 3 / Male / Middle (62.00lb)",
+      "time": "10:58 AM",
       "mat": "8",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3258/categories/2904914",
       "time_type": "listed fight",
       "result": "",
-      "fight_number": "10",
-      "scheduled_at": "2026-11-22T15:20:00Z"
+      "fight_number": "19",
+      "scheduled_at": "2026-11-22T15:58:00Z"
     },
     {
       "competition_id": "3258",
@@ -34269,38 +34301,6 @@
       "name": "Albrecht Carlton Roeser",
       "team": "340 Kairos",
       "bracket": "Grey / Pee-Wee 3 / Male / Light (73.60lb)",
-      "time": "10:25 AM",
-      "mat": "2",
-      "day": "Sun",
-      "bracket_url": "https://www.bjjcompsystem.com/tournaments/3258/categories/2905006",
-      "time_type": "listed fight",
-      "result": "",
-      "fight_number": "12",
-      "scheduled_at": "2026-11-22T15:25:00Z"
-    },
-    {
-      "competition_id": "3258",
-      "competition_name": "New Jersey Fall Kids International Open IBJJF Jiu-Jitsu Championship 2026",
-      "date": "",
-      "name": "Lucas Quinn Wattanachaiyot",
-      "team": "A-Force Brazilian Jiu-Jitsu",
-      "bracket": "Grey / Pee-Wee 3 / Male / Light (73.60lb)",
-      "time": "10:20 AM",
-      "mat": "2",
-      "day": "Sun",
-      "bracket_url": "https://www.bjjcompsystem.com/tournaments/3258/categories/2905006",
-      "time_type": "listed fight",
-      "result": "",
-      "fight_number": "11",
-      "scheduled_at": "2026-11-22T15:20:00Z"
-    },
-    {
-      "competition_id": "3258",
-      "competition_name": "New Jersey Fall Kids International Open IBJJF Jiu-Jitsu Championship 2026",
-      "date": "",
-      "name": "Zane Zaoude Frydrychowicz",
-      "team": "Brazilian Top Team Int.",
-      "bracket": "Grey / Pee-Wee 3 / Male / Light (73.60lb)",
       "time": "10:30 AM",
       "mat": "2",
       "day": "Sun",
@@ -34309,6 +34309,54 @@
       "result": "",
       "fight_number": "13",
       "scheduled_at": "2026-11-22T15:30:00Z"
+    },
+    {
+      "competition_id": "3258",
+      "competition_name": "New Jersey Fall Kids International Open IBJJF Jiu-Jitsu Championship 2026",
+      "date": "",
+      "name": "Lucas Quinn Wattanachaiyot",
+      "team": "A-Force Brazilian Jiu-Jitsu",
+      "bracket": "Grey / Pee-Wee 3 / Male / Light (73.60lb)",
+      "time": "10:23 AM",
+      "mat": "2",
+      "day": "Sun",
+      "bracket_url": "https://www.bjjcompsystem.com/tournaments/3258/categories/2905006",
+      "time_type": "listed fight",
+      "result": "WIN",
+      "fight_number": "11",
+      "scheduled_at": "2026-11-22T15:23:00Z"
+    },
+    {
+      "competition_id": "3258",
+      "competition_name": "New Jersey Fall Kids International Open IBJJF Jiu-Jitsu Championship 2026",
+      "date": "",
+      "name": "Lucas Quinn Wattanachaiyot",
+      "team": "A-Force Brazilian Jiu-Jitsu",
+      "bracket": "Grey / Pee-Wee 3 / Male / Light (73.60lb)",
+      "time": "10:40 AM",
+      "mat": "2",
+      "day": "Sun",
+      "bracket_url": "https://www.bjjcompsystem.com/tournaments/3258/categories/2905006",
+      "time_type": "listed fight",
+      "result": "",
+      "fight_number": "15",
+      "scheduled_at": "2026-11-22T15:40:00Z"
+    },
+    {
+      "competition_id": "3258",
+      "competition_name": "New Jersey Fall Kids International Open IBJJF Jiu-Jitsu Championship 2026",
+      "date": "",
+      "name": "Zane Zaoude Frydrychowicz",
+      "team": "Brazilian Top Team Int.",
+      "bracket": "Grey / Pee-Wee 3 / Male / Light (73.60lb)",
+      "time": "10:25 AM",
+      "mat": "2",
+      "day": "Sun",
+      "bracket_url": "https://www.bjjcompsystem.com/tournaments/3258/categories/2905006",
+      "time_type": "listed fight",
+      "result": "",
+      "fight_number": "12",
+      "scheduled_at": "2026-11-22T15:25:00Z"
     },
     {
       "competition_id": "3258",
@@ -34333,22 +34381,6 @@
       "name": "Augustus James Chung",
       "team": "Cicero Costha Internacional",
       "bracket": "Grey / Pee-Wee 3 / Male / Light (73.60lb)",
-      "time": "10:25 AM",
-      "mat": "2",
-      "day": "Sun",
-      "bracket_url": "https://www.bjjcompsystem.com/tournaments/3258/categories/2905006",
-      "time_type": "listed fight",
-      "result": "",
-      "fight_number": "12",
-      "scheduled_at": "2026-11-22T15:25:00Z"
-    },
-    {
-      "competition_id": "3258",
-      "competition_name": "New Jersey Fall Kids International Open IBJJF Jiu-Jitsu Championship 2026",
-      "date": "",
-      "name": "Asad Abdel Kareem Mujalli",
-      "team": "GMAC",
-      "bracket": "Grey / Pee-Wee 3 / Male / Light (73.60lb)",
       "time": "10:30 AM",
       "mat": "2",
       "day": "Sun",
@@ -34362,17 +34394,33 @@
       "competition_id": "3258",
       "competition_name": "New Jersey Fall Kids International Open IBJJF Jiu-Jitsu Championship 2026",
       "date": "",
-      "name": "Connor James Huber",
-      "team": "Ground Control MMA",
+      "name": "Asad Abdel Kareem Mujalli",
+      "team": "GMAC",
       "bracket": "Grey / Pee-Wee 3 / Male / Light (73.60lb)",
-      "time": "10:20 AM",
+      "time": "10:25 AM",
       "mat": "2",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3258/categories/2905006",
       "time_type": "listed fight",
       "result": "",
+      "fight_number": "12",
+      "scheduled_at": "2026-11-22T15:25:00Z"
+    },
+    {
+      "competition_id": "3258",
+      "competition_name": "New Jersey Fall Kids International Open IBJJF Jiu-Jitsu Championship 2026",
+      "date": "",
+      "name": "Connor James Huber",
+      "team": "Ground Control MMA",
+      "bracket": "Grey / Pee-Wee 3 / Male / Light (73.60lb)",
+      "time": "10:23 AM",
+      "mat": "2",
+      "day": "Sun",
+      "bracket_url": "https://www.bjjcompsystem.com/tournaments/3258/categories/2905006",
+      "time_type": "listed fight",
+      "result": "LOSS",
       "fight_number": "11",
-      "scheduled_at": "2026-11-22T15:20:00Z"
+      "scheduled_at": "2026-11-22T15:23:00Z"
     },
     {
       "competition_id": "3258",
@@ -34434,8 +34482,9 @@
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3258/categories/2904932",
       "time_type": "listed fight",
-      "result": "",
+      "result": "WIN",
       "fight_number": "15",
+      "placement": 1,
       "scheduled_at": "2026-11-22T15:20:00Z"
     },
     {
@@ -34481,8 +34530,9 @@
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3258/categories/2904932",
       "time_type": "listed fight",
-      "result": "",
+      "result": "LOSS",
       "fight_number": "15",
+      "placement": 2,
       "scheduled_at": "2026-11-22T15:20:00Z"
     },
     {
@@ -34530,6 +34580,7 @@
       "time_type": "listed fight",
       "result": "LOSS",
       "fight_number": "10",
+      "placement": 3,
       "scheduled_at": "2026-11-22T15:01:00Z"
     },
     {
@@ -34546,6 +34597,7 @@
       "time_type": "listed fight",
       "result": "LOSS",
       "fight_number": "13",
+      "placement": 3,
       "scheduled_at": "2026-11-22T15:14:00Z"
     },
     {
@@ -34586,14 +34638,30 @@
       "name": "Valerie Qi",
       "team": "A-Force Brazilian Jiu-Jitsu",
       "bracket": "Grey / Pee-Wee 3 / Female / Feather (67.00lb)",
-      "time": "10:25 AM",
+      "time": "10:23 AM",
+      "mat": "7",
+      "day": "Sun",
+      "bracket_url": "https://www.bjjcompsystem.com/tournaments/3258/categories/2905022",
+      "time_type": "listed fight",
+      "result": "WIN",
+      "fight_number": "13",
+      "scheduled_at": "2026-11-22T15:23:00Z"
+    },
+    {
+      "competition_id": "3258",
+      "competition_name": "New Jersey Fall Kids International Open IBJJF Jiu-Jitsu Championship 2026",
+      "date": "",
+      "name": "Valerie Qi",
+      "team": "A-Force Brazilian Jiu-Jitsu",
+      "bracket": "Grey / Pee-Wee 3 / Female / Feather (67.00lb)",
+      "time": "10:35 AM",
       "mat": "7",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3258/categories/2905022",
       "time_type": "listed fight",
       "result": "",
-      "fight_number": "13",
-      "scheduled_at": "2026-11-22T15:25:00Z"
+      "fight_number": "15",
+      "scheduled_at": "2026-11-22T15:35:00Z"
     },
     {
       "competition_id": "3258",
@@ -34727,14 +34795,14 @@
       "name": "Mirai Zhong Izaguirre",
       "team": "Unity Jiu-jitsu",
       "bracket": "Grey / Pee-Wee 3 / Female / Feather (67.00lb)",
-      "time": "10:25 AM",
+      "time": "10:23 AM",
       "mat": "7",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3258/categories/2905022",
       "time_type": "listed fight",
-      "result": "",
+      "result": "LOSS",
       "fight_number": "13",
-      "scheduled_at": "2026-11-22T15:25:00Z"
+      "scheduled_at": "2026-11-22T15:23:00Z"
     },
     {
       "competition_id": "3258",
@@ -35031,14 +35099,14 @@
       "name": "Anson Wang",
       "team": "A-Force Brazilian Jiu-Jitsu",
       "bracket": "Yellow / Junior 1 / Male / Light (80.00lb)",
-      "time": "11:11 AM",
+      "time": "11:16 AM",
       "mat": "6",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3258/categories/2905046",
       "time_type": "listed fight",
       "result": "",
       "fight_number": "21",
-      "scheduled_at": "2026-11-22T16:11:00Z"
+      "scheduled_at": "2026-11-22T16:16:00Z"
     },
     {
       "competition_id": "3258",
@@ -35047,14 +35115,14 @@
       "name": "Ryland Roberto Privitello",
       "team": "G13 BJJ USA",
       "bracket": "Yellow / Junior 1 / Male / Light (80.00lb)",
-      "time": "11:11 AM",
+      "time": "11:16 AM",
       "mat": "6",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3258/categories/2905046",
       "time_type": "listed fight",
       "result": "",
       "fight_number": "21",
-      "scheduled_at": "2026-11-22T16:11:00Z"
+      "scheduled_at": "2026-11-22T16:16:00Z"
     },
     {
       "competition_id": "3258",
@@ -35063,14 +35131,14 @@
       "name": "Adrienne James Testa",
       "team": "Abmar Barbosa Association",
       "bracket": "Yellow / Junior 2 / Female / Medium Heavy (100.00lb)",
-      "time": "11:00 AM",
+      "time": "11:05 AM",
       "mat": "6",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3258/categories/2905133",
       "time_type": "listed fight",
       "result": "",
       "fight_number": "19",
-      "scheduled_at": "2026-11-22T16:00:00Z"
+      "scheduled_at": "2026-11-22T16:05:00Z"
     },
     {
       "competition_id": "3258",
@@ -35079,14 +35147,14 @@
       "name": "Mei Adilynn Brinn",
       "team": "Ares BJJ",
       "bracket": "Yellow / Junior 2 / Female / Medium Heavy (100.00lb)",
-      "time": "11:00 AM",
+      "time": "11:05 AM",
       "mat": "6",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3258/categories/2905133",
       "time_type": "listed fight",
       "result": "",
       "fight_number": "19",
-      "scheduled_at": "2026-11-22T16:00:00Z"
+      "scheduled_at": "2026-11-22T16:05:00Z"
     },
     {
       "competition_id": "3258",
@@ -35095,14 +35163,14 @@
       "name": "Isabelly Sophia Silva Soares",
       "team": "Morselli Jiu-Jitsu Academy",
       "bracket": "Yellow / Junior 2 / Female / Medium Heavy (100.00lb)",
-      "time": "11:17 AM",
+      "time": "11:22 AM",
       "mat": "6",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3258/categories/2905133",
       "time_type": "listed fight",
       "result": "",
       "fight_number": "22",
-      "scheduled_at": "2026-11-22T16:17:00Z"
+      "scheduled_at": "2026-11-22T16:22:00Z"
     },
     {
       "competition_id": "3258",
@@ -35145,14 +35213,14 @@
       "name": "Hailey Gerilyn Hyett",
       "team": "Alliance",
       "bracket": "Grey / Pee-Wee 1 / Female / Middle (67.00lb)",
-      "time": "10:20 AM",
+      "time": "10:16 AM",
       "mat": "7",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3258/categories/2904954",
       "time_type": "listed fight",
-      "result": "",
+      "result": "LOSS",
       "fight_number": "12",
-      "scheduled_at": "2026-11-22T15:20:00Z"
+      "scheduled_at": "2026-11-22T15:16:00Z"
     },
     {
       "competition_id": "3258",
@@ -35161,14 +35229,30 @@
       "name": "Joelle G. Sohn",
       "team": "Gracie Barra",
       "bracket": "Grey / Pee-Wee 1 / Female / Middle (67.00lb)",
-      "time": "10:20 AM",
+      "time": "10:16 AM",
+      "mat": "7",
+      "day": "Sun",
+      "bracket_url": "https://www.bjjcompsystem.com/tournaments/3258/categories/2904954",
+      "time_type": "listed fight",
+      "result": "WIN",
+      "fight_number": "12",
+      "scheduled_at": "2026-11-22T15:16:00Z"
+    },
+    {
+      "competition_id": "3258",
+      "competition_name": "New Jersey Fall Kids International Open IBJJF Jiu-Jitsu Championship 2026",
+      "date": "",
+      "name": "Joelle G. Sohn",
+      "team": "Gracie Barra",
+      "bracket": "Grey / Pee-Wee 1 / Female / Middle (67.00lb)",
+      "time": "10:40 AM",
       "mat": "7",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3258/categories/2904954",
       "time_type": "listed fight",
       "result": "",
-      "fight_number": "12",
-      "scheduled_at": "2026-11-22T15:20:00Z"
+      "fight_number": "16",
+      "scheduled_at": "2026-11-22T15:40:00Z"
     },
     {
       "competition_id": "3258",
@@ -35398,14 +35482,14 @@
       "name": "Madeline Phuong-Uyen Su",
       "team": "Alliance",
       "bracket": "Grey / Junior 2 / Female / Light (87.00lb)",
-      "time": "11:32 AM",
+      "time": "11:30 AM",
       "mat": "1",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3258/categories/2905126",
       "time_type": "listed fight",
       "result": "",
       "fight_number": "27",
-      "scheduled_at": "2026-11-22T16:32:00Z"
+      "scheduled_at": "2026-11-22T16:30:00Z"
     },
     {
       "competition_id": "3258",
@@ -35414,14 +35498,14 @@
       "name": "Jordan Arielle Rexach",
       "team": "Cicero Costha Internacional",
       "bracket": "Grey / Junior 2 / Female / Light (87.00lb)",
-      "time": "11:32 AM",
+      "time": "11:30 AM",
       "mat": "1",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3258/categories/2905126",
       "time_type": "listed fight",
       "result": "",
       "fight_number": "27",
-      "scheduled_at": "2026-11-22T16:32:00Z"
+      "scheduled_at": "2026-11-22T16:30:00Z"
     },
     {
       "competition_id": "3258",
@@ -35596,14 +35680,14 @@
       "name": "Leonidas Albert Shakhnazarov",
       "team": "API - Ascension Athletics",
       "bracket": "Grey / Pee-Wee 2 / Male / Light (67.00lb)",
-      "time": "10:35 AM",
+      "time": "10:40 AM",
       "mat": "3",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3258/categories/2904970",
       "time_type": "listed fight",
       "result": "",
       "fight_number": "15",
-      "scheduled_at": "2026-11-22T15:35:00Z"
+      "scheduled_at": "2026-11-22T15:40:00Z"
     },
     {
       "competition_id": "3258",
@@ -35612,14 +35696,14 @@
       "name": "Noah Enrique Souza Castro",
       "team": "Gracie Sports USA",
       "bracket": "Grey / Pee-Wee 2 / Male / Light (67.00lb)",
-      "time": "10:25 AM",
+      "time": "10:35 AM",
       "mat": "3",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3258/categories/2904970",
       "time_type": "listed fight",
       "result": "",
-      "fight_number": "13",
-      "scheduled_at": "2026-11-22T15:25:00Z"
+      "fight_number": "14",
+      "scheduled_at": "2026-11-22T15:35:00Z"
     },
     {
       "competition_id": "3258",
@@ -35628,14 +35712,14 @@
       "name": "Ayman Mousa Eisheh",
       "team": "Gregor Gracie Jiu-Jitsu",
       "bracket": "Grey / Pee-Wee 2 / Male / Light (67.00lb)",
-      "time": "10:35 AM",
+      "time": "10:40 AM",
       "mat": "3",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3258/categories/2904970",
       "time_type": "listed fight",
       "result": "",
       "fight_number": "15",
-      "scheduled_at": "2026-11-22T15:35:00Z"
+      "scheduled_at": "2026-11-22T15:40:00Z"
     },
     {
       "competition_id": "3258",
@@ -35644,14 +35728,14 @@
       "name": "Thomas Zeidler",
       "team": "Gregor Gracie Jiu-Jitsu",
       "bracket": "Grey / Pee-Wee 2 / Male / Light (67.00lb)",
-      "time": "10:25 AM",
+      "time": "10:35 AM",
       "mat": "3",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3258/categories/2904970",
       "time_type": "listed fight",
       "result": "",
-      "fight_number": "13",
-      "scheduled_at": "2026-11-22T15:25:00Z"
+      "fight_number": "14",
+      "scheduled_at": "2026-11-22T15:35:00Z"
     },
     {
       "competition_id": "3258",
@@ -35822,14 +35906,30 @@
       "name": "Jameson Joseph Calderon",
       "team": "Atlas Jiu-Jitsu - BJJ Revolution Team",
       "bracket": "Grey / Pee-Wee 1 / Male / Light (60.00lb)",
-      "time": "10:11 AM",
+      "time": "10:12 AM",
       "mat": "3",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3258/categories/2904934",
       "time_type": "listed fight",
-      "result": "",
+      "result": "WIN",
       "fight_number": "10",
-      "scheduled_at": "2026-11-22T15:11:00Z"
+      "scheduled_at": "2026-11-22T15:12:00Z"
+    },
+    {
+      "competition_id": "3258",
+      "competition_name": "New Jersey Fall Kids International Open IBJJF Jiu-Jitsu Championship 2026",
+      "date": "",
+      "name": "Jameson Joseph Calderon",
+      "team": "Atlas Jiu-Jitsu - BJJ Revolution Team",
+      "bracket": "Grey / Pee-Wee 1 / Male / Light (60.00lb)",
+      "time": "10:23 AM",
+      "mat": "3",
+      "day": "Sun",
+      "bracket_url": "https://www.bjjcompsystem.com/tournaments/3258/categories/2904934",
+      "time_type": "listed fight",
+      "result": "LOSS",
+      "fight_number": "12",
+      "scheduled_at": "2026-11-22T15:23:00Z"
     },
     {
       "competition_id": "3258",
@@ -35854,14 +35954,30 @@
       "name": "Xander Angelo de Guia Garcia",
       "team": "Carlson Gracie Team",
       "bracket": "Grey / Pee-Wee 1 / Male / Light (60.00lb)",
-      "time": "10:26 AM",
+      "time": "10:23 AM",
+      "mat": "3",
+      "day": "Sun",
+      "bracket_url": "https://www.bjjcompsystem.com/tournaments/3258/categories/2904934",
+      "time_type": "listed fight",
+      "result": "WIN",
+      "fight_number": "12",
+      "scheduled_at": "2026-11-22T15:23:00Z"
+    },
+    {
+      "competition_id": "3258",
+      "competition_name": "New Jersey Fall Kids International Open IBJJF Jiu-Jitsu Championship 2026",
+      "date": "",
+      "name": "Xander Angelo de Guia Garcia",
+      "team": "Carlson Gracie Team",
+      "bracket": "Grey / Pee-Wee 1 / Male / Light (60.00lb)",
+      "time": "10:50 AM",
       "mat": "3",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3258/categories/2904934",
       "time_type": "listed fight",
       "result": "",
-      "fight_number": "13",
-      "scheduled_at": "2026-11-22T15:26:00Z"
+      "fight_number": "17",
+      "scheduled_at": "2026-11-22T15:50:00Z"
     },
     {
       "competition_id": "3258",
@@ -35870,14 +35986,14 @@
       "name": "Caelum Paul Infante",
       "team": "Gregor Gracie Jiu-Jitsu",
       "bracket": "Grey / Pee-Wee 1 / Male / Light (60.00lb)",
-      "time": "10:11 AM",
+      "time": "10:12 AM",
       "mat": "3",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3258/categories/2904934",
       "time_type": "listed fight",
-      "result": "",
+      "result": "LOSS",
       "fight_number": "10",
-      "scheduled_at": "2026-11-22T15:11:00Z"
+      "scheduled_at": "2026-11-22T15:12:00Z"
     },
     {
       "competition_id": "3258",
@@ -35886,14 +36002,30 @@
       "name": "Rigdoel Tenzin Lhaksam",
       "team": "Lotus Club USA",
       "bracket": "Grey / Pee-Wee 1 / Male / Light (60.00lb)",
-      "time": "10:16 AM",
+      "time": "10:18 AM",
+      "mat": "3",
+      "day": "Sun",
+      "bracket_url": "https://www.bjjcompsystem.com/tournaments/3258/categories/2904934",
+      "time_type": "listed fight",
+      "result": "WIN",
+      "fight_number": "11",
+      "scheduled_at": "2026-11-22T15:18:00Z"
+    },
+    {
+      "competition_id": "3258",
+      "competition_name": "New Jersey Fall Kids International Open IBJJF Jiu-Jitsu Championship 2026",
+      "date": "",
+      "name": "Rigdoel Tenzin Lhaksam",
+      "team": "Lotus Club USA",
+      "bracket": "Grey / Pee-Wee 1 / Male / Light (60.00lb)",
+      "time": "10:30 AM",
       "mat": "3",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3258/categories/2904934",
       "time_type": "listed fight",
       "result": "",
-      "fight_number": "11",
-      "scheduled_at": "2026-11-22T15:16:00Z"
+      "fight_number": "13",
+      "scheduled_at": "2026-11-22T15:30:00Z"
     },
     {
       "competition_id": "3258",
@@ -35918,14 +36050,14 @@
       "name": "Otávio Augusto Lima Ferreira",
       "team": "Piupiuteam BJJ",
       "bracket": "Grey / Pee-Wee 1 / Male / Light (60.00lb)",
-      "time": "10:31 AM",
+      "time": "10:30 AM",
       "mat": "3",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3258/categories/2904934",
       "time_type": "listed fight",
       "result": "",
-      "fight_number": "14",
-      "scheduled_at": "2026-11-22T15:31:00Z"
+      "fight_number": "13",
+      "scheduled_at": "2026-11-22T15:30:00Z"
     },
     {
       "competition_id": "3258",
@@ -35949,14 +36081,14 @@
       "name": "Shawn Wang",
       "team": "Renzo Gracie Academy",
       "bracket": "Grey / Pee-Wee 1 / Male / Light (60.00lb)",
-      "time": "10:16 AM",
+      "time": "10:18 AM",
       "mat": "3",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3258/categories/2904934",
       "time_type": "listed fight",
-      "result": "",
+      "result": "LOSS",
       "fight_number": "11",
-      "scheduled_at": "2026-11-22T15:16:00Z"
+      "scheduled_at": "2026-11-22T15:18:00Z"
     },
     {
       "competition_id": "3258",
@@ -35971,7 +36103,7 @@
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3258/categories/2905008",
       "time_type": "listed fight",
       "result": "LOSS",
-      "fight_number": "12",
+      "fight_number": "14",
       "scheduled_at": "2026-11-22T15:19:00Z"
     },
     {
@@ -36002,7 +36134,7 @@
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3258/categories/2905008",
       "time_type": "listed fight",
       "result": "WIN",
-      "fight_number": "12",
+      "fight_number": "14",
       "scheduled_at": "2026-11-22T15:19:00Z"
     },
     {
@@ -36012,14 +36144,14 @@
       "name": "Aden Zaoude Frydrychowicz",
       "team": "Brazilian Top Team Int.",
       "bracket": "Grey / Pee-Wee 3 / Male / Middle (80.00lb)",
-      "time": "10:40 AM",
+      "time": "10:35 AM",
       "mat": "6",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3258/categories/2905008",
       "time_type": "listed fight",
       "result": "",
-      "fight_number": "15",
-      "scheduled_at": "2026-11-22T15:40:00Z"
+      "fight_number": "12",
+      "scheduled_at": "2026-11-22T15:35:00Z"
     },
     {
       "competition_id": "3258",
@@ -36059,14 +36191,30 @@
       "name": "Jameson Thomas Alexin",
       "team": "Essential Jiu-Jitsu",
       "bracket": "Grey / Pee-Wee 3 / Male / Middle (80.00lb)",
-      "time": "10:20 AM",
+      "time": "10:23 AM",
+      "mat": "6",
+      "day": "Sun",
+      "bracket_url": "https://www.bjjcompsystem.com/tournaments/3258/categories/2905008",
+      "time_type": "listed fight",
+      "result": "WIN",
+      "fight_number": "10",
+      "scheduled_at": "2026-11-22T15:23:00Z"
+    },
+    {
+      "competition_id": "3258",
+      "competition_name": "New Jersey Fall Kids International Open IBJJF Jiu-Jitsu Championship 2026",
+      "date": "",
+      "name": "Jameson Thomas Alexin",
+      "team": "Essential Jiu-Jitsu",
+      "bracket": "Grey / Pee-Wee 3 / Male / Middle (80.00lb)",
+      "time": "10:35 AM",
       "mat": "6",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3258/categories/2905008",
       "time_type": "listed fight",
       "result": "",
-      "fight_number": "10",
-      "scheduled_at": "2026-11-22T15:20:00Z"
+      "fight_number": "12",
+      "scheduled_at": "2026-11-22T15:35:00Z"
     },
     {
       "competition_id": "3258",
@@ -36106,14 +36254,14 @@
       "name": "Ronin Atlas Mitchum",
       "team": "Gracie Barra",
       "bracket": "Grey / Pee-Wee 3 / Male / Middle (80.00lb)",
-      "time": "10:20 AM",
+      "time": "10:23 AM",
       "mat": "6",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3258/categories/2905008",
       "time_type": "listed fight",
-      "result": "",
+      "result": "LOSS",
       "fight_number": "10",
-      "scheduled_at": "2026-11-22T15:20:00Z"
+      "scheduled_at": "2026-11-22T15:23:00Z"
     },
     {
       "competition_id": "3258",
@@ -36154,14 +36302,14 @@
       "name": "Davi Lima Lopes",
       "team": "Bella Art Jiu-Jitsu",
       "bracket": "Grey / Pee-Wee 2 / Male / Middle (73.60lb)",
-      "time": "10:30 AM",
+      "time": "10:35 AM",
       "mat": "2",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3258/categories/2904972",
       "time_type": "listed fight",
       "result": "",
-      "fight_number": "13",
-      "scheduled_at": "2026-11-22T15:30:00Z"
+      "fight_number": "14",
+      "scheduled_at": "2026-11-22T15:35:00Z"
     },
     {
       "competition_id": "3258",
@@ -36170,14 +36318,14 @@
       "name": "Liam Jakor Raber",
       "team": "CJJA Long Island City",
       "bracket": "Grey / Pee-Wee 2 / Male / Middle (73.60lb)",
-      "time": "10:30 AM",
+      "time": "10:35 AM",
       "mat": "2",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3258/categories/2904972",
       "time_type": "listed fight",
       "result": "",
-      "fight_number": "13",
-      "scheduled_at": "2026-11-22T15:30:00Z"
+      "fight_number": "14",
+      "scheduled_at": "2026-11-22T15:35:00Z"
     },
     {
       "competition_id": "3258",
@@ -36448,14 +36596,14 @@
       "name": "Paige Daisy Yun",
       "team": "Bronx Martial Arts Academy",
       "bracket": "Grey / Junior 3 / Female / Feather (89.00lb)",
-      "time": "11:12 AM",
+      "time": "11:17 AM",
       "mat": "3",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3258/categories/2905177",
       "time_type": "listed fight",
       "result": "",
       "fight_number": "22",
-      "scheduled_at": "2026-11-22T16:12:00Z"
+      "scheduled_at": "2026-11-22T16:17:00Z"
     },
     {
       "competition_id": "3258",
@@ -36464,14 +36612,14 @@
       "name": "Ailee Belle-Zelmira Velez",
       "team": "Notorious Mixed Martial Arts",
       "bracket": "Grey / Junior 3 / Female / Feather (89.00lb)",
-      "time": "11:18 AM",
+      "time": "11:23 AM",
       "mat": "3",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3258/categories/2905177",
       "time_type": "listed fight",
       "result": "",
       "fight_number": "23",
-      "scheduled_at": "2026-11-22T16:18:00Z"
+      "scheduled_at": "2026-11-22T16:23:00Z"
     },
     {
       "competition_id": "3258",
@@ -36480,14 +36628,14 @@
       "name": "Zoe Hope Leboeuf",
       "team": "Pablo Silva BJJ",
       "bracket": "Grey / Junior 3 / Female / Feather (89.00lb)",
-      "time": "11:12 AM",
+      "time": "11:17 AM",
       "mat": "3",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3258/categories/2905177",
       "time_type": "listed fight",
       "result": "",
       "fight_number": "22",
-      "scheduled_at": "2026-11-22T16:12:00Z"
+      "scheduled_at": "2026-11-22T16:17:00Z"
     },
     {
       "competition_id": "3258",
@@ -36496,14 +36644,14 @@
       "name": "Alice Katherine Chouinard",
       "team": "TWA",
       "bracket": "Grey / Junior 3 / Female / Feather (89.00lb)",
-      "time": "11:18 AM",
+      "time": "11:23 AM",
       "mat": "3",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3258/categories/2905177",
       "time_type": "listed fight",
       "result": "",
       "fight_number": "23",
-      "scheduled_at": "2026-11-22T16:18:00Z"
+      "scheduled_at": "2026-11-22T16:23:00Z"
     },
     {
       "competition_id": "3258",
@@ -36628,14 +36776,30 @@
       "name": "Arthur Tiburcio Dias",
       "team": "Bruno Jacaré Kaizen B9",
       "bracket": "Grey / Mighty-mite 1 / Male / Feather (40.00lb)",
-      "time": "10:28 AM",
+      "time": "10:24 AM",
+      "mat": "1",
+      "day": "Sun",
+      "bracket_url": "https://www.bjjcompsystem.com/tournaments/3258/categories/2904876",
+      "time_type": "listed fight",
+      "result": "WIN",
+      "fight_number": "13",
+      "scheduled_at": "2026-11-22T15:24:00Z"
+    },
+    {
+      "competition_id": "3258",
+      "competition_name": "New Jersey Fall Kids International Open IBJJF Jiu-Jitsu Championship 2026",
+      "date": "",
+      "name": "Arthur Tiburcio Dias",
+      "team": "Bruno Jacaré Kaizen B9",
+      "bracket": "Grey / Mighty-mite 1 / Male / Feather (40.00lb)",
+      "time": "10:38 AM",
       "mat": "1",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3258/categories/2904876",
       "time_type": "listed fight",
       "result": "",
-      "fight_number": "13",
-      "scheduled_at": "2026-11-22T15:28:00Z"
+      "fight_number": "16",
+      "scheduled_at": "2026-11-22T15:38:00Z"
     },
     {
       "competition_id": "3258",
@@ -36644,14 +36808,14 @@
       "name": "Leo Benito Labrada",
       "team": "Crazy 88",
       "bracket": "Grey / Mighty-mite 1 / Male / Feather (40.00lb)",
-      "time": "10:28 AM",
+      "time": "10:24 AM",
       "mat": "1",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3258/categories/2904876",
       "time_type": "listed fight",
-      "result": "",
+      "result": "LOSS",
       "fight_number": "13",
-      "scheduled_at": "2026-11-22T15:28:00Z"
+      "scheduled_at": "2026-11-22T15:24:00Z"
     },
     {
       "competition_id": "3258",
@@ -36676,14 +36840,14 @@
       "name": "Manu Kai Daehoon Lee",
       "team": "Versus Brazilian Jiu-Jitsu Academy",
       "bracket": "Grey / Mighty-mite 1 / Male / Feather (40.00lb)",
-      "time": "10:40 AM",
+      "time": "10:38 AM",
       "mat": "1",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3258/categories/2904876",
       "time_type": "listed fight",
       "result": "",
       "fight_number": "16",
-      "scheduled_at": "2026-11-22T15:40:00Z"
+      "scheduled_at": "2026-11-22T15:38:00Z"
     },
     {
       "competition_id": "3258",
@@ -36806,14 +36970,14 @@
       "name": "Anna Merturi",
       "team": "Carlson Gracie Team",
       "bracket": "Grey / Mighty-mite 2 / Female / Light (53.00lb)",
-      "time": "10:32 AM",
+      "time": "10:30 AM",
       "mat": "1",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3258/categories/2904904",
       "time_type": "listed fight",
       "result": "",
       "fight_number": "14",
-      "scheduled_at": "2026-11-22T15:32:00Z"
+      "scheduled_at": "2026-11-22T15:30:00Z"
     },
     {
       "competition_id": "3258",
@@ -36822,14 +36986,14 @@
       "name": "Eudoria Hajdari",
       "team": "Gregor Gracie Jiu-Jitsu",
       "bracket": "Grey / Mighty-mite 2 / Female / Light (53.00lb)",
-      "time": "10:44 AM",
+      "time": "10:42 AM",
       "mat": "1",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3258/categories/2904904",
       "time_type": "listed fight",
       "result": "",
       "fight_number": "17",
-      "scheduled_at": "2026-11-22T15:44:00Z"
+      "scheduled_at": "2026-11-22T15:42:00Z"
     },
     {
       "competition_id": "3258",
@@ -36838,14 +37002,14 @@
       "name": "Ella Sophia Jacquard",
       "team": "Mavs",
       "bracket": "Grey / Mighty-mite 2 / Female / Light (53.00lb)",
-      "time": "10:32 AM",
+      "time": "10:30 AM",
       "mat": "1",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3258/categories/2904904",
       "time_type": "listed fight",
       "result": "",
       "fight_number": "14",
-      "scheduled_at": "2026-11-22T15:32:00Z"
+      "scheduled_at": "2026-11-22T15:30:00Z"
     },
     {
       "competition_id": "3258",
@@ -36902,14 +37066,14 @@
       "name": "Noah Silvestre Deoliveira",
       "team": "Carlson Gracie Team",
       "bracket": "Yellow / Junior 3 / Male / Super Heavy (133.60lb)",
-      "time": "11:41 AM",
+      "time": "11:46 AM",
       "mat": "6",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3258/categories/2905166",
       "time_type": "listed fight",
       "result": "",
       "fight_number": "26",
-      "scheduled_at": "2026-11-22T16:41:00Z"
+      "scheduled_at": "2026-11-22T16:46:00Z"
     },
     {
       "competition_id": "3258",
@@ -36918,14 +37082,14 @@
       "name": "Kohen Alexander Townsend",
       "team": "Crazy 88",
       "bracket": "Yellow / Junior 3 / Male / Super Heavy (133.60lb)",
-      "time": "11:41 AM",
+      "time": "11:46 AM",
       "mat": "6",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3258/categories/2905166",
       "time_type": "listed fight",
       "result": "",
       "fight_number": "26",
-      "scheduled_at": "2026-11-22T16:41:00Z"
+      "scheduled_at": "2026-11-22T16:46:00Z"
     },
     {
       "competition_id": "3258",
@@ -37400,14 +37564,14 @@
       "name": "Abigail Skye McNeil",
       "team": "CJJ Clear Jiu-Jitsu Academy",
       "bracket": "Grey / Pee-Wee 2 / Female / Light (67.00lb)",
-      "time": "10:50 AM",
+      "time": "10:55 AM",
       "mat": "6",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3258/categories/2904988",
       "time_type": "listed fight",
       "result": "",
       "fight_number": "17",
-      "scheduled_at": "2026-11-22T15:50:00Z"
+      "scheduled_at": "2026-11-22T15:55:00Z"
     },
     {
       "competition_id": "3258",
@@ -37422,7 +37586,7 @@
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3258/categories/2904988",
       "time_type": "listed fight",
       "result": "",
-      "fight_number": "14",
+      "fight_number": "12",
       "scheduled_at": "2026-11-22T15:35:00Z"
     },
     {
@@ -37438,7 +37602,7 @@
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3258/categories/2904988",
       "time_type": "listed fight",
       "result": "",
-      "fight_number": "14",
+      "fight_number": "12",
       "scheduled_at": "2026-11-22T15:35:00Z"
     },
     {
@@ -37496,14 +37660,14 @@
       "name": "Julius Arthur Diaz",
       "team": "CJJ Clear Jiu-Jitsu Academy",
       "bracket": "Grey / Junior 1 / Male / Light Feather (67.00lb)",
-      "time": "11:06 AM",
+      "time": "11:11 AM",
       "mat": "3",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3258/categories/2905039",
       "time_type": "listed fight",
       "result": "",
       "fight_number": "21",
-      "scheduled_at": "2026-11-22T16:06:00Z"
+      "scheduled_at": "2026-11-22T16:11:00Z"
     },
     {
       "competition_id": "3258",
@@ -37512,14 +37676,14 @@
       "name": "Grayson Michael Pak",
       "team": "Gracie Barra",
       "bracket": "Grey / Junior 1 / Male / Light Feather (67.00lb)",
-      "time": "11:00 AM",
+      "time": "11:05 AM",
       "mat": "3",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3258/categories/2905039",
       "time_type": "listed fight",
       "result": "",
       "fight_number": "20",
-      "scheduled_at": "2026-11-22T16:00:00Z"
+      "scheduled_at": "2026-11-22T16:05:00Z"
     },
     {
       "competition_id": "3258",
@@ -37528,14 +37692,14 @@
       "name": "Dylan Alekseyevich Neshkov",
       "team": "Gregor Gracie Jiu-Jitsu",
       "bracket": "Grey / Junior 1 / Male / Light Feather (67.00lb)",
-      "time": "11:06 AM",
+      "time": "11:11 AM",
       "mat": "3",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3258/categories/2905039",
       "time_type": "listed fight",
       "result": "",
       "fight_number": "21",
-      "scheduled_at": "2026-11-22T16:06:00Z"
+      "scheduled_at": "2026-11-22T16:11:00Z"
     },
     {
       "competition_id": "3258",
@@ -37544,14 +37708,14 @@
       "name": "Red Tora Matsumoto",
       "team": "Renzo Gracie Academy",
       "bracket": "Grey / Junior 1 / Male / Light Feather (67.00lb)",
-      "time": "11:00 AM",
+      "time": "11:05 AM",
       "mat": "3",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3258/categories/2905039",
       "time_type": "listed fight",
       "result": "",
       "fight_number": "20",
-      "scheduled_at": "2026-11-22T16:00:00Z"
+      "scheduled_at": "2026-11-22T16:05:00Z"
     },
     {
       "competition_id": "3258",
@@ -37560,14 +37724,14 @@
       "name": "Isla Jay Ortiz",
       "team": "CJJ Clear Jiu-Jitsu Academy",
       "bracket": "Grey / Junior 2 / Female / Light Feather (73.60lb)",
-      "time": "11:29 AM",
+      "time": "11:34 AM",
       "mat": "6",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3258/categories/2905120",
       "time_type": "listed fight",
       "result": "",
       "fight_number": "24",
-      "scheduled_at": "2026-11-22T16:29:00Z"
+      "scheduled_at": "2026-11-22T16:34:00Z"
     },
     {
       "competition_id": "3258",
@@ -37576,14 +37740,14 @@
       "name": "Aria Donatella Romero",
       "team": "Jiu-Jitsu For Life Team",
       "bracket": "Grey / Junior 2 / Female / Light Feather (73.60lb)",
-      "time": "11:29 AM",
+      "time": "11:34 AM",
       "mat": "6",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3258/categories/2905120",
       "time_type": "listed fight",
       "result": "",
       "fight_number": "24",
-      "scheduled_at": "2026-11-22T16:29:00Z"
+      "scheduled_at": "2026-11-22T16:34:00Z"
     },
     {
       "competition_id": "3258",
@@ -37592,14 +37756,14 @@
       "name": "Hudson Tilak Singh",
       "team": "CJJA Long Island City",
       "bracket": "Grey / Mighty-mite 2 / Male / Light (53.00lb)",
-      "time": "10:42 AM",
+      "time": "10:46 AM",
       "mat": "8",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3258/categories/2904895",
       "time_type": "listed fight",
       "result": "",
-      "fight_number": "15",
-      "scheduled_at": "2026-11-22T15:42:00Z"
+      "fight_number": "16",
+      "scheduled_at": "2026-11-22T15:46:00Z"
     },
     {
       "competition_id": "3258",
@@ -37640,14 +37804,30 @@
       "name": "Niam Chirag Domadia",
       "team": "CJJA Long Island City",
       "bracket": "Grey / Mighty-mite 3 / Male / Feather (48.60lb)",
-      "time": "10:24 AM",
+      "time": "10:21 AM",
+      "mat": "1",
+      "day": "Sun",
+      "bracket_url": "https://www.bjjcompsystem.com/tournaments/3258/categories/2904912",
+      "time_type": "listed fight",
+      "result": "WIN",
+      "fight_number": "12",
+      "scheduled_at": "2026-11-22T15:21:00Z"
+    },
+    {
+      "competition_id": "3258",
+      "competition_name": "New Jersey Fall Kids International Open IBJJF Jiu-Jitsu Championship 2026",
+      "date": "",
+      "name": "Niam Chirag Domadia",
+      "team": "CJJA Long Island City",
+      "bracket": "Grey / Mighty-mite 3 / Male / Feather (48.60lb)",
+      "time": "10:34 AM",
       "mat": "1",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3258/categories/2904912",
       "time_type": "listed fight",
       "result": "",
-      "fight_number": "12",
-      "scheduled_at": "2026-11-22T15:24:00Z"
+      "fight_number": "15",
+      "scheduled_at": "2026-11-22T15:34:00Z"
     },
     {
       "competition_id": "3258",
@@ -37692,7 +37872,7 @@
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3258/categories/2904912",
       "time_type": "listed fight",
-      "result": "",
+      "result": "LOSS",
       "fight_number": "11",
       "scheduled_at": "2026-11-22T15:18:00Z"
     },
@@ -37703,14 +37883,14 @@
       "name": "Neo Aech Chi",
       "team": "Gregor Gracie Jiu-Jitsu",
       "bracket": "Grey / Mighty-mite 3 / Male / Feather (48.60lb)",
-      "time": "10:24 AM",
+      "time": "10:21 AM",
       "mat": "1",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3258/categories/2904912",
       "time_type": "listed fight",
-      "result": "",
+      "result": "LOSS",
       "fight_number": "12",
-      "scheduled_at": "2026-11-22T15:24:00Z"
+      "scheduled_at": "2026-11-22T15:21:00Z"
     },
     {
       "competition_id": "3258",
@@ -37739,9 +37919,25 @@
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3258/categories/2904912",
       "time_type": "listed fight",
-      "result": "",
+      "result": "WIN",
       "fight_number": "11",
       "scheduled_at": "2026-11-22T15:18:00Z"
+    },
+    {
+      "competition_id": "3258",
+      "competition_name": "New Jersey Fall Kids International Open IBJJF Jiu-Jitsu Championship 2026",
+      "date": "",
+      "name": "Liam Tulsi Patel",
+      "team": "RABJJ Academy",
+      "bracket": "Grey / Mighty-mite 3 / Male / Feather (48.60lb)",
+      "time": "10:34 AM",
+      "mat": "1",
+      "day": "Sun",
+      "bracket_url": "https://www.bjjcompsystem.com/tournaments/3258/categories/2904912",
+      "time_type": "listed fight",
+      "result": "",
+      "fight_number": "15",
+      "scheduled_at": "2026-11-22T15:34:00Z"
     },
     {
       "competition_id": "3258",
@@ -37781,14 +37977,14 @@
       "name": "Cole Wilson Campbell",
       "team": "CJJA Long Island City",
       "bracket": "Grey / Pee-Wee 3 / Male / Ultra Heavy",
-      "time": "10:55 AM",
+      "time": "11:00 AM",
       "mat": "3",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3258/categories/2905016",
       "time_type": "listed fight",
       "result": "",
       "fight_number": "19",
-      "scheduled_at": "2026-11-22T15:55:00Z"
+      "scheduled_at": "2026-11-22T16:00:00Z"
     },
     {
       "competition_id": "3258",
@@ -37797,14 +37993,14 @@
       "name": "Ethan Zachary Pierce",
       "team": "Crazy 88",
       "bracket": "Grey / Pee-Wee 3 / Male / Ultra Heavy",
-      "time": "10:55 AM",
+      "time": "11:00 AM",
       "mat": "3",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3258/categories/2905016",
       "time_type": "listed fight",
       "result": "",
       "fight_number": "19",
-      "scheduled_at": "2026-11-22T15:55:00Z"
+      "scheduled_at": "2026-11-22T16:00:00Z"
     },
     {
       "competition_id": "3258",
@@ -37813,14 +38009,14 @@
       "name": "Adrian Ella Campbell",
       "team": "CJJA Long Island City",
       "bracket": "Grey / Junior 1 / Female / Medium Heavy (93.60lb)",
-      "time": "11:26 AM",
+      "time": "11:23 AM",
       "mat": "1",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3258/categories/2905078",
       "time_type": "listed fight",
       "result": "",
       "fight_number": "26",
-      "scheduled_at": "2026-11-22T16:26:00Z"
+      "scheduled_at": "2026-11-22T16:23:00Z"
     },
     {
       "competition_id": "3258",
@@ -37829,14 +38025,14 @@
       "name": "Iris Cheyenne-Kimberly Nadwairski",
       "team": "GF Team",
       "bracket": "Grey / Junior 1 / Female / Medium Heavy (93.60lb)",
-      "time": "11:26 AM",
+      "time": "11:23 AM",
       "mat": "1",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3258/categories/2905078",
       "time_type": "listed fight",
       "result": "",
       "fight_number": "26",
-      "scheduled_at": "2026-11-22T16:26:00Z"
+      "scheduled_at": "2026-11-22T16:23:00Z"
     },
     {
       "competition_id": "3258",
@@ -38154,14 +38350,14 @@
       "name": "Pearl Rosalind McConnell",
       "team": "Crazy 88",
       "bracket": "Yellow / Junior 1 / Female / Middle (87.00lb)",
-      "time": "11:23 AM",
+      "time": "11:28 AM",
       "mat": "6",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3258/categories/2905076",
       "time_type": "listed fight",
       "result": "",
       "fight_number": "23",
-      "scheduled_at": "2026-11-22T16:23:00Z"
+      "scheduled_at": "2026-11-22T16:28:00Z"
     },
     {
       "competition_id": "3258",
@@ -38170,14 +38366,14 @@
       "name": "Savannah Jade Green",
       "team": "Gracie Allegiance",
       "bracket": "Yellow / Junior 1 / Female / Middle (87.00lb)",
-      "time": "11:23 AM",
+      "time": "11:28 AM",
       "mat": "6",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3258/categories/2905076",
       "time_type": "listed fight",
       "result": "",
       "fight_number": "23",
-      "scheduled_at": "2026-11-22T16:23:00Z"
+      "scheduled_at": "2026-11-22T16:28:00Z"
     },
     {
       "competition_id": "3258",
@@ -38596,14 +38792,14 @@
       "name": "John Henry Flood V",
       "team": "Nova União",
       "bracket": "Yellow / Junior 1 / Male / Feather (73.60lb)",
-      "time": "10:40 AM",
+      "time": "10:30 AM",
       "mat": "5",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3258/categories/2905043",
       "time_type": "listed fight",
       "result": "",
-      "fight_number": "19",
-      "scheduled_at": "2026-11-22T15:40:00Z"
+      "fight_number": "17",
+      "scheduled_at": "2026-11-22T15:30:00Z"
     },
     {
       "competition_id": "3258",
@@ -38612,14 +38808,14 @@
       "name": "Jagger Titus Apostol Abat",
       "team": "Renzo Gracie Jiu-Jitsu - Upper West Side",
       "bracket": "Yellow / Junior 1 / Male / Feather (73.60lb)",
-      "time": "10:40 AM",
+      "time": "10:30 AM",
       "mat": "5",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3258/categories/2905043",
       "time_type": "listed fight",
       "result": "",
-      "fight_number": "19",
-      "scheduled_at": "2026-11-22T15:40:00Z"
+      "fight_number": "17",
+      "scheduled_at": "2026-11-22T15:30:00Z"
     },
     {
       "competition_id": "3258",
@@ -38758,14 +38954,14 @@
       "name": "Lucas Miguel Costa Silveira",
       "team": "Fenix BJJ Woburn",
       "bracket": "Orange / Teen 3 / Male / Heavy (152.60lb)",
-      "time": "10:28 AM",
+      "time": "10:23 AM",
       "mat": "8",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3258/categories/2905368",
       "time_type": "listed fight",
-      "result": "",
-      "fight_number": "12",
-      "scheduled_at": "2026-11-22T15:28:00Z"
+      "result": "WIN",
+      "fight_number": "11",
+      "scheduled_at": "2026-11-22T15:23:00Z"
     },
     {
       "competition_id": "3258",
@@ -38822,14 +39018,14 @@
       "name": "Felype Denner Faria Andrade",
       "team": "Rodolfo Rocha Martial Academy",
       "bracket": "Orange / Teen 3 / Male / Heavy (152.60lb)",
-      "time": "10:28 AM",
+      "time": "10:23 AM",
       "mat": "8",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3258/categories/2905368",
       "time_type": "listed fight",
-      "result": "",
-      "fight_number": "12",
-      "scheduled_at": "2026-11-22T15:28:00Z"
+      "result": "LOSS",
+      "fight_number": "11",
+      "scheduled_at": "2026-11-22T15:23:00Z"
     },
     {
       "competition_id": "3258",
@@ -38938,14 +39134,14 @@
       "name": "Lavinia Goncalves Cruvinel",
       "team": "GF Team",
       "bracket": "Grey / Mighty-mite 3 / Female / Light Feather (42.00lb)",
-      "time": "11:00 AM",
+      "time": "10:58 AM",
       "mat": "1",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3258/categories/2904920",
       "time_type": "listed fight",
       "result": "",
       "fight_number": "21",
-      "scheduled_at": "2026-11-22T16:00:00Z"
+      "scheduled_at": "2026-11-22T15:58:00Z"
     },
     {
       "competition_id": "3258",
@@ -38954,14 +39150,14 @@
       "name": "Ines Xuan Nguyen Sobel",
       "team": "Gregor Gracie Jiu-Jitsu",
       "bracket": "Grey / Mighty-mite 3 / Female / Light Feather (42.00lb)",
-      "time": "10:48 AM",
+      "time": "10:46 AM",
       "mat": "1",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3258/categories/2904920",
       "time_type": "listed fight",
       "result": "",
       "fight_number": "18",
-      "scheduled_at": "2026-11-22T15:48:00Z"
+      "scheduled_at": "2026-11-22T15:46:00Z"
     },
     {
       "competition_id": "3258",
@@ -38970,14 +39166,14 @@
       "name": "Scottie Lou Wade Chesterson",
       "team": "Renzo Gracie Rockland Ny",
       "bracket": "Grey / Mighty-mite 3 / Female / Light Feather (42.00lb)",
-      "time": "10:48 AM",
+      "time": "10:46 AM",
       "mat": "1",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3258/categories/2904920",
       "time_type": "listed fight",
       "result": "",
       "fight_number": "18",
-      "scheduled_at": "2026-11-22T15:48:00Z"
+      "scheduled_at": "2026-11-22T15:46:00Z"
     },
     {
       "competition_id": "3258",
@@ -38986,14 +39182,14 @@
       "name": "Luna Sofia Jimenez",
       "team": "GF Team",
       "bracket": "Grey / Pee-Wee 3 / Female / Middle (80.00lb)",
-      "time": "10:55 AM",
+      "time": "11:00 AM",
       "mat": "6",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3258/categories/2905026",
       "time_type": "listed fight",
       "result": "",
       "fight_number": "18",
-      "scheduled_at": "2026-11-22T15:55:00Z"
+      "scheduled_at": "2026-11-22T16:00:00Z"
     },
     {
       "competition_id": "3258",
@@ -39002,14 +39198,14 @@
       "name": "Ines Yuin Izaguirre",
       "team": "Unity Jiu-jitsu",
       "bracket": "Grey / Pee-Wee 3 / Female / Middle (80.00lb)",
-      "time": "10:55 AM",
+      "time": "11:00 AM",
       "mat": "6",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3258/categories/2905026",
       "time_type": "listed fight",
       "result": "",
       "fight_number": "18",
-      "scheduled_at": "2026-11-22T15:55:00Z"
+      "scheduled_at": "2026-11-22T16:00:00Z"
     },
     {
       "competition_id": "3258",
@@ -39050,14 +39246,14 @@
       "name": "Solomon Dongmin Sohn",
       "team": "Gracie Barra",
       "bracket": "Grey / Junior 1 / Male / Ultra Heavy",
-      "time": "11:19 AM",
+      "time": "11:20 AM",
       "mat": "8",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3258/categories/2905060",
       "time_type": "listed fight",
       "result": "",
       "fight_number": "24",
-      "scheduled_at": "2026-11-22T16:19:00Z"
+      "scheduled_at": "2026-11-22T16:20:00Z"
     },
     {
       "competition_id": "3258",
@@ -39066,14 +39262,14 @@
       "name": "Luke Matthew Taylor",
       "team": "Nova União",
       "bracket": "Grey / Junior 1 / Male / Ultra Heavy",
-      "time": "11:19 AM",
+      "time": "11:20 AM",
       "mat": "8",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3258/categories/2905060",
       "time_type": "listed fight",
       "result": "",
       "fight_number": "24",
-      "scheduled_at": "2026-11-22T16:19:00Z"
+      "scheduled_at": "2026-11-22T16:20:00Z"
     },
     {
       "competition_id": "3258",
@@ -39246,14 +39442,14 @@
       "name": "Theodore Daniel Infante",
       "team": "Gregor Gracie Jiu-Jitsu",
       "bracket": "Grey / Mighty-mite 2 / Male / Feather (44.60lb)",
-      "time": "10:52 AM",
+      "time": "10:50 AM",
       "mat": "1",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3258/categories/2904894",
       "time_type": "listed fight",
       "result": "",
       "fight_number": "19",
-      "scheduled_at": "2026-11-22T15:52:00Z"
+      "scheduled_at": "2026-11-22T15:50:00Z"
     },
     {
       "competition_id": "3258",
@@ -39262,14 +39458,14 @@
       "name": "Vicent Luciano da Costa",
       "team": "Rolles Gracie Academy",
       "bracket": "Grey / Mighty-mite 2 / Male / Feather (44.60lb)",
-      "time": "10:52 AM",
+      "time": "10:50 AM",
       "mat": "1",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3258/categories/2904894",
       "time_type": "listed fight",
       "result": "",
       "fight_number": "19",
-      "scheduled_at": "2026-11-22T15:52:00Z"
+      "scheduled_at": "2026-11-22T15:50:00Z"
     },
     {
       "competition_id": "3258",
@@ -39326,14 +39522,14 @@
       "name": "Margaux Lan Nguyen Sobel",
       "team": "Gregor Gracie Jiu-Jitsu",
       "bracket": "Grey / Pee-Wee 3 / Female / Rooster (53.00lb)",
-      "time": "10:35 AM",
+      "time": "10:41 AM",
       "mat": "5",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3258/categories/2905018",
       "time_type": "listed fight",
       "result": "",
-      "fight_number": "18",
-      "scheduled_at": "2026-11-22T15:35:00Z"
+      "fight_number": "19",
+      "scheduled_at": "2026-11-22T15:41:00Z"
     },
     {
       "competition_id": "3258",
@@ -39342,14 +39538,14 @@
       "name": "Mia Orozco",
       "team": "TRA Jiu-Jitsu",
       "bracket": "Grey / Pee-Wee 3 / Female / Rooster (53.00lb)",
-      "time": "10:35 AM",
+      "time": "10:41 AM",
       "mat": "5",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3258/categories/2905018",
       "time_type": "listed fight",
       "result": "",
-      "fight_number": "18",
-      "scheduled_at": "2026-11-22T15:35:00Z"
+      "fight_number": "19",
+      "scheduled_at": "2026-11-22T15:41:00Z"
     },
     {
       "competition_id": "3258",
@@ -39472,14 +39668,14 @@
       "name": "Amirah Ibrahim",
       "team": "IFTEAM- MSMA",
       "bracket": "Grey / Pee-Wee 1 / Female / Feather (53.00lb)",
-      "time": "10:40 AM",
+      "time": "10:45 AM",
       "mat": "3",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3258/categories/2904950",
       "time_type": "listed fight",
       "result": "",
       "fight_number": "16",
-      "scheduled_at": "2026-11-22T15:40:00Z"
+      "scheduled_at": "2026-11-22T15:45:00Z"
     },
     {
       "competition_id": "3258",
@@ -39488,14 +39684,14 @@
       "name": "Charlotte Rose Jacquard",
       "team": "Mavs",
       "bracket": "Grey / Pee-Wee 1 / Female / Feather (53.00lb)",
-      "time": "10:40 AM",
+      "time": "10:45 AM",
       "mat": "3",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3258/categories/2904950",
       "time_type": "listed fight",
       "result": "",
       "fight_number": "16",
-      "scheduled_at": "2026-11-22T15:40:00Z"
+      "scheduled_at": "2026-11-22T15:45:00Z"
     },
     {
       "competition_id": "3258",
@@ -39552,14 +39748,14 @@
       "name": "Bridget Lilian Kim",
       "team": "Inverted Gear Academy",
       "bracket": "Grey / Pee-Wee 1 / Female / Light (60.00lb)",
-      "time": "10:25 AM",
+      "time": "10:40 AM",
       "mat": "6",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3258/categories/2904952",
       "time_type": "listed fight",
       "result": "",
-      "fight_number": "11",
-      "scheduled_at": "2026-11-22T15:25:00Z"
+      "fight_number": "13",
+      "scheduled_at": "2026-11-22T15:40:00Z"
     },
     {
       "competition_id": "3258",
@@ -39568,14 +39764,14 @@
       "name": "Gabriella Kehlani Cortes",
       "team": "Kogaion Academy",
       "bracket": "Grey / Pee-Wee 1 / Female / Light (60.00lb)",
-      "time": "10:25 AM",
+      "time": "10:40 AM",
       "mat": "6",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3258/categories/2904952",
       "time_type": "listed fight",
       "result": "",
-      "fight_number": "11",
-      "scheduled_at": "2026-11-22T15:25:00Z"
+      "fight_number": "13",
+      "scheduled_at": "2026-11-22T15:40:00Z"
     },
     {
       "competition_id": "3258",
@@ -39584,14 +39780,14 @@
       "name": "Viviana Elyse Lima",
       "team": "SNCA BJJ",
       "bracket": "Grey / Pee-Wee 1 / Female / Light (60.00lb)",
-      "time": "10:30 AM",
+      "time": "10:45 AM",
       "mat": "6",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3258/categories/2904952",
       "time_type": "listed fight",
       "result": "",
-      "fight_number": "13",
-      "scheduled_at": "2026-11-22T15:30:00Z"
+      "fight_number": "15",
+      "scheduled_at": "2026-11-22T15:45:00Z"
     },
     {
       "competition_id": "3258",
@@ -39714,14 +39910,14 @@
       "name": "Julian Francisco Fabian Jr",
       "team": "Lucas Pinheiro Jiu-Jitsu",
       "bracket": "Grey / Junior 1 / Male / Middle (87.00lb)",
-      "time": "11:10 AM",
+      "time": "11:07 AM",
       "mat": "1",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3258/categories/2905048",
       "time_type": "listed fight",
       "result": "",
       "fight_number": "23",
-      "scheduled_at": "2026-11-22T16:10:00Z"
+      "scheduled_at": "2026-11-22T16:07:00Z"
     },
     {
       "competition_id": "3258",
@@ -39730,14 +39926,14 @@
       "name": "Santino Emil Stamato",
       "team": "Notorious Mixed Martial Arts",
       "bracket": "Grey / Junior 1 / Male / Middle (87.00lb)",
-      "time": "11:10 AM",
+      "time": "11:07 AM",
       "mat": "1",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3258/categories/2905048",
       "time_type": "listed fight",
       "result": "",
       "fight_number": "23",
-      "scheduled_at": "2026-11-22T16:10:00Z"
+      "scheduled_at": "2026-11-22T16:07:00Z"
     },
     {
       "competition_id": "3258",
@@ -39794,14 +39990,14 @@
       "name": "Ronan Dean Kelly",
       "team": "Nova União",
       "bracket": "Grey / Junior 3 / Male / Feather (89.00lb)",
-      "time": "11:20 AM",
+      "time": "11:18 AM",
       "mat": "1",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3258/categories/2905150",
       "time_type": "listed fight",
       "result": "",
       "fight_number": "25",
-      "scheduled_at": "2026-11-22T16:20:00Z"
+      "scheduled_at": "2026-11-22T16:18:00Z"
     },
     {
       "competition_id": "3258",
@@ -39810,14 +40006,14 @@
       "name": "Puttchara Leeratermpong",
       "team": "Renzo Gracie Academy",
       "bracket": "Grey / Junior 3 / Male / Feather (89.00lb)",
-      "time": "11:04 AM",
+      "time": "11:02 AM",
       "mat": "1",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3258/categories/2905150",
       "time_type": "listed fight",
       "result": "",
       "fight_number": "22",
-      "scheduled_at": "2026-11-22T16:04:00Z"
+      "scheduled_at": "2026-11-22T16:02:00Z"
     },
     {
       "competition_id": "3258",
@@ -39826,14 +40022,14 @@
       "name": "Nolan Pan Nguyen",
       "team": "Stafford MMA",
       "bracket": "Grey / Junior 3 / Male / Feather (89.00lb)",
-      "time": "11:04 AM",
+      "time": "11:02 AM",
       "mat": "1",
       "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3258/categories/2905150",
       "time_type": "listed fight",
       "result": "",
       "fight_number": "22",
-      "scheduled_at": "2026-11-22T16:04:00Z"
+      "scheduled_at": "2026-11-22T16:02:00Z"
     },
     {
       "competition_id": "3258",
