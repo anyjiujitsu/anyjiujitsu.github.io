@@ -35,7 +35,7 @@
       "event_end_date": "2026-11-22"
     }
   ],
-  "updated_at": "2026-11-22T00:03:56.873888+00:00",
+  "updated_at": "2026-11-22T00:13:02.887776+00:00",
   "athletes": [
     {
       "competition_id": "3256",
@@ -8707,6 +8707,7 @@
       "time_type": "listed fight",
       "result": "LOSS",
       "fight_number": "67",
+      "placement": 3,
       "scheduled_at": "2026-11-21T23:14:00Z"
     },
     {
@@ -8779,14 +8780,15 @@
       "name": "William Joseph Altman",
       "team": "Gregor Gracie Jiu-Jitsu",
       "bracket": "Brown / Master 2 / Male / Open Class",
-      "time": "06:45 PM",
+      "time": "06:53 PM",
       "mat": "5",
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3256/categories/2904176",
       "time_type": "listed fight",
-      "result": "",
+      "result": "LOSS",
       "fight_number": "70",
-      "scheduled_at": "2026-11-21T23:45:00Z"
+      "placement": 2,
+      "scheduled_at": "2026-11-21T23:53:00Z"
     },
     {
       "competition_id": "3256",
@@ -8850,6 +8852,7 @@
       "time_type": "listed fight",
       "result": "LOSS",
       "fight_number": "69",
+      "placement": 3,
       "scheduled_at": "2026-11-21T23:36:00Z"
     },
     {
@@ -8891,14 +8894,15 @@
       "name": "James P. Peters",
       "team": "Strategic Academy",
       "bracket": "Brown / Master 2 / Male / Open Class",
-      "time": "06:45 PM",
+      "time": "06:53 PM",
       "mat": "5",
       "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3256/categories/2904176",
       "time_type": "listed fight",
-      "result": "",
+      "result": "WIN",
       "fight_number": "70",
-      "scheduled_at": "2026-11-21T23:45:00Z"
+      "placement": 1,
+      "scheduled_at": "2026-11-21T23:53:00Z"
     },
     {
       "competition_id": "3256",
