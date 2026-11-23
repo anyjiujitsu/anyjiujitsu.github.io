@@ -35,7 +35,7 @@
       "event_end_date": "2026-11-22"
     }
   ],
-  "updated_at": "2026-11-23T00:02:49.361582+00:00",
+  "updated_at": "2026-11-23T00:12:45.985679+00:00",
   "athletes": [
     {
       "competition_id": "3256",
@@ -10838,14 +10838,15 @@
       "name": "Dana Kenneth Dickeson",
       "team": "Alliance",
       "bracket": "Black / Master 4 / Male / Ultra Heavy",
-      "time": "",
-      "mat": "",
-      "day": "",
+      "time": "12:51 PM",
+      "mat": "1",
+      "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3256/categories/2903839",
-      "time_type": "completed result without published time",
+      "time_type": "listed fight",
       "result": "WIN",
-      "fight_number": "",
-      "placement": 1
+      "fight_number": "31",
+      "placement": 1,
+      "scheduled_at": "2026-11-21T17:51:00Z"
     },
     {
       "competition_id": "3256",
@@ -10854,14 +10855,15 @@
       "name": "Frank Joseph Kerner Jr.",
       "team": "Lake Mohawk Mma",
       "bracket": "Black / Master 4 / Male / Ultra Heavy",
-      "time": "",
-      "mat": "",
-      "day": "",
+      "time": "12:51 PM",
+      "mat": "1",
+      "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3256/categories/2903839",
-      "time_type": "completed result without published time",
+      "time_type": "listed fight",
       "result": "LOSS",
-      "fight_number": "",
-      "placement": 2
+      "fight_number": "31",
+      "placement": 2,
+      "scheduled_at": "2026-11-21T17:51:00Z"
     },
     {
       "competition_id": "3256",
@@ -32061,14 +32063,15 @@
       "name": "Jason Allen",
       "team": "Alliance",
       "bracket": "Blue / Master 1 / Male / Heavy (202.00lb)",
-      "time": "",
-      "mat": "",
-      "day": "",
+      "time": "03:54 PM",
+      "mat": "9",
+      "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3257/categories/2904316",
-      "time_type": "completed result without published time",
+      "time_type": "listed fight",
       "result": "WIN",
-      "fight_number": "",
-      "placement": 1
+      "fight_number": "21",
+      "placement": 1,
+      "scheduled_at": "2026-11-22T20:54:00Z"
     },
     {
       "competition_id": "3257",
@@ -32077,14 +32080,15 @@
       "name": "Kevin Alan Zigadlo",
       "team": "Carlson Gracie Team",
       "bracket": "Blue / Master 1 / Male / Heavy (202.00lb)",
-      "time": "",
-      "mat": "",
-      "day": "",
+      "time": "03:54 PM",
+      "mat": "9",
+      "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3257/categories/2904316",
-      "time_type": "completed result without published time",
+      "time_type": "listed fight",
       "result": "LOSS",
-      "fight_number": "",
-      "placement": 2
+      "fight_number": "21",
+      "placement": 2,
+      "scheduled_at": "2026-11-22T20:54:00Z"
     },
     {
       "competition_id": "3257",
