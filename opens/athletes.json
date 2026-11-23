@@ -35,7 +35,7 @@
       "event_end_date": "2026-11-22"
     }
   ],
-  "updated_at": "2026-11-23T02:02:48.025762+00:00",
+  "updated_at": "2026-11-23T02:12:55.143074+00:00",
   "athletes": [
     {
       "competition_id": "3256",
@@ -37506,14 +37506,13 @@
       "name": "Jason Lee Mask",
       "team": "Cary Brazilian Jiu-Jitsu",
       "bracket": "Black / Master 5 / Male / Heavy (202.00lb)",
-      "time": "02:30 PM",
-      "mat": "1",
-      "day": "Sun",
+      "time": "",
+      "mat": "",
+      "day": "",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3257/categories/2904591",
-      "time_type": "listed fight",
+      "time_type": "completed result without published time",
       "result": "LOSS",
-      "fight_number": "8",
-      "scheduled_at": "2026-11-22T19:30:00Z"
+      "fight_number": ""
     },
     {
       "competition_id": "3257",
@@ -37522,14 +37521,13 @@
       "name": "Ninad Desai",
       "team": "Cicero Costha Internacional",
       "bracket": "Black / Master 5 / Male / Heavy (202.00lb)",
-      "time": "02:49 PM",
-      "mat": "1",
-      "day": "Sun",
+      "time": "",
+      "mat": "",
+      "day": "",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3257/categories/2904591",
-      "time_type": "listed fight",
+      "time_type": "completed result without published time",
       "result": "LOSS",
-      "fight_number": "12",
-      "scheduled_at": "2026-11-22T19:49:00Z"
+      "fight_number": ""
     },
     {
       "competition_id": "3257",
@@ -37538,14 +37536,14 @@
       "name": "Jason Randall Fenton",
       "team": "Gracie Barra",
       "bracket": "Black / Master 5 / Male / Heavy (202.00lb)",
-      "time": "02:49 PM",
-      "mat": "1",
-      "day": "Sun",
+      "time": "",
+      "mat": "",
+      "day": "",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3257/categories/2904591",
-      "time_type": "listed fight",
-      "result": "WIN",
-      "fight_number": "12",
-      "scheduled_at": "2026-11-22T19:49:00Z"
+      "time_type": "completed result without published time",
+      "result": "LOSS",
+      "fight_number": "",
+      "placement": 2
     },
     {
       "competition_id": "3257",
@@ -37554,15 +37552,13 @@
       "name": "Jason Randall Fenton",
       "team": "Gracie Barra",
       "bracket": "Black / Master 5 / Male / Heavy (202.00lb)",
-      "time": "02:53 PM",
-      "mat": "1",
-      "day": "Sun",
+      "time": "",
+      "mat": "",
+      "day": "",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3257/categories/2904591",
-      "time_type": "listed fight",
-      "result": "LOSS",
-      "fight_number": "13",
-      "placement": 2,
-      "scheduled_at": "2026-11-22T19:53:00Z"
+      "time_type": "completed result without published time",
+      "result": "WIN",
+      "fight_number": ""
     },
     {
       "competition_id": "3257",
@@ -37571,14 +37567,14 @@
       "name": "Zinoviy Turanskiy",
       "team": "TAC Team BJJ",
       "bracket": "Black / Master 5 / Male / Heavy (202.00lb)",
-      "time": "02:30 PM",
-      "mat": "1",
-      "day": "Sun",
+      "time": "",
+      "mat": "",
+      "day": "",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3257/categories/2904591",
-      "time_type": "listed fight",
+      "time_type": "completed result without published time",
       "result": "WIN",
-      "fight_number": "8",
-      "scheduled_at": "2026-11-22T19:30:00Z"
+      "fight_number": "",
+      "placement": 1
     },
     {
       "competition_id": "3257",
@@ -37587,15 +37583,13 @@
       "name": "Zinoviy Turanskiy",
       "team": "TAC Team BJJ",
       "bracket": "Black / Master 5 / Male / Heavy (202.00lb)",
-      "time": "02:53 PM",
-      "mat": "1",
-      "day": "Sun",
+      "time": "",
+      "mat": "",
+      "day": "",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3257/categories/2904591",
-      "time_type": "listed fight",
+      "time_type": "completed result without published time",
       "result": "WIN",
-      "fight_number": "13",
-      "placement": 1,
-      "scheduled_at": "2026-11-22T19:53:00Z"
+      "fight_number": ""
     },
     {
       "competition_id": "3257",
