@@ -35,7 +35,7 @@
       "event_end_date": "2026-11-22"
     }
   ],
-  "updated_at": "2026-11-23T01:52:46.830329+00:00",
+  "updated_at": "2026-11-23T02:02:48.025762+00:00",
   "athletes": [
     {
       "competition_id": "3256",
@@ -27703,13 +27703,14 @@
       "name": "Joshua Samuel Sohn",
       "team": "Masterskya",
       "bracket": "Purple / Master 5 / Male / Heavy (208.00lb)",
-      "time": "",
-      "mat": "",
-      "day": "",
+      "time": "04:14 PM",
+      "mat": "4",
+      "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3256/categories/2903912",
-      "time_type": "completed result without published time",
+      "time_type": "listed fight",
       "result": "LOSS",
-      "fight_number": ""
+      "fight_number": "48",
+      "scheduled_at": "2026-11-21T21:14:00Z"
     },
     {
       "competition_id": "3256",
@@ -27718,13 +27719,14 @@
       "name": "Christoph Edward Umscheid",
       "team": "Nova União",
       "bracket": "Purple / Master 5 / Male / Heavy (208.00lb)",
-      "time": "",
-      "mat": "",
-      "day": "",
+      "time": "04:14 PM",
+      "mat": "4",
+      "day": "Sat",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3256/categories/2903912",
-      "time_type": "completed result without published time",
+      "time_type": "listed fight",
       "result": "WIN",
-      "fight_number": ""
+      "fight_number": "48",
+      "scheduled_at": "2026-11-21T21:14:00Z"
     },
     {
       "competition_id": "3256",
