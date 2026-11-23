@@ -35,7 +35,7 @@
       "event_end_date": "2026-11-22"
     }
   ],
-  "updated_at": "2026-11-23T16:42:44.609289+00:00",
+  "updated_at": "2026-11-23T16:52:46.503789+00:00",
   "athletes": [
     {
       "competition_id": "3256",
@@ -27735,15 +27735,14 @@
       "name": "Oskar Pasternak",
       "team": "Mavs USA",
       "bracket": "Purple / Adult / Male / Heavy (208.00lb)",
-      "time": "01:17 PM",
-      "mat": "9",
-      "day": "Sat",
+      "time": "",
+      "mat": "",
+      "day": "",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3256/categories/2903487",
-      "time_type": "listed fight",
+      "time_type": "completed result without published time",
       "result": "LOSS",
-      "fight_number": "31",
-      "placement": 2,
-      "scheduled_at": "2026-11-21T18:17:00Z"
+      "fight_number": "",
+      "placement": 2
     },
     {
       "competition_id": "3256",
@@ -27752,15 +27751,14 @@
       "name": "Sergio Otavio Silva Almeida",
       "team": "Rising Sun BJJ",
       "bracket": "Purple / Adult / Male / Heavy (208.00lb)",
-      "time": "01:17 PM",
-      "mat": "9",
-      "day": "Sat",
+      "time": "",
+      "mat": "",
+      "day": "",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3256/categories/2903487",
-      "time_type": "listed fight",
+      "time_type": "completed result without published time",
       "result": "WIN",
-      "fight_number": "31",
-      "placement": 1,
-      "scheduled_at": "2026-11-21T18:17:00Z"
+      "fight_number": "",
+      "placement": 1
     },
     {
       "competition_id": "3256",
