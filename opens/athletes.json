@@ -35,7 +35,7 @@
       "event_end_date": "2026-11-22"
     }
   ],
-  "updated_at": "2026-11-23T07:42:49.855968+00:00",
+  "updated_at": "2026-11-23T07:52:44.440141+00:00",
   "athletes": [
     {
       "competition_id": "3256",
@@ -27965,15 +27965,14 @@
       "name": "Andreas Jesse Almeida",
       "team": "Morselli Jiu-Jitsu Academy",
       "bracket": "Blue / Juvenile / Male / Feather (141.60lb)",
-      "time": "02:09 PM",
-      "mat": "2",
-      "day": "Sat",
+      "time": "",
+      "mat": "",
+      "day": "",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3256/categories/2904040",
-      "time_type": "listed fight",
+      "time_type": "completed result without published time",
       "result": "WIN",
-      "fight_number": "33",
-      "placement": 1,
-      "scheduled_at": "2026-11-21T19:09:00Z"
+      "fight_number": "",
+      "placement": 1
     },
     {
       "competition_id": "3256",
@@ -27982,15 +27981,14 @@
       "name": "Elias David Correa",
       "team": "Notorious Mixed Martial Arts",
       "bracket": "Blue / Juvenile / Male / Feather (141.60lb)",
-      "time": "02:09 PM",
-      "mat": "2",
-      "day": "Sat",
+      "time": "",
+      "mat": "",
+      "day": "",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3256/categories/2904040",
-      "time_type": "listed fight",
+      "time_type": "completed result without published time",
       "result": "LOSS",
-      "fight_number": "33",
-      "placement": 2,
-      "scheduled_at": "2026-11-21T19:09:00Z"
+      "fight_number": "",
+      "placement": 2
     },
     {
       "competition_id": "3256",
