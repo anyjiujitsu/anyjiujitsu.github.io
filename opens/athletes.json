@@ -35,7 +35,7 @@
       "event_end_date": "2026-11-22"
     }
   ],
-  "updated_at": "2026-11-23T08:03:09.283153+00:00",
+  "updated_at": "2026-11-23T08:12:44.990432+00:00",
   "athletes": [
     {
       "competition_id": "3256",
@@ -39975,14 +39975,15 @@
       "name": "Haley Nicole Martinez",
       "team": "High Level Jiu-Jitsu",
       "bracket": "Purple / Master 1 / Female / Light Feather (114.00lb)",
-      "time": "",
-      "mat": "",
-      "day": "",
+      "time": "03:43 PM",
+      "mat": "7",
+      "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3257/categories/2904333",
-      "time_type": "completed result without published time",
+      "time_type": "listed fight",
       "result": "LOSS",
-      "fight_number": "",
-      "placement": 3
+      "fight_number": "22",
+      "placement": 3,
+      "scheduled_at": "2026-11-22T20:43:00Z"
     },
     {
       "competition_id": "3257",
@@ -39991,14 +39992,15 @@
       "name": "Nicole Lynn Romero",
       "team": "Jiu-Jitsu For Life Team",
       "bracket": "Purple / Master 1 / Female / Light Feather (114.00lb)",
-      "time": "",
-      "mat": "",
-      "day": "",
+      "time": "04:02 PM",
+      "mat": "7",
+      "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3257/categories/2904333",
-      "time_type": "completed result without published time",
+      "time_type": "listed fight",
       "result": "LOSS",
-      "fight_number": "",
-      "placement": 3
+      "fight_number": "25",
+      "placement": 3,
+      "scheduled_at": "2026-11-22T21:02:00Z"
     },
     {
       "competition_id": "3257",
@@ -40007,14 +40009,14 @@
       "name": "Daniela Bárbara da S. T. Franca",
       "team": "Renzo Gracie Academy",
       "bracket": "Purple / Master 1 / Female / Light Feather (114.00lb)",
-      "time": "",
-      "mat": "",
-      "day": "",
+      "time": "03:43 PM",
+      "mat": "7",
+      "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3257/categories/2904333",
-      "time_type": "completed result without published time",
-      "result": "LOSS",
-      "fight_number": "",
-      "placement": 2
+      "time_type": "listed fight",
+      "result": "WIN",
+      "fight_number": "22",
+      "scheduled_at": "2026-11-22T20:43:00Z"
     },
     {
       "competition_id": "3257",
@@ -40023,13 +40025,15 @@
       "name": "Daniela Bárbara da S. T. Franca",
       "team": "Renzo Gracie Academy",
       "bracket": "Purple / Master 1 / Female / Light Feather (114.00lb)",
-      "time": "",
-      "mat": "",
-      "day": "",
+      "time": "04:20 PM",
+      "mat": "7",
+      "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3257/categories/2904333",
-      "time_type": "completed result without published time",
-      "result": "WIN",
-      "fight_number": ""
+      "time_type": "listed fight",
+      "result": "LOSS",
+      "fight_number": "27",
+      "placement": 2,
+      "scheduled_at": "2026-11-22T21:20:00Z"
     },
     {
       "competition_id": "3257",
@@ -40038,14 +40042,14 @@
       "name": "Brittany Denise Hoskinson",
       "team": "Stoic Brazilian Jiu-Jitsu",
       "bracket": "Purple / Master 1 / Female / Light Feather (114.00lb)",
-      "time": "",
-      "mat": "",
-      "day": "",
+      "time": "04:02 PM",
+      "mat": "7",
+      "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3257/categories/2904333",
-      "time_type": "completed result without published time",
+      "time_type": "listed fight",
       "result": "WIN",
-      "fight_number": "",
-      "placement": 1
+      "fight_number": "25",
+      "scheduled_at": "2026-11-22T21:02:00Z"
     },
     {
       "competition_id": "3257",
@@ -40054,13 +40058,15 @@
       "name": "Brittany Denise Hoskinson",
       "team": "Stoic Brazilian Jiu-Jitsu",
       "bracket": "Purple / Master 1 / Female / Light Feather (114.00lb)",
-      "time": "",
-      "mat": "",
-      "day": "",
+      "time": "04:20 PM",
+      "mat": "7",
+      "day": "Sun",
       "bracket_url": "https://www.bjjcompsystem.com/tournaments/3257/categories/2904333",
-      "time_type": "completed result without published time",
+      "time_type": "listed fight",
       "result": "WIN",
-      "fight_number": ""
+      "fight_number": "27",
+      "placement": 1,
+      "scheduled_at": "2026-11-22T21:20:00Z"
     },
     {
       "competition_id": "3257",
