@@ -1,5 +1,7 @@
 {
-  "active": false,
-  "competition_ids": [],
-  "updated_at": null
+  "active": true,
+  "competition_ids": [
+    "3033"
+  ],
+  "updated_at": "2026-11-24T02:33:31.444Z"
 }
